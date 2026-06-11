@@ -1,0 +1,6 @@
+{"ts": "2026-05-23T18:48:33", "event": "batch_start", "dataset": "/tmp/tmp.PsHOiFadKQ", "output_dir": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new_smoke2", "total": 2, "skipped": 0, "to_run": 2, "workers": 2}
+{"ts": "2026-05-23T18:48:33", "event": "sample_start", "paper_id": "05hNleYOcG"}
+{"ts": "2026-05-23T18:48:33", "event": "sample_start", "paper_id": "0JLUFJMo5p"}
+{"ts": "2026-05-23T18:52:29", "event": "sample_done", "paper_id": "05hNleYOcG", "job_id": "0911213d-4c6b-41a6-b32f-3d5d0574ee72", "score": 5.5, "cost_usd": 0.0341849536, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new_smoke2/reviews/05hNleYOcG.md"}
+{"ts": "2026-05-23T18:52:59", "event": "sample_done", "paper_id": "0JLUFJMo5p", "job_id": "15c387b1-a185-4e35-9a4d-06c3926036d6", "score": 4.0, "cost_usd": 0.031714536, "openrouter_calls": 33, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new_smoke2/reviews/0JLUFJMo5p.md"}
+{"ts": "2026-05-23T18:52:59", "event": "batch_done", "total": 2, "skipped": 0, "completed": 2, "failed": 0, "cost_usd": 0.0658994896}

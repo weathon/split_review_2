@@ -1,0 +1,45 @@
+ M CLAUDE.md
+ m baselines/DeepReviewer-v2
+ m baselines/DeepReviewer-v2-openai-mini
+ M results/2026_deepseek_mimo_response/scores_scatter.png
+ M results/2026_deepseek_pro_response_v3/scores_scatter.png
+ D results/2026_mimo_pro_response/reviews/1AYy3T3Xjk.md
+ D results/2026_mimo_pro_response/reviews/2hTLJEgCbv.md
+ D results/2026_mimo_pro_response/reviews/32mrjmaeMP.md
+ D results/2026_mimo_pro_response/reviews/5o0zF03RP9.md
+ D results/2026_mimo_pro_response/reviews/Iq1fNZus2W.md
+ D results/2026_mimo_pro_response/reviews/OAXECnLxuk.md
+ D results/2026_mimo_pro_response/reviews/OPFE1zPYbU.md
+ D results/2026_mimo_pro_response/reviews/OUQ8kLRK3m.md
+ D results/2026_mimo_pro_response/reviews/RT5SlprCmc.md
+ D results/2026_mimo_pro_response/reviews/SkmkGKEZ1U.md
+ D results/2026_mimo_pro_response/reviews/SzXDuBN8M1.md
+ D results/2026_mimo_pro_response/reviews/e26MPyczN9.md
+ D results/2026_mimo_pro_response/reviews/e9JphzQ5Gr.md
+ D results/2026_mimo_pro_response/reviews/gubSyVxWdG.md
+ D results/2026_mimo_pro_response/reviews/nHrYBGujps.md
+ D results/2026_mimo_pro_response/reviews/pbbRmnFkjG.md
+ D results/2026_mimo_pro_response/reviews/qPbDM5L8tE.md
+ D results/2026_mimo_pro_response/reviews/s7oURFZTQD.md
+ D results/2026_mimo_pro_response/reviews/sJxBWDc8SM.md
+ D results/2026_mimo_pro_response/scores.csv
+ M results/2026_mimo_pro_response/snapshot/code/main.py
+ M results/2026_mimo_pro_response/snapshot/code/metric.py
+ M results/2026_mimo_pro_response/snapshot/git_commit.txt
+ D results/2026_mimo_pro_response/snapshot/git_diff.patch
+ M results/2026_mimo_pro_response/snapshot/git_status.txt
+ M results/2026_mimo_pro_response/snapshot/prompts/cal_with.md
+ M results/2026_mimo_pro_response/snapshot/prompts/merger.md
+ M results/2026_mimo_pro_response/snapshot/run_deepreview_claude.sh
+ M scripts/run_deepreview.sh
+?? chat.txt
+?? prompts.bak/
+?? prompts.bak2/
+?? results/2026_deepseek_flash_response_v3/
+?? results/2026_deepseek_flash_response_v4/
+?? results/2026_deepseek_pro_response_v5/
+?? results/2026_mimo_pro_response/snapshot/code/pairwise_infer.py
+?? results/2026_mimo_pro_response/snapshot/code/reviews/230_SEA_Sparse_Linear_Attentio_review_2026_06_06_14_26_34.md
+?? results/2026_mimo_pro_response/snapshot/code/reviews/liu_review_2026_06_08_17_13_06.md
+?? results/2026_mimo_pro_response/snapshot/code/reviews/liu_review_2026_06_08_17_19_43.md
+?? results/2026_mimo_pro_response/snapshot/code/reviews/liu_review_2026_06_08_17_30_01.md

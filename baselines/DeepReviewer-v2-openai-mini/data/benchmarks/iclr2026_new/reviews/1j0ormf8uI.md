@@ -1,0 +1,66 @@
+## Summary
+This paper introduces a conformal prediction framework for constructing Lower Prediction Bounds (LPBs) for counterfactual survival outcomes under general right-censored data. The core methodological contribution is a reweighted calibration procedure that transforms the counterfactual coverage problem into a weighted conformal inference task, achieving exact marginal coverage (rather than PAC-type guarantees provided by prior work). The procedure is doubly robust against misspecification of either the weight function or the quantile regression function.
+
+The paper addresses a practically important problem: providing reliable, uncertainty-quantified survival predictions for personalized treatment selection in high-stakes clinical settings. The theoretical framing is clean — combining censored quantile regression, density ratio weighting, and conformal prediction into a unified procedure with distribution-free finite-sample guarantees.
+
+**Key strengths:** (1) Novel integration of weighted conformal prediction with counterfactual survival analysis to achieve exact marginal coverage under general right censoring; (2) Rigorous theoretical analysis including both a distribution-free coverage bound (Theorem 4.1) and an asymptotic doubly robust property (Theorem 4.2); (3) Strong empirical support on synthetic data across six settings and a real clinical lung cancer dataset, demonstrating that the proposed method achieves nominal coverage with competitive LPB informativeness.
+
+**Core weaknesses:** (1) The key derivation uses an inequality (step (iii) in Eq. 1) whose slack is not quantified, making the exact coverage guarantee potentially conservative; (2) The strong ignorability assumption jointly conditions on both treatment and censoring, which is stronger than standard causal assumptions and is not empirically examined; (3) The practical implementation of Theorem 4.1's weight normalization is not described, creating a gap between theory and algorithm; (4) The doubly robust claim depends on regularity conditions (A2) that are restrictive and not verifiable in practice; (5) The real-data evaluation is limited to N=541 patients from a single institution, limiting generalizability claims.
+
+**Novelty verdict:** External literature verification is deferred (Retrieval-Disabled Mode active). Based on manuscript-internal evidence, the contribution appears to be a principled extension of weighted conformal prediction to the counterfactual survival setting, with the claimed first exact marginal coverage guarantee for general right-censored data. Verification against prior works (Candès et al., Gui et al., Davidov et al.) is recommended to confirm the "first" claim.
+
+## Strengths
+**S1. Novel problem formulation with clear practical motivation.** The paper tackles an important and well-defined problem: constructing a lower prediction bound for counterfactual survival times that achieves *exact* marginal coverage under general right censoring. This directly addresses the limitations of prior PAC-type conformal methods, which do not control the expected miscoverage rate exactly. The clinical motivation — personalized treatment selection for lung cancer patients — is compelling and grounds the methodology in a high-impact application.
+
+**S2. Principled technical approach that combines three frameworks.** The method cleanly integrates censored quantile regression (to estimate the conditional quantile of $T(w)|X$), density ratio weighting (to correct for both treatment assignment and censoring), and weighted conformal prediction (to obtain distribution-free coverage guarantees). This synthesis is technically sound and extends the well-established weighted conformal framework [Lei & Candès, 2021] to a more challenging setting with two simultaneous distribution shifts.
+
+**S3. Rigorous theoretical guarantees.** Theorem 4.1 provides a distribution-free bound that explicitly quantifies how estimation error in the density ratio $\hat{\omega}(x)$ propagates to coverage degradation — a clean and interpretable result. Theorem 4.2 establishes an asymptotic doubly robust property, showing that the method can recover valid coverage if either the weight or quantile model is correctly specified. The theory is presented at the right level of detail for this type of methodological contribution.
+
+**S4. Comprehensive synthetic experiments.** The simulation study covers six different settings with varying censoring and treatment rates, plus outlier robustness analysis. The comparison against multiple baselines (Uncal, Naive, Focus, Fused) is fair and informative. The results convincingly show that the proposed method achieves coverage closest to the nominal 90% level while maintaining competitive LPB values, and that it is more robust to outliers than PAC-type alternatives.
+
+**S5. Real-world clinical validation.** The application to a real dataset of 541 non-small cell lung cancer patients with detailed radiochemotherapy regimens is a genuine strength. The analysis of LPB variations across radiotherapy techniques (IMRT vs VMAT), chemotherapy types, and prognostic covariates (stage, KPS, radiomic features) demonstrates practical utility and produces clinically consistent findings. This moves beyond purely synthetic validation and supports the claim of applicability for personalized treatment benchmarking.
+
+## Weaknesses
+**W1. Unquantified slack in core inequality (major).** The derivation in Eq. (1), step (iii), uses an inequality $\leq$ that converts $\mathbb{P}(T \leq \cdot | X, W)$ into $\mathbb{P}(T \leq \cdot, e=1 | X, W) / p(e=1|X,W)$. This introduces an unknown slack equal to $\mathbb{P}(T \leq \cdot, e=0 | X, W) / p(e=1|X,W)$, which is the probability mass of censored observations below the threshold. The paper does not bound or discuss this slack, which means the "exact" coverage guarantee is actually a *conservative* bound whose tightness depends on the censoring distribution. In high-censoring regimes (e.g., $>60\%$ as mentioned in experiments), the conservatism could be substantial, making the LPB overly conservative and reducing its informativeness. **Fix:** Add a formal bound on the slack in terms of the censoring probability, and report empirical estimates of the slack across synthetic settings to show how conservative the LPB is in practice.
+
+*Located: Page 4 — Method: Calibration procedure (Eq. 1, step (iii)).*
+
+**W2. Strong ignorability assumption includes censoring at random (major).** Assumption 3.1 requires $\{T(1), T(0)\} \perp\!\!\!\perp (W, C) | X$, which jointly conditions on treatment AND censoring. Remark 3.2 acknowledges this but does not discuss its practical implications or testability. In many clinical settings, censoring occurs due to patient dropout or study end, which may depend on unmeasured prognostic factors even after conditioning on $X$. When censoring at random (CAR) is violated — e.g., sicker patients are more likely to withdraw — the weight function $\gamma(x) = p(W=w, e=1 | x)$ cannot correct for the induced bias, and the coverage guarantee may degrade. The paper's discussion of double robustness covers model misspecification but not assumption violations. **Fix:** Add a sensitivity analysis (e.g., tipping-point) showing how strong a violation of CAR must be to break the coverage guarantee. At minimum, acknowledge this limitation prominently.
+
+*Located: Page 2 — Section 3: Preliminary, Assumption 3.1 and Remark 3.2.*
+
+**W3. Gap between theoretical weight normalization and Algorithm 1 (major).** Theorem 4.1 requires redefining $\tilde{\omega}(x)$ as $\tilde{\omega}(x)/\mathbb{E}[\tilde{\omega}(X)|\mathcal{D}_{\text{tr}}]$ to ensure $\mathbb{E}[\tilde{\omega}(X)|\mathcal{D}_{\text{tr}}] = 1$. However, this normalization is not implemented in Algorithm 1, and the paper does not explain how to compute $\mathbb{E}[\tilde{\omega}(X)|\mathcal{D}_{\text{tr}}]$ in practice (it requires integration over $\mathbb{P}_{X|W=w, e=1}$, which is unknown). Without this normalization, the theoretical bound in Theorem 4.1 may not hold for the implemented algorithm. **Fix:** Add a practical normalization step to Algorithm 1 (e.g., normalize $\hat{\omega}(X_i)$ by the sample mean over $\mathcal{I}_{\text{cal}}^{(w)}$), and discuss the relationship between the sample and population normalization.
+
+*Located: Page 5 — Section 4.2: Theorem 4.1 vs Algorithm 1.*
+
+**W4. Doubly robust property depends on restrictive conditions (moderate).** Theorem 4.2's A2 conditions for the doubly robust property are strong and non-standard. A2(i) requires the conditional density $\mathbb{P}(T(w)=t|X=x)$ to be uniformly bounded away from 0 and $\infty$ in a neighborhood of the quantile — restrictive for discrete or sparse-data settings. A2(ii) involves a convergence-in-ratio condition $\lim_{N \to \infty} [\mathcal{E}_N(X)/\hat{\gamma}(x)] = \lim_{N \to \infty} [\mathcal{E}_N(X)/\gamma(x)]$, which is unusual and difficult to verify. The text presents the doubly robust property as a headline contribution but does not discuss these subtleties sufficiently. **Fix:** Add caveats about the restrictiveness of A2 conditions. Propose a practical diagnostic: compare the full LPB procedure to a version with uniform weights to detect cases where weight misspecification degrades coverage.
+
+*Located: Page 5 — Section 4.2: Theorem 4.2.*
+
+**W5. Real-data evaluation limited in scale and scope (moderate).** The clinical validation uses N=541 patients from a single institution. While the multi-regimen analysis is valuable, the sample size limits the reliability of subgroup analyses and raises concerns about generalizability. The dataset's 124 features with only 541 observations create a high-dimensional setting where the Random Forest weight estimator may be unstable. The paper does not report confidence intervals for the coverage rates on real data (unlike the synthetic experiments where 50 trials were used). **Fix:** Report bootstrap-based confidence intervals for the real-data coverage rates. Add a discussion of the feature-to-sample ratio and its potential impact on weight estimation stability.
+
+*Located: Page 8 — Section 5.2: Application on Real Data.*
+
+**W6. "First" claim unverifiable in current run (minor).** The Related Work section claims to *firstly* establish a conformalized procedure for survival counterfactual prediction with exact coverage guarantee. Without external literature verification (Retrieval-Disabled Mode), this claim cannot be confirmed or refuted. **Fix:** Qualify the wording to "to the best of our knowledge" or provide a comprehensive comparison table in the Related Work section showing the exact coverage status of each prior work. External verification is recommended before final publication.
+
+*Located: Page 2 — Section 2: Related Work, last paragraph.*
+
+**W7. Missing clarity on counterfactual evaluation protocol (minor).** The synthetic experiment section states that coverage is evaluated but does not explain that for synthetic data, both $T(0)$ and $T(1)$ are simulated, enabling evaluation of $\mathbb{P}(T(w) \geq \hat{L}(X))$ against the true unobservable counterfactual outcome. Without this clarification, the reader may question how coverage is measured when $T(w)$ is not observed for units assigned to the other treatment. **Fix:** Add one sentence explaining that the simulation generates both potential outcomes, so the true $T(w)$ is available for evaluation.
+
+*Located: Page 7 — Section 5.1: Simulation, Data paragraph.*
+
+## Score
+**Final Score: 6.5/10**
+
+**Rationale:** The paper makes a methodologically sound and practically motivated contribution to survival counterfactual prediction with conformal guarantees. The integration of weighted conformal inference with censored quantile regression to achieve exact marginal coverage under general right censoring is a principled extension of existing work. The theoretical analysis (Theorems 4.1 and 4.2) is rigorous, and the synthetic experiments convincingly demonstrate coverage validity.
+
+The score is moderated by four factors: (1) the key derivation relies on an unquantified inequality slack, making the "exact" guarantee partially conservative in practice; (2) the strong ignorability assumption (including censoring at random) is not empirically examined; (3) there is a gap between the theoretical weight normalization requirement and the practical algorithm; (4) the doubly robust claim rests on restrictive regularity conditions that are not adequately discussed. These weaknesses are fixable with additional analysis and exposition rather than fundamental flaws.
+
+The novelty assessment is deferred (external literature verification not available in this run). The score should be considered provisional pending verification of the "first exact guarantee" claim against the closest prior works (Gui et al., Davidov et al., Candès et al.).
+
+**Key differentiators that could raise the score (to 7.5-8.0):**
+- Closing the theory-algorithm gap for weight normalization.
+- Adding a sensitivity analysis for the CAR assumption.
+- Quantifying the inequality slack empirically.
+- Adding confidence intervals for real-data coverage.
+- Independent verification of the novelty claim.

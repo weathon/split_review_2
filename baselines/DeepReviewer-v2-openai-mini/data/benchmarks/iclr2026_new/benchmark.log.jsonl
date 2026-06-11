@@ -1,0 +1,788 @@
+{"ts": "2026-05-23T19:46:27", "event": "batch_start", "dataset": "/home/wg25r/review_agent/iclr2026_new", "output_dir": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new", "total": 393, "skipped": 0, "to_run": 393, "workers": 20}
+{"ts": "2026-05-23T19:46:27", "event": "sample_start", "paper_id": "05hNleYOcG"}
+{"ts": "2026-05-23T19:46:27", "event": "sample_start", "paper_id": "0JLUFJMo5p"}
+{"ts": "2026-05-23T19:46:28", "event": "sample_start", "paper_id": "0K4jNe8ik9"}
+{"ts": "2026-05-23T19:46:28", "event": "sample_start", "paper_id": "0TmVqOpBbK"}
+{"ts": "2026-05-23T19:46:28", "event": "sample_start", "paper_id": "0aBAAS0rRT"}
+{"ts": "2026-05-23T19:46:28", "event": "sample_start", "paper_id": "0cbUKCyBsH"}
+{"ts": "2026-05-23T19:46:28", "event": "sample_start", "paper_id": "0kHbD6ad07"}
+{"ts": "2026-05-23T19:46:28", "event": "sample_start", "paper_id": "0lW2UBiEWN"}
+{"ts": "2026-05-23T19:46:28", "event": "sample_start", "paper_id": "0nvQ5kHXf4"}
+{"ts": "2026-05-23T19:46:28", "event": "sample_start", "paper_id": "0obDxMfeYu"}
+{"ts": "2026-05-23T19:46:28", "event": "sample_start", "paper_id": "0xHWd4CUaX"}
+{"ts": "2026-05-23T19:46:28", "event": "sample_start", "paper_id": "0zKfU1rsXd"}
+{"ts": "2026-05-23T19:46:28", "event": "sample_start", "paper_id": "173Pq3F31r"}
+{"ts": "2026-05-23T19:46:28", "event": "sample_start", "paper_id": "1AYy3T3Xjk"}
+{"ts": "2026-05-23T19:46:28", "event": "sample_start", "paper_id": "1CR1MTIgmq"}
+{"ts": "2026-05-23T19:46:28", "event": "sample_start", "paper_id": "1E4Bltg6Xb"}
+{"ts": "2026-05-23T19:46:28", "event": "sample_start", "paper_id": "1EdAn5gMVv"}
+{"ts": "2026-05-23T19:46:28", "event": "sample_start", "paper_id": "1FCZ4f8dAY"}
+{"ts": "2026-05-23T19:46:28", "event": "sample_start", "paper_id": "1PIfB5w05x"}
+{"ts": "2026-05-23T19:46:28", "event": "sample_start", "paper_id": "1j0ormf8uI"}
+{"ts": "2026-05-23T19:48:26", "event": "sample_done", "paper_id": "1PIfB5w05x", "job_id": "518a4c57-cc2e-4404-97ad-d5b5d71a4888", "score": 6.0, "cost_usd": 0.0230448624, "openrouter_calls": 11, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/1PIfB5w05x.md"}
+{"ts": "2026-05-23T19:48:26", "event": "sample_start", "paper_id": "20DsUSauCj"}
+{"ts": "2026-05-23T19:49:58", "event": "sample_done", "paper_id": "0JLUFJMo5p", "job_id": "e2d283a5-df16-4a55-a911-f60b161c3b02", "score": 4.0, "cost_usd": 0.027566447999999993, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/0JLUFJMo5p.md"}
+{"ts": "2026-05-23T19:49:58", "event": "sample_start", "paper_id": "23Ea4fVGiI"}
+{"ts": "2026-05-23T19:50:00", "event": "sample_done", "paper_id": "1EdAn5gMVv", "job_id": "7f635d94-569e-474e-bceb-c2a7661ad872", "score": 6.0, "cost_usd": 0.0310035208, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/1EdAn5gMVv.md"}
+{"ts": "2026-05-23T19:50:00", "event": "sample_start", "paper_id": "2EQPpEZtEK"}
+{"ts": "2026-05-23T19:50:12", "event": "sample_done", "paper_id": "0TmVqOpBbK", "job_id": "347efb6f-9270-478a-9f7c-b4ea0ee74a8e", "score": 6.5, "cost_usd": 0.0330247624, "openrouter_calls": 24, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/0TmVqOpBbK.md"}
+{"ts": "2026-05-23T19:50:12", "event": "sample_start", "paper_id": "2PJkG6aV4A"}
+{"ts": "2026-05-23T19:50:23", "event": "sample_done", "paper_id": "1FCZ4f8dAY", "job_id": "ef814bf2-1a65-4abf-b764-7c187b4bc0a0", "score": 6.0, "cost_usd": 0.03505692959999999, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/1FCZ4f8dAY.md"}
+{"ts": "2026-05-23T19:50:23", "event": "sample_start", "paper_id": "2cq8FyBfDk"}
+{"ts": "2026-05-23T19:50:25", "event": "sample_done", "paper_id": "1CR1MTIgmq", "job_id": "87ad8b37-e87f-4296-bfd0-c048809f9546", "score": 6.0, "cost_usd": 0.032621103199999994, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/1CR1MTIgmq.md"}
+{"ts": "2026-05-23T19:50:25", "event": "sample_start", "paper_id": "2eAGrunxVz"}
+{"ts": "2026-05-23T19:50:27", "event": "sample_done", "paper_id": "05hNleYOcG", "job_id": "5aba7b99-0e19-41d9-bbf5-c11f393f1eab", "score": 6.0, "cost_usd": 0.0307317416, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/05hNleYOcG.md"}
+{"ts": "2026-05-23T19:50:27", "event": "sample_start", "paper_id": "2hTLJEgCbv"}
+{"ts": "2026-05-23T19:50:31", "event": "sample_done", "paper_id": "0xHWd4CUaX", "job_id": "301f3853-5e0d-4e64-a8ba-b2fe882c21a2", "score": 5.0, "cost_usd": 0.02812498079999999, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/0xHWd4CUaX.md"}
+{"ts": "2026-05-23T19:50:31", "event": "sample_start", "paper_id": "2uTxLC4LmC"}
+{"ts": "2026-05-23T19:50:33", "event": "sample_done", "paper_id": "1E4Bltg6Xb", "job_id": "7bfce647-f068-4ce5-89cc-8d4031f5a2a2", "score": 5.5, "cost_usd": 0.029123320799999994, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/1E4Bltg6Xb.md"}
+{"ts": "2026-05-23T19:50:33", "event": "sample_start", "paper_id": "2za3iNkwXn"}
+{"ts": "2026-05-23T19:50:35", "event": "sample_done", "paper_id": "0K4jNe8ik9", "job_id": "5bfe4f11-e1c6-44de-8a40-8c63f42c4867", "score": 5.0, "cost_usd": 0.0297758048, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/0K4jNe8ik9.md"}
+{"ts": "2026-05-23T19:50:35", "event": "sample_start", "paper_id": "31CznLfRIS"}
+{"ts": "2026-05-23T19:50:42", "event": "sample_done", "paper_id": "0obDxMfeYu", "job_id": "1e97964d-d79f-403f-af13-7a55cfaa4296", "score": 5.5, "cost_usd": 0.034725667200000004, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/0obDxMfeYu.md"}
+{"ts": "2026-05-23T19:50:42", "event": "sample_start", "paper_id": "32mrjmaeMP"}
+{"ts": "2026-05-23T19:50:45", "event": "sample_done", "paper_id": "173Pq3F31r", "job_id": "3a9c35d2-f9e5-4042-9294-c3cd4e005b78", "score": 6.0, "cost_usd": 0.0298369064, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/173Pq3F31r.md"}
+{"ts": "2026-05-23T19:50:45", "event": "sample_start", "paper_id": "36CzrZYEch"}
+{"ts": "2026-05-23T19:50:47", "event": "sample_done", "paper_id": "0zKfU1rsXd", "job_id": "3f2b04b5-791d-4269-8cde-4dfcbecb7561", "score": 6.0, "cost_usd": 0.03299777599999999, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/0zKfU1rsXd.md"}
+{"ts": "2026-05-23T19:50:47", "event": "sample_start", "paper_id": "3V559xWIWc"}
+{"ts": "2026-05-23T19:51:01", "event": "sample_done", "paper_id": "1j0ormf8uI", "job_id": "1513ed6f-ef86-4092-9360-45cb608e9d10", "score": 6.5, "cost_usd": 0.0338783536, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/1j0ormf8uI.md"}
+{"ts": "2026-05-23T19:51:01", "event": "sample_start", "paper_id": "3YKeB9R1g9"}
+{"ts": "2026-05-23T19:51:04", "event": "sample_done", "paper_id": "0nvQ5kHXf4", "job_id": "13468d38-91e9-4270-bd63-6d044ecdf2ec", "score": 5.0, "cost_usd": 0.0322247912, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/0nvQ5kHXf4.md"}
+{"ts": "2026-05-23T19:51:04", "event": "sample_start", "paper_id": "3icvqeC1sA"}
+{"ts": "2026-05-23T19:51:14", "event": "sample_done", "paper_id": "0aBAAS0rRT", "job_id": "ae7d2223-9461-4830-a07f-5216977b2ac9", "score": 5.0, "cost_usd": 0.03167296160000001, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/0aBAAS0rRT.md"}
+{"ts": "2026-05-23T19:51:14", "event": "sample_start", "paper_id": "3wMdHl7JQ6"}
+{"ts": "2026-05-23T19:51:20", "event": "sample_done", "paper_id": "0kHbD6ad07", "job_id": "db13c4d0-c0a8-44ae-9ef4-3da6e3f5da43", "score": 6.0, "cost_usd": 0.03340219679999999, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/0kHbD6ad07.md"}
+{"ts": "2026-05-23T19:51:20", "event": "sample_start", "paper_id": "40sQXprYlm"}
+{"ts": "2026-05-23T19:51:30", "event": "sample_done", "paper_id": "0lW2UBiEWN", "job_id": "c9f637b9-f2ef-49fb-a124-d36e20d63a88", "score": 6.0, "cost_usd": 0.03725883840000001, "openrouter_calls": 33, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/0lW2UBiEWN.md"}
+{"ts": "2026-05-23T19:51:30", "event": "sample_start", "paper_id": "41JeFWdVFa"}
+{"ts": "2026-05-23T19:51:33", "event": "sample_done", "paper_id": "0cbUKCyBsH", "job_id": "42b9d764-e727-4ce2-ac9e-fc53c4766755", "score": 5.0, "cost_usd": 0.0362092472, "openrouter_calls": 30, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/0cbUKCyBsH.md"}
+{"ts": "2026-05-23T19:51:33", "event": "sample_start", "paper_id": "4Ha2srdhPN"}
+{"ts": "2026-05-23T19:51:37", "event": "sample_done", "paper_id": "1AYy3T3Xjk", "job_id": "61ab26ea-68b6-49d7-94fd-1ddc84a2c5c1", "score": 6.0, "cost_usd": 0.03616613280000001, "openrouter_calls": 40, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/1AYy3T3Xjk.md"}
+{"ts": "2026-05-23T19:51:37", "event": "sample_start", "paper_id": "4Mvdn1m861"}
+{"ts": "2026-05-23T19:52:35", "event": "sample_done", "paper_id": "20DsUSauCj", "job_id": "da8bd0cb-1822-4434-8ac3-39504c978de7", "score": 6.5, "cost_usd": 0.030031881599999997, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/20DsUSauCj.md"}
+{"ts": "2026-05-23T19:52:35", "event": "sample_start", "paper_id": "4Nsx2kZkex"}
+{"ts": "2026-05-23T19:53:27", "event": "sample_done", "paper_id": "2EQPpEZtEK", "job_id": "f071a1c8-3a74-4874-b0dc-453b158dbc8a", "score": 6.5, "cost_usd": 0.0286512408, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/2EQPpEZtEK.md"}
+{"ts": "2026-05-23T19:53:27", "event": "sample_start", "paper_id": "4S5x8yhJ5H"}
+{"ts": "2026-05-23T19:53:56", "event": "sample_done", "paper_id": "23Ea4fVGiI", "job_id": "bb846b6d-15f8-4f4f-8fac-d5483dfbd02a", "score": 5.0, "cost_usd": 0.031311184799999996, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/23Ea4fVGiI.md"}
+{"ts": "2026-05-23T19:53:56", "event": "sample_start", "paper_id": "4VW9HVCRw0"}
+{"ts": "2026-05-23T19:54:03", "event": "sample_done", "paper_id": "2za3iNkwXn", "job_id": "86cb0381-f665-4944-8ecc-539a8e795eb9", "score": 6.0, "cost_usd": 0.0299661208, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/2za3iNkwXn.md"}
+{"ts": "2026-05-23T19:54:03", "event": "sample_start", "paper_id": "4fm4Rc5fUK"}
+{"ts": "2026-05-23T19:54:06", "event": "sample_done", "paper_id": "2hTLJEgCbv", "job_id": "a614496a-e00d-4e07-a19f-969c22e3e754", "score": 4.0, "cost_usd": 0.0243057192, "openrouter_calls": 20, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/2hTLJEgCbv.md"}
+{"ts": "2026-05-23T19:54:06", "event": "sample_start", "paper_id": "4hkMvkzai5"}
+{"ts": "2026-05-23T19:54:19", "event": "sample_done", "paper_id": "32mrjmaeMP", "job_id": "3ec4315c-9097-4a8c-955e-4e96c040ee2c", "score": 6.0, "cost_usd": 0.032317516000000004, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/32mrjmaeMP.md"}
+{"ts": "2026-05-23T19:54:19", "event": "sample_start", "paper_id": "4iu9Lj0Ist"}
+{"ts": "2026-05-23T19:54:43", "event": "sample_done", "paper_id": "2PJkG6aV4A", "job_id": "02c90853-af61-4589-97a7-0828a8ba1307", "score": 6.0, "cost_usd": 0.0360588312, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/2PJkG6aV4A.md"}
+{"ts": "2026-05-23T19:54:43", "event": "sample_start", "paper_id": "4nOZBufbLC"}
+{"ts": "2026-05-23T19:54:44", "event": "sample_done", "paper_id": "2uTxLC4LmC", "job_id": "636a0a73-1320-4781-83fa-ae0a7a2f7801", "score": 7.0, "cost_usd": 0.03556002240000001, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/2uTxLC4LmC.md"}
+{"ts": "2026-05-23T19:54:44", "event": "sample_start", "paper_id": "55GsILa8c9"}
+{"ts": "2026-05-23T19:54:46", "event": "sample_done", "paper_id": "36CzrZYEch", "job_id": "d7afeb07-68c8-4454-b801-865c44108ac7", "score": 6.0, "cost_usd": 0.0358567776, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/36CzrZYEch.md"}
+{"ts": "2026-05-23T19:54:46", "event": "sample_done", "paper_id": "3YKeB9R1g9", "job_id": "58f6f4c4-01b9-4257-bd5a-4f48aef29ec4", "score": 7.0, "cost_usd": 0.0349331136, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/3YKeB9R1g9.md"}
+{"ts": "2026-05-23T19:54:46", "event": "sample_start", "paper_id": "5DpzzTPnJZ"}
+{"ts": "2026-05-23T19:54:46", "event": "sample_start", "paper_id": "5H8kxW0Efk"}
+{"ts": "2026-05-23T19:54:53", "event": "sample_done", "paper_id": "31CznLfRIS", "job_id": "d1364aa6-1244-49fd-8f74-7d09029df1e1", "score": 6.5, "cost_usd": 0.0325988376, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/31CznLfRIS.md"}
+{"ts": "2026-05-23T19:54:53", "event": "sample_start", "paper_id": "5SQo2E9Ujj"}
+{"ts": "2026-05-23T19:54:59", "event": "sample_done", "paper_id": "3wMdHl7JQ6", "job_id": "e9f0c827-a21f-4750-9ac3-e68989440f0e", "score": 5.0, "cost_usd": 0.030064064800000005, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/3wMdHl7JQ6.md"}
+{"ts": "2026-05-23T19:54:59", "event": "sample_start", "paper_id": "5T1vMQldr8"}
+{"ts": "2026-05-23T19:55:07", "event": "sample_done", "paper_id": "3V559xWIWc", "job_id": "684a8b0b-862f-44a2-a716-ff444ee0d7de", "score": 7.0, "cost_usd": 0.03861747680000001, "openrouter_calls": 30, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/3V559xWIWc.md"}
+{"ts": "2026-05-23T19:55:07", "event": "sample_start", "paper_id": "5Y4wvlp923"}
+{"ts": "2026-05-23T19:55:34", "event": "sample_done", "paper_id": "3icvqeC1sA", "job_id": "be1fd23a-6583-4516-aec1-407201ed8526", "score": 6.0, "cost_usd": 0.0320653816, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/3icvqeC1sA.md"}
+{"ts": "2026-05-23T19:55:34", "event": "sample_start", "paper_id": "5asbtzIVpS"}
+{"ts": "2026-05-23T19:55:35", "event": "sample_done", "paper_id": "40sQXprYlm", "job_id": "35bc7f4b-9d61-44b5-a3e0-b126bbc54f79", "score": 5.5, "cost_usd": 0.030503082399999996, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/40sQXprYlm.md"}
+{"ts": "2026-05-23T19:55:35", "event": "sample_start", "paper_id": "5o0zF03RP9"}
+{"ts": "2026-05-23T19:55:47", "event": "sample_done", "paper_id": "4Mvdn1m861", "job_id": "969e5100-d2ba-4ad5-8295-2174b580c5e6", "score": 5.0, "cost_usd": 0.031167259200000002, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/4Mvdn1m861.md"}
+{"ts": "2026-05-23T19:55:47", "event": "sample_start", "paper_id": "5qd7V5TNGV"}
+{"ts": "2026-05-23T19:55:53", "event": "sample_done", "paper_id": "2eAGrunxVz", "job_id": "11c5c1f6-45e7-4f2d-ba01-2646f9ba2bad", "score": 6.0, "cost_usd": 0.0383142088, "openrouter_calls": 33, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/2eAGrunxVz.md"}
+{"ts": "2026-05-23T19:55:53", "event": "sample_start", "paper_id": "65Ai8mLfjI"}
+{"ts": "2026-05-23T19:55:55", "event": "sample_done", "paper_id": "4Ha2srdhPN", "job_id": "6fb7faa2-ff9f-48b3-a7a9-d7e848153bbc", "score": 6.0, "cost_usd": 0.033485844, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/4Ha2srdhPN.md"}
+{"ts": "2026-05-23T19:55:55", "event": "sample_start", "paper_id": "6P5sAycAQr"}
+{"ts": "2026-05-23T19:55:58", "event": "sample_done", "paper_id": "41JeFWdVFa", "job_id": "11064c58-ea52-4566-9532-5070a5c5df06", "score": 5.0, "cost_usd": 0.0368193056, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/41JeFWdVFa.md"}
+{"ts": "2026-05-23T19:55:58", "event": "sample_start", "paper_id": "6RQsAQEUib"}
+{"ts": "2026-05-23T19:56:07", "event": "sample_done", "paper_id": "2cq8FyBfDk", "job_id": "19423383-0ecb-4a56-829a-a485bcf7bdda", "score": 6.0, "cost_usd": 0.03831441599999999, "openrouter_calls": 37, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/2cq8FyBfDk.md"}
+{"ts": "2026-05-23T19:56:07", "event": "sample_start", "paper_id": "6Y9NP1qhoM"}
+{"ts": "2026-05-23T19:56:17", "event": "sample_done", "paper_id": "4Nsx2kZkex", "job_id": "91836f88-b6fc-405d-bb13-451585b01cb4", "score": 3.0, "cost_usd": 0.029436461599999998, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/4Nsx2kZkex.md"}
+{"ts": "2026-05-23T19:56:17", "event": "sample_start", "paper_id": "6i1jVAYbHs"}
+{"ts": "2026-05-23T19:57:13", "event": "sample_done", "paper_id": "4S5x8yhJ5H", "job_id": "eeffb82b-099d-41b4-a0bf-984efd910e6f", "score": 6.0, "cost_usd": 0.026358813600000003, "openrouter_calls": 23, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/4S5x8yhJ5H.md"}
+{"ts": "2026-05-23T19:57:13", "event": "sample_start", "paper_id": "6rz7VyAatm"}
+{"ts": "2026-05-23T19:57:47", "event": "sample_done", "paper_id": "4fm4Rc5fUK", "job_id": "d4d7e0be-9f91-4e1e-b2f5-c5ced17e3638", "score": 7.0, "cost_usd": 0.030577937600000007, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/4fm4Rc5fUK.md"}
+{"ts": "2026-05-23T19:57:47", "event": "sample_start", "paper_id": "6vX0LH9Yt7"}
+{"ts": "2026-05-23T19:58:19", "event": "sample_done", "paper_id": "4hkMvkzai5", "job_id": "e69ab608-792a-48de-8fe6-b88858df20a0", "score": 5.0, "cost_usd": 0.03336688320000001, "openrouter_calls": 24, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/4hkMvkzai5.md"}
+{"ts": "2026-05-23T19:58:19", "event": "sample_start", "paper_id": "70n4clRSTj"}
+{"ts": "2026-05-23T19:58:21", "event": "sample_done", "paper_id": "4VW9HVCRw0", "job_id": "f647a7a0-7c3c-44f0-88c3-22a92e41f8d1", "score": 7.0, "cost_usd": 0.0337267616, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/4VW9HVCRw0.md"}
+{"ts": "2026-05-23T19:58:21", "event": "sample_start", "paper_id": "7L7kmHHfgf"}
+{"ts": "2026-05-23T19:58:23", "event": "sample_done", "paper_id": "4iu9Lj0Ist", "job_id": "a4765b63-2cdc-41c3-aea6-cced31182166", "score": 5.5, "cost_usd": 0.034540833599999994, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/4iu9Lj0Ist.md"}
+{"ts": "2026-05-23T19:58:23", "event": "sample_start", "paper_id": "7gLNA6nT5d"}
+{"ts": "2026-05-23T19:58:23", "event": "sample_done", "paper_id": "5H8kxW0Efk", "job_id": "c476cb42-f392-4c02-9c45-9dd72ed1e0fb", "score": 6.0, "cost_usd": 0.028670997600000005, "openrouter_calls": 23, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/5H8kxW0Efk.md"}
+{"ts": "2026-05-23T19:58:23", "event": "sample_start", "paper_id": "7yvz93kBw9"}
+{"ts": "2026-05-23T19:58:40", "event": "sample_done", "paper_id": "55GsILa8c9", "job_id": "f8e5f43a-80af-4e4e-8984-31e7d5976e62", "score": 6.5, "cost_usd": 0.032957232, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/55GsILa8c9.md"}
+{"ts": "2026-05-23T19:58:40", "event": "sample_start", "paper_id": "8J3GTeQmwl"}
+{"ts": "2026-05-23T19:58:52", "event": "sample_done", "paper_id": "4nOZBufbLC", "job_id": "1216f849-d9aa-49a9-8abe-ef65f360b6c8", "score": 6.0, "cost_usd": 0.034882344, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/4nOZBufbLC.md"}
+{"ts": "2026-05-23T19:58:52", "event": "sample_start", "paper_id": "8KcjEygedc"}
+{"ts": "2026-05-23T19:58:59", "event": "sample_done", "paper_id": "5o0zF03RP9", "job_id": "c7114eb7-4f47-44c3-9d23-22935b7f5209", "score": 5.0, "cost_usd": 0.027377475999999994, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/5o0zF03RP9.md"}
+{"ts": "2026-05-23T19:58:59", "event": "sample_start", "paper_id": "8ZQ0HjBOEc"}
+{"ts": "2026-05-23T19:59:08", "event": "sample_done", "paper_id": "5DpzzTPnJZ", "job_id": "90ddaa2a-0301-49d3-9a19-c1907244eff4", "score": 6.0, "cost_usd": 0.03228586480000001, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/5DpzzTPnJZ.md"}
+{"ts": "2026-05-23T19:59:08", "event": "sample_start", "paper_id": "9X2NfyZpR2"}
+{"ts": "2026-05-23T19:59:14", "event": "sample_done", "paper_id": "5Y4wvlp923", "job_id": "614e8055-99a9-4ebc-9578-b62e2386452e", "score": 4.0, "cost_usd": 0.02822724239999999, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/5Y4wvlp923.md"}
+{"ts": "2026-05-23T19:59:14", "event": "sample_start", "paper_id": "9h2c2rMSY1"}
+{"ts": "2026-05-23T19:59:40", "event": "sample_done", "paper_id": "5SQo2E9Ujj", "job_id": "1d19eab9-2f81-41f2-a5ac-08d08e3f39b7", "score": 4.0, "cost_usd": 0.030583543200000004, "openrouter_calls": 34, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/5SQo2E9Ujj.md"}
+{"ts": "2026-05-23T19:59:40", "event": "sample_start", "paper_id": "9wIVIjWn0F"}
+{"ts": "2026-05-23T19:59:42", "event": "sample_done", "paper_id": "5T1vMQldr8", "job_id": "1198537b-4498-4582-a2c9-674b6440bae6", "score": 6.0, "cost_usd": 0.0347110064, "openrouter_calls": 34, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/5T1vMQldr8.md"}
+{"ts": "2026-05-23T19:59:42", "event": "sample_start", "paper_id": "A4Us8jxVGq"}
+{"ts": "2026-05-23T19:59:44", "event": "sample_done", "paper_id": "65Ai8mLfjI", "job_id": "6c083927-a077-4da5-bf63-89e59c990c1d", "score": 6.5, "cost_usd": 0.030398272800000004, "openrouter_calls": 22, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/65Ai8mLfjI.md"}
+{"ts": "2026-05-23T19:59:44", "event": "sample_start", "paper_id": "AB3jM3iMaW"}
+{"ts": "2026-05-23T19:59:47", "event": "sample_done", "paper_id": "6P5sAycAQr", "job_id": "38cfd8f3-8726-4187-8b52-1272ca92d332", "score": 5.0, "cost_usd": 0.028806881600000004, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/6P5sAycAQr.md"}
+{"ts": "2026-05-23T19:59:47", "event": "sample_start", "paper_id": "AdfEHMueyc"}
+{"ts": "2026-05-23T20:00:13", "event": "sample_done", "paper_id": "6Y9NP1qhoM", "job_id": "fb928e08-ae6a-4640-9518-6c11c7d88404", "score": 5.5, "cost_usd": 0.0338643424, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/6Y9NP1qhoM.md"}
+{"ts": "2026-05-23T20:00:13", "event": "sample_start", "paper_id": "BDNctVKwuD"}
+{"ts": "2026-05-23T20:00:19", "event": "sample_done", "paper_id": "6RQsAQEUib", "job_id": "7a00fba3-1309-4dba-9a2a-22388992e8eb", "score": 5.0, "cost_usd": 0.033822370399999996, "openrouter_calls": 37, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/6RQsAQEUib.md"}
+{"ts": "2026-05-23T20:00:19", "event": "sample_start", "paper_id": "BGEdvJ35PV"}
+{"ts": "2026-05-23T20:00:23", "event": "sample_done", "paper_id": "5asbtzIVpS", "job_id": "70e90272-63d7-4f80-9930-1131b1668607", "score": 6.0, "cost_usd": 0.036591592799999996, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/5asbtzIVpS.md"}
+{"ts": "2026-05-23T20:00:23", "event": "sample_start", "paper_id": "Bf4FeuW0Mr"}
+{"ts": "2026-05-23T20:00:25", "event": "sample_done", "paper_id": "5qd7V5TNGV", "job_id": "289eb719-69b1-4949-8734-05b7872414fd", "score": 6.0, "cost_usd": 0.0362336856, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/5qd7V5TNGV.md"}
+{"ts": "2026-05-23T20:00:25", "event": "sample_start", "paper_id": "BiXwSIIMIq"}
+{"ts": "2026-05-23T20:00:59", "event": "sample_done", "paper_id": "6i1jVAYbHs", "job_id": "1df4a81c-be94-4ed6-996c-f61a05114682", "score": 7.0, "cost_usd": 0.0360628016, "openrouter_calls": 32, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/6i1jVAYbHs.md"}
+{"ts": "2026-05-23T20:00:59", "event": "sample_start", "paper_id": "BzqkbJTsbq"}
+{"ts": "2026-05-23T20:02:07", "event": "sample_done", "paper_id": "6rz7VyAatm", "job_id": "2b32b464-f567-493e-ab20-2026f55694d3", "score": 5.5, "cost_usd": 0.036495424, "openrouter_calls": 33, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/6rz7VyAatm.md"}
+{"ts": "2026-05-23T20:02:07", "event": "sample_start", "paper_id": "C6WWMryELL"}
+{"ts": "2026-05-23T20:02:33", "event": "sample_done", "paper_id": "7gLNA6nT5d", "job_id": "36c9d58a-6837-41b5-a5af-e6524d7a5505", "score": 5.0, "cost_usd": 0.031073448, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/7gLNA6nT5d.md"}
+{"ts": "2026-05-23T20:02:33", "event": "sample_start", "paper_id": "CFuNu8dK4s"}
+{"ts": "2026-05-23T20:02:37", "event": "sample_done", "paper_id": "7yvz93kBw9", "job_id": "96e0fa29-6886-440c-88bc-b5e7af4b98c0", "score": 6.0, "cost_usd": 0.032236063999999995, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/7yvz93kBw9.md"}
+{"ts": "2026-05-23T20:02:37", "event": "sample_start", "paper_id": "CNrU5kGJYG"}
+{"ts": "2026-05-23T20:02:42", "event": "sample_done", "paper_id": "8KcjEygedc", "job_id": "042afac4-25a1-4022-bd4f-6a4fdc177f42", "score": 5.5, "cost_usd": 0.0300317528, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/8KcjEygedc.md"}
+{"ts": "2026-05-23T20:02:42", "event": "sample_start", "paper_id": "CQ0U1wZYoy"}
+{"ts": "2026-05-23T20:02:45", "event": "sample_done", "paper_id": "70n4clRSTj", "job_id": "17fadaad-1fab-4d05-b8b5-baa7a0f61899", "score": 6.0, "cost_usd": 0.033571098400000006, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/70n4clRSTj.md"}
+{"ts": "2026-05-23T20:02:45", "event": "sample_start", "paper_id": "CTEXdHB1BB"}
+{"ts": "2026-05-23T20:02:46", "event": "sample_done", "paper_id": "9X2NfyZpR2", "job_id": "15baf044-75ff-4140-911f-c79b89bbcead", "score": 6.0, "cost_usd": 0.0307539848, "openrouter_calls": 18, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/9X2NfyZpR2.md"}
+{"ts": "2026-05-23T20:02:46", "event": "sample_start", "paper_id": "CrCPeM5fRB"}
+{"ts": "2026-05-23T20:02:54", "event": "sample_done", "paper_id": "8J3GTeQmwl", "job_id": "8b91720e-9c8b-4b12-ae58-e294cbbd3b2f", "score": 7.0, "cost_usd": 0.033379768799999994, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/8J3GTeQmwl.md"}
+{"ts": "2026-05-23T20:02:54", "event": "sample_start", "paper_id": "D5PJX02Jki"}
+{"ts": "2026-05-23T20:03:12", "event": "sample_done", "paper_id": "AdfEHMueyc", "job_id": "2af7179e-8633-4541-9776-85f3989f9bf1", "score": 5.5, "cost_usd": 0.02686281359999999, "openrouter_calls": 24, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/AdfEHMueyc.md"}
+{"ts": "2026-05-23T20:03:12", "event": "sample_start", "paper_id": "DAPcmFcqgd"}
+{"ts": "2026-05-23T20:03:14", "event": "sample_done", "paper_id": "6vX0LH9Yt7", "job_id": "f71e98ed-c86a-44fc-a924-f052c5f0549e", "score": 5.0, "cost_usd": 0.037919722399999994, "openrouter_calls": 41, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/6vX0LH9Yt7.md"}
+{"ts": "2026-05-23T20:03:14", "event": "sample_start", "paper_id": "DB2KJKFX0d"}
+{"ts": "2026-05-23T20:03:17", "event": "sample_done", "paper_id": "8ZQ0HjBOEc", "job_id": "32e03301-02c3-4ffc-92d8-66bdd8aa8ceb", "score": 5.0, "cost_usd": 0.032783548, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/8ZQ0HjBOEc.md"}
+{"ts": "2026-05-23T20:03:17", "event": "sample_start", "paper_id": "DZUehXNiBn"}
+{"ts": "2026-05-23T20:03:38", "event": "sample_done", "paper_id": "9wIVIjWn0F", "job_id": "262157bc-30c5-4975-aacf-8fbede4cd101", "score": 6.0, "cost_usd": 0.036741174400000014, "openrouter_calls": 32, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/9wIVIjWn0F.md"}
+{"ts": "2026-05-23T20:03:38", "event": "sample_start", "paper_id": "Dxb9zYD23D"}
+{"ts": "2026-05-23T20:03:49", "event": "sample_done", "paper_id": "9h2c2rMSY1", "job_id": "17384946-3305-4461-b9f0-153cb0c6c041", "score": 6.0, "cost_usd": 0.030990612800000004, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/9h2c2rMSY1.md"}
+{"ts": "2026-05-23T20:03:49", "event": "sample_start", "paper_id": "EbSkBZQF9g"}
+{"ts": "2026-05-23T20:03:54", "event": "sample_done", "paper_id": "BGEdvJ35PV", "job_id": "52b7d516-342d-4863-87a1-7bae159383c6", "score": 6.0, "cost_usd": 0.0282135168, "openrouter_calls": 23, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/BGEdvJ35PV.md"}
+{"ts": "2026-05-23T20:03:54", "event": "sample_start", "paper_id": "FDlvVdh1sB"}
+{"ts": "2026-05-23T20:03:55", "event": "sample_done", "paper_id": "7L7kmHHfgf", "job_id": "017e29c7-93c1-48a7-a526-236d97f2adc0", "score": 6.0, "cost_usd": 0.040180336, "openrouter_calls": 38, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/7L7kmHHfgf.md"}
+{"ts": "2026-05-23T20:03:55", "event": "sample_start", "paper_id": "FEqZmGl36g"}
+{"ts": "2026-05-23T20:04:03", "event": "sample_done", "paper_id": "AB3jM3iMaW", "job_id": "c2b0400d-8869-463e-9ab7-ceb4cf353412", "score": 6.5, "cost_usd": 0.03550496320000001, "openrouter_calls": 32, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/AB3jM3iMaW.md"}
+{"ts": "2026-05-23T20:04:03", "event": "sample_start", "paper_id": "FF9QVQduAu"}
+{"ts": "2026-05-23T20:04:15", "event": "sample_done", "paper_id": "BiXwSIIMIq", "job_id": "e972ee59-4ff7-4c0d-8344-a560431637bb", "score": 6.0, "cost_usd": 0.04051959520000001, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/BiXwSIIMIq.md"}
+{"ts": "2026-05-23T20:04:15", "event": "sample_start", "paper_id": "FMjeC9Msws"}
+{"ts": "2026-05-23T20:04:36", "event": "sample_done", "paper_id": "Bf4FeuW0Mr", "job_id": "2f982fb3-3a53-4801-82c0-b29b27acdeb9", "score": 6.5, "cost_usd": 0.032755945599999996, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/Bf4FeuW0Mr.md"}
+{"ts": "2026-05-23T20:04:36", "event": "sample_done", "paper_id": "D5PJX02Jki", "job_id": "a6a619e3-44fa-4fa7-af30-d70870e6f5ce", "score": 6.0, "cost_usd": 0.0158613504, "openrouter_calls": 6, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/D5PJX02Jki.md"}
+{"ts": "2026-05-23T20:04:36", "event": "sample_start", "paper_id": "FkTEc3XEL6"}
+{"ts": "2026-05-23T20:04:36", "event": "sample_start", "paper_id": "FlcMckO6x5"}
+{"ts": "2026-05-23T20:04:41", "event": "sample_done", "paper_id": "BDNctVKwuD", "job_id": "fb9ba378-b057-4f6e-8caa-37c164033df8", "score": 6.0, "cost_usd": 0.0335675816, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/BDNctVKwuD.md"}
+{"ts": "2026-05-23T20:04:41", "event": "sample_start", "paper_id": "FtL9eEmU6v"}
+{"ts": "2026-05-23T20:04:54", "event": "sample_done", "paper_id": "A4Us8jxVGq", "job_id": "80f70f43-7170-4c4f-9b7d-3bcac1d63b93", "score": 6.0, "cost_usd": 0.037348023999999994, "openrouter_calls": 37, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/A4Us8jxVGq.md"}
+{"ts": "2026-05-23T20:04:54", "event": "sample_start", "paper_id": "GE0b5aQAvm"}
+{"ts": "2026-05-23T20:05:08", "event": "sample_done", "paper_id": "CQ0U1wZYoy", "job_id": "f06206b7-81b6-4048-9e4b-efdec6884337", "score": 7.0, "cost_usd": 0.020161024799999996, "openrouter_calls": 9, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/CQ0U1wZYoy.md"}
+{"ts": "2026-05-23T20:05:08", "event": "sample_start", "paper_id": "GFWfR4G5fm"}
+{"ts": "2026-05-23T20:06:12", "event": "sample_done", "paper_id": "BzqkbJTsbq", "job_id": "8212cf90-33a4-41d6-a8b2-1b49734dc441", "score": 6.0, "cost_usd": 0.03895585679999999, "openrouter_calls": 33, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/BzqkbJTsbq.md"}
+{"ts": "2026-05-23T20:06:12", "event": "sample_start", "paper_id": "GMP1S4R6Ke"}
+{"ts": "2026-05-23T20:06:32", "event": "sample_done", "paper_id": "C6WWMryELL", "job_id": "38b53c60-e3eb-410c-8f8e-baba0b4c976a", "score": 6.0, "cost_usd": 0.03284652, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/C6WWMryELL.md"}
+{"ts": "2026-05-23T20:06:32", "event": "sample_start", "paper_id": "GMlZt4fZSY"}
+{"ts": "2026-05-23T20:06:44", "event": "sample_done", "paper_id": "CFuNu8dK4s", "job_id": "b32c5c8f-23cc-4522-9552-7e0d546dd6db", "score": 6.0, "cost_usd": 0.03386719839999999, "openrouter_calls": 33, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/CFuNu8dK4s.md"}
+{"ts": "2026-05-23T20:06:44", "event": "sample_start", "paper_id": "GODFBZhFcX"}
+{"ts": "2026-05-23T20:06:48", "event": "sample_done", "paper_id": "CrCPeM5fRB", "job_id": "d7d62475-cff6-46c1-8637-642cfa5dd3c0", "score": 6.0, "cost_usd": 0.0297052392, "openrouter_calls": 24, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/CrCPeM5fRB.md"}
+{"ts": "2026-05-23T20:06:48", "event": "sample_start", "paper_id": "GRufFX1gAy"}
+{"ts": "2026-05-23T20:06:53", "event": "sample_done", "paper_id": "CTEXdHB1BB", "job_id": "8593692d-5335-47df-9a24-97e908715b04", "score": 6.0, "cost_usd": 0.034306568800000006, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/CTEXdHB1BB.md"}
+{"ts": "2026-05-23T20:06:53", "event": "sample_start", "paper_id": "GiItKTlJIB"}
+{"ts": "2026-05-23T20:07:15", "event": "sample_done", "paper_id": "DAPcmFcqgd", "job_id": "c71d5569-2cf6-4d31-98af-a934c5c0d441", "score": 5.0, "cost_usd": 0.029280389599999998, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/DAPcmFcqgd.md"}
+{"ts": "2026-05-23T20:07:15", "event": "sample_start", "paper_id": "GiaF5cFIpI"}
+{"ts": "2026-05-23T20:07:19", "event": "sample_done", "paper_id": "FEqZmGl36g", "job_id": "7db42cb6-e200-416e-a083-d6a79d30171c", "score": 6.0, "cost_usd": 0.027749797599999994, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/FEqZmGl36g.md"}
+{"ts": "2026-05-23T20:07:19", "event": "sample_start", "paper_id": "Gk7gLAtVDO"}
+{"ts": "2026-05-23T20:07:33", "event": "sample_done", "paper_id": "DB2KJKFX0d", "job_id": "c52ef0a6-71fe-4ad9-9a7f-efa2830cdc64", "score": 5.5, "cost_usd": 0.03306669520000002, "openrouter_calls": 30, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/DB2KJKFX0d.md"}
+{"ts": "2026-05-23T20:07:33", "event": "sample_start", "paper_id": "H1s6SBhzlg"}
+{"ts": "2026-05-23T20:07:39", "event": "sample_done", "paper_id": "DZUehXNiBn", "job_id": "ad9b1a36-a092-4113-9d26-a6342791f81a", "score": 6.0, "cost_usd": 0.038052582399999986, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/DZUehXNiBn.md"}
+{"ts": "2026-05-23T20:07:39", "event": "sample_start", "paper_id": "HA8vzzT6Ax"}
+{"ts": "2026-05-23T20:07:41", "event": "sample_done", "paper_id": "FDlvVdh1sB", "job_id": "554cdb71-a5ef-4dec-a70a-556e681ae9b1", "score": 6.5, "cost_usd": 0.03349139920000001, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/FDlvVdh1sB.md"}
+{"ts": "2026-05-23T20:07:41", "event": "sample_start", "paper_id": "HHYd4Pz5Lp"}
+{"ts": "2026-05-23T20:07:47", "event": "sample_done", "paper_id": "CNrU5kGJYG", "job_id": "8d995be7-033a-4b88-9f2d-5574500062dd", "score": 6.0, "cost_usd": 0.0363270712, "openrouter_calls": 33, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/CNrU5kGJYG.md"}
+{"ts": "2026-05-23T20:07:47", "event": "sample_start", "paper_id": "Hf7jMztvve"}
+{"ts": "2026-05-23T20:07:57", "event": "sample_done", "paper_id": "FF9QVQduAu", "job_id": "966729b0-d125-4bbe-b415-b3a974e74eeb", "score": 6.0, "cost_usd": 0.030913349600000008, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/FF9QVQduAu.md"}
+{"ts": "2026-05-23T20:07:57", "event": "sample_start", "paper_id": "HvFpfea8XA"}
+{"ts": "2026-05-23T20:07:59", "event": "sample_done", "paper_id": "EbSkBZQF9g", "job_id": "e1626723-e0cf-4473-b427-d6f01ad1ea13", "score": 4.0, "cost_usd": 0.029161916000000003, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/EbSkBZQF9g.md"}
+{"ts": "2026-05-23T20:07:59", "event": "sample_start", "paper_id": "HwyYpLxY0G"}
+{"ts": "2026-05-23T20:08:09", "event": "sample_done", "paper_id": "FlcMckO6x5", "job_id": "f93ca193-35b5-45c1-b8c2-e242fe01f964", "score": 6.0, "cost_usd": 0.03694488000000001, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/FlcMckO6x5.md"}
+{"ts": "2026-05-23T20:08:09", "event": "sample_start", "paper_id": "IFCUMN8Fp1"}
+{"ts": "2026-05-23T20:08:53", "event": "sample_done", "paper_id": "FtL9eEmU6v", "job_id": "fb0c06a3-09cb-4f7b-974f-71d19748dea3", "score": 7.0, "cost_usd": 0.029526840000000002, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/FtL9eEmU6v.md"}
+{"ts": "2026-05-23T20:08:53", "event": "sample_start", "paper_id": "IHyY6vdYZw"}
+{"ts": "2026-05-23T20:08:53", "event": "sample_done", "paper_id": "FMjeC9Msws", "job_id": "71787119-a575-46f7-8b0f-b982ae265217", "score": 6.0, "cost_usd": 0.0336810432, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/FMjeC9Msws.md"}
+{"ts": "2026-05-23T20:08:53", "event": "sample_start", "paper_id": "IOKftyz5iP"}
+{"ts": "2026-05-23T20:09:01", "event": "sample_done", "paper_id": "GE0b5aQAvm", "job_id": "e842a46b-f545-450e-8b3b-e1853426e7ee", "score": 4.0, "cost_usd": 0.03377555439999999, "openrouter_calls": 35, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/GE0b5aQAvm.md"}
+{"ts": "2026-05-23T20:09:01", "event": "sample_start", "paper_id": "IU4rqTlpRb"}
+{"ts": "2026-05-23T20:09:05", "event": "sample_done", "paper_id": "Dxb9zYD23D", "job_id": "ffa0594a-8f6a-402b-821c-85ef73d9dc62", "score": 6.0, "cost_usd": 0.0373590952, "openrouter_calls": 39, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/Dxb9zYD23D.md"}
+{"ts": "2026-05-23T20:09:05", "event": "sample_start", "paper_id": "IdJakw2jta"}
+{"ts": "2026-05-23T20:09:38", "event": "sample_done", "paper_id": "GFWfR4G5fm", "job_id": "a9ea5605-723e-44c5-b5a6-60caba7a3f06", "score": 6.0, "cost_usd": 0.0345667112, "openrouter_calls": 30, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/GFWfR4G5fm.md"}
+{"ts": "2026-05-23T20:09:38", "event": "sample_start", "paper_id": "IeNXtofK6T"}
+{"ts": "2026-05-23T20:09:44", "event": "sample_done", "paper_id": "FkTEc3XEL6", "job_id": "b74431da-aed8-4ceb-957a-c2a6dc056b78", "score": 4.0, "cost_usd": 0.03141652080000001, "openrouter_calls": 36, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/FkTEc3XEL6.md"}
+{"ts": "2026-05-23T20:09:44", "event": "sample_start", "paper_id": "Iq1fNZus2W"}
+{"ts": "2026-05-23T20:10:07", "event": "sample_done", "paper_id": "GMlZt4fZSY", "job_id": "4b1119f5-2a4d-4d60-b3b3-228e5f01df25", "score": 6.0, "cost_usd": 0.03305674400000001, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/GMlZt4fZSY.md"}
+{"ts": "2026-05-23T20:10:07", "event": "sample_start", "paper_id": "Ir0HMkRpYb"}
+{"ts": "2026-05-23T20:10:33", "event": "sample_done", "paper_id": "GODFBZhFcX", "job_id": "a6ddd149-c8b0-465c-a4f6-92f222843882", "score": 6.0, "cost_usd": 0.030843265600000006, "openrouter_calls": 32, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/GODFBZhFcX.md"}
+{"ts": "2026-05-23T20:10:33", "event": "sample_start", "paper_id": "IvG90aRAL0"}
+{"ts": "2026-05-23T20:10:53", "event": "sample_done", "paper_id": "Gk7gLAtVDO", "job_id": "d8380165-f148-4499-9cd3-2cdb2b01eb68", "score": 6.5, "cost_usd": 0.030497622400000004, "openrouter_calls": 24, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/Gk7gLAtVDO.md"}
+{"ts": "2026-05-23T20:10:53", "event": "sample_start", "paper_id": "JEN4nsDgh9"}
+{"ts": "2026-05-23T20:11:20", "event": "sample_done", "paper_id": "GRufFX1gAy", "job_id": "37e36a90-f7e3-4ef4-8f5c-51385fc8cfec", "score": 5.0, "cost_usd": 0.034287092000000005, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/GRufFX1gAy.md"}
+{"ts": "2026-05-23T20:11:20", "event": "sample_start", "paper_id": "JEYWpFGzvn"}
+{"ts": "2026-05-23T20:11:35", "event": "sample_done", "paper_id": "Hf7jMztvve", "job_id": "25fc559d-616d-458b-948f-d5bd3b94477e", "score": 5.0, "cost_usd": 0.0258176856, "openrouter_calls": 20, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/Hf7jMztvve.md"}
+{"ts": "2026-05-23T20:11:35", "event": "sample_start", "paper_id": "JdVTWjjnR6"}
+{"ts": "2026-05-23T20:11:38", "event": "sample_done", "paper_id": "GiItKTlJIB", "job_id": "91af3195-913f-44c6-829c-21417432f284", "score": 5.0, "cost_usd": 0.0324034032, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/GiItKTlJIB.md"}
+{"ts": "2026-05-23T20:11:38", "event": "sample_start", "paper_id": "JhziZbaefH"}
+{"ts": "2026-05-23T20:11:44", "event": "sample_done", "paper_id": "GMP1S4R6Ke", "job_id": "a32b790e-d2b1-427e-8b79-7cb0429aab57", "score": 5.0, "cost_usd": 0.0344302616, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/GMP1S4R6Ke.md"}
+{"ts": "2026-05-23T20:11:44", "event": "sample_start", "paper_id": "JjJzbMDGsx"}
+{"ts": "2026-05-23T20:11:50", "event": "sample_done", "paper_id": "HA8vzzT6Ax", "job_id": "9524ba46-530d-4456-aaf7-423bfb1cb1b9", "score": 6.5, "cost_usd": 0.0334507152, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/HA8vzzT6Ax.md"}
+{"ts": "2026-05-23T20:11:50", "event": "sample_start", "paper_id": "KAZpuq2W4Y"}
+{"ts": "2026-05-23T20:12:08", "event": "sample_done", "paper_id": "HvFpfea8XA", "job_id": "18ba5999-210d-4b61-b646-eea6740f9daf", "score": 5.0, "cost_usd": 0.03165638560000001, "openrouter_calls": 33, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/HvFpfea8XA.md"}
+{"ts": "2026-05-23T20:12:08", "event": "sample_start", "paper_id": "KDIgNmK8YT"}
+{"ts": "2026-05-23T20:12:10", "event": "sample_done", "paper_id": "HHYd4Pz5Lp", "job_id": "77b65fe4-038d-4e92-811d-ce0908d833ef", "score": 6.5, "cost_usd": 0.0343422968, "openrouter_calls": 39, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/HHYd4Pz5Lp.md"}
+{"ts": "2026-05-23T20:12:10", "event": "sample_start", "paper_id": "KsWRLyIAKP"}
+{"ts": "2026-05-23T20:12:18", "event": "sample_done", "paper_id": "IFCUMN8Fp1", "job_id": "57ec0f1f-bbcd-43d4-9678-197cca3a247b", "score": 6.0, "cost_usd": 0.036984085599999994, "openrouter_calls": 30, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/IFCUMN8Fp1.md"}
+{"ts": "2026-05-23T20:12:18", "event": "sample_start", "paper_id": "KsmTaPygR9"}
+{"ts": "2026-05-23T20:12:21", "event": "sample_done", "paper_id": "GiaF5cFIpI", "job_id": "864622b9-d1a4-4677-861c-9487ff6ddd63", "score": 5.0, "cost_usd": 0.03830457679999999, "openrouter_calls": 38, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/GiaF5cFIpI.md"}
+{"ts": "2026-05-23T20:12:21", "event": "sample_start", "paper_id": "Ksvv8x00eo"}
+{"ts": "2026-05-23T20:12:39", "event": "sample_done", "paper_id": "IU4rqTlpRb", "job_id": "902c8e85-1ffe-4df3-b7ec-3acd47b49679", "score": 6.5, "cost_usd": 0.031902080000000006, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/IU4rqTlpRb.md"}
+{"ts": "2026-05-23T20:12:39", "event": "sample_start", "paper_id": "Kw2mvnzCoc"}
+{"ts": "2026-05-23T20:13:02", "event": "sample_done", "paper_id": "IHyY6vdYZw", "job_id": "185be5ab-e177-4296-b30d-960b3bc88258", "score": 6.0, "cost_usd": 0.0352773792, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/IHyY6vdYZw.md"}
+{"ts": "2026-05-23T20:13:02", "event": "sample_start", "paper_id": "LD6B7AvkZq"}
+{"ts": "2026-05-23T20:13:03", "event": "sample_done", "paper_id": "IOKftyz5iP", "job_id": "3c8b4919-4ae2-45c8-9d1b-8da7094d68a3", "score": 5.0, "cost_usd": 0.02953975920000001, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/IOKftyz5iP.md"}
+{"ts": "2026-05-23T20:13:03", "event": "sample_start", "paper_id": "LHSea6DI8U"}
+{"ts": "2026-05-23T20:13:10", "event": "sample_done", "paper_id": "H1s6SBhzlg", "job_id": "27b3a464-ea80-482f-9884-7a1a3c23698d", "score": 6.0, "cost_usd": 0.036791462399999995, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/H1s6SBhzlg.md"}
+{"ts": "2026-05-23T20:13:10", "event": "sample_start", "paper_id": "M14YpuTejd"}
+{"ts": "2026-05-23T20:13:14", "event": "sample_done", "paper_id": "HwyYpLxY0G", "job_id": "79bdfc75-917d-4f60-93a5-7ebc7fa396cd", "score": 5.5, "cost_usd": 0.037183025600000016, "openrouter_calls": 38, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/HwyYpLxY0G.md"}
+{"ts": "2026-05-23T20:13:14", "event": "sample_start", "paper_id": "MPhnlqdU9Z"}
+{"ts": "2026-05-23T20:13:22", "event": "sample_done", "paper_id": "IeNXtofK6T", "job_id": "09581866-27e4-41d0-aeaf-93cd425452d7", "score": 6.0, "cost_usd": 0.0315162512, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/IeNXtofK6T.md"}
+{"ts": "2026-05-23T20:13:22", "event": "sample_start", "paper_id": "MQmrcX5jnk"}
+{"ts": "2026-05-23T20:13:31", "event": "sample_done", "paper_id": "Ir0HMkRpYb", "job_id": "84ac6abd-842f-4326-b892-933c848e3419", "score": 6.0, "cost_usd": 0.029334295199999992, "openrouter_calls": 24, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/Ir0HMkRpYb.md"}
+{"ts": "2026-05-23T20:13:31", "event": "sample_start", "paper_id": "Me0n0iESJY"}
+{"ts": "2026-05-23T20:13:45", "event": "sample_done", "paper_id": "IdJakw2jta", "job_id": "26c78b1b-1f71-49a3-941c-cad27fdb479b", "score": 6.0, "cost_usd": 0.03581103119999999, "openrouter_calls": 30, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/IdJakw2jta.md"}
+{"ts": "2026-05-23T20:13:45", "event": "sample_start", "paper_id": "MrJoBgN1VO"}
+{"ts": "2026-05-23T20:13:57", "event": "sample_done", "paper_id": "Iq1fNZus2W", "job_id": "7712b96d-b4aa-4337-a3db-3cdb9d7bacfa", "score": 6.0, "cost_usd": 0.03501822240000001, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/Iq1fNZus2W.md"}
+{"ts": "2026-05-23T20:13:57", "event": "sample_start", "paper_id": "MwuSvrthXq"}
+{"ts": "2026-05-23T20:14:43", "event": "sample_done", "paper_id": "JEN4nsDgh9", "job_id": "8b552cd0-eadc-4136-90ca-c413c58e22dc", "score": 6.0, "cost_usd": 0.031242080799999995, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/JEN4nsDgh9.md"}
+{"ts": "2026-05-23T20:14:43", "event": "sample_start", "paper_id": "Mz98kwANpF"}
+{"ts": "2026-05-23T20:14:46", "event": "sample_done", "paper_id": "IvG90aRAL0", "job_id": "9f8cd717-7d22-491b-b9b2-de264d02a5fe", "score": 6.0, "cost_usd": 0.03206494479999999, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/IvG90aRAL0.md"}
+{"ts": "2026-05-23T20:14:46", "event": "sample_start", "paper_id": "N7ziRPTNdT"}
+{"ts": "2026-05-23T20:15:15", "event": "sample_done", "paper_id": "JhziZbaefH", "job_id": "4f93fa82-6c83-492f-9177-30bbee65abaa", "score": 5.0, "cost_usd": 0.03058814639999999, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/JhziZbaefH.md"}
+{"ts": "2026-05-23T20:15:15", "event": "sample_start", "paper_id": "N8ntZEb4Ap"}
+{"ts": "2026-05-23T20:15:46", "event": "sample_done", "paper_id": "KAZpuq2W4Y", "job_id": "7123862d-1a32-4288-93de-5bb4e6bd0f36", "score": 6.0, "cost_usd": 0.0290572352, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/KAZpuq2W4Y.md"}
+{"ts": "2026-05-23T20:15:46", "event": "sample_start", "paper_id": "NFB4QGGS65"}
+{"ts": "2026-05-23T20:16:02", "event": "sample_done", "paper_id": "JEYWpFGzvn", "job_id": "beeb11ca-c086-4242-9e85-b94e4b547207", "score": 7.0, "cost_usd": 0.0350926408, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/JEYWpFGzvn.md"}
+{"ts": "2026-05-23T20:16:02", "event": "sample_start", "paper_id": "NIvqiJ8R4J"}
+{"ts": "2026-05-23T20:16:21", "event": "sample_done", "paper_id": "JdVTWjjnR6", "job_id": "80a9704f-4dd3-4882-ab4b-26ec7f76d7a6", "score": 5.5, "cost_usd": 0.035307748, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/JdVTWjjnR6.md"}
+{"ts": "2026-05-23T20:16:21", "event": "sample_start", "paper_id": "NcvmuiLuZn"}
+{"ts": "2026-05-23T20:16:24", "event": "sample_done", "paper_id": "KDIgNmK8YT", "job_id": "c5e9fd72-17a0-44ae-8aab-011bd652631c", "score": 5.5, "cost_usd": 0.0344063272, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/KDIgNmK8YT.md"}
+{"ts": "2026-05-23T20:16:24", "event": "sample_start", "paper_id": "NfO2Lt2WY7"}
+{"ts": "2026-05-23T20:16:28", "event": "sample_done", "paper_id": "KsWRLyIAKP", "job_id": "a8dce2b2-ee8d-4544-86ab-0448d970931d", "score": 5.0, "cost_usd": 0.03338102879999999, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/KsWRLyIAKP.md"}
+{"ts": "2026-05-23T20:16:28", "event": "sample_start", "paper_id": "NlHHlqP1zk"}
+{"ts": "2026-05-23T20:16:44", "event": "sample_done", "paper_id": "M14YpuTejd", "job_id": "68ae00a8-0613-4fc2-89b1-66fcb275e397", "score": 5.0, "cost_usd": 0.030951233600000003, "openrouter_calls": 22, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/M14YpuTejd.md"}
+{"ts": "2026-05-23T20:16:44", "event": "sample_start", "paper_id": "O6n4dgTBBL"}
+{"ts": "2026-05-23T20:16:45", "event": "sample_done", "paper_id": "KsmTaPygR9", "job_id": "494f7635-40b4-4ff0-9a22-5e633e5fbc51", "score": 6.5, "cost_usd": 0.0335844264, "openrouter_calls": 33, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/KsmTaPygR9.md"}
+{"ts": "2026-05-23T20:16:45", "event": "sample_start", "paper_id": "O75R5yyw4R"}
+{"ts": "2026-05-23T20:16:53", "event": "sample_done", "paper_id": "JjJzbMDGsx", "job_id": "c7476c24-ead3-4fd4-b70b-ddb26415322f", "score": 6.0, "cost_usd": 0.03552346000000001, "openrouter_calls": 33, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/JjJzbMDGsx.md"}
+{"ts": "2026-05-23T20:16:53", "event": "sample_start", "paper_id": "OAXECnLxuk"}
+{"ts": "2026-05-23T20:16:55", "event": "sample_done", "paper_id": "Ksvv8x00eo", "job_id": "b6933ddd-5846-4a51-ad62-2a3f9dfb8cfd", "score": 6.5, "cost_usd": 0.037516158400000006, "openrouter_calls": 36, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/Ksvv8x00eo.md"}
+{"ts": "2026-05-23T20:16:55", "event": "sample_start", "paper_id": "OJupg4mDjS"}
+{"ts": "2026-05-23T20:17:12", "event": "sample_done", "paper_id": "Me0n0iESJY", "job_id": "7f661781-1ebe-45aa-a4e0-99797694664b", "score": 6.0, "cost_usd": 0.0357507808, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/Me0n0iESJY.md"}
+{"ts": "2026-05-23T20:17:12", "event": "sample_start", "paper_id": "OPFE1zPYbU"}
+{"ts": "2026-05-23T20:17:43", "event": "sample_done", "paper_id": "LD6B7AvkZq", "job_id": "f30ccbbc-e08b-41b4-b6c3-7a56164be891", "score": 5.0, "cost_usd": 0.034140708000000006, "openrouter_calls": 30, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/LD6B7AvkZq.md"}
+{"ts": "2026-05-23T20:17:43", "event": "sample_start", "paper_id": "OUQ8kLRK3m"}
+{"ts": "2026-05-23T20:17:51", "event": "sample_done", "paper_id": "Kw2mvnzCoc", "job_id": "50a04f0d-65e9-4c7e-ad7e-6f238ed35de0", "score": 5.0, "cost_usd": 0.041672248800000006, "openrouter_calls": 50, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/Kw2mvnzCoc.md"}
+{"ts": "2026-05-23T20:17:51", "event": "sample_start", "paper_id": "Olc7XhgstJ"}
+{"ts": "2026-05-23T20:17:54", "event": "sample_done", "paper_id": "MPhnlqdU9Z", "job_id": "1ec32c70-a82d-46e7-b032-4b101807f6cd", "score": 5.5, "cost_usd": 0.034303438400000004, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/MPhnlqdU9Z.md"}
+{"ts": "2026-05-23T20:17:54", "event": "sample_start", "paper_id": "OuMNJoKJBQ"}
+{"ts": "2026-05-23T20:17:59", "event": "sample_done", "paper_id": "MrJoBgN1VO", "job_id": "d37806a4-69cf-4d31-a842-8a3c97d1fde6", "score": 6.0, "cost_usd": 0.03456669439999999, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/MrJoBgN1VO.md"}
+{"ts": "2026-05-23T20:17:59", "event": "sample_start", "paper_id": "P1qlqfRtgo"}
+{"ts": "2026-05-23T20:18:12", "event": "sample_done", "paper_id": "LHSea6DI8U", "job_id": "397a504b-9c2c-4ae9-b3b7-5b1f238604d2", "score": 6.0, "cost_usd": 0.037344949599999996, "openrouter_calls": 32, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/LHSea6DI8U.md"}
+{"ts": "2026-05-23T20:18:12", "event": "sample_start", "paper_id": "PFhrOUJZ5o"}
+{"ts": "2026-05-23T20:18:16", "event": "sample_done", "paper_id": "MwuSvrthXq", "job_id": "1765cee5-ea94-4f3f-a7ae-572003251d6e", "score": 6.5, "cost_usd": 0.032835124, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/MwuSvrthXq.md"}
+{"ts": "2026-05-23T20:18:16", "event": "sample_start", "paper_id": "Pa6ak2B9jJ"}
+{"ts": "2026-05-23T20:18:38", "event": "sample_done", "paper_id": "MQmrcX5jnk", "job_id": "58fc5c42-d934-4a6a-9953-c2c7c8a5b778", "score": 7.0, "cost_usd": 0.036241604, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/MQmrcX5jnk.md"}
+{"ts": "2026-05-23T20:18:38", "event": "sample_start", "paper_id": "Pxd5mjwznl"}
+{"ts": "2026-05-23T20:18:44", "event": "sample_done", "paper_id": "Mz98kwANpF", "job_id": "dfb7821a-666c-4d54-a94a-dbb444b9b442", "score": 6.0, "cost_usd": 0.032353692, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/Mz98kwANpF.md"}
+{"ts": "2026-05-23T20:18:44", "event": "sample_start", "paper_id": "Q5SSA6IonA"}
+{"ts": "2026-05-23T20:18:49", "event": "sample_done", "paper_id": "N8ntZEb4Ap", "job_id": "3a521391-8ee7-4441-ba38-b01c6fbcec80", "score": 6.0, "cost_usd": 0.029142399999999995, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/N8ntZEb4Ap.md"}
+{"ts": "2026-05-23T20:18:49", "event": "sample_start", "paper_id": "Q6TymStAvS"}
+{"ts": "2026-05-23T20:18:51", "event": "sample_done", "paper_id": "N7ziRPTNdT", "job_id": "58504c17-e1d5-4b9a-8a4c-509a35e7ed8d", "score": 6.0, "cost_usd": 0.03222423120000001, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/N7ziRPTNdT.md"}
+{"ts": "2026-05-23T20:18:51", "event": "sample_start", "paper_id": "QIIrjgUnL1"}
+{"ts": "2026-05-23T20:19:54", "event": "sample_done", "paper_id": "NFB4QGGS65", "job_id": "41459af6-25c9-41f2-b7ee-c904f65e2881", "score": 6.5, "cost_usd": 0.0343541632, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/NFB4QGGS65.md"}
+{"ts": "2026-05-23T20:19:54", "event": "sample_start", "paper_id": "QSPKIO3XV8"}
+{"ts": "2026-05-23T20:20:03", "event": "sample_failed", "paper_id": "OuMNJoKJBQ", "job_id": "f4179e72-e53a-4606-b9a9-f35349cc7d4d", "error": "ModelBehaviorError: Tool pdf_animate not found in agent DeepReviewer2TextBenchmarkAgent", "cost_usd": 0.024737260799999997, "openrouter_calls": 17}
+{"ts": "2026-05-23T20:20:03", "event": "sample_start", "paper_id": "QnuJR7qA3z"}
+{"ts": "2026-05-23T20:20:09", "event": "sample_done", "paper_id": "NcvmuiLuZn", "job_id": "3b9149cc-21d3-40a1-9cbb-2185f8f8fcd3", "score": 6.0, "cost_usd": 0.02974121360000001, "openrouter_calls": 23, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/NcvmuiLuZn.md"}
+{"ts": "2026-05-23T20:20:09", "event": "sample_start", "paper_id": "QryPmx2MNh"}
+{"ts": "2026-05-23T20:20:13", "event": "sample_done", "paper_id": "NIvqiJ8R4J", "job_id": "269ecf9d-ba63-47d8-9e80-b699d746669a", "score": 5.5, "cost_usd": 0.0333579176, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/NIvqiJ8R4J.md"}
+{"ts": "2026-05-23T20:20:13", "event": "sample_start", "paper_id": "R0ZKcQlF2C"}
+{"ts": "2026-05-23T20:20:40", "event": "sample_done", "paper_id": "NfO2Lt2WY7", "job_id": "24bb4a17-2edd-470f-8517-568c8aa85e06", "score": 5.0, "cost_usd": 0.0331574824, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/NfO2Lt2WY7.md"}
+{"ts": "2026-05-23T20:20:40", "event": "sample_start", "paper_id": "R8y089OGoo"}
+{"ts": "2026-05-23T20:20:47", "event": "sample_done", "paper_id": "OAXECnLxuk", "job_id": "3aac6004-da18-40d2-ad8b-11e445bde008", "score": 6.5, "cost_usd": 0.031099493599999996, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/OAXECnLxuk.md"}
+{"ts": "2026-05-23T20:20:47", "event": "sample_start", "paper_id": "RDAhLHEHDm"}
+{"ts": "2026-05-23T20:20:56", "event": "sample_done", "paper_id": "O75R5yyw4R", "job_id": "fd5b9554-36ce-4c0c-9b69-820b5e525378", "score": 5.0, "cost_usd": 0.0323320648, "openrouter_calls": 32, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/O75R5yyw4R.md"}
+{"ts": "2026-05-23T20:20:56", "event": "sample_start", "paper_id": "RNe17WTR38"}
+{"ts": "2026-05-23T20:21:04", "event": "sample_done", "paper_id": "OJupg4mDjS", "job_id": "ed701e76-135a-42fb-b7fd-dd8e1136a2b3", "score": 6.0, "cost_usd": 0.033350665599999996, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/OJupg4mDjS.md"}
+{"ts": "2026-05-23T20:21:04", "event": "sample_start", "paper_id": "RNsydf7HB4"}
+{"ts": "2026-05-23T20:21:11", "event": "sample_done", "paper_id": "OUQ8kLRK3m", "job_id": "ab98b321-f3f2-479a-ae40-1500ed52d746", "score": 5.0, "cost_usd": 0.031960079200000005, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/OUQ8kLRK3m.md"}
+{"ts": "2026-05-23T20:21:11", "event": "sample_start", "paper_id": "RT5SlprCmc"}
+{"ts": "2026-05-23T20:21:17", "event": "sample_done", "paper_id": "OPFE1zPYbU", "job_id": "cf6aafdb-71b5-4e30-a53e-22579eae13bc", "score": 5.0, "cost_usd": 0.02878153039999999, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/OPFE1zPYbU.md"}
+{"ts": "2026-05-23T20:21:17", "event": "sample_start", "paper_id": "Rd0yhdfueL"}
+{"ts": "2026-05-23T20:21:50", "event": "sample_done", "paper_id": "O6n4dgTBBL", "job_id": "b1d93c7d-a60c-4d54-aa75-193d4f69ef8f", "score": 4.0, "cost_usd": 0.03701883360000001, "openrouter_calls": 33, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/O6n4dgTBBL.md"}
+{"ts": "2026-05-23T20:21:50", "event": "sample_start", "paper_id": "Rip3EJc4nx"}
+{"ts": "2026-05-23T20:22:03", "event": "sample_done", "paper_id": "P1qlqfRtgo", "job_id": "674a7918-dcaf-45e7-8b56-45df00c6a235", "score": 5.5, "cost_usd": 0.026967673599999995, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/P1qlqfRtgo.md"}
+{"ts": "2026-05-23T20:22:03", "event": "sample_start", "paper_id": "Rj5ZJk956j"}
+{"ts": "2026-05-23T20:22:05", "event": "sample_done", "paper_id": "NlHHlqP1zk", "job_id": "8cade30c-85e4-4968-9090-1f05f5018ff6", "score": 5.0, "cost_usd": 0.0360632776, "openrouter_calls": 35, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/NlHHlqP1zk.md"}
+{"ts": "2026-05-23T20:22:05", "event": "sample_start", "paper_id": "RlMCc0JTu4"}
+{"ts": "2026-05-23T20:22:40", "event": "sample_done", "paper_id": "PFhrOUJZ5o", "job_id": "22112576-fac5-4c2b-b434-023bd3be85c0", "score": 5.5, "cost_usd": 0.03576670159999999, "openrouter_calls": 32, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/PFhrOUJZ5o.md"}
+{"ts": "2026-05-23T20:22:40", "event": "sample_start", "paper_id": "RpDJz00zNh"}
+{"ts": "2026-05-23T20:22:41", "event": "sample_done", "paper_id": "Pxd5mjwznl", "job_id": "c9e1b5e7-c455-479c-a760-56c53786933a", "score": 2.5, "cost_usd": 0.0251715184, "openrouter_calls": 24, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/Pxd5mjwznl.md"}
+{"ts": "2026-05-23T20:22:41", "event": "sample_start", "paper_id": "Rt9SeEAMWv"}
+{"ts": "2026-05-23T20:22:45", "event": "sample_done", "paper_id": "Pa6ak2B9jJ", "job_id": "64ae612c-7bed-40dd-8861-ff07f457ca5a", "score": 6.5, "cost_usd": 0.0362763688, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/Pa6ak2B9jJ.md"}
+{"ts": "2026-05-23T20:22:45", "event": "sample_start", "paper_id": "RtS4UqSmNt"}
+{"ts": "2026-05-23T20:22:51", "event": "sample_done", "paper_id": "Olc7XhgstJ", "job_id": "8c75198c-d800-4f7b-8cfe-db7068d85edf", "score": 6.0, "cost_usd": 0.0383820528, "openrouter_calls": 37, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/Olc7XhgstJ.md"}
+{"ts": "2026-05-23T20:22:51", "event": "sample_start", "paper_id": "Ry8jLSYIUG"}
+{"ts": "2026-05-23T20:22:53", "event": "sample_done", "paper_id": "Q5SSA6IonA", "job_id": "d81a7f70-ceab-49e9-b840-00c530635c10", "score": 5.5, "cost_usd": 0.0350495768, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/Q5SSA6IonA.md"}
+{"ts": "2026-05-23T20:22:53", "event": "sample_start", "paper_id": "SA8xDYrUYB"}
+{"ts": "2026-05-23T20:23:25", "event": "sample_done", "paper_id": "Q6TymStAvS", "job_id": "de8ccbf2-19c8-4003-ae61-9717a92826e9", "score": 6.0, "cost_usd": 0.035863744, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/Q6TymStAvS.md"}
+{"ts": "2026-05-23T20:23:25", "event": "sample_start", "paper_id": "SkmkGKEZ1U"}
+{"ts": "2026-05-23T20:23:27", "event": "sample_done", "paper_id": "QIIrjgUnL1", "job_id": "7809ed28-fb41-46f7-89c5-78d7c5f276fb", "score": 5.0, "cost_usd": 0.031147463200000006, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/QIIrjgUnL1.md"}
+{"ts": "2026-05-23T20:23:27", "event": "sample_start", "paper_id": "SpUXijnBEg"}
+{"ts": "2026-05-23T20:24:39", "event": "sample_done", "paper_id": "R8y089OGoo", "job_id": "162f4233-4687-4cce-9e47-ddb3deb4b396", "score": 7.0, "cost_usd": 0.0335986616, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/R8y089OGoo.md"}
+{"ts": "2026-05-23T20:24:39", "event": "sample_start", "paper_id": "SsUjdSVdUl"}
+{"ts": "2026-05-23T20:25:04", "event": "sample_done", "paper_id": "RT5SlprCmc", "job_id": "27a3be97-7261-46c5-bb7d-0f434ee13e03", "score": 6.0, "cost_usd": 0.028760306400000005, "openrouter_calls": 23, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/RT5SlprCmc.md"}
+{"ts": "2026-05-23T20:25:04", "event": "sample_start", "paper_id": "SzXDuBN8M1"}
+{"ts": "2026-05-23T20:25:05", "event": "sample_done", "paper_id": "RNsydf7HB4", "job_id": "b299cb55-b44c-40ba-a47a-38f707652441", "score": 6.0, "cost_usd": 0.0304786384, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/RNsydf7HB4.md"}
+{"ts": "2026-05-23T20:25:05", "event": "sample_start", "paper_id": "TADsPhlp32"}
+{"ts": "2026-05-23T20:25:07", "event": "sample_done", "paper_id": "Rd0yhdfueL", "job_id": "b5c7aac2-9c79-430b-9157-265f0b087e10", "score": 4.0, "cost_usd": 0.027001480799999998, "openrouter_calls": 24, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/Rd0yhdfueL.md"}
+{"ts": "2026-05-23T20:25:07", "event": "sample_start", "paper_id": "TBsTStMK41"}
+{"ts": "2026-05-23T20:25:10", "event": "sample_done", "paper_id": "RNe17WTR38", "job_id": "37a650c1-b10b-4adb-ba5a-ab62d815656b", "score": 6.0, "cost_usd": 0.034812915199999996, "openrouter_calls": 30, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/RNe17WTR38.md"}
+{"ts": "2026-05-23T20:25:10", "event": "sample_start", "paper_id": "TX4k7BF6aO"}
+{"ts": "2026-05-23T20:25:11", "event": "sample_done", "paper_id": "R0ZKcQlF2C", "job_id": "1e4f2a43-bb2a-4b72-929f-868c215d32f2", "score": 5.0, "cost_usd": 0.032986044, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/R0ZKcQlF2C.md"}
+{"ts": "2026-05-23T20:25:11", "event": "sample_start", "paper_id": "TgLW2DiRDG"}
+{"ts": "2026-05-23T20:25:14", "event": "sample_done", "paper_id": "QSPKIO3XV8", "job_id": "0eda14e8-dc71-415b-b393-ee02b18f6fe4", "score": 6.0, "cost_usd": 0.0361248552, "openrouter_calls": 34, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/QSPKIO3XV8.md"}
+{"ts": "2026-05-23T20:25:14", "event": "sample_start", "paper_id": "TjAhTNzRub"}
+{"ts": "2026-05-23T20:25:14", "event": "sample_done", "paper_id": "QryPmx2MNh", "job_id": "c2544f4e-6d9b-4312-8007-482b122f9056", "score": 6.0, "cost_usd": 0.03780859039999999, "openrouter_calls": 40, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/QryPmx2MNh.md"}
+{"ts": "2026-05-23T20:25:14", "event": "sample_start", "paper_id": "TjF9WLcu8o"}
+{"ts": "2026-05-23T20:25:17", "event": "sample_done", "paper_id": "RDAhLHEHDm", "job_id": "f531437b-384d-4ce8-9225-68c5c4348773", "score": 6.0, "cost_usd": 0.030451915200000013, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/RDAhLHEHDm.md"}
+{"ts": "2026-05-23T20:25:17", "event": "sample_start", "paper_id": "U2SJE6W3wT"}
+{"ts": "2026-05-23T20:25:23", "event": "sample_done", "paper_id": "RlMCc0JTu4", "job_id": "862b959a-9c81-4247-8983-8cec26831585", "score": 3.0, "cost_usd": 0.02659941200000001, "openrouter_calls": 24, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/RlMCc0JTu4.md"}
+{"ts": "2026-05-23T20:25:23", "event": "sample_start", "paper_id": "U6ROetm5nW"}
+{"ts": "2026-05-23T20:25:53", "event": "sample_done", "paper_id": "Rj5ZJk956j", "job_id": "5796d83e-00f2-4c7b-a659-6dce725d3f1c", "score": 6.5, "cost_usd": 0.0307991488, "openrouter_calls": 24, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/Rj5ZJk956j.md"}
+{"ts": "2026-05-23T20:25:53", "event": "sample_start", "paper_id": "UDIYU1X3vC"}
+{"ts": "2026-05-23T20:26:12", "event": "sample_done", "paper_id": "Ry8jLSYIUG", "job_id": "33f5bdf7-ce5c-4007-b907-97f9a1e1cc2d", "score": 6.5, "cost_usd": 0.0317567544, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/Ry8jLSYIUG.md"}
+{"ts": "2026-05-23T20:26:12", "event": "sample_start", "paper_id": "UESTP6dR1K"}
+{"ts": "2026-05-23T20:26:28", "event": "sample_done", "paper_id": "Rt9SeEAMWv", "job_id": "0bbc870d-f02e-47d2-b463-7013d57e5a2d", "score": 5.0, "cost_usd": 0.031891972000000005, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/Rt9SeEAMWv.md"}
+{"ts": "2026-05-23T20:26:28", "event": "sample_start", "paper_id": "UJ2UUjT2ko"}
+{"ts": "2026-05-23T20:26:38", "event": "sample_done", "paper_id": "SA8xDYrUYB", "job_id": "c82dd839-4174-46a9-a0aa-8069a8870a78", "score": 5.5, "cost_usd": 0.028916720000000003, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/SA8xDYrUYB.md"}
+{"ts": "2026-05-23T20:26:38", "event": "sample_start", "paper_id": "USyGD0eUod"}
+{"ts": "2026-05-23T20:26:40", "event": "sample_done", "paper_id": "QnuJR7qA3z", "job_id": "3d83018b-e161-4a82-84f0-b590f4f27c76", "score": 5.0, "cost_usd": 0.0412667248, "openrouter_calls": 35, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/QnuJR7qA3z.md"}
+{"ts": "2026-05-23T20:26:40", "event": "sample_start", "paper_id": "VFaYukYt6K"}
+{"ts": "2026-05-23T20:26:57", "event": "sample_done", "paper_id": "RpDJz00zNh", "job_id": "c5d45656-5ea8-4cb0-a9ea-d4c3318bc92e", "score": 6.0, "cost_usd": 0.034729015999999995, "openrouter_calls": 33, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/RpDJz00zNh.md"}
+{"ts": "2026-05-23T20:26:57", "event": "sample_start", "paper_id": "VK5G3Ff4Ty"}
+{"ts": "2026-05-23T20:27:08", "event": "sample_done", "paper_id": "Rip3EJc4nx", "job_id": "541c4443-4e36-4002-a598-83f3e81273ab", "score": 5.0, "cost_usd": 0.03976747600000001, "openrouter_calls": 41, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/Rip3EJc4nx.md"}
+{"ts": "2026-05-23T20:27:08", "event": "sample_start", "paper_id": "VSDV0SWwOC"}
+{"ts": "2026-05-23T20:27:09", "event": "sample_done", "paper_id": "SkmkGKEZ1U", "job_id": "454dcbb4-91c9-46cb-94a5-de2007adac4d", "score": 5.0, "cost_usd": 0.02776052159999999, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/SkmkGKEZ1U.md"}
+{"ts": "2026-05-23T20:27:09", "event": "sample_start", "paper_id": "VbTLgEUocp"}
+{"ts": "2026-05-23T20:27:10", "event": "sample_done", "paper_id": "RtS4UqSmNt", "job_id": "62974ee3-8222-46e3-b2e4-c3c1dc2558da", "score": 6.0, "cost_usd": 0.0325272808, "openrouter_calls": 30, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/RtS4UqSmNt.md"}
+{"ts": "2026-05-23T20:27:10", "event": "sample_start", "paper_id": "VgVeQpagf7"}
+{"ts": "2026-05-23T20:27:23", "event": "sample_done", "paper_id": "SpUXijnBEg", "job_id": "d3250ca8-bb6f-4b90-844e-b81f34628661", "score": 6.0, "cost_usd": 0.0309655192, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/SpUXijnBEg.md"}
+{"ts": "2026-05-23T20:27:23", "event": "sample_start", "paper_id": "Vgm77U4ojX"}
+{"ts": "2026-05-23T20:28:24", "event": "sample_done", "paper_id": "TgLW2DiRDG", "job_id": "d32bf848-b809-4874-8428-e1a73ab37ae8", "score": 6.5, "cost_usd": 0.029661514400000002, "openrouter_calls": 19, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/TgLW2DiRDG.md"}
+{"ts": "2026-05-23T20:28:24", "event": "sample_start", "paper_id": "Vit5M0G5Gb"}
+{"ts": "2026-05-23T20:28:54", "event": "sample_done", "paper_id": "TX4k7BF6aO", "job_id": "ad2add4d-7163-4d10-b609-439de8baab83", "score": 6.5, "cost_usd": 0.0328063064, "openrouter_calls": 24, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/TX4k7BF6aO.md"}
+{"ts": "2026-05-23T20:28:54", "event": "sample_start", "paper_id": "VjGU55hEwV"}
+{"ts": "2026-05-23T20:28:58", "event": "sample_done", "paper_id": "SzXDuBN8M1", "job_id": "53dc6de0-1566-4681-bf7f-2a6bbcaab36a", "score": 7.0, "cost_usd": 0.035428092, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/SzXDuBN8M1.md"}
+{"ts": "2026-05-23T20:28:58", "event": "sample_start", "paper_id": "VmEkhV2yCX"}
+{"ts": "2026-05-23T20:29:01", "event": "sample_done", "paper_id": "U2SJE6W3wT", "job_id": "a0ee2128-6868-4601-a0eb-ca67f8e0da1c", "score": 6.5, "cost_usd": 0.0336007112, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/U2SJE6W3wT.md"}
+{"ts": "2026-05-23T20:29:01", "event": "sample_start", "paper_id": "Vsgq2ldr4K"}
+{"ts": "2026-05-23T20:29:14", "event": "sample_done", "paper_id": "SsUjdSVdUl", "job_id": "01f802ea-b3ac-4247-a7f2-648d7f692c14", "score": 6.0, "cost_usd": 0.038044372800000004, "openrouter_calls": 37, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/SsUjdSVdUl.md"}
+{"ts": "2026-05-23T20:29:15", "event": "sample_start", "paper_id": "W42oLSwI9p"}
+{"ts": "2026-05-23T20:29:29", "event": "sample_done", "paper_id": "TBsTStMK41", "job_id": "405900ec-86e1-44c2-b356-a70ec079b8ec", "score": 6.0, "cost_usd": 0.033062708, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/TBsTStMK41.md"}
+{"ts": "2026-05-23T20:29:29", "event": "sample_start", "paper_id": "W4FAenIrQ2"}
+{"ts": "2026-05-23T20:29:55", "event": "sample_done", "paper_id": "TjAhTNzRub", "job_id": "00afbce5-b7ad-4695-8fd1-88ab6392ef89", "score": 5.0, "cost_usd": 0.038674602399999994, "openrouter_calls": 33, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/TjAhTNzRub.md"}
+{"ts": "2026-05-23T20:29:55", "event": "sample_start", "paper_id": "Wes9HF3ppt"}
+{"ts": "2026-05-23T20:29:59", "event": "sample_done", "paper_id": "UDIYU1X3vC", "job_id": "9b1087e7-2797-47d2-aea7-0ab9bff3e166", "score": 7.0, "cost_usd": 0.03294071760000001, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/UDIYU1X3vC.md"}
+{"ts": "2026-05-23T20:29:59", "event": "sample_start", "paper_id": "WgMZPsdJmC"}
+{"ts": "2026-05-23T20:30:01", "event": "sample_done", "paper_id": "U6ROetm5nW", "job_id": "c2d2b8fc-0347-49f0-992e-06ac4960359b", "score": 6.0, "cost_usd": 0.03352773199999999, "openrouter_calls": 24, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/U6ROetm5nW.md"}
+{"ts": "2026-05-23T20:30:01", "event": "sample_start", "paper_id": "WhO6Km5Rku"}
+{"ts": "2026-05-23T20:30:05", "event": "sample_done", "paper_id": "UJ2UUjT2ko", "job_id": "618e3ad1-d303-48e1-9a2b-1d0ee712e1a7", "score": 7.0, "cost_usd": 0.0304914792, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/UJ2UUjT2ko.md"}
+{"ts": "2026-05-23T20:30:05", "event": "sample_start", "paper_id": "WwDNiisZQm"}
+{"ts": "2026-05-23T20:30:08", "event": "sample_done", "paper_id": "TjF9WLcu8o", "job_id": "b2960aff-dbb7-4e34-894d-1d64ffeaba52", "score": 3.0, "cost_usd": 0.030889622400000007, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/TjF9WLcu8o.md"}
+{"ts": "2026-05-23T20:30:08", "event": "sample_start", "paper_id": "WxTlAbRUE6"}
+{"ts": "2026-05-23T20:30:13", "event": "sample_done", "paper_id": "UESTP6dR1K", "job_id": "148c3e1b-e114-44d0-a8e7-046f11b7a05f", "score": 6.0, "cost_usd": 0.0334165048, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/UESTP6dR1K.md"}
+{"ts": "2026-05-23T20:30:13", "event": "sample_start", "paper_id": "X2yzXtH4wp"}
+{"ts": "2026-05-23T20:30:27", "event": "sample_done", "paper_id": "USyGD0eUod", "job_id": "0aeefced-b6c3-4af9-a174-726a661d6948", "score": 5.0, "cost_usd": 0.029791159999999997, "openrouter_calls": 30, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/USyGD0eUod.md"}
+{"ts": "2026-05-23T20:30:27", "event": "sample_start", "paper_id": "XHzrBDzKaX"}
+{"ts": "2026-05-23T20:30:35", "event": "sample_done", "paper_id": "TADsPhlp32", "job_id": "e3baa33b-d3a5-4210-89a7-03b24ceabc4d", "score": 6.0, "cost_usd": 0.03777451440000001, "openrouter_calls": 36, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/TADsPhlp32.md"}
+{"ts": "2026-05-23T20:30:35", "event": "sample_start", "paper_id": "XIAta0WOJ6"}
+{"ts": "2026-05-23T20:30:53", "event": "sample_done", "paper_id": "VFaYukYt6K", "job_id": "831e6f10-1b7e-43c2-bf0c-2fc88686cfba", "score": 4.5, "cost_usd": 0.032740036, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/VFaYukYt6K.md"}
+{"ts": "2026-05-23T20:30:53", "event": "sample_start", "paper_id": "XKLPlnfZzM"}
+{"ts": "2026-05-23T20:30:54", "event": "sample_done", "paper_id": "VK5G3Ff4Ty", "job_id": "0a473d24-f0a4-4c0b-8aea-c6112ec490b9", "score": 5.5, "cost_usd": 0.029510275199999995, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/VK5G3Ff4Ty.md"}
+{"ts": "2026-05-23T20:30:54", "event": "sample_start", "paper_id": "XX5EZoe4ec"}
+{"ts": "2026-05-23T20:30:59", "event": "sample_done", "paper_id": "VbTLgEUocp", "job_id": "b78ca756-22b9-4896-b6ea-88da445a16d6", "score": 5.5, "cost_usd": 0.0329809928, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/VbTLgEUocp.md"}
+{"ts": "2026-05-23T20:30:59", "event": "sample_start", "paper_id": "Xn33bU71m4"}
+{"ts": "2026-05-23T20:31:13", "event": "sample_done", "paper_id": "VgVeQpagf7", "job_id": "e0a0333f-0186-4a48-b276-ab087be7a041", "score": 7.0, "cost_usd": 0.033890948, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/VgVeQpagf7.md"}
+{"ts": "2026-05-23T20:31:13", "event": "sample_start", "paper_id": "Xpj0yeMhpz"}
+{"ts": "2026-05-23T20:31:38", "event": "sample_done", "paper_id": "VSDV0SWwOC", "job_id": "39d9922c-178e-4c8f-9be2-4e43ae2c40a3", "score": 6.0, "cost_usd": 0.03515893920000001, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/VSDV0SWwOC.md"}
+{"ts": "2026-05-23T20:31:38", "event": "sample_start", "paper_id": "Y6lVVJHiwN"}
+{"ts": "2026-05-23T20:31:52", "event": "sample_done", "paper_id": "Vgm77U4ojX", "job_id": "c5b95c07-5f19-4e13-911c-30a8ff72205a", "score": 7.0, "cost_usd": 0.0359551584, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/Vgm77U4ojX.md"}
+{"ts": "2026-05-23T20:31:52", "event": "sample_start", "paper_id": "Y9TgNFsNyP"}
+{"ts": "2026-05-23T20:32:34", "event": "sample_done", "paper_id": "WgMZPsdJmC", "job_id": "cb1f404b-38ec-493e-89f7-fd431f16743f", "score": 4.0, "cost_usd": 0.020848637599999994, "openrouter_calls": 15, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/WgMZPsdJmC.md"}
+{"ts": "2026-05-23T20:32:34", "event": "sample_start", "paper_id": "YADyx3ieUX"}
+{"ts": "2026-05-23T20:32:41", "event": "sample_done", "paper_id": "VmEkhV2yCX", "job_id": "3ad762b7-c019-444b-80f5-7d9661e73630", "score": 6.0, "cost_usd": 0.036325928800000004, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/VmEkhV2yCX.md"}
+{"ts": "2026-05-23T20:32:41", "event": "sample_start", "paper_id": "YETCQLcKtn"}
+{"ts": "2026-05-23T20:33:06", "event": "sample_done", "paper_id": "W42oLSwI9p", "job_id": "2a4c4486-7331-4f6d-9c6b-feda07d224a6", "score": 5.0, "cost_usd": 0.03462090240000001, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/W42oLSwI9p.md"}
+{"ts": "2026-05-23T20:33:06", "event": "sample_start", "paper_id": "YS4N1YxXSM"}
+{"ts": "2026-05-23T20:33:14", "event": "sample_done", "paper_id": "VjGU55hEwV", "job_id": "acf220d1-9997-4384-8a70-f9ecf75bd103", "score": 5.5, "cost_usd": 0.033300736000000004, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/VjGU55hEwV.md"}
+{"ts": "2026-05-23T20:33:14", "event": "sample_start", "paper_id": "Yo7eG3lC3y"}
+{"ts": "2026-05-23T20:33:31", "event": "sample_done", "paper_id": "W4FAenIrQ2", "job_id": "8650c880-ec26-4d64-b8c5-c2ce9594b70f", "score": 6.5, "cost_usd": 0.034171418399999993, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/W4FAenIrQ2.md"}
+{"ts": "2026-05-23T20:33:31", "event": "sample_start", "paper_id": "YuxgSGFaqb"}
+{"ts": "2026-05-23T20:33:43", "event": "sample_done", "paper_id": "Vsgq2ldr4K", "job_id": "a07f6270-237e-4439-82e1-f677333f1ab5", "score": 5.0, "cost_usd": 0.034175153599999994, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/Vsgq2ldr4K.md"}
+{"ts": "2026-05-23T20:33:43", "event": "sample_start", "paper_id": "YvMkU4BYOA"}
+{"ts": "2026-05-23T20:33:54", "event": "sample_done", "paper_id": "WwDNiisZQm", "job_id": "f06e7132-7851-47fe-8c48-8c1e3b5179f4", "score": 6.5, "cost_usd": 0.0303043608, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/WwDNiisZQm.md"}
+{"ts": "2026-05-23T20:33:54", "event": "sample_start", "paper_id": "ZBhZT307xx"}
+{"ts": "2026-05-23T20:34:03", "event": "sample_done", "paper_id": "XIAta0WOJ6", "job_id": "bd124360-369b-4a0d-96bd-7f59e057a842", "score": 6.5, "cost_usd": 0.03144683360000001, "openrouter_calls": 24, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/XIAta0WOJ6.md"}
+{"ts": "2026-05-23T20:34:03", "event": "sample_start", "paper_id": "ZF0xRAdsuY"}
+{"ts": "2026-05-23T20:34:17", "event": "sample_done", "paper_id": "WxTlAbRUE6", "job_id": "6792a186-95a1-4da3-a5ac-91a5679aca2d", "score": 6.0, "cost_usd": 0.028587109600000004, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/WxTlAbRUE6.md"}
+{"ts": "2026-05-23T20:34:17", "event": "sample_start", "paper_id": "ZKkeA1G935"}
+{"ts": "2026-05-23T20:34:23", "event": "sample_done", "paper_id": "Vit5M0G5Gb", "job_id": "245e85c0-5d2b-4f3e-8178-41e8bc0ded32", "score": 6.5, "cost_usd": 0.0398382992, "openrouter_calls": 37, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/Vit5M0G5Gb.md"}
+{"ts": "2026-05-23T20:34:23", "event": "sample_start", "paper_id": "ZMzha5gbnF"}
+{"ts": "2026-05-23T20:34:38", "event": "sample_done", "paper_id": "X2yzXtH4wp", "job_id": "8f160062-2dff-4089-bf39-056d336b314c", "score": 6.0, "cost_usd": 0.03117549679999999, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/X2yzXtH4wp.md"}
+{"ts": "2026-05-23T20:34:38", "event": "sample_start", "paper_id": "ZNAY3ivd62"}
+{"ts": "2026-05-23T20:34:40", "event": "sample_done", "paper_id": "Wes9HF3ppt", "job_id": "2e4c7a86-6f8e-4dde-bf6f-2ada700a000e", "score": 6.0, "cost_usd": 0.033078752, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/Wes9HF3ppt.md"}
+{"ts": "2026-05-23T20:34:40", "event": "sample_start", "paper_id": "ZZFNyU3ZSo"}
+{"ts": "2026-05-23T20:34:45", "event": "sample_done", "paper_id": "XHzrBDzKaX", "job_id": "18b5b4ba-840c-4927-98fe-a6ce1e54f4f0", "score": 6.0, "cost_usd": 0.037639593600000014, "openrouter_calls": 32, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/XHzrBDzKaX.md"}
+{"ts": "2026-05-23T20:34:45", "event": "sample_start", "paper_id": "a2XmC7rHIU"}
+{"ts": "2026-05-23T20:34:56", "event": "sample_done", "paper_id": "WhO6Km5Rku", "job_id": "44cac214-cda6-47b9-9267-864f56b48a30", "score": 4.0, "cost_usd": 0.0332362464, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/WhO6Km5Rku.md"}
+{"ts": "2026-05-23T20:34:56", "event": "sample_start", "paper_id": "a3sRspQ62b"}
+{"ts": "2026-05-23T20:35:02", "event": "sample_done", "paper_id": "XX5EZoe4ec", "job_id": "d7586094-1bb4-4af7-acfd-fed790223585", "score": 6.0, "cost_usd": 0.0309480752, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/XX5EZoe4ec.md"}
+{"ts": "2026-05-23T20:35:02", "event": "sample_start", "paper_id": "a4S1nQay3b"}
+{"ts": "2026-05-23T20:35:10", "event": "sample_done", "paper_id": "XKLPlnfZzM", "job_id": "fc96597b-0012-4ddc-9c6e-169fdd211f42", "score": 6.0, "cost_usd": 0.0316917832, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/XKLPlnfZzM.md"}
+{"ts": "2026-05-23T20:35:10", "event": "sample_start", "paper_id": "a7Qa4CcHak"}
+{"ts": "2026-05-23T20:35:23", "event": "sample_done", "paper_id": "Y6lVVJHiwN", "job_id": "cae8eead-9f2e-4889-99fa-015aa2def9c5", "score": 5.0, "cost_usd": 0.029886807999999997, "openrouter_calls": 23, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/Y6lVVJHiwN.md"}
+{"ts": "2026-05-23T20:35:23", "event": "sample_start", "paper_id": "abgW71sKIt"}
+{"ts": "2026-05-23T20:35:24", "event": "sample_done", "paper_id": "Xpj0yeMhpz", "job_id": "4775a754-7dfc-4856-b1f0-2b91466d2a74", "score": 6.0, "cost_usd": 0.0379926848, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/Xpj0yeMhpz.md"}
+{"ts": "2026-05-23T20:35:24", "event": "sample_start", "paper_id": "ahpO7S1Ppi"}
+{"ts": "2026-05-23T20:36:39", "event": "sample_done", "paper_id": "Xn33bU71m4", "job_id": "d868b501-8681-4520-9472-506c2a64a9e2", "score": 4.0, "cost_usd": 0.0394415448, "openrouter_calls": 40, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/Xn33bU71m4.md"}
+{"ts": "2026-05-23T20:36:39", "event": "sample_start", "paper_id": "aiM6bRd6bG"}
+{"ts": "2026-05-23T20:36:49", "event": "sample_done", "paper_id": "YADyx3ieUX", "job_id": "ae36b1f2-a565-4b7a-be4d-f49454b0ab2e", "score": 6.0, "cost_usd": 0.029081864, "openrouter_calls": 23, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/YADyx3ieUX.md"}
+{"ts": "2026-05-23T20:36:49", "event": "sample_start", "paper_id": "ao7VBbvWIK"}
+{"ts": "2026-05-23T20:37:09", "event": "sample_done", "paper_id": "Y9TgNFsNyP", "job_id": "f8584e9e-69a0-4e46-9691-fc73e46f52f0", "score": 4.5, "cost_usd": 0.033132288, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/Y9TgNFsNyP.md"}
+{"ts": "2026-05-23T20:37:09", "event": "sample_start", "paper_id": "b6miYNcjag"}
+{"ts": "2026-05-23T20:37:25", "event": "sample_done", "paper_id": "Yo7eG3lC3y", "job_id": "ad6001a3-6267-4963-bfca-0f8cef7b7168", "score": 6.0, "cost_usd": 0.0323076824, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/Yo7eG3lC3y.md"}
+{"ts": "2026-05-23T20:37:25", "event": "sample_start", "paper_id": "b6qQmQ2F13"}
+{"ts": "2026-05-23T20:37:33", "event": "sample_done", "paper_id": "YuxgSGFaqb", "job_id": "d4bffa6e-80dc-4145-a42e-e18e007334a1", "score": 6.5, "cost_usd": 0.029732897600000006, "openrouter_calls": 33, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/YuxgSGFaqb.md"}
+{"ts": "2026-05-23T20:37:33", "event": "sample_start", "paper_id": "b8TlYh6PN6"}
+{"ts": "2026-05-23T20:37:54", "event": "sample_done", "paper_id": "YS4N1YxXSM", "job_id": "a0a8bd07-a294-49b9-9e7d-1d93110388bb", "score": 6.0, "cost_usd": 0.03251173519999999, "openrouter_calls": 24, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/YS4N1YxXSM.md"}
+{"ts": "2026-05-23T20:37:54", "event": "sample_start", "paper_id": "bH5M0ts8Y6"}
+{"ts": "2026-05-23T20:38:03", "event": "sample_done", "paper_id": "YETCQLcKtn", "job_id": "879b8aa5-f0bb-4375-abb8-96ff0a629699", "score": 5.0, "cost_usd": 0.0354219936, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/YETCQLcKtn.md"}
+{"ts": "2026-05-23T20:38:03", "event": "sample_start", "paper_id": "beV5wMTRIq"}
+{"ts": "2026-05-23T20:38:14", "event": "sample_done", "paper_id": "ZMzha5gbnF", "job_id": "9bff2359-d519-45d6-9952-cc031e5960bb", "score": 7.0, "cost_usd": 0.0304289048, "openrouter_calls": 18, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/ZMzha5gbnF.md"}
+{"ts": "2026-05-23T20:38:14", "event": "sample_start", "paper_id": "bhPaXhWVKG"}
+{"ts": "2026-05-23T20:38:24", "event": "sample_done", "paper_id": "ZBhZT307xx", "job_id": "bbfd1418-a6e0-4ec9-937d-6bdb5a74deeb", "score": 5.5, "cost_usd": 0.030796947999999994, "openrouter_calls": 18, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/ZBhZT307xx.md"}
+{"ts": "2026-05-23T20:38:24", "event": "sample_start", "paper_id": "bhR00j6Mku"}
+{"ts": "2026-05-23T20:38:46", "event": "sample_done", "paper_id": "a4S1nQay3b", "job_id": "733f5324-2adc-4a30-967c-051ad444927c", "score": 6.0, "cost_usd": 0.03550974, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/a4S1nQay3b.md"}
+{"ts": "2026-05-23T20:38:46", "event": "sample_start", "paper_id": "blFpxJ3A08"}
+{"ts": "2026-05-23T20:38:52", "event": "sample_done", "paper_id": "ZNAY3ivd62", "job_id": "b2aa4c7a-b1aa-479f-92fc-3e26812e7bd7", "score": 5.0, "cost_usd": 0.0323050896, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/ZNAY3ivd62.md"}
+{"ts": "2026-05-23T20:38:52", "event": "sample_start", "paper_id": "bm3rbtEMFj"}
+{"ts": "2026-05-23T20:38:59", "event": "sample_done", "paper_id": "ZKkeA1G935", "job_id": "425b6bc1-13e3-413a-bc7e-3101efa4e298", "score": 6.5, "cost_usd": 0.0342519072, "openrouter_calls": 33, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/ZKkeA1G935.md"}
+{"ts": "2026-05-23T20:38:59", "event": "sample_start", "paper_id": "bwtiK0yjuK"}
+{"ts": "2026-05-23T20:39:02", "event": "sample_done", "paper_id": "ZF0xRAdsuY", "job_id": "94dd6103-62eb-4ed8-997d-8afe0dcd8899", "score": 6.0, "cost_usd": 0.031655064, "openrouter_calls": 24, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/ZF0xRAdsuY.md"}
+{"ts": "2026-05-23T20:39:02", "event": "sample_start", "paper_id": "bxZUPQbvp0"}
+{"ts": "2026-05-23T20:39:18", "event": "sample_done", "paper_id": "a7Qa4CcHak", "job_id": "90ee584a-f341-4c7f-a97a-fa66ca36ac21", "score": 7.0, "cost_usd": 0.0319784584, "openrouter_calls": 30, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/a7Qa4CcHak.md"}
+{"ts": "2026-05-23T20:39:18", "event": "sample_start", "paper_id": "c2ozZYoZFd"}
+{"ts": "2026-05-23T20:39:19", "event": "sample_done", "paper_id": "ahpO7S1Ppi", "job_id": "91e62b57-9de9-436d-b1d6-d1557b342bcb", "score": 6.0, "cost_usd": 0.0329972328, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/ahpO7S1Ppi.md"}
+{"ts": "2026-05-23T20:39:19", "event": "sample_start", "paper_id": "c339hUw3cy"}
+{"ts": "2026-05-23T20:39:36", "event": "sample_done", "paper_id": "ZZFNyU3ZSo", "job_id": "18e56f1c-97be-4c90-a7cf-53dab3b3edb3", "score": 6.0, "cost_usd": 0.033953186399999995, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/ZZFNyU3ZSo.md"}
+{"ts": "2026-05-23T20:39:36", "event": "sample_start", "paper_id": "c7OsKOOZo8"}
+{"ts": "2026-05-23T20:39:37", "event": "sample_done", "paper_id": "a3sRspQ62b", "job_id": "7e3f95c2-2439-4f66-8731-05240ac82561", "score": 5.0, "cost_usd": 0.03577963200000001, "openrouter_calls": 34, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/a3sRspQ62b.md"}
+{"ts": "2026-05-23T20:39:37", "event": "sample_start", "paper_id": "cEXEmyW77N"}
+{"ts": "2026-05-23T20:39:39", "event": "sample_done", "paper_id": "abgW71sKIt", "job_id": "cdf84247-e9e3-4d2e-b91c-f78703059574", "score": 6.0, "cost_usd": 0.03303557039999999, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/abgW71sKIt.md"}
+{"ts": "2026-05-23T20:39:39", "event": "sample_start", "paper_id": "cP9ciYglnI"}
+{"ts": "2026-05-23T20:39:58", "event": "sample_done", "paper_id": "YvMkU4BYOA", "job_id": "3abb97f0-0d95-454c-9f09-92130798e420", "score": 5.5, "cost_usd": 0.0416300192, "openrouter_calls": 44, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/YvMkU4BYOA.md"}
+{"ts": "2026-05-23T20:39:58", "event": "sample_start", "paper_id": "cSpjHOf04S"}
+{"ts": "2026-05-23T20:40:01", "event": "sample_done", "paper_id": "a2XmC7rHIU", "job_id": "425f1c4f-d383-4c3e-b7a5-bdae32309c1c", "score": 6.0, "cost_usd": 0.03557617279999999, "openrouter_calls": 33, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/a2XmC7rHIU.md"}
+{"ts": "2026-05-23T20:40:01", "event": "sample_start", "paper_id": "cVX3VqO8BO"}
+{"ts": "2026-05-23T20:40:50", "event": "sample_done", "paper_id": "b8TlYh6PN6", "job_id": "e9f83f47-30e9-43ab-bf6c-2f97d0c0f954", "score": 6.0, "cost_usd": 0.03126907279999999, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/b8TlYh6PN6.md"}
+{"ts": "2026-05-23T20:40:50", "event": "sample_start", "paper_id": "cZ74yWoKYr"}
+{"ts": "2026-05-23T20:41:20", "event": "sample_done", "paper_id": "b6miYNcjag", "job_id": "6760d36e-a8bd-4214-ac19-1e1199a1af49", "score": 5.0, "cost_usd": 0.0337794296, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/b6miYNcjag.md"}
+{"ts": "2026-05-23T20:41:20", "event": "sample_start", "paper_id": "cZFgsLq8Gs"}
+{"ts": "2026-05-23T20:41:24", "event": "sample_done", "paper_id": "bH5M0ts8Y6", "job_id": "2d804a3f-87ac-44b1-8d4e-f7a1c7c0d4fe", "score": 6.0, "cost_usd": 0.034368174400000014, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/bH5M0ts8Y6.md"}
+{"ts": "2026-05-23T20:41:24", "event": "sample_start", "paper_id": "ck0aZTAnwK"}
+{"ts": "2026-05-23T20:41:26", "event": "sample_done", "paper_id": "aiM6bRd6bG", "job_id": "6d277472-554b-4586-8f7b-c26cb11a4bf7", "score": 6.0, "cost_usd": 0.032895637600000006, "openrouter_calls": 30, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/aiM6bRd6bG.md"}
+{"ts": "2026-05-23T20:41:26", "event": "sample_start", "paper_id": "cmzeMZNsmm"}
+{"ts": "2026-05-23T20:41:40", "event": "sample_done", "paper_id": "ao7VBbvWIK", "job_id": "61964ebf-6a89-4c0d-9748-17b2df0eb142", "score": 4.0, "cost_usd": 0.03119757760000001, "openrouter_calls": 33, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/ao7VBbvWIK.md"}
+{"ts": "2026-05-23T20:41:40", "event": "sample_start", "paper_id": "crKJJ4Ej60"}
+{"ts": "2026-05-23T20:42:02", "event": "sample_done", "paper_id": "bhR00j6Mku", "job_id": "971cce70-e014-4c4a-9520-129e20feee62", "score": 6.5, "cost_usd": 0.0318127992, "openrouter_calls": 24, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/bhR00j6Mku.md"}
+{"ts": "2026-05-23T20:42:02", "event": "sample_start", "paper_id": "cu6xWUNOzQ"}
+{"ts": "2026-05-23T20:42:03", "event": "sample_done", "paper_id": "bhPaXhWVKG", "job_id": "b3be9343-a6e1-40b6-84fc-a6972e336cce", "score": 6.0, "cost_usd": 0.030672566400000004, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/bhPaXhWVKG.md"}
+{"ts": "2026-05-23T20:42:03", "event": "sample_start", "paper_id": "d2pUyiXwcm"}
+{"ts": "2026-05-23T20:42:07", "event": "sample_done", "paper_id": "b6qQmQ2F13", "job_id": "c77c606c-c34b-4ed9-a115-53fc0eb0059d", "score": 7.0, "cost_usd": 0.03500381920000001, "openrouter_calls": 36, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/b6qQmQ2F13.md"}
+{"ts": "2026-05-23T20:42:07", "event": "sample_start", "paper_id": "dCtkwjkK0E"}
+{"ts": "2026-05-23T20:42:56", "event": "sample_done", "paper_id": "blFpxJ3A08", "job_id": "77e225ce-ce32-4628-bd6b-a771f7e9c740", "score": 5.0, "cost_usd": 0.030695005600000002, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/blFpxJ3A08.md"}
+{"ts": "2026-05-23T20:42:56", "event": "sample_start", "paper_id": "dIOYpj9K8P"}
+{"ts": "2026-05-23T20:43:03", "event": "sample_done", "paper_id": "bxZUPQbvp0", "job_id": "77d77449-4705-492d-99ae-d421b430eacd", "score": 6.0, "cost_usd": 0.030592693600000002, "openrouter_calls": 30, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/bxZUPQbvp0.md"}
+{"ts": "2026-05-23T20:43:03", "event": "sample_start", "paper_id": "dbYvP2BKCM"}
+{"ts": "2026-05-23T20:43:06", "event": "sample_done", "paper_id": "beV5wMTRIq", "job_id": "bb7fb705-9df8-4edd-8397-a748989755c4", "score": 4.0, "cost_usd": 0.034317623199999994, "openrouter_calls": 32, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/beV5wMTRIq.md"}
+{"ts": "2026-05-23T20:43:06", "event": "sample_start", "paper_id": "doxBjZ88H3"}
+{"ts": "2026-05-23T20:43:26", "event": "sample_done", "paper_id": "cEXEmyW77N", "job_id": "65b5e0e9-8a2a-455e-973e-f2892e756587", "score": 7.0, "cost_usd": 0.0292896688, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/cEXEmyW77N.md"}
+{"ts": "2026-05-23T20:43:26", "event": "sample_start", "paper_id": "dwgtYTuSaS"}
+{"ts": "2026-05-23T20:43:30", "event": "sample_done", "paper_id": "bwtiK0yjuK", "job_id": "910eeffc-24cc-4e98-b9d2-55d6c4c9fbb9", "score": 6.0, "cost_usd": 0.031260734400000004, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/bwtiK0yjuK.md"}
+{"ts": "2026-05-23T20:43:30", "event": "sample_start", "paper_id": "e26MPyczN9"}
+{"ts": "2026-05-23T20:43:45", "event": "sample_done", "paper_id": "c2ozZYoZFd", "job_id": "074aed94-e8fd-4433-a6f0-d6350fb82479", "score": 5.0, "cost_usd": 0.03372798239999998, "openrouter_calls": 33, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/c2ozZYoZFd.md"}
+{"ts": "2026-05-23T20:43:45", "event": "sample_start", "paper_id": "e9JphzQ5Gr"}
+{"ts": "2026-05-23T20:43:46", "event": "sample_done", "paper_id": "c7OsKOOZo8", "job_id": "c64a7b56-0c0c-4e97-9119-d3ecd6af7e61", "score": 6.0, "cost_usd": 0.0346953376, "openrouter_calls": 33, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/c7OsKOOZo8.md"}
+{"ts": "2026-05-23T20:43:46", "event": "sample_start", "paper_id": "eETr3lrOQB"}
+{"ts": "2026-05-23T20:43:54", "event": "sample_done", "paper_id": "bm3rbtEMFj", "job_id": "899994f4-1802-4fa2-b468-636016848787", "score": 6.0, "cost_usd": 0.035137149600000014, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/bm3rbtEMFj.md"}
+{"ts": "2026-05-23T20:43:54", "event": "sample_start", "paper_id": "ecbEfXdqrV"}
+{"ts": "2026-05-23T20:44:03", "event": "sample_done", "paper_id": "cVX3VqO8BO", "job_id": "72c60b47-1c0b-4669-98ce-89314c80102e", "score": 5.0, "cost_usd": 0.03340388800000001, "openrouter_calls": 32, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/cVX3VqO8BO.md"}
+{"ts": "2026-05-23T20:44:03", "event": "sample_start", "paper_id": "ei1bRG971A"}
+{"ts": "2026-05-23T20:44:06", "event": "sample_done", "paper_id": "cSpjHOf04S", "job_id": "cb1cbcff-7b99-496e-96e1-03a80285ee7d", "score": 7.0, "cost_usd": 0.0312468968, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/cSpjHOf04S.md"}
+{"ts": "2026-05-23T20:44:06", "event": "sample_start", "paper_id": "eu3PwSle8J"}
+{"ts": "2026-05-23T20:44:21", "event": "sample_done", "paper_id": "c339hUw3cy", "job_id": "d662116b-841e-4641-a566-fb6cee648c0e", "score": 6.0, "cost_usd": 0.0326719176, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/c339hUw3cy.md"}
+{"ts": "2026-05-23T20:44:21", "event": "sample_start", "paper_id": "ey7CXUBn1g"}
+{"ts": "2026-05-23T20:44:21", "event": "sample_done", "paper_id": "cP9ciYglnI", "job_id": "9425e067-3ba2-44fe-af3a-f38ab0436648", "score": 6.0, "cost_usd": 0.03303043519999999, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/cP9ciYglnI.md"}
+{"ts": "2026-05-23T20:44:21", "event": "sample_start", "paper_id": "f4B4ohWO53"}
+{"ts": "2026-05-23T20:44:25", "event": "sample_done", "paper_id": "cZ74yWoKYr", "job_id": "c69cd422-b9cc-45c0-a2ea-1f4080481064", "score": 6.0, "cost_usd": 0.0321704376, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/cZ74yWoKYr.md"}
+{"ts": "2026-05-23T20:44:25", "event": "sample_start", "paper_id": "fBc9v8CVvm"}
+{"ts": "2026-05-23T20:44:30", "event": "sample_done", "paper_id": "cmzeMZNsmm", "job_id": "b6532b21-4508-4730-81c5-ff16095b745b", "score": 5.5, "cost_usd": 0.0305732504, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/cmzeMZNsmm.md"}
+{"ts": "2026-05-23T20:44:30", "event": "sample_start", "paper_id": "fD9YRHazW3"}
+{"ts": "2026-05-23T20:45:33", "event": "sample_done", "paper_id": "cu6xWUNOzQ", "job_id": "014aff69-b9e0-42fe-b5c0-c7607c37b9b8", "score": 6.0, "cost_usd": 0.028931582399999996, "openrouter_calls": 30, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/cu6xWUNOzQ.md"}
+{"ts": "2026-05-23T20:45:33", "event": "sample_start", "paper_id": "gTMzRm8fb0"}
+{"ts": "2026-05-23T20:45:51", "event": "sample_done", "paper_id": "ck0aZTAnwK", "job_id": "ee9094ee-deea-4772-8e16-6ca282234a1e", "score": 6.0, "cost_usd": 0.0320560632, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/ck0aZTAnwK.md"}
+{"ts": "2026-05-23T20:45:51", "event": "sample_start", "paper_id": "gubSyVxWdG"}
+{"ts": "2026-05-23T20:45:55", "event": "sample_done", "paper_id": "crKJJ4Ej60", "job_id": "a0cdd92c-ef8e-4cbe-a653-43204506561c", "score": 7.0, "cost_usd": 0.031758608, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/crKJJ4Ej60.md"}
+{"ts": "2026-05-23T20:45:55", "event": "sample_start", "paper_id": "hQZQVLJrH9"}
+{"ts": "2026-05-23T20:46:06", "event": "sample_done", "paper_id": "cZFgsLq8Gs", "job_id": "d594733a-e4bd-4f71-9fd7-4a0a4e8604a6", "score": 5.5, "cost_usd": 0.03265131519999999, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/cZFgsLq8Gs.md"}
+{"ts": "2026-05-23T20:46:06", "event": "sample_start", "paper_id": "heVn5cNfje"}
+{"ts": "2026-05-23T20:46:24", "event": "sample_done", "paper_id": "d2pUyiXwcm", "job_id": "8681c4ec-6750-4ddf-9511-720437d93b2d", "score": 6.0, "cost_usd": 0.039791298399999994, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/d2pUyiXwcm.md"}
+{"ts": "2026-05-23T20:46:24", "event": "sample_start", "paper_id": "i9q9xDMjG7"}
+{"ts": "2026-05-23T20:46:33", "event": "sample_done", "paper_id": "dCtkwjkK0E", "job_id": "9d5c43d7-a864-440e-9e8a-00a2b37ec18d", "score": 5.5, "cost_usd": 0.03179819439999999, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/dCtkwjkK0E.md"}
+{"ts": "2026-05-23T20:46:33", "event": "sample_start", "paper_id": "iDki7djO2K"}
+{"ts": "2026-05-23T20:46:37", "event": "sample_done", "paper_id": "dbYvP2BKCM", "job_id": "14522cf6-e2d8-4282-84da-eded01d481f8", "score": 5.0, "cost_usd": 0.031394412000000003, "openrouter_calls": 20, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/dbYvP2BKCM.md"}
+{"ts": "2026-05-23T20:46:37", "event": "sample_start", "paper_id": "iIEEgI6WsF"}
+{"ts": "2026-05-23T20:47:07", "event": "sample_done", "paper_id": "dIOYpj9K8P", "job_id": "7e3a520b-077e-4acc-9cd9-4bfa949dc108", "score": 6.0, "cost_usd": 0.0331231936, "openrouter_calls": 30, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/dIOYpj9K8P.md"}
+{"ts": "2026-05-23T20:47:07", "event": "sample_start", "paper_id": "iaoAKDRAJQ"}
+{"ts": "2026-05-23T20:47:13", "event": "sample_done", "paper_id": "e26MPyczN9", "job_id": "292d5fac-21f3-418a-95ee-38a4e434ed88", "score": 5.0, "cost_usd": 0.03208480240000001, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/e26MPyczN9.md"}
+{"ts": "2026-05-23T20:47:13", "event": "sample_start", "paper_id": "ikthqd3qF4"}
+{"ts": "2026-05-23T20:47:21", "event": "sample_done", "paper_id": "doxBjZ88H3", "job_id": "0e0958d9-6c51-48e8-a695-5ed0b82fdd60", "score": 7.0, "cost_usd": 0.029592298399999994, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/doxBjZ88H3.md"}
+{"ts": "2026-05-23T20:47:21", "event": "sample_start", "paper_id": "j3htU5i01r"}
+{"ts": "2026-05-23T20:47:25", "event": "sample_done", "paper_id": "eETr3lrOQB", "job_id": "7b8749a6-04f7-4dbc-a7be-61a53a810d35", "score": 6.5, "cost_usd": 0.03622429439999999, "openrouter_calls": 21, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/eETr3lrOQB.md"}
+{"ts": "2026-05-23T20:47:25", "event": "sample_start", "paper_id": "jJedqisfOt"}
+{"ts": "2026-05-23T20:47:33", "event": "sample_done", "paper_id": "ei1bRG971A", "job_id": "557d5799-444c-4aa1-a52d-80679e511235", "score": 5.5, "cost_usd": 0.030965250399999995, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/ei1bRG971A.md"}
+{"ts": "2026-05-23T20:47:33", "event": "sample_start", "paper_id": "jLO4pSi5Pt"}
+{"ts": "2026-05-23T20:48:09", "event": "sample_done", "paper_id": "fD9YRHazW3", "job_id": "f79d8498-68ef-429a-99a3-129258322e36", "score": 6.0, "cost_usd": 0.028304091200000003, "openrouter_calls": 22, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/fD9YRHazW3.md"}
+{"ts": "2026-05-23T20:48:09", "event": "sample_start", "paper_id": "jZcWBV3Pis"}
+{"ts": "2026-05-23T20:48:12", "event": "sample_done", "paper_id": "e9JphzQ5Gr", "job_id": "b0c08da5-04d0-40aa-a6dd-ad37d8252312", "score": 7.0, "cost_usd": 0.0342905304, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/e9JphzQ5Gr.md"}
+{"ts": "2026-05-23T20:48:12", "event": "sample_start", "paper_id": "k6nTUFoqeT"}
+{"ts": "2026-05-23T20:48:13", "event": "sample_done", "paper_id": "dwgtYTuSaS", "job_id": "b040f5c3-abdc-4872-9284-7a09f8ea0bf3", "score": 6.0, "cost_usd": 0.0337091944, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/dwgtYTuSaS.md"}
+{"ts": "2026-05-23T20:48:13", "event": "sample_start", "paper_id": "kMfVTka2WB"}
+{"ts": "2026-05-23T20:48:20", "event": "sample_done", "paper_id": "eu3PwSle8J", "job_id": "00a7e915-5628-4051-ad73-cec68b07217b", "score": 6.0, "cost_usd": 0.0313245128, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/eu3PwSle8J.md"}
+{"ts": "2026-05-23T20:48:20", "event": "sample_start", "paper_id": "khBHJz2wcV"}
+{"ts": "2026-05-23T20:48:26", "event": "sample_done", "paper_id": "f4B4ohWO53", "job_id": "3caaa983-2e5a-432c-95b6-78112033b905", "score": 5.0, "cost_usd": 0.028769921599999998, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/f4B4ohWO53.md"}
+{"ts": "2026-05-23T20:48:26", "event": "sample_start", "paper_id": "khHNHzRjMy"}
+{"ts": "2026-05-23T20:48:32", "event": "sample_done", "paper_id": "ecbEfXdqrV", "job_id": "86eaf5f8-d901-4dd9-992e-9cf6f53b894a", "score": 6.0, "cost_usd": 0.030767060800000003, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/ecbEfXdqrV.md"}
+{"ts": "2026-05-23T20:48:32", "event": "sample_start", "paper_id": "klB3AvQZqJ"}
+{"ts": "2026-05-23T20:48:46", "event": "sample_done", "paper_id": "ey7CXUBn1g", "job_id": "15d9cf2b-05c0-4db9-8bb7-add28471d5c2", "score": 6.0, "cost_usd": 0.035371615999999995, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/ey7CXUBn1g.md"}
+{"ts": "2026-05-23T20:48:46", "event": "sample_start", "paper_id": "kpLRYtPGt3"}
+{"ts": "2026-05-23T20:49:54", "event": "sample_done", "paper_id": "fBc9v8CVvm", "job_id": "e40f5dcf-2532-4c30-9875-4be13dad23ed", "score": 7.0, "cost_usd": 0.03921332239999999, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/fBc9v8CVvm.md"}
+{"ts": "2026-05-23T20:49:54", "event": "sample_start", "paper_id": "lJ7zecny2e"}
+{"ts": "2026-05-23T20:50:02", "event": "sample_done", "paper_id": "i9q9xDMjG7", "job_id": "9fd44da8-f189-42c2-9440-293750762ef4", "score": 6.0, "cost_usd": 0.029868171199999998, "openrouter_calls": 23, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/i9q9xDMjG7.md"}
+{"ts": "2026-05-23T20:50:02", "event": "sample_start", "paper_id": "lJqssVKeR7"}
+{"ts": "2026-05-23T20:50:05", "event": "sample_done", "paper_id": "gTMzRm8fb0", "job_id": "b8a197b9-7341-49d4-ba06-bd585cb03b88", "score": 5.5, "cost_usd": 0.0336451528, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/gTMzRm8fb0.md"}
+{"ts": "2026-05-23T20:50:05", "event": "sample_start", "paper_id": "lSM6MtjQcM"}
+{"ts": "2026-05-23T20:50:24", "event": "sample_done", "paper_id": "heVn5cNfje", "job_id": "a0efd95e-8e0e-459c-9c4e-bf7cb28c5b49", "score": 6.0, "cost_usd": 0.036423279200000006, "openrouter_calls": 35, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/heVn5cNfje.md"}
+{"ts": "2026-05-23T20:50:24", "event": "sample_start", "paper_id": "lWdxX5s9T1"}
+{"ts": "2026-05-23T20:50:27", "event": "sample_done", "paper_id": "gubSyVxWdG", "job_id": "afa9f6aa-89b2-4928-9170-310905b149fc", "score": 6.0, "cost_usd": 0.035476812, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/gubSyVxWdG.md"}
+{"ts": "2026-05-23T20:50:27", "event": "sample_start", "paper_id": "lZrZgZ9wIu"}
+{"ts": "2026-05-23T20:50:35", "event": "sample_done", "paper_id": "iIEEgI6WsF", "job_id": "b03c3a41-0757-45bf-8fc0-c73862b1e321", "score": 6.5, "cost_usd": 0.032043939199999996, "openrouter_calls": 30, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/iIEEgI6WsF.md"}
+{"ts": "2026-05-23T20:50:35", "event": "sample_start", "paper_id": "lbLAgGF8OO"}
+{"ts": "2026-05-23T20:50:55", "event": "sample_done", "paper_id": "iaoAKDRAJQ", "job_id": "84b44772-0fdd-443a-9462-b22dc12bac0a", "score": 7.0, "cost_usd": 0.03253054, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/iaoAKDRAJQ.md"}
+{"ts": "2026-05-23T20:50:55", "event": "sample_start", "paper_id": "liDUSnwUVP"}
+{"ts": "2026-05-23T20:51:08", "event": "sample_done", "paper_id": "jLO4pSi5Pt", "job_id": "ced19757-9b3c-4dd5-89c3-4078f1ffbb52", "score": 6.0, "cost_usd": 0.039638698400000005, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/jLO4pSi5Pt.md"}
+{"ts": "2026-05-23T20:51:08", "event": "sample_start", "paper_id": "m18MXVdrV9"}
+{"ts": "2026-05-23T20:51:16", "event": "sample_done", "paper_id": "hQZQVLJrH9", "job_id": "e29600f6-0d62-4562-843c-f5fced636016", "score": 4.0, "cost_usd": 0.033352967200000014, "openrouter_calls": 30, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/hQZQVLJrH9.md"}
+{"ts": "2026-05-23T20:51:16", "event": "sample_start", "paper_id": "m7gNW26Zih"}
+{"ts": "2026-05-23T20:51:18", "event": "sample_done", "paper_id": "j3htU5i01r", "job_id": "d750c963-7944-4cf2-adf1-f70fe5be214d", "score": 6.0, "cost_usd": 0.033473328000000004, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/j3htU5i01r.md"}
+{"ts": "2026-05-23T20:51:18", "event": "sample_start", "paper_id": "mDuTDAK6KU"}
+{"ts": "2026-05-23T20:51:30", "event": "sample_done", "paper_id": "iDki7djO2K", "job_id": "25a2451a-431a-4ef8-ba2a-6d17ae84a78b", "score": 6.0, "cost_usd": 0.033277014400000006, "openrouter_calls": 30, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/iDki7djO2K.md"}
+{"ts": "2026-05-23T20:51:30", "event": "sample_start", "paper_id": "mGeeRFToaW"}
+{"ts": "2026-05-23T20:51:53", "event": "sample_done", "paper_id": "jZcWBV3Pis", "job_id": "8c688cd6-e6de-40ea-b4de-0c91ab809784", "score": 6.0, "cost_usd": 0.030329706400000003, "openrouter_calls": 23, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/jZcWBV3Pis.md"}
+{"ts": "2026-05-23T20:51:53", "event": "sample_start", "paper_id": "mHRuCmc9lo"}
+{"ts": "2026-05-23T20:52:12", "event": "sample_done", "paper_id": "khBHJz2wcV", "job_id": "d9960f83-995a-4899-b43d-ac2bf4449021", "score": 6.0, "cost_usd": 0.03602239200000001, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/khBHJz2wcV.md"}
+{"ts": "2026-05-23T20:52:12", "event": "sample_start", "paper_id": "mkl9iIXIr2"}
+{"ts": "2026-05-23T20:52:23", "event": "sample_done", "paper_id": "jJedqisfOt", "job_id": "e4af99dd-989f-4fec-8e4f-a8ffedd8bbab", "score": 5.5, "cost_usd": 0.03448536000000001, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/jJedqisfOt.md"}
+{"ts": "2026-05-23T20:52:23", "event": "sample_start", "paper_id": "mytIKuRsSE"}
+{"ts": "2026-05-23T20:52:39", "event": "sample_done", "paper_id": "khHNHzRjMy", "job_id": "9ab6d225-13c0-4936-af1a-e63a4461e02a", "score": 6.0, "cost_usd": 0.03189609360000001, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/khHNHzRjMy.md"}
+{"ts": "2026-05-23T20:52:39", "event": "sample_start", "paper_id": "nHrYBGujps"}
+{"ts": "2026-05-23T20:52:40", "event": "sample_done", "paper_id": "k6nTUFoqeT", "job_id": "c272fd56-a760-49e4-a0cd-efefe118bc06", "score": 6.0, "cost_usd": 0.0362589808, "openrouter_calls": 32, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/k6nTUFoqeT.md"}
+{"ts": "2026-05-23T20:52:40", "event": "sample_start", "paper_id": "ngOOlatCK6"}
+{"ts": "2026-05-23T20:52:46", "event": "sample_done", "paper_id": "lbLAgGF8OO", "job_id": "eee7420b-23f2-4f3e-a881-67932fa8225a", "score": 6.0, "cost_usd": 0.022810732, "openrouter_calls": 9, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/lbLAgGF8OO.md"}
+{"ts": "2026-05-23T20:52:46", "event": "sample_start", "paper_id": "ngfIm9aPsH"}
+{"ts": "2026-05-23T20:52:50", "event": "sample_done", "paper_id": "kMfVTka2WB", "job_id": "c854a3db-524f-4753-9d94-b1f5bd9dbc42", "score": 4.0, "cost_usd": 0.0293995184, "openrouter_calls": 32, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/kMfVTka2WB.md"}
+{"ts": "2026-05-23T20:52:50", "event": "sample_start", "paper_id": "nnwvwge40d"}
+{"ts": "2026-05-23T20:52:57", "event": "sample_done", "paper_id": "ikthqd3qF4", "job_id": "f94a3fd9-9874-4350-a5a0-4131c9f39b31", "score": 6.5, "cost_usd": 0.0332317776, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/ikthqd3qF4.md"}
+{"ts": "2026-05-23T20:52:57", "event": "sample_start", "paper_id": "nxmBUymHIQ"}
+{"ts": "2026-05-23T20:53:22", "event": "sample_done", "paper_id": "klB3AvQZqJ", "job_id": "2e2f58a8-8755-47ac-b453-70a742aa03af", "score": 6.0, "cost_usd": 0.032981984000000006, "openrouter_calls": 17, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/klB3AvQZqJ.md"}
+{"ts": "2026-05-23T20:53:22", "event": "sample_start", "paper_id": "nzkObUsajY"}
+{"ts": "2026-05-23T20:53:50", "event": "sample_done", "paper_id": "kpLRYtPGt3", "job_id": "94a2e3d4-97c3-4d77-8ed9-24467c6c3754", "score": 7.0, "cost_usd": 0.03780591360000001, "openrouter_calls": 32, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/kpLRYtPGt3.md"}
+{"ts": "2026-05-23T20:53:50", "event": "sample_start", "paper_id": "oGbzk8xuVT"}
+{"ts": "2026-05-23T20:54:03", "event": "sample_done", "paper_id": "lJqssVKeR7", "job_id": "738ffe5e-07e3-4773-9417-870776f70e8a", "score": 6.5, "cost_usd": 0.03377916640000001, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/lJqssVKeR7.md"}
+{"ts": "2026-05-23T20:54:03", "event": "sample_start", "paper_id": "ocmGsqQWG2"}
+{"ts": "2026-05-23T20:54:48", "event": "sample_done", "paper_id": "lSM6MtjQcM", "job_id": "6d630a6c-dc8a-4d67-9e5b-b23fcc7c15dc", "score": 6.0, "cost_usd": 0.032813491199999996, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/lSM6MtjQcM.md"}
+{"ts": "2026-05-23T20:54:48", "event": "sample_start", "paper_id": "oh9ChF7Pv0"}
+{"ts": "2026-05-23T20:54:54", "event": "sample_done", "paper_id": "lJ7zecny2e", "job_id": "ef503994-8600-4273-b85b-99b9635102e5", "score": 6.0, "cost_usd": 0.03400120079999999, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/lJ7zecny2e.md"}
+{"ts": "2026-05-23T20:54:54", "event": "sample_done", "paper_id": "lWdxX5s9T1", "job_id": "9f304f52-c4f8-4b8a-b0e9-c89e675f1b17", "score": 6.0, "cost_usd": 0.034042528800000006, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/lWdxX5s9T1.md"}
+{"ts": "2026-05-23T20:54:54", "event": "sample_start", "paper_id": "oiz0QHejVj"}
+{"ts": "2026-05-23T20:54:54", "event": "sample_start", "paper_id": "omg9K6lI93"}
+{"ts": "2026-05-23T20:55:16", "event": "sample_done", "paper_id": "mGeeRFToaW", "job_id": "e90de185-d902-4593-b0d3-1f221d8b6c6b", "score": 6.0, "cost_usd": 0.0299853176, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/mGeeRFToaW.md"}
+{"ts": "2026-05-23T20:55:16", "event": "sample_start", "paper_id": "opU91paIvZ"}
+{"ts": "2026-05-23T20:55:45", "event": "sample_done", "paper_id": "m18MXVdrV9", "job_id": "742bdead-d59e-4b4e-a643-dbe60f3e3587", "score": 6.0, "cost_usd": 0.0336726656, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/m18MXVdrV9.md"}
+{"ts": "2026-05-23T20:55:45", "event": "sample_start", "paper_id": "pI9n8wAR80"}
+{"ts": "2026-05-23T20:55:47", "event": "sample_done", "paper_id": "lZrZgZ9wIu", "job_id": "0cfd5c17-0d55-4f46-8925-ba8cc6dec102", "score": 5.0, "cost_usd": 0.032663377599999995, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/lZrZgZ9wIu.md"}
+{"ts": "2026-05-23T20:55:47", "event": "sample_start", "paper_id": "pNpnqsn0Si"}
+{"ts": "2026-05-23T20:55:52", "event": "sample_done", "paper_id": "mDuTDAK6KU", "job_id": "ebede5c3-aebb-494f-928c-337563333a95", "score": 5.0, "cost_usd": 0.0335575464, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/mDuTDAK6KU.md"}
+{"ts": "2026-05-23T20:55:52", "event": "sample_done", "paper_id": "m7gNW26Zih", "job_id": "218002d0-b376-4b4c-a1e2-75a929454122", "score": 5.0, "cost_usd": 0.02935912, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/m7gNW26Zih.md"}
+{"ts": "2026-05-23T20:55:52", "event": "sample_start", "paper_id": "pW6rFymZ8F"}
+{"ts": "2026-05-23T20:55:52", "event": "sample_start", "paper_id": "pbbRmnFkjG"}
+{"ts": "2026-05-23T20:56:01", "event": "sample_done", "paper_id": "mkl9iIXIr2", "job_id": "e5c084c4-1759-42d2-b1e2-358e7bf19644", "score": 6.0, "cost_usd": 0.035428842400000014, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/mkl9iIXIr2.md"}
+{"ts": "2026-05-23T20:56:01", "event": "sample_start", "paper_id": "piylyBPSau"}
+{"ts": "2026-05-23T20:56:07", "event": "sample_done", "paper_id": "mytIKuRsSE", "job_id": "2bfb6db3-bcf2-420d-be4d-d10b9ff099c2", "score": 6.0, "cost_usd": 0.0346776752, "openrouter_calls": 23, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/mytIKuRsSE.md"}
+{"ts": "2026-05-23T20:56:07", "event": "sample_start", "paper_id": "pn2H6YeOv2"}
+{"ts": "2026-05-23T20:56:10", "event": "sample_done", "paper_id": "liDUSnwUVP", "job_id": "e1059a65-4a22-49ce-9b43-0c2ab3c96348", "score": 5.5, "cost_usd": 0.034185088, "openrouter_calls": 34, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/liDUSnwUVP.md"}
+{"ts": "2026-05-23T20:56:10", "event": "sample_start", "paper_id": "ppXAVexrAM"}
+{"ts": "2026-05-23T20:56:52", "event": "sample_done", "paper_id": "mHRuCmc9lo", "job_id": "79370d44-aa82-4801-9908-b93458da30f6", "score": 7.0, "cost_usd": 0.0347141648, "openrouter_calls": 30, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/mHRuCmc9lo.md"}
+{"ts": "2026-05-23T20:56:52", "event": "sample_start", "paper_id": "q0UEl3xAIZ"}
+{"ts": "2026-05-23T20:56:59", "event": "sample_done", "paper_id": "ngOOlatCK6", "job_id": "41c08ed8-1127-4b53-b072-c51f105c64b6", "score": 6.0, "cost_usd": 0.034808748800000004, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/ngOOlatCK6.md"}
+{"ts": "2026-05-23T20:56:59", "event": "sample_start", "paper_id": "qCfYOLAzti"}
+{"ts": "2026-05-23T20:57:09", "event": "sample_done", "paper_id": "ngfIm9aPsH", "job_id": "7b9e058d-6d82-4193-962c-579aa9ad852d", "score": 6.0, "cost_usd": 0.031751188, "openrouter_calls": 32, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/ngfIm9aPsH.md"}
+{"ts": "2026-05-23T20:57:09", "event": "sample_start", "paper_id": "qPbDM5L8tE"}
+{"ts": "2026-05-23T20:57:18", "event": "sample_done", "paper_id": "nxmBUymHIQ", "job_id": "6bd85012-4867-415c-86b6-a29c0c3ed993", "score": 6.0, "cost_usd": 0.03004607199999999, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/nxmBUymHIQ.md"}
+{"ts": "2026-05-23T20:57:18", "event": "sample_start", "paper_id": "qSak1Hjfdq"}
+{"ts": "2026-05-23T20:57:19", "event": "sample_done", "paper_id": "nnwvwge40d", "job_id": "a3942375-44fc-4cc5-a746-518f6c8d851c", "score": 6.5, "cost_usd": 0.04051536719999999, "openrouter_calls": 32, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/nnwvwge40d.md"}
+{"ts": "2026-05-23T20:57:19", "event": "sample_start", "paper_id": "qclNnbjxNJ"}
+{"ts": "2026-05-23T20:57:21", "event": "sample_done", "paper_id": "nHrYBGujps", "job_id": "06ce0c6a-d7e4-4b23-a4bb-6dcc9aeb7130", "score": 6.5, "cost_usd": 0.03591786240000001, "openrouter_calls": 33, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/nHrYBGujps.md"}
+{"ts": "2026-05-23T20:57:21", "event": "sample_start", "paper_id": "qkKUG56s5r"}
+{"ts": "2026-05-23T20:57:48", "event": "sample_done", "paper_id": "nzkObUsajY", "job_id": "b140b40c-e6a2-49dc-afc4-cf3806199c56", "score": 5.0, "cost_usd": 0.0341834472, "openrouter_calls": 34, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/nzkObUsajY.md"}
+{"ts": "2026-05-23T20:57:48", "event": "sample_start", "paper_id": "r5Ii1GTEWj"}
+{"ts": "2026-05-23T20:58:04", "event": "sample_done", "paper_id": "oGbzk8xuVT", "job_id": "7468aefd-24fb-40a1-a818-3258af69a62b", "score": 6.0, "cost_usd": 0.0311941448, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/oGbzk8xuVT.md"}
+{"ts": "2026-05-23T20:58:04", "event": "sample_start", "paper_id": "r5jxDjYeO4"}
+{"ts": "2026-05-23T20:58:26", "event": "sample_done", "paper_id": "omg9K6lI93", "job_id": "510f5289-ed91-48c7-9c90-b7e14e7ab98d", "score": 5.0, "cost_usd": 0.028829354399999993, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/omg9K6lI93.md"}
+{"ts": "2026-05-23T20:58:26", "event": "sample_start", "paper_id": "rBj2iVyrhh"}
+{"ts": "2026-05-23T20:58:32", "event": "sample_done", "paper_id": "ocmGsqQWG2", "job_id": "5137fcfc-b08b-4b01-89df-1ab248e618a3", "score": 5.5, "cost_usd": 0.032305134400000005, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/ocmGsqQWG2.md"}
+{"ts": "2026-05-23T20:58:32", "event": "sample_start", "paper_id": "rI2Fa13fUL"}
+{"ts": "2026-05-23T20:58:56", "event": "sample_done", "paper_id": "oiz0QHejVj", "job_id": "3639de3a-c2b5-4473-a4ca-39a1e3e88d90", "score": 5.5, "cost_usd": 0.035483722399999994, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/oiz0QHejVj.md"}
+{"ts": "2026-05-23T20:58:56", "event": "sample_start", "paper_id": "rRB1bYErbL"}
+{"ts": "2026-05-23T20:59:19", "event": "sample_done", "paper_id": "pI9n8wAR80", "job_id": "6e912667-d3e2-477f-99bf-53224215bd83", "score": 6.0, "cost_usd": 0.0340254768, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/pI9n8wAR80.md"}
+{"ts": "2026-05-23T20:59:19", "event": "sample_start", "paper_id": "rajioNWfRs"}
+{"ts": "2026-05-23T20:59:48", "event": "sample_done", "paper_id": "oh9ChF7Pv0", "job_id": "6c1f8dd9-cf61-456c-b879-4b9e8073617b", "score": 5.0, "cost_usd": 0.03587436719999999, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/oh9ChF7Pv0.md"}
+{"ts": "2026-05-23T20:59:48", "event": "sample_start", "paper_id": "rzGEfYr2ZC"}
+{"ts": "2026-05-23T20:59:52", "event": "sample_done", "paper_id": "pNpnqsn0Si", "job_id": "d3c0bc22-2633-4048-9700-6abc1f116bcb", "score": 5.0, "cost_usd": 0.0346423952, "openrouter_calls": 32, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/pNpnqsn0Si.md"}
+{"ts": "2026-05-23T20:59:52", "event": "sample_start", "paper_id": "s7gSTR2AqA"}
+{"ts": "2026-05-23T20:59:58", "event": "sample_done", "paper_id": "pbbRmnFkjG", "job_id": "97d0f3d7-8686-4868-b941-cd3ce0b05e0e", "score": 6.5, "cost_usd": 0.03156276480000001, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/pbbRmnFkjG.md"}
+{"ts": "2026-05-23T20:59:58", "event": "sample_start", "paper_id": "s7oURFZTQD"}
+{"ts": "2026-05-23T21:00:08", "event": "sample_done", "paper_id": "piylyBPSau", "job_id": "49a3ac0d-1614-48cb-98e1-eaf46ccf3dc1", "score": 6.0, "cost_usd": 0.032269467999999996, "openrouter_calls": 24, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/piylyBPSau.md"}
+{"ts": "2026-05-23T21:00:08", "event": "sample_start", "paper_id": "sJxBWDc8SM"}
+{"ts": "2026-05-23T21:00:37", "event": "sample_done", "paper_id": "opU91paIvZ", "job_id": "b2823199-8105-4f39-a94a-ec7c5ec91936", "score": 5.5, "cost_usd": 0.035424261599999986, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/opU91paIvZ.md"}
+{"ts": "2026-05-23T21:00:37", "event": "sample_start", "paper_id": "sSbEEHNEsL"}
+{"ts": "2026-05-23T21:00:46", "event": "sample_done", "paper_id": "qclNnbjxNJ", "job_id": "11410c63-94f1-4b12-a412-c5d34d9f4d46", "score": 6.0, "cost_usd": 0.0326313008, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/qclNnbjxNJ.md"}
+{"ts": "2026-05-23T21:00:46", "event": "sample_start", "paper_id": "sh1hWO9RHo"}
+{"ts": "2026-05-23T21:00:49", "event": "sample_done", "paper_id": "pW6rFymZ8F", "job_id": "e2bb91ee-fa9a-44d1-9216-88798e5b33a2", "score": 5.0, "cost_usd": 0.035530700799999995, "openrouter_calls": 32, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/pW6rFymZ8F.md"}
+{"ts": "2026-05-23T21:00:49", "event": "sample_start", "paper_id": "t33kMzEAg8"}
+{"ts": "2026-05-23T21:00:53", "event": "sample_done", "paper_id": "pn2H6YeOv2", "job_id": "792342a1-58ca-4cf1-bab5-c21c8306f99f", "score": 6.0, "cost_usd": 0.03567794159999999, "openrouter_calls": 32, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/pn2H6YeOv2.md"}
+{"ts": "2026-05-23T21:00:53", "event": "sample_start", "paper_id": "t5Nd4HiI3E"}
+{"ts": "2026-05-23T21:00:57", "event": "sample_done", "paper_id": "q0UEl3xAIZ", "job_id": "7316cc46-0c0e-4003-96c6-925ceb485877", "score": 6.0, "cost_usd": 0.032799289599999996, "openrouter_calls": 33, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/q0UEl3xAIZ.md"}
+{"ts": "2026-05-23T21:00:57", "event": "sample_start", "paper_id": "tswBfpkwHn"}
+{"ts": "2026-05-23T21:01:03", "event": "sample_done", "paper_id": "qCfYOLAzti", "job_id": "414a5bbb-209e-4340-ab19-944eff00b59e", "score": 6.0, "cost_usd": 0.033885123999999996, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/qCfYOLAzti.md"}
+{"ts": "2026-05-23T21:01:03", "event": "sample_start", "paper_id": "tucuU4sQ3s"}
+{"ts": "2026-05-23T21:01:12", "event": "sample_done", "paper_id": "ppXAVexrAM", "job_id": "159702e9-f43c-4995-a71e-40f15a05fb9d", "score": 5.5, "cost_usd": 0.0354516848, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/ppXAVexrAM.md"}
+{"ts": "2026-05-23T21:01:12", "event": "sample_start", "paper_id": "txiGUfI4yF"}
+{"ts": "2026-05-23T21:01:28", "event": "sample_done", "paper_id": "qPbDM5L8tE", "job_id": "ddec9e90-89f7-435c-9f6c-772112043434", "score": 5.5, "cost_usd": 0.0314776672, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/qPbDM5L8tE.md"}
+{"ts": "2026-05-23T21:01:28", "event": "sample_start", "paper_id": "uP6RDWHcs7"}
+{"ts": "2026-05-23T21:01:44", "event": "sample_done", "paper_id": "qSak1Hjfdq", "job_id": "59a3bace-8d26-45ca-8878-b68051868648", "score": 6.0, "cost_usd": 0.032783318400000004, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/qSak1Hjfdq.md"}
+{"ts": "2026-05-23T21:01:44", "event": "sample_start", "paper_id": "uXecy0nKiJ"}
+{"ts": "2026-05-23T21:01:58", "event": "sample_done", "paper_id": "r5Ii1GTEWj", "job_id": "b7254938-9980-488e-8aed-4a5925681cd4", "score": 4.0, "cost_usd": 0.03280353999999999, "openrouter_calls": 32, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/r5Ii1GTEWj.md"}
+{"ts": "2026-05-23T21:01:58", "event": "sample_start", "paper_id": "ulXBsAYSwU"}
+{"ts": "2026-05-23T21:01:58", "event": "sample_done", "paper_id": "qkKUG56s5r", "job_id": "f012b322-a23c-499e-befb-ed981a63c7fd", "score": 5.0, "cost_usd": 0.034875008, "openrouter_calls": 30, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/qkKUG56s5r.md"}
+{"ts": "2026-05-23T21:01:58", "event": "sample_start", "paper_id": "v05SW2X3IC"}
+{"ts": "2026-05-23T21:03:09", "event": "sample_done", "paper_id": "r5jxDjYeO4", "job_id": "f3cefab1-8043-4c3d-a316-6cd9d9d35a1f", "score": 6.0, "cost_usd": 0.0336167776, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/r5jxDjYeO4.md"}
+{"ts": "2026-05-23T21:03:09", "event": "sample_start", "paper_id": "v4bQPw4aTW"}
+{"ts": "2026-05-23T21:03:11", "event": "sample_done", "paper_id": "rBj2iVyrhh", "job_id": "49ff2fe4-1271-40ae-91d3-bfcf77e58e17", "score": 6.0, "cost_usd": 0.0356061328, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/rBj2iVyrhh.md"}
+{"ts": "2026-05-23T21:03:11", "event": "sample_start", "paper_id": "vGkXf8nvt9"}
+{"ts": "2026-05-23T21:03:16", "event": "sample_done", "paper_id": "rRB1bYErbL", "job_id": "f4c765f3-50d5-473a-906c-bb7790f6b1a6", "score": 5.5, "cost_usd": 0.03497712959999999, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/rRB1bYErbL.md"}
+{"ts": "2026-05-23T21:03:16", "event": "sample_start", "paper_id": "vPSiCA3CkD"}
+{"ts": "2026-05-23T21:03:28", "event": "sample_done", "paper_id": "rI2Fa13fUL", "job_id": "ab05f6dd-feab-4133-9ecc-dbc5f58e21ec", "score": 6.0, "cost_usd": 0.0351540168, "openrouter_calls": 30, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/rI2Fa13fUL.md"}
+{"ts": "2026-05-23T21:03:28", "event": "sample_start", "paper_id": "wA6dvVnKe8"}
+{"ts": "2026-05-23T21:03:34", "event": "sample_done", "paper_id": "rzGEfYr2ZC", "job_id": "8c21e866-ea77-43aa-9d27-b33290a52bab", "score": 6.0, "cost_usd": 0.0296012696, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/rzGEfYr2ZC.md"}
+{"ts": "2026-05-23T21:03:34", "event": "sample_start", "paper_id": "wSbVv6xaRr"}
+{"ts": "2026-05-23T21:03:41", "event": "sample_done", "paper_id": "rajioNWfRs", "job_id": "753bad59-7bf0-4989-9778-87b836f9a912", "score": 6.5, "cost_usd": 0.032484536, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/rajioNWfRs.md"}
+{"ts": "2026-05-23T21:03:41", "event": "sample_start", "paper_id": "wUzBBsrdB1"}
+{"ts": "2026-05-23T21:03:48", "event": "sample_done", "paper_id": "s7gSTR2AqA", "job_id": "a22ee300-5b91-47f4-925c-14e972e2a256", "score": 6.5, "cost_usd": 0.029113268799999998, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/s7gSTR2AqA.md"}
+{"ts": "2026-05-23T21:03:48", "event": "sample_start", "paper_id": "wVGfJxM2Nz"}
+{"ts": "2026-05-23T21:04:22", "event": "sample_done", "paper_id": "t33kMzEAg8", "job_id": "4860edba-5fef-487b-a84a-4e76bdc937ff", "score": 6.0, "cost_usd": 0.030918893599999994, "openrouter_calls": 24, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/t33kMzEAg8.md"}
+{"ts": "2026-05-23T21:04:22", "event": "sample_start", "paper_id": "wkVsKDnl4s"}
+{"ts": "2026-05-23T21:04:27", "event": "sample_done", "paper_id": "sh1hWO9RHo", "job_id": "9c8950d3-5bd0-448b-87d1-2750ca6cc004", "score": 6.0, "cost_usd": 0.030793868, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/sh1hWO9RHo.md"}
+{"ts": "2026-05-23T21:04:27", "event": "sample_start", "paper_id": "x6bG2Hoqdf"}
+{"ts": "2026-05-23T21:04:38", "event": "sample_done", "paper_id": "s7oURFZTQD", "job_id": "8e2f99ca-7a9e-4c4a-a06e-77e85f8eea16", "score": 5.0, "cost_usd": 0.035966783999999995, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/s7oURFZTQD.md"}
+{"ts": "2026-05-23T21:04:38", "event": "sample_start", "paper_id": "x6iodYWNty"}
+{"ts": "2026-05-23T21:04:40", "event": "sample_done", "paper_id": "sSbEEHNEsL", "job_id": "7c926f3a-a6fa-4b86-b3e5-2b7a6eaf8b9a", "score": 6.5, "cost_usd": 0.0321230056, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/sSbEEHNEsL.md"}
+{"ts": "2026-05-23T21:04:40", "event": "sample_start", "paper_id": "xDO0239YOm"}
+{"ts": "2026-05-23T21:04:48", "event": "sample_done", "paper_id": "sJxBWDc8SM", "job_id": "8ab76364-1293-4424-b146-6eec237667a7", "score": 6.0, "cost_usd": 0.0318223024, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/sJxBWDc8SM.md"}
+{"ts": "2026-05-23T21:04:48", "event": "sample_start", "paper_id": "xFo13SaHQm"}
+{"ts": "2026-05-23T21:05:17", "event": "sample_done", "paper_id": "t5Nd4HiI3E", "job_id": "49e04c5a-b12f-4e2f-8034-ec1bbd10aefc", "score": 6.0, "cost_usd": 0.0323713936, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/t5Nd4HiI3E.md"}
+{"ts": "2026-05-23T21:05:17", "event": "sample_start", "paper_id": "xVB9AivJa5"}
+{"ts": "2026-05-23T21:05:19", "event": "sample_done", "paper_id": "tswBfpkwHn", "job_id": "18cce03a-35ba-4fc3-a9e1-9af784c186f7", "score": 5.0, "cost_usd": 0.03348579920000001, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/tswBfpkwHn.md"}
+{"ts": "2026-05-23T21:05:19", "event": "sample_start", "paper_id": "y7VeiCT7HG"}
+{"ts": "2026-05-23T21:05:32", "event": "sample_done", "paper_id": "txiGUfI4yF", "job_id": "cac2a714-e636-4235-815e-a9cdb295ecee", "score": 6.5, "cost_usd": 0.03350110399999999, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/txiGUfI4yF.md"}
+{"ts": "2026-05-23T21:05:32", "event": "sample_start", "paper_id": "yBFXOZPESZ"}
+{"ts": "2026-05-23T21:05:34", "event": "sample_done", "paper_id": "tucuU4sQ3s", "job_id": "bfb93d02-0550-4e3d-adad-db026306a6b8", "score": 6.0, "cost_usd": 0.0357504672, "openrouter_calls": 32, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/tucuU4sQ3s.md"}
+{"ts": "2026-05-23T21:05:34", "event": "sample_start", "paper_id": "yBpzF8hp3J"}
+{"ts": "2026-05-23T21:05:51", "event": "sample_done", "paper_id": "uXecy0nKiJ", "job_id": "2a74df13-7350-457e-a766-8f446a53c18b", "score": 6.0, "cost_usd": 0.030689176, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/uXecy0nKiJ.md"}
+{"ts": "2026-05-23T21:05:51", "event": "sample_start", "paper_id": "yEpE0QPpf8"}
+{"ts": "2026-05-23T21:05:58", "event": "sample_done", "paper_id": "uP6RDWHcs7", "job_id": "a4dfb8df-a0a8-4625-8141-c7b52d84578a", "score": 6.0, "cost_usd": 0.03525192159999999, "openrouter_calls": 29, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/uP6RDWHcs7.md"}
+{"ts": "2026-05-23T21:05:58", "event": "sample_start", "paper_id": "yPfBP3EFGG"}
+{"ts": "2026-05-23T21:06:00", "event": "sample_done", "paper_id": "ulXBsAYSwU", "job_id": "909ec80a-a11e-4b92-a053-f54084d453ce", "score": 5.5, "cost_usd": 0.028004681599999998, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/ulXBsAYSwU.md"}
+{"ts": "2026-05-23T21:06:00", "event": "sample_start", "paper_id": "yR5QX5cTEy"}
+{"ts": "2026-05-23T21:06:21", "event": "sample_done", "paper_id": "v05SW2X3IC", "job_id": "52773078-1cf8-4e71-8b1a-cf10f2f14a14", "score": 6.0, "cost_usd": 0.0326982152, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/v05SW2X3IC.md"}
+{"ts": "2026-05-23T21:06:21", "event": "sample_start", "paper_id": "yjrVOxjkDR"}
+{"ts": "2026-05-23T21:06:49", "event": "sample_done", "paper_id": "wSbVv6xaRr", "job_id": "264f245f-8ab6-4581-9061-504fc2725238", "score": 5.0, "cost_usd": 0.0295846488, "openrouter_calls": 23, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/wSbVv6xaRr.md"}
+{"ts": "2026-05-23T21:06:49", "event": "sample_start", "paper_id": "zHdKaF3ZM7"}
+{"ts": "2026-05-23T21:07:00", "event": "sample_done", "paper_id": "wUzBBsrdB1", "job_id": "222377b4-f184-4c5b-9c3d-2f70e0dd388f", "score": 6.0, "cost_usd": 0.030435501600000005, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/wUzBBsrdB1.md"}
+{"ts": "2026-05-23T21:07:00", "event": "sample_start", "paper_id": "zKQSyT7a7n"}
+{"ts": "2026-05-23T21:07:46", "event": "sample_done", "paper_id": "v4bQPw4aTW", "job_id": "57c30135-a07f-4683-adc1-ffc4e2d51bab", "score": 6.0, "cost_usd": 0.0361724048, "openrouter_calls": 38, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/v4bQPw4aTW.md"}
+{"ts": "2026-05-23T21:07:46", "event": "sample_start", "paper_id": "zNH3Sf404X"}
+{"ts": "2026-05-23T21:07:57", "event": "sample_done", "paper_id": "vGkXf8nvt9", "job_id": "99ef88d6-86cc-43e9-8edf-9695832da110", "score": 6.0, "cost_usd": 0.03567844, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/vGkXf8nvt9.md"}
+{"ts": "2026-05-23T21:07:57", "event": "sample_start", "paper_id": "zS1bPtMlt9"}
+{"ts": "2026-05-23T21:08:01", "event": "sample_done", "paper_id": "wA6dvVnKe8", "job_id": "af44e48e-f9e0-4f23-be38-14bd4e78395a", "score": 5.0, "cost_usd": 0.03189972800000001, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/wA6dvVnKe8.md"}
+{"ts": "2026-05-23T21:08:01", "event": "sample_start", "paper_id": "zftquoHTgS"}
+{"ts": "2026-05-23T21:08:20", "event": "sample_done", "paper_id": "vPSiCA3CkD", "job_id": "9a52c1fb-0c59-4088-8b60-0a6298b5f0c5", "score": 6.0, "cost_usd": 0.03773830480000001, "openrouter_calls": 35, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/vPSiCA3CkD.md"}
+{"ts": "2026-05-23T21:08:20", "event": "sample_start", "paper_id": "zqA7Q9Q21L"}
+{"ts": "2026-05-23T21:08:35", "event": "sample_done", "paper_id": "wVGfJxM2Nz", "job_id": "57c55665-7383-439b-ae9a-dae443011114", "score": 5.0, "cost_usd": 0.03305274, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/wVGfJxM2Nz.md"}
+{"ts": "2026-05-23T21:08:35", "event": "sample_start", "paper_id": "zt7IPzsXrT"}
+{"ts": "2026-05-23T21:08:39", "event": "sample_done", "paper_id": "wkVsKDnl4s", "job_id": "730b6c0b-5dff-49d4-857d-55202df97efc", "score": 5.5, "cost_usd": 0.030115859199999997, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/wkVsKDnl4s.md"}
+{"ts": "2026-05-23T21:08:39", "event": "sample_start", "paper_id": "zwfpyw345l"}
+{"ts": "2026-05-23T21:08:51", "event": "sample_done", "paper_id": "xVB9AivJa5", "job_id": "92574971-e36e-47b9-91c7-e0e474a96546", "score": 5.0, "cost_usd": 0.0293838552, "openrouter_calls": 24, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/xVB9AivJa5.md"}
+{"ts": "2026-05-23T21:08:53", "event": "sample_done", "paper_id": "y7VeiCT7HG", "job_id": "9830c047-e8fa-4631-8aae-479aebf44f81", "score": 5.0, "cost_usd": 0.0284726848, "openrouter_calls": 19, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/y7VeiCT7HG.md"}
+{"ts": "2026-05-23T21:08:54", "event": "sample_done", "paper_id": "x6bG2Hoqdf", "job_id": "a9955fb3-210e-4c44-a860-51c758be454d", "score": 6.0, "cost_usd": 0.0337768928, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/x6bG2Hoqdf.md"}
+{"ts": "2026-05-23T21:09:00", "event": "sample_done", "paper_id": "x6iodYWNty", "job_id": "6e67a539-37bc-4a02-8bf9-b8e5d3749143", "score": 6.0, "cost_usd": 0.0330635984, "openrouter_calls": 33, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/x6iodYWNty.md"}
+{"ts": "2026-05-23T21:09:20", "event": "sample_done", "paper_id": "yBFXOZPESZ", "job_id": "ad6ade88-fb00-4bdd-8dc3-2a072444475d", "score": 4.0, "cost_usd": 0.033262790400000006, "openrouter_calls": 25, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/yBFXOZPESZ.md"}
+{"ts": "2026-05-23T21:09:30", "event": "sample_done", "paper_id": "xDO0239YOm", "job_id": "2441c3d5-75d6-4074-956f-717fafb95068", "score": 5.0, "cost_usd": 0.0328640368, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/xDO0239YOm.md"}
+{"ts": "2026-05-23T21:09:42", "event": "sample_done", "paper_id": "xFo13SaHQm", "job_id": "109f4762-ab9b-48d4-8872-e2d720957a52", "score": 6.0, "cost_usd": 0.0381165792, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/xFo13SaHQm.md"}
+{"ts": "2026-05-23T21:09:54", "event": "sample_done", "paper_id": "yjrVOxjkDR", "job_id": "9ac0ebba-49be-4886-ace3-2d2a15cc8821", "score": 6.0, "cost_usd": 0.0318642016, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/yjrVOxjkDR.md"}
+{"ts": "2026-05-23T21:10:03", "event": "sample_done", "paper_id": "yR5QX5cTEy", "job_id": "811a660b-66db-4548-9016-6504c3ad199a", "score": 6.5, "cost_usd": 0.03656167200000001, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/yR5QX5cTEy.md"}
+{"ts": "2026-05-23T21:10:06", "event": "sample_done", "paper_id": "yBpzF8hp3J", "job_id": "a3b43d44-f7d8-434c-a9fb-977abf7c9388", "score": 6.0, "cost_usd": 0.033918544800000006, "openrouter_calls": 23, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/yBpzF8hp3J.md"}
+{"ts": "2026-05-23T21:10:18", "event": "sample_done", "paper_id": "yPfBP3EFGG", "job_id": "d8621ef0-fe2a-42c2-a471-c0b77d4b0422", "score": 5.0, "cost_usd": 0.0369695704, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/yPfBP3EFGG.md"}
+{"ts": "2026-05-23T21:10:33", "event": "sample_done", "paper_id": "yEpE0QPpf8", "job_id": "4bdfd110-c8cb-4e9e-b8ff-67334ff1a41d", "score": 5.0, "cost_usd": 0.0380122232, "openrouter_calls": 33, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/yEpE0QPpf8.md"}
+{"ts": "2026-05-23T21:10:43", "event": "sample_done", "paper_id": "zHdKaF3ZM7", "job_id": "679a57fb-2e98-4386-82de-4f0bedb63101", "score": 5.5, "cost_usd": 0.031177227199999998, "openrouter_calls": 27, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/zHdKaF3ZM7.md"}
+{"ts": "2026-05-23T21:11:39", "event": "sample_done", "paper_id": "zqA7Q9Q21L", "job_id": "e0b16f31-ab56-42c1-b2ca-876fe91f6988", "score": 6.0, "cost_usd": 0.0296363032, "openrouter_calls": 24, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/zqA7Q9Q21L.md"}
+{"ts": "2026-05-23T21:11:40", "event": "sample_done", "paper_id": "zKQSyT7a7n", "job_id": "a771ff0a-76f0-4e20-a058-5d5d444dcfa1", "score": 6.0, "cost_usd": 0.0333493272, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/zKQSyT7a7n.md"}
+{"ts": "2026-05-23T21:11:44", "event": "sample_done", "paper_id": "zNH3Sf404X", "job_id": "31a8b21c-29ef-4c08-8e1e-6ce32af25d00", "score": 5.5, "cost_usd": 0.031828479199999996, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/zNH3Sf404X.md"}
+{"ts": "2026-05-23T21:12:11", "event": "sample_done", "paper_id": "zS1bPtMlt9", "job_id": "033b6129-28c3-4c19-a709-039fed0aaa5f", "score": 5.0, "cost_usd": 0.034557571999999995, "openrouter_calls": 30, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/zS1bPtMlt9.md"}
+{"ts": "2026-05-23T21:12:42", "event": "sample_done", "paper_id": "zt7IPzsXrT", "job_id": "a3004fab-a3c2-41e0-abb1-1c6374766d90", "score": 6.0, "cost_usd": 0.031806454399999996, "openrouter_calls": 26, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/zt7IPzsXrT.md"}
+{"ts": "2026-05-23T21:12:50", "event": "sample_done", "paper_id": "zftquoHTgS", "job_id": "5f83ab35-7cac-40d6-be5c-50e91c39dfeb", "score": 6.0, "cost_usd": 0.03510375119999999, "openrouter_calls": 31, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/zftquoHTgS.md"}
+{"ts": "2026-05-23T21:13:05", "event": "sample_done", "paper_id": "zwfpyw345l", "job_id": "426bd417-04b1-46fe-8649-b660f4a9d8b5", "score": 4.0, "cost_usd": 0.030425953600000007, "openrouter_calls": 28, "review_path": "/home/wg25r/split_review/DeepReviewer-v2-openai/data/benchmarks/iclr2026_new/reviews/zwfpyw345l.md"}
+{"ts": "2026-05-23T21:13:05", "event": "batch_done", "total": 393, "skipped": 0, "completed": 392, "failed": 1, "cost_usd": 12.94655971280001}

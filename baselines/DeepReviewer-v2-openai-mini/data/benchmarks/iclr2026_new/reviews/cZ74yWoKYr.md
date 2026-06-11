@@ -1,0 +1,48 @@
+## Summary
+# Final Review Report
+
+## Summary
+
+This paper addresses the problem of KV cache compression in LLM inference by proposing a formal, perturbation-based criterion for identifying critical cache entries. The key insight is that prior cache eviction methods rely solely on attention weights to determine entry importance, whereas the authors show theoretically that the projected value states (through the output matrix $W^O$) also affect the output perturbation. They derive an upper bound on the $\ell_1$ output perturbation (Theorem 3.3) and propose a two-stage greedy selection algorithm (Algorithm 1) that minimizes this bound by jointly considering attention weights and projected value norms. The algorithm is designed as a plug-and-play enhancement for existing eviction methods (SnapKV, AdaKV, HeadKV).
+
+The empirical evaluation covers 29 datasets from Ruler and LongBench across three LLMs (Llama-3.1-8B, Mistral-7B, Qwen2.5-32B). At 40% cache size, the proposed method consistently reduces performance loss compared to baselines, with average loss reductions from e.g., 13.9% to 1.8% (AdaKV, Llama, Ruler). Head-wise perturbation analysis confirms lower output perturbation in over 92% of attention heads, and computational overhead is reported as minimal (0.06s TTFT increase at 32K context).
+
+The paper is structurally sound, the theoretical framing is novel within the cache eviction literature, and the empirical results are extensive. However, several weaknesses limit the strength of the claims: (1) no variance/statistical significance is reported for any experiment, (2) the "first" claim and several "state-of-the-art" references are unverifiable without external literature search (which is disabled in this run), (3) the two-stage algorithm relies on an assumption (Assumption 3.4) whose failure modes are not analyzed, (4) the conclusion omits any discussion of limitations, and (5) the contribution statements mix motivation, performance, and analysis without clear conceptual separation.
+
+## Strengths
+1. **Formal grounding of cache criticality.** The paper provides the first formal definition of the critical KV cache identification problem as an output perturbation minimization (Definition 3.1). This is a meaningful step beyond the heuristic attention-weight-based criteria used in prior work, and the theoretical analysis (Theorem 3.3) cleanly reveals that both attention weights and projected value states affect output quality.
+
+2. **Theoretically motivated and practical algorithm.** The two-stage selection algorithm (Algorithm 1) is directly derived from the perturbation upper bound, not from ad-hoc heuristics. The design is simple, computationally efficient (a single matrix multiplication $VW^O$ per head during prefill), and integrates seamlessly with existing eviction methods without modifying their accumulation or budget allocation mechanisms.
+
+3. **Extensive empirical evaluation.** The paper evaluates across 29 datasets (13 synthetic Ruler tasks + 16 real-world LongBench tasks), three diverse LLMs (8B to 32B parameters), three eviction methods (SnapKV, AdaKV, HeadKV), and multiple cache sizes (2.5% to 80%). The consistent improvement across 88 out of 90 test cases (97.8%) provides strong evidence that the perturbation-aware selection generalizes across settings.
+
+4. **Perturbation analysis validates the mechanism.** The head-wise perturbation reduction analysis (Figure 4) shows that the proposed algorithm achieves lower output perturbation in 92% (Llama) and 86% (Mistral) of attention heads, directly confirming that the theoretical upper bound translates into practical perturbation reduction. This bridges the gap between theory and observed quality improvement.
+
+5. **Negligible computational overhead.** The additional TTFT overhead (0.06s for batch-1, 0.16s for batch-4 at 32K context) is modest, and decoding latency is unaffected. This makes the method practical for deployment.
+
+## Weaknesses
+### W1. Missing variance and statistical significance (Major)
+All results in Tables 1-3 and Figures 1-6 are reported as single-point scores without standard deviations, confidence intervals, or multi-seed averages. This is a critical omission because: (a) the Ruler benchmark uses only 100 sampled instances per task, making scores sensitive to sampling noise; (b) many improvements are modest (e.g., LongBench Llama SnapKV 40% summarization: 26.11 → 27.15, a +1.04 point gain) and could fall within noise; (c) the headline claim "reduces compression loss by more than half" cannot be statistically verified without variance estimates. **Fix:** Report mean ± std over at least 3 runs on a representative subset; perform a paired significance test against the strongest baseline for the primary metric.
+
+### W2. Unsupportable novelty claims without literature verification (Major)
+The paper makes strong priority claims: "For the first time, we formalize the problem" (Conclusion) and "we present the first analysis of output perturbations aimed at... cache eviction" (Related Work). These claims cannot be verified without external literature search, which is unavailable in this run. Additionally, the paper refers to SnapKV, AdaKV, and HeadKV as "state-of-the-art" without comparative justification. **Fix:** Soften "first" to "To our knowledge, this is the first" and provide specific comparison against prior work. Include a dedicated related-work table showing where novelty lies.
+
+### W3. Assumption 3.4 not rigorously validated (Major)
+The two-stage algorithm critically depends on Assumption 3.4 (that 50% of budget captures >50% of attention weight mass in 99%+ heads). However: (a) the verification is deferred to Appendix A without concrete statistics in the main text; (b) the "99% of heads" claim could mask critical failures in the remaining <1%; (c) the assumption combines two variables ($\alpha=0.5$ as fraction of budget, not fraction of total cache) in a way that may confuse readers — at 20% total cache, stage 1 gets only 10% of total, which may not be sufficient for $\sigma>0.5$. **Fix:** (1) Report the empirical distribution of $\sigma$ across heads (mean, min, worst-case). (2) Discuss what happens when the assumption fails (graceful degradation vs. catastrophic failure). (3) Add a sensitivity study with $\alpha=0.0$ (pure perturbation-based selection) to validate the necessity of the two-stage design.
+
+### W4. No discussion of limitations (Major)
+The conclusion (Section 5) does not mention any limitations of the proposed method. This is a significant omission for scientific completeness. Practical limitations include: (a) the method requires access to $W^O$, which may not be available in black-box API deployments; (b) the $\alpha=0.5$ heuristic may not generalize to all model architectures; (c) the extra memory for storing $\mathcal{V}=VW^O$ during selection is not quantified; (d) evaluation is limited to English/synthetic benchmarks. **Fix:** Add a limitation paragraph covering at least the points above.
+
+### W5. Introduction narrative and writing quality (Minor)
+The introduction uses informal phrasing ("likes chatbots" should be "like chatbots") and reads as a literature survey before reaching the key gap. The two motivating questions are well-posed but appear without sufficient theoretical motivation for why attention weights might be insufficient. **Fix:** Restructure to: (1) problem significance, (2) what current methods do and their implicit assumption, (3) why that assumption may be wrong (attention weights ignore value state magnitude and output projection), (4) the proposed perturbation formulation, (5) preview of contributions.
+
+### W6. SCBench evaluation incomplete (Minor)
+Multi-turn evaluation covers only 3 of many SCBench tasks, and the full-cache baselines for Math.Find (11.67) and EN.QA (22.86) are very low, leaving little headroom. Per-turn accuracy degradation is not reported, which is the primary interest in multi-turn settings. **Fix:** Include more tasks with higher full-cache performance and report per-turn accuracy curves.
+
+### W7. Efficiency evaluation limited scope (Minor)
+The efficiency analysis (Section 4.6) covers only SnapKV at 32K context. Overhead for AdaKV, HeadKV, and longer contexts (64K, 128K) is not reported. The extra memory for storing $\mathcal{V}=VW^O$ (an $n \times d$ matrix per head during prefill) is not quantified. **Fix:** Report TTFT for all methods and include memory overhead analysis.
+
+## Score
+**Final Score: 6/10**
+
+**Rationale.** The paper presents a genuinely novel formalization of critical KV cache selection through output perturbation analysis, which is a meaningful conceptual advance over attention-weight-only heuristics. The empirical evaluation is extensive in breadth (29 datasets, 3 LLMs, 3 eviction methods) and the results show consistent improvements. However, the score is constrained by four major weaknesses that must be addressed before the claims can be fully trusted: (1) the complete absence of variance reporting and statistical significance testing undermines the reliability of the headline "more than half" loss reduction claim; (2) unsupported priority claims ("first") require either literature verification or softening; (3) the critical Assumption 3.4 is not rigorously validated in the main text; and (4) the lack of any limitation discussion is a significant omission for scientific completeness. With these issues addressed, the paper would be in the 7-8 range. As it stands, the theoretical contribution is promising but the experimental rigor and defensive writing fall short of the standards needed for the claimed results.
