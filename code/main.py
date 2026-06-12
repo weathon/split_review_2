@@ -199,7 +199,7 @@ def resolve_model(spec: str | None):
     return OpenAIResponsesModel(model=spec, openai_client=custom_client)
 
 _harsh_prompt = "harsh_critic_position.md" if _POSITION_MODE else "harsh_critic.md"
-# _neutral_prompt = "neutral_reviewer_position.md" if _POSITION_MODE else "neutral_reviewer.md"
+_neutral_prompt = "neutral_reviewer_position.md" if _POSITION_MODE else "neutral_reviewer.md"
 _merger_prompt_file = "merger_position.md" if _POSITION_MODE else "merger.md"
 
 if HARSH_MODEL.startswith("claude_sdk:"):
@@ -210,7 +210,7 @@ else:
     harsh = Agent(name="Harsh Critic", instructions=load_prompts(_harsh_prompt, paper_access=PAPER_ACCESS_CHUNKED), model=resolve_model(HARSH_MODEL), tools=[read_file, grep_file], model_settings=_MODEL_SETTINGS)
     _HARSH_SDK_MODEL = None
     _harsh_sdk_system_prompt = None
-# neutral_reviewer = Agent(name="Strength Finder", instructions=load_prompts(_neutral_prompt, paper_access=PAPER_ACCESS_CHUNKED), model=resolve_model(NEUTRAL_MODEL), tools=[read_file, grep_file], model_settings=_MODEL_SETTINGS)
+neutral_reviewer = Agent(name="Strength Finder", instructions=load_prompts(_neutral_prompt, paper_access=PAPER_ACCESS_CHUNKED), model=resolve_model(NEUTRAL_MODEL), tools=[read_file, grep_file], model_settings=_MODEL_SETTINGS)
 
 _NO_CAL = "--no_cal" in sys.argv
 
@@ -319,12 +319,16 @@ async def run_pipeline(paper_path: str, skip_scoring: bool = False, no_cal: bool
         text, usage = await run_agent_with_retry(harsh, review_prompt)
         return ("Harsh Critic", text, usage, None)
 
-    print(f"  Phase 1: Running harsh critic ...")
-    harsh_result = await _run_harsh()
-    if isinstance(harsh_result, Exception):
-        print(f"  🔥ERROR: {paper_path} — phase 1 agent raised {type(harsh_result).__name__}: {harsh_result}")
-        return None
-    phase1_results = [harsh_result]
+    async def _run_neutral():
+        text, usage = await run_agent_with_retry(neutral_reviewer, review_prompt)
+        return ("Strength Finder", text, usage, None)
+
+    print(f"  Phase 1: Running 2 agents in parallel ...")
+    phase1_results = await asyncio.gather(_run_harsh(), _run_neutral(), return_exceptions=True)
+    for r in phase1_results:
+        if isinstance(r, Exception):
+            print(f"  🔥ERROR: {paper_path} — phase 1 agent raised {type(r).__name__}: {r}")
+            return None
 
     agent_usages: dict = {}
     sdk_usages: dict = {}
@@ -348,9 +352,10 @@ async def run_pipeline(paper_path: str, skip_scoring: bool = False, no_cal: bool
             f"artifacts are parser issues, not paper problems):\n\n"
             f"Paper path: {paper_path_abs}, read it in chunks.\n\n"
             f"Human reviews directory (for calibration): {HUMAN_REVIEW_DIR}\n\n"
-            f"Here is the input review:\n\n{chr(10).join(labeled)}\n\n"
+            f"Here are the inputs:\n\n{chr(10).join(labeled)}\n\n"
             f"Now produce the final consolidated review following your instructions. "
-            f"Cross-check every weakness against the actual paper before including it."
+            f"Remember: many of the harsh critic's points may be nonsensical or overly "
+            f"picky — cross-check everything against the actual paper before including it."
         )
         paper_dir = str(Path(paper_path_abs).parent)
         merged_review, merger_sdk_usage = await run_merger_claude_sdk(_MERGER_SDK_MODEL, merger_prompt, paper_dir, no_cal=no_cal)
@@ -367,9 +372,10 @@ async def run_pipeline(paper_path: str, skip_scoring: bool = False, no_cal: bool
             f"artifacts are parser issues, not paper problems).\n\n"
             f"Paper path: {paper_path_abs} — use read_file (which reads the whole file by default; do not pass start_line/end_line unless you specifically need a slice) or grep_file to read it.\n\n"
             f"Human reviews directory (for calibration): {HUMAN_REVIEW_DIR}\n\n"
-            f"Here is the input review:\n\n{chr(10).join(labeled)}\n\n"
+            f"Here are the inputs:\n\n{chr(10).join(labeled)}\n\n"
             f"Now produce the final consolidated review following your instructions. "
-            f"Cross-check every weakness against the actual paper before including it."
+            f"Remember: many of the harsh critic's points may be nonsensical or overly "
+            f"picky — cross-check everything against the actual paper before including it."
         )
         merged_review, merger_usage = await run_agent_with_retry(merger, merger_prompt)
         end_time = time.monotonic()
