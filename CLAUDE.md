@@ -4,7 +4,7 @@ HARD RULE 2: NO FALLBACK OR "BETTER PATH" UNLESS THEY DO THE SANE THING OR USER 
 HARD RULE 3: WHEN YOU ASK TO CHECK THE RESULTS, YOU SHOULD ONLY REPORT THE RESULT, WITH NO COMMENTS OR DIAGNOSIS (NO "The results are improving", "the results are good", etc)
 HARD RULE 4: YOU HAVE TO DOUBLE CHECK WITH THIS GUIDELINE BEFORE YOU HAND OFF
 HARD RULE 5: NEVER run history-rewriting or working-tree-resetting git commands (`git filter-repo`, `filter-branch`, `reset --hard`, `checkout -- .`, `clean -fd`, `stash drop`) when there are uncommitted/unstaged changes. These re-checkout the working tree to HEAD and silently destroy uncommitted edits that git never recorded and cannot recover. To prune a large file from history, FIRST ask the user to commit/stash their work, OR use a method that does not touch the working tree. When in doubt, stop and ask. NEVER assume the worktree is fully commited. 
-Run git add -A and git commit before and after EVERY chat response
+HARD RULE 6: You HAVE TO git add -A and commit BEFORE you start to edit. YOU HAVE TO DO THIS TO ACOID 
 
 
 All these rules can be one time override by user.
