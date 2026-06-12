@@ -1,0 +1,76 @@
+Now I have enough data to finalize my assessment. Let me compile the final review.
+
+**Calibration Summary:**
+
+Round 1 bracket: 6.0 - 7.0 (GRAID is clearly stronger than rejected 4.0-4.5 papers like Sparkle, comparable to accepted papers at 6.0-6.75, weaker than EQA-MX at 8.0).
+
+Round 2 narrowing: Among the additional anchors, GRAID provides stronger evidence than the pure benchmark papers at 6.0 (MMWorld, Needle in Video) through its generalization experiments, but the human evaluation methodology concerns prevent it from reaching 7.0+. Final score: 6.5.
+
+**All anchors retrieved:**
+
+| Paper | Score | Round | Comparison |
+|-------|-------|-------|------------|
+| Sparkle: Spatial Capabilities in VLMs | 4.5 | R1 | Similar topic but much less comprehensive (1 model, no human eval). GRAID is clearly stronger. |
+| On Inherent 3D Reasoning of VLMs | 4.0 | R1 | Analysis-only paper with limited scope. GRAID is clearly stronger. |
+| vVLM: Visual Reasoning in VLMs | 5.0 | R1 | Less directly comparable, high-variance reviews. GRAID is stronger. |
+| Can Medical VLP Succeed with Synthetic Data | 6.0 | R1 | Similar synthetic data theme, rejected with quality concerns. GRAID has stronger human eval and more models. |
+| Object-Centric VQA | 6.0 | R1 | Empirical study, accepted. Different focus but comparable contribution level. |
+| EQA-MX: Embodied QA | 8.0 | R1 | Novel tasks + model + 8M dataset. More comprehensive than GRAID. |
+| Does Spatial Cognition Emerge (SPACE) | 6.75 | R2 | Spatial reasoning benchmark, accepted. Comparable topical relevance. |
+| LLMs as Automated Aligners | 6.0 | R2 | VLM benchmark paper. GRAID has stronger downstream evidence. |
+| Needle in Video Haystack | 5.75 | R2 | Synthetic benchmark framework. GRAID's generalization experiments are stronger. |
+| DivScene | 6.25 | R2 | Navigation benchmark, rejected. GRAID is more broadly useful. |
+
+---
+
+## Summary
+GRAID is a framework for generating spatial reasoning VQA datasets using only 2D bounding boxes from object detectors, avoiding the 3D reconstruction errors and generative hallucinations that affect existing methods. It generates 8.5M+ VQA pairs across three driving datasets with 91.16% human-validated quality, and demonstrates that models fine-tuned on GRAID data generalize across question types (6 trained → 13+ improved), datasets (BDD → NuImages), and external benchmarks (BLINK, A-OKVQA, NaturalBench, RealWorldQA, VSR) across four VLM backbones.
+
+## Strengths
+- **Strong compositional generalization (RQ2):** Training Llama 3.2 11B on only 6 question types yields improvements on 13+ held-out types never seen during training, with +47.5pp overall on BDD and +38.0pp on NuImages (Figure 3). This is compelling evidence that the data encodes transferable spatial primitives rather than template-specific patterns.
+- **Cross-dataset generalization (RQ1):** Training on 10% of GRAID-BDD and evaluating on unseen GRAID-NuImages (different cities, scenes, visual contexts) yields +29.1pp improvement (38% → 67.1%), demonstrating that learned spatial reasoning transfers across datasets.
+- **Broad benchmark evaluation across multiple VLMs (RQ3):** GRAID-tuned models outperform SpatialVLM-tuned models on five established VQA benchmarks (BLINK, NaturalBench, A-OKVQA, RealWorldQA, VSR) across four backbones (Llama 3.2 11B, Gemma 3 4B, Qwen2.5 VL 3B, Qwen3 VL 8B), with standout Llama gains like +32.5% on A-OKVQA and +41.13% on Relative Depth in BLINK (line 272–274).
+- **Generalization beyond driving scenes:** Despite training data consisting mostly of driving-scene objects, improvements on BLINK indoor/outdoor tasks (+30.77% Spatial Relations, only 10 of 143 questions mention "car") suggest concept transfer rather than domain memorization (line 276).
+- **Practical engineering contribution via SPARQ:** The predicate-based early rejection system yields up to 1400× speedups on the heaviest templates (line 136), enabling generation of 8.5M+ pairs at scale.
+
+## Weaknesses
+
+### Fatal
+None
+
+### Major
+- **Human evaluation methodology asymmetry between GRAID and baseline:** GRAID evaluators could view bounding boxes alongside images to verify answer correctness (line 184: "we offer each person the person to view the image with and without bounding boxes... With the boxes, they can determine if the answer in the dataset is indeed correct"), while the OpenSpaces (SpatialVLM community implementation) evaluation was conducted without such visual aids (line 182). Since spatial relationship answers (e.g., "is X to the right of Y?") are substantially easier to verify with explicit bounding box overlays, this asymmetry could inflate GRAID's quality estimate relative to the baseline. The 91.16% vs. 57.6% comparison — the paper's central quality claim — is weakened by this methodological inconsistency.
+- **Human evaluation baseline targets a community re-implementation:** The 57.6% invalidity rate is measured on "OpenSpaces," described as generated by "the community implementation of SpatialVLM" (line 182), not by Chen et al. (2024a) themselves. Yet the abstract frames this as "a dataset produced by a current training data generation pipeline has a 57.6% human validation rate" without clearly distinguishing community vs. original implementation. A third-party re-implementation may replicate the pipeline poorly.
+
+### Minor
+- **Qwen3 results underreported:** The paper evaluates four VLMs in RQ3 but provides specific numbers only for Llama (32.5% on A-OKVQA, 15.94% on BLINK). For Qwen3, the strongest model, the paper says only "lesser gains" (line 274). If the most capable model benefits least, this bounds the significance of the contribution and should be explicitly discussed with full numbers.
+- **No inter-annotator agreement reported:** With 4 annotators evaluating 317 pairs each, the paper reports only aggregate validity counts (95.58% valid questions, 93.69% valid answers), not Cohen's kappa or similar agreement metrics. Standard practice for multi-annotator human evaluations.
+- **All source datasets are driving scenes:** BDD, NuImages, and Waymo are all autonomous vehicle datasets (Table 2). The paper claims GRAID is "domain-agnostic" (line 53) but only demonstrates generation on driving data. External benchmarks include indoor scenes and generalization is encouraging, but direct generation from a non-driving domain would strengthen the claim.
+
+### Trivial
+None
+
+## Nice-to-Haves
+- Variance or confidence intervals across multiple seeds for the RQ1 and RQ2 fine-tuning experiments would strengthen the claims.
+- Error analysis on the ~9% of GRAID pairs found invalid/confusing by evaluators, and on failure cases in held-out question types (e.g., the LessThanThresholdHowMany regression noted at line 200).
+- Including even one non-driving domain (e.g., indoor scenes with detection annotations) in the GRAID generation would directly support the domain-agnostic claim.
+- The abstract leads with the 1400× SPARQ speedup, which is the best case for a single template (LargestAppearance). The more typical RightOf speedup is ~9× (line 136). Honest in the body but slightly misleading in the abstract.
+
+## Removed Points
+These points are flagged to be removed, treat them with caution:
+- "RQ3 benchmark tables (Tables 4, 5, 6) are essential to evaluating claims" — These tables are referenced in the paper but were stripped by the parser. The tables exist in the original submission; this is a parser artifact, not a paper problem.
+- "Variance/confidence intervals absent" — Moved to nice-to-have as this is common practice in the field and does not invalidate the core claims.
+- Missing related works — Cannot verify existence of external references not cited.
+
+## Novel Insights
+The paper's genuinely novel observation is that qualitative 2D spatial relationships from bounding boxes alone — without any 3D reconstruction, metric estimation, or generative models — can produce spatial reasoning data of substantially higher quality and broader generalizability than existing 3D-reconstruction-based pipelines. The RQ2 experiment (6 training types → 13+ held-out types) provides particularly strong evidence that the generated data encodes compositional spatial primitives rather than template-specific patterns. The finding that even stronger models (Qwen3) benefit less is noteworthy and suggests a ceiling effect where better-pretrained models already possess these spatial primitives — an observation worth highlighting rather than burying.
+
+## Suggestions
+- Equalize the human evaluation methodology: either evaluate both datasets with bounding boxes visible, or both without, and report the change. This is the most important revision for strengthening the paper's central claim.
+- Report Qwen3 results in full alongside the other models, with discussion of why stronger models benefit less — this is an informative finding, not a weakness.
+- Tighten the abstract and introduction framing to clearly state the 57.6% figure comes from a community re-implementation of SpatialVLM, not the original authors' data.
+- Add Cohen's kappa or similar inter-annotator agreement metric for the human evaluation.
+- Consider adding even one non-driving dataset (e.g., Objects365 or COCO with existing detections) to directly support the domain-agnostic claim.
+
+MY FINAL SCORE: <score>6.5</score>
+MY FINAL DECISION: <decision>Accept</decision>
