@@ -1,5 +1,5 @@
 Understand the current repo and set it up if needed by looking at code/ and prompts/ and do this task. 
-
+Put all files in network storage in ~/abc besides venv, that should be in ~/, but a quick setup for the venv should be in ~/abc
 
 Problem:
 Currently the LLM cannot rank the current paper in the retrival list well and usually over rank them.
