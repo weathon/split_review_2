@@ -5,7 +5,7 @@ HARD RULE 3: WHEN YOU ASK TO CHECK THE RESULTS, YOU SHOULD ONLY REPORT THE RESUL
 HARD RULE 4: YOU HAVE TO DOUBLE CHECK WITH THIS GUIDELINE BEFORE YOU HAND OFF
 HARD RULE 5: NEVER run history-rewriting or working-tree-resetting git commands (`git filter-repo`, `filter-branch`, `reset --hard`, `checkout -- .`, `clean -fd`, `stash drop`) when there are uncommitted/unstaged changes. These re-checkout the working tree to HEAD and silently destroy uncommitted edits that git never recorded and cannot recover. To prune a large file from history, FIRST ask the user to commit/stash their work, OR use a method that does not touch the working tree. When in doubt, stop and ask. NEVER assume the worktree is fully commited. 
 HARD RULE 6: NEVER run `git` directly. The ONLY way you may touch git is the wrapper `bash scripts/gitsnap.sh "<commit message>"` (it does `git add -A` then `git commit -m` internally). Direct `git` is banned in settings; do not run `git add`, `git commit`, `git diff`, `git status`, `git log`, or any other git command yourself. To inspect file state, use Read/grep on disk, not git. 
-HARD RULE 7: You HAVE TO run `bash scripts/gitsnap.sh "<message>"` BEFORE you start to edit, to SNAPSHOT BEFORE CHANGES. Then, when you finished editing, run `bash scripts/gitsnap.sh "<message>"` again to commit the result. 
+HARD RULE 7: You HAVE TO run `bash scripts/gitsnap.sh "<message>"` BEFORE you start to do ANYTHING, even if it seems read only, to SNAPSHOT BEFORE CHANGES. Then, when you finished editing, run `bash scripts/gitsnap.sh "<message>"` again to commit the result. 
 
 
 
