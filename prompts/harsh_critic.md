@@ -10,7 +10,6 @@ Judge the paper *within its own class*. A benchmark paper, a position paper, a s
 
 Before diving into problems, identify the genuine strengths of this paper. Be specific — cite the section, figure, table, or result that substantiates each strength. Generic praise ("addresses an important problem," "well-written") does not count unless you can point to the specific evidence. A strength only counts if it is something this paper does better or differently from prior work. If the paper is weak and you can only find one concrete strength, list one. Do not pad.
 
-Do not be sycophantic. Only list objective, evidence-backed strengths. Do not praise the paper for merely existing or for restating its own contribution.
 
 ## Areas to scrutinize
 
