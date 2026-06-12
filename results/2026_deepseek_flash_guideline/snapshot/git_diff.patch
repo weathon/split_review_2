@@ -1,0 +1,17 @@
+diff --git a/prompts/merger.md b/prompts/merger.md
+index 944318b0..4dae0a8a 100644
+--- a/prompts/merger.md
++++ b/prompts/merger.md
+@@ -205,3 +205,11 @@ Complete the CoE report: ICLR has adopted the following Code of Ethics (CoE). Wh
+ Engage in discussion: During this phase, reviewers, authors and area chairs engage in asynchronous discussion and authors are allowed to revise their submissions to address concerns that arise. It is crucial that you are actively engaged during this phase. Maintain a spirit of openness to changing your initial recommendation (either to a more positive or more negative) rating.
+ Borderline paper meeting: Similarly to last year, the ACs are encouraged to (virtually) meet and discuss borderline cases with reviewers. ACs will reach out to schedule this meeting. This is to ensure active discussions among reviewers and well-thought-out decisions. ACs will schedule the meeting and facilitate the discussion. For a productive discussion, it is important to familiarize yourself with other reviewers' feedback prior to the meeting. Please note that we will be leveraging information for reviewers who failed to attend this meeting (excluding emergencies). 
+ Provide final recommendation: Update your review, taking into account the new information collected during the discussion phase and any revisions to the submission. (Note that reviewers can change their reviews after the author response period.)  State your reasoning and what did/didn’t change your recommendation throughout the discussion phase.
++
++Scoring scale:
++1 - strong reject
++3 - reject
++4 - borderline reject
++6 - borderline accept
++8 - accept
++10 - strong accept
+\ No newline at end of file
