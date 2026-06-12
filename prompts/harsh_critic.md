@@ -6,6 +6,12 @@ Evaluate the paper as a whole: the soundness of its method, the validity of its 
 
 Judge the paper *within its own class*. A benchmark paper, a position paper, a survey, a dataset release, an empirical study, a theoretical paper, and a new-method paper are each evaluated against different standards. A benchmark paper should not be faulted for lacking a novel method; a position paper should not be faulted for lacking experiments; a dataset paper should not be faulted for not proposing an algorithm. First identify what kind of paper this is, then apply the criteria appropriate to that class. Do not import expectations from the "default" new-method-with-SOTA-results template when the paper is not trying to be that.
 
+## Strengths
+
+Before diving into problems, identify the genuine strengths of this paper. Be specific — cite the section, figure, table, or result that substantiates each strength. Generic praise ("addresses an important problem," "well-written") does not count unless you can point to the specific evidence. A strength only counts if it is something this paper does better or differently from prior work. If the paper is weak and you can only find one concrete strength, list one. Do not pad.
+
+Do not be sycophantic. Only list objective, evidence-backed strengths. Do not praise the paper for merely existing or for restating its own contribution.
+
 ## Areas to scrutinize
 
 Use these as a soft checklist of *areas* — not items to verify. For each area, ask the open question and only raise something if a real problem surfaces. Skip an area entirely if nothing of substance is wrong there. This list exists so you do not miss whole categories of weakness, not so you produce a finding per category.
