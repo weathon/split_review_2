@@ -168,6 +168,80 @@ HuggingFace `deepreview/DeepReview-13K` dataset:
 python code/build_deepreview.py
 ```
 
+## Results
+
+### 3-way comparison: baseline vs ours vs no-cal ablation (deepseek-v4-flash, 300 papers)
+
+Three runs on the ICLR-2026 set, scored `pred_score` vs `gt_avg_score`:
+- **baseline** (`cmp3_baseline`) — single-call reviewer (`code/baseline.py`).
+- **ours** (`cmp3_ours`) — split-agent pipeline + deepreview calibration retrieval.
+- **no-cal** (`cmp3_nocal`) — ours with calibration disabled (`--no_cal`) ablation.
+
+Pearson r on the common overlap (n = 292 papers scored by all three; `pred_score == -100`
+"no score found" sentinels excluded — this dropped 1 row from `ours`):
+
+| run | Pearson r |
+|---|---|
+| baseline | 0.5074 |
+| ours | 0.6359 |
+| no-cal | 0.5397 |
+
+Dependent (Steiger) test for the three overlapping, gt-sharing correlations — t / p, df = 289:
+
+| | baseline | ours | no-cal |
+|---|---|---|---|
+| baseline | — | −3.71 / 0.000 | −0.79 / 0.430 |
+| ours | +3.71 / 0.000 | — | +2.96 / 0.003 |
+| no-cal | +0.79 / 0.430 | −2.96 / 0.003 | — |
+
+pred-pred correlations: r(baseline,ours)=0.7091, r(baseline,no-cal)=0.6425, r(ours,no-cal)=0.7410.
+Ours beats both the single-call baseline (p≈0.0002) and its own no-cal ablation (p≈0.003);
+baseline vs no-cal is not significant (p≈0.43).
+
+### Follow-up analysis (from existing results/snapshots, no new runs)
+
+All correlations below are pred_score vs gt_avg_score with the `pred_score == -100`
+"no score found" sentinel (`code/main.py:388`, `code/baseline.py`) excluded.
+
+**1. How does `ours` compare to before?**
+`cmp3_ours` (deepseek-v4-flash split-agent pipeline + deepreview calibration — the
+`run_deepreview.sh` config, whose default sweep name is `2026_deepseek_flash_guideline_single`)
+lands at Pearson r ≈ 0.64 on n ≈ 295. The earlier run of the *same* config,
+`2026_deepseek_flash_guideline_single`, was r = 0.673 (n = 100), and
+`2026_deepseek_flash_guideline` was r = 0.666 (n = 100). So `ours` is essentially
+unchanged — marginally lower, well within run-to-run noise — but now measured on
+~3× the sample.
+
+**2. The "very good" vs "very bad" baseline.**
+Good baseline: `2026_baseline_claude` (claude-sonnet-4-6 single-call), r = 0.684 (n = 393).
+The "very bad" baseline was a **sentinel artifact**, not a real collapse:
+- `mimo_baseline`: r = −0.010 (n = 393) with 10 `-100` sentinels → r = 0.659 (n = 383) clean.
+- `deepreview_baseline`: r = 0.203 (n = 298, 2 sentinels) → r = 0.578 (n = 296) clean.
+
+So the "very bad" number you remember (~0) was `mimo_baseline` being dragged to zero by
+ten unparsed-score rows; cleaned, it is ~0.66.
+
+**3. Did we test baseline + guideline?**
+Not as a separate arm. The ICLR official guideline is **already embedded in the
+single-call baseline prompt** (`code/baseline.py`, "ICLR Offical Guideline for reference"),
+together with a global 2026 score-distribution hint. Every `*guideline*` result directory
+(`2026_deepseek_flash_guideline`, `..._single`, `2026_mimo_pro_response_guideline`) is the
+**multi-agent (ours) pipeline**, not the baseline. What the baseline never got is the
+per-paper *calibration-retrieval* (anchor RAG) that `ours` runs — that arm was not tested.
+
+**4. The old pairs where `ours` barely beat baseline** (matched overlap, clean):
+| ours | baseline | n | ours r | baseline r | gap |
+|---|---|---|---|---|---|
+| 2026_sonnet_repro (sonnet agent) | 2026_baseline_claude (sonnet single) | 393 | 0.7065 | 0.6843 | +0.022 |
+| 2026_mimo_pro_response_guideline | mimo_baseline | 344 | 0.6570 | 0.6518 | +0.005 |
+| 2026_deepseek_flash_guideline_single | deepreview_baseline | 99 | 0.6539 | 0.5798 | +0.074 |
+
+The sonnet and mimo pairs are the near-ties (+0.02 and +0.005) — the likely reason the
+project was set aside. Note the current cmp3 gap (ours ≈ 0.64 vs baseline ≈ 0.52,
+Steiger p ≈ 0.001) is large only because `cmp3_baseline` is the *weak* deepseek-flash
+single-call baseline; against the *strong* claude baseline (0.68) `ours` has never
+opened a clear margin.
+
 ## Notes
 
 - `*.pkl` files are tracked via Git LFS (see `.gitattributes`).
