@@ -170,33 +170,42 @@ python code/build_deepreview.py
 
 ## Results
 
-### 3-way comparison: baseline vs ours vs no-cal ablation (deepseek-v4-flash, 300 papers)
+### 4-way comparison: baseline vs ours vs no-cal vs deepseek baseline (deepseek-v4-flash, full 393)
 
-Three runs on the ICLR-2026 set, scored `pred_score` vs `gt_avg_score`:
+Four runs on the full ICLR-2026 set (393 papers), scored `pred_score` vs `gt_avg_score`:
 - **baseline** (`cmp3_baseline`) — single-call reviewer (`code/baseline.py`).
 - **ours** (`cmp3_ours`) — split-agent pipeline + deepreview calibration retrieval.
 - **no-cal** (`cmp3_nocal`) — ours with calibration disabled (`--no_cal`) ablation.
+- **good_base** (`deepreview_baseline`) — earlier same-config deepseek-flash single-call baseline.
 
-Pearson r on the common overlap (n = 292 papers scored by all three; `pred_score == -100`
+Pearson r on the common overlap (n = 389 papers scored by all four; `pred_score == -100`
 "no score found" sentinels excluded — this dropped 1 row from `ours`):
 
 | run | Pearson r |
 |---|---|
-| baseline | 0.5074 |
-| ours | 0.6359 |
-| no-cal | 0.5397 |
+| baseline | 0.5015 |
+| ours | 0.6313 |
+| no-cal | 0.5548 |
+| good_base | 0.5440 |
 
-Dependent (Steiger) test for the three overlapping, gt-sharing correlations — t / p, df = 289:
+Dependent (Steiger) test for the four overlapping, gt-sharing correlations — t / p, df = 386:
 
-| | baseline | ours | no-cal |
-|---|---|---|---|
-| baseline | — | −3.71 / 0.000 | −0.79 / 0.430 |
-| ours | +3.71 / 0.000 | — | +2.96 / 0.003 |
-| no-cal | +0.79 / 0.430 | −2.96 / 0.003 | — |
+| | baseline | ours | no-cal | good_base |
+|---|---|---|---|---|
+| baseline | — | −4.09 / 0.000 | −1.47 / 0.142 | −1.12 / 0.262 |
+| ours | +4.09 / 0.000 | — | +2.63 / 0.009 | +2.71 / 0.007 |
+| no-cal | +1.47 / 0.142 | −2.63 / 0.009 | — | +0.30 / 0.767 |
+| good_base | +1.12 / 0.262 | −2.71 / 0.007 | −0.30 / 0.767 | — |
 
-pred-pred correlations: r(baseline,ours)=0.7091, r(baseline,no-cal)=0.6425, r(ours,no-cal)=0.7410.
-Ours beats both the single-call baseline (p≈0.0002) and its own no-cal ablation (p≈0.003);
-baseline vs no-cal is not significant (p≈0.43).
+pred-pred: r(baseline,ours)=0.6773, r(baseline,no-cal)=0.6203, r(baseline,good_base)=0.5862,
+r(ours,no-cal)=0.7217, r(ours,good_base)=0.6588, r(no-cal,good_base)=0.6030.
+Ours beats all three others significantly (vs baseline p≈0.00005, vs no-cal p≈0.009, vs
+good_base p≈0.007). baseline, no-cal, and good_base are mutually indistinguishable (all p > 0.14).
+
+**cmp3_baseline vs deepreview_baseline (both deepseek-flash single-call, full 393).**
+Same code/prompt/model — matched n = 390: `cmp3_baseline` r = 0.5017 vs `deepreview_baseline`
+r = 0.5439, Steiger t = −1.11, p = 0.266 (pred-pred r = 0.585). The two same-config baseline
+draws differ only by run-to-run stochasticity (not significant).
 
 ### Follow-up analysis (from existing results/snapshots, no new runs)
 

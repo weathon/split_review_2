@@ -1,49 +1,55 @@
 ## Summary
 
-The paper proposes TARS, a framework for dexterous robotic manipulation that integrates visual and tactile modalities through a unified point cloud representation. The claimed contributions include a visual-tactile affordance module (VTA), a visual-tactile policy module (VTP), and a teacher-student training pipeline to handle both contact and non-contact states. The evaluation is performed on four simulated manipulation tasks (Lift, Pick and Place, Pull Drawer, Open Door) with comparisons to three baselines.
+The paper proposes TARS (Tactile Affordance in Robot Synesthesia), a framework that integrates visual and tactile modalities using a unified point cloud representation for dexterous robotic manipulation. The aim is to handle both contact and non-contact states, using a teacher-student reinforcement learning framework with a visual-tactile affordance module (VTA) and a visual-tactile policy module (VTP). The approach is evaluated on four manipulation tasks in simulation.
 
 ## Strengths
 
-- The problem of smoothly integrating visual and tactile feedback across contact and non-contact states is relevant and important for dexterous manipulation.
-- The use of a unified point cloud representation for both modalities is a conceptually clean design choice.
+- The problem of seamlessly integrating visual and tactile modalities across contact and non-contact states is relevant and timely for dexterous manipulation.
+- The idea of using a unified point cloud representation for both modalities is sound and aligns with recent trends in robotic synesthesia.
 
 ## Weaknesses
 
 ### Fatal
 
-- **The paper is not a coherent, self-contained research paper.**  The content is a corrupted combination of two distinct papers. Section 3.2, titled “Visual-Tactile Affordance,” instead presents an unrelated finite-element force estimation model for soft-bubble grippers (Equations 1–13), with no connection to affordance learning. The conclusion (Section 5) and the first reference are from a different work on soft-bubble force estimation. This contamination makes it impossible to evaluate the claimed TARS framework because the method description is fundamentally wrong and incomplete.
+- **Major content mismatch and incoherence.** Section 3.2, titled "Visual-Tactile Affordance," contains a lengthy derivation of a finite element force estimation method for soft-bubble grippers (e.g., Punyo), which is unrelated to the paper's claimed setup using Gelsight Mini sensors and parallel grippers. The equations and text are directly applicable to a different sensor type and do not describe an affordance prediction method. The conclusion similarly describes "a finite element force estimation method for soft-bubble grippers" that is not part of the TARS framework described earlier. This makes the paper internally inconsistent and suggests the technical content is not original or properly adapted.
 
-- **Key experimental results are missing.**  The paper refers to Table I, Table II, and Table III in the text, but no tables are actually present. The results that are discussed qualitatively (e.g., “Tab. I, demonstrate that our method… achieves the best overall performance”) cannot be verified. Without the actual data, the core empirical claims are unsupported.
-
-- **Core method components are not described.** The paper fails to explain how the visual-tactile affordance (VTA) module is trained, what its loss function is, or how it produces affordance predictions from point clouds. The VTP section includes a placeholder equation for the loss function (“where …”), but the actual expression is missing. The Gaussian mixture density model and the teacher-student distillation are mentioned but not sufficiently detailed to allow reproducibility.
+- **Core method is not described.** The paper repeatedly refers to the VTA module providing affordance information, but never explains what the affordance is, how it is predicted, or how it is trained. Section 3.2 is entirely a force estimation model for a different sensor, not an affordance model. Without a clear description of the affordance mechanism, the claims about "visual-tactile affordance" are unsupported.
 
 ### Major
 
-- **The paper is essentially unreviewable in its current form.** The mixture of unrelated content, missing tables, and incomplete method descriptions mean that no informed assessment of the technical contribution or experimental validation is possible.
+- **Missing experimental results.** The paper references "Tab. I," "Tab. II," and "Tab. III" with numerical comparisons, but these tables are absent from the text (likely a parsing issue). However, even the textual descriptions are vague (e.g., "our method achieves the best overall performance") and do not provide concrete numbers or statistical significance. The absence of quantitative evidence makes it impossible to evaluate the claims.
+
+- **Incomplete and mismatched conclusion.** The conclusion discusses a force estimation method for soft-bubble grippers and mentions future work on improving deformation models, which has no connection to the TARS framework or the tasks evaluated. This suggests the paper is incomplete or that content from a different work was erroneously included.
 
 ### Minor
 
-- The paper claims to be “the first to apply these concepts to a robotic system using optical tactile sensors and external cameras,” but this claim is not substantiated with proper citations to earlier visual-tactile synesthesia work.
+- The related work section cites many references with numbers (e.g., "[9]–[13]") but no actual reference list is provided. This hinders reproducibility and verification.
+
+- The motivation for "tactile affordance for robot synesthesia" is intuitive, but the paper does not clearly differentiate its contribution from prior work on visual-tactile synesthesia (e.g., [18], [19]) beyond claiming a broader scope.
 
 ### Trivial
 
-- None.
+- Figure 1 is described but the actual image is missing; the caption is repeated twice.
 
 ## Nice-to-Haves
 
-- The idea of a unified point-cloud representation for visual and tactile data has merit. A clean, self-contained paper with complete method descriptions and full experimental tables would be interesting to evaluate.
+- The paper would benefit from a clear, standalone description of the affordance model and how it is trained, separate from any force estimation method.
+- Including actual experimental results (numbers, success rates, error bars) is essential for supporting the claims.
 
 ## Novel Insights
 
-None beyond the paper’s own contributions—the paper as presented does not contain a coherent exposition from which novel insights could be extracted.
+None beyond the paper's own contributions, because the core technical contribution (the affordance model and how it integrates with the policy) is not clearly presented, and the presented technical derivation is mismatched with the claimed system.
 
 ## Suggestions
 
-- The authors should carefully re-assemble the correct version of the paper, ensuring that all sections (especially the method and experiments) are consistent and complete. The irrelevant soft-bubble content must be removed, all tables should be included, and the mathematical formulations for the VTA and VTP modules should be clearly stated.
+- The authors must remove the irrelevant finite element force estimation content and replace it with a proper description of their affordance prediction method.
+- Provide full experimental results with quantitative comparisons to baselines, including error bars and statistical tests.
+- Ensure the conclusion reflects the actual contributions of the paper (TARS, not a bubble force estimator).
+- Provide a complete reference list.
 
 ## Score and Decision
 
-The paper as submitted is not a valid, coherent research contribution. It contains content from two different papers, missing experimental results, and incomplete method descriptions, making it impossible to evaluate its claims. Therefore, the appropriate outcome is an error.
+The paper contains fatal inconsistencies: the main technical section and conclusion describe a different sensor and method than the one claimed, and the core affordance mechanism is not defined. The missing experimental results further weaken the evaluation. The contribution as presented is not valid.
 
-MY FINAL SCORE: -100 <score>-100</score>  
-MY FINAL DECISION: Error
+MY FINAL SCORE: <score>1</score>
+MY FINAL DECISION: <decision>Reject</decision>
