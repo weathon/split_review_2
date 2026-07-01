@@ -1,0 +1,98 @@
+Now let me verify specific claims by reading the contribution list and key sections more carefully.Now I have all the information I need. Let me draft the review.Now let me run calibration search Round 1 to bracket the score.Let me read some of the most relevant anchors in detail.Now let me form my initial bracket. Based on the anchors:
+
+- **UGround** (kxnoqaisCT, accepted, file says 7.75 avg): Much stronger contribution - 10M dataset, 20% improvements, 6 benchmarks. GUI-Spotlight is weaker.
+- **Grounding MLLM in GUI** (M9iky9Ruhx, accepted, 6.00): Similar scope, GUI-Spotlight has more novel training but overclaiming issues. Roughly comparable.
+- **Reinforced UI Grounding** (nNyjIMKGCH, rejected, 5.75): Both use RL for UI grounding. Comparable novelty level.
+- **SpiritSight** (jY2ow7jRdZ, rejected, 5.25): Rejected for limited novelty/ablations. GUI-Spotlight has better novelty and ablations.
+- **UI-Pro** (5wmAfwDBoi, rejected, 4.25): Rejected for lacking innovation. GUI-Spotlight has more novelty.
+
+**Initial bracket: 5.0–6.0**
+
+Let me do a targeted Round 2 to narrow within this range.Now I have enough calibration data. Let me write the final review.
+
+## Summary
+GUI-Spotlight proposes an iterative, tool-augmented visual grounding approach for GUI agents, where a 7B MLLM dynamically invokes three tools (crop, extract, find_color) to progressively refine focus on target screen elements. Training combines SFT warm-up on 72B-teacher-generated trajectories with a modified GSPO reinforcement learning objective that adds an auxiliary filtered-positive cross-entropy loss to stabilize multi-turn tool-calling. With 18.5K training samples, it achieves 52.8% on ScreenSpot-Pro, surpassing 7B models trained on millions of samples on that benchmark, but underperforms existing 7B baselines on UI-Vision and OSWorld-G.
+
+## Strengths
+- **Data efficiency on ScreenSpot-Pro is genuine and concrete.** Table 3 shows 52.8% with 18.5K samples vs. V2P-7B (50.6%, 9.6M samples) and GTA-1-7B (50.1%, 1.56M samples) — a two-to-three orders-of-magnitude reduction in training data for competitive or better performance at the 7B scale. This is a meaningful and well-demonstrated result.
+
+- **The auxiliary cross-entropy loss for stabilizing multi-turn RL is a practical, well-evidenced contribution.** Figure 3 (right panel) shows vanilla GRPO and GSPO collapse after ~300 steps when applied to multi-turn tool-calling, while the proposed filtered-positive cross-entropy term prevents this. This is a concrete engineering insight likely useful to others training RL on agentic tool-use tasks.
+
+- **Section 4 (Empirical Insights) documents negative results with unusual honesty.** The systematic comparison of GRPO variants (Figure 3, left panel) — including showing that selecting top-p% most uncertain prompts degraded accuracy and that continuously updating the reference policy also hurt — goes beyond the norm for transparency. The reward-design ablations in Section 4.2 (sparse vs. dense answer rewards, crop/extract ratios in Figure 4) are informative.
+
+- **The ablation in Section 5.4 cleanly isolates the training contribution.** Comparing multi-turn conversational inference (7.6%), repeated single-turn inference (47.6%), and GUI-Spotlight (52.8%) demonstrates that the base model has essentially no multi-turn reasoning capacity and that training provides a real, measurable gain over a naive iterative baseline.
+
+## Weaknesses
+
+### Fatal
+None.
+
+### Major
+
+- **Factually incorrect claims about outperforming 7B baselines across benchmarks.** Contribution 1 (Section 1) states GUI-Spotlight achieves "23.4% on UI-Vision, substantially outperforming comparable 7B baselines." Table 4 directly contradicts this: UI-Venus-Ground-7B achieves 26.5% vs. GUI-Spotlight's 23.4%, a 3.1-point deficit. Section 5.2 explicitly claims "outperforming other 7B models," which is factually false given the same table. On OSWorld-G (Table 5), GTA1-7B achieves 67.7% vs. GUI-Spotlight's 62.7%, a 5.0-point gap. The paper's actual strength is benchmark-specific (ScreenSpot-Pro), and the framing misrepresents this scope. This is not a presentation issue but an evidential one — the claims and evidence are in conflict.
+
+- **Inference cost is completely unaddressed.** The iterative mechanism requires multiple forward passes, each appending new images to the context. The paper never reports: (a) average number of tool invocations per query, (b) wall-clock latency per example, or (c) accuracy–latency tradeoff vs. single-pass baselines. For a method whose advantage over single-pass models on ScreenSpot-Pro is 2.0 points (vs. UI-Venus-7B at 50.8%), an unknown but potentially 3–4× inference cost significantly changes the practical value proposition. This is a substantial methodological gap for a paper motivated by practical GUI automation.
+
+- **The 72B teacher model dependency is inadequately acknowledged in the data-efficiency narrative.** Stage 1 SFT trajectories are generated by Qwen2.5-VL-72B (Section 3.2.2), and data cleaning uses the same 72B model for instruction quality auditing, bounding-box verification, and consistency checking (Section 3.2.1). The "18.5K samples" count is prominently featured, but the total compute budget including the teacher model is never reported. This doesn't invalidate the contribution but the framing is one-sided — a fair accounting would report both sample count and total compute.
+
+### Minor
+
+- **The Stage 1 SFT accuracy drop (39.3% → 17.8% on ScreenSpot-Pro, Figure 2) is unexplained.** The paper notes the model "remains under-aligned" but provides no analysis of why SFT on expert trajectories causes a 21.5-point accuracy drop. Is this catastrophic forgetting of single-turn capabilities? Format incompatibility? This is a striking result that deserves more investigation, as it raises questions about how well-designed the SFT stage is.
+
+- **The gain from training the iterative mechanism (5.2 points over repeated single-turn inference) is modest and not fully disentangled.** The Section 5.4 ablation shows repeated single-turn inference achieves 47.6% vs. GUI-Spotlight's 52.8%. While this gap is real, an ablation applying the same RL training to a single-pass model (without iterative tools) would help isolate whether the improvement comes from the iterative tool-use framework or from RL training itself.
+
+- **No tool-usage analysis is provided.** The paper does not report how often each tool (extract, crop, find_color) is invoked, which tools contribute most to accuracy, or what characteristic failure modes look like. A tool-usage breakdown would help readers understand whether all three tools are necessary or whether crop and extract do the heavy lifting.
+
+### Trivial
+None.
+
+## Nice-to-Haves
+- Accuracy as a function of maximum allowed tool calls, which would reveal whether the iterative mechanism is genuinely necessary or whether most gains come from the first refinement step
+- Qualitative examples of successful and unsuccessful trajectories to illustrate when the approach helps and when it fails
+- Per-category error analysis beyond the coarse domain breakdowns in Table 3
+
+## Removed Points
+*These points are flagged to be removed; treat them with caution.*
+
+- **"The introduction's framing as 'attention mechanisms' is loose"** — Removed as a pure presentation/framing nitpick. The paper's technical method is clear regardless of the analogy chosen.
+- **"Reward weights (α₁=0.30, ..., α₅=0.20) were tuned on unknown data"** — Removed as a standard hyperparameter transparency issue common in RL papers; the paper does ablate the crop/extract ratio in Figure 4 (right panel), which is the most impactful design choice.
+- **"Interaction effects between reward components are not analyzed"** — Weakened and subsumed: requesting a full factorial ablation of 5 reward components is beyond standard practice. The crop/extract ratio ablation and sparse vs. dense reward comparison address the most important interactions.
+
+## Novel Insights
+The auxiliary filtered-positive cross-entropy loss for preventing RL collapse in multi-turn tool-calling scenarios (Section 3.2.2, Figure 3) is a genuinely useful and novel insight. The mechanism is clearly explained: without it, autonomous exploration leads to unparseable tool formats, sparse volatile rewards, high-variance gradients, and training collapse. The systematic comparison of GRPO variants in the multi-turn tool-use setting (Section 4.1) provides practical guidance that is uncommon in the RL-for-vision literature and should be valuable to practitioners working on agentic RL.
+
+## Suggestions
+- **Correct the overclaims in Contribution 1 and Section 5.2** to accurately scope the results: strong on ScreenSpot-Pro, improved over backbone on UI-Vision and OSWorld-G, but not outperforming all 7B baselines.
+- **Report inference cost metrics**: average tool invocations per query, per-example latency, and accuracy vs. number of allowed tool calls.
+- **Acknowledge the 72B teacher model cost** alongside the 18.5K sample count; report total compute budget.
+- **Analyze the Stage 1 SFT drop**: explain the mechanism behind the 39.3% → 17.8% accuracy decrease.
+- **Add a single-pass RL ablation**: train with the same RL objective but without iterative tools to disentangle the two contributions.
+
+## Score and Decision
+
+**Calibration Anchors (all rounds):**
+
+| Paper | Path | Avg Score | Round | Comparison |
+|---|---|---|---|---|
+| UGround (Navigating Digital World) | kxnoqaisCT | 7.75 | R1 | Much stronger: massive dataset, 20% improvements, comprehensive evaluation, no overclaiming. GUI-Spotlight is clearly below. |
+| Grounding MLLM in GUI World | M9iky9Ruhx | 6.00 | R1, R2 | Comparable scope; GUI-Spotlight has more novel training but overclaims and lacks inference cost. Slightly below this paper. |
+| Reinforced UI Instruction Grounding | nNyjIMKGCH | 5.75 | R1, R2 | Both use RL for UI grounding. GUI-Spotlight has more novel multi-turn approach but more egregious overclaiming. Comparable. |
+| SpiritSight Agent | jY2ow7jRdZ | 5.25 | R1, R2 | GUI-Spotlight has better novelty, ablation design, and negative results. Above this paper. |
+| GUI-World | QarKTT5brZ | 6.25 | R1, R2 | Dataset contribution accepted with scores 5,6,8,6. Different contribution type; GUI-Spotlight's methodological contribution is narrower due to overclaiming. |
+| AutoGUI | wl4c9jvcyY | 5.00 | R1 | Rejected with mixed reviews (6,8,3,3). GUI-Spotlight has more novel method. Above this paper. |
+| UI-Pro | 5wmAfwDBoi | 4.25 | R1 | Rejected for lacking innovation. GUI-Spotlight has more genuine novelty. Above this paper. |
+| LLaVA-Plus | IB1HqbA2Pn | 3.25 | R1 | Tool-use multimodal agent rejected with significant concerns. GUI-Spotlight is clearly above. |
+| StepTool | PNHjoWcQje | 5.50 | R2 | Step-grained RL for tool learning, rejected (6,6,5,5). Very similar paradigm. GUI-Spotlight has stronger ScreenSpot-Pro results but worse overclaiming. Comparable. |
+| MetaTool | 6AUzsrsNUx | 5.00 | R2 | Tool learning methodology, rejected (3,5,6,6). GUI-Spotlight has more targeted contribution. |
+| MultiReAct | kHTHf1XrFt | 4.75 | R2 | Multimodal tool-augmented reasoning, rejected (3,3,5,8). GUI-Spotlight is above due to more consistent results. |
+| Aligning LMMs with RLHF | B6t5wy6g5a | 5.00 | R2 | RLHF for multimodal alignment, rejected. Different focus but similar RL methodology caliber. |
+
+**Round 1 bracket:** 5.0–6.0
+**Round 2 narrowing:** GUI-Spotlight sits between SpiritSight (5.25, rejected) and Reinforced UI Grounding (5.75, rejected) / StepTool (5.50, rejected). It has genuine novelty that places it above the lower-scored rejections, but the factually incorrect overclaims (Section 5.2 directly contradicted by Table 4), missing inference cost analysis, and benchmark-specific improvements prevent it from reaching the 6.0 acceptance threshold.
+
+The paper contributes a sound idea (iterative tool-augmented grounding) and a useful RL stabilization technique, both well-demonstrated on ScreenSpot-Pro. However, the factually incorrect claim in Section 5.2 ("outperforming other 7B models" when UI-Venus-Ground-7B outperforms it by 3.1 points) undermines trust in the paper's claims. The complete absence of inference cost analysis is a significant gap for an iterative method. The contribution is real but narrower than framed — a data-efficient approach that achieves competitive results on one benchmark with unquantified overhead.
+
+**Final score: 5.0** — Between borderline reject and borderline accept. The technical ideas are solid and the ScreenSpot-Pro data efficiency is genuine, but the overclaiming, missing inference cost, and inconsistent cross-benchmark results tip toward borderline reject.
+
+MY FINAL SCORE: <score>5.0</score>
+MY FINAL DECISION: <decision>Reject</decision>

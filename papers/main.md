@@ -2,579 +2,352 @@
 
 {0}------------------------------------------------
 
-# --- Positional Encodings Anchor Spatial Structure in Vision Transformers: A Geometric Perspective on Robustness ---
+# ZS-VCOS: Zero-Shot Video Camouflaged Object Segmentation By Optical Flow and Open Vocabulary Object Detection
 
-Anonymous Author(s)
+Wenqi Marshall Guo<sup>1,2</sup> Mohamed Shehata<sup>1</sup> Shan Du<sup>1,\*</sup>
 
-Affiliation
+<sup>1</sup>Department of CMPS, University of British Columbia, Canada
 
-Address
+<sup>2</sup>Group of Methane Emission Observation & Warning (MEOW), Weathon Software, Canada
 
-email
+wg25r@student.ubc.ca, mohamed.sami.shehata@ubc.ca, shan.du@ubc.ca \*Corresponding Author
 
 ## Abstract
 
-1 Positional embeddings (PEs) in Vision Transformers (ViTs) are known to impact  
-2 performance and robustness, but their role in shaping internal spatial representations  
-3 is not well understood. In this work, we study how different forms of PEs influence  
-4 the representational geometry of ViTs and how these changes relate to robustness  
-5 under content-disrupting distribution shifts. We introduce a metric, the Spatial  
-6 Similarity Distance Correlation (SSDC), to quantify spatial structure in token  
-7 representations. Using this metric, we show that ViTs trained without PEs still  
-8 develop non-trivial spatial structure, but this structure is driven by visual content  
-9 and collapses under token permutation. In contrast, we find that all PEs considered  
-10 (learned absolute, sinusoidal, and rotary) are associated with a consistent shift  
-11 toward an index-anchored spatial organization. Representations in these models  
-12 remain stable under perturbations that disrupt content, and exhibit substantially  
-13 improved robustness to such distributional shifts. We further show that while  
-14 different PEs produce distinct depth-wise trajectories of spatial structure, their  
-15 robustness properties are largely similar (with secondary variation across encoding  
-16 schemes), suggesting that robustness appears to depend on the presence of a  
-17 stable positional reference frame more than it depends on the specific encoding  
-18 mechanism. These results offer a geometric account of how positional encodings  
-19 shape internal representations, with implications for the principled design of future  
-20 encoding schemes.
+*Camouflaged object segmentation presents unique challenges compared to traditional segmentation tasks, primarily due to the high similarity in patterns and colors between camouflaged objects and their backgrounds. Effective solutions to this problem have significant implications in critical areas such as pest control, defect detection, and lesion segmentation in medical imaging. Prior research has predominantly emphasized supervised or unsupervised pre-training methods, leaving zero-shot approaches significantly underdeveloped. Existing zero-shot techniques commonly utilize the Segment Anything Model (SAM) in automatic mode or rely on vision-language models to generate cues for segmentation; however, their performances remain unsatisfactory, due to the similarity of the camouflaged object and the background. This work studies how to avoid training by integrating large pre-trained models like SAM-2 and Owl-v2 with temporal information into a modular pipeline. Evaluated on the MoCA-Mask dataset, our approach achieves outstanding performance improvements, significantly outperforming existing zero-shot methods by raising the  $F$ -measure ( $F_{\beta}^{w}$ ) from 0.315 to 0.628. Our approach also surpasses supervised methods, increasing the  $F$ -measure from 0.476 to 0.628. Additionally, evaluation on the MoCA-Filter dataset demonstrates an increase in the success rate from 0.628 to 0.697 when compared with FlowSAM, a supervised transfer method. A thorough ablation study further validates the individual contributions of each component. Besides our main contributions, we also highlight inconsistencies in previous work regarding metrics and settings.*<sup>1</sup>
 
-## 21 1 Introduction
+## 1. Introduction
 
-22 Vision Transformers (ViTs) model images as sequences of patch tokens processed by self-attention  
-23 [Dosovitskiy et al., 2021]. Unlike convolutional architectures, they lack built-in inductive biases  
-24 toward locality and translation equivariance, and instead rely on positional embeddings (PEs) to inject  
-25 spatial information, enabling the model to distinguish tokens originating from different locations.
+Camouflaged object detection and segmentation (COD and COS) is an image detection/segmentation task for objects
 
-26 While PEs are designed to provide positional information, this design does not determine how that  
-27 signal is integrated into internal representations. In particular, it remains unclear whether positional  
-28 information organizes token representations into similarity structures anchored to absolute indices, or  
-29 whether spatial structure continues to arise primarily from visual content.
+that are concealed in the background (See Figure 2 for example). It poses significant challenges beyond traditional object detection and segmentation tasks. This increased difficulty primarily stems from the inherent nature of camouflaged objects, which are visually similar to their backgrounds in terms of patterns, colors, and textures [7, 45], effectively blending into their surroundings and complicating accurate identification and delineation. Despite these challenges, effective solutions for COD and COS have considerable real-world significance, especially in critical fields such as defect detection [17], pest control [35], and medical imaging for lesion segmentation [11].
 
-30 Prior work shows that ViTs retain substantial performance even when positional information is  
-31 removed or degraded [Dosovitskiy et al., 2021, Chu et al., 2023], suggesting that spatial relationships  
-32 can partially emerge from patch content alone. This raises a central question: if spatial structure can  
-33 arise without explicit positional guidance, what functional role do positional embeddings play?
+Extending these image-based tasks into the temporal domain, video camouflage object detection and segmentation (VCOD and VCOS) have emerged as specialized subsets derived from video object detection (VOD) and video object segmentation (VOS), respectively. By leveraging motion cues, such methods can potentially overcome some limitations inherent to static images. Optical flow, for instance, has proven particularly useful by measuring pixel-level movements, thus enabling differentiation of moving camouflaged entities from their backgrounds.
+
+However, camouflage-related tasks in both static and dynamic contexts remain relatively underdeveloped compared to traditional detection and segmentation methods. Most prior work in this area has focused on supervised learning, relying on complex architectures and labelled data. Yet, even these supervised models often struggle with camouflaged objects due to the lack of distinct features. On the other hand, zero-shot methods, which avoid training by using large pre-trained models like SAM and vision-language models, are severely less explored and currently perform worse than supervised methods.
+
+To address this gap, we propose a method that integrates optical flow, a vision-language model, and SAM in a modular pipeline. Each stage of the pipeline uses the output of the previous one to refine its segmentation cues. Rather than relying on any training or fine-tuning, our approach operates in a zero-shot setting and achieves strong perfor-
+
+<sup>1</sup>Code can be found on GitHub after publication.
 
 {1}------------------------------------------------
 
-34 Existing studies have largely addressed this question through downstream performance comparisons  
-35 or architectural variations. While informative, these approaches provide limited insight into how  
-36 positional information shapes internal representations. In particular, it remains unclear whether  
-37 different positional encoding schemes (learned absolute, sinusoidal, or rotary) induce distinct spatial  
-38 reasoning strategies, or whether their effects on robustness arise from a shared mechanism.
+mance. On the MoCA-Mask dataset, our method improves the weighted F-measure ( $F_{\beta}^w$ ) from 0.315 (baseline zero-shot methods) to 0.628. It also outperforms multiple supervised methods, whose best  $F_{\beta}^w$  reaches 0.476. Furthermore, on the MoCA-Filtered dataset, our method raises the detection success rate from 0.628 to 0.697. These gains highlight the effectiveness of combining motion-based cues with strong foundation models.
 
-39 In this work, we adopt a geometric perspective. We analyze the evolution of token representations  
-40 across the transformer stack using tools from representational geometry [Raghu et al., 2021], introduc-  
-41 ing the Spatial Similarity Distance Correlation (SSDC) as a probe of spatial structure. Critically, we  
-42 use SSDC in conjunction with a random permutation intervention at inference to distinguish whether  
-43 spatial organization is anchored to token indices or driven by patch content. We compare models  
-44 trained with learned absolute positional embeddings (APE), sinusoidal encodings (SPE), rotary  
-45 embeddings (RoPE), and no positional embeddings, and evaluate their robustness to distributional  
-46 shifts.
+In summary, our technical contributions are (1) a zero-shot framework for camouflaged object segmentation in video that surpasses supervised baselines, (2) extensive experimentation on different components and prompting strategies of our methods, and (3) insights demonstrating that properly designed zero-shot pipelines can not only compete with but in some cases outperform traditional supervised approaches.
 
-47 Our central finding is that the specific encoding mechanism matters less than the presence of a  
-48 consistent positional signal. We show that:
+Additionally, we noticed that previous works often failed to systematically compare their results against other methods evaluated under the same settings (test-time supervised, also known as tracking, and test-time unsupervised). Furthermore, metric calculation in these benchmarks frequently suffered from inconsistent aggregation methods and inadequate handling of special cases. In this work, we highlight these issues, re-evaluate the state-of-the-art methods using a consistent and corrected metric, and ensure a direct and fair comparison between our method and the current state-of-the-art. We urge the research community to adopt standardized evaluation practices to enable clearer and more meaningful comparisons in future studies.
 
-- 49 • **Positional encodings are associated with index-based spatial organization:** All PE types  
-50 shift ViTs away from purely content-driven spatial structure toward representations that  
-51 remain partially anchored to token indices under permutation.
-- 52 • **This shift, not the encoding form, is associated with robustness:** Despite differing in  
-53 how spatial structure develops across depth, APE, sinusoidal, and RoPE models exhibit  
-54 broadly comparable robustness to content-disrupting distributional shifts (despite consistent  
-55 but smaller differences between encoding schemes), while models lacking index-based  
-56 organization are substantially more fragile.
-- 57 • **A stable positional reference frame is strongly implicated in robustness:** Using Random  
-58 Permutation Training (RPT), which preserves PEs but destroys index-to-location consistency,  
-59 we find that robustness is greatly reduced when a consistent positional frame cannot be  
-60 learned.
+## 2. Related Work
 
-61 Together, these results provide a unified, geometric account of how positional encodings shape internal  
-62 representations and why they remain critical for robust visual recognition, though we emphasize that  
-63 the evidence is intervention-based rather than strictly causal.
+### 2.1. Optical Flow
 
-## 64 2 Related Work
+Optical flow is a technique used to measure pixel movement in videos. It has been used in video processing or recognition for a long time; one of the most significant works is the two-stream network published in 2014 [36]. There are two types of optical flow: sparse and dense optical flow. Sparse optical flow gives a movement vector for points of interest in the image, whereas dense optical flow estimates movement for all pixels in the image. One of the most famous sparse optical flows is the Lucas-Kanade method [24], which uses the assumption that local pixels have similar motion. It can be used in camera motion estimation for panoramic image generation or motion compensation. Dense optical methods, like RAFT [39] and GMFlow [48], can provide movement information for every pixel in the frame, and it has demonstrated promising performance in camouflaged object detection based on movement differences between foreground and background, although their methods rely on training and the performance can be further improved.
 
-###### 65 Positional Information in Vision Transformers
+### 2.2. Moving Object Segmentation
 
-66 The standard Vision Transformer (ViT) breaks the permutation invariance of self-attention by adding  
-67 learnable absolute positional embeddings (PEs) to patch tokens [Dosovitskiy et al., 2021], establishing  
-68 the dominant paradigm for spatial encoding. However, ViTs retain substantial performance when  
-69 positional information is degraded or removed [Dosovitskiy et al., 2021, Chu et al., 2023], suggesting  
-70 that spatial structure can partially emerge from patch content alone.
+Moving object segmentation is a task aiming to segment moving objects within a video sequence. These objects could be general entities, as in DAVIS [33] and YouTube-VOS [49], or camouflaged ones, as presented in MoCA-Mask [7] and CAD [2]. The segmentation task can be performed in two scenarios: test-time semi-supervised, where one annotated frame is provided and the model propagates this annotation to subsequent frames, and test-time unsupervised, where no annotation is provided during testing. These two methods have distinct difficulty levels and should be compared separately.
 
-71 Similar observations have been reported beyond vision. Recent work on decoder-only transformers  
-72 shows that models trained without PEs can recover positional information implicitly and tend to  
-73 rely on relative positions in practice [Kazemnejad et al., 2023]. Earlier findings in convolutional  
-74 networks further demonstrate that substantial positional information can be learned implicitly from  
-75 architectural biases such as zero-padding [Islam\* et al., 2020]. Together, these results suggest that  
-76 explicit positional signals are not strictly required for structured spatial information to emerge.
+Optical flow has been extensively used in video object segmentation, primarily in two ways: propagating segmentation masks and differentiating objects from background based on different motions.
 
-77 This creates a central puzzle: if spatial structure can arise without explicit positional guidance, what  
-78 functional role do PEs play? Prior work has primarily addressed this question through architectural  
-79 variants [d’Ascoli et al., 2022, Liu et al., 2021, Heo et al., 2024] or performance comparisons [Doso-  
-80 vitskiy et al., 2021, Chu et al., 2023], leaving their mechanistic impact on internal representations  
-81 largely unexplored.
+#### 2.2.1. Methods Leveraging Optical Flow as Motion Cues
 
-###### 82 Representational Analysis of Transformers
+Brox *et al.* [3] utilized long-term optical flow trajectories combined with clustering for segmenting videos. Ochs *et al.* [30] applied flow-based motion cues to resolve ambiguities in color-based segmentation. Xiao *et al.* [46] employed optical flow cues to reinforce target frame representations. Yang *et al.* [52] used both optical flow and RGB input to assist video object segmentation. FlowI-SAM and FlowP-SAM [47] utilized optical flow either exclusively as input (FlowI-SAM) or as a prompt guiding segmentation of RGB frames (FlowP-SAM). Both FlowI-SAM and FlowP-SAM handled standard and camouflaged objects effectively.
 
-83 A separate line of work studies the geometry and dynamics of transformer representations. Early  
-84 analyses compare ViT and CNN representations [Raghu et al., 2021], revealing differences in spatial
+#### 2.2.2. Methods Employing Optical Flow for Mask Propagation
+
+Tsai *et al.* [40] considered segmentation and optical flow simultaneously, using optical flow to propagate masks and segmentation masks to refine flow boundaries. TR-OVIS [50] employed optical flow to propagate key-frame information, thus enhancing inference speed for open-vocabulary video instance segmentation.
+
+#### 2.2.3. Joint Modeling of Segmentation and Flow without Using Flow as Input
+
+Cheng *et al.* [5] (SegFlow) treated segmentation and optical flow estimation as similar tasks and jointly trained a network to take in video frames and output segmentation masks and optical flow.
+
+#### 2.2.4. Alternative Motion Methods without Optical Flow
+
+LangGas [14] applied background subtraction to isolate moving regions, followed by an open vocabulary object detector and SAM2 [34] to segment gas leaks in synthetic datasets. Zero-shot Background Subtraction (ZBS) [1] detected the displacement of objects across frames using object detection techniques to classify their motion status, thus identifying moving objects without optical flow.
 
 {2}------------------------------------------------
 
-85 organization. Subsequent work examines how attention transforms representations [Kobayashi  
-86 et al., 2021], how representational rank evolves with depth [Dong et al., 2021], and how token  
-87 representations tend to homogenize in deeper layers [Bhojanapalli et al., 2021]. The residual stream  
-88 framework provides a useful lens for analyzing these dynamics [Elhage et al., 2021]. However,  
-89 these approaches do not isolate the causal role of positional embeddings, nor do they connect  
-90 representational structure to robustness.
+![Figure 1: Overview of Our Method. This flowchart illustrates the process of camouflage object detection and segmentation. It starts with two input frames, 'Frame 1' and 'Frame 1+1'. 'Frame 1' is processed by 'Flow Extraction' to produce 'Momentum Update of Optical Flow'. This is then combined with 'Frame 1+1' in an 'Overlay' step. The 'Overlay' result goes to 'Open Vocabulary Object Detection', which produces a heatmap. This heatmap is then processed by 'SAM Segmentation and Tracking' to produce the final 'Output' segmentation mask. A 'Bidirectional Mask Propagation' step connects the 'Output' back to the 'Open Vocabulary Object Detection' heatmap.](b230b8f21d8e82d55c0d311c8c32ef73_img.jpg)
 
-###### 91 Robustness of Visual Models
+Figure 1: Overview of Our Method. This flowchart illustrates the process of camouflage object detection and segmentation. It starts with two input frames, 'Frame 1' and 'Frame 1+1'. 'Frame 1' is processed by 'Flow Extraction' to produce 'Momentum Update of Optical Flow'. This is then combined with 'Frame 1+1' in an 'Overlay' step. The 'Overlay' result goes to 'Open Vocabulary Object Detection', which produces a heatmap. This heatmap is then processed by 'SAM Segmentation and Tracking' to produce the final 'Output' segmentation mask. A 'Bidirectional Mask Propagation' step connects the 'Output' back to the 'Open Vocabulary Object Detection' heatmap.
 
-92 Vision Transformers exhibit distinct robustness profiles compared to convolutional networks. Prior  
-93 work shows that transformers are generally more robust to certain spatial perturbations but can  
-94 be more sensitive to texture-based changes [Bhojanapalli et al., 2021]. Additional studies report  
-95 favorable out-of-distribution generalization properties for ViTs [Paul and Chen, 2022], connecting to  
-96 broader findings on shape versus texture bias in visual recognition [Geirhos et al., 2019]. While the  
-97 impact of positional embeddings on robustness has been observed (particularly that models trained  
-98 with PEs exhibit better robustness profiles than models trained without them) [Mao et al., 2021], the  
-99 relationship between a model’s spatial organization strategy (whether anchored to absolute position  
-100 or inferred from content) and its robustness to distributional shifts remains poorly understood.
+Figure 1. Overview of Our Method.
 
-###### 101 Our Contribution
+![Figure 2: Visual Comparison Of Our Methods and Previous Supervised Methods. This figure shows a grid of 16 columns and 5 rows. The columns represent different video sequences: 'shoe_basket_10', 'feeding_3', 'dick_head_3', 'lion_dog_0', 'ant5_fox', 'ants_corned_out_0', 'copperhead_snake', 'flower_cup_outdoor_0', 'flower_cup_outdoor_2', 'fox', 'ant5_fox_3', 'flower_cup_outdoor_2', 'Mask_out_1', 'copperhead_snake_0', 'moth', and 'morgue'. The rows represent different methods: 'Image' (original frames), 'CF' (Canny Filter), 'U-Net', 'ZoomNet', and 'Ours' (the proposed method). The 'Ours' row shows significantly better segmentation results compared to the other methods, especially in complex and noisy backgrounds.](7e2f2d03a5dda38b038fd4884629a2b4_img.jpg)
 
-102 We connect these lines of work by showing that positional embeddings are associated with a shift  
-103 toward index-based spatial organization, and that this shift (rather than the specific encoding mech-  
-104 anism) appears to be a dominant correlate of robustness. Using SSDC and controlled permutation  
-105 interventions (RPT and RPI), we provide a geometric account of how positional information shapes  
-106 internal representations and why it improves robustness.
+Figure 2: Visual Comparison Of Our Methods and Previous Supervised Methods. This figure shows a grid of 16 columns and 5 rows. The columns represent different video sequences: 'shoe\_basket\_10', 'feeding\_3', 'dick\_head\_3', 'lion\_dog\_0', 'ant5\_fox', 'ants\_corned\_out\_0', 'copperhead\_snake', 'flower\_cup\_outdoor\_0', 'flower\_cup\_outdoor\_2', 'fox', 'ant5\_fox\_3', 'flower\_cup\_outdoor\_2', 'Mask\_out\_1', 'copperhead\_snake\_0', 'moth', and 'morgue'. The rows represent different methods: 'Image' (original frames), 'CF' (Canny Filter), 'U-Net', 'ZoomNet', and 'Ours' (the proposed method). The 'Ours' row shows significantly better segmentation results compared to the other methods, especially in complex and noisy backgrounds.
 
-###### 107 3 Preliminaries
+Figure 2. Visual Comparison Of Our Methods and Previous Supervised Methods.
 
-###### 108 3.1 Vision Transformer Architecture and Positional Encodings
+Wang *et al.* [41], Wang *et al.* [42], and Li *et al.* [21] performed segmentation directly from raw RGB frames with text as queries, without incorporating explicit motion signals or optical flow.
 
-109 All models are Vision Transformers trained from scratch on ImageNet-100 (a subset of Imagenet-  
-110 1K) [Deng et al., 2009], with approximately 22M parameters (details in Appendix A). Images are  
-111 partitioned into fixed-size patches, projected into token embeddings, and processed by a stack of  
-112 self-attention and feedforward layers.
+### 2.3. Moving Camera Background Subtraction
 
-113 Since self-attention is permutation invariant, positional encodings are required to inject spatial  
-114 information. We consider three commonly used PE schemes, all adapted to 2D grids:
+Moving camera background subtraction (MCBS) is very similar to the VOS task, where it extracts the moving foreground from the background by using a background model. Unlike fixed camera background subtraction, where pixels from the same object/background are mostly aligned throughout the video, MCBS is challenging as the background is moving, and the algorithm cannot simply compare the pixel value at the same absolute location. Kurnianggoro *et al.* [18] used motion compensation to solve this problem, while DeepMCBM [8] and PanoramicPCA [29] built a panoramic background model.
 
-115 **Learned Absolute Positional Embeddings (APE):** learnable vectors added to token embeddings  
-116 before the first transformer block, establishing a fixed index-to-location mapping.
+### 2.4. Camouflage Object Detection and Segmentation
 
-117 **Sinusoidal Positional Embeddings (SPE):** fixed, deterministic encodings constructed from sinu-  
-118 soidal functions applied independently along spatial axes and added to token embeddings.
+Unlike regular object detection and segmentation, camouflage object tasks are significantly more challenging because the foreground usually seamlessly blends into the
 
-119 **Rotary Positional Embeddings (RoPE):** position-dependent rotations applied to query and key  
-120 vectors within each attention layer, introducing positional information multiplicatively.
+background. There are two tasks in camouflage object detection: image-based camouflage object detection (usually referred to as COD) and video-based camouflage object detection (VCOD). They could also be extended to segmentation, namely COS and VCOS. VCOD/S allows the model to use motion cues to detect the foreground but also brings in the challenges of temporal changes [45].
 
-121 These approaches differ in parameterization (learned vs. fixed) and integration (additive vs. multi-  
-122 plicative), enabling comparison of how different positional signals shape internal representations.
+#### 2.4.1. Datasets
 
-###### 123 3.2 Index-Based and Content-Based Spatial Organization
+Since this paper focuses on VCOS, we mainly introduce video-based datasets here. For image-based datasets like COD10K [10], N4K [25], and CAMO [20], readers can refer to the review article [45].
 
-124 We distinguish between two qualitatively distinct modes of spatial organization.
+There are two major datasets and 3 variants in video camouflage object detection: Camouflaged Animal Dataset (CAD) [2] and Moving Camouflaged Animal Dataset (MoCA) [19]. However, MoCA is an object detection dataset but not a segmentation dataset. It contains some non-camouflaged animals or animals that do not have locomotion. Thus, two variances of MoCA were proposed. MoCA-filtered [51] and MoCA-Mask [7].
 
-125 **Index-based spatial organization** refers to representations whose similarity structure depends  
-126 systematically on token position. Tokens that are spatially proximate tend to have more similar  
-127 representations by virtue of their indices, and this structure persists under disruptions to patch content.  
-128 This definition is behavioral and does not assume explicit coordinate representations.
-
-129 **Content-based spatial organization** refers to representations in which similarity is driven primarily  
-130 by patch content. Spatial structure arises indirectly from natural image statistics and degrades under  
-131 transformations that disrupt content or token ordering.
-
-132 In practice, models may exhibit both behaviors; the key distinction is which signal dominates.
+MoCA-filtered mainly removed non-locomotive videos from the dataset, with additional processing such as cropping away logos and borders, resampling frames, and incor-
 
 {3}------------------------------------------------
 
-## 4 Methods
+| Method | Pub. | Setting | $S_a \uparrow$ | $F_{\beta}^w \uparrow$ | MAE↓ | $E_d \uparrow$ | mDice↑ | mIoU↑ |
+|-|-|-|-|-|-|-|-|-|
+| SLT-Net [7] | CVPR 22 | SV Tr | 0.656 | 0.357 | 0.021 | 0.785 | 0.397 | 0.310 |
+| ZoomNeXt [32] | TPAMI 24 | SV Tr | <b>0.734</b> | <b>0.476</b> | 0.010 | 0.736 | <b>0.497</b> | <b>0.422</b> |
+| TSP-SAM(M+B) [15] | CVPR 24 | SV Tr | 0.689 | 0.444 | <b>0.008</b> | <b>0.808</b> | 0.458 | 0.388 |
+| Gao <i>et al.</i> [12] | arXiv 25 | SV Tr | 0.706 | 0.455 | 0.011 | - | 0.495 | 0.404 |
+| SAM2 Tracking [37] | arXiv 24 | SV Te | 0.804 | 0.691 | 0.004 | - | - | - |
+| SAM-PM [27] | CVPRW 24 | SV Tr+Te | 0.728 | 0.567 | 0.009 | 0.813 | 0.594 | 0.502 |
+| Finetuned SAM2-T + Prompts [53] | arXiv 24 | SV Tr+Te | <b>0.832</b> | <b>0.726</b> | <b>0.005</b> | <b>0.908</b> | <b>0.756</b> | <b>0.652</b> |
+| CVP [38] | ACM MM 24 | ZS | 0.569 | 0.196 | 0.031 | - | - | - |
+| SAM-2-S Auto [53] | arXiv 24 | ZS | 0.497 | 0.201 | 0.141 | 0.608 | 0.202 | 0.174 |
+| LLaVA + SAM2-L [53] | arXiv 24 | ZS | 0.624 | 0.315 | 0.046 | 0.688 | 0.334 | 0.291 |
+| Shikra + SAM2-L [53] | arXiv 24 | ZS | 0.502 | 0.146 | 0.107 | 0.590 | 0.157 | 0.124 |
+| Ours | - | ZS | <b>0.776</b> | <b>0.628</b> | <b>0.008</b> | <b>0.878</b> | <b>0.648</b> | <b>0.550</b> |
 
-### 4.1 Residual Stream Geometry
+Table 1. **Performance comparison on the MoCA-Mask dataset [7].** “SV Tr” denotes supervised training. “SV Te” denotes supervised testing, where one frame from the video was provided to the model along with prompts. “ZS” indicates zero-shot learning. The grouping of methods is based on settings. Metrics shown in gray represent results from prior work that may contain methodological inconsistencies. These are included for transparency and completeness but should be interpreted with caution. Our method significantly outperforms all zero-shot and even supervisely trained and unsupervisely tested methods.
 
-At selected layers, we extract the residual stream as a matrix  $R \in \mathbb{R}^{T \times C}$ , where  $T$  is the number of tokens and  $C$  the embedding dimension. We compute pairwise cosine similarities between unit-normalized token representations to form a symmetric similarity matrix, averaged across the batch dimension.
+porating the bounding boxes. Since it still lacks segmentation masks, papers using this dataset ([51] [47]) used the detection success rate based on the IoU threshold to evaluate the results. MoCA-Mask improved MoCA by removing scenes with obvious animals and converting bounding boxes into masks. In addition to ground truth masks provided every 5 frames, they also used bidirectional optical flow to generate pseudo masks for unlabelled frames.
 
-### 4.2 Spatial Similarity Distance Correlation
+#### 2.4.2. Algorithms
 
-Let  $S \in \mathbb{R}^{T \times T}$  denote the token similarity matrix, and let  $p_i \in \mathbb{N}^2$  denote the spatial coordinates of token  $i$ . Define the spatial distance matrix  $D$  by  $D_{ij} = \|p_i - p_j\|_1$ . We define SSDC as the Spearman rank correlation between similarity and negative spatial distance over all token pairs:
+Existing methods can be classified into supervised, unsupervised, and zero-shot categories based on training settings and into test-time semi-supervised or test-time unsupervised categories based on inference settings.
 
-$$\text{SSDC} = \rho_{\text{Spearman}}(\{S_{ij}\}_{i < j}, \{-D_{ij}\}_{i < j}).$$
+SLT-Net [7] is a supervisely trained and unsupervisely tested model. It argued that when using optical flow and homography, the error might be accumulated from both the motion estimation and segmentation. Thus, they proposed to use a unified framework for both motion estimation and segmentation. Additionally, they used a long-term spatiotemporal transformer to refine short-term predictions, although this long-term module provides marginal improvement. ZoomNeXt [32] is an improved version of ZoomNet [31], mainly adapted from image-based COS to video-based COS and improved performance by introducing more structural extensions. ZoomNeXt is trained on both image COS datasets and video COS datasets, including MoCA-Mask [7]. ZoomNet and ZoomNeXt both use zooming to capture features at different scales. Similar to SLT-Net, they are both supervisely trained and unsupervisely tested methods.
 
-Higher SSDC values indicate that spatially proximate tokens tend to have more similar representations. We use Spearman rank correlation to remain agnostic to the precise functional form relating spatial distance and representational similarity.
+Previous studies have sometimes failed to clearly differentiate between test-time semi-supervised and unsupervised tasks, despite their differing levels of difficulty. For
 
-Importantly, SSDC should be interpreted as a coarse proxy for spatial organization rather than a direct measurement of a specific mechanism. Absolute values may reflect multiple factors (e.g., data statistics, architectural biases), and therefore SSDC is primarily used comparatively (to track changes across depth and to measure sensitivity to controlled interventions).
+example, SAM-PM [27], requiring supervision during both training and inference, reported state-of-the-art results compared with SLT-Net [7]. However, SLT-Net operates under supervised training but unsupervised testing conditions. This fundamental difference in evaluation criteria renders direct comparisons between these two methods somewhat inequitable. Although the authors of SAM-PM described their method as semi-supervised (which we refer to in this paper as test-time supervised), they did not clearly acknowledge this distinction when making comparisons or drawing conclusions.
 
-### 4.3 Random Permutation at Inference (RPI)
+Flow-SAM [47] and Motion Grouping [51], though trained initially for video object segmentation tasks, demonstrated robust performance on VCOS tasks. Specifically, Flow-SAM utilizes supervised training, while Motion Grouping employs self-supervised training. Neither method requires supervision during inference.
 
-To distinguish index-based from content-based organization, we randomly permute token order at inference while keeping positional indices fixed. This breaks the correspondence between token order and spatial location. Under this setup, spatial structure driven purely by patch content is expected to be disrupted, as spatially adjacent tokens no longer correspond to neighboring image patches. In contrast, if a model has learned representations that depend systematically on token indices via positional signals, some spatial structure may persist or be partially recoverable.
-
-As a result, SSDC under RPI should be interpreted as an indicator of the extent to which spatial organization depends on token indices, rather than as a definitive separation between index-based and content-based mechanisms.
-
-### 4.4 Random Permutation during Training (RPT)
-
-Random Permutation Training (RPT) applies a fresh random permutation to the token sequence at every forward pass during training. At each batch, patch tokens are shuffled while positional embeddings remain fixed to their original indices, breaking the consistent mapping between token index and spatial location. This prevents the model from learning a stable index-based spatial organization despite the presence of positional signals.
-
-### 4.5 Positional Embedding Magnitude Scaling
-
-We scale positional embeddings at inference by a factor  $\alpha$ , replacing  $\mathbf{e}_i$  with  $\alpha \mathbf{e}_i$ . This provides a continuous intervention on positional signal strength without retraining. We apply this to APE and sinusoidal models; an equivalent scaling for RoPE is not directly defined due to its multiplicative formulation.
-
-### 4.6 Fragility Score
-
-We quantify robustness using the Fragility Score (FS):
-
-$$\text{FS} = 1 - \frac{A_{\text{shift}}}{A_{\text{normal}}},$$
-
-where  $A_{\text{normal}}$  and  $A_{\text{shift}}$  denote accuracy on clean and shifted data. Higher values indicate greater sensitivity to distributional shift.
+For zero-shot unsupervised testing neither training nor inference is supervised), Chain of Vision Perception (CVP) [38] represents an early effort employing vision-language models (VLMs) for COD/S tasks, with a primary focus on images rather than videos. CVP prompts a vision-language model to identify the location of camouflaged objects. Subsequently, these locations are refined and given to a segmentation model. Properly designed prompting can further enhance the model’s performance. CVP achieved higher performance than several supervised methods on datasets such as CAMO [20], COD10K [10], and NC4K [25]. However, its results on the MoCA-Mask were suboptimal, with a weighted F-score ( $F_{\beta}^w$ ) of 0.196. Zhou *et al.* [53] improved upon this by employing LLaVA [22] or Shikra [4] as the vision-language model and utilizing SAM-2 for segmentation. A similar approach is evident in Grounded SAM
 
 {4}------------------------------------------------
 
-![Figure 1: Evolution of SSDC across depth. (a) SSDC grows weakly and remains at a relatively high value across layers for untrained ablated models. (b) SSDC evolution for untrained ablated, trained ablated, and intact models. The trained ablated model shows a sharp increase in early layers, while the untrained ablated model shows a gradual increase. The intact model shows a sharp increase in early layers followed by a slight decrease and then a gradual increase.](de6e8b740c69dac308cce9edfec3eff4_img.jpg)
+[23], which integrates Grounding DINO and SAM for open-vocabulary segmentation of regular objects.
 
-Figure 1 consists of two line plots. Plot (a) shows the SSDC (Spatial Similarity Coefficient) on the y-axis (ranging from 0.50 to 0.80) against the Layer number on the x-axis (ranging from 0 to 10). A single blue line represents the 'Untrained Ablated' model, showing a gradual increase in SSDC from approximately 0.58 at layer 0 to about 0.66 at layer 10. Plot (b) shows the SSDC on the y-axis (ranging from 0.40 to 0.70) against the Layer number on the x-axis (ranging from 0 to 10). Three lines are shown: 'Untrained Ablated' (blue), 'Ablated' (orange), and 'Intact' (green). The 'Untrained Ablated' line is the same as in (a). The 'Ablated' line starts at approximately 0.50, rises sharply to about 0.65 by layer 2, and then gradually increases to about 0.66 by layer 10. The 'Intact' line starts at approximately 0.50, rises sharply to about 0.68 by layer 2, and then gradually decreases to about 0.63 by layer 10. Shaded regions around the lines indicate variability across runs.
+While comparing test-time unsupervised methods with semi-supervised methods is inherently unfair, semi-supervised inference methods without prior training have demonstrated that SAM-2 can reasonably track camouflaged objects when provided with accurate prompts.
 
-Figure 1: Evolution of SSDC across depth. (a) SSDC grows weakly and remains at a relatively high value across layers for untrained ablated models. (b) SSDC evolution for untrained ablated, trained ablated, and intact models. The trained ablated model shows a sharp increase in early layers, while the untrained ablated model shows a gradual increase. The intact model shows a sharp increase in early layers followed by a slight decrease and then a gradual increase.
+Detailed performance comparisons of these methods can be found in Table 1.
 
-(a) Evolution of SSDC across depth on untrained ablated models
+## 3. Proposed Methods
 
-(b) Evolution of SSDC across depth on untrained ablated models, trained ablated models, and intact (trained with APE) models
+### 3.1. Motion Detection
 
-Figure 1: (a) SSDC grows weakly and remains at a relatively high value across layers, indicating static spatial correlations induced by architectural and data priors rather than learning. (b) While untrained ablated models exhibit relatively high but slowly varying SSDC consistent with static data and architectural priors, trained ablated models display a sharp increase in early layers, indicating the emergence of learned spatial structure despite the absence of explicit positional encoding.
+Our method builds upon LangGas [14]. Gas leakage shares many similarities with a camouflage object: they both have low contrast against the background, but they often have different relative motion with respect to the background. Previous studies, including LangGas [14] and VideoGasNet [43], have shown that background subtraction effectively captures subtle changes in the input. High-quality masks can then be extracted from the resulting foreground using vision-language models (VLMs) together with SAM2 [34] [14]. However, traditional BGS methods can only be used in fixed camera settings, and most camouflage object segmentation datasets and real-world applications do not feature a fixed camera; while a moving camera background subtraction method can sometimes work, it may fail under complex camera motion. In addition, if an object does not fully move away to expose the background behind it, a valid background model cannot be built.<sup>2</sup>
 
-## 175 5 Results
+To address such challenges, we turn to another commonly used motion detection method: optical flow. By tracking the movement of each pixel between two adjacent frames, optical flow can show different movement patterns in the image. Following Motion Grouping [51] and FlowSAM [47], we employ RAFT [39] to compute optical flow. However, we found that highly repetitive backgrounds or videos with margins can compromise RAFT optical flow, thereby diminishing its usefulness. Thus, we combine optical flow with background subtraction, applying the latter (BGS) when there is no camera motion and using optical flow otherwise. To detect camera motion, we use a simple Lucas-Kanade method [24] to track points in the video. The movement is used to estimate the affine transformation throughout the video and detect the furthest point the camera reached.
 
-###### 176 5.1 Architectural Priors Induce Static Spatial Correlations at Initialization
+For videos processed using optical flow, we compute an optical flow tensor  $F \in \mathbb{R}^{(t-1) \times h \times w \times 2}$ , where  $t$  is the total number of frames,  $h$  and  $w$  denote frame height and width, respectively, and the two channels represent horizontal and
 
-177 **Experimental Setup:** We evaluate SSDC across all layers of untrained ablated models on the  
- 178 Imagenet-100 dataset. Unless stated otherwise, all reported results are averaged over 4 random seeds.  
- 179 Shaded regions in figures indicate variability across runs ( $\pm 1$  standard deviation).
+vertical pixel displacements. The corresponding intensity map is obtained by calculating the magnitude of displacement vectors at each pixel location, and the intensity map is normalized to 0-255, as shown in Equation (1). We also experimented with maintaining a momentum-based moving average over the flow vector map to address cases where the object temporarily stops moving. The formulation is given in Equation (2). We also experimented with subtracting the mean displacement vector (averaged over the frame) from every pixel to reduce camera motion, inspired by the Two-Stream Network approach [36].
 
-180 **Results:** The untrained ablated model exhibits a substantial non-zero SSDC (approximately  
- 181 0.57–0.64) with only a weak, gradual increase across depth (Figure 1a). This behavior is highly  
- 182 consistent across runs and reflects static spatial correlations induced by architectural priors and the  
- 183 inherent structure of natural images, rather than learned spatial reasoning.
+$$I_{i,x,y} = \text{normalize}_{[0,255]}(\|F_{i,x,y}\|_2) \quad (1)$$
 
-184 Crucially, this baseline highlights that SSDC should not be interpreted as a standalone metric whose  
- 185 absolute magnitude reflects the presence or strength of learned spatial organization. Even in the  
- 186 absence of training, relatively high SSDC values emerge. Instead, the layer-wise dynamics of SSDC  
- 187 (in particular, the rate and pattern of change across depth) are the informative signal. In contrast to the  
- 188 shallow, nearly static progression observed here, trained models exhibit rapid and structured changes  
- 189 in SSDC (e.g., sharp increases in early layers), indicating the emergence of learned spatial structure.
+$$F_i = \begin{cases} F_i, & i = 1 \\ (1 - m) \cdot F_i + m \cdot F_{i-1}, & i > 1 \end{cases} \quad (2)$$
 
-190 This establishes a static baseline, allowing us to distinguish genuinely learned spatial organization  
- 191 from correlations that arise purely from architectural and data-driven effects.
+For videos analyzed using background subtraction, we followed [14]. First, we obtain a background model tensor  $B \in \mathbb{R}^{t \times h \times w \times 3}$  using MOG2 [54, 55]. Here, each frame in the background model matches the dimensions and RGB channels of the input frames. The intensity map in this scenario is computed by taking the absolute pixel-wise difference between the current frame  $C_i$  and the background frame  $B_t$ , and normalized to 0-255, as detailed in Equation (3).
 
-###### 192 5.2 Emergence of Spatial Structure Without Positional Encoding
+$$I_{i,x,y} = \text{normalize}_{[0,255]}(\|C_{i,x,y} - B_{i,x,y}\|_1) \quad (3)$$
 
-193 **Experimental Setup:** To investigate whether spatial structure can emerge in the absence of explicit  
- 194 positional information, we evaluate SSDC across all layers of untrained ablated models, trained  
- 195 ablated models, and trained intact (APE) models on the Imagenet-100 dataset.
+The intensity map is then blended into the current frame using a specific color (e.g. blue) to highlight the moving parts in the current frame.
 
-196 **Results:** Figure 1b compares the layer-wise evolution of SSDC for an untrained ablated model,  
- 197 a trained ablated model, and a trained model with positional embeddings. The untrained ablated  
- 198 model exhibits relatively high SSDC (approximately 0.57–0.64) with only weak growth across depth,  
- 199 reflecting static spatial correlations induced by architectural and data priors rather than learning.
+### 3.2. Open Vocabulary Detection
 
-200 In contrast, the trained ablated model shows a qualitatively different trajectory: starting from lower  
- 201 SSDC, it exhibits a sharp increase in early layers followed by continued growth. This dynamic pattern  
- 202 closely resembles that of the trained model with positional embeddings. The key distinction is not  
- 203 absolute SSDC magnitude, but its evolution.
+We used Owlv2 [28] as our detection vision language model (VLM), same as in LangGas [14]. Since all videos in MoCA are about animals or insects, following [53], we included that in the prompt. Following LangGas [14], we used one positive prompt and 3 negative prompts so that when the object is closer to the negative prompts, it can be correctly classified into the negative prompt and reduce interference. We used “an animal or insect being highlighted in blue” as a positive prompt and “background”, “logo or sign,” and “plant” as negative prompts. Since the camouflage object segmentation is usually a single object problem, we select the box with the highest score after the VLM.
+
+### 3.3. Segmentation and Tracking
+
+Given that camouflage can significantly reduce object detection performance for VLM, many frames might result in missed detections. However, previous research [53] [27] [37] has demonstrated that vanilla SAM-2 [37], when
+
+<sup>2</sup>Although the object’s edges could be shown in the foreground map, camera movements may also highlight these edges, making it hard for the algorithm to distinguish them.
 
 {5}------------------------------------------------
 
-![Figure 2: SSDC under random permutation at inference (RPI). (a) Models with positional encodings: APE, RoPE, and Sinusoidal PEs. (b) Models without a stable positional reference frame: Ablated and RPT. Both plots show SSDC under RPI across 10 layers.](431b8889a0e7f676f0eef40859590349_img.jpg)
+|  | Motion Detection | Mean Subtraction | Momentum | Tracking | $S_\alpha \uparrow$ | $E_\phi \uparrow$ | mIoU $\uparrow$ |
+|-|-|-|-|-|-|-|-|
+| (a) | None | - | - | None | 0.621 | 0.596 | 0.252 |
+| (b) | None | - | - | Bidirectional | 0.643 | 0.657 | 0.301 |
+| (c) | OF Only | ✓ |  | Bidirectional | 0.752 | 0.832 | 0.508 |
+| (d) | OF Only | ✓ | ✓ | Bidirectional | 0.750 | 0.824 | 0.513 |
+| (e) | OF/BGS | ✓ |  | Bidirectional | 0.759 | 0.843 | 0.522 |
+| (f) | OF/BGS | ✓ |  | None | 0.676 | 0.698 | 0.363 |
+| (g) | OF/BGS | ✓ | ✓ | None | 0.683 | 0.723 | 0.372 |
+| (h) | OF/BGS | ✓ | ✓ | Forward Only | 0.747 | 0.825 | 0.497 |
+| (i) | OF/BGS |  | ✓ | Bidirectional | <b>0.782</b> | <b>0.859</b> | <b>0.561</b> |
+| Ours | OF/BGS | ✓ | ✓ | Bidirectional | 0.776 | <b>0.878</b> | 0.550 |
 
-Figure 2 consists of two line plots, (a) and (b), showing the SSDC under random permutation at inference (RPI) across 10 layers for different models. Plot (a) is titled '(a) Models with positional encodings' and shows three models: APE (blue line), RoPE (orange line), and Sinusoidal PEs (green line). The y-axis is 'SSDC under RPI' ranging from -0.1 to 0.6. The x-axis is 'Layer' ranging from 0 to 10. APE and Sinusoidal PEs show a sharp increase in SSDC at layer 1, peaking around 0.5 and 0.6 respectively, and then gradually decreasing. RoPE shows a more gradual increase, reaching about 0.35 by layer 10. Plot (b) is titled '(b) Models without a stable positional reference frame' and shows two models: Ablated (blue line) and RPT (orange line). The y-axis is 'SSDC under RPI' ranging from -0.100 to 0.100. The x-axis is 'Layer' ranging from 0 to 10. Both models show a collapse to near-zero SSDC across all layers, with values staying very close to 0.0.
+Table 2. Ablation study of different components including motion detection (optical flow and background subtraction), mean subtraction, momentum update, and tracking strategies. Motion detection includes either optical flow only (OF) or a combination of optical flow and background subtraction (OF/BGS). We evaluate each configuration using  $S_\alpha$ ,  $E_\phi$ , and mean IoU (mIoU).
 
-Figure 2: SSDC under random permutation at inference (RPI). (a) Models with positional encodings: APE, RoPE, and Sinusoidal PEs. (b) Models without a stable positional reference frame: Ablated and RPT. Both plots show SSDC under RPI across 10 layers.
+guided by explicit prompts, can achieve effective object tracking. We utilized this tracking capability by supplying SAM-2 with all prompts obtained from VLM detections and allowed it to propagate these prompts across all video frames. These prompts consist of the bounding boxes generated by the VLM and the center of mass of the intensity map within each bounding box as a point prompt.
 
-(a) **Models with positional encodings.** APE, Sinusoidal PEs, and RoPE models exhibit substantial SSDC recovery under RPI, indicating spatial organization anchored to token indices. In contrast, models lacking a consistent positional mapping collapse to near-zero SSDC, revealing a purely content-based spatial organization.
+Since forward propagation alone limits object tracking to frames following the initial successful detection, we implemented a bidirectional propagation approach. We provided prompts for both the original forward-playing video and its reversed sequence. Masks generated from both directions are combined using an OR operation, producing the final robust masks across the entire video sequence.
 
-(b) **Models without a stable positional reference frame.** Ablated and RPT models collapse to near-zero SSDC across all layers under RPI, indicating that their spatial structure is entirely content-driven and does not survive token permutation.
+## 4. Experiments and Results
 
-Figure 2: **SSDC under random permutation at inference (RPI).** RPI disrupts the correspondence between token content and spatial position. Only models that anchor spatial structure to token indices exhibit SSDC recovery after permutation. In contrast, models lacking a consistent positional mapping collapse to near-zero SSDC, revealing a purely content-based spatial organization.
+### 4.1. Benchmark
 
-204 These results indicate that non-trivial spatial structure emerges during training even without positional  
-205 embeddings. This is consistent with the non-trivial performance of ablated models and prior evidence  
-206 that transformers can implicitly recover positional information.
+#### 4.1.1. Metrics and Datasets
 
-207 We emphasize that this emergent structure is not equivalent to that induced by positional embed-  
-208 dings. Rather, this establishes that spatial organization can arise without explicit positional signals,  
-209 motivating a more precise characterization of its underlying mechanism in the next section.
+In this paper, we examine two variants of the MoCA dataset [19]: MoCA-Mask [7] and MoCA-Filtered [51]. The Camouflaged Animal Dataset (CAD) [2] is not used due to its inaccessibility, as the server is offline and the dataset is not provided by a third party. MoCA-Mask is a segmentation dataset, and our evaluation approach aligns with SLT-Net [7]. We report the following metrics: S-measure ( $S_\alpha$ ) [6], weighted F-measure ( $F_\beta^w$ ) [26], and Mean Absolute Error (MAE). More details on these metrics can be found in the SLT-Net paper and their original sources. We did not focus on E-measure [9], mean Dice coefficient, and mean Intersection-over-Union (IoU) in our comparison with previous methods because they will yield different results depending on metric calculation methods, which we explain in Section 4.1.2. All standard metrics are provided in Table 1, with metrics that could be miscalculated by the previous method colored in gray. For our internal comparisons in
 
-###### 210 5.3 Disentangling Index-Based and Content-Based Spatial Organization
+the ablation study, we primarily focus on a subset of these metrics (using a subset of internal comparisons is used in SLT-Net): S-measure, E-measure, and mean IoU. To ensure consistency and fairness, we adopted the evaluation code and methodology from SLT-Net.
 
-211 **Experimental Setup:** To distinguish between index-based and content-based spatial organization,  
-212 we evaluate SSDC across all layers under a *Random Permutation at Inference* (RPI) intervention.  
-213 Concretely, patch tokens are randomly permuted before being processed by the transformer, while  
-214 positional embedding indices (when present) remain fixed to their original spatial locations. This  
-215 operation disrupts the correspondence between token content and spatial position, while preserving  
-216 any mapping between token indices and positional embeddings.
+#### 4.1.2. Metric Calculation Inconsistency
 
-217 Under this setup, any spatial structure that arises purely from patch content is destroyed, as spatially  
-218 adjacent tokens no longer correspond to neighboring image patches. In contrast, if a model has  
-219 learned to anchor its representations to absolute token indices via positional embeddings, spatial  
-220 structure can be re-established through the fixed positional signal. As a result, *SSDC recovery under*  
-221 *RPI* serves as a probe for index-based spatial organization: models that rely on absolute positional  
-222 information exhibit non-trivial SSDC despite permutation, whereas models that rely on content-based  
-223 cues collapse to near-zero SSDC.
+Metrics such as mean IoU can be computed in three primary ways: (1) calculating IoU for each frame individually, averaging across frames within one video, and then averaging across videos, (2) calculating IoU for each frame, and averaging all frames’ results, or (3) calculating an IoU for all frames, which is equivalent to treating the entire video sequence as a single, large concatenated image for both the predicted masks and the ground truth masks, and then computing the IoU on these two large, combined frames. The three calculation methods can yield different results, occasionally significant. Additionally, the calculation script for each paper varies slightly, such as SLT-Net omits the last frame to keep for flow-based methods.
 
-224 We evaluate this behavior across models trained with learned absolute positional embeddings (APE),  
-225 sinusoidal encodings, rotary embeddings (RoPE), no positional embeddings (ablated), and under  
-226 Random Permutation Training (RPT).
+In our paper, we computed the metrics using the SLT-Net script. This methodology might differ from other reported methods. We recalculated these metrics using the SLT-Net evaluation implementation for the supervised state-of-the-art method, ZoomNeXt, and it resulted in slightly elevated results of  $E_m=0.755$ , mDice=0.511, and mIoU=0.438 compared to the original reporting (see Table 1). However  $S_\alpha$ ,  $F_\beta^w$ , and MAE remains unchanged. Thus, in this paper, we focus on these 3 metrics when comparing them across previous methods.
 
-227 **Results:** Models trained without positional embeddings exhibit a complete collapse of SSDC under  
-228 RPI across all layers, suggesting that their spatial structure is predominantly content-driven under this  
-229 probe. Despite exhibiting non-trivial SSDC in the unpermuted setting (Section 5.2), this structure  
-230 does not survive disruption of patch content, indicating that it is not anchored to token indices.
-
-231 In contrast, all models trained with positional embeddings show substantial SSDC recovery under  
-232 RPI, indicating representations that are more consistent with index-anchored spatial organization.  
-233 However, the nature of this recovery differs across encoding schemes. For APE and sinusoidal
+Although there are forum discussions about this issue [16], there are only a few publications mentioned about this issue [14, 44]. We encourage future research to clearly specify their metric calculation methodology and consider adopting this standardized frame-then-video averaging approach to facilitate fair comparisons.
 
 {6}------------------------------------------------
 
-![Figure 3: Robustness to distributional shifts. Two line plots showing fragility scores for different model variants under Gaussian Blur and JPEG Compression perturbations.](4086a572c080354982c11f1de4d6921d_img.jpg)
+Since the SLT-Net method produces soft outputs with continuous pixel values, they considered multiple thresholds and report a max and mean metric. However, as our method produces binary outputs, we used a single threshold value of 0.5.
 
-Figure 3 consists of two line plots, (a) and (b), showing fragility scores for five model variants: APE, RoPE, SPE, Ablated, and RPT. Both plots include error bars representing uncertainty.
+MoCA-Filtered [51] is a detection dataset. Following [51] and [47], we used the detection success rate based on IoU. Similar to MoCA-Mask, we employed the original evaluation code provided by [51].
 
-(a) Gaussian Blur ( $\sigma = 2.5$ ). The y-axis is 'Gaussian Blur Fragility Score' ranging from 0.15 to 0.30. The x-axis is 'Model Condition'. The data points are approximately: APE (0.19), RoPE (0.15), SPE (0.21), Ablated (0.30), and RPT (0.24).
+#### 4.1.3. Baselines
 
-(b) JPEG Compression (quality = 5). The y-axis is 'JPEG Fragility Score' ranging from 0.3 to 0.6. The x-axis is 'Model Condition'. The data points are approximately: APE (0.44), RoPE (0.29), SPE (0.44), Ablated (0.64), and RPT (0.63).
+For MoCA-Mask, we selected SLT-Net [7], ZoomNeXt [32], TSP-SAN (M+B) [15], and the proposed method from the MSVOD dataset paper [12] as our supervised training baselines. For zero-shot baselines, we employed Chain of Visual Perception (CVP) [38], SAM-2-L Auto, and SAM-2 combined with either LLaVA [22] or Shikra [4], following the approach described in [53]. Additionally, we utilized three test-time supervised methods [27, 37, 53] as performance upper bounds.
 
-Figure 3: Robustness to distributional shifts. Two line plots showing fragility scores for different model variants under Gaussian Blur and JPEG Compression perturbations.
+For MoCA-Filtered, we adopted FlowSAM (including FlowI-SAM and FlowP-SAM) [47] and Motion Grouping [51] as baselines for supervised and self-supervised pre-training, respectively, using non-camouflage object datasets and testing on a camouflage dataset.
 
-(a) **Gaussian Blur** ( $\sigma = 2.5$ ). Fragility scores under a mild perturbation that removes high-frequency detail while largely preserving global spatial structure. Differences between models are present but compressed, reflecting the weaker disruption of content-based cues.
+#### 4.1.4. Settings
 
-(b) **JPEG Compression** (quality = 5). Fragility scores under a strong content-disrupting transformation. Models with positional encodings exhibit substantially lower fragility than ablated and RPT models, with RoPE achieving the lowest fragility overall.
+Since our method is zero-shot without training, we directly evaluated it on the testing set. For MoCA-Mask, we swept the VLM threshold (following [14]) from 0.03 to 0.13 (inclusive) at a step of 0.02 and report the metric at the best threshold. This follows the standard practice of reporting a metric at its optimal operating point, analogous to the maximum-over-thresholds metrics (e.g.,  $\text{IoU}_{max}$ ) reported by prior soft-output methods [7] discussed in Section 4.1.2. A small number of remaining hyperparameters were adjusted manually. For MoCA-Filtered, we employed a fixed threshold of 0.12 tuned by hand. Optical flow was computed using RAFT-Things [39], employing the implementation provided by Motion Grouping [51] with only forward flow and a frame gap of 1. All input images were passed directly to the model processor without resizing or cropping. The momentum parameter ( $m$ ) was set to 0.9. We used OwlV2-Base-Patch16-Ensemble and Sam2.1-Hiera-Small as our VLM and segmentation models.
 
-Figure 3: **Robustness to distributional shifts.** Fragility scores across model variants under two perturbation regimes. The gap between models with and without a stable positional reference frame is most pronounced under strong content disruption (JPEG), while remaining consistent but attenuated under milder perturbations (Gaussian blur).
+### 4.2. Results
 
-234 embeddings, SSDC exhibits a rapid increase in early layers following permutation, reaching a peak  
-235 within the first few layers before stabilizing or slightly decreasing. This behavior suggests that spatial  
-236 structure is injected early in the network via additive positional signals.
+#### 4.2.1. MoCA-Mask
 
-237 RoPE models display a qualitatively different trajectory: SSDC increases more gradually and  
-238 continues to grow with depth, without a pronounced early-layer peak. This indicates that positional  
-239 information is integrated progressively throughout the network, consistent with its multiplicative  
-240 incorporation into attention mechanisms. A similar depth-wise pattern is observed in the unpermuted  
-241 setting (Appendix C.1).
+The results of our method compared with previous baselines on MoCA-Mask are presented in Table 1. Our approach achieves the highest  $F_{\beta}^w$  and  $S_a$ , as well as the lowest MAE among all methods without test-time prompts (unsupervised
 
-242 RPT models, despite having positional embeddings present, fail to exhibit meaningful SSDC recovery  
-243 under RPI, behaving similarly to fully ablated models. This suggests that the mere presence of  
-244 positional embeddings is insufficient; a consistent mapping between token indices and spatial locations  
-245 during training appears necessary for index-based spatial organization to emerge.
+| Model | Pub. | Settings | SR |
+|-|-|-|-|
+| FlowI-SAM [47] | ACCV 24 | SV Transfer | 0.628 |
+| FlowP-SAM [47] | ACCV 24 | SV Transfer | 0.645 |
+| Motion Grouping [51] | ICCV 21 | SS Transfer | 0.484 |
+| ZS-VCOS | - | ZS w/ PK | <b>0.697</b> |
 
-246 Taken together, these results establish that positional embeddings are associated with a shift from  
-247 content-based to index-based spatial organization, and that this shift depends critically on the stability  
-248 of the positional reference frame rather than on the architectural presence of positional signals alone.
+Table 3. Success rate (SR) of detection success rate on MoCA-Filtered [51]. “SV” stands for supervised training, “SV” stands for self-supervised, and “ZS” stands for zero-shot. Although the previous three methods are trained on VOS datasets, they are not trained on camouflage object datasets. Our method is not trained on any VOS or camouflage datasets and resulted in the highest SR.
 
-###### 249 5.4 Robustness to Content-Preserving and Content-Disrupting Perturbations
+at test-time). Specifically, we outperform ZoomNeXt, a supervised method published in 2024 and considered state-of-the-art, by +0.152 on  $F_{\beta}^w$  and +0.042 on  $S_a$ . Compared to previous zero-shot methods, such as LLaVA + SAM2-L [53], we obtain improvements of +0.313 in  $F_{\beta}^w$  and +0.154 in  $S_a$ . Moreover, our method is only -0.098 behind in  $F_{\beta}^w$  and -0.056 in  $S_a$  compared to the test-time supervised upper bound reported in [53]. This indicates that our method is very close to this upper bound. Although our improvement in  $S_a$  is moderate, we observed that  $S_a$  might not be highly discriminative, as even masks with minimal overlap can achieve scores around 0.40.
 
-250 **Experimental Setup:** To evaluate how spatial organization strategy influences robustness, we  
-251 measure performance under distribution shifts that perturb image content while preserving global  
-252 structure. We consider two transformations:
+#### 4.2.2. MoCA-Filtered
 
-253 **JPEG Compression:** We apply aggressive compression (quality = 5), introducing blocking artifacts  
-254 that strongly disrupt local texture statistics while preserving coarse spatial layout. This provides a  
-255 targeted probe of reliance on content-based cues.
+Our results for MoCA-Filtered are presented in Table 3. Our method outperforms Flow-SAM [47] and Motion Grouping [51], which are trained on non-camouflage video segmentation datasets using supervised and unsupervised approaches, respectively. We achieve a detection success rate of 0.697, compared to 0.645 for Flow-SAM and 0.484 for Motion Grouping. The improvement here is not as significant as in MoCA-Mask, which may indicate that combining SAM and optical flow, as done in FlowSAM, is already an effective approach.
 
-256 **Gaussian Blur:** We apply Gaussian blur with standard deviation  $\sigma = 2.5$ , attenuating high-frequency  
-257 detail while preserving low-frequency structure. This constitutes a milder perturbation than JPEG.
+### 4.3. Video-Level Results
 
-258 For each model, we compute the *Fragility Score* (FS), defined as the relative drop in accuracy under  
-259 each transformation. We also report the raw accuracy of each model condition in Appendix D.
-
-260 We include **Random Permutation Training (RPT)** as a critical control, allowing us to distinguish  
-261 between the mere presence of positional signals and the emergence of a consistent positional reference  
-262 frame.
+We examined individual results for each video in the test set. Quantitative results for mIoU are presented in Table 5 in supplemental material, and qualitative results are shown in Figure 2. Both results indicate that our method succeeded in `stick_insect.1` and `snow_leopard.10`, where ZoomNeXt completely failed. Additionally, our approach successfully captured the target in `ibex`, whereas the other two methods missed it. In `arctic_fox.3`, our method achieved a significantly higher  $F_{\beta}^w$  score and effectively avoided stationary objects. Although our method struggled in `pygmy_seahorse.0`, neither ZoomNeXt nor SLT-Net performed well in this case. In other cases where other methods outperformed ours, the margin of improvement was minimal.
 
 {7}------------------------------------------------
 
-263 We emphasize that these robustness results are limited to content-disrupting perturbations (e.g.,  
-264 compression artifacts and blur) and do not necessarily generalize to other forms of distribution shift.
+### 4.4. Ablation Study
 
-265 **Results:** Under JPEG compression, models with positional encodings exhibit substantially lower  
-266 fragility (APE and sinusoidal:  $\sim 0.43$ , RoPE:  $\sim 0.30$ ) than ablated and RPT models ( $\sim 0.66$ ). This large  
-267 gap indicates that robustness to severe content degradation is strongly influenced by the presence of a  
-268 stable positional reference frame. Within PE-based models, RoPE consistently achieves lower fragility,  
-269 suggesting a secondary effect of the encoding mechanism. We speculate that RoPE’s progressive  
-270 depth-wise accumulation of spatial structure may keep later layers more spatially grounded than the  
-271 early-layer injection characteristic of additive encodings.
+For our ablation study, we designed 9 configurations, as shown in Table 2. Configuration (a) is a minimum baseline with only object detection, used to compare with prior methods such as LLaVA/Shikra + SAM2 [53]. Our result ( $S_\alpha = 0.621$ ) is nearly identical to theirs ( $S_\alpha = 0.622$ ). In (b), we add bidirectional tracking to (a), which slightly improves  $S_\alpha$  by +0.022 and mIoU by +0.049. In (c), we add optical flow and mean subtraction on top of (b), leading to a significant improvement:  $S_\alpha$  increases by +0.109 and mIoU by +0.207. In (d), we introduce momentum to (c), resulting in a very small drop in  $S_\alpha$  (-0.002) but a minor gain in mIoU (+0.005). In (e), we use both optical flow and background subtraction based on camera movements, along with mean subtraction for optical flow, resulted in a slight increase compared to (d), +0.009 in  $S_\alpha$  and 0.009 in mIoU. In (f) and (g), we remove tracking entirely to assess its impact. Both show a substantial performance drop, especially in mIoU, indicating that tracking is essential. (g) includes momentum, while (f) does not. In (h), we test forward-only tracking instead of bidirectional. It performs worse than Ours (-0.029 in  $S_\alpha$  and -0.053 in mIoU), showing bidirectional tracking is more effective. Finally, we remove mean subtraction from Ours, as shown in (i), which resulted in a slight increase in  $S_\alpha$  and mIoU but a lower  $E_\phi$ . This means that subtraction has a minimum impact on performance. This might be due to the limited number of videos in the dataset featuring camera motion with relatively static objects, or because the pipeline relies more effectively on contrast rather than absolute color for object identification. Compared to other methods, our approach without mean subtraction (i) achieved the highest  $S_\alpha$  and mIoU scores. However, our full method obtained the highest  $E_\phi$ , with  $S_\alpha$  and mIoU scores close to those of (i).
 
-272 Under Gaussian blur, the same ordering is preserved but differences are attenuated (RoPE:  $\sim 0.15$ ,  
-273 APE:  $\sim 0.17$ – $0.20$ , sinusoidal:  $\sim 0.22$ , RPT:  $\sim 0.25$ , ablated:  $\sim 0.30$ ). Because blur preserves global  
-274 structure, it provides a weaker test of reliance on content-based cues, reducing the separation between  
-275 models.
+Our final model includes all components: optical flow, background subtraction, mean subtraction, momentum, and bidirectional tracking. It achieves strong performance with  $S_\alpha = 0.776$ ,  $E_\phi = 0.878$ , and mIoU = 0.550.
 
-276 Taken together, these results support a two-level interpretation: (1) the emergence of a stable  
-277 positional reference frame appears to be a dominant factor associated with robustness, and (2) the  
-278 specific encoding mechanism introduces secondary variation, with RoPE exhibiting consistently  
-279 lower fragility. Crucially, the poor robustness of RPT models shows that the mere presence of  
-280 positional embeddings is insufficient: robustness appears to rely on learning a consistent mapping  
-281 between token indices and spatial locations. This provides evidence for a relationship between the  
-282 spatial organization patterns identified earlier and downstream robustness.
+### 4.5. Prompting Experiments
 
-###### 283 5.5 Linking Index-Based Spatial Organization to Robustness via Positional Scaling
+In supplementary material Section 5.2, we studied the effects of different OwlV2 prompts. Results show that naming the target category and the color of the highlight to OwlV2 gives the best detection.
 
-284 **Experimental Setup:** To probe the relationship between spatial organization and robustness, we  
-285 require a controlled intervention that selectively disrupts index-based spatial structure while preserving  
-286 the rest of the model. We achieve this by scaling the magnitude of learned absolute positional  
-287 embeddings (APE) at inference time by a factor  $\alpha \in [0, 1]$ , without retraining.
+We also compared the prompt types passed to SAM-2, as shown in Table 4. Using only the bounding box already yields strong performance, and adding the center-of-mass point prompt further improves  $E_\phi$  from 0.873 to 0.878 and mIoU from 0.540 to 0.550, while  $S_\alpha$  remains unchanged. We therefore use both box and point prompts in our final method.
 
-288 While this intervention operates on positional embeddings, our goal is not to study positional signal  
-289 strength per se, but to use it as a mechanism to continuously degrade the model’s *index-based spatial*  
-290 *organization*. To measure the integrity of this organization, we evaluate Spatial Similarity Distance  
-291 Correlation (SSDC) under Random Permutation at Inference (RPI), as introduced in Section 5.3.  
-292 Under RPI, any recovered spatial structure must be anchored to token indices rather than content. We  
-293 therefore interpret SSDC recovery as a proxy for the presence of index-based spatial organization.  
-294 Importantly, SSDC recovery approaching zero does not imply content-based spatial structure; it  
-295 indicates that the positional signal is too weak to sustain index-based organization.
-
-296 To summarize this behavior compactly, we define:
-
-$$\Delta \text{SSDC} = \text{SSDC}_{\text{layer } 1} - \text{SSDC}_{\text{layer } 0},$$
-
-297 which captures the immediate recovery of spatial structure after the first encoder block under RPI.  
-298 Thus,  $\Delta \text{SSDC}$  serves as a measure of index-based spatial organization.
-
-299 We jointly analyze  $\Delta \text{SSDC}$  and the Fragility Score (FS) across varying  $\alpha$ . For clarity, we report  
-300 representative magnitudes illustrating distinct regimes, with the full results provided in Appendix B.1  
-301 (and Appendix B.2 for Sinusoidal PEs).
-
-| $\alpha$ | $\Delta \text{SSDC}$ (RPI) |  | Fragility Score |  |
+|  | SAM-2 Prompt | $S_\alpha$ | $E_\phi$ | mIoU |
 |-|-|-|-|-|
-|  | Mean | Std | Mean | Std |
-| 1.0 | 0.4725 | 0.0228 | 0.4338 | 0.0127 |
-| 0.8 | 0.3125 | 0.0259 | 0.4780 | 0.0146 |
-| 0.7 | 0.1845 | 0.0342 | 0.5145 | 0.0145 |
-| 0.5 | 0.0475 | 0.0083 | 0.5975 | 0.0202 |
-| 0.4 | 0.0000 | 0.0000 | 0.6272 | 0.0189 |
+| (a) | Box Only | <b>0.776</b> | 0.873 | 0.540 |
+| (b) | Point + Box | <b>0.776</b> | <b>0.878</b> | <b>0.550</b> |
 
-Table 1: Effect of positional embedding magnitude  $\alpha$  on index-based spatial organization and  
-robustness.  $\Delta \text{SSDC}$  captures the recovery of index-based spatial structure after the first encoder block.  
-As  $\alpha$  decreases,  $\Delta \text{SSDC}$  collapses, indicating the breakdown of index-based spatial organization,  
-while fragility increases sharply in the same regime before plateauing once spatial structure is lost.
+Table 4. Effects of different SAM-2 prompts
+
+## 5. Conclusion
+
+We introduced ZS-VCOS, a zero-shot method for video camouflaged object segmentation, integrating optical flow, vision-language models, and SAM. Our approach significantly outperformed existing methods, increasing the weighted F-measure ( $F_\beta^w$ ) on the MoCA-Mask dataset from 0.315 to 0.628 and improving detection success on MoCA-Filtered from 0.628 to 0.697. Our findings highlight the potential of zero-shot pipelines for effectively handling camouflaged objects, particularly beneficial in scenarios lacking labelled data. Our modular design enables easy replacement of improved modules at any pipeline stage, enhancing overall performance.
+
+Our method has several limitations. First, it is designed for videos containing one and only one object. In multi-object scenarios, the tracking and matching components would require modification to handle multiple object associations. Second, the approach relies on a textual description of the target object. While this is significantly less costly than collecting annotated training data, generating an accurate and unambiguous prompt can still be non-trivial in some cases. Potential solutions include incorporating few-shot object detection using example image embeddings from VLM as queries, or integrating an image-to-text captioning tool to automatically generate prompts from reference frames.
+
+## Acknowledgement
+
+This work was supported by NFRF GR024801 and CFI GR024473. We also thank Weathon Software (<https://weasoft.com>) for providing computing credits via Google Colab.
 
 {8}------------------------------------------------
 
-302 **Results:** We observe a clear correspondence between the degradation of index-based spatial organization  
-303 and the loss of robustness.
+## References
 
-304 At high magnitudes ( $\alpha \geq 0.9$ ), models exhibit strong SSDC recovery ( $\Delta\text{SSDC} \approx 0.37\text{--}0.47$ ),  
-305 indicating intact index-based spatial organization. In this regime, fragility remains relatively low and  
-306 stable ( $\text{FS} \approx 0.44\text{--}0.46$ ), suggesting that robustness is preserved when spatial structure is intact.
-
-307 As  $\alpha$  decreases into an intermediate regime ( $0.8 \geq \alpha \geq 0.5$ ), SSDC recovery drops sharply  
-308 ( $\Delta\text{SSDC} \approx 0.30 \rightarrow 0.02$ ), reflecting the progressive breakdown of index-based spatial organization.  
-309 This degradation is accompanied by a pronounced increase in fragility ( $\text{FS} \approx 0.48 \rightarrow 0.63$ ). Notably,  
-310 the most significant increases in fragility occur precisely where SSDC recovery is actively decreasing,  
-311 indicating that robustness degradation is strongly correlated with the loss of spatial structure.
-
-312 Below a critical threshold ( $\alpha \leq 0.4$ ), SSDC recovery collapses to zero ( $\Delta\text{SSDC} \approx 0$ ), indicating that  
-313 index-based spatial organization is no longer recoverable under permutation. In this regime, fragility  
-314 continues to increase, but only marginally ( $\text{FS} \approx 0.65 \rightarrow 0.685$ ). This suggests that once spatial  
-315 organization is fully disrupted, further degradation in robustness is no longer correlated with changes  
-316 in spatial structure, but instead reflects secondary effects such as reduced representational quality or  
-317 distribution mismatch induced by scaling.
-
-318 A complementary effect is observed at high magnitudes: when index-based spatial organization  
-319 is already fully intact, small reductions in  $\alpha$  have limited impact on fragility. Together, these  
-320 observations reveal three regimes: (1) a stable regime with intact spatial organization and low  
-321 fragility, (2) a transition regime where spatial structure degrades and fragility increases sharply, and  
-322 (3) a collapsed regime where spatial organization is absent and fragility plateaus.
-
-323 Overall, these results provide evidence that robustness may be driven in part by the presence of  
-324 index-based spatial organization. Positional scaling serves only as a means of intervention; the  
-325 observed changes in robustness track the degradation of spatial structure rather than the magnitude of  
-326 the positional signal itself.
-
-###### 327 6 Limitations
-
-328 The findings reported here are based on ViT-S models trained from scratch on ImageNet-100, and it  
-329 remains an open question whether the observed relationships between positional encoding, index-  
-330 based spatial organization, and robustness generalize to larger architectures, pre-trained models, or  
-331 models fine-tuned from large-scale checkpoints. The robustness evaluation is specifically scoped  
-332 to content-disrupting perturbations (JPEG compression and Gaussian blur); we make no claims  
-333 about spatial perturbations, adversarial shifts, or semantic distribution changes, and these may  
-334 involve different mechanisms. SSDC is used as a coarse proxy for spatial organization rather than  
-335 a direct measurement of a specific representational mechanism, and its interpretation depends on  
-336 the comparative and intervention-based framing established in Section 5.1. Finally, the positional  
-337 scaling experiment (Section 5.5) conflates spatial organization degradation with changes in raw  
-338 positional signal magnitude, and while the three-regime structure is consistent with a mediating role  
-339 for index-based organization, alternative pathways cannot be fully excluded.
-
-## 340 7 Conclusion
-
-341 We studied how positional encodings shape spatial organization in Vision Transformers and its  
-342 relationship to robustness under content-disrupting perturbations. Using SSDC and permutation-  
-343 based interventions, we found that spatial structure emerges even without positional encodings, but  
-344 remains content-driven and collapses under token permutation. Models with positional encodings  
-345 exhibit representations more consistent with index-anchored spatial organization. Across experiments,  
-346 robustness under content-disrupting shifts is closely associated with a stable positional reference  
-347 frame rather than the mere presence of positional embeddings — evidenced by RPT models and  
-348 positional scaling, where robustness degrades alongside the breakdown of index-anchored spatial  
-349 structure. Differences between encoding schemes persist but appear secondary. Overall, our results  
-350 suggest positional encodings contribute to robustness by supporting a stable positional reference  
-351 frame, though we emphasize this conclusion is based on intervention-based evidence and identifies a  
-352 strong relationship rather than a fully isolated causal mechanism.
+- [1] Yongqi An, Xu Zhao, Tao Yu, Haiyun Guo, Chaoyang Zhao, Ming Tang, and Jinqiao Wang. Zbs: Zero-shot background subtraction via instance-level background modeling and foreground selection. (arXiv:2303.14679), 2023. arXiv:2303.14679. 2
+- [2] Pia Bideau and Erik Learned-Miller. It’s moving! a probabilistic model for causal motion segmentation in moving camera videos. (arXiv:1604.00136), 2016. arXiv:1604.00136. 2, 3, 6
+- [3] Thomas Brox and Jitendra Malik. Object segmentation by long term analysis of point trajectories. In *Computer Vision – ECCV 2010*, page 282–295, Berlin, Heidelberg, 2010. Springer. 2
+- [4] Keqin Chen, Zhao Zhang, Weili Zeng, Richong Zhang, Feng Zhu, and Rui Zhao. Shikra: Unleashing multimodal llm’s referential dialogue magic. (arXiv:2306.15195), 2023. arXiv:2306.15195. 4, 7
+- [5] Jingchun Cheng, Yi-Hsuan Tsai, Shengjin Wang, and Ming-Hsuan Yang. Segflow: Joint learning for video object segmentation and optical flow. In *Proceedings of the IEEE International Conference on Computer Vision (ICCV)*, 2017. 2
+- [6] Ming-Ming Cheng and Deng-Ping Fan. Structure-measure: A new way to evaluate foreground maps. *International Journal of Computer Vision*, 129(9):2622–2638, 2021. 6
+- [7] Xuelian Cheng, Huan Xiong, Deng-Ping Fan, Yiran Zhong, Mehrtash Harandi, Tom Drummond, and Zongyuan Ge. Implicit motion handling for video camouflaged object detection. In *2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)*, pages 13854–13863, 2022. ISSN: 2575-7075. 1, 2, 3, 4, 6, 7
+- [8] Guy Erez, Ron Shapira Weber, and Oren Freifeld. A deep moving-camera background model. (arXiv:2209.07923), 2022. arXiv:2209.07923. 3
+- [9] Deng-Ping Fan, Cheng Gong, Yang Cao, Bo Ren, Ming-Ming Cheng, and Ali Borji. Enhanced-alignment measure for binary foreground map evaluation. page 698–704, 2018. 6
+- [10] Deng-Ping Fan, Ge-Peng Ji, Guolei Sun, Ming-Ming Cheng, Jianbing Shen, and Ling Shao. Camouflaged object detection. page 2777–2787, 2020. 3, 4
+- [11] Deng-Ping Fan, Ge-Peng Ji, Tao Zhou, Geng Chen, Huazhu Fu, Jianbing Shen, and Ling Shao. Planet: Parallel reverse attention network for polyp segmentation. (arXiv:2006.11392), 2020. arXiv:2006.11392. 1
+- [12] Shuyong Gao, Yu’ang Feng, Qishan Wang, Lingyi Hong, Xinyu Zhou, Liu Fei, Yan Wang, and Wenqiang Zhang. Msvcod: a large-scale multi-scene dataset for video camouflage object detection. (arXiv:2502.13859), 2025. arXiv:2502.13859. 4, 7
+- [13] Shuyong Gao, Yu’ang Feng, Qishan Wang, Lingyi Hong, Xinyu Zhou, Liu Fei, Yan Wang, and Wenqiang Zhang. MSVCOd: A Large-Scale Multi-Scene Dataset for Video Camouflage Object Detection, 2025. arXiv:2502.13859. 1
+- [14] Wenqi Guo, Yiyang Du, and Shan Du. Langgas: introducing language in selective zero-shot background subtraction for semi-transparent gas leak detection with a new dataset, 2025. arXiv:2503.02910. 2, 5, 6, 7
+- [15] Wenjun Hui, Zhenfeng Zhu, Shuai Zheng, and Yao Zhao. Endow sam with keen eyes: temporal-spatial prompt learning for video camouflaged object detection. pages 19058–19067, 2024. 4, 7
+- [16] ignatius. Calculate average intersection over union, 2018. 6
+- [17] Ajay Kumar. Computer-vision-based fabric defect detection: A survey. *IEEE Transactions on Industrial Electronics*, 55(1):348–363, 2008. 1
+- [18] Laksono Kurnianggoro, Wahyono, Yang Yu, Danilo Caceres Hernandez, and Kang-Hyun Jo. Online background-subtraction with motion compensation for freely moving camera. In *Intelligent Computing Theories and Application*, page 569–578, Cham, 2016. Springer International Publishing. 3
+- [19] Hala Lamdouar, Charig Yang, Weidi Xie, and Andrew Zisserman. Betrayed by motion: Camouflaged object discovery via motion segmentation. (arXiv:2011.11630), 2020. arXiv:2011.11630. 3, 6
+- [20] Trung-Nghia Le, Tam V. Nguyen, Zhongliang Nie, Minh-Triet Tran, and Akihiro Sugimoto. Anabranch network for camouflaged object segmentation. (arXiv:2105.09451), 2021. arXiv:2105.09451. 3, 4
+- [21] Xinhao Li, Yun Liu, Guolei Sun, Min Wu, Le Zhang, and Ce Zhu. Towards open-vocabulary video semantic segmentation. (arXiv:2412.09329), 2024. arXiv:2412.09329. 3
+- [22] Haotian Liu, Chunyuan Li, Qingyang Wu, and Yong Jae Lee. Visual instruction tuning. (arXiv:2304.08485), 2023. arXiv:2304.08485. 4, 7
+- [23] Shilong Liu, Zhaoyang Zeng, Tianhe Ren, Feng Li, Hao Zhang, Jie Yang, Qing Jiang, Chunyuan Li, Jianwei Yang, Hang Su, Jun Zhu, and Lei Zhang. Grounding dino: Marrying dino with grounded pre-training for open-set object detection. (arXiv:2303.05499), 2024. arXiv:2303.05499. 5
+- [24] Bruce D. Lucas and Takeo Kanade. An iterative image registration technique with an application to stereo vision. In *Proceedings of the 7th International Joint Conference on Artificial Intelligence - Volume 2*, page 674–679, San Francisco, CA, USA, 1981. Morgan Kaufmann Publishers Inc. 2, 5
+- [25] Yunqiu Lv, Jing Zhang, Yuchao Dai, Aixuan Li, Bowen Liu, Nick Barnes, and Deng-Ping Fan. Simultaneously localize, segment and rank the camouflaged objects. page 11591–11601, 2021. 3, 4
+- [26] Ran Margolin, Lili Zelnik-Manor, and Ayellet Tal. How to evaluate foreground maps. In *2014 IEEE Conference on Computer Vision and Pattern Recognition*, page 248–255, Columbus, OH, USA, 2014. IEEE. 6
+- [27] Muhammad Nawfal Meeran, Gokul Adethya T, and Bhanu Pratyush Mantha. Sam-pm: Enhancing video camouflaged object detection using spatio-temporal attention. (arXiv:2406.05802), 2024. arXiv:2406.05802. 4, 5, 7
+- [28] Matthias Minderer, Alexey Gritsenko, and Neil Houlsby. Scaling open-vocabulary object detection. (arXiv:2306.09683), 2024. arXiv:2306.09683. 5, 1
+- [29] Brian E. Moore, Chen Gao, and Raj Rao Nadakuditi. Panoramic robust pca for foreground-background separation
 
 {9}------------------------------------------------
 
-## References
-
-- 353  
-354 Srinadh Bhojanapalli, Ayan Chakrabarti, Daniel Glasner, Daliang Li, Thomas Unterthiner, and  
-355 Andreas Veit. Understanding robustness of transformers for image classification. pages 10211–  
-356 10221, 10 2021. doi: 10.1109/ICCV48922.2021.01007.
-- 357 Xiangxiang Chu, Zhi Tian, Bo Zhang, Xinlong Wang, and Chunhua Shen. Conditional positional  
-358 encodings for vision transformers. In *The Eleventh International Conference on Learning Repre-*  
-359 *sentations*, 2023. URL <https://openreview.net/forum?id=3KWnuT-R1bh>.
-- 360 Jia Deng, Wei Dong, Richard Socher, Li-Jia Li, Kai Li, and Li Fei-Fei. Imagenet: A large-scale hier-  
-361 archical image database. In *2009 IEEE Conference on Computer Vision and Pattern Recognition*,  
-362 pages 248–255, 2009. doi: 10.1109/CVPR.2009.5206848.
-- 363 Yihe Dong, Jean-Baptiste Cordonnier, and Andreas Loukas. Attention is not all you need: pure  
-364 attention loses rank doubly exponentially with depth. In Marina Meila and Tong Zhang, edi-  
-365 tors, *Proceedings of the 38th International Conference on Machine Learning*, volume 139 of  
-366 *Proceedings of Machine Learning Research*, pages 2793–2803. PMLR, 18–24 Jul 2021. URL  
-367 <https://proceedings.mlr.press/v139/dong21a.html>.
-- 368 Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn, Xiaohua Zhai, Thomas  
-369 Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg Heigold, Sylvain Gelly, Jakob Uszkoreit,  
-370 and Neil Houlsby. An image is worth 16x16 words: Transformers for image recognition at scale.  
-371 In *International Conference on Learning Representations*, 2021. URL <https://openreview.net/forum?id=YicbFdNTTy>.
-- 372  
-373 Stéphane d’Ascoli, Hugo Touvron, Matthew L Leavitt, Ari S Morcos, Giulio Biroli, and Levent  
-374 Sagun. Convit: improving vision transformers with soft convolutional inductive biases\*. *Journal*  
-375 *of Statistical Mechanics: Theory and Experiment*, 2022(11):114005, nov 2022. doi: 10.1088/1742-5468/ac9830. URL <https://doi.org/10.1088/1742-5468/ac9830>.
-- 376  
-377 Nelson Elhage, Neel Nanda, Catherine Olsson, Tom Henighan, Nicholas Joseph, Ben Mann, Amanda  
-378 Askell, Yuntao Bai, Anna Chen, Tom Conerly, Nova DasSarma, Dawn Drain, Deep Ganguli, As-  
-379 zack Hatfield-Dodds, Danny Hernandez, Andy Jones, Jackson Kernion, Liane Lovitt, Kamal  
-380 Ndousse, Dario Amodei, Tom Brown, Jack Clark, Jared Kaplan, Sam McCandlish, and Chris  
-381 Olah. A mathematical framework for transformer circuits. *Transformer Circuits Thread*, 2021.  
-382 <https://transformer-circuits.pub/2021/framework/index.html>.
-- 383  
-384 Robert Geirhos, Patricia Rubisch, Claudio Michaelis, Matthias Bethge, Felix A. Wichmann, and  
-385 Wieland Brendel. Imagenet-trained CNNs are biased towards texture; increasing shape bias  
-386 improves accuracy and robustness. In *International Conference on Learning Representations*,  
-387 2019. URL <https://openreview.net/forum?id=Bygh9j09KX>.
-- 388  
-389 Byeongho Heo, Song Park, Dongyoon Han, and Sangdoon Yun. Rotary position embedding for  
-390 vision transformer. In *Computer Vision – ECCV 2024: 18th European Conference, Milan, Italy*,  
-391 *September 29–October 4, 2024, Proceedings, Part X*, page 289–305. Berlin, Heidelberg, 2024.  
-392 Springer-Verlag. ISBN 978-3-031-72683-5. doi: 10.1007/978-3-031-72684-2\_17. URL [https://doi.org/10.1007/978-3-031-72684-2\\_17](https://doi.org/10.1007/978-3-031-72684-2_17).
-- 393  
-394 Md Amirul Islam\*, Sen Jia\*, and Neil D. B. Bruce. How much position information do convolutional  
-395 neural networks encode? In *International Conference on Learning Representations*, 2020. URL  
-396 <https://openreview.net/forum?id=rJeB36NKvB>.
-- 397  
-398 Amirhossein Kazemnejad, Inkit Padhi, Karthikeyan Natesan, Payel Das, and Siva Reddy. The impact  
-399 of positional encoding on length generalization in transformers. In *Thirty-seventh Conference on*  
-400 *Neural Information Processing Systems*, 2023. URL <https://openreview.net/forum?id=Drr12gcj2l>.
-- 401  
-402 Goro Kobayashi, Tatsuki Kuribayashi, Sho Yokoi, and Kentaro Inui. Incorporating Residual and  
-403 Normalization Layers into Analysis of Masked Language Models. In Marie-Francine Moens,  
-404 Xuanjing Huang, Lucia Specia, and Scott Wen-tau Yih, editors, *Proceedings of the 2021 Con-*  
-405 *ference on Empirical Methods in Natural Language Processing*, pages 4547–4568. Association  
-406 for Computational Linguistics, November 2021. doi: 10.18653/v1/2021.emnlp-main.373. URL  
-407 <https://aclanthology.org/2021.emnlp-main.373/>.
+- on noisy, free-motion camera video. (arXiv:1712.06229), 2019. arXiv:1712.06229. 3
+- [30] Peter Ochs, Jitendra Malik, and Thomas Brox. Segmentation of moving objects by long term video analysis. *IEEE Transactions on Pattern Analysis and Machine Intelligence*, 36(6): 1187–1200, 2014. 2
+- [31] Youwei Pang, Xiaoqi Zhao, Tian-Zhu Xiang, Lihe Zhang, and Huchuan Lu. Zoom in and out: A mixed-scale triplet network for camouflaged object detection. (arXiv:2203.02688), 2022. arXiv:2203.02688. 4
+- [32] Youwei Pang, Xiaoqi Zhao, Tian-Zhu Xiang, Lihe Zhang, and Huchuan Lu. Zoomnext: a unified collaborative pyramid network for camouflaged object detection. *IEEE Transactions on Pattern Analysis and Machine Intelligence*, 46(12): 9205–9220, 2024. 4, 7
+- [33] Jordi Pont-Tuset, Federico Perazzi, Sergi Caelles, Pablo Arbeláez, Alex Sorkine-Hornung, and Luc Van Gool. The 2017 davis challenge on video object segmentation. (arXiv:1704.00675), 2018. arXiv:1704.00675. 2
+- [34] Nikhila Ravi, Valentin Gabeur, Yuan-Ting Hu, Ronghang Hu, Chaitanya Ryali, Tengyu Ma, Haitham Khedr, Roman Rädle, Chloe Rolland, Laura Gustafson, Eric Mintun, Juntong Pan, Kalyan Vasudev Alwala, Nicolas Carion, Chaoyuan Wu, Ross Girshick, Piotr Dollár, and Christoph Feichtenhofer. Sam 2: Segment anything in images and videos. (arXiv:2408.00714), 2024. arXiv:2408.00714. 2, 5
+- [35] Dan Jeric Arcega Rustia, Chien Erh Lin, Jui-Yung Chung, Yi-Ji Zhuang, Ju-Chun Hsu, and Ta-Te Lin. Application of an image and environmental sensor network for automated greenhouse insect pest monitoring. *Journal of Asia-Pacific Entomology*, 23(1):17–28, 2020. 1
+- [36] Karen Simonyan and Andrew Zisserman. Two-stream convolutional networks for action recognition in videos. (arXiv:1406.2199), 2014. arXiv:1406.2199. 2, 5
+- [37] Lv Tang and Bo Li. Evaluating sam2’s role in camouflaged object detection: from sam to sam2, 2024. arXiv:2407.21596. 4, 5, 7
+- [38] Lv Tang, Peng-Tao Jiang, Zhi-Hao Shen, Hao Zhang, Jin-Wei Chen, and Bo Li. Chain of visual perception: harnessing multimodal large language models for zero-shot camouflaged object detection. In *Proceedings of the 32nd ACM International Conference on Multimedia*, pages 8805–8814, Melbourne VIC Australia, 2024. ACM. 4, 7
+- [39] Zachary Teed and Jia Deng. Raft: recurrent all-pairs field transforms for optical flow. (arXiv:2003.12039), 2020. arXiv:2003.12039. 2, 5, 7
+- [40] Yi-Hsuan Tsai, Ming-Hsuan Yang, and Michael J. Black. Video segmentation via object flow. In *Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)*, 2016. 2
+- [41] Haochen Wang, Cilin Yan, Shuai Wang, Xiaolong Jiang, Xu Tang, Yao Hu, Weidi Xie, and Efstratios Gavves. Towards open-vocabulary video instance segmentation. In *Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)*, pages 4057–4066, 2023. 3
+- [42] Haochen Wang, Cilin Yan, Keyan Chen, Xiaolong Jiang, Xu Tang, Yao Hu, Guoliang Kang, Weidi Xie, and Efstratios Gavves. Ov-vis: Open-vocabulary video instance segmentation. *International Journal of Computer Vision*, 132(11): 5048–5065, 2024. 3
+- [43] Jingfan Wang, Jingwei Ji, Arvind P. Ravikumar, Silvio Savarese, and Adam R. Brandt. Videogaset: Deep learning for natural gas methane leak classification using an infrared camera. *Energy*, 238:121516, 2022. 5
+- [44] Zifu Wang, Maxim Berman, Amal Rannen-Triki, Philip H. S. Torr, Devis Tuia, Tinne Tuytelaars, Luc Van Gool, Jiaqian Yu, and Matthew B. Blaschke. Revisiting evaluation metrics for semantic segmentation: Optimization and evaluation of fine-grained intersection over union. (arXiv:2310.19252), 2023. arXiv:2310.19252. 6
+- [45] Fengyang Xiao, Sujie Hu, Yuqi Shen, Chengyu Fang, Jinfa Huang, Chunming He, Longxiang Tang, Ziyun Yang, and Xiu Li. A survey of camouflaged object detection and beyond, 2024. arXiv:2408.14562. 1, 3
+- [46] Huaxin Xiao, Jiashi Feng, Guosheng Lin, Yu Liu, and Maojun Zhang. Monet: Deep motion exploitation for video object segmentation. In *Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)*, 2018. 2
+- [47] Junyu Xie, Charig Yang, Weidi Xie, and Andrew Zisserman. Moving object segmentation: all you need is sam(And flow). In *Computer Vision – ACCV 2024*, pages 291–308, Singapore, 2025. Springer Nature. 2, 4, 5, 7, 1
+- [48] Haofei Xu, Jing Zhang, Jianfei Cai, Hamid Rezaatoughi, and Dacheng Tao. Gmflow: Learning optical flow via global matching. (arXiv:2111.13680), 2022. arXiv:2111.13680. 2
+- [49] Ning Xu, Linjie Yang, Yuchen Fan, Dingcheng Yue, Yuchen Liang, Jianchao Yang, and Thomas Huang. Youtubevos: A large-scale video object segmentation benchmark. (arXiv:1809.03327), 2018. arXiv:1809.03327. 2
+- [50] Bin Yan, Martin Sundermeyer, David Joseph Tan, Huchuan Lu, and Federico Tombari. Towards real-time open-vocabulary video instance segmentation. (arXiv:2412.04434), 2024. arXiv:2412.04434. 2
+- [51] Charig Yang, Hala Lamdouar, Erika Lu, Andrew Zisserman, and Weidi Xie. Self-supervised video object segmentation by motion grouping. (arXiv:2104.07658), 2021. arXiv:2104.07658. 3, 4, 5, 6, 7, 1
+- [52] Shu Yang, Lu Zhang, Jinqing Qi, Huchuan Lu, Shuo Wang, and Xiaoxing Zhang. Learning motion-appearance co-attention for zero-shot video object segmentation. In *Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)*, pages 1564–1573, 2021. 2
+- [53] Yuli Zhou, Guolei Sun, Yawei Li, Luca Benini, and Ender Konukoglu. When sam2 meets video camouflaged object segmentation: A comprehensive evaluation and adaptation. (arXiv:2409.18653), 2024. arXiv:2409.18653. 4, 5, 7, 8, 1
+- [54] Z Zivkovic. Improved adaptive gaussian mixture model for background subtraction. In *Proceedings of the 17th International Conference on Pattern Recognition, 2004. ICPR 2004.*, page 28–31 Vol.2. IEEE, 2004. 5
+- [55] Zoran Zivkovic and Ferdinand Van Der Heijden. Efficient adaptive density estimation per image pixel for the task of background subtraction. *Pattern Recognition Letters*, 27: 773–780, 2006. 5
 
  Rest of paper (reference and Appendix) is removed.
