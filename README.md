@@ -247,6 +247,14 @@ opened a clear margin.
 - `*.pkl` files are tracked via Git LFS (see `.gitattributes`).
 - The repo is configured for the DeepReview calibration set only. Older
   ICLR-2025/2026 and NeurIPS position-paper code paths were trimmed.
+- **Naming caveat:** `2026_deepseek_flash_guideline_single` (and the other
+  `*_guideline*` dirs) is **ours** — the multi-agent split pipeline + calibration
+  retrieval (`run_deepreview.sh`, `code/main.py`), *not* a baseline. It is the
+  default `SWEEP_NAME` of `run_deepreview.sh`; "guideline" refers to the
+  calibration protocol, not a single-call baseline. The single-call baselines are
+  the `*_baseline` dirs (`code/baseline.py`). Its high r (0.673, n=100) is a
+  small-subset effect: on the same 99 papers `cmp3_ours` scores 0.684, and the
+  full-set number is ~0.64.
 
 
 
