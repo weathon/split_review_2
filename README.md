@@ -207,6 +207,34 @@ Same code/prompt/model — matched n = 390: `cmp3_baseline` r = 0.5017 vs `deepr
 r = 0.5439, Steiger t = −1.11, p = 0.266 (pred-pred r = 0.585). The two same-config baseline
 draws differ only by run-to-run stochasticity (not significant).
 
+### Pooled 3-draw comparison with cluster bootstrap (headline result)
+
+Every arm was run 3 times end-to-end (baseline: `cmp3_baseline` / `deepreview_baseline` /
+`cmp3_baseline_v2`; ours: `cmp3_ours` / `_v2` / `_v3`; no-cal: `cmp3_nocal` / `_v2` / `_v3`).
+The 3 draws per arm are pooled as datapoints (376 common papers × 3 draws = 1128 points per
+arm; `pred_score == -100` sentinels excluded), so no arm's number depends on a lucky draw:
+
+| arm | pooled Pearson | pooled Spearman |
+|---|---|---|
+| baseline | 0.5216 | 0.4851 |
+| no-cal | 0.5592 | 0.5097 |
+| ours | 0.6154 | 0.5539 |
+
+Significance via **paper-level cluster bootstrap** (10,000 resamples; papers resampled with
+replacement, each carrying all 3 draws of every arm — this preserves within-paper dependence
+so no effective-n/df assumption is needed):
+
+| comparison | Δr | 95% CI | bootstrap p |
+|---|---|---|---|
+| ours − baseline | +0.0938 | [+0.049, +0.140] | 0.0002 |
+| ours − no-cal | +0.0563 | [+0.022, +0.093] | 0.0002 |
+| no-cal − baseline | +0.0376 | [−0.012, +0.087] | 0.142 |
+
+Ours beats both the single-call baseline and its own no-calibration ablation; no-cal does not
+significantly beat the baseline. The split-agent structure alone does not explain the gain —
+the calibration retrieval carries it. (For reference, dependent Steiger tests on the pooled
+vectors give ours-vs-baseline p = 0.0048 even at the worst-case df of n = 376 papers.)
+
 ### Follow-up analysis (from existing results/snapshots, no new runs)
 
 All correlations below are pred_score vs gt_avg_score with the `pred_score == -100`
