@@ -94,10 +94,20 @@ def load_review(method_name, pid):
 class ParseResponse(BaseModel):
     items: list[str]
 
+PARSE_RESPONSE_JSON_SCHEMA = {
+    "type": "json_schema",
+    "json_schema": {
+        "name": "ParseResponse",
+        "strict": True,
+        "schema": ParseResponse.model_json_schema(),
+    },
+}
+
+
 def prep_review(review_text):
-    while True:
+    for i in range(MAX_RETRIES):
         try:
-            reviews = client.chat.completions.parse(
+            completion = client.chat.completions.create(
                 model=PARSE_MODEL,
                 messages=[
                     {
@@ -109,11 +119,11 @@ def prep_review(review_text):
                         "content": review_text,
                     },
                 ],
-                response_format=ParseResponse,
-                extra_body={"reasoning": {"enabled": False}, "provider": {"only": ["gmicloud/fp8"]}},
+                response_format=PARSE_RESPONSE_JSON_SCHEMA,
+                extra_body={"reasoning": {"enabled": False}, "provider": {"only": ["deepseek"]}},
             )
 
-            reviews = reviews.choices[0].message.parsed.items
+            reviews = ParseResponse(**json.loads(completion.choices[0].message.content)).items
 
             embedding = client.embeddings.create(
                 model="openai/text-embedding-3-small",
@@ -125,6 +135,7 @@ def prep_review(review_text):
         except Exception as e:
             print(f"Error in prep_review: {e}. Retrying in {RETRY_DELAY} seconds...")
             time.sleep(RETRY_DELAY//2)
+    raise RuntimeError(f"Failed to process review after {MAX_RETRIES} attempts.")
 
 def main():
     ap = argparse.ArgumentParser()
@@ -157,8 +168,12 @@ def main():
     embeddings = {}
     if (Path(OUT_DIR / "checkpoint.pkl").exists()):
         with open(OUT_DIR / "checkpoint.pkl", "rb") as f:
-            embeddings = pickle.load(f)
-        print(f"Loaded checkpoint with {len(embeddings)} methods.")
+            try:
+                embeddings = pickle.load(f)
+                print(f"Loaded checkpoint with {len(embeddings)} methods.")
+            except Exception as e:
+                print(f"Failed to load checkpoint: {e}. Starting fresh.")
+                embeddings = {}
 
     with ThreadPoolExecutor(max_workers=args.concurrency) as ex:
         futures = []
@@ -190,7 +205,6 @@ def main():
                 # sim = np.mean(np.max(sim_matrix, axis=1))
                 sims[method].append(sim)
 
-    import pickle
     with open(OUT_DIR / "overlap_results.pkl", "wb") as f:
         pickle.dump(sims, f)
     print({m:np.mean(sims[m]) for m in METHODS})
