@@ -269,7 +269,7 @@ Three external tools were confirmed to score the identical 393-paper ICLR-2026 s
 
 | method | n | Pearson | Spearman |
 |---|---|---|---|
-| cspaper | 367 | 0.7386 | 0.7631 |
+| cspaper | 376 | 0.7558 | 0.7736 |
 | ours (median draw) | 376 | 0.6138 | 0.5498 |
 | no-cal (median) | 376 | 0.5578 | 0.5085 |
 | DeepReviewer-v2-openai | 375 | 0.5526 | 0.5112 |
@@ -279,9 +279,9 @@ Three external tools were confirmed to score the identical 393-paper ICLR-2026 s
 **cspaper coverage note.** cspaper's pre-review gate desk-rejects some papers with no numeric
 score (`main_score_norm: N/A`). Initially 24/393 were desk-rejected; suspecting an over-desk-reject
 bug, the same 24 PDFs were resubmitted to the CSPaper platform API. 14/24 came back with a real
-score on rerun (confirming the bug — same paper, same gate, opposite outcome), 9/24 desk-rejected
-again (state as of this rerun; consistent, not resolved), raising scored coverage from 369→384/393
-(n=367 on the 376-common set, up from 352).
+score on rerun (confirming the bug — same paper, same gate, opposite outcome); the remaining
+9 were rerun with `desk_rejection_enabled=false` (documented API flag) and all returned scores
+(0.0–0.4, i.e. genuinely weak papers). Final coverage: **393/393 scored** (up from 369).
 
 **⚠️ cspaper's number above is likely invalid — probable decision leakage.** cspaper's
 `main_score_norm` sits almost perfectly on the correct side of the accept/reject boundary (0.5),
@@ -289,16 +289,30 @@ far beyond what score-only reasoning would produce:
 
 | | n | accuracy of `(score > threshold)` vs `gt_binary` |
 |---|---|---|
-| **cspaper** (`main_score_norm > 0.5`) | 381 | **92.1%** (accepted papers scored >0.5 in 88.7% of cases; rejected papers scored <0.5 in 94.6%) |
+| **cspaper** (`main_score_norm > 0.5`) | 390 | **92.3%** (accepted papers scored >0.5 in 88.7% of cases; rejected papers scored <0.5 in 94.8%) |
 | ours (`cmp3_ours_v2`, `pred_score > 5`) | 387 | 64.6% |
 | baseline (`cmp3_baseline_v2`, `pred_score > 5`) | 390 | 60.0% |
 | deepreview_baseline (`pred_score > 5`) | 390 | 59.2% |
 
+The strongest evidence: cspaper's score predicts the final decision **better than the human
+reviewers' own average score does** (all on n = 390, each metric at its own optimal threshold):
+
+| | AUROC vs decision | accuracy at fixed cutoff | max accuracy (optimal threshold) |
+|---|---|---|---|
+| cspaper `main_score_norm` | 0.9279 | 92.3% (> 0.5) | **92.3%** (> 0.4) |
+| human average score | 0.9310 | 84.9% (> 5) | **85.9%** (> 4.8) |
+
+The human panel's average score misses ~14% of decisions (borderline papers where the
+meta-review overrode the scores); cspaper lands on the correct decision side in most of those
+too. A model scoring purely from paper content cannot systematically beat the reviewers' own
+average at predicting the reviewers' final decision — that extra information has to come from
+outside the paper.
+
 Decomposing cspaper's correlation: a predictor that only knows the binary accept/reject decision
-(no score-level information at all) would already achieve r = 0.6860 against `gt_avg_score` on
-this set — i.e. **most of cspaper's headline r = 0.7419 (full-overlap) is explained by decision
+(no score-level information at all) would already achieve r = 0.6858 against `gt_avg_score` on
+this set — i.e. **most of cspaper's headline r = 0.7587 (full-overlap) is explained by decision
 knowledge alone**, not fine-grained scoring skill. Within-bucket, cspaper still discriminates
-somewhat (r = 0.5187 within accepted papers, r = 0.4603 within rejected papers, n=159/222), so
+somewhat (r = 0.5187 within accepted papers, r = 0.5195 within rejected papers, n=159/231), so
 it isn't purely a coin flip on the decision — but the ~92% decision-side accuracy is far above
 what any of our arms achieve (59–65%). This is not "cspaper infers the decision first, then sets
 the score to match" (a reasoning artifact) — the ~92% decision-side accuracy is far too high to
@@ -307,7 +321,7 @@ accept/reject outcome for these ICLR 2026 papers is highly likely already presen
 training data or retrieval context (e.g. via OpenReview), and `main_score_norm` is contaminated
 by it directly, independent of the review reasoning shown in its output. **Do not report cspaper's
 correlation as a fair comparison point without this caveat**, and prefer the within-bucket
-correlations (~0.46–0.52) as the more honest estimate of its actual paper-quality-scoring skill,
+correlations (~0.52) as the more honest estimate of its actual paper-quality-scoring skill,
 which is roughly in line with the other baselines.
 
 ### Follow-up analysis (from existing results/snapshots, no new runs)
