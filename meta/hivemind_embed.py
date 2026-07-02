@@ -14,6 +14,7 @@ import numpy as np
 import dotenv
 from openai import OpenAI
 from pydantic import BaseModel
+from tqdm import tqdm
 
 
 class WeaknessItem(BaseModel):
@@ -164,7 +165,7 @@ def main():
         for review_id in common_sorted:
             for method in METHODS:
                 futures.append(ex.submit(run_one, method, review_id))
-        for f in futures:
+        for f in tqdm(futures):
             e, method = f.result()
             old = embeddings.get(method, [])
             old.append(e)
