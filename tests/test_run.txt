@@ -1,0 +1,31 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-7.2.0, pluggy-1.6.0 -- /home/wg25r/miniconda/envs/neg/bin/python
+cachedir: .pytest_cache
+rootdir: /home/wg25r/split_review_opus_repro
+plugins: split-0.8.0, anyio-4.12.1
+collecting ... collected 22 items
+
+tests/test_baseline.py::test_parse_review_regex_path PASSED              [  4%]
+tests/test_baseline.py::test_parse_review_whitespace_and_negative PASSED [  9%]
+tests/test_baseline.py::test_parse_review_rejects_non_decision_word PASSED [ 13%]
+tests/test_baseline.py::test_load_ground_truth PASSED                    [ 18%]
+tests/test_baseline.py::test_load_ground_truth_missing_csv PASSED        [ 22%]
+tests/test_main.py::test_parse_score PASSED                              [ 27%]
+tests/test_main.py::test_decision_match PASSED                           [ 31%]
+tests/test_main.py::test_match_label PASSED                              [ 36%]
+tests/test_main.py::test_shorten_title PASSED                            [ 40%]
+tests/test_main.py::test_stratified_sample PASSED                        [ 45%]
+tests/test_main.py::test_load_ground_truth PASSED                        [ 50%]
+tests/test_main.py::test_load_ground_truth_missing_csv PASSED            [ 54%]
+tests/test_main.py::test_predict_acceptance_rate PASSED                  [ 59%]
+tests/test_main.py::test_predict_acceptance_rate_missing_file PASSED     [ 63%]
+tests/test_main.py::test_score_and_decision_extraction_from_merged_review PASSED [ 68%]
+tests/test_pipeline.py::test_run_pipeline_shape PASSED                   [ 72%]
+tests/test_pipeline.py::test_run_pipeline_extractor_fallback PASSED      [ 77%]
+tests/test_pipeline.py::test_process_papers_callback_and_skip PASSED     [ 81%]
+tests/test_pipeline.py::test_run_benchmark_csv_shape PASSED              [ 86%]
+tests/test_pipeline.py::test_baseline_review_paper_shape PASSED          [ 90%]
+tests/test_pipeline.py::test_baseline_parse_review_extractor_fallback PASSED [ 95%]
+tests/test_pipeline.py::test_baseline_run_benchmark_csv_shape PASSED     [100%]
+
+============================= 22 passed in 18.46s ==============================
