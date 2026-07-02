@@ -162,7 +162,7 @@ def main():
     write_lock = threading.Lock()
 
     def run_one(pid1, pid2):
-        reviewer_rng = random.Random((args.seed, "human", pid1, pid2).__hash__())
+        reviewer_rng = random.Random(f"{args.seed}-human-{pid1}-{pid2}")
         r1 = load_human_review(pid1, reviewer_rng)
         r2 = load_human_review(pid2, reviewer_rng)
         if r1 is None or r2 is None:

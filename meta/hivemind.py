@@ -181,7 +181,7 @@ def main():
     write_lock = threading.Lock()
 
     def run_one(method, pid1, pid2):
-        reviewer_rng = random.Random((args.seed, method, pid1, pid2).__hash__())
+        reviewer_rng = random.Random(f"{args.seed}-{method}-{pid1}-{pid2}")
         r1 = load_review(method, pid1, reviewer_rng)
         r2 = load_review(method, pid2, reviewer_rng)
         if r1 is None or r2 is None:

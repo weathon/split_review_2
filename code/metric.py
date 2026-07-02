@@ -418,8 +418,12 @@ ADMIN_BLACKLIST = {
 
 def analyze_and_plot(path):
     df = pd.read_csv(path)
-    # remove -1 lines
+    # remove -1 lines (NaN >= 0 is False, so missing predictions are dropped here too)
+    n_total = len(df)
     df = df[df["pred_score"] >= 0]
+    n_dropped = n_total - len(df)
+    if n_dropped > 0:
+        print(f"\n  WARNING: Dropped {n_dropped}/{n_total} papers with missing/error predictions")
     n_before_blacklist = len(df)
     df = df[~df["paper_id"].isin(ADMIN_BLACKLIST)]
     n_blacklisted = n_before_blacklist - len(df)
@@ -429,13 +433,7 @@ def analyze_and_plot(path):
     if "position" in path:
         df["pred_score"] = df["pred_score"]/2
 
-    # Filter out rows where pred_score is missing (ERROR / failed papers)
-    n_total = len(df)
-    df = df.dropna(subset=["pred_score"])
     df = df.reset_index(drop=True)
-    n_dropped = n_total - len(df)
-    if n_dropped > 0:
-        print(f"\n  WARNING: Dropped {n_dropped}/{n_total} papers with missing predictions (ERROR rows)")
 
     pred = df["pred_score"].values
     gt_avg = df["gt_avg_score"].values
@@ -768,7 +766,9 @@ def analyze_and_plot(path):
         n_indiv_neg = len(human_indiv_labels) - n_indiv_pos
         if n_indiv_pos > 0 and n_indiv_neg > 0:
             human_auroc = roc_auc_score(human_indiv_labels, human_indiv_scores)
-            human_auroc_ci_val = auroc_ci(human_auroc, n_indiv_pos, n_indiv_neg)
+            # CI uses paper-level counts, not pooled review counts: reviews of the same
+            # paper share one label, so the effective sample size is the paper count
+            human_auroc_ci_val = auroc_ci(human_auroc, n_pos, n_neg)
             human_f1_max, human_f1_threshold = max_f1_at_threshold(human_indiv_labels, human_indiv_scores)
             human_fpr, human_tpr, _ = roc_curve(human_indiv_labels, human_indiv_scores)
         else:
@@ -784,7 +784,7 @@ def analyze_and_plot(path):
         if human_auroc is not None:
             print(
                 f"  AUROC (human indiv):   {human_auroc:.4f}  "
-                f"(95% CI {human_auroc_ci_val[0]:.4f}, {human_auroc_ci_val[1]:.4f}; "
+                f"(95% CI {human_auroc_ci_val[0]:.4f}, {human_auroc_ci_val[1]:.4f} at paper-level n; "
                 f"{len(human_indiv_scores)} individual scores)"
             )
             print(f"  F1_max (human indiv):  {human_f1_max:.4f}  (threshold={human_f1_threshold:.2f})")

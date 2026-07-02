@@ -642,7 +642,7 @@ async def run_benchmark(data_dir: str, n_samples: int = 10, seed: int = 42, bala
     print(f"Running {len(samples)} benchmark papers (concurrency={CONCURRENCY}) ...")
     await process_papers(samples, papers_dir, skip_scoring=False, callback=on_complete, no_cal=no_cal)
 
-    scored = [r for r in results if r["pred_score"] != -1]
+    scored = [r for r in results if r["pred_score"] >= 0]
     if scored:
         mae = sum(abs(r["pred_score"] - r["gt_avg_score"]) for r in scored) / len(scored)
         print(f"\nResults: {len(scored)} scored, MAE={mae:.2f}")

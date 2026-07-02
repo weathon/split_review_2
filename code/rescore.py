@@ -279,7 +279,7 @@ async def run_rescore_pipeline(paper_path: str, cached_inputs: str) -> dict:
         extractor_resp = await custom_client.chat.completions.create(
             model="deepseek/deepseek-v4-flash",
             messages=[
-                {"role": "system", "content": "Extract the final numeric score and accept/reject decision from a paper review. Respond with exactly: <score>NUMBER</score><decision>Accept|Reject</decision>. No other text."},
+                {"role": "system", "content": "Extract the final numeric score and accept/reject decision from a paper review. Respond with exactly: <score>NUMBER</score><decision>Accept|Reject</decision>. No other text. If you cannot see a score, return -100! If you cannot see a decision, return N/A! You should NOT guess the score."},
                 {"role": "user", "content": merged_review},
             ],
             extra_body={"reasoning": {"enabled": False}},

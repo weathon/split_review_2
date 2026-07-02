@@ -77,17 +77,15 @@ Paper id: {paper_id}
 === END REVIEW ===
 
 Task:
-The review is structured with multiple sections (Summary, Strengths, Weaknesses, Nice-to-Haves, Suggestions, etc.). ONLY consider claims that appear under the `## Weaknesses` section (including its `### Fatal`, `### Major`, `### Minor`, `### Trivial` subsections). IGNORE anything under `## Nice-to-Haves`, `## Suggestions`, `## Questions`, `## Removed Points`, `## Novel Insights`, or any other non-Weakness section -- those are not weaknesses by design and should NOT be extracted or judged.
-
-Extract every weakness claim from the `## Weaknesses` section, then judge whether each weakness is reliable BY CHECKING IT AGAINST THE PAPER TEXT ABOVE.
+Extract every weakness claim that the review makes about the paper, then judge whether each weakness is reliable BY CHECKING IT AGAINST THE PAPER TEXT ABOVE.
 
 For each weakness, return:
 - weakness: one specific weakness, flaw, limitation, or criticism of the paper that appears in the review.
-- reliable: 1 if this weakness is genuinely supported by the paper. 0 if it matches one of the error patterns in the guideline.
+- reliable: 1 if this weakness is genuinely supported by the paper (the flaw really exists, the omission is real, the critique is well-grounded). 0 if it matches one of the error patterns in the guideline (Misunderstanding/Neglect/etc. -- e.g., the reviewer overlooked something explicitly in the paper, misread a claim, asked for something out-of-scope, or made a vague/generic/excessive criticism).
 - error_type: if reliable=0, choose the single best-matching label from {sorted(t for t in VALID_ERROR_TYPES if t)}. If reliable=1, use an empty string.
 - justification: 1-2 sentences. If reliable=0, cite the specific paper passage that contradicts the weakness or explain why it is vague/excessive/generic. If reliable=1, point to the gap in the paper that supports the weakness.
 
-Be strict. The paper is available to you -- if the reviewer's claim contradicts something explicitly in the paper, mark it Neglect/Misunderstanding.
+Be strict. The paper is available to you -- if the reviewer's claim contradicts something explicitly in the paper, mark it Neglect/Misunderstanding. If you cannot find supporting evidence in the paper for what the reviewer claims is missing, double-check the paper before marking reliable=1.
 """
     completion = client.chat.completions.parse(
         model=MODEL,
@@ -129,8 +127,13 @@ guideline = GUIDELINE_PATH.read_text(encoding="utf-8").strip()
 review_paths = {p.stem: p for p in REVIEW_DIR.glob(REVIEW_GLOB)}
 paper_paths = {p.stem: p for p in PAPER_DIR.glob("*.txt")}
 
-sampled = sorted(set(review_paths) & set(paper_paths))
-print(f"sonnet∩papers: {len(sampled)}", file=sys.stderr)
+common = sorted(set(review_paths) & set(paper_paths))
+if len(common) < SAMPLE_SIZE:
+    raise RuntimeError(f"Only {len(common)} paper+review pairs, need {SAMPLE_SIZE}")
+
+rng = random.Random(SEED)
+sampled = rng.sample(common, SAMPLE_SIZE)
+print(f"sonnet∩papers: {len(common)}, sampled: {len(sampled)}", file=sys.stderr)
 SAMPLED_IDS_PATH.parent.mkdir(parents=True, exist_ok=True)
 SAMPLED_IDS_PATH.write_text(json.dumps(sorted(sampled), indent=2))
 

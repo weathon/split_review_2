@@ -9,12 +9,15 @@ import statistics
 from pathlib import Path
 
 import dotenv
+from openai import AsyncOpenAI
 
 from paths import RESULTS_DIR
 from claude_merger import _run_claude_sdk_query, _make_merger_mcp_server
 
 ROOT = Path(__file__).resolve().parent.parent
 dotenv.load_dotenv(ROOT / ".env")
+
+extractor_client = AsyncOpenAI(base_url="https://openrouter.ai/api/v1", api_key=os.getenv("OPENROUTER_API_KEY"))
 
 BASELINE_PROMPT = """You are an experienced academic reviewer for ICLR, a top ML venue. Your task is to write one direct review of the paper.
 
@@ -136,6 +139,22 @@ async def review_paper(paper_path: Path, model: str, system_prompt: str):
     )
     score = float(review_text.split("<score>")[1].split("</score>")[0]) if "<score>" in review_text else -1
     decision = review_text.split("<decision>")[1].split("</decision>")[0] if "<decision>" in review_text else "N/A"
+    if score == -1 or decision == "N/A":
+        print(f"  Parsing failed (score={score}, decision={decision}); falling back to deepseek-v4-flash extractor")
+        extractor_resp = await extractor_client.chat.completions.create(
+            model="deepseek/deepseek-v4-flash",
+            messages=[
+                {"role": "system", "content": "Extract the final numeric score and accept/reject decision from a paper review. Respond with exactly: <score>NUMBER</score><decision>Accept|Reject</decision>. No other text. If you cannot see a score, return -100! If you cannot see a decision, return N/A! You should NOT guess the score."},
+                {"role": "user", "content": review_text},
+            ],
+            extra_body={"reasoning": {"enabled": False}},
+        )
+        extracted = extractor_resp.choices[0].message.content or ""
+        if score == -1 and "<score>" in extracted:
+            score = float(extracted.split("<score>")[1].split("</score>")[0])
+        if decision == "N/A" and "<decision>" in extracted:
+            decision = extracted.split("<decision>")[1].split("</decision>")[0]
+        print(f"  [extractor] score={score} decision={decision}")
     cost = sdk_usage["total_cost_usd"] or 0.0
     print(json.dumps({"event": "sample_done", "paper_id": paper_path.stem, "score": score, "decision": decision, "cost": cost}), flush=True)
     return review_text, score, decision, cost
