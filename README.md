@@ -265,16 +265,18 @@ than the single-call baseline; calibration retrieval stabilizes scoring, not jus
 
 Three external tools were confirmed to score the identical 393-paper ICLR-2026 set (`cspaper`:
 393 papers, one stray `submissions.json`; `DeepReviewer_14B`: 393; `DeepReviewer-v2-openai`:
-393, 1 failed job skipped) and evaluated on the same 376-common-paper subset used above:
+393, 1 failed job skipped). All methods below are evaluated on the single shared subset of
+papers scored by every method (n = 382 — the intersection of cspaper 393, DeepReviewer_14B 393,
+DeepReviewer-v2 392, ours 387, no-cal 386, baseline 390):
 
 | method | n | Pearson | Spearman |
 |---|---|---|---|
-| cspaper | 376 | 0.7558 | 0.7736 |
-| ours (median draw) | 376 | 0.6138 | 0.5498 |
-| no-cal (median) | 376 | 0.5578 | 0.5085 |
-| DeepReviewer-v2-openai | 375 | 0.5526 | 0.5112 |
-| DeepReviewer_14B | 376 | 0.5420 | 0.4711 |
-| baseline (median) | 376 | 0.5230 | 0.4787 |
+| cspaper | 382 | 0.7589 | 0.7773 |
+| ours (median draw) | 382 | 0.6139 | 0.5500 |
+| no-cal (median) | 382 | 0.5571 | 0.5052 |
+| DeepReviewer-v2-openai | 382 | 0.5552 | 0.5169 |
+| DeepReviewer_14B | 382 | 0.5342 | 0.4631 |
+| baseline (median) | 382 | 0.5210 | 0.4746 |
 
 **cspaper coverage note.** cspaper's pre-review gate desk-rejects some papers with no numeric
 score (`main_score_norm: N/A`). Initially 24/393 were desk-rejected; suspecting an over-desk-reject
