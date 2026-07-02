@@ -300,12 +300,15 @@ this set — i.e. **most of cspaper's headline r = 0.7419 (full-overlap) is expl
 knowledge alone**, not fine-grained scoring skill. Within-bucket, cspaper still discriminates
 somewhat (r = 0.5187 within accepted papers, r = 0.4603 within rejected papers, n=159/222), so
 it isn't purely a coin flip on the decision — but the ~92% decision-side accuracy is far above
-what any of our arms achieve (59–65%) and is the most plausible explanation: cspaper (or its
-underlying LLM) appears to already know or infer the actual accept/reject outcome for these ICLR
-2026 papers — plausibly from training-data exposure to OpenReview decisions — rather than deriving
-it from the paper content. **Do not report cspaper's correlation as a fair comparison point without
-this caveat**, and prefer the within-bucket correlations (~0.46–0.52) as the more honest estimate
-of its actual paper-quality-scoring skill, which is roughly in line with the other baselines.
+what any of our arms achieve (59–65%). This is not "cspaper infers the decision first, then sets
+the score to match" (a reasoning artifact) — the ~92% decision-side accuracy is far too high to
+be explained by review quality and is best explained as **decision leakage**: the ground-truth
+accept/reject outcome for these ICLR 2026 papers is highly likely already present in cspaper's
+training data or retrieval context (e.g. via OpenReview), and `main_score_norm` is contaminated
+by it directly, independent of the review reasoning shown in its output. **Do not report cspaper's
+correlation as a fair comparison point without this caveat**, and prefer the within-bucket
+correlations (~0.46–0.52) as the more honest estimate of its actual paper-quality-scoring skill,
+which is roughly in line with the other baselines.
 
 ### Follow-up analysis (from existing results/snapshots, no new runs)
 
