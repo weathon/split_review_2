@@ -5,8 +5,9 @@ from pathlib import Path
 SCRIPT_ROOT = Path(__file__).resolve().parents[1]
 DATA = SCRIPT_ROOT / "data/ReviewCritique.jsonl"
 OUT = SCRIPT_ROOT / "outputs/weakness_reliability_guideline.md"
-MAX_PER_TYPE = 30
+MAX_PER_TYPE = 10
 SEED = 0
+RELIABLE_FRACTION = 1 / 3  # add reliable (valid) weakness examples = this fraction of the unreliable count
 
 CATEGORIES = [
     ("Misunderstanding", "The reviewer misinterprets claims or ideas presented in the paper, leading to inaccurate or irrelevant comments."),
@@ -21,6 +22,7 @@ CATEGORIES = [
 ]
 
 by_type = {name: [] for name, _ in CATEGORIES}
+reliable_weak = []
 with DATA.open() as f:
     for line in f:
         rec = json.loads(line)
@@ -30,10 +32,13 @@ with DATA.open() as f:
             for seg in rec[k]['review']:
                 et = str(seg.get('error_type', '')).strip()
                 rel = str(seg.get('reliability', '')).strip().lower()
-                if rel != 'no':
-                    continue
-                if et in by_type:
-                    by_type[et].append(seg)
+                tc1 = str(seg.get('topic_class_1', '')).lower()
+                text = str(seg.get('segment_text', '')).strip()
+                if rel == 'no':
+                    if et in by_type:
+                        by_type[et].append(seg)
+                elif rel == 'yes' and 'weakness' in tc1 and len(text) > 40:
+                    reliable_weak.append(seg)
 
 lines = []
 lines.append("# Weakness Reliability Guideline\n")
@@ -45,8 +50,9 @@ for name, defn in CATEGORIES:
     lines.append(f"| {name} | {defn} |")
 lines.append("")
 
-lines.append("## Examples per error type\n")
-lines.append("Each example is a real reviewer segment annotated by a human as unreliable, with the human's explanation of why.\n")
+lines.append("## Unreliable weakness examples (per error type)\n")
+lines.append("Each example is a real reviewer segment annotated by a human as UNRELIABLE, with the human's explanation of why. Do NOT assume a weakness is unreliable just because it is a criticism -- only mark unreliable when it matches one of these error patterns.\n")
+n_unreliable = 0
 for name, defn in CATEGORIES:
     lines.append(f"### {name}\n")
     lines.append(f"*{defn}*\n")
@@ -57,6 +63,7 @@ for name, defn in CATEGORIES:
     if not examples:
         lines.append("_No examples available in the source dataset._\n")
         continue
+    n_unreliable += len(examples)
     for i, seg in enumerate(examples, 1):
         text = seg.get('segment_text', '').strip()
         expl = str(seg.get('explanation', '')).strip()
@@ -68,8 +75,36 @@ for name, defn in CATEGORIES:
         lines.append(f"Why unreliable: {expl}")
         lines.append("")
 
+n_reliable = round(n_unreliable * RELIABLE_FRACTION)
+rng = random.Random(SEED)
+seen = set()
+uniq_reliable = []
+for seg in reliable_weak:
+    t = str(seg.get('segment_text', '')).strip()
+    if t in seen:
+        continue
+    seen.add(t)
+    uniq_reliable.append(seg)
+rng.shuffle(uniq_reliable)
+picked = uniq_reliable[:n_reliable]
+
+lines.append("## Reliable (valid) weakness examples\n")
+lines.append("Each example below is a real reviewer weakness segment annotated by a human as RELIABLE (a genuine, well-grounded criticism). Use these to calibrate: many critical-sounding weaknesses ARE reliable. Only mark reliable=0 when the segment clearly matches one of the error patterns above.\n")
+for i, seg in enumerate(picked, 1):
+    text = str(seg.get('segment_text', '')).strip()
+    expl = str(seg.get('explanation', '')).strip()
+    lines.append(f"**Example {i}**")
+    lines.append(f"> Reviewer wrote: {text}")
+    lines.append("")
+    if expl.lower() not in ('nan', ''):
+        lines.append(f"Why reliable: {expl}")
+        lines.append("")
+
 OUT.parent.mkdir(parents=True, exist_ok=True)
 OUT.write_text("\n".join(lines))
 print(f"wrote {OUT}")
 for name, _ in CATEGORIES:
-    print(f"  {name}: {len(by_type[name])} examples")
+    shown = min(len(by_type[name]), MAX_PER_TYPE) if by_type[name] else 0
+    print(f"  {name}: {len(by_type[name])} available, {shown} shown")
+print(f"  unreliable shown total: {n_unreliable}")
+print(f"  reliable weakness pool: {len(uniq_reliable)}, added: {len(picked)}")
