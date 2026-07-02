@@ -36,7 +36,7 @@ ${t.text2}
 Return your verdict via the required structured output only, with a one-sentence reason.`
 }
 
-const CONCURRENCY = 5
+const CONCURRENCY = 2
 const results = []
 for (let i = 0; i < TASKS.length; i += CONCURRENCY) {
   const chunk = TASKS.slice(i, i + CONCURRENCY)
