@@ -184,6 +184,8 @@ def main():
                 set_a = set_a / np.linalg.norm(set_a, axis=1, keepdims=True)
                 set_b = set_b / np.linalg.norm(set_b, axis=1, keepdims=True)
                 sim_matrix = set_a @ set_b.T
+                diag = np.diagonal(sim_matrix) 
+
                 sim = np.mean(np.max(sim_matrix, axis=1))
                 sims[method].append(sim)
 
