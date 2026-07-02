@@ -61,7 +61,7 @@ function buildPrompt(t) {{
 Error type table:
 ${{ERROR_TYPE_TABLE}}
 
-Weakness reliability guideline (error type table + human-annotated examples of BOTH unreliable and reliable weaknesses):
+Weakness reliability guideline (error type table + human-annotated examples):
 ${{GUIDELINE}}
 
 First, use the Read tool to read the full paper text at: ${{t.paper_path}}
@@ -75,11 +75,11 @@ Task:
 Judge whether THIS SPECIFIC segment is reliable BY CHECKING IT AGAINST THE PAPER TEXT.
 
 Return:
-- reliable: 1 if this segment is a genuine, well-grounded criticism of the paper (the flaw really exists, the omission is real, the concern is legitimate). 0 ONLY if it clearly matches one of the error patterns in the guideline (Misunderstanding/Neglect/Vague/Out-of-scope/etc.).
+- reliable: 1 if this segment is genuinely supported by the paper (the flaw really exists, the omission is real, the critique is well-grounded). 0 if it matches one of the error patterns in the guideline (Misunderstanding/Neglect/etc.).
 - error_type: if reliable=0, choose the single best-matching label from the error type table (exact label text). If reliable=1, use an empty string.
 - justification: 1-2 sentences citing the specific paper passage.
 
-Do NOT mark a segment unreliable merely because it is a criticism or because you could imagine a rebuttal. Most genuine weaknesses raised by reviewers ARE reliable (see the reliable examples in the guideline). Only mark reliable=0 when the segment clearly matches an error pattern -- e.g. it contradicts something explicitly in the paper, misreads a claim, is vague/generic, or asks for something out of scope. When in doubt, mark reliable=1.
+Be strict. If the segment's claim contradicts something explicitly in the paper, mark it Neglect/Misunderstanding. If you cannot find supporting evidence in the paper for what the segment claims is missing, double-check the paper before marking reliable=1.
 
 Return your result via the required structured output only.`
 }}
