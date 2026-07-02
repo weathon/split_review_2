@@ -201,8 +201,8 @@ def main():
                 sim_matrix = set_a @ set_b.T
                 diag = np.diagonal(sim_matrix) 
 
-                sim = np.mean(sim_matrix)
-                # sim = np.mean(np.max(sim_matrix, axis=1))
+                # sim = np.mean(sim_matrix)
+                sim = np.mean(np.max(sim_matrix, axis=1))
                 sims[method].append(sim)
 
     with open(OUT_DIR / "overlap_results.pkl", "wb") as f:
