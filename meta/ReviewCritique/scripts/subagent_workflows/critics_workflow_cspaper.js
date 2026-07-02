@@ -72,7 +72,7 @@ Be strict. The paper is available to you -- if the reviewer's claim contradicts 
 Return your result via the required structured output only.`
 }
 
-const CONCURRENCY = 5
+const CONCURRENCY = 2
 const results = []
 for (let i = 0; i < TASKS.length; i += CONCURRENCY) {
   const chunk = TASKS.slice(i, i + CONCURRENCY)
