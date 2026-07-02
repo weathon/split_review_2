@@ -7,6 +7,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 GUIDELINE = (HERE / "original_guideline_extracted.md").read_text()
 segments = json.load(open(HERE / "ai_segments.json"))
+subset_seg_ids = set(json.load(open(HERE / "subset_seg_ids.json")))
 
 TEMPLATE = """export const meta = {{
   name: 'human-overlap-ai-judge-score',
@@ -107,7 +108,8 @@ tasks = [
         "segment_text": s["segment_text"],
     }
     for s in segments
+    if s["seg_id"] in subset_seg_ids
 ]
 script = TEMPLATE.format(guideline_json=json.dumps(GUIDELINE), tasks_json=json.dumps(tasks))
-(HERE / "judge_score_full.js").write_text(script)
-print(f"judge_score_full.js: {len(tasks)} segments")
+(HERE / "judge_score_subset.js").write_text(script)
+print(f"judge_score_subset.js: {len(tasks)} segments")
