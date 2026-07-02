@@ -175,19 +175,19 @@ def main():
                 print(f"Failed to load checkpoint: {e}. Starting fresh.")
                 embeddings = {}
 
-    with ThreadPoolExecutor(max_workers=args.concurrency) as ex:
-        futures = []
-        for review_id in common_sorted:
-            for method in METHODS:
-                futures.append(ex.submit(run_one, method, review_id))
-        for f in tqdm(futures):
-            e, method = f.result()
-            old = embeddings.get(method, [])
-            old.append(e)
-            embeddings[method] = old
-            if len(old) % 20 == 0:
-                with open(OUT_DIR / "checkpoint.pkl", "wb") as f:
-                    pickle.dump(embeddings, f)
+    # with ThreadPoolExecutor(max_workers=args.concurrency) as ex:
+    #     futures = []
+    #     for review_id in common_sorted:
+    #         for method in METHODS:
+    #             futures.append(ex.submit(run_one, method, review_id))
+    #     for f in tqdm(futures):
+    #         e, method = f.result()
+    #         old = embeddings.get(method, [])
+    #         old.append(e)
+    #         embeddings[method] = old
+    #         if len(old) % 20 == 0:
+    #             with open(OUT_DIR / "checkpoint.pkl", "wb") as f:
+    #                 pickle.dump(embeddings, f)
 
     # print(embeddings)
     sims = {m: [] for m in METHODS}
