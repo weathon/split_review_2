@@ -261,6 +261,52 @@ analysis; the median draw is only the single-run reporting metric.)
 The pipeline is not only better-correlated with gt but roughly 2× more reproducible per paper
 than the single-call baseline; calibration retrieval stabilizes scoring, not just improves it.
 
+### External baselines (`~/split_review_ablation/baselines/`), same 393-paper set
+
+Three external tools were confirmed to score the identical 393-paper ICLR-2026 set (`cspaper`:
+393 papers, one stray `submissions.json`; `DeepReviewer_14B`: 393; `DeepReviewer-v2-openai`:
+393, 1 failed job skipped) and evaluated on the same 376-common-paper subset used above:
+
+| method | n | Pearson | Spearman |
+|---|---|---|---|
+| cspaper | 367 | 0.7386 | 0.7631 |
+| ours (median draw) | 376 | 0.6138 | 0.5498 |
+| no-cal (median) | 376 | 0.5578 | 0.5085 |
+| DeepReviewer-v2-openai | 375 | 0.5526 | 0.5112 |
+| DeepReviewer_14B | 376 | 0.5420 | 0.4711 |
+| baseline (median) | 376 | 0.5230 | 0.4787 |
+
+**cspaper coverage note.** cspaper's pre-review gate desk-rejects some papers with no numeric
+score (`main_score_norm: N/A`). Initially 24/393 were desk-rejected; suspecting an over-desk-reject
+bug, the same 24 PDFs were resubmitted to the CSPaper platform API. 14/24 came back with a real
+score on rerun (confirming the bug — same paper, same gate, opposite outcome), 9/24 desk-rejected
+again (state as of this rerun; consistent, not resolved), raising scored coverage from 369→384/393
+(n=367 on the 376-common set, up from 352).
+
+**⚠️ cspaper's number above is likely invalid — probable decision leakage.** cspaper's
+`main_score_norm` sits almost perfectly on the correct side of the accept/reject boundary (0.5),
+far beyond what score-only reasoning would produce:
+
+| | n | accuracy of `(score > threshold)` vs `gt_binary` |
+|---|---|---|
+| **cspaper** (`main_score_norm > 0.5`) | 381 | **92.1%** (accepted papers scored >0.5 in 88.7% of cases; rejected papers scored <0.5 in 94.6%) |
+| ours (`cmp3_ours_v2`, `pred_score > 5`) | 387 | 64.6% |
+| baseline (`cmp3_baseline_v2`, `pred_score > 5`) | 390 | 60.0% |
+| deepreview_baseline (`pred_score > 5`) | 390 | 59.2% |
+
+Decomposing cspaper's correlation: a predictor that only knows the binary accept/reject decision
+(no score-level information at all) would already achieve r = 0.6860 against `gt_avg_score` on
+this set — i.e. **most of cspaper's headline r = 0.7419 (full-overlap) is explained by decision
+knowledge alone**, not fine-grained scoring skill. Within-bucket, cspaper still discriminates
+somewhat (r = 0.5187 within accepted papers, r = 0.4603 within rejected papers, n=159/222), so
+it isn't purely a coin flip on the decision — but the ~92% decision-side accuracy is far above
+what any of our arms achieve (59–65%) and is the most plausible explanation: cspaper (or its
+underlying LLM) appears to already know or infer the actual accept/reject outcome for these ICLR
+2026 papers — plausibly from training-data exposure to OpenReview decisions — rather than deriving
+it from the paper content. **Do not report cspaper's correlation as a fair comparison point without
+this caveat**, and prefer the within-bucket correlations (~0.46–0.52) as the more honest estimate
+of its actual paper-quality-scoring skill, which is roughly in line with the other baselines.
+
 ### Follow-up analysis (from existing results/snapshots, no new runs)
 
 All correlations below are pred_score vs gt_avg_score with the `pred_score == -100`
