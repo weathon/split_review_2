@@ -1,0 +1,24 @@
+{
+  "summary": "Test embedding tasks as JS literal instead of args",
+  "agentCount": 0,
+  "logs": [
+    "TASKS.length: 3"
+  ],
+  "result": {
+    "length": 3,
+    "tasks": [
+      "a",
+      "b",
+      "c"
+    ]
+  },
+  "workflowProgress": [
+    {
+      "type": "workflow_phase",
+      "index": 1,
+      "title": "Check"
+    }
+  ],
+  "totalTokens": 0,
+  "totalToolCalls": 0
+}

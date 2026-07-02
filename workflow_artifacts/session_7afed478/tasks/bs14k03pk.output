@@ -1,0 +1,17 @@
+oiz0QHejVj/YuxgSGFaqb: orig_glm=0.333  rerun_glm=0.333  rerun_deepseek=1.000  n=(orig 3, glm 3, ds 3)
+oiz0QHejVj/khHNHzRjMy: orig_glm=0.000  rerun_glm=0.000  rerun_deepseek=0.000  n=(orig 3, glm 3, ds 3)
+  retry 1/5 DeepReviewer_14B oiz0QHejVj/MwuSvrthXq: ValidationError: 1 validation error for OverlapResult
+  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='**Weakness Item 1 from R...rom Review 2:**  \nnull', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+  retry 2/5 DeepReviewer_14B oiz0QHejVj/MwuSvrthXq: ValidationError: 1 validation error for OverlapResult
+  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='**Weakness item 1 from R...rom Review 2:**  \nnull', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+oiz0QHejVj/MwuSvrthXq: orig_glm=0.667  rerun_glm=0.333  rerun_deepseek=0.333  n=(orig 3, glm 3, ds 3)
+6P5sAycAQr/0TmVqOpBbK: orig_glm=0.667  rerun_glm=0.333  rerun_deepseek=1.000  n=(orig 3, glm 3, ds 3)
+6P5sAycAQr/zqA7Q9Q21L: orig_glm=0.000  rerun_glm=0.667  rerun_deepseek=0.333  n=(orig 3, glm 3, ds 3)
+6P5sAycAQr/CFuNu8dK4s: orig_glm=0.500  rerun_glm=0.500  rerun_deepseek=0.500  n=(orig 2, glm 2, ds 2)
+173Pq3F31r/tucuU4sQ3s: orig_glm=0.000  rerun_glm=0.000  rerun_deepseek=0.000  n=(orig 2, glm 2, ds 2)
+173Pq3F31r/XHzrBDzKaX: orig_glm=0.000  rerun_glm=0.000  rerun_deepseek=1.000  n=(orig 2, glm 2, ds 2)
+
+mean glm rerun: 0.2708333333333333
+mean deepseek rerun: 0.5208333333333333
