@@ -99,7 +99,7 @@ PARSE_RESPONSE_JSON_SCHEMA = {
     "json_schema": {
         "name": "ParseResponse",
         "strict": True,
-        "schema": ParseResponse.model_json_schema(),
+        "schema": {**ParseResponse.model_json_schema(), "additionalProperties": False},
     },
 }
 
