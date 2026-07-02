@@ -120,7 +120,7 @@ def prep_review(review_text):
                     },
                 ],
                 response_format=PARSE_RESPONSE_JSON_SCHEMA,
-                extra_body={"reasoning": {"enabled": False}, "provider": {"only": ["deepseek"]}},
+                extra_body={"reasoning": {"enabled": False}, "provider": {"only": ["gmicloud/fp8"]}},
             )
 
             reviews = ParseResponse(**json.loads(completion.choices[0].message.content)).items
