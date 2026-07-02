@@ -1,0 +1,50 @@
+## Summary
+This paper proposes three one-step diffusion-based solvers (CMILP, SCMILP, MFILP) for integer linear programming (ILP), targeting both binary and non-binary problems. The core technical innovations are: (1) adaptation of consistency, shortcut, and meanflow models to one-step ILP solution generation; (2) an Iterative Integer Projection (IIP) layer for differentiable non-binary integer approximation; and (3) a momentum-based objective-guided sampling scheme. Experiments on binary benchmarks (set cover, capacitated facility location, combinatorial auction) and non-binary datasets (inventory management, synthetic) show that the proposed methods achieve 10-100x speedup over prior diffusion-based ILP solvers while maintaining competitive feasibility rates. However, the optimality gap of these neural solvers remains substantially larger than traditional solvers (Gurobi, SCIP) and the prior DDIM-based approach, indicating a speed-accuracy tradeoff that is not fully acknowledged in the paper's narrative. Key weaknesses include missing statistical variance reporting, selective comparison claims, potential issues in the diffusion formulation, and incomplete derivation of the guidance framework.
+
+## Strengths
+1. **Significant inference speed improvement**: The proposed one-step diffusion solvers reduce inference time by 10-100x compared to prior diffusion-based ILP solvers (IP Guided DDPM/DDIM), while maintaining competitive feasibility rates. This is a practically meaningful contribution, as slow inference has been a key barrier to deploying neural ILP solvers in real-world applications.
+
+2. **Novel IIP layer for non-binary ILP**: The Iterative Integer Projection (IIP) mechanism $f_{\\text{proj}}(x) = x - \\sin(2\\pi x)/(2\\pi)$ provides a differentiable, iteration-based approximation of integer rounding without requiring costly binarization. This enables the first end-to-end neural solver for non-binary integer variables, and the idea of a tunable iteration count (fewer during training, more during testing) is practical.
+
+3. **Comprehensive empirical evaluation across diverse ILP types**: The paper evaluates on both binary ILP benchmarks (three classic problem types) and non-binary ILP (two families: inventory management and synthetic), totaling nine dataset configurations. This breadth of evaluation is commendable and demonstrates the generality of the approach.
+
+4. **Introduction of momentum to objective-guided sampling**: The insight that prior guidance methods are a single-step gradient descent, and that momentum can accelerate the guidance process, is well-motivated. The ablation study in Table 5 shows consistent improvements (2-4% dataset feasibility improvement, 2-3% gap reduction) when momentum is applied.
+
+5. **Thorough baseline comparison**: The paper includes a wide range of baselines: traditional solvers (Gurobi, SCIP, COPT), heuristic methods (rins, feasibility pump), learning-based solvers (Neural Diving, Predict-and-Search), and prior diffusion-based methods (IP Guided DDPM/DDIM, DiffILO). This provides a clear positioning of the proposed methods within the existing landscape.
+
+## Weaknesses
+### W1. Missing statistical variance and significance reporting (CRITICAL)
+All experimental results in Tables 1-6 report only point estimates (Gap, Time, Feasibility) without variance, confidence intervals, or significance tests. For neural methods with inherent randomness (sampling, seed-dependent training), results without multi-seed reporting are insufficient to establish reliability. Key claims such as "the introduction of momentum improves the search quality significantly" (Table 5) use the word "significantly" without any statistical test. The improvement is 2-4% in dataset feasibility, which may not be statistically significant given the 100-instance test set. **Required**: Report mean±std over at least 3-5 random seeds for all neural methods; add pairwise significance tests for the main comparisons (proposed vs. DDIM on gap/feasibility).
+
+### W2. Speed-accuracy tradeoff is understated in narrative claims (MAJOR)
+The abstract and introduction state that the proposed methods "outperform existing learning-based methods," but Table 1 shows that IP Guided DDIM achieves consistently lower optimality gaps across all binary datasets (SC: 68.5% vs 88-92%; CF: 54.6% vs 76-83%; CA: 25.4% vs 79-85%). The proposed methods are faster, not uniformly better. The paper should explicitly separate speed claims from accuracy claims. The contribution is meaningful (speed at competitive accuracy) but needs more honest framing. **Required**: Revise all "outperforms" claims to distinguish speed vs. accuracy dimensions; acknowledge DDIM's superior gap explicitly in the abstract and introduction.
+
+### W3. Derivation issues in objective-guided sampling and CMILP loss (MAJOR)
+The CMILP loss (Eq. 6) uses $\delta(\\mathbf{x} - \\mathbf{x}^*)$ (Dirac delta at a single optimal solution) as the target while claiming to learn a *distribution* of feasible solutions. This contradiction is not addressed. The distance function $d(\\cdot,\\cdot)$ to a Dirac delta is not defined — KL-divergence to a point mass is degenerate, and MSE to a delta reduces to standard supervised regression. This undermines the distributional learning motivation. Additionally, the variational derivation in Eq. (7) includes terms ($\\log Z$, $\\mathbf{y}^*$) that are constant w.r.t. $\\eta$ and thus irrelevant for optimization, making the derivation harder to follow than necessary. **Required**: Clarify how $d(\\cdot,\\cdot)$ operates on a delta distribution; either justify the distributional claim or reframe the method as learning point estimates with diffusion prior. Simplify Eq. (7) by removing constant terms.
+
+### W4. Potential gradient pathology in IIP layer (MAJOR)
+The IIP function $f_{\\text{proj}}(x) = x - \\sin(2\\pi x)/(2\\pi)$ has derivative $f'(x) = 1 - \\cos(2\\pi x)$, which equals 0 at all integer points. This means that once a variable reaches an integer value during training, its gradient vanishes — preventing any further learning for that variable. The paper does not discuss this "gradient death" issue, nor does it propose a mitigation (e.g., stop-gradient at integers, straight-through estimator, or annealing the projection strength). **Required**: Add a discussion of gradient behavior at integer points and propose a practical mitigation strategy.
+
+### W5. Missing out-of-distribution generalization evaluation (MAJOR)
+The paper claims "strong scalability compared to traditional solvers" but only evaluates on in-distribution test sets (same problem sizes as training). For example, models trained on 800 instances of IM-(50,5,2) are tested on 100 instances of IM-(50,5,2) — same dimensions. There is no evaluation on larger problem sizes (e.g., train on n=50, test on n=100) or different constraint densities. This weakens the scalability claim because the model's ability to generalize to unseen problem dimensions is unknown. **Required**: Add at least one out-of-distribution experiment where test instances have different variable/constraint counts than training.
+
+### W6. Ambiguity in Eq. (5) denoising formulation (MINOR)
+The noise coefficient in Eq. (5) is written as $\\sqrt{\\frac{1-\\bar{\\alpha}_{t-1}}{1-\\bar{\\alpha}_t}} \\beta_t \\mathbf{z}$, which is ambiguous regarding whether $\\beta_t$ is inside or outside the square root. The standard DDPM formulation uses $\\sqrt{\\beta_t \\cdot \\frac{1-\\bar{\\alpha}_{t-1}}{1-\\bar{\\alpha}_t}} \\mathbf{z}$. The paper should clarify this notation to avoid implementation ambiguity.
+
+### W7. Incomplete limitation discussion (MINOR)
+The conclusion mentions only optimality gap and gradient search cost as limitations. It omits: (a) dependence on Gurobi for training targets (the model cannot exceed Gurobi's quality), (b) lack of constraint satisfaction guarantees during guidance, (c) use of hard rounding for integrality (undermining "end-to-end" claim), and (d) limited problem diversity (only linear objectives, only ≤ constraints). **Required**: Add a comprehensive limitations subsection covering these points.
+
+### W8. Reproducibility gaps (MINOR)
+The inventory management problem (Eq. 10) does not specify the sampling intervals for coefficients $s_j$, $q_i$, $a_i$, $C_j$. The synthetic dataset generation references Lee & Kim (2025) but does not specify the coefficient ranges or sparsity patterns. Without this information, the experiments cannot be reproduced independently. **Required**: Report all coefficient generation parameters in the main text or appendix.
+
+## Score
+**Final Score: 5/10**
+
+**Rationale**: The paper presents a technically meaningful contribution — one-step diffusion solvers for ILP — and demonstrates a genuine practical advantage in inference speed. The IIP layer is a novel and useful mechanism for handling non-binary integer variables. However, the paper is weakened by several significant issues that limit its current scientific impact:
+
+- **Missing statistical rigor** (no variance reporting, no significance tests) makes key quantitative claims unverifiable.
+- **Selective and overstated comparison claims** (the narrative of "outperforming" is contradicted by the data on multiple dimensions).
+- **Technical gaps** in the CMILP loss formulation, objective-guided sampling derivation, and IIP gradient pathology reduce confidence in the methodology.
+- **Narrow generalization evidence** (only in-distribution testing) limits the practical relevance of scalability claims.
+
+When research value and novelty are taken as primary scoring dimensions, the paper demonstrates moderate novelty (application of one-step diffusion to ILP + IIP projection) but insufficient evidential rigor to fully support its contribution claims. The speed benefits are real and practically relevant, but must be disentangled from the overstated accuracy narrative. A revised version that addresses the statistical, framing, and derivation issues could be significantly stronger.

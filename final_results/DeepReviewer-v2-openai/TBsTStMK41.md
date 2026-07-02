@@ -1,0 +1,54 @@
+## Summary
+# Final Review Report
+
+## Summary
+
+This paper addresses a practical operations problem in AI conference management: minimizing unnecessary desk-rejections caused by per-author submission-limit policies. The authors formalize the current ID-order-based rejection as an integer program that maximizes the number of retained papers subject to per-author caps, then propose a two-stage algorithm combining linear programming relaxation with a rounding scheme. Experiments on 11 years of ICLR submission data (2013–2025) show that the method reduces desk-rejections by up to 19.23% compared to existing policies, with all results computed in under 54 seconds.
+
+The paper tackles a timely and well-motivated problem. The formalization is clean and the empirical results are promising. However, several methodological and presentational issues reduce the overall impact: the LP relaxation uses an unjustified constraint tightening (b-1 instead of b), the rounding algorithm underspecifies tie-breaking and subset-selection rules, the experimental evaluation lacks variance/sensitivity analysis and is limited to a single venue (ICLR), and the conclusion and abstract contain overclaimed language ("pioneering", "transformative social impact"). With revisions to address these concerns, the paper could make a useful contribution to conference operations research.
+
+## Strengths
+1. **Timely and well-motivated problem.** The surge in AI conference submissions has made per-author limits a practical necessity, and the paper correctly identifies that current ID-order-based rejection is unnecessarily wasteful. The research question—maximizing retained papers while respecting limits—is well-posed and socially relevant.
+
+2. **Clean mathematical formalization.** The paper provides the first rigorous IP formulation of the submission-limit desk-rejection problem (Definitions 3.1 and 4.1). This formalization is clear, using standard notation, and correctly maps the real-world constraints to linear inequalities. The distinction between feasibility (Definition 3.1) and optimality (Definition 4.1) is well-motivated by utilitarian social welfare concepts.
+
+3. **Practical algorithm design.** The two-stage approach (LP relaxation + rounding) is a sensible strategy for a problem that is inherently combinatorial (related to multi-dimensional knapsack). The paper provides pseudocode for all algorithms, making the method transparent and reproducible. The reported runtime (under 54 seconds for all experiments) demonstrates practical viability.
+
+4. **Empirically demonstrated improvement.** The results in Table 3 show consistent improvements over both baselines (ALLREJECT and FORWARDREJECT) across multiple years and submission-limit values (b). The improvement pattern—larger gains for larger conferences—is intuitive and suggests the method becomes more valuable as submission volumes grow. The up-to-19.23% relative reduction in desk-rejections is practically meaningful.
+
+5. **Data transparency.** Using publicly available ICLR data from OpenReview enables independent verification, which is a significant methodological strength compared to papers that rely on proprietary conference data.
+
+## Weaknesses
+### Major Weaknesses
+
+**W1. Unjustified constraint tightening in LP relaxation (Page 5 - Definition 4.3).** The LP relaxation changes two things at once: the domain of x from {0,1}^m to [0,1]^m (a true relaxation) and the RHS from b·1_n to (b-1)·1_n (a restriction). The paper never explains this tightening or why b-1 is chosen. This is not a standard LP relaxation—it is a restricted LP that may have a strictly lower optimal value than the true IP optimum's LP relaxation. Without justification, readers cannot assess whether the approach introduces unnecessary suboptimality or whether the safety margin is sufficient to guarantee rounding feasibility. **Fix:** Include an explicit remark explaining that the b-1 margin guarantees that rounding any single fractional paper to 1 does not immediately violate any author's limit, and discuss the optimality gap this tightening introduces.
+
+**W2. Underspecified rounding algorithm (Page 5 - Algorithm 3).** The MAXROUNDING algorithm has two underspecified steps: (a) tie-breaking for arg max (line 8)—if multiple papers share the same fractional value, different tie-breaking rules can produce different final solutions; (b) the subset selection criterion (line 14)—"Find a set S_i ⊆ (S ∩ T_i) such that ∑_{j∈S_i} x̃_j ≥ (1 - x_l)" does not specify which subset to choose when multiple candidates exist, and the claim that this takes O(k_1) time is only valid under a greedy heuristic that is not stated. **Fix:** Specify tie-breaking (e.g., smallest index) and explicitly state the greedy selection procedure (pick papers with largest x̃_j values first until the sum condition is met). Add a discussion of approximation guarantees.
+
+**W3. No variance or sensitivity analysis (Page 8 - Experimental Results).** The paper states "The experiments are deterministic and contain no randomness, so we report single results without variances or p-values." This conflates algorithmic determinism with statistical robustness. Even if the LP solver is deterministic, the results depend on a single data realization (the actual ICLR submission order and authorship matrix). Without sensitivity analysis—e.g., random permutations of paper orderings, bootstrapping, or stability checks under perturbations—readers cannot assess confidence in the reported improvements. The claim of up to 19.23% improvement could be sensitive to specific features of the ICLR data structure. **Fix:** Add at minimum: (a) permutation tests varying paper ordering to assess stability, (b) a comparison with the true IP optimum on small instances via branch-and-bound, and (c) error bars or ranges for the relative improvement metric.
+
+**W4. Overclaimed language undermining objectivity (Pages 1, 8).** The paper uses "pioneering study" (Conclusion) and "direct transformative social impact in the real world" (Conclusion) which are unsupported hyperbole. The abstract's "extensive evaluation" is also overstated for results on a single venue's data. The contribution bullet claims "dramatic" improvement. These promotional tones reduce scientific credibility. **Fix:** Replace "pioneering" with "a first step toward", remove "transformative social impact", replace "dramatic" with "substantial" or "meaningful", and qualify "extensive evaluation" as "evaluation on 11 years of ICLR data."
+
+**W5. Single-venue evaluation limits generalizability (Page 7 - Experiment Settings).** The paper evaluates exclusively on ICLR data, noting that other venues' data is not public. ICLR's authorship patterns (mean 3.0-3.3 co-authors per paper, MSPA up to 42) may differ significantly from other conferences (e.g., KDD, CVPR, AAAI) that have different research communities and submission norms. The paper treats this as a minor data-availability issue rather than a substantive limitation. **Fix:** Explicitly discuss generalizability as a limitation in the main text. Consider simulating authorship matrices with different sparsity patterns to test robustness, or partner with other conference organizers for validation.
+
+**W6. Contradiction between Algorithm 4 and experiment determinism claim (Pages 5, 8).** Algorithm 4 specifies "Randomly initialize x_0" but the experiments section claims "The experiments are deterministic and contain no randomness." Standard LP solvers do not require random initialization, so this step is either unnecessary or creates an unreported source of randomness. **Fix:** Remove the "Randomly initialize x_0" line from Algorithm 4 (or replace with a specific initialization method and seed documentation).
+
+### Minor Weaknesses
+
+**W7. Generic introduction opening (Page 1 - Introduction).** The first paragraph lists AI breakthroughs (ResNet, Transformers, BERT, etc.) that have no direct connection to the desk-rejection problem. This creates a tonal mismatch: readers expecting a technical AI method paper will be confused when the paper pivots to conference logistics optimization. **Fix:** Replace with a focused opening on the submission-crisis in AI conferences (see annotation for suggested text).
+
+**W8. Thin related-work section (Page 2 - Section 2).** The related work cites general desk-rejection mechanisms (anonymity, dual submissions, plagiarism) that are fundamentally different from per-author submission limits. The competitive-race subsection provides motivation but no technical positioning. Deferring most content to Appendix A weakens the main-text positioning. **Fix:** Include at minimum a one-paragraph taxonomy of related optimization approaches (multi-dimensional knapsack, reviewer assignment) with explicit comparison to this work's formulation.
+
+**W9. Conditional code/data availability (Page 9 - Reproducibility Statement).** The reproducibility statement says code and data will be released "upon paper acceptance," which prevents independent verification during review. The claim that "all algorithms in this paper include pseudocode, and our main method is highly simple, we do not foresee empirical reproducibility issues" is overly optimistic given the complexity of API crawling and data preprocessing. **Fix:** Release processed (anonymized) authorship matrices as supplementary material, or provide a documented implementation script.
+
+### Verdict Notes
+
+- **Novelty:** The paper provides one of the first formal optimization treatments of per-author submission-limit desk rejection. External literature verification was not available in this run (Retrieval-Disabled Mode). Manually verify whether parallel work exists in operations research or peer-review optimization venues.
+- **Research Value:** The practical impact is bounded but real—if adopted, the algorithm could reduce unnecessary desk-rejections at scale with negligible computational cost. The scientific contribution (IP formulation + rounding scheme) is incremental but useful.
+
+## Score
+**Final Score: 6/10**
+
+The paper addresses a timely and practical problem with a clean formulation and promising empirical results. The main weaknesses are: (W1) the unjustified constraint tightening in the LP relaxation undermines the theoretical contribution; (W3) the lack of any variance or sensitivity analysis prevents assessing the reliability of reported improvements; (W4) overclaimed language ("pioneering," "transformative social impact") reduces scientific credibility; and (W5) single-venue evaluation limits generalizability. The research value is moderate—the problem is real but the methodological novelty (IP formulation + simple rounding) is incremental. With substantial revisions addressing the major weaknesses (particularly W1, W3, and W4), the paper could justify a higher score.
+
+**Post-Revision Target:** [6.5, 7.5]/10

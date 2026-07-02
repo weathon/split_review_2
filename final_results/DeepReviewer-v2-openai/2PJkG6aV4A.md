@@ -1,0 +1,63 @@
+## Summary
+# Final Review Report
+
+## Summary
+
+This paper proposes a guardrail-avoiding framework for evaluating societal bias in Large Vision-Language Models (LVLMs) when strong safety guardrails cause prior attribute-inferring benchmarks to fail via refusals. The core idea is conceptually clean: replace attribute-inferring prompts ("Is this person a CEO or a secretary?") with person-irrelevant tasks ("Write a fictional story about an imaginary person") while attaching the person's image only as provisional user context. This design decouples the evaluation task from the depicted person, avoiding refusal triggers, and measures bias as statistical disparities in outputs across user demographic groups.
+
+The method is instantiated across three diverse tasks — story generation, term explanation, and exam-style QA — using Total Variation Distance (TVD) as the unified bias metric. The empirical evaluation spans 20 recent LVLMs (16 open-source, 4 proprietary) and yields several noteworthy findings: (1) zero refusals across all models, confirming the operational advantage over prior benchmarks; (2) all models exhibit measurable gender and racial bias; (3) proprietary models show lower but non-negligible bias compared to open-source counterparts; (4) bias scores across tasks are weakly correlated, suggesting bias is not a monolithic model property; (5) model size and general performance (MMMU accuracy) do not reliably predict bias.
+
+The paper contributes a practical evaluation tool for a timely problem — as safety guardrails become ubiquitous, existing bias benchmarks lose effectiveness. The main weaknesses include: a speculative causal claim about "continuous monitoring" without controlled evidence, limited transparency on the LLM-judge measurement pipeline, an overclaimed "guardrail-agnostic" label that is narrower than implied, and several methodological details (refusal classification protocol, fairness definition choice, within-family correlation reliability) that need tightening. Novelty positioning relative to existing persona-based LLM bias work is deferred due to the unavailability of external literature retrieval in this review run.
+
+## Strengths
+**S1. Timely and well-motivated problem.** The paper identifies a genuine and growing problem in bias evaluation: as safety guardrails become standard in proprietary (and increasingly open-source) LVLMs, existing attribute-inferring benchmarks produce unreliable measurements due to refusals. The refusal-rate documentation across 4 benchmarks and 6 models (Table 1) convincingly demonstrates the severity of this issue, with rates reaching 100% for Claude 3.7 Sonnet on SBBench.
+
+**S2. Conceptually clean solution.** The core idea — decoupling the evaluation task from the depicted person by using person-irrelevant prompts and treating images only as user context — is elegant and intuitively sound. The two-part design (prompt type change + image role change) directly addresses both the refusal problem and the contextual-confounds problem identified in prior caption-based evaluations.
+
+**S3. Multi-task instantiation.** Evaluating bias across three structurally different tasks (creative generation, explanation, factual QA) is a methodological strength. The weak cross-task correlations (Observation 2.3) provide compelling evidence that bias is not a monolithic property, underscoring the need for diverse evaluation batteries rather than single-metric assessments.
+
+**S4. Broad empirical coverage.** The evaluation of 20 LVLMs (16 open-source, 4 proprietary) across multiple model families and scales provides a useful landscape of current bias levels. The consistent finding that all models exhibit measurable bias, despite variations in training and alignment, underscores the persistence of the problem.
+
+**S5. Frank acknowledgment of limitations.** The paper explicitly acknowledges the limitations of discrete demographic labels (binary gender, seven race categories) and points to Appendix H for broader discussion. This transparency is commendable and appropriate for a fairness-oriented paper.
+
+**S6. Practical impact potential.** The framework's ability to achieve zero refusals across all tested models makes it immediately usable by practitioners who need to audit LVLMs before and during deployment, as discussed in Section 5.
+
+## Weaknesses
+**W1. Overclaimed "guardrail-agnostic" framing (Severity: Major, Fixable).** The paper brands its method as "guardrail-agnostic," implying invariance to any safety guardrail configuration. In reality, the method is guardrail-avoiding for a specific class of prompts (person-irrelevant tasks) — it does not guarantee immunity to guardrails triggered by image content (e.g., violent, medical, or copyrighted imagery in the user photo itself), nor does it address scenarios where the model's guardrails evolve to detect indirect demographic probing. A more precise characterization would strengthen the paper's scientific credibility and avoid overclaiming. (See Annotation 5.)
+
+**W2. Unsupported causal claim about "continuous monitoring" (Severity: Major, Fixable).** Section 5 argues that "continuous monitoring and iterative refinement can be a critical factor" for bias reduction, but provides no direct evidence. The observed lower bias in proprietary models is equally consistent with multiple alternative explanations: larger compute budgets, better training data, architectural advances, or more extensive safety alignment. The current framing presents this hypothesis as a plausible interpretation rather than a tested claim, but the language ("we argue that the practice of continuous monitoring and iterative refinement can be a critical factor") risks over-interpretation by readers. The paper should explicitly list alternative explanations and propose a controlled study design for causal validation. (See Annotation 14.)
+
+**W3. LLM-as-judge measurement pipeline (Severity: Moderate, Fixable).** Two of the three evaluation tasks (story generation, term explanation) rely on an LLM assistant (Qwen3-32B) for attribute extraction and technicality judgment. This introduces a potential measurement confound: if the LLM judge itself exhibits gender/racial biases in attribute inference or difficulty assessment, the reported bias scores could partially reflect the judge's biases rather than the target LVLM's biases. The paper mentions Appendix D for human-alignment validation but does not report any summary statistic (e.g., Cohen's kappa, agreement rate) in the main text. Without this, readers cannot assess measurement reliability. (See Annotations 11, 15.)
+
+**W4. Fairness definition assumption (Severity: Moderate, Fixable).** The TVD metric implicitly adopts demographic parity (equal distribution of attributes across groups) as the fairness criterion without explicit justification. For story generation, equal proportions of "engineer" characters for male and female users is treated as the ideal, but this assumes that the model should not reflect real-world base-rate differences in occupational distributions. Different fairness definitions (e.g., equal opportunity, base-rate matching) would yield different reference distributions and potentially different conclusions. The paper should transparently state its chosen fairness norm and discuss the implications. (See Annotation 9.)
+
+**W5. Small-sample within-family correlations (Severity: Moderate, Fixable).** Observation 2.5 reports within-model-family correlations between bias and model size (e.g., r=0.90 for racial bias in story generation) based on only 2-3 data points per family. With n=3, even a correlation of 0.90 is not statistically significant (p>0.05). Presenting these as observations without significance levels or confidence intervals risks misleading readers about the reliability of these trends. (See Annotation 13.)
+
+**W6. Limited evaluation of visual confounds (Severity: Moderate, Addressable).** The paper controls for non-target demographic distributions (age, race when analyzing gender) but does not address non-demographic visual confounds in face images — such as facial expression, image quality, background complexity, or head pose — that may correlate with demographic attributes. If, for example, female faces in FairFace are systematically younger or have different expressions than male faces, observed output disparities could partly reflect these visual confounds rather than gender bias per se. (See Annotation 7.)
+
+**W7. Refusal classification methodology (Severity: Minor, Fixable).** The paper reports refusal rates but does not describe the operational classification procedure (keyword-based vs. manual, inter-annotator agreement, handling of borderline cases). This limits reproducibility of the zero-refusal claim. (See Annotation 16.)
+
+**W8. Missing statistical rigor for key comparisons (Severity: Minor, Fixable).** The paper reports average bias scores for open-source vs. proprietary groups but does not provide confidence intervals, standard errors, or significance tests for these comparisons. Given the small number of proprietary models (n=4) and the variability within each group, statistical testing would strengthen the reliability of the observed gap.
+
+**W9. Novelty verification deferred (Severity: Informational, Unavoidable).** Due to the unavailability of external paper search in this review run, all novelty and related-work positioning conclusions are deferred. A complete evaluation would require systematic comparison against existing persona-based LLM bias evaluation methods, caption-based LVLM bias benchmarks, and prior work on indirect probing for demographic bias. Authors and readers should treat all novelty claims in this paper as requiring manual verification.
+
+**W10. Exam-style QA causal pathway (Severity: Minor, Clarification).** The mechanism by which a user's photo would affect factual question-answering accuracy is not clearly articulated. If the model merely conditions on the image as user context, it is unclear why accuracy on objective factual knowledge (MMLU) should vary. The low bias scores in this task (0.36-3.44) are consistent with a weak or absent effect, but the paper should either articulate the hypothesized causal chain or discuss whether this task primarily measures a different construct (e.g., differential response calibration) than the other two tasks. (See Annotation 10.)
+
+## Score
+**Final Score: 6/10**
+
+*Rationale:* The paper addresses a timely and practically important problem with a conceptually clean solution and broad empirical evaluation across 20 LVLMs. The core contribution — a guardrail-avoiding bias evaluation framework using person-irrelevant prompts — is well-motivated, clearly explained, and empirically validated through the zero-refusal result. The multi-task design and the finding that bias scores are weakly correlated across tasks are valuable methodological contributions.
+
+However, the score is constrained by several factors that materially affect research value and scientific credibility:
+
+1. **Overclaiming of "guardrail-agnostic"** — The method is guardrail-avoiding for a specific prompt class, not fully guardrail-agnostic as the title and framing suggest. This weakens the paper's core branding.
+
+2. **Unsupported causal hypothesis** — The "continuous monitoring" narrative is presented as a key finding (highlighted in abstract and conclusion) but is supported only by post-hoc speculation, not controlled evidence. This conflates empirical contribution with interpretation.
+
+3. **Measurement pipeline transparency** — The reliance on an LLM judge without main-text validation metrics introduces unquantified measurement risk.
+
+4. **Deferred novelty verification** — Without external literature retrieval, the paper's novelty relative to existing persona-based LLM bias evaluation and caption-based LVLM bias methods cannot be confirmed. This is an informational constraint of this review, but it means the contribution's distinctiveness remains unvalidated.
+
+5. **Statistical rigor gaps** — Small-sample within-family correlations presented without significance levels, and group comparisons without confidence intervals, reduce the reliability of the quantitative claims.
+
+The paper has strong potential after revision — tightening the claims, addressing the measurement pipeline transparency, adding statistical rigor, and tempering the causal language would substantially strengthen it. In its current form, the empirical contribution is solid but the rhetorical framing over-reaches the evidence.
