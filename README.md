@@ -280,6 +280,27 @@ DeepReviewer-v2 failed job is the only gap):
 | DeepReviewer_14B | 392 | 0.5284 | 0.4548 |
 | baseline (median) | 392 | 0.5212 | 0.4734 |
 
+**Paired bootstrap: ours vs each non-leaked method** (papers resampled jointly, 10,000
+resamples, shared n = 392; single draw per method — cspaper excluded due to the leakage
+caveat below):
+
+| ours vs | metric | Δ | 95% CI | boot p |
+|---|---|---|---|---|
+| baseline (median) | Pearson | +0.0942 | [+0.028, +0.160] | **0.0044** |
+| | Spearman | +0.0791 | [−0.002, +0.158] | 0.0554 |
+| DeepReviewer_14B | Pearson | +0.0870 | [+0.002, +0.174] | **0.0446** |
+| | Spearman | +0.0977 | [+0.006, +0.189] | **0.0378** |
+| DeepReviewer-v2-openai | Pearson | +0.0614 | [−0.003, +0.130] | 0.0618 |
+| | Spearman | +0.0377 | [−0.038, +0.116] | 0.3194 |
+| no-cal (median) | Pearson | +0.0552 | [−0.003, +0.117] | 0.0652 |
+| | Spearman | +0.0424 | [−0.026, +0.111] | 0.2286 |
+
+Ours significantly beats the single-call baseline on Pearson (p = 0.004; Spearman marginal at
+0.055) and DeepReviewer_14B on both metrics; vs DeepReviewer-v2-openai and no-cal the edge is
+consistent but marginal on Pearson (~0.06) and not significant on Spearman. These are
+single-draw-vs-single-draw tests; for baseline and no-cal the pooled 3-draw cluster bootstrap
+above (p = 0.0002 both) is the stronger evidence — the external methods only have one draw.
+
 **cspaper coverage note.** cspaper's pre-review gate desk-rejects some papers with no numeric
 score (`main_score_norm: N/A`). Initially 24/393 were desk-rejected; suspecting an over-desk-reject
 bug, the same 24 PDFs were resubmitted to the CSPaper platform API. 14/24 came back with a real
