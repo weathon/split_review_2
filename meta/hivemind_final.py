@@ -46,8 +46,6 @@ RETRY_DELAY = 5
 
 PROMPT = """You are comparing two paper reviews written by the SAME reviewer agent on TWO DIFFERENT papers. Identify each item in the WEAKNESS section of review 1 and, for each one, decide whether review 2 contains a SIMILAR weakness item — the same kind of methodological/presentation complaint applied to the other paper (e.g. "missing ablation", "no statistical significance", "overclaimed novelty", "writing/typos", "weak baselines").
 
-Ignore any item that is explicitly labeled as "Nice-to-Have" / "Nice-to-Haves" (e.g. items under a Nice-to-Have section or explicitly marked as nice-to-have) — do not count those as weakness items in either review. Only apply this to items explicitly said to be nice-to-have; do NOT infer or reclassify weakness items as nice-to-have.
-
 Two items match if they describe the SAME KIND of problem, even when applied to different content. They do NOT match merely because both mention the same topic.
 
 For each weakness item in review 1, output the item text and either the matching item summary from review 2, or null if there is no match.
