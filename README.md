@@ -265,18 +265,20 @@ than the single-call baseline; calibration retrieval stabilizes scoring, not jus
 
 Three external tools were confirmed to score the identical 393-paper ICLR-2026 set (`cspaper`:
 393 papers, one stray `submissions.json`; `DeepReviewer_14B`: 393; `DeepReviewer-v2-openai`:
-393, 1 failed job skipped). All methods below are evaluated on the single shared subset of
-papers scored by every method (n = 382 — the intersection of cspaper 393, DeepReviewer_14B 393,
-DeepReviewer-v2 392, ours 387, no-cal 386, baseline 390):
+393, 1 failed job skipped). Our three median-draw runs were completed to 393/393 (3 papers per
+run were never sampled due to duplicate rows in `ratings.csv` shifting the seeded sample; they
+were filled by running the identical pipeline on exactly those papers). All methods below are
+evaluated on the single shared subset scored by every method — n = 392 of 393 (the one
+DeepReviewer-v2 failed job is the only gap):
 
 | method | n | Pearson | Spearman |
 |---|---|---|---|
-| cspaper | 382 | 0.7589 | 0.7773 |
-| ours (median draw) | 382 | 0.6139 | 0.5500 |
-| no-cal (median) | 382 | 0.5571 | 0.5052 |
-| DeepReviewer-v2-openai | 382 | 0.5552 | 0.5169 |
-| DeepReviewer_14B | 382 | 0.5342 | 0.4631 |
-| baseline (median) | 382 | 0.5210 | 0.4746 |
+| cspaper | 392 | 0.7592 | 0.7757 |
+| ours (median draw) | 392 | 0.6154 | 0.5525 |
+| no-cal (median) | 392 | 0.5602 | 0.5101 |
+| DeepReviewer-v2-openai | 392 | 0.5539 | 0.5148 |
+| DeepReviewer_14B | 392 | 0.5284 | 0.4548 |
+| baseline (median) | 392 | 0.5212 | 0.4734 |
 
 **cspaper coverage note.** cspaper's pre-review gate desk-rejects some papers with no numeric
 score (`main_score_norm: N/A`). Initially 24/393 were desk-rejected; suspecting an over-desk-reject
