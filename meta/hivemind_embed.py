@@ -200,7 +200,7 @@ def main():
                 set_b = set_b / np.linalg.norm(set_b, axis=1, keepdims=True)
                 sim_matrix = set_a @ set_b.T
                 # sim = np.mean(sim_matrix)
-                sim = np.mean(np.max(sim_matrix, axis=1))
+                sim = np.mean(np.percentile(sim_matrix, 75, axis=1))
                 sims[method].append(sim)
 
     with open(OUT_DIR / "overlap_results.pkl", "wb") as f:
