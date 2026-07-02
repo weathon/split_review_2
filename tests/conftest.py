@@ -3,6 +3,7 @@ import types
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "code"))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "meta"))
 
 # main.py calls weave.init at import time (hits wandb servers); stub it out so
 # tests never touch the network.

@@ -3,29 +3,53 @@ platform linux -- Python 3.11.14, pytest-7.2.0, pluggy-1.6.0 -- /home/wg25r/mini
 cachedir: .pytest_cache
 rootdir: /home/wg25r/split_review_opus_repro
 plugins: split-0.8.0, anyio-4.12.1
-collecting ... collected 22 items
+collecting ... collected 40 items
 
-tests/test_baseline.py::test_parse_review_regex_path PASSED              [  4%]
-tests/test_baseline.py::test_parse_review_whitespace_and_negative PASSED [  9%]
-tests/test_baseline.py::test_parse_review_rejects_non_decision_word PASSED [ 13%]
-tests/test_baseline.py::test_load_ground_truth PASSED                    [ 18%]
-tests/test_baseline.py::test_load_ground_truth_missing_csv PASSED        [ 22%]
-tests/test_main.py::test_parse_score PASSED                              [ 27%]
-tests/test_main.py::test_decision_match PASSED                           [ 31%]
-tests/test_main.py::test_match_label PASSED                              [ 36%]
-tests/test_main.py::test_shorten_title PASSED                            [ 40%]
-tests/test_main.py::test_stratified_sample PASSED                        [ 45%]
-tests/test_main.py::test_load_ground_truth PASSED                        [ 50%]
-tests/test_main.py::test_load_ground_truth_missing_csv PASSED            [ 54%]
-tests/test_main.py::test_predict_acceptance_rate PASSED                  [ 59%]
-tests/test_main.py::test_predict_acceptance_rate_missing_file PASSED     [ 63%]
-tests/test_main.py::test_score_and_decision_extraction_from_merged_review PASSED [ 68%]
-tests/test_pipeline.py::test_run_pipeline_shape PASSED                   [ 72%]
-tests/test_pipeline.py::test_run_pipeline_extractor_fallback PASSED      [ 77%]
-tests/test_pipeline.py::test_process_papers_callback_and_skip PASSED     [ 81%]
-tests/test_pipeline.py::test_run_benchmark_csv_shape PASSED              [ 86%]
-tests/test_pipeline.py::test_baseline_review_paper_shape PASSED          [ 90%]
-tests/test_pipeline.py::test_baseline_parse_review_extractor_fallback PASSED [ 95%]
+tests/test_baseline.py::test_parse_review_regex_path PASSED              [  2%]
+tests/test_baseline.py::test_parse_review_whitespace_and_negative PASSED [  5%]
+tests/test_baseline.py::test_parse_review_rejects_non_decision_word PASSED [  7%]
+tests/test_baseline.py::test_load_ground_truth PASSED                    [ 10%]
+tests/test_baseline.py::test_load_ground_truth_missing_csv PASSED        [ 12%]
+tests/test_main.py::test_parse_score PASSED                              [ 15%]
+tests/test_main.py::test_decision_match PASSED                           [ 17%]
+tests/test_main.py::test_match_label PASSED                              [ 20%]
+tests/test_main.py::test_shorten_title PASSED                            [ 22%]
+tests/test_main.py::test_stratified_sample PASSED                        [ 25%]
+tests/test_main.py::test_load_ground_truth PASSED                        [ 27%]
+tests/test_main.py::test_load_ground_truth_missing_csv PASSED            [ 30%]
+tests/test_main.py::test_predict_acceptance_rate PASSED                  [ 32%]
+tests/test_main.py::test_predict_acceptance_rate_missing_file PASSED     [ 35%]
+tests/test_main.py::test_score_and_decision_extraction_from_merged_review PASSED [ 37%]
+tests/test_meta.py::test_list_papers_and_load_review PASSED              [ 40%]
+tests/test_meta.py::test_split_human_reviewers PASSED                    [ 42%]
+tests/test_meta.py::test_load_human_review PASSED                        [ 45%]
+tests/test_meta.py::test_judge_real_api_shape PASSED                     [ 47%]
+tests/test_meta.py::test_human_baseline_judge_real_api_shape PASSED      [ 50%]
+tests/test_metric.py::test_round_to_scale PASSED                         [ 52%]
+tests/test_metric.py::test_spearman_and_pearson_ci PASSED                [ 55%]
+tests/test_metric.py::test_mae_ci PASSED                                 [ 57%]
+tests/test_metric.py::test_auroc_ci PASSED                               [ 60%]
+tests/test_metric.py::test_max_f1_at_threshold PASSED                    [ 62%]
+tests/test_metric.py::test_paired_bootstrap_ci_and_pvalue PASSED         [ 65%]
+tests/test_metric.py::test_build_one_vs_rest_arrays_by_paper PASSED      [ 67%]
+tests/test_metric.py::test_one_vs_rest_baseline PASSED                   [ 70%]
+tests/test_metric.py::test_one_vs_one_baseline PASSED                    [ 72%]
+tests/test_metric.py::test_split_half_baseline PASSED                    [ 75%]
+tests/test_metric.py::test_ai_vs_one_vs_rest_shape PASSED                [ 77%]
+tests/test_metric.py::test_ai_vs_one_vs_one_shape PASSED                 [ 80%]
+tests/test_metric.py::test_analyze_and_plot_end_to_end PASSED            [ 82%]
+tests/test_pipeline.py::test_run_pipeline_shape PASSED                   [ 85%]
+tests/test_pipeline.py::test_run_pipeline_extractor_fallback PASSED      [ 87%]
+tests/test_pipeline.py::test_process_papers_callback_and_skip PASSED     [ 90%]
+tests/test_pipeline.py::test_run_benchmark_csv_shape PASSED              [ 92%]
+tests/test_pipeline.py::test_baseline_review_paper_shape PASSED          [ 95%]
+tests/test_pipeline.py::test_baseline_parse_review_extractor_fallback PASSED [ 97%]
 tests/test_pipeline.py::test_baseline_run_benchmark_csv_shape PASSED     [100%]
 
-============================= 22 passed in 18.46s ==============================
+=============================== warnings summary ===============================
+tests/test_metric.py::test_analyze_and_plot_end_to_end
+  /home/wg25r/split_review_opus_repro/code/metric.py:490: RuntimeWarning: divide by zero encountered in divide
+    bin_weights = np.where(bin_counts > 0, 1.0 / bin_counts, 0.0)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================== 40 passed, 1 warning in 155.39s (0:02:35) ===================
