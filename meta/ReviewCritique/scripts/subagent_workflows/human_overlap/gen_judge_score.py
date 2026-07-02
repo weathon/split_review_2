@@ -4,8 +4,11 @@ can compute F1-max (best threshold) and AUROC. Judges all 815 unique overlapped 
 import json
 from pathlib import Path
 
+import sys
 HERE = Path(__file__).resolve().parent
-GUIDELINE = (HERE / "original_guideline_extracted.md").read_text()
+GUIDELINE_FILE = sys.argv[1] if len(sys.argv) > 1 else "original_guideline_extracted.md"
+OUT_SUFFIX = sys.argv[2] if len(sys.argv) > 2 else ""
+GUIDELINE = (HERE / GUIDELINE_FILE).read_text()
 segments = json.load(open(HERE / "ai_segments.json"))
 subset_seg_ids = set(json.load(open(HERE / "subset_seg_ids.json")))
 
@@ -111,5 +114,6 @@ tasks = [
     if s["seg_id"] in subset_seg_ids
 ]
 script = TEMPLATE.format(guideline_json=json.dumps(GUIDELINE), tasks_json=json.dumps(tasks))
-(HERE / "judge_score_subset.js").write_text(script)
-print(f"judge_score_subset.js: {len(tasks)} segments")
+name = f"judge_score{OUT_SUFFIX}_subset.js"
+(HERE / name).write_text(script)
+print(f"{name}: {len(tasks)} segments")
