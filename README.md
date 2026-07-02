@@ -393,6 +393,35 @@ Steiger p ≈ 0.001) is large only because `cmp3_baseline` is the *weak* deepsee
 single-call baseline; against the *strong* claude baseline (0.68) `ours` has never
 opened a clear margin.
 
+### Weakness-reliability AI judge — validation against human labels (overlap set)
+
+The weakness-reliability judge (Sonnet-5, ICLR error-type guideline) scores each review
+weakness on a 0–1 reliability scale. To validate it we use the ReviewCritique human-annotated
+overlap set: weakness segments that two reviewers of the same paper both raised, so each has a
+human reliable/unreliable label. The judge scored all **815 unique overlapped segments**; we
+measure it against the human label, treating **No/unreliable as the positive class**.
+
+**Grade the judge against the *same* segment's human label** (the segment it actually scored) —
+not the paired other reviewer's label. On the whole overlap set:
+
+| judge guideline | set | AUROC | F1-max | prec | rec | n (pos) |
+|---|---|---|---|---|---|---|
+| with examples | whole 815-seg | 0.639 | 0.362 | 0.256 | 0.618 | 815 (144) |
+| with examples | strict same-issue subset | 0.642 | 0.373 | 0.247 | 0.760 | 299 (50) |
+| definitions only (no examples) | 60-pair look | 0.721 | 0.514 | 0.375 | 0.818 | 58 (11) |
+| with examples | 60-pair look | 0.764 | 0.552 | 0.444 | 0.727 | 58 (11) |
+
+For reference, grading against the *other* (cross-reviewer) human label collapses AUROC to
+chance (~0.50, F1-max ~0.31 whole set) — expected, since the two reviewers' segments are only
+approximately the same issue and the same 2-annotator team disagrees with itself across
+presentations, so the cross-reviewer label is a noisy target.
+
+**Leakage caveat.** The guideline's few-shot examples and the judged overlap segments are both
+drawn from `ReviewCritique.jsonl`; 24/815 judged segments (3%) appear verbatim as guideline
+examples (all as *unreliable*). This inflates the with-examples numbers slightly. The
+downstream `final_results` critics eval is unaffected — those reviews are on the ICLR-2026 paper
+set, disjoint from ReviewCritique.
+
 ## Notes
 
 - `*.pkl` files are tracked via Git LFS (see `.gitattributes`).
