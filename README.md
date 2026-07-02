@@ -235,6 +235,32 @@ significantly beat the baseline. The split-agent structure alone does not explai
 the calibration retrieval carries it. (For reference, dependent Steiger tests on the pooled
 vectors give ours-vs-baseline p = 0.0048 even at the worst-case df of n = 376 papers.)
 
+### Reporting rule for cross-method comparisons: median draw
+
+Pooling requires every compared method to also be run 3×, which is not practical for external
+comparison methods. So for headline tables that compare against other methods (each run once),
+report the **median-Pearson draw** of each of our arms, not the pooled value and not the best
+draw. On the 376 common papers the median draws are:
+
+| arm | median draw | Pearson | Spearman |
+|---|---|---|---|
+| baseline | `cmp3_baseline_v2` | 0.5230 | 0.4787 |
+| no-cal | `cmp3_nocal_v3` | 0.5578 | 0.5085 |
+| ours | `cmp3_ours_v2` | 0.6138 | 0.5498 |
+
+(Per-arm draw ranges: baseline 0.500–0.546, no-cal 0.550–0.570, ours 0.597–0.635 — every ours
+draw beats every baseline draw. The pooled + bootstrap section above remains the significance
+analysis; the median draw is only the single-run reporting metric.)
+
+### Inter-run variance (3 draws per arm, same 376 papers)
+
+- run-level r-vs-gt std: baseline 0.023, ours 0.019, no-cal 0.010.
+- prediction stability between draws: pred-pred r baseline ≈ 0.61, no-cal ≈ 0.70, ours ≈ 0.79;
+  per-paper score std across draws: baseline 0.89 pts (P90 1.73), no-cal 0.61, ours 0.45 (P90 0.76).
+
+The pipeline is not only better-correlated with gt but roughly 2× more reproducible per paper
+than the single-call baseline; calibration retrieval stabilizes scoring, not just improves it.
+
 ### Follow-up analysis (from existing results/snapshots, no new runs)
 
 All correlations below are pred_score vs gt_avg_score with the `pred_score == -100`
