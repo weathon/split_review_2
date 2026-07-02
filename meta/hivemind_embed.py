@@ -140,7 +140,7 @@ def main():
         print(f"{m}: {len(s)} papers")
     common = set.intersection(*method_papers.values())
     print(f"common across all methods: {len(common)}")
-    common_sorted = sorted(common)[:3]
+    common_sorted = sorted(common)
 
     print(common_sorted)
 
@@ -179,7 +179,6 @@ def main():
     for method in METHODS:
         for a in range(len(embeddings[method])):
             for b in range(len(embeddings[method])):
-                print(embeddings[method][a])
                 set_a = embeddings[method][a]
                 set_b = embeddings[method][b]
                 set_a = set_a / np.linalg.norm(set_a, axis=1, keepdims=True)
