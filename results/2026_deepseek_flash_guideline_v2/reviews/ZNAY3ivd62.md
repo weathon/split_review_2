@@ -1,96 +1,72 @@
-Now I have all the information needed. Let me produce the final consolidated review.
+Now I have all the evidence I need. Here is the final consolidated review.
+
+---
 
 ## Summary
 
-GUI-Spotlight proposes a multi-tool iterative visual grounding framework for GUI agents. The model dynamically invokes three specialized tools (crop, extract, find_color) to iteratively narrow focus on screen regions, trained via a three-stage pipeline (SFT → modified GSPO RL → high-resolution RL). On ScreenSpot-Pro, the model reaches 52.8% accuracy with 18.5K fine-tuning samples, and the paper provides extensive ablation of RL algorithms and reward designs.
+GUI-Spotlight trains a 7B multimodal LLM to iteratively invoke three visual tools (crop, extract, find_color) via reinforcement learning for GUI visual grounding. On ScreenSpot-Pro it achieves 52.8% with 18.5K training samples — the best reported accuracy among 7B models and competitive with much larger ones. The paper provides a careful ablation of RL design choices, documenting both successful and negative results, and introduces a modified GSPO objective with an auxiliary cross-entropy term that prevents format-collapse during multi-turn tool-use RL training.
 
 ## Strengths
 
-1. **Clean ablation isolating the contribution of RL training from the iterative procedure itself (Figure 5).** The paper compares GUI-Spotlight (52.8%) against a training-free iterative baseline (repeated single-turn inference, 47.6%) and a multi-turn conversational baseline (7.6%). This decomposition allows the reader to see that the iterative procedure alone accounts for a large gain, and RL training adds a meaningful further +5.2%. This is more informative than a simple comparison with single-pass baselines and directly supports the paper's core thesis.
+- **Data efficiency with direct benchmark evidence**: GUI-Spotlight achieves 52.8% on ScreenSpot-Pro using only 18.5K training samples, surpassing V2P-7B (50.6% with 9.6M samples) and GTA-1-7B (50.1% with 1.56M samples). Table 3 directly juxtaposes training data sizes alongside per-domain and overall accuracy, making the comparison transparent.
 
-2. **Modified GSPO objective empirically prevents training collapse (Figure 3, right panel).** Vanilla GSPO and GRPO begin oscillating and degrading after ~300 steps, while the proposed method (with auxiliary cross-entropy loss on format-valid, correct samples) maintains stable 0.9 reward through 400 steps. This is a clean head-to-head comparison under identical settings that directly supports contribution #2.
+- **Systematic diagnosis and mitigation of RL training collapse**: Section 4.1 (right panel of Figure 3) identifies that vanilla GSP0 and GRPO begin oscillating around step 300 because the model generates non-parseable tool-call syntax, causing reward collapse. The paper's modified GSPO with tool-filtered positives and an auxiliary cross-entropy loss prevents this collapse, maintaining stable reward near 0.9 while baselines drop to ~0.3–0.4. This goes beyond reporting final accuracy — it documents a specific failure mode and a targeted fix.
 
-3. **Systematic documentation of negative results across 7 RL variants (Section 4.1).** The paper reports accuracy for each variant and explicitly marks which are discarded (e.g., top-p% uncertainty sampling drops to 35.8%, continuous reference policy update drops to 36.7%). This provides practical guidance beyond the winning configuration and supports contribution #3.
+- **Documentation of negative results across seven RL variants**: Section 4.1 (left panel of Figure 3) reports GRPO (37.3%) plus six incremental modifications (35.8%–47.6%), explicitly marking which techniques were discarded. Most papers omit such negative results, making this a useful departure from common reporting norms.
 
-4. **Generalization demonstrated across two distinct base models and three benchmarks.** The Qwen2.5-VL-7B-Instruct variant gains +11.9 points on ScreenSpot-Pro, +7.4 on UI-Vision, and +4.2 on OSWorld-G, showing the method is not brittle to backbone choice.
+- **Ablation isolating training effect from tool-use prompting**: Section 5.4 compares GUI-Spotlight (52.8%) against training-free multi-turn conversational inference (7.6%) and training-free repeated single-turn inference (47.6%). The large gap between the training-free baselines and GUI-Spotlight provides direct evidence that the accuracy gains come from the RL training procedure, not merely from the tool-use prompt format.
+
+- **Consistent gains across two backbone initializations**: On ScreenSpot-Pro, the Qwen-initiated variant gains +11.9 points (from 26.8% to 38.7%) and the UI-TARS-initiated variant gains +14.1 points (from 38.7% to 52.8%), showing the method transfers beyond a single backbone.
 
 ## Weaknesses
 
-### Fatal
-None.
-
 ### Major
 
-1. **Overclaimed scope of "substantially outperforming comparable 7B baselines."** Contribution 1 (line 31) states the model "substantially outperform[s] comparable 7B baselines," but this is not uniformly true across benchmarks.
-   - On **UI-Vision** (Table 4), GUI-Spotlight (23.4%) is outperformed by UI-Venus-Ground-7B (26.5%).
-   - On **OSWorld-G** (Table 5), GUI-Spotlight (62.7%) is substantially below GTA1-7B (67.7%) and only 0.8 points above its own backbone UI-TARS-1.5-7B (61.9%).
-   - The paper also states in line 299 that GUI-Spotlight is "outperforming other 7B models" on UI-Vision, which is factually contradicted by Table 4.
-   The claim is calibrated to ScreenSpot-Pro alone but stated as if it applies broadly. The paper must qualify which benchmarks and which models are being outperformed.
-
-2. **Headline comparison obscures the evaluation-protocol asymmetry.** The abstract and introduction present GUI-Spotlight (52.8%) vs. V2P-7B (50.6%) and GTA-1-7B (50.1%) without disclosing that GUI-Spotlight uses iterative multi-turn inference while the baselines are evaluated in a single-pass manner. The paper's own ablation (Figure 5) shows that a *training-free* iterative baseline (strategy ②) achieves 47.6%, meaning the iterative procedure itself — not learned policy — accounts for the majority of the gap over single-pass models. The honest contribution margin of the RL training is the 5.2% gap over this baseline (52.8% vs. 47.6%). The paper should frame the results with this context upfront rather than burying the matched-protocol comparison in Section 5.4.
-
-3. **Stage 1 SFT causes a 55% relative accuracy drop (39.3% → 17.8%) with insufficient analysis.** The paper's explanation — "the model learns to invoke multiple tools but remains under-aligned" (line 136–137) — does not adequately address why training on 2,561 trajectories from a 72B teacher destroys the base model's grounding capability. While Stage 2 RL recovers and exceeds the original, the fragility of Stage 1 warrants investigation: Is this collapse specific to the Qwen2.5-VL-72B demonstrations? Would mixing in grounding data or using a lower imitation weight avoid the problem? The paper offers no evidence on this point.
-
-4. **Possible data contamination between training and evaluation sets not addressed.** The paper collects 15K high-resolution GUI screenshots (Section 3.2.1) and evaluates on ScreenSpot-Pro, which also consists of high-resolution professional software screenshots covering similar domains (creative tools, office platforms, CAD, etc.). No discussion of potential overlap is provided. Even a brief statement that web domains or software types were verified to be disjoint would address this concern.
+- **Overclaim on UI-Vision in the contributions list and Section 5.2**: The contributions list (line 31) states the model "achieves **52.8%** accuracy on SCREENSPOT-PRO and **23.4%** on UI-Vision, substantially outperforming comparable 7B baselines." On ScreenSpot-Pro this is true. On UI-Vision, however, Table 4 shows UI-Venus-Ground-7B achieves **26.5%**, outperforming GUI-Spotlight's 23.4% by 3.1 points. Section 5.2 similarly claims the model "outperforms other 7B models" on UI-Vision, which is contradicted by the paper's own Table 4. The abstract correctly limits its outperformance claim to ScreenSpot-Pro, so the main headline is intact, but the contributions summary and Section 5.2 are factually inaccurate and need correction.
 
 ### Minor
 
-5. **No variance or statistical significance reported.** All accuracy numbers are point estimates. Given that the main result (52.8%) is only 2.2 points above V2P-7B (50.6%), variance could matter. Reporting standard errors or confidence intervals would strengthen the claim. (Single-run evaluation is common on these benchmarks, so this is a minor concern rather than a major one.)
+- **Selective baseline citation in the abstract inflates perceived margin**: The abstract compares against V2P-7B (50.6%) and GTA-1-7B (50.1%) but omits UI-Venus-7B (50.8%), which is only 2.0 points behind GUI-Spotlight (52.8%). The ScreenSpot-Pro result is still the best among 7B models, but the framing overstates the margin over the strongest competitor. This is a presentational issue, not a factual error.
 
-6. **The `find_color` tool's crop window size `w` is not specified.** Table 1 describes "center a w × w window" but never defines the value of `w`. The stride (10) and patch size (10×10) are given, but the crop window size is critical for reproducibility.
+- **Minimal gain on OSWorld-G undercuts broad generalizability claims**: On OSWorld-G (Table 5), GUI-Spotlight (UI-TARS-1.5-7B) achieves 62.7% versus the base model's 61.9% — a gain of only +0.8 points. GTA1-7B achieves 67.7% on the same benchmark. The paper's claim of "robustness for diverse OS-level grounding tasks" is broader than the evidence supports, as the benefit appears concentrated on high-resolution, cluttered UIs (ScreenSpot-Pro) rather than generalizing to everyday desktop tasks.
 
-7. **Figure 2 training-sample labels are misaligned with the text.** The table below Figure 2 lists "2561" under Stage 0 and "12K" under Stage 1, but the text states Stage 1 uses 2561 trajectories and Stage 2 uses 12K samples. The labels appear shifted by one stage. The text description clarifies this, but the figure is misleading as-is.
+- **No error bars or significance tests**: Headline gains of 2–5 points (and the 0.8-point OSWorld-G gain) are reported as point estimates without confidence intervals or significance testing. Given the modest margins, it is unclear whether some of the improvements are statistically reliable. This is a common omission but matters more here because the gains over the strongest baselines are small.
 
 ### Trivial
 
-8. **Factually incorrect sentence in UI-Vision discussion.** Line 299 states GUI-Spotlight "outperform[s] other 7B models" on UI-Vision, but Table 4 shows UI-Venus-Ground-7B (26.5%) outperforms GUI-Spotlight (23.4%). This specific sentence contradicts the paper's own data.
-
-9. **`crop` tool description mentions "optional ±1px adjustment for edge case" (Table 1) without specifying what edge case triggers it.** This is a minor clarity issue.
+- **"Data efficiency" framing is slightly imprecise**: The 18.5K samples are multi-turn dialogue trajectories with tool invocations, each potentially containing multiple image-crop pairs, rather than single-turn examples. This does not invalidate the data efficiency conclusion (even with 3–5 steps per trajectory, total image-label pairs are well under 100K versus millions), but the comparison as presented is not strictly apples-to-apples.
 
 ## Nice-to-Haves
 
-- Clarify that "trained with 18.5K samples" refers to fine-tuning data added on top of extensively pre-trained backbones. The table column makes this clear, but the abstract phrasing ("trained with only 18.5K training samples") could be more precise.
-- Justify or ablate the choice of 700×450-pixel crop size in the repeated single-turn inference baseline (Section 5.4, strategy ②).
-- Include a single-pass accuracy of GUI-Spotlight (forcing it to answer without tool invocation) to directly show the gain from tool-use.
-- The paper could strengthen its position by reporting standard errors for the main results in Table 3.
+- **Inference cost analysis**: The method trades compute for accuracy via iterative tool invocations. Reporting the mean/median number of tool calls per query and latency compared to single-step baselines would help readers assess the practical trade-off.
+
+- **Qualitative analysis of the learned tool-use policy**: The paper never shows what strategies the model learns (e.g., does it always start with extract, then crop, then answer? Does it use find_color at all?). A few case studies or a distribution of tool-call sequences would strengthen the claim that the model is "learning when and how to use tools effectively."
+
+- **Failure mode analysis**: The paper reports accuracy but does not analyze what kinds of grounding errors persist — e.g., does the model fail to find the relevant region, or does it find the region but mispredict the final coordinate?
 
 ## Removed Points
 
-These points were flagged by reviewers but are removed from the main assessment for the following reasons:
-
-- **"Data efficiency framing is misleading"** (Harsh Critic): The paper provides a "Training Data Size" column in Table 3 with a ↓ arrow. While "trained with 18.5K samples" could be more precisely phrased as "fine-tuned with 18.5K additional samples," this is standard practice in the fine-tuning literature and the table makes the comparison transparent. Demoted to nice-to-have.
-- **"Comprehensive documentation claim exaggerated"** (Harsh Critic): Section 4.1 documents 7 RL variants across multiple dimensions, plus reward design ablations in Section 4.2. This is reasonably comprehensive for one paper. Removed.
-- **"No statistical significance as major weakness"**: Demoted to minor because single-run evaluation is standard on these benchmarks and the critic did not anchor this complaint to a specific threshold that would change interpretation.
-- **"OSWorld-G near-zero gain not remarked upon"**: The paper does remark (line 326) that it "remains competitive with 72B-scale models." The small gain is already captured by Major Weakness #1 (overclaimed scope).
-- **Strength Finder Point 1 ("massive data-efficiency advantage")**: The strength is valid insofar as the paper uses less fine-tuning data, but the claim is entangled with the protocol-asymmetry issue (Major Weakness #2). The honest framing is covered by the decomposition in Figure 5 rather than the headline comparison in Table 3.
-- **Strength Finder generic strengths** (e.g., "addressed important problem"): Dropped as generic/superficial per filtering rules.
-- **Missing related works, formatting nitpicks, reproducibility nitpicks about appendix content**: Removed per hard rules.
+- *Harsh critic's claim that the "abstract makes an incorrect factual claim about UI-Vision."* — The abstract (line 9) only claims outperformance on ScreenSpot-Pro and is factually correct. The overclaim exists in the contributions list (line 31) and Section 5.2, not the abstract. Moved here for precision.
+- *Harsh critic's claim that the data efficiency argument "compares incommensurable quantities" as a structural issue.* — Retained as trivial (above) since the conclusion still holds broadly even accounting for the multi-turn nature. The severity was overestimated.
+- *Strength Finder's generic praise about addressing important problems.* — No such generic strengths were present; all listed strengths cite specific evidence. Not removed.
+- *Strength Finder's claim about "Dramatic data efficiency"* — Retained but reworded as it is well-supported by Table 3.
 
 ## Novel Insights
 
-The most informative finding that goes beyond the paper's own framing is the decomposition in Figure 5. The training-free iterative baseline (strategy ②) at 47.6% captures the *majority* of the end-to-end gain over single-pass models, and the RL training adds only 5.2% on top. This suggests that for GUI visual grounding, the structure of iterative zooming — independent of learned policy — is the dominant mechanism driving improvement over single-pass methods. The practical implication is that a simple training-free iterative pipeline could already yield strongly competitive results on ScreenSpot-Pro, and the marginal value of the RL training, while real, is relatively modest. This observation contextualizes the paper's headline claims significantly.
+The combination of the two reviews surfaces a structural observation: the paper's strongest contribution (stable multi-tool RL training, verified through a thorough negative-results ablation that traces the collapse mechanism to tool-format syntax drift) is separable from its weaker claim (comprehensive SOTA across all 7B-model comparisons). The RL stabilization evidence in Figure 3's training dynamics is the most convincing part of the paper and provides a genuinely useful recipe for practitioners building multi-tool RL systems. The UI-Vision limitation and OSWorld-G plateau, meanwhile, suggest the gains are concentrated on high-resolution, cluttered UIs where iterative cropping provides clear benefits over single-step inference, rather than constituting a universal improvement across all grounding scenarios.
 
 ## Suggestions
 
-1. **Add a matched-protocol baseline to Table 3** — evaluate existing baselines (e.g., V2P-7B, GTA-1-7B) with the same iterative inference strategy (strategy ② from Section 5.4) and report those numbers alongside GUI-Spotlight.
-2. **Qualify the "substantially outperforming" claim** in Contribution 1 to specify which benchmarks and which models are outperformed, or remove the claim.
-3. **Add a data-contamination analysis** — at minimum a statement that the self-collected dataset and ScreenSpot-Pro were verified to be disjoint by domain or source.
-4. **Investigate the Stage 1 SFT collapse** — report why accuracy drops 55% and whether alternative warm-up strategies avoid the problem.
-5. **Specify the `w` parameter** for `find_color`'s crop window in Table 1.
-6. **Fix the Figure 2 stage/sample-count labeling** so the table aligns with the text description.
-7. **Correct line 299** ("outperforming other 7B models") or add a footnote acknowledging UI-Venus-Ground-7B's higher score.
-8. **Add variance information** (standard errors or 95% confidence intervals from multiple runs) for at least the main ScreenSpot-Pro results.
+1. **Correct the UI-Vision overclaim** in the contributions list (line 31) and Section 5.2. Acknowledge that GUI-Spotlight underperforms UI-Venus-Ground-7B on UI-Vision and discuss why (e.g., domain mismatch, lower-resolution screenshots where tool-use overhead provides less benefit).
+2. **Add error bars or confidence intervals** for the main benchmark results, especially given the modest (2-point) gain over UI-Venus-7B on ScreenSpot-Pro.
+3. **Report inference cost**: average number of tool calls per query and latency compared to single-step baselines.
+4. **Add qualitative analysis** of the learned tool-use policy — at minimum, the distribution of tool-call sequences (how often each tool is invoked and in what order).
 
 ## Score and Decision
 
-Based on my analysis:
-- The paper has genuine strengths: a clearly described method, thorough ablations, documented negative results, and generalization across base models.
-- However, the paper overclaims its results: the headline comparison does not account for the evaluation-protocol asymmetry, the "substantially outperforming" claim is contradicted by the paper's own data on 2 of 3 benchmarks, and several issues (Stage 1 collapse, potential data contamination, missing parameters) are under-addressed.
-- These are evidential and presentational problems rather than fatal methodological flaws, but they are significant enough that the paper's current claims do not match its evidence.
+*Calibration note: The calibration search tool was unavailable due to a file-path error, so anchor-based cross-comparison could not be performed. The score is based on direct evaluation of the paper's content against ICLR standards.*
 
-**Score: 5.0** (between borderline reject and borderline accept — a paper with a reasonable core contribution that is weakened by overstated claims and insufficiently addressed concerns).
+The paper makes a genuine empirical contribution: it demonstrates that iterative tool-use via stabilized RL training improves GUI visual grounding on ScreenSpot-Pro over single-step baselines, achieving the best 7B result on that benchmark. The RL stabilization analysis (modified GSPO with auxiliary CE loss) is technically sound and well-supported by training dynamics evidence. The documentation of negative results across seven RL variants provides useful guidance for practitioners. However, the paper overclaims its results on UI-Vision (a factual inaccuracy in the contributions list and Section 5.2), reports no error bars despite modest gains, and shows only marginal improvement on OSWorld-G. These issues are fixable but currently prevent clear acceptance. The paper sits between borderline reject and borderline accept.
 
-**Decision: Reject** — the paper would need meaningful revisions (matched-protocol comparison, corrected claims, analysis of Stage 1 collapse, contamination discussion) before it could be accepted. The core method has merit, but the presentation as submitted overstates what is demonstrated.
-
-MY FINAL SCORE: <score>5.0</score>
+MY FINAL SCORE: <score>5.5</score>
 MY FINAL DECISION: <decision>Reject</decision>
