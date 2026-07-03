@@ -422,6 +422,38 @@ examples (all as *unreliable*). This inflates the with-examples numbers slightly
 downstream `final_results` critics eval is unaffected — those reviews are on the ICLR-2026 paper
 set, disjoint from ReviewCritique.
 
+**Binary judge validation (the judge used for the `final_results` invalid-rate eval).** The
+per-method invalid rates below come from a *binary* reliable/unreliable judge, so it is validated
+the same way — its 0/1 calls on the overlap segments vs the same-segment human label
+(positive = No/unreliable):
+
+| set | raw agr | precision | sensitivity | specificity | F1(No) | κ | n (pos) |
+|---|---|---|---|---|---|---|---|
+| full 815 seg | 0.502 | 0.227 | 0.757 | 0.447 | 0.349 | 0.106 | 815 (144) |
+| strict 299 seg | 0.569 | 0.235 | 0.700 | 0.542 | 0.352 | 0.135 | 299 (50) |
+
+Human–human ceiling (label-noise floor, same vs other human label): F1(No) 0.251 / κ 0.098 on
+the full set, 0.309 / 0.191 on strict. The binary judge's F1(No) (0.349 / 0.352) is **above** the
+ceiling and its κ (0.106 / 0.135) is around it, so the judge clears the noise floor. It has high
+sensitivity (~0.70–0.76, catches most unreliable weaknesses) but modest specificity
+(~0.45–0.54, over-flags some reliable ones).
+
+### Invalid (unreliable) weakness rate per method — `final_results` critics eval
+
+Each method's reviews on the ICLR-2026 set (392 papers) were judged weakness-by-weakness by the
+validated binary judge; invalid rate = fraction of extracted weaknesses judged unreliable:
+
+| method | n weaknesses | n invalid | invalid rate |
+|---|---|---|---|
+| nocal_cmp3_nocal_v3 | 2529 | 35 | 0.014 |
+| ours_cmp3_ours_v2 | 2403 | 40 | 0.017 |
+| cspaper | 4280 | 257 | 0.060 |
+| baseline_cmp3_baseline_v2 | 2545 | 316 | 0.124 |
+| DeepReviewer-v2-openai | 3589 | 547 | 0.152 |
+| DeepReviewer_14B | 1306 | 732 | 0.560 |
+
+Our pipeline (ours / no-cal) produces the fewest unreliable weaknesses; DeepReviewer_14B the most.
+
 ## Notes
 
 - `*.pkl` files are tracked via Git LFS (see `.gitattributes`).
