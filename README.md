@@ -395,48 +395,42 @@ opened a clear margin.
 
 ### Weakness-reliability AI judge — validation against human labels (overlap set)
 
-The weakness-reliability judge (Sonnet-5, ICLR error-type guideline) scores each review
-weakness on a 0–1 reliability scale. To validate it we use the ReviewCritique human-annotated
-overlap set: weakness segments that two reviewers of the same paper both raised, so each has a
-human reliable/unreliable label. The judge scored all **815 unique overlapped segments**; we
-measure it against the human label, treating **No/unreliable as the positive class**.
+The weakness-reliability judge (Sonnet-5, ICLR error-type guideline) judges each review
+weakness as reliable/unreliable. To validate it we use the ReviewCritique human-annotated
+overlap set, restricted to the **strict same-issue subset** — pairs that two reviewers of the
+same paper raised about the *same specific issue* (verified by a separate strict-matching pass),
+so the human label is a valid ground truth for that segment. The full overlap set is excluded:
+its pairs are only approximately the same issue, so pair-based comparison there is not
+meaningful. Metrics use the **same segment's** human label (the segment the judge actually
+scored), with **No/unreliable as the positive class**.
 
-**Grade the judge against the *same* segment's human label** (the segment it actually scored) —
-not the paired other reviewer's label. On the whole overlap set:
+For reference, a *continuous-score* variant of the judge (0–1 reliability, for threshold/AUROC
+analysis) on the strict subset and small look-sets:
 
 | judge guideline | set | AUROC | F1-max | prec | rec | n (pos) |
 |---|---|---|---|---|---|---|
-| with examples | whole 815-seg | 0.639 | 0.362 | 0.256 | 0.618 | 815 (144) |
 | with examples | strict same-issue subset | 0.642 | 0.373 | 0.247 | 0.760 | 299 (50) |
-| definitions only (no examples) | 60-pair look | 0.721 | 0.514 | 0.375 | 0.818 | 58 (11) |
 | with examples | 60-pair look | 0.764 | 0.552 | 0.444 | 0.727 | 58 (11) |
+| definitions only (no examples) | 60-pair look | 0.721 | 0.514 | 0.375 | 0.818 | 58 (11) |
 
-For reference, grading against the *other* (cross-reviewer) human label collapses AUROC to
-chance (~0.50, F1-max ~0.31 whole set) — expected, since the two reviewers' segments are only
-approximately the same issue and the same 2-annotator team disagrees with itself across
-presentations, so the cross-reviewer label is a noisy target.
-
-**Leakage caveat.** The guideline's few-shot examples and the judged overlap segments are both
-drawn from `ReviewCritique.jsonl`; 24/815 judged segments (3%) appear verbatim as guideline
-examples (all as *unreliable*). This inflates the with-examples numbers slightly. The
-downstream `final_results` critics eval is unaffected — those reviews are on the ICLR-2026 paper
-set, disjoint from ReviewCritique.
-
-**Binary judge validation (the judge used for the `final_results` invalid-rate eval).** The
-per-method invalid rates below come from a *binary* reliable/unreliable judge, so it is validated
-the same way — its 0/1 calls on the overlap segments vs the same-segment human label
-(positive = No/unreliable):
+**Binary judge validation** (the judge used for the `final_results` invalid-rate eval), strict
+same-issue subset:
 
 | set | raw agr | precision | sensitivity | specificity | F1(No) | κ | n (pos) |
 |---|---|---|---|---|---|---|---|
-| full 815 seg | 0.502 | 0.227 | 0.757 | 0.447 | 0.349 | 0.106 | 815 (144) |
 | strict 299 seg | 0.569 | 0.235 | 0.700 | 0.542 | 0.352 | 0.135 | 299 (50) |
 
-Human–human ceiling (label-noise floor, same vs other human label): F1(No) 0.251 / κ 0.098 on
-the full set, 0.309 / 0.191 on strict. The binary judge's F1(No) (0.349 / 0.352) is **above** the
-ceiling and its κ (0.106 / 0.135) is around it, so the judge clears the noise floor. It has high
-sensitivity (~0.70–0.76, catches most unreliable weaknesses) but modest specificity
-(~0.45–0.54, over-flags some reliable ones).
+Human–human ceiling (label-noise floor, same vs other human label) on the strict subset:
+F1(No) 0.309, κ 0.191. The binary judge's F1(No) (0.352) is **above** the ceiling and its κ
+(0.135) is around it, so the judge clears the noise floor. It has high sensitivity (0.700,
+catches most unreliable weaknesses) but modest specificity (0.542, over-flags some reliable
+ones).
+
+**Leakage caveat.** The guideline's few-shot examples and the judged overlap segments are both
+drawn from `ReviewCritique.jsonl`; a small fraction of judged segments appear verbatim as
+guideline examples (all as *unreliable*), slightly inflating the numbers. The downstream
+`final_results` critics eval is unaffected — those reviews are on the ICLR-2026 paper set,
+disjoint from ReviewCritique.
 
 ### Invalid (unreliable) weakness rate per method — `final_results` critics eval
 
