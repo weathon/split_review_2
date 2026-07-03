@@ -18,8 +18,10 @@ import openreview
 ROOT = Path(__file__).resolve().parent.parent
 dotenv.load_dotenv(ROOT / ".env")
 CSPAPER_DIR = ROOT / "final_results" / "cspaper"
+OURS_DIR = ROOT / "final_results" / "ours_cmp3_ours_v2" / "reviews"
 JUDGE_MODEL = "claude-sonnet-5"
 N_PAPERS = 3
+EXCLUDE = {"gubSyVxWdG", "mHRuCmc9lo", "Kw2mvnzCoc"}  # already tested
 
 client = openreview.api.OpenReviewClient(
     username=os.environ["OPENREVIEW_USERNAME"],
@@ -120,7 +122,7 @@ AC_PROMPT = """You are analyzing the OpenReview discussion of an ICLR paper that
 
 Follow these rules EXACTLY. Do NOT use your own judgement about whether the rebuttal resolved a concern. Decide ONLY from the AC meta-review's explicit statements.
 
-Step 1 — gate. Does the AC meta-review explicitly discuss resolution status of reviewer concerns? That means it EITHER (a) explicitly states that certain concerns were resolved/addressed by the rebuttal, AND/OR (b) lists the remaining / still-open / unresolved concerns (or the concerns motivating its assessment). If the AC meta-review does NEITHER, set "ac_discusses_resolution": false and return empty lists — the paper will be skipped.
+Step 1 — gate (STRICT). Does the AC meta-review name SPECIFIC, concrete concerns and their status? It qualifies ONLY if the AC EITHER (a) explicitly states that SPECIFIC named concerns were resolved/addressed by the rebuttal, AND/OR (b) lists SPECIFIC named remaining / still-open / unresolved concerns. Generic, high-level meta-reviews ("reviewers raised some concerns that were addressed", "authors responded to the reviews", a bare summary with no concrete issues named) do NOT qualify. If the AC does not name specific issues with a resolution status, set "ac_discusses_resolution": false and return empty lists — the paper will be skipped.
 
 Step 2 — reviewer issues. Extract the SUBSTANTIVE issues reviewers raised (in reviews and discussion). EXCLUDE trivial items entirely: typos, grammar, wording, formatting, notation, missing citations, presentation/clarity nits.
 
@@ -133,21 +135,30 @@ For every "resolved" and "unresolved" item, quote the exact AC sentence you reli
 Return ONLY JSON, no prose, no code fences:
 {{"ac_discusses_resolution": true/false, "resolved_invalid": [{{"issue": "<short desc>", "ac_evidence": "<exact AC quote>"}}], "unresolved": [{{"issue": "<short desc>", "ac_evidence": "<exact AC quote>"}}]}}"""
 
-RECALL_PROMPT = """Below is an automated reviewer's ("CSPaper") review of a paper, followed by a list of issues that HUMAN reviewers raised about the same paper but which were RESOLVED in rebuttal (i.e., they turned out not to block acceptance).
+RECALL_PROMPT = """Below is an automated reviewer's review of a paper, followed by a list of issues that HUMAN reviewers raised about the same paper but which were RESOLVED in rebuttal (i.e., they turned out not to block acceptance).
 
-=== CSPAPER REVIEW ===
+=== AUTOMATED REVIEW ===
 {review}
 
 === RESOLVED (NON-BLOCKING) ISSUES ===
 {issues}
 
-For each resolved issue, decide whether the CSPaper review ALSO raises essentially the same issue (same specific concern about the same aspect of the paper). Be strict: same specific point, not merely same topic.
+For each resolved issue, decide whether the automated review ALSO raises essentially the same issue (same specific concern about the same aspect of the paper). Be strict: same specific point, not merely same topic.
 
 Return ONLY JSON, no prose, no code fences:
-{{"matches": [{{"issue": "<the resolved issue>", "raised_by_cspaper": true/false, "cspaper_excerpt": "<short quote from CSPaper review if raised, else empty>"}}]}}"""
+{{"matches": [{{"issue": "<the resolved issue>", "raised_by_cspaper": true/false, "cspaper_excerpt": "<short quote from the review if raised, else empty>"}}]}}"""
 
 
-async def process(pid, path):
+async def recall_for(review_text, issues_txt):
+    rec = extract_json(await query_claude(RECALL_PROMPT.format(review=review_text, issues=issues_txt)))
+    matches = rec["matches"]
+    return sum(1 for m in matches if m["raised_by_cspaper"]), matches
+
+
+async def process(pid, csp_path):
+    ours_path = OURS_DIR / f"{pid}.md"
+    if not ours_path.exists():
+        return {"skip": "no ours review"}
     thread = fetch_thread(pid)
     dec = (thread["decision"] or "").lower()
     if "accept" not in dec:
@@ -156,28 +167,29 @@ async def process(pid, path):
         return {"skip": "no meta-review"}
     ac = extract_json(await query_claude(AC_PROMPT.format(thread=assemble(thread))))
     if not ac.get("ac_discusses_resolution"):
-        return {"skip": "AC does not discuss resolution"}
+        return {"skip": "AC does not name specific resolved/unresolved issues"}
     issues = ac["resolved_invalid"]
     if not issues:
-        return {"skip": "AC discusses resolution but no resolved-invalid items"}
-    review = path.read_text()
+        return {"skip": "AC specific but no resolved-invalid items"}
     issues_txt = "\n".join(f"{i+1}. {it['issue']}" for i, it in enumerate(issues))
-    rec = extract_json(await query_claude(RECALL_PROMPT.format(review=review, issues=issues_txt)))
-    matches = rec["matches"]
-    n_rec = sum(1 for m in matches if m["raised_by_cspaper"])
+    csp_rec, csp_m = await recall_for(csp_path.read_text(), issues_txt)
+    ours_rec, ours_m = await recall_for(ours_path.read_text(), issues_txt)
     return {"pid": pid, "title": thread["title"], "decision": thread["decision"],
-            "n_resolved": len(issues), "n_recalled": n_rec,
-            "resolved_invalid": issues, "unresolved": ac.get("unresolved", []), "matches": matches}
+            "n_resolved": len(issues), "cspaper_recalled": csp_rec, "ours_recalled": ours_rec,
+            "resolved_invalid": issues, "unresolved": ac.get("unresolved", []),
+            "cspaper_matches": csp_m, "ours_matches": ours_m}
 
 
 async def main():
     idx = cspaper_index()
     results = []
     scanned = 0
-    MAX_SCAN = 40
+    MAX_SCAN = 60
     for pid, path in idx.items():
         if len(results) >= N_PAPERS or scanned >= MAX_SCAN:
             break
+        if pid in EXCLUDE:
+            continue
         scanned += 1
         try:
             r = await process(pid, path)
@@ -189,19 +201,23 @@ async def main():
             continue
         results.append(r)
         print(f"\n### {pid} — {r['title']}  [{r.get('decision')}]")
-        print(f"resolved(invalid) issues: {r['n_resolved']} | recalled by CSPaper: {r['n_recalled']} "
-              f"({100*r['n_recalled']/r['n_resolved']:.0f}%)" if r["n_resolved"] else "no resolved issues")
-        for m in r["matches"]:
-            mark = "RAISED" if m["raised_by_cspaper"] else "  -   "
-            print(f"  [{mark}] {m['issue'][:110]}")
+        print(f"resolved(invalid) issues: {r['n_resolved']} | cspaper: {r['cspaper_recalled']} "
+              f"({100*r['cspaper_recalled']/r['n_resolved']:.0f}%) | ours: {r['ours_recalled']} "
+              f"({100*r['ours_recalled']/r['n_resolved']:.0f}%)")
+        cm, om = r["cspaper_matches"], r["ours_matches"]
+        for i, it in enumerate(r["resolved_invalid"]):
+            c = "C" if i < len(cm) and cm[i].get("raised_by_cspaper") else "-"
+            o = "O" if i < len(om) and om[i].get("raised_by_cspaper") else "-"
+            print(f"  [{c}{o}] {it['issue'][:100]}")
 
     out = ROOT / "meta" / "cspaper_rebuttal_recall_test.json"
     out.write_text(json.dumps(results, indent=2))
-    tot_r = sum(r["n_resolved"] for r in results)
-    tot_rec = sum(r["n_recalled"] for r in results)
-    print(f"\n=== TOTAL over {len(results)} accepted papers ===")
-    print(f"resolved(invalid) issues: {tot_r} | recalled by CSPaper: {tot_rec} "
-          f"({100*tot_rec/tot_r:.0f}%)" if tot_r else "none")
+    tot = sum(r["n_resolved"] for r in results)
+    csp = sum(r["cspaper_recalled"] for r in results)
+    ours = sum(r["ours_recalled"] for r in results)
+    print(f"\n=== TOTAL over {len(results)} accepted papers | {tot} resolved(invalid) issues ===")
+    if tot:
+        print(f"cspaper recall: {csp}/{tot} ({100*csp/tot:.0f}%)   ours recall: {ours}/{tot} ({100*ours/tot:.0f}%)")
     print(f"wrote {out}")
 
 
