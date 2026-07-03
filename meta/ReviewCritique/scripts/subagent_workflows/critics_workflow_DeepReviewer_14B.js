@@ -97,6 +97,7 @@ for (let i = 0; i < TASKS.length; i += CONCURRENCY) {
   log(`method=${METHOD}: chunk ${i / CONCURRENCY + 1}/${Math.ceil(TASKS.length / CONCURRENCY)} done`)
 }
 
-const flat = results.filter(Boolean).flat()
+const perPaper = results.filter(Boolean)
+const flat = perPaper.flat()
 log(`method=${METHOD}: ${flat.length} weakness rows from ${TASKS.length} papers`)
-return flat
+return perPaper
