@@ -1,0 +1,83 @@
+{
+  "pid": "pn2H6YeOv2",
+  "stage1_fetch_thread": {
+    "title": "Pi-CCA: Prompt-Invariant CCA Certificates for Replay-Free Continual Multimodal Learning",
+    "decision": "Accept (Poster)",
+    "n_reviews": 4,
+    "n_comments": 15,
+    "meta_chars": 3722,
+    "review_ratings": [
+      6,
+      6,
+      4,
+      6
+    ]
+  },
+  "stage2_assembled_chars": 60821,
+  "stage3_ac": {
+    "ac_discusses_resolution": true,
+    "n_resolved_invalid": 10,
+    "n_unresolved": 1,
+    "resolved_issues": [
+      "Sensitivity to sketch randomness/sketch type",
+      "Scaling to larger backbones and different adapter types",
+      "Definition/clarity of the certificate concept",
+      "Lack of standard deviations / statistical significance tests",
+      "Whether gains are due to careful tuning rather than CCA geometry preservation",
+      "Theoretical soundness of Frobenius norm between sketched projectors as subspace-angle surrogate",
+      "Whether gradients propagate through EMA/QR certificate update and effect on stability",
+      "Simplicity of prompt invariance mechanism and reliance on diverse anchor prompt set",
+      "Computational/storage overhead compared to other methods and replay",
+      "Results dominated by a single task"
+    ],
+    "unresolved_issues": [
+      "Conceptual novelty of combining orthogonal/angular/prompt-invariance techniques"
+    ]
+  },
+  "stage4_recall": {
+    "n_issues": 10,
+    "cspaper_recalled": 3,
+    "matches": [
+      {
+        "issue": "Sensitivity to sketch randomness/sketch type",
+        "raised_by_cspaper": false
+      },
+      {
+        "issue": "Scaling to larger backbones and different adapter types",
+        "raised_by_cspaper": false
+      },
+      {
+        "issue": "Definition/clarity of the certificate concept",
+        "raised_by_cspaper": false
+      },
+      {
+        "issue": "Lack of standard deviations / statistical significance tests",
+        "raised_by_cspaper": false
+      },
+      {
+        "issue": "Whether gains are due to careful tuning rather than CCA geometry preservation",
+        "raised_by_cspaper": true
+      },
+      {
+        "issue": "Theoretical soundness of Frobenius norm between sketched projectors as subspace-angle surrogate",
+        "raised_by_cspaper": true
+      },
+      {
+        "issue": "Whether gradients propagate through EMA/QR certificate update and effect on stability",
+        "raised_by_cspaper": false
+      },
+      {
+        "issue": "Simplicity of prompt invariance mechanism and reliance on diverse anchor prompt set",
+        "raised_by_cspaper": true
+      },
+      {
+        "issue": "Computational/storage overhead compared to other methods and replay",
+        "raised_by_cspaper": false
+      },
+      {
+        "issue": "Results dominated by a single task",
+        "raised_by_cspaper": false
+      }
+    ]
+  }
+}
