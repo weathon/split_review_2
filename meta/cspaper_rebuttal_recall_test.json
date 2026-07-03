@@ -1,0 +1,249 @@
+[
+  {
+    "pid": "gubSyVxWdG",
+    "title": "A Relative Error-Based Evaluation Framework of Heterogeneous Treatment Effect Estimators",
+    "decision": "Accept (Poster)",
+    "n_resolved": 23,
+    "n_recalled": 4,
+    "matches": [
+      {
+        "issue": "Terminology inconsistency between 'balance regularizers' in intro and L_const later (Reviewer 2)",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "No sensitivity analysis of propensity score misspecification (Reviewers 2 and 3)",
+        "raised_by_cspaper": true,
+        "cspaper_excerpt": "Injecting Gaussian noise into the *true* propensity score is a perturbation experiment, not a misspecified-model experiment... this is not a side issue, it is one of the paper's key practical bottlenecks."
+      },
+      {
+        "issue": "Lack of deeper comparison against Gao (2025) baseline (Reviewer 2, Reviewer 4)",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "How results depend on number of candidate estimators (Reviewer 2)",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Typo: line 1017 should be L_const (Reviewer 3)",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Explanation missing for how ground-truth tau is computed for Twins and Jobs datasets (Reviewer 3)",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Concern that method requires sample splitting like standard orthogonal estimators (Reviewer 3)",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "No convergence/finite-sample evidence that L_const and L_ce approximate original moment conditions (Reviewer 3)",
+        "raised_by_cspaper": true,
+        "cspaper_excerpt": "There is no argument in the main paper that minimizing this objective actually yields nuisance estimators satisfying the relevant moment conditions at the needed rates, or even approximately enough for the asymptotic conclusion to plausibly transfer."
+      },
+      {
+        "issue": "Justification needed for why propensity score is easier to estimate than outcome regression (Reviewer 3)",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Concern about computational cost/time complexity of the enhanced estimator (Reviewer 3)",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Arbitrary parametrization and shared representation of e(X) and mu_a(X) lacking justification (Reviewer 3)",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Possible misspecification arising from representation Phi(X) (Reviewer 3)",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Missing standard datasets like ACIC/News (Reviewer M3dQ)",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Confusion about whether Gao's condition requires consistency of both nuisance models and whether new theorem conditions are truly easier (Reviewer M3dQ)",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Concern about enhanced estimator modeling full potential outcomes contrary to SOTA HTE literature (Reviewer M3dQ)",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Numerous typos and presentation/language issues, confusion between HTE estimation and evaluation (Reviewer M3dQ, Reviewer 4, Reviewer 2)",
+        "raised_by_cspaper": true,
+        "cspaper_excerpt": "Table 5 contains entries like \"\u221a\u03b5H2PE\" and \"\u03b5u4ZE,\" which are clearly broken renderings... several malformed reference entries in the bibliography."
+      },
+      {
+        "issue": "Unclear practical motivation for using relative error over absolute metrics like PEHE (Reviewer 4)",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Missing precise definition of HTE vs ITE/CATE (Reviewer 4)",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Typo in Assumption 1(i) regarding unconfoundedness statement (Reviewer 4)",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Unclear novelty of network architecture relative to Dragonnet (Reviewer 4, Reviewer GfzX)",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "No baseline representing Gao (2025) in experiments (Reviewer 4)",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Minor typos at specific lines referencing Assumption 2 vs Condition 2 and estimator wording (Reviewer 4)",
+        "raised_by_cspaper": true,
+        "cspaper_excerpt": "\"Assumption 2\" on **Page 4** where the paper appears to mean Condition 2"
+      },
+      {
+        "issue": "PDF revision not visible/verifiable after claimed update (Reviewer M3dQ)",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      }
+    ]
+  },
+  {
+    "pid": "mHRuCmc9lo",
+    "title": "Robust Decision-Making with Partially Calibrated Forecasters",
+    "decision": "Accept (Poster)",
+    "n_resolved": 8,
+    "n_recalled": 2,
+    "matches": [
+      {
+        "issue": "R1 asked whether the ambiguity set collapses to a single expected utility under decision calibration, and where the 'collapse' of the minimax policy to plug-in best-response comes from",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "R2 requested sensitivity analysis of how decision calibration error affects the minimax decision maker's loss",
+        "raised_by_cspaper": true,
+        "cspaper_excerpt": "there is no quantitative report of the calibration error nor any empirical sensitivity analysis showing whether the robust policy remains preferable as those moment constraints are violated"
+      },
+      {
+        "issue": "R2 requested discussion of sample efficiency of decision calibration versus the exponential sample complexity of full calibration",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "R2 pointed out typos (lines 71, 203, 475, 132) and a mischaracterization of Hu & Wu 2024's calibration notion",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "R3 questioned the strength/realism of the linear utility assumption and asked for concrete examples of utilities satisfying and not satisfying it",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "R3 asked for clarification on whether the h functions in H take the forecast f(X) or raw input X as input",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "R3 noted ambiguity about whether Y in [0,1]^d represents one-hot encoded outcomes or a regression target",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "R3 raised various typos and writing issues (lines 63/64, 88, 166, 210, 475, and wording around 'minimal' at lines 324-326)",
+        "raised_by_cspaper": true,
+        "cspaper_excerpt": "There are typos and formatting glitches, for example \"$a_{\\mathrm{BH}}$\" on Page 3 appears to be a typo for $a_{\\mathrm{BR}}$, \"Equation equation 1\" on Page 4"
+      }
+    ]
+  },
+  {
+    "pid": "Kw2mvnzCoc",
+    "title": "TSPulse: Tiny Pre-Trained Models with Disentangled Representations for Rapid Time-Series Analysis",
+    "decision": "Accept (Poster)",
+    "n_resolved": 13,
+    "n_recalled": 5,
+    "matches": [
+      {
+        "issue": "Task-specific loss reweighting/pre-training specialization contradicts claim of a general-purpose single model",
+        "raised_by_cspaper": true,
+        "cspaper_excerpt": "the authors explicitly state that they \"specialize the pre-training for every task through reweighting loss objectives\"... the headline framing of one tiny versatile pre-trained model is materially inaccurate"
+      },
+      {
+        "issue": "Fairness of comparisons against general-purpose foundation models like MOMENT/UniTS deemed apples-to-oranges",
+        "raised_by_cspaper": true,
+        "cspaper_excerpt": "it is not an apples-to-apples basis for claiming a broad advantage in \"versatility\" or \"general-purpose\" transfer"
+      },
+      {
+        "issue": "Ablation studies only destructive, not showing incremental/constructive contribution from TSMixer baseline",
+        "raised_by_cspaper": true,
+        "cspaper_excerpt": "there is no clean decomposition of how much gain comes from using TSMixer versus the disentanglement losses"
+      },
+      {
+        "issue": "No quantitative/qualitative evidence that disentangled embeddings (time/FFT/semantic) are truly disentangled",
+        "raised_by_cspaper": true,
+        "cspaper_excerpt": "these results mainly show differential robustness properties under a few synthetic perturbations, not disentanglement in any rigorous representation-learning sense"
+      },
+      {
+        "issue": "Hybrid masking claimed to reflect 'real randomness' without statistical evidence of alignment with realistic missingness",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Omission of forecasting evaluation limits comparability with other time-series foundation models",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "TSLens and Multi-Head Triangulation seem like simple re-brandings of attention pooling and ensembling",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Lack of parameter-matched plug-in baselines (gated residual, lightweight cross-attention) to isolate design effects from capacity",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Unclear practical application/motivation for the similarity search task",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Very good imputation performance (Figure 6) needed more discussion/explanation",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Presentation/clarity of the paper's key idea was insufficient",
+        "raised_by_cspaper": true,
+        "cspaper_excerpt": "The presentation has multiple clarity and notation issues, some of them surprisingly distracting for a paper with many architectural details."
+      },
+      {
+        "issue": "Reviewer claimed key specialization details were 'buried' in Appendix A.6, implying authors hid the general-vs-specialized model distinction",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "No comparison to CLS-style aggregator baselines for the register-token design",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      }
+    ]
+  }
+]
