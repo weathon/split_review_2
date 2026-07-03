@@ -1,24 +1,22 @@
-The calibration search tool appears to have a persistent file access issue. I'll proceed with careful manual calibration based on my knowledge of typical ICLR scoring standards. Let me now write the final consolidated review.
+Since the calibration data directory is not accessible, I'll proceed with my own calibrated assessment based on the paper content.
 
-**Manual calibration reasoning:** Based on the paper's content, the efficiency gains (3.9-10× speedup, 2.46-5.12× VRAM reduction) are genuinely impressive. The method is empirically motivated by attention-pattern analysis, and the architectural contributions (PAA, KSA, condition cache) are concrete. The quality metrics largely improve over baselines. However, the understated F1 trade-off, underspecified baseline training protocol, and purely qualitative early-timestep sampling evaluation are non-trivial issues that prevent a score in the strong accept range (8-10). Conversely, the core idea is sound and well-demonstrated enough to be above the reject range (1-4). The paper sits in the borderline-to-accept range (5.5-7).
-
-Here is the final consolidated review:
+Let me finalize the consolidated review.
 
 ## Summary
-This paper proposes Patch-wise and Keyword-Aware Attention (PKA), a framework for efficient multi-condition control in Diffusion Transformers (DiTs). PKA decomposes the expensive "concatenate-and-attend" computation into two specialized sparse-attention modules: Position-Aligned Attention (PAA) for spatial conditions (one-to-one attention at aligned positions) and Keyword-Scoped Attention (KSA) for subject conditions (attention only in keyword-activated regions). A condition KV cache reuses Key/Value projections across denoising steps, and an early-timestep sampling strategy shifts the training distribution to prioritize high-noise phases. Evaluated on FLUX.1 with multiple multi-condition tasks, PKA achieves 3.9-10× inference speedup and 2.46-5.12× VRAM reduction while improving or maintaining generation quality on most metrics.
+
+The paper proposes Patch-wise and Keyword-Aware Attention (PKA), a framework that decomposes multi-condition attention in Diffusion Transformers into two specialized modules: Position-Aligned Attention (PAA) for spatial conditions (one-to-one attention at aligned positions) and Keyword-Scoped Attention (KSA) for subject conditions (attention restricted to keyword-activated regions). Together with a condition KV cache and an early-timestep sampling strategy, PKA achieves up to 10× inference speedup and 5.12× VRAM reduction for the attention module while claiming to maintain or improve generative quality.
 
 ## Strengths
-1. **Empirically motivated architectural design via attention-pattern analysis** — The paper does not assume sparsity generically; it explicitly analyzes attention matrices in prior multi-condition DiTs (Section 1, Figures 2-3), confirming that spatial-condition attention is diagonally concentrated while subject-condition attention is sparse and keyword-correlated. This analysis directly drives the design of two distinct modules (PAA and KSA) rather than applying a generic sparsity heuristic.
 
-2. **Condition Cache mechanism enabled by structural attention decomposition** — By redesigning the attention structure so condition tokens perform self-attention only within their own condition type (Figure 4b), the paper unlocks a practical KV cache: Key/Value projections are computed once at the first denoising step and reused in all subsequent steps (Section 3.2). This is a concrete architectural novelty beyond token pruning or layer removal.
+1. **Empirically diagnosed attention sparsity that directly motivates the two-module decomposition.** The paper provides visual evidence (Figures 2-3) showing that spatial-condition attention is concentrated along the diagonal and subject-condition attention is localized to keyword-relevant regions. This analysis directly motivates the separate PAA and KSA modules rather than applying a single global sparsification scheme, and differentiates the work from prior efficient DiT methods based on token pruning or layer caching.
 
-3. **Simultaneous efficiency gains and quality improvements on multiple tasks** — Table 1 shows PKA not only reduces computation (Figures 7-8: up to 10× speedup, 5.12× VRAM reduction) but also improves FID, SSIM, CLIP-I, and DINOv2 scores over both OminiControl2 and UniCombine across Subject-Canny, Subject-Depth, and Canny-Depth tasks. For instance, on Subject-Canny, FID drops from 61.03 (UniCombine) to 52.99 (Ours), and DINOv2 rises from 0.901 to 0.926.
+2. **Up to 10× speedup and 5.12× VRAM reduction with an increasing-condition trend.** Figures 7-8 plot inference time and VRAM against condition count (1 to 16), showing PKA's advantage grows with more conditions: speedup from 3.90× at 4 conditions to 10× at 16, and VRAM reduction from 2.46× to 5.12×. The full-attention baselines scale quadratically while PKA stays nearly flat, directly demonstrating that the method addresses the stated "concatenate-and-attend" bottleneck. This trend data, measured on a single GPU, is the paper's strongest evidence.
 
-4. **Perturbation analysis grounding the early-timestep sampling** — Figure 5 provides direct empirical evidence that perturbing early (high-noise) timesteps degrades SSIM substantially more than perturbing late timesteps, supporting the claim that visual conditions exert strongest influence early in denoising and motivating the shifted logit-normal training distribution (Section 3.3).
+3. **Condition KV cache enabled by the structural design.** Because condition tokens only perform self-attention within their own condition type (Section 3.2), their Key and Value projections can be computed once in the first denoising step and cached for all subsequent steps. This is structurally different from earlier efficient DiT methods that rely on added heuristics like layer caching or token pruning.
 
-5. **PAA ablation against sliding window attention (SWA)** — Section 4.3.1 compares PAA not only against full attention but also against SWA with window sizes 1, 2, and 3, showing PAA achieves lower latency (13.63s vs 14.00s for SWA-1) and lower VRAM (237MB vs 276MB) while producing qualitatively comparable outputs.
+4. **Perturbation analysis providing empirical grounding for the early-timestep sampling scheme.** Section 3.3 and Figure 5 show that perturbing early (high-noise) steps degrades SSIM faster than perturbing late steps, empirically demonstrating that visual conditions exert their strongest influence early in the denoising trajectory. This motivates the shifted logit-normal sampling distribution.
 
-6. **KSA threshold ablation showing graceful trade-off** — Figure 10 varies the KSA mask threshold ε from 0.2 to 0.8 and reports both efficiency metrics (latency drops from 16.99s to 15.23s, VRAM from 368MB to 230MB) and qualitative results, showing subject fidelity degrades only in subtle fine-detail differences rather than collapsing abruptly.
+5. **Systematic ablation of the KSA mask threshold demonstrating a smooth efficiency-quality trade-off.** Figure 10 varies ε from 0.0 (w/o KSA, 16.99s, 368MB) to 0.8 (15.23s, 230MB), showing that the threshold provides intuitive and graceful control over the efficiency-quality balance rather than being a sensitive hyperparameter.
 
 ## Weaknesses
 
@@ -26,49 +24,66 @@ This paper proposes Patch-wise and Keyword-Aware Attention (PKA), a framework fo
 None.
 
 ### Major
-1. **Subject-Canny F1 drop is significantly understated.** On the Subject-Canny task (Table 1), canny controllability (F1) drops from 0.551 (UniCombine) to 0.414 (Ours) — a ~25% relative decline and the largest single gap in the entire table. The paper describes this as "a narrow margin" (line 249). This is a meaningful cost of the efficiency gain: in PKA, spatial and subject conditions are processed independently with no cross-attention between them, so spatial controllability degrades noticeably when a subject condition is also present. The paper neither acknowledges this structural limitation nor discusses it as a trade-off. This does not invalidate the core contribution, but the presentation is misleading and the limitation should be honestly characterized.
 
-2. **Baseline training procedure is underspecified.** The paper states "To ensure a fair comparison, we fine-tune the FLUX.1 model using LoRA" (lines 197-198) but does not clarify whether OminiControl2 and UniCombine underwent the same LoRA fine-tuning on the same data subset, or were used as pre-trained off-the-shelf models. If baselines were not comparably fine-tuned, the quality metrics (FID, SSIM, CLIP-I, DINOv2) could reflect dataset distribution mismatch rather than genuine method superiority. This must be clarified in the rebuttal.
+1. **The quality comparison is confounded with training procedure differences.** The paper claims PKA "maintains or improves generative quality" and Table 1 shows substantially better FID, SSIM, CLIP-I, and DINOv2 across all three tasks. However, Section 4.1 describes training PKA with LoRA fine-tuning, a curated Subject200K subset, the Prodigy optimizer, gradient accumulation, and the proposed early-timestep sampling — while simply "employing" OminiControl2 and UniCombine as baselines without specifying whether they were retrained under identical conditions or used off-the-shelf. If baselines were not retrained with the same data, LoRA, optimizer, and timestep sampling, the quality improvements in Table 1 cannot be attributed to the attention architecture. The paper needs to either (a) retrain all baselines under identical conditions (same data, same LoRA training, same optimizer, same timestep sampling) with their own attention mechanisms, or (b) clearly separate the efficiency claim (well-supported by Figures 7-8) from the quality claim and acknowledge that quality differences may reflect training procedure improvements.
 
-3. **The early-timestep sampling contribution lacks quantitative validation.** Section 3.3 presents early-timestep sampling as a methodological contribution on par with PKA (it appears in the contribution list in the introduction). However, Figure 11 shows only qualitative image grids for different (μ, δ) configurations at varying iteration counts. There are no quantitative metrics — no FID, SSIM, convergence curves, or controllability scores — to support the claims that the strategy "accelerates convergence" and "enhances control fidelity." A quantitative ablation on at least one task is necessary to validate this as a distinct contribution.
+2. **The KSA mask recomputation schedule is underspecified in a way that affects the validity assessment.** Section 3.2.2 states the mask is computed at timestep *t* (Eq. 3) and reused at timestep *t+1* (Eq. 4), with the figure caption (Figure 4d) saying the mask is applied in "subsequent steps" (plural). It is unclear whether this is a recurring alternation pattern (compute at even steps, reuse at odd steps — the natural reading of the "two-step process" description) or a one-time computation at step 1 reused for all later steps. If the latter, the mask would be computed from pure-noise attention patterns and would not meaningfully localize the subject at later steps. The paper must specify the exact schedule, the recomputation overhead if any, and provide evidence (e.g., mask IoU between consecutive steps) that the temporal consistency assumption holds.
 
 ### Minor
-4. **Unexplained "swa condition" column in PAA ablation.** Figure 9 includes a column labeled "swa condition" that achieves better efficiency than the proposed PAA (13.58s, 198MB vs. PAA's 13.63s, 237MB). The paper provides no explanation of what this variant is, how it differs from the other SWA variants (window sizes 1, 2, 3), or why it is not preferred if it is both faster and more memory-efficient. This omission undermines the clarity of the ablation analysis.
 
-5. **KSA's dependency on text-to-image attention map accuracy not discussed.** KSA (Section 3.2.2) uses text keyword attention maps to generate a mask that localizes subject-driven attention. If the text keyword is ambiguous (e.g., "person" in a crowd scene with multiple people), or if the description does not precisely localize the visual subject, the mask may be incorrect and subject-condition information applied to wrong regions or omitted entirely. This failure mode is not discussed.
+3. **No variance or confidence information for any quantitative metric.** Table 1 reports point estimates for FID, SSIM, F1, MSE, CLIP-I, DINOv2, and CLIP-T without error bars, confidence intervals, or any indication of how many seeds/runs were averaged. FID in particular is known to be seed-dependent. Without variance estimates, the reader cannot assess whether the reported differences (e.g., FID 52.99 vs 61.03 for Subject-Canny) are statistically significant or could arise from run-to-run variation.
 
-6. **Condition Cache quality impact not analyzed.** The condition KV cache (Section 3.2) reuses condition token K/V projections after the first denoising step for all subsequent steps. While the noisy image changes significantly across the denoising trajectory, no analysis is provided on whether this caching approximation degrades quality relative to recomputing condition representations at each step.
+4. **PAA ablation lacks quality metrics.** Figure 9 reports only latency and VRAM for the PAA comparison against full attention and sliding window attention. The claim that PAA "delivers high-quality spatial control" is supported only by qualitative images, with no FID, SSIM, or controllability (F1/MSE) metrics alongside the efficiency numbers.
 
-7. **No statistical significance or variance reported.** All quantitative results appear to be from single runs. Without variance estimates, it is impossible to assess whether observed differences between methods (including the F1 gap on Subject-Canny) are reliable.
+5. **Early-timestep sampling ablation is only qualitative.** Figure 11 shows visual results for different (μ, δ) settings at various training iterations but provides no learning curves, loss values, or quantitative control metrics to substantiate the claim that the sampling "accelerates convergence."
 
-8. **KSA threshold ablation lacks quantitative subject consistency scores.** Figure 10 varies ε from 0.2 to 0.8 and reports efficiency metrics, but does not report corresponding quantitative subject consistency scores (CLIP-I, DINOv2). The claim that "the generated image remains highly faithful" at higher ε relies entirely on visual inspection of two examples.
+6. **The number of inference steps used for evaluation is not reported.** This matters because the condition cache savings depend on the total number of denoising steps (more steps = greater amortized benefit).
 
 ### Trivial
 None.
 
 ## Nice-to-Haves
-- An end-to-end latency breakdown at realistic condition counts (2-4 conditions) would help practitioners assess practical speedup.
-- A controlled experiment varying whether spatial and subject conditions are redundant, complementary, or conflicting would clarify whether the F1 drop is fundamental or can be mitigated.
+- Quantitative metrics (CLIP-I, DINOv2) for the KSA ε ablation across different threshold values.
+- A quantitative convergence comparison for the early-timestep sampling (e.g., training loss curves or control metric vs. iterations for different μ, δ settings).
+- A discussion of whether the restricted interaction paths (conditions only self-attend, no cross-condition attention) could limit certain forms of multi-condition reasoning where spatial and subject conditions must interact.
 
 ## Removed Points
-These points were flagged during review but removed; treat them with caution:
 
-- **FID computation is "not the standard protocol"** — REMOVED. Computing FID between generated and ground-truth image sets is a standard evaluation for conditional generation. The high absolute values are likely due to the small evaluation subset, and the relative comparison across methods (all using the same protocol) is valid.
-- **Abstract should distinguish peak vs typical speedup** — REMOVED. The abstract states "up to a 10× inference speedup," which correctly indicates the peak case. This is standard practice.
-- **PAA vs SWA-1 improvements are "incremental"** — REMOVED. While individual module improvements are modest, the main contribution is the full system (PAA+KSA+Cache), which achieves substantial end-to-end gains.
-- **Missing related works** — REMOVED per policy (cannot be independently verified).
+These points are flagged to be removed; treat them with caution.
+
+- **"Up to 10× speedup should be contextualized more clearly"**: The paper already contextualizes this in Figure 7 (3.90× at 4 conditions, 6.46× at 8, 10× at 16). The abstract honestly says "up to 10×." The 10× figure is correctly tied to the 16-condition scenario. (Harsh Critic)
+
+- **"PAA/KSA being the only interaction paths could limit cross-condition reasoning"**: Speculative and outside the paper's stated scope. The paper explicitly describes its design choice and does not claim to support cross-condition reasoning. (Harsh Critic)
+
+- **"Formatting error in Table 1 (F1 column dash alignment)"**: A pure formatting artifact; most likely a LaTeX alignment issue in the PDF extraction, not a content error. (Harsh Critic)
+
+- **"VRAM measurement is ambiguous"**: Figure 8 is clearly labeled "VRAM consumption of attention mechanism" and Section 4.1 says "Efficiency metrics, including inference latency and condition overhead, are measured on a single NVIDIA RTX 6000 Ada GPU." The measurement scope is stated. (Harsh Critic)
+
+- **"Strength: the paper addresses an important problem"**: Generic/superficial strength lacking a specific citation to paper content. (Strength Finder)
+
+- **"Canny-Depth-to-Image task tests PAA in isolation with no subject condition"**: This is a valid task choice; the paper does not claim KSA is applied there. Not a weakness. (Harsh Critic)
 
 ## Novel Insights
-None beyond the paper's own contributions.
+
+None beyond the paper's own contributions. The reviews surface the core tension between the paper's quality claims and the experimental design (conflated training procedures), but neither reviewer offers a fundamentally new observation about the method or its implications beyond what the paper already discusses.
 
 ## Suggestions
-1. Add a controlled experiment and explicit discussion of the Subject-Canny F1 trade-off, including analysis of when spatial and subject conditions may conflict.
-2. Clarify the baseline training protocol: state explicitly whether OminiControl2 and UniCombine were fine-tuned with LoRA on the same subset, or used off-the-shelf.
-3. Add quantitative metrics (FID, controllability scores) for the early-timestep sampling ablation in Figure 11.
-4. Explain the "swa condition" column in Figure 9.
-5. Add variance estimates (e.g., over multiple seeds) to key quantitative results.
-6. Discuss failure modes of KSA when keyword attention maps are inaccurate.
-7. Add an ablation or analysis of the condition cache approximation's impact on generation quality.
+1. **(Required)** Clarify whether OminiControl2 and UniCombine baselines were retrained under identical conditions (same data, LoRA, optimizer, early-timestep sampling) or used off-the-shelf. If the latter, retrain them under controlled conditions or explicitly reframe the quality claims to acknowledge confounding.
+2. **(Required)** Specify the KSA mask recomputation schedule precisely. Provide evidence (e.g., mask overlap statistics across steps) that the temporal consistency assumption holds and that the mask remains meaningful across reused steps.
+3. **(Required)** Add variance estimates (error bars or confidence intervals) to all quantitative comparisons in Table 1 and ablation figures.
+4. **(Recommended)** Report quality metrics (FID, SSIM, controllability F1/MSE) for the PAA ablation study alongside the latency/VRAM numbers already shown.
+5. **(Recommended)** Report the number of inference steps used in evaluation.
+6. **(Suggested)** Add learning curves or quantitative convergence data for the early-timestep sampling ablation.
 
-MY FINAL SCORE: <score>6.0</score>
+## Score and Decision
+
+The paper's core contribution — an efficient attention decomposition for multi-condition DiTs — is sound, the empirical motivation (attention sparsity analysis) is convincing, and the efficiency results (up to 10× speedup, 5.12× VRAM reduction) are well-supported by Figures 7-8. These results alone constitute a meaningful contribution: the method substantially reduces computation and memory for multi-condition control, and the advantage grows with the number of conditions.
+
+However, the paper overreaches by claiming quality improvements alongside efficiency when the comparison is confounded by uncontrolled training procedure differences. The KSA mask schedule is also underspecified in a way that affects reproducibility. These issues are fixable but require substantive clarification and controlled experiments, not minor edits.
+
+Compared to standard acceptance thresholds: the efficiency evidence is stronger than many accepted methods papers (due to the parametric efficiency-quality trade-off characterization), but the quality claims are weaker than they should be for a method that frames "maintaining or improving quality" as a core result. The paper would be a clear accept if the quality comparison issue were resolved.
+
+**Score: 6** — Borderline accept. The efficiency contribution is real and well-demonstrated. The quality claims need to be disentangled from training procedure effects. With proper clarification and controlled experiments, the paper would be publishable at a higher score.
+
+MY FINAL SCORE: <score>6</score>
 MY FINAL DECISION: <decision>Accept</decision>
