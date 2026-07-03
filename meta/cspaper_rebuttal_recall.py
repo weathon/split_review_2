@@ -114,18 +114,24 @@ def extract_json(text):
     return json.loads(text)
 
 
-RESOLVED_PROMPT = """You are analyzing the OpenReview discussion of an ICLR paper that was ultimately ACCEPTED.
-
-Below are the official human reviews, the author rebuttal / discussion comments, and the AC meta-review.
+AC_PROMPT = """You are analyzing the OpenReview discussion of an ICLR paper that was ACCEPTED. The paper PDF under review is the POST-rebuttal version, and the AC meta-review below assesses THAT version.
 
 {thread}
 
-Task: identify the concrete issues/weaknesses that reviewers RAISED and that were RESOLVED during the rebuttal — i.e., the authors clarified a point, corrected a reviewer's misunderstanding, added a requested experiment/detail, or the reviewer/AC explicitly indicated the concern was addressed, such that the issue did NOT block acceptance. Do NOT include issues that remained open limitations noted by the AC.
+Follow these rules EXACTLY. Do NOT use your own judgement about whether the rebuttal resolved a concern. Decide ONLY from the AC meta-review's explicit statements.
 
-For each resolved issue give a short, self-contained description of what the reviewer was complaining about.
+Step 1 — gate. Does the AC meta-review explicitly discuss resolution status of reviewer concerns? That means it EITHER (a) explicitly states that certain concerns were resolved/addressed by the rebuttal, AND/OR (b) lists the remaining / still-open / unresolved concerns (or the concerns motivating its assessment). If the AC meta-review does NEITHER, set "ac_discusses_resolution": false and return empty lists — the paper will be skipped.
+
+Step 2 — reviewer issues. Extract the SUBSTANTIVE issues reviewers raised (in reviews and discussion). EXCLUDE trivial items entirely: typos, grammar, wording, formatting, notation, missing citations, presentation/clarity nits.
+
+Step 3 — classify each substantive issue using ONLY the AC meta-review:
+- "resolved"  ONLY IF: the AC explicitly says that concern was resolved/addressed, OR the AC gave a list of remaining/unresolved concerns and this issue is NOT in that list.
+- "unresolved" if the AC lists it among remaining/open concerns.
+- "unknown"   if the AC statements do not let you decide by the two rules above.
+For every "resolved" and "unresolved" item, quote the exact AC sentence you relied on in "ac_evidence".
 
 Return ONLY JSON, no prose, no code fences:
-{{"resolved_issues": [{{"issue": "<short description of the reviewer concern that got resolved>", "how_resolved": "<one clause>"}}]}}"""
+{{"ac_discusses_resolution": true/false, "resolved_invalid": [{{"issue": "<short desc>", "ac_evidence": "<exact AC quote>"}}], "unresolved": [{{"issue": "<short desc>", "ac_evidence": "<exact AC quote>"}}]}}"""
 
 RECALL_PROMPT = """Below is an automated reviewer's ("CSPaper") review of a paper, followed by a list of issues that HUMAN reviewers raised about the same paper but which were RESOLVED in rebuttal (i.e., they turned out not to block acceptance).
 
@@ -145,32 +151,41 @@ async def process(pid, path):
     thread = fetch_thread(pid)
     dec = (thread["decision"] or "").lower()
     if "accept" not in dec:
-        return None
-    resolved = extract_json(await query_claude(RESOLVED_PROMPT.format(thread=assemble(thread))))
-    issues = resolved["resolved_issues"]
+        return {"skip": "not accepted"}
+    if not thread["meta"]:
+        return {"skip": "no meta-review"}
+    ac = extract_json(await query_claude(AC_PROMPT.format(thread=assemble(thread))))
+    if not ac.get("ac_discusses_resolution"):
+        return {"skip": "AC does not discuss resolution"}
+    issues = ac["resolved_invalid"]
     if not issues:
-        return {"pid": pid, "title": thread["title"], "n_resolved": 0, "n_recalled": 0, "matches": []}
+        return {"skip": "AC discusses resolution but no resolved-invalid items"}
     review = path.read_text()
     issues_txt = "\n".join(f"{i+1}. {it['issue']}" for i, it in enumerate(issues))
     rec = extract_json(await query_claude(RECALL_PROMPT.format(review=review, issues=issues_txt)))
     matches = rec["matches"]
     n_rec = sum(1 for m in matches if m["raised_by_cspaper"])
     return {"pid": pid, "title": thread["title"], "decision": thread["decision"],
-            "n_resolved": len(issues), "n_recalled": n_rec, "matches": matches}
+            "n_resolved": len(issues), "n_recalled": n_rec,
+            "resolved_invalid": issues, "unresolved": ac.get("unresolved", []), "matches": matches}
 
 
 async def main():
     idx = cspaper_index()
     results = []
+    scanned = 0
+    MAX_SCAN = 40
     for pid, path in idx.items():
-        if len(results) >= N_PAPERS:
+        if len(results) >= N_PAPERS or scanned >= MAX_SCAN:
             break
+        scanned += 1
         try:
             r = await process(pid, path)
         except Exception as e:
             print(f"  skip {pid}: {type(e).__name__}: {e}")
             continue
-        if r is None:
+        if r.get("skip"):
+            print(f"  skip {pid}: {r['skip']}")
             continue
         results.append(r)
         print(f"\n### {pid} — {r['title']}  [{r.get('decision')}]")
