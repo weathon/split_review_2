@@ -1,166 +1,406 @@
 [
   {
-    "pid": "gubSyVxWdG",
-    "title": "A Relative Error-Based Evaluation Framework of Heterogeneous Treatment Effect Estimators",
+    "pid": "pn2H6YeOv2",
+    "title": "Pi-CCA: Prompt-Invariant CCA Certificates for Replay-Free Continual Multimodal Learning",
+    "decision": "Accept (Poster)",
+    "n_resolved": 10,
+    "cspaper_recalled": 3,
+    "ours_recalled": 1,
+    "resolved_invalid": [
+      {
+        "issue": "Sensitivity to sketch randomness/type",
+        "ac_evidence": "the authors add robustness experiments showing low sensitivity to sketch randomness and sketch type"
+      },
+      {
+        "issue": "Scaling to larger backbones/adapter types",
+        "ac_evidence": "scaling results to ViT\u2011L backbones and multiple PET configurations"
+      },
+      {
+        "issue": "Certificate concept unclear",
+        "ac_evidence": "clearer explanations of the CCA certificate"
+      },
+      {
+        "issue": "Lack of standard deviations/statistical tests",
+        "ac_evidence": "standard deviations and paired t\u2011tests demonstrating statistical significance of gains"
+      },
+      {
+        "issue": "Gains may be due to careful tuning rather than CCA geometry",
+        "ac_evidence": "stronger baselines with heavy regularization and proxy similarity alignment that still underperform Pi\u2013CCA"
+      },
+      {
+        "issue": "Theoretical soundness of Frobenius norm projector loss",
+        "ac_evidence": "they justify the projector loss as a sketched Grassmann distance"
+      },
+      {
+        "issue": "Whether gradients propagate through EMA/QR certificate update",
+        "ac_evidence": "clarify that the certificate is updated via stop\u2011grad EMA+QR for stability"
+      },
+      {
+        "issue": "Simplicity of prompt invariance mechanism and anchor prompt set feasibility",
+        "ac_evidence": "give additional evidence that prompt invariance and small, label-derived anchor sets are effective and not overly sensitive"
+      },
+      {
+        "issue": "Computational/storage overhead vs replay methods",
+        "ac_evidence": "they quantify modest overhead and very small certificate storage compared with replay buffers"
+      },
+      {
+        "issue": "Results dominated by single task",
+        "ac_evidence": "provide per\u2011task results showing consistent gains"
+      }
+    ],
+    "unresolved": [
+      {
+        "issue": "Conceptual novelty concerns",
+        "ac_evidence": "some novelty concerns remain"
+      }
+    ],
+    "cspaper_matches": [
+      {
+        "issue": "Sensitivity to sketch randomness/type",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Scaling to larger backbones/adapter types",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Certificate concept unclear",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Lack of standard deviations/statistical tests",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Gains may be due to careful tuning rather than CCA geometry",
+        "raised_by_cspaper": true,
+        "cspaper_excerpt": "without seeing the simplest baselines in the main text it is harder to judge how much of the gain comes from the CCA certificate specifically rather than from a careful LoRA recipe and tuning budget"
+      },
+      {
+        "issue": "Theoretical soundness of Frobenius norm projector loss",
+        "raised_by_cspaper": true,
+        "cspaper_excerpt": "these are only sketched surrogates, not true projectors in the original space... whether those assumptions are expected to hold at the chosen (k,h) values"
+      },
+      {
+        "issue": "Whether gradients propagate through EMA/QR certificate update",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Simplicity of prompt invariance mechanism and anchor prompt set feasibility",
+        "raised_by_cspaper": true,
+        "cspaper_excerpt": "the distribution P is not specified precisely enough in the main body... whether there is any task-specific tuning of the perturbation set"
+      },
+      {
+        "issue": "Computational/storage overhead vs replay methods",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Results dominated by single task",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      }
+    ],
+    "ours_matches": [
+      {
+        "issue": "Sensitivity to sketch randomness/type",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Scaling to larger backbones/adapter types",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Certificate concept unclear",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Lack of standard deviations/statistical tests",
+        "raised_by_cspaper": true,
+        "cspaper_excerpt": "Table 1 (MTIL/X-TAIL classification results) lacks variance estimates... Table 1 reports no standard deviations, error bars, or seed counts"
+      },
+      {
+        "issue": "Gains may be due to careful tuning rather than CCA geometry",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Theoretical soundness of Frobenius norm projector loss",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Whether gradients propagate through EMA/QR certificate update",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Simplicity of prompt invariance mechanism and anchor prompt set feasibility",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Computational/storage overhead vs replay methods",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Results dominated by single task",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      }
+    ]
+  },
+  {
+    "pid": "32mrjmaeMP",
+    "title": "Dataless Weight Disentanglement in Task Arithmetic via Kronecker-Factored Approximate Curvature",
     "decision": "Accept (Poster)",
     "n_resolved": 3,
-    "n_recalled": 1,
+    "cspaper_recalled": 1,
+    "ours_recalled": 1,
     "resolved_invalid": [
       {
-        "issue": "Moment conditions / balancing conditions infeasible in finite samples",
-        "ac_evidence": "The authors countered effectively by explaining that these are standard balancing conditions used widely in causal inference (e.g., CBPS) and provided empirical evidence that their soft-penalty approach satisfies these constraints well in practice."
+        "issue": "Lack of non-linear fine-tuning validation / comparison with SOTA merging methods (TIES, TSV) limited to linearized setting",
+        "ac_evidence": "The authors clarify that our validation is not restricted to the linearized fine-tuning setting. The originally submitted manuscript already includes experiments where our KFAC regularizer is integrated into a standard non-linear fine-tuning pipeline, and these results show clear and tangible performance gains. The authors also add a direct comparison with the state-of-the-art TSV-M method."
       },
       {
-        "issue": "Propensity score rarely correctly specified in practice",
-        "ac_evidence": "The authors showed via sensitivity analysis that the method is robust to reasonable noise in the propensity score."
+        "issue": "Missing baseline comparison to Task-Localized Sparse FT (TaLoS)",
+        "ac_evidence": "The authors added TaLoS (Task-Localized Sparse FT) as a baseline in the main tables."
       },
       {
-        "issue": "Enhanced estimator relies on modeling full potential outcomes, at odds with SOTA HTE inductive bias",
-        "ac_evidence": "The authors clarified this is an ancillary contribution (a byproduct of the evaluation framework) and does not detract from the main contribution."
+        "issue": "KFAC memory footprint concerns for large models",
+        "ac_evidence": "The authors added a dedicated experiment that memory usage can be substantially reduced with limited performance degradation, but with 1-point drop in accuracy."
       }
     ],
     "unresolved": [
       {
-        "issue": "Framing of method as \"reliable\" given heuristic/non-convex optimization without convergence guarantees",
-        "ac_evidence": "the reviewer remained unconvinced about the fundamental framing (\"reliability\") and the practical feasibility of the moment conditions."
-      },
-      {
-        "issue": "Overall practical readiness of the paper (e.g., missing standard datasets like ACIC prior to rebuttal)",
-        "ac_evidence": "they maintained that the paper was \"not yet ready.\""
+        "issue": "On T5, curvature surrogate underperforms \u03c4-JP and could be improved for text",
+        "ac_evidence": "The authors admit that on T5, there is still room to improve the quality of the curvature surrogate."
       }
     ],
-    "matches": [
+    "cspaper_matches": [
       {
-        "issue": "Moment conditions / balancing conditions infeasible in finite samples",
+        "issue": "Lack of non-linear fine-tuning validation / comparison with SOTA merging methods (TIES, TSV) limited to linearized setting",
+        "raised_by_cspaper": true,
+        "cspaper_excerpt": "The method is derived for the linearized setting... the non-linear results are also less clean than the linear ones."
+      },
+      {
+        "issue": "Missing baseline comparison to Task-Localized Sparse FT (TaLoS)",
         "raised_by_cspaper": false,
         "cspaper_excerpt": ""
       },
       {
-        "issue": "Propensity score rarely correctly specified in practice",
+        "issue": "KFAC memory footprint concerns for large models",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      }
+    ],
+    "ours_matches": [
+      {
+        "issue": "Lack of non-linear fine-tuning validation / comparison with SOTA merging methods (TIES, TSV) limited to linearized setting",
         "raised_by_cspaper": true,
-        "cspaper_excerpt": "The central claim is robustness to misspecified outcome regressions, but Theorem 1 on Page 6 requires the propensity model to be correctly specified and estimated faster than n^{-1/4}. In practice, this is not a benign assumption."
+        "cspaper_excerpt": "The theoretical derivation (Eq. 2\u2192Eq. 3) relies on model linearization, which is not exact in the non-linear regime... provides no experiment validating how well the approximation holds"
       },
       {
-        "issue": "Enhanced estimator relies on modeling full potential outcomes, at odds with SOTA HTE inductive bias",
+        "issue": "Missing baseline comparison to Task-Localized Sparse FT (TaLoS)",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "KFAC memory footprint concerns for large models",
         "raised_by_cspaper": false,
         "cspaper_excerpt": ""
       }
     ]
   },
   {
-    "pid": "mHRuCmc9lo",
-    "title": "Robust Decision-Making with Partially Calibrated Forecasters",
+    "pid": "GODFBZhFcX",
+    "title": "From Assumptions to Actions: Turning LLM Reasoning into Uncertainty-Aware Planning for Embodied Agents",
     "decision": "Accept (Poster)",
-    "n_resolved": 1,
-    "n_recalled": 1,
+    "n_resolved": 12,
+    "cspaper_recalled": 6,
+    "ours_recalled": 4,
     "resolved_invalid": [
       {
-        "issue": "Reviewer questions/specific concerns raised",
-        "ac_evidence": "The reviewers had several specific questions, which have been addressed."
+        "issue": "Unclear hyperparameter choices",
+        "ac_evidence": "I think all reviewer concerns have been addressed."
+      },
+      {
+        "issue": "Related work discussion of tree-search methods (CoTS)",
+        "ac_evidence": "I think all reviewer concerns have been addressed."
+      },
+      {
+        "issue": "Lack of discussion on prior long-horizon LLM planning work",
+        "ac_evidence": "I think all reviewer concerns have been addressed."
+      },
+      {
+        "issue": "Lack of case studies/qualitative analyses",
+        "ac_evidence": "I think all reviewer concerns have been addressed."
+      },
+      {
+        "issue": "Scalability to larger numbers of agents",
+        "ac_evidence": "I think all reviewer concerns have been addressed."
+      },
+      {
+        "issue": "No analysis of Composer's reliability",
+        "ac_evidence": "I think all reviewer concerns have been addressed."
+      },
+      {
+        "issue": "Overstated scaling claim",
+        "ac_evidence": "I think all reviewer concerns have been addressed."
+      },
+      {
+        "issue": "Differentiation from existing methods",
+        "ac_evidence": "I think all reviewer concerns have been addressed."
+      },
+      {
+        "issue": "PCE relies on many existing methods (limited novelty)",
+        "ac_evidence": "I think all reviewer concerns have been addressed."
+      },
+      {
+        "issue": "Why performance exceeds baselines without Composer / Composer's specific contribution unclear",
+        "ac_evidence": "I think all reviewer concerns have been addressed."
+      },
+      {
+        "issue": "Stability issues from LLM-based components",
+        "ac_evidence": "I think all reviewer concerns have been addressed."
+      },
+      {
+        "issue": "Unclear token usage / communication channel load vs latency",
+        "ac_evidence": "I think all reviewer concerns have been addressed."
       }
     ],
-    "unresolved": [
+    "unresolved": [],
+    "cspaper_matches": [
       {
-        "issue": "Discussion around line 323 conflating minimax optimality with swap regret guarantee",
-        "ac_evidence": "I think the discussion around lines 323 is a bit misleading, minimax optimality with respect to all decision rules is not strictly stronger than the swap regret guarantee, since the swap regret guarantee holds at a sequence-level."
-      },
-      {
-        "issue": "Lack of statistical significance bars for experimental results",
-        "ac_evidence": "It would be good to have some statistical significance bars for the experimental results, since the differences are small."
-      },
-      {
-        "issue": "Optimality should be clarified as with respect to linear decision rules",
-        "ac_evidence": "I think the paper should mention that optimality is with respect to linear decision rules in the introduction."
-      },
-      {
-        "issue": "Missing discussion of omniprediction literature",
-        "ac_evidence": "The paper should discuss the line of work on omniprediction, since it aims to provide the same guarantee of the optimal downstream decision rule being the one corresponding to the ground-truth probabilities."
-      }
-    ],
-    "matches": [
-      {
-        "issue": "Reviewer questions/specific concerns raised",
-        "raised_by_cspaper": true,
-        "cspaper_excerpt": "For Theorem 3.1, can the authors provide a cleaner statement of the exact optimization space and assumptions needed for minimax interchange and strong duality?"
-      }
-    ]
-  },
-  {
-    "pid": "Kw2mvnzCoc",
-    "title": "TSPulse: Tiny Pre-Trained Models with Disentangled Representations for Rapid Time-Series Analysis",
-    "decision": "Accept (Poster)",
-    "n_resolved": 6,
-    "n_recalled": 4,
-    "resolved_invalid": [
-      {
-        "issue": "Task-specific loss reweighting reduces generality/increases user burden",
-        "ac_evidence": "Task Specialization Complexity: Initial concern that task-specifi loss reweighting reduces generality and increases uer burden was addressed."
-      },
-      {
-        "issue": "Novel components (TSLens, MHT, hybrid masking) may be rebranded standard techniques",
-        "ac_evidence": "Limited Novlty of Components: Reviewer RHFo questioned whether SLens (attention), multi-head triangulation (ensembl), and hybrid masking (point+block) were just rebranings of standard techniques. Authors clarified: (a) hese become novel and effective specifically becauseTSPulse's disentangled architecture provides complemntary multi-space views that no prior TSFM offers"
-      },
-      {
-        "issue": "Ablation study insufficiency (destructive-only)",
-        "ac_evidence": "Ablation Study Sfficiency: Concerns about destructive-only ablationswere partially addressed. Authors showed: (a) clear nd consistent performance drops when removing each cmponent; (b) constructive aspects (TSMixer baseline hows ~7% drop without dual-space; complementary recostruction heads clearly outperform single heads)"
-      },
-      {
-        "issue": "Lack of quantitative proof of disentanglement",
-        "ac_evidence": "Disentanglement Evidence Reviewer 9eiE asked for quantitative proof that embddings are truly disentangled. Authors provided compehensive synthetic experiments (Appendix A.4, Q8 resonses) showing: time embeddings are highly sensitiveto phase shifts (130% distortion)... confirming ditinct complementary roles."
-      },
-      {
-        "issue": "Hybrid masking not validated against realistic missingness",
-        "ac_evidence": "Hybrid Masking Validaion: Reviewer 9eiE questioned whether hybrid maskingaligns with realistic missingness. Authors provided AR/MNAR experiments across multiple realistic scenaros... showing TSPulse significantly otperforms MOMENT."
-      },
-      {
-        "issue": "Omission of long-horizon forecasting evaluation",
-        "ac_evidence": "Generalization Beyond Diagnostcs: Reviewer 6n4K and 9eiE noted absence of forecasting evaluation. Authors clarified SPulse is diagnostics-first (bidirectional reconstruction incompatible with causal forecsting) but still provided long-horizon forecasting rsults showing reasonable performance despite not beig optimized for forecasting, demonstrating broader transferability."
-      }
-    ],
-    "unresolved": [
-      {
-        "issue": "Lack of parameter-matched plug-in baselines (gated residuals, lightweight cross-attention)",
-        "ac_evidence": "Parameter-Matched Baselines: eviewer 6n4K requested equally-small plug-in baselins (gated residuals, lightweight cross-attention) at ame parameter budget. Authors noted TSPulse's role i complementary (pre-training formulation, not backboe modification) and self-attention has quadratic cos, but full systematic comparison was not conducted."
-      },
-      {
-        "issue": "Novelty perception of individual components still incremental",
-        "ac_evidence": "ovelty Perception: While authors clarified disentangement is jointly across spaces AND abstraction level (not just spaces), some may still perceive individul components (dual-space, disentanglement, hybrid making, attention, ensemble) as incremental."
-      },
-      {
-        "issue": "Single model vs task-specialized trade-off compromising general-purpose narrative",
-        "ac_evidence": "Single Model vs. Task-Specialized Trade-off: Whil authors demonstrated single-model viability, task-secialized design remains primary contribution. Some ay view this as compromising the \"general-purpose\" mdel narrative"
-      }
-    ],
-    "matches": [
-      {
-        "issue": "Task-specific loss reweighting reduces generality/increases user burden",
-        "raised_by_cspaper": true,
-        "cspaper_excerpt": "the authors explicitly state that they \u201cspecialize the pre-training for every task through reweighting loss objectives\u201d ... The model family is better described as several small task-specialized checkpoints"
-      },
-      {
-        "issue": "Novel components (TSLens, MHT, hybrid masking) may be rebranded standard techniques",
+        "issue": "Unclear hyperparameter choices",
         "raised_by_cspaper": false,
         "cspaper_excerpt": ""
       },
       {
-        "issue": "Ablation study insufficiency (destructive-only)",
-        "raised_by_cspaper": true,
-        "cspaper_excerpt": "The ablations in Table 1 help, but they are still task-specific and incomplete. For example, there is no clean decomposition of how much gain comes from using TSMixer versus the disentanglement losses..."
-      },
-      {
-        "issue": "Lack of quantitative proof of disentanglement",
-        "raised_by_cspaper": true,
-        "cspaper_excerpt": "A more convincing evaluation would quantify cross-view redundancy, linear probing for factor-specific information, or interference between views."
-      },
-      {
-        "issue": "Hybrid masking not validated against realistic missingness",
-        "raised_by_cspaper": true,
-        "cspaper_excerpt": "Table 22 and Table 23 show that hybrid pre-training is excellent for hybrid-mask evaluation, but under regular block masking, the variant without hybrid pre-training can actually be better."
-      },
-      {
-        "issue": "Omission of long-horizon forecasting evaluation",
+        "issue": "Related work discussion of tree-search methods (CoTS)",
         "raised_by_cspaper": false,
         "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Lack of discussion on prior long-horizon LLM planning work",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Lack of case studies/qualitative analyses",
+        "raised_by_cspaper": true,
+        "cspaper_excerpt": "A useful rebuttal would include at least one concrete failure analysis. Under what kinds of planner hallucinations or composer mistakes does PCE still fail"
+      },
+      {
+        "issue": "Scalability to larger numbers of agents",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "No analysis of Composer's reliability",
+        "raised_by_cspaper": true,
+        "cspaper_excerpt": "how do you avoid semantically duplicate assumptions, and what exact condition triggers early stopping before reaching depth D?"
+      },
+      {
+        "issue": "Overstated scaling claim",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Differentiation from existing methods",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "PCE relies on many existing methods (limited novelty)",
+        "raised_by_cspaper": true,
+        "cspaper_excerpt": "the conceptual and methodological novelty is more moderate than the paper sometimes suggests"
+      },
+      {
+        "issue": "Why performance exceeds baselines without Composer / Composer's specific contribution unclear",
+        "raised_by_cspaper": true,
+        "cspaper_excerpt": "\"w/o Composer\" lowers communication to 0.26 and lowers token usage below full PCE, yet only modestly hurts steps... the paper does not really unpack that trade-off"
+      },
+      {
+        "issue": "Stability issues from LLM-based components",
+        "raised_by_cspaper": true,
+        "cspaper_excerpt": "This makes it hard to tell whether the improvements are robust across tasks or driven by a few favorable episodes... due to LLM nondeterminism and prompt sensitivity"
+      },
+      {
+        "issue": "Unclear token usage / communication channel load vs latency",
+        "raised_by_cspaper": true,
+        "cspaper_excerpt": "PCE is substantially *higher* in usage than CoELA for all three backbones, sometimes by a very large margin"
+      }
+    ],
+    "ours_matches": [
+      {
+        "issue": "Unclear hyperparameter choices",
+        "raised_by_cspaper": true,
+        "cspaper_excerpt": "Default cost weights \u03b1=\u03b2=1 (Section 4.4). Setting movement distance and message length on equal footing lacks empirical justification"
+      },
+      {
+        "issue": "Related work discussion of tree-search methods (CoTS)",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Lack of discussion on prior long-horizon LLM planning work",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Lack of case studies/qualitative analyses",
+        "raised_by_cspaper": true,
+        "cspaper_excerpt": "A concrete worked example or case study in the main paper showing how PCE's structured handling corrected a planning error"
+      },
+      {
+        "issue": "Scalability to larger numbers of agents",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "No analysis of Composer's reliability",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Overstated scaling claim",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Differentiation from existing methods",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "PCE relies on many existing methods (limited novelty)",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Why performance exceeds baselines without Composer / Composer's specific contribution unclear",
+        "raised_by_cspaper": true,
+        "cspaper_excerpt": "The w/o Composer ablation conflates removing structured assumption handling with removing the agent's ability to communicate"
+      },
+      {
+        "issue": "Stability issues from LLM-based components",
+        "raised_by_cspaper": false,
+        "cspaper_excerpt": ""
+      },
+      {
+        "issue": "Unclear token usage / communication channel load vs latency",
+        "raised_by_cspaper": true,
+        "cspaper_excerpt": "\"Comparable token usage\" claim is overstated for TDW-MAT ... PCE uses 1.42\u00d7\u20131.88\u00d7 more tokens than CoELA"
       }
     ]
   }
