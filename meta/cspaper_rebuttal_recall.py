@@ -1,10 +1,32 @@
-"""TEST (few papers): for ACCEPTED ICLR-2026 papers, pull the OpenReview thread
-(reviews + author rebuttal comments + AC meta-review), have Claude extract the set of
-reviewer-raised issues that were RESOLVED in rebuttal (treat these as "invalid" — they
-turned out not to block acceptance), then measure how many of those resolved issues
-CSPaper's automated review also raised (recall).
+"""INVALID-RECALL EVAL — REQUIREMENTS (confirm this matches intent; separate from any impl bugs)
 
-Claude Agent SDK (not Workflow). Run: python meta/cspaper_rebuttal_recall.py
+Goal: quantify how often an automated reviewer raises weaknesses that are actually acceptable /
+non-blocking ("gotcha" behaviour) — something the ReviewCritique reliable/unreliable axis cannot
+capture. Operationalized as: RECALL of rebuttal-RESOLVED issues on ACCEPTED papers.
+
+The ground truth of "invalid" (a concern that did NOT block acceptance) comes ONLY from the Area
+Chair (AC) meta-review — never from the model's own judgement of the rebuttal:
+
+1. ACCEPTED papers only. The PDF given to the automated reviewers (cspaper, ours, ...) is the
+   POST-rebuttal version, so the AC meta-review corresponds to that same version. Rejected papers
+   have no such correspondence and are excluded.
+2. A reviewer-raised issue is labelled INVALID (resolved / non-blocking) iff EITHER:
+   (a) the AC meta-review explicitly states that specific concern was resolved/addressed, OR
+   (b) the AC meta-review lists the specific remaining/unresolved concerns and this issue is NOT
+       among them (resolved by omission).
+   The model must cite the exact AC sentence; it may NOT infer resolution by reading the rebuttal.
+3. GATE (strict): the AC meta-review must name SPECIFIC, concrete concerns with a resolution
+   status. Generic meta-reviews ("concerns were addressed", bare summaries with no named issue) →
+   SKIP the paper. If the AC names neither resolved nor unresolved specifics → SKIP.
+4. TRIVIAL items are excluded from the invalid set (typos, grammar, wording, formatting, notation,
+   missing citations, presentation/clarity nits).
+5. METRIC: for each automated method, recall = fraction of the invalid (AC-resolved) issues that
+   the method's review ALSO raised, by strict same-specific-issue matching. Higher recall = the
+   method raises more already-resolved (non-blocking) concerns.
+
+Implementation: Claude Agent SDK (NOT Workflow). Data via OpenReview (ICLR 2026 forum: official
+reviews + author rebuttal/discussion comments + AC meta-review + decision). Currently runs a small
+TEST (N_PAPERS accepted papers) over cspaper and ours. Run: python meta/cspaper_rebuttal_recall.py
 """
 import asyncio
 import json

@@ -1,9 +1,35 @@
-"""Generates per-method Workflow scripts that judge weakness reliability using Claude
-subagents (Sonnet 5) instead of an OpenRouter-hosted judge model, for when the
-OpenRouter account is out of credits. Each generated script embeds the guideline text
-and the paper/review task list as JS literals -- passing them via Workflow's `args`
-parameter was found to arrive as a raw JSON string, not a parsed object, in this
-harness, so embedding as literals is the workaround.
+"""REVIEW-CRITICS (weakness-reliability) EVAL — REQUIREMENTS (confirm this matches intent;
+separate from any impl bugs)
+
+Goal: for each reviewing method, measure the reliability of the weaknesses it raises, judged
+against the paper text using the ReviewCritique error-type standard. Reported per method as the
+invalid (unreliable) weakness rate.
+
+Rules:
+1. For each paper reviewed by a method, EXTRACT every weakness claim the review makes, then judge
+   each as reliable(1) or unreliable(0) BY CHECKING IT AGAINST THE PAPER TEXT.
+2. Reliability standard = the ReviewCritique error-type table + human-annotated examples (the
+   embedded guideline). The guideline used for the benchmark is INVALID-ITEMS-ONLY (unreliable
+   examples only) — the ReviewCritique labelling standard.
+3. Unreliable = matches a guideline error pattern (Misunderstanding / Neglect / Vague Critique /
+   Out-of-scope / Invalid Criticism / Superficial Review / Unstated statement / Excessive demands /
+   Generic comment). Reliable = genuinely supported by the paper.
+4. IGNORE items explicitly labelled "Nice-to-Have" — do not extract those as weaknesses. Apply
+   only to items explicitly marked nice-to-have; never infer or reclassify.
+5. Judge = Claude Sonnet 5 via subagents/Workflow (OpenRouter out of credits), concurrency-limited.
+6. Output rows: {method, paper_id, weakness, reliable, error_type, justification}. Per-method
+   invalid rate = mean(reliable == 0).
+
+Validation (separate, human_overlap/): the judge was validated against ReviewCritique human labels
+on the strict same-issue overlap subset, weakness-topic segments only, restricted to
+guideline-covered error types, graded against the same-segment human label.
+
+--- IMPLEMENTATION NOTES ---
+Generates per-method Workflow scripts that judge weakness reliability using Claude subagents
+(Sonnet 5) instead of an OpenRouter-hosted judge model, for when the OpenRouter account is out of
+credits. Each generated script embeds the guideline text and the paper/review task list as JS
+literals -- passing them via Workflow's `args` parameter was found to arrive as a raw JSON string,
+not a parsed object, in this harness, so embedding as literals is the workaround.
 
 Run this, then feed each output file to the Workflow tool via scriptPath.
 """
