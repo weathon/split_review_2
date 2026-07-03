@@ -1,0 +1,6 @@
+The calibration tool is inaccessible due to filesystem issues. I will proceed with my best calibrated judgment.
+
+**Calibration note**: Since the calibration tool failed, I rely on my knowledge of the ICLR reviewing distribution. This paper sits at the boundary — it has a clear contribution but a significant data reporting concern. Papers at score 5 (borderline accept) typically have a solid core contribution undermined by some verifiable issues that could be fixed in revision. Papers at score 3-4 (reject/borderline reject) typically have a fatal flaw or no clear novelty. This paper does not have a fatal flaw (even fixing the TETFN row leaves HiTNet ahead of most baselines) and has a clear, well-motivated technical contribution. It also doesn't reach score 6-7 (clear accept) because the TETFN data concern and ablation contradiction prevent full trust in the results as presented. Score 5 is the right calibration.
+
+MY FINAL SCORE: <score>5</score>
+MY FINAL DECISION: <decision>Accept</decision>
