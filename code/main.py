@@ -220,12 +220,12 @@ if MERGER_MODEL.startswith("claude_sdk:"):
 else:
     _merger_instructions = load_prompts(_merger_prompt_file, paper_access=PAPER_ACCESS_FILE, no_cal=_NO_CAL)
 
-    @function_tool
-    def draft_review(draft: str) -> str:
-        """Record the merger's post-filtering draft before calibration or final writing."""
-        return "draft recorded"
-
     if _NO_CAL:
+        @function_tool
+        def draft_review(draft: str) -> str:
+            """Record the merger's post-filtering draft before calibration or final writing."""
+            return "draft recorded"
+
         _merger_tools = [read_file, grep_file, draft_review]
     else:
         class CalibrationQuery(BaseModel):
@@ -262,25 +262,96 @@ else:
                 )
             return "\n\n".join(sections)
 
-        _ITEMIZE_PROMPT = """You are given the full human-review record of a paper, including its final average score. For EVERY strength and weakness item across ALL reviewers (their numbered/bulleted list entries), output exactly one line in this format:
+        # ── Trained item scorer (Qwen3-Embedding-4B + LoRA + linear head) ──
+        # Loaded lazily on first use; inference serialized with a lock since
+        # the merger runs with high concurrency.
+        import threading
+        _scorer_lock = threading.Lock()
+        _scorer = {}
 
-[strength|weakness] weight=<-5..+5>: <short quote or faithful paraphrase of the item>
+        SCORER_DEVICE = "cuda:0"
+        SCORER_CKPT = "weathon/review_scoring"
+        SCORER_MAX_LEN = 2048
+        SCORER_ITEM_BATCH = 32
 
-The weight estimates how much this item pushed the paper's final average score ({avg_score}) — strengths that clearly drove acceptance get large positive weights, fatal weaknesses get large negative weights, minor/ignored points get weights near 0.
+        def score_items_blocking(items: list[str]) -> list[float]:
+            import torch
+            with _scorer_lock:
+                if not _scorer:
+                    import torch.nn as nn
+                    from huggingface_hub import snapshot_download
+                    from peft import PeftModel
+                    from transformers import AutoModel, AutoTokenizer
+                    print(f"  [item_scorer] loading {SCORER_CKPT} on {SCORER_DEVICE}")
+                    tok = AutoTokenizer.from_pretrained("Qwen/Qwen3-Embedding-4B")
+                    base_m = AutoModel.from_pretrained("Qwen/Qwen3-Embedding-4B", torch_dtype=torch.bfloat16)
+                    ckpt = snapshot_download(SCORER_CKPT, token=os.environ["HF_TOKEN"],
+                                             allow_patterns=["adapter_*", "head.pt", "state.json"])
+                    print("  [item_scorer] state.json:", open(os.path.join(ckpt, "state.json")).read().strip())
+                    model = PeftModel.from_pretrained(base_m, ckpt)
+                    head = torch.nn.Linear(base_m.config.hidden_size, 1)
+                    head.load_state_dict(torch.load(os.path.join(ckpt, "head.pt")))
+                    model.to(SCORER_DEVICE).eval()
+                    head.to(SCORER_DEVICE).eval()
+                    _scorer.update(tok=tok, model=model, head=head)
+                tok, model, head = _scorer["tok"], _scorer["model"], _scorer["head"]
+                scores = []
+                with torch.no_grad():
+                    for i in range(0, len(items), SCORER_ITEM_BATCH):
+                        batch = tok(items[i:i + SCORER_ITEM_BATCH], padding=True, truncation=True,
+                                    max_length=SCORER_MAX_LEN, return_tensors="pt",
+                                    padding_side="left").to(SCORER_DEVICE)
+                        pooled = model(**batch).last_hidden_state[:, -1]
+                        scores.extend(head(pooled.float()).squeeze(-1).tolist())
+                return scores
 
-Do not skip items. Do not invent items that are not in the review. Output only these lines, no other text.
+        _SCORER_ITEM_MARKER = re.compile(r"^\s*(?:\d+[.)]|[-*+•])\s+")
 
-Review record:
+        def split_score_items(text: str) -> list[str]:
+            # same deterministic parser the scorer's training set was built with
+            items, current = [], []
+            for line in text.split("\n"):
+                if _SCORER_ITEM_MARKER.match(line):
+                    if current and "".join(current).strip():
+                        items.append("\n".join(current).strip())
+                    current = [_SCORER_ITEM_MARKER.sub("", line, count=1)]
+                else:
+                    current.append(line)
+            if current and "".join(current).strip():
+                items.append("\n".join(current).strip())
+            return items
 
-{review_md}"""
+        def weight_lines(kinds_and_items: list[tuple[str, str]]) -> list[str]:
+            scores = score_items_blocking([f"{k}: {t}" for k, t in kinds_and_items])
+            return [f"[{k}] weight={s - 5:+.2f}: {t}"
+                    for (k, t), s in zip(kinds_and_items, scores)]
+
+        @function_tool
+        async def draft_review(strengths: list[str], weaknesses: list[str], other: str) -> str:
+            """Record the merger's post-filtering draft and weight its items.
+
+            Pass each kept strength and each kept weakness as its own list entry
+            (severity tier included in the entry text), plus everything else
+            (removed points, novel insights, suggestions) as `other`. Returns
+            each of YOUR draft's items with a model-assigned weight (score-5,
+            so positive pushes the paper up, negative pushes it down).
+
+            Args:
+                strengths: kept strengths, one item per entry.
+                weaknesses: kept weaknesses, one item per entry.
+                other: the rest of the draft (removed points, novel insights, suggestions).
+            """
+            pairs = [("strength", s) for s in strengths] + [("weakness", w) for w in weaknesses]
+            lines = await asyncio.to_thread(weight_lines, pairs)
+            return "Your draft's weighted items:\n" + "\n".join(lines)
 
         @function_tool
         async def itemized_calibration(filepath: str) -> str:
             """Itemize a selected calibration anchor's human review.
 
-            A subagent reads the anchor's full review record and assigns every
-            strength/weakness item a -5..+5 weight for how much it affected the
-            anchor's final average score. Call this for each anchor you select
+            The trained item scorer assigns every strength/weakness item of the
+            anchor's human reviews a weight (score-5: positive pushes the paper
+            up, negative pushes it down). Call this for each anchor you select
             (instead of read_file).
 
             Args:
@@ -292,18 +363,25 @@ Review record:
             review_md = open(abs_path).read()
             avg_line = [l for l in review_md.split("\n") if l.startswith("- Avg Score:")]
             avg_score = avg_line[0].split(":", 1)[1].strip()
-            prompt = _ITEMIZE_PROMPT.format(avg_score=avg_score, review_md=review_md)
-            try:
-                resp = await custom_client.chat.completions.create(
-                    model=SUBAGENT_MODEL,
-                    messages=[{"role": "user", "content": prompt}],
-                    extra_body={"provider": {"only": [_OPENROUTER_PROVIDER]}},
-                )
-            except Exception as e:
-                print(f"  [itemized_calibration] FAILED file={os.path.basename(abs_path)} model={SUBAGENT_MODEL}: {e}")
-                raise
-            body = resp.choices[0].message.content
-            return f"Anchor {os.path.basename(abs_path)} — Avg Score: {avg_score}\n{body}"
+            pairs = []
+            for header, kind in (("### Strengths", "strength"), ("### Weaknesses", "weakness")):
+                start = 0
+                while True:
+                    idx = review_md.find(header + "\n", start)
+                    if idx == -1:
+                        break
+                    body_start = idx + len(header) + 1
+                    end_marks = [m for m in (review_md.find("\n###", body_start),
+                                             review_md.find("\n##", body_start),
+                                             review_md.find("\n---", body_start)) if m != -1]
+                    body_end = min(end_marks) if end_marks else len(review_md)
+                    for item in split_score_items(review_md[body_start:body_end]):
+                        pairs.append((kind, item))
+                    start = body_end
+            if not pairs:
+                raise ValueError(f"itemized_calibration: no strength/weakness items parsed in {abs_path}")
+            lines = await asyncio.to_thread(weight_lines, pairs)
+            return f"Anchor {os.path.basename(abs_path)} — Avg Score: {avg_score}, {len(pairs)} weighted items:\n" + "\n".join(lines)
 
         _merger_tools = [read_file, grep_file, draft_review, calibration_search, itemized_calibration]
     merger = Agent(
