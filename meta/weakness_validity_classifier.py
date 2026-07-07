@@ -37,7 +37,14 @@ def extract_json(text):
     if text.startswith("```"):
         text = re.sub(r"^```[a-zA-Z]*\n?", "", text)
         text = re.sub(r"\n?```$", "", text)
-    return json.loads(text)
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        # With the Read tool the model emits narration before the final JSON object.
+        i, j = text.find("{"), text.rfind("}")
+        if i == -1 or j == -1:
+            raise
+        return json.loads(text[i:j + 1])
 
 
 PROMPT = """You are judging whether the weaknesses a reviewer raised about a scientific paper are VALID or INVALID.
@@ -122,11 +129,11 @@ async def main():
         for key, group in groups.items()
     ]
     results = [r for sub in await asyncio.gather(*tasks) for r in sub]
+    assert len(results) == len(data), f"prediction count {len(results)} != dataset count {len(data)}"
 
     with open(OUT_DIR / "predictions.jsonl", "w") as f:
         for r in results:
             f.write(json.dumps(r) + "\n")
-    assert len(results) == len(data), f"prediction count {len(results)} != dataset count {len(data)}"
     print(f"wrote {OUT_DIR/'predictions.jsonl'} ({len(results)} predictions)")
 
 
