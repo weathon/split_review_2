@@ -114,16 +114,30 @@ def ac_text(node):
 
 
 async def label_review(sem, pid, ridx, hr, ac, rec):
-    async with sem:
-        resp = await client.chat.completions.create(
-            model=MODEL,
-            messages=[{"role": "user", "content": PROMPT.format(review=review_text(hr), ac=ac)}],
-            response_format={"type": "json_schema", "json_schema": {"name": "Items", "strict": True, "schema": SCHEMA}},
-        )
-    content = resp.choices[0].message.content
-    if not content:
-        raise RuntimeError(f"deepseek returned empty content for {pid} review {ridx}")
-    parsed = Items.model_validate_json(content)
+    parsed = None
+    last = ""
+    for attempt in range(3):
+        async with sem:
+            resp = await client.chat.completions.create(
+                model=MODEL,
+                messages=[{"role": "user", "content": PROMPT.format(review=review_text(hr), ac=ac)}],
+                response_format={"type": "json_schema", "json_schema": {"name": "Items", "strict": True, "schema": SCHEMA}},
+            )
+        content = resp.choices[0].message.content or ""
+        last = content
+        try:
+            parsed = Items.model_validate_json(content)
+            break
+        except Exception:
+            i, j = content.find("{"), content.rfind("}")
+            if i != -1 and j != -1:
+                try:
+                    parsed = Items.model_validate_json(content[i:j + 1])
+                    break
+                except Exception:
+                    pass
+    if parsed is None:
+        raise RuntimeError(f"deepseek returned non-JSON for {pid} review {ridx} after 3 tries: {last!r}")
     rows = []
     for it in parsed.items:
         if it.label == "exclude":
