@@ -262,20 +262,13 @@ else:
                 )
             return "\n\n".join(sections)
 
-        class ItemWeight(BaseModel):
-            item: str
-            kind: str  # "strength" or "weakness"
-            weight: float  # -5..+5 impact on the anchor's final score
+        _ITEMIZE_PROMPT = """You are given the full human-review record of a paper, including its final average score. For EVERY strength and weakness item across ALL reviewers (their numbered/bulleted list entries), output exactly one line in this format:
 
-        class ItemizedReview(BaseModel):
-            items: list[ItemWeight]
+[strength|weakness] weight=<-5..+5>: <short quote or faithful paraphrase of the item>
 
-        _ITEMIZE_PROMPT = """You are given the full human-review record of a paper, including its final average score. For EVERY strength and weakness item across ALL reviewers (their numbered/bulleted list entries), output:
-- item: a short quote or faithful paraphrase of the item
-- kind: "strength" or "weakness"
-- weight: a number from -5 to +5 estimating how much this item pushed the paper's final average score ({avg_score}) — strengths that clearly drove acceptance get large positive weights, fatal weaknesses get large negative weights, minor/ignored points get weights near 0.
+The weight estimates how much this item pushed the paper's final average score ({avg_score}) — strengths that clearly drove acceptance get large positive weights, fatal weaknesses get large negative weights, minor/ignored points get weights near 0.
 
-Do not skip items. Do not invent items that are not in the review.
+Do not skip items. Do not invent items that are not in the review. Output only these lines, no other text.
 
 Review record:
 
@@ -304,24 +297,13 @@ Review record:
                 resp = await custom_client.chat.completions.create(
                     model=SUBAGENT_MODEL,
                     messages=[{"role": "user", "content": prompt}],
-                    response_format={
-                        "type": "json_schema",
-                        "json_schema": {
-                            "name": "itemized_review",
-                            "strict": True,
-                            "schema": ItemizedReview.model_json_schema(),
-                        },
-                    },
                     extra_body={"provider": {"only": [_OPENROUTER_PROVIDER]}},
                 )
-                items = ItemizedReview.model_validate_json(resp.choices[0].message.content).items
             except Exception as e:
                 print(f"  [itemized_calibration] FAILED file={os.path.basename(abs_path)} model={SUBAGENT_MODEL}: {e}")
                 raise
-            lines = [f"Anchor {os.path.basename(abs_path)} — Avg Score: {avg_score}, {len(items)} items:"]
-            for it in items:
-                lines.append(f"[{it.kind}] weight={it.weight:+.1f}: {it.item}")
-            return "\n".join(lines)
+            body = resp.choices[0].message.content
+            return f"Anchor {os.path.basename(abs_path)} — Avg Score: {avg_score}\n{body}"
 
         _merger_tools = [read_file, grep_file, draft_review, calibration_search, itemized_calibration]
     merger = Agent(
