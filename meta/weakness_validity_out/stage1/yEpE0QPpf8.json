@@ -1,0 +1,109 @@
+{
+ "paper_id": "yEpE0QPpf8",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "Questionable Task Scope and Definition: The paper claims to address image quality assessment (IQA), which is a broad concept encompassing various quality dimensions such as saturation, color distortion, noise, compression artifacts, etc. However, the proposed method primarily focuses on motion blur of objects, which requires enhanced referring and grounding capabilities. This narrow focus does not adequately represent the full spectrum of IQA. The work would be more convincing if the problem were explicitly defined as \"motion blur assessment\" or \"local distortion grounding\" rather than claiming to solve general fine-grained IQA. The current framing creates a mismatch between the stated goal and actual contribution.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited Generalization Evidence: Even for motion blur assessment, the method's scope appears limited. Most examples showcase salient objects (e.g., people, animals, vehicles), but it remains unclear whether the approach generalizes to other scenarios such as text blur, background element blur, or subtle quality degradations in non-salient regions. The proposed benchmark does not sufficiently demonstrate the model's generalization capability across diverse object categories and blur scenarios, raising concerns about practical applicability.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Key concerns\u2014such as ... demonstration of the IQA method\u2019s generalization ... were adequately addressed during the rebuttal.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Lack of Evaluation on Public Benchmarks: A critical experimental gap is the absence of evaluation on established public IQA benchmarks. The authors only test their trained model on the self-proposed GIQA-Bench, which limits the ability to assess the method's performance relative to existing approaches and raises questions about potential dataset-specific overfitting. Evaluation on standard IQA datasets would provide stronger evidence of the method's effectiveness and facilitate fair comparison with prior work.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Although implementation details of the pipeline are provided, some settings lack explanation or analysis. For example, why the discrete coordinates are set to 20\u00d720, and why the number of tasks differs in GIQA-Bench?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The work applies Llama-3 for evaluation. Considering the existence of more advanced models such as Llama-4, using them could provide more accurate evaluation results.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Key concerns\u2014such as comparison with more advanced models ... were adequately addressed during the rebuttal.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The impact of dataset scale on performance is not investigated. It is not certain whether 160K data is necessary.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Fix typographical errors in the references.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Some novel IQA methods like (VisualQuality-R1) should be included.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Conduct user studies to evaluate how well the output descriptions align with the corresponding images.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Key concerns\u2014such as ... introduction of a user study\u2014were adequately addressed during the rebuttal.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "While the contribution of a large-scale dataset and benchmark is substantial, the main novelty resides primarily in dataset creation and annotation procedures rather than in methodological innovation. The proposed framework mainly adapts existing MLLM capabilities and fine-tuning strategies to the IQA domain. As such, the work may align more closely with a dataset or benchmark track rather than the ICLR main track, where new learning methodologies or theoretical insights are typically emphasized.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Additionally, there are a few minor grammatical issues throughout the text\u2014for example, \u201cprovide\u201d should be \u201cprovides\u201d (line 53), and \u201cnew coordinates is\u201d should be \u201cnew coordinates are\u201d (line 268).",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 5000,
+  "prompt_tokens": 1172,
+  "total_tokens": 6172,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 3908,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 1024,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.001449392,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.001449392,
+   "upstream_inference_prompt_cost": 4.9392e-05,
+   "upstream_inference_completions_cost": 0.0014
+  }
+ }
+}

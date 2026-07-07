@@ -1,0 +1,144 @@
+{
+ "paper_id": "gubSyVxWdG",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "The paper's primary weakness is the unclear practical motivation for using \"relative error.\" While the metric is theoretically interesting for comparing two estimators, its real-world applicability is not well-established. The paper would be significantly stronger if it could provide clear use cases where practitioners would prefer this comparative measure over standard absolute performance metrics like PEHE. This is particularly important for the ICLR audience, which values practical impact.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper is mathematically dense, and while this contributes to its theoretical rigor, it also appears to have led to several typos and minor inconsistencies. To ensure the paper's core contributions are communicated accurately, a thorough proofreading of all definitions, assumptions, and equations is highly recommended.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper has limited novelty compared with existing DR estimator Gao (2025). The fundamental form of estimator remains the same as Gao. And the paper seems to just reconstruct the nuisances to meet certain constraints.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The parametrization of e(X) and \\mu_a(X) in (1),(2) seem quite arbitrary and lack a decent justification on why these nuisances should share representation.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "There is NO solution to the moment-based conditions. To this, soft penalties are introduced for finite-sample optimization. Without the correct specification of propensity (which is never met in real world applications) or sensitivity analysis on the propensity score, I doubt the complete formulation might just go meaningless.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors countered effectively by explaining that these are standard balancing conditions used widely in causal inference (e.g., CBPS) and provided empirical evidence that their soft-penalty approach satisfies these constraints well in practice. The authors showed via sensitivity analysis that the method is robust to reasonable noise in the propensity score.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Misspecification can also come from the representation $\\Phi(X)$.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Nuisance overfit could be a problem without sample splitting.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Typo: line 1017 should be L_const.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper does not perform sensitivity analysis (empirical) on the propensity score, which makes the practical utility doubtful.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors showed via sensitivity analysis that the method is robust to reasonable noise in the propensity score.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper does not explain how they compute the \\tau in real world datasets Twins and Jobs.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper does not provide convergence analysis of the losses, especially L_const and L_ce. The whole method would only make sense if the paper could show, at least empirically, that under finite samples the two losses successfully approximate the original condition.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "provided empirical evidence that their soft-penalty approach satisfies these constraints well in practice.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The need for a correctly specified propensity score model still remains a strong assumption, which may not hold or be guaranteed in practice in many cases.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors showed via sensitivity analysis that the method is robust to reasonable noise in the propensity score. Furthermore, the assumption of a correctly specified propensity model is standard in this literature to achieve identification/robustness properties, and the authors' relaxation of the outcome model specification is a genuine advancement.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "One would expect a deeper evaluation on the comparison of the proposed method against the method by Gao 2025, as well as an empirical evaluation of what happens when the propensity score estimator is misspecified.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "There is some confusion regarding the terminology, since there is mention of \"balance regularizers\" in the beginning but later this terminology is abandoned, where $\\mathcal{L}_{\\text{const}}$ is mentioned",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Can strengthen the connection with other studies (see below question 2&3).",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The asymptotic property relies on some critical assumptions, for example, $\\check{\\gamma}, \\check{\\beta}_0, \\check{\\beta}_1$ should converge to the true one at a rate faster than $n^{-1/4}$. It is strong but also reasonable. It is reasonable because orthogonal ML literature always assumes the convergence rate of nuisance parameters. It is strong because we are treating them as \"plug-in\" quantities, instead of the nuisance parameters that the estimator should be doubly robust to. It might be useful to provide some explanations to justify that the condition is realistic.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 8870,
+  "prompt_tokens": 1856,
+  "total_tokens": 10726,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 7303,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00274344,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00274344,
+   "upstream_inference_prompt_cost": 0.00025984,
+   "upstream_inference_completions_cost": 0.0024836
+  }
+ }
+}

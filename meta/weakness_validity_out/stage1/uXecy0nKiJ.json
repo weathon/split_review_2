@@ -1,0 +1,123 @@
+{
+ "paper_id": "uXecy0nKiJ",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "Unclear conceptual grounding of steering vectors: Although the paper motivates activation steering as conceptually meaningful (e.g., France concept in Figure 1), most experiments use Gaussian-random directions. This makes it difficult to interpret what the steering is actually doing beyond injecting noise into activations.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Narrow evaluation scope: All results are based on JailbreakBench. Testing the same steering methods on other safety benchmarks (e.g., AdvBench[1] or other aspects of safety like privacy and toxicity) and on general capability tasks like MMLU or CSQA could help determine whether the steering trade-offs generalize beyond safety settings.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Weak causal interpretation: It remains unclear whether steering compromises safety through meaningful feature activation or through general perturbation effects. A more careful causal or ablation-based analysis could clarify the mechanism.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Unsteered baseline results are not clear from the paper. In Figures 2, 3, 6, the comparisons begin at nonzero steering coefficients and do not include a no steering condition. And from the paper, it\u2019s ambiguous whether the baselines that the authors refer to are actually measured through unsteered models. Without this it\u2019s hard to interpret the reported changes caused by steering.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Compliance measurement (Section 3.4) is insufficient. The authors consider incoherent or repetitive outputs as safe, and this design choice can potentially lead to false negatives. Although some quality assessment is done (Appendix B),  this is only based on precision. For reported compliance rates across figures, no uncertainty quantification such as confidence intervals is provided.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "SAE feature selection process is not clear enough. The paper highlights a few high impact features like \u201cbrand identity\u201d (Figure 4), but it\u2019s unclear the total number of features tested, whether the reported features were cherry-picked, or how labels were assigned.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The claim made in the abstract and introduction that steering with benign SAE features is even more alignment-breaking that steering with random directions appears to be based on a single prompt and model, evaluated at a depth that's not optimal for random directions (Figure 2); the more comprehensive evaluation shown in Figure 3 shows precisely the opposite, with Llama3-8b-it compliance rates much higher with random vectors on every prompt category save one. This claim also appears misleadingly in the Conclusion, where random steering on one model is compared with SAE steering on another.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The judge model used is quite small, despite the fact that much better models could be used at very modest cost. The authors argue that manual labelings mostly agreed with the model; still, this is an unnecessary source of uncertainty added to critical evaluations.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Both Reviewer qXRg and m7Sg pointed out that the judge model (Qwen3-8B) is not sufficient.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Figures lack confidence intervals.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Figure 4b is quite hard to interpret on its own.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The claim that to be used as an attack this method only requires \"black-box API access\" (line 461) seems misleading, as with the exception of Goodfire's research API designed specifically for this purpose, hosts do not allow steering via API; the practical implication of this work are that researchers should test for jailbreak vulnerability before deploying steering to production.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I would have liked to see results not just for random vectors but also for steering vectors that were actually trained for some benign purpose from the literature - do meaningful steering vectors also induce jailbroken behavior? For example, it has also been reported in the literature (Ghandeharioun 2024 - https://arxiv.org/pdf/2406.12094) that steering vectors may inadvertently cause increased refusal behavior. Also the steering coefficients at which the authors observed misaligned behavior (>1) is generally outside the recommended regime for use.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I also feel that the core result: random vectors induce misalignment - is well predicted by the literature. For example Qi 2024 - https://arxiv.org/pdf/2406.05946, and especially Qi 2023 - https://arxiv.org/pdf/2310.03693 (Fine-tuning aligned language models compromises safety even when users do not intend to! - which the authors cite), also Peng 2024 - https://arxiv.org/pdf/2405.17374v1 - regarding the fragility of safety alignment.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 5975,
+  "prompt_tokens": 1464,
+  "total_tokens": 7439,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 4607,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 1152,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.001748936,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.001748936,
+   "upstream_inference_prompt_cost": 7.5936e-05,
+   "upstream_inference_completions_cost": 0.001673
+  }
+ }
+}

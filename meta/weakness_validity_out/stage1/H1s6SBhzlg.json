@@ -1,0 +1,158 @@
+{
+ "paper_id": "H1s6SBhzlg",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "Related work is an important part of the paper and should not be put in the appendix.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Why is the LLM's output unaffected by the order of the options? Is there any literature or experiment demonstrating this? Since different letters have different statistical probabilities, the LLM should have different preferences for different letters.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Why didn't the authors conduct experiments on widely used mathematical and common sense reasoning datasets, such as GSM 8K? This might be more helpful in verifying the effectiveness of the proposed method.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Regarding concerns about evaluation scope and generalization, the authors did not provide additional benchmarks or experimental results during the rebuttal.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I'm sorry that I can't find any relevant literature, but in my impression, optimal weight aggregation should not be the first one proposed in this paper. It has been proposed in other works before.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper describes MoE as \"only one expert gets a non-zero weight\", which is too simplification. Modern MoE combines outputs from multiple experts via weighted averaging. The authors should more accurately describe the distinction from their work (e.g., aggregating final answers vs. internal representations).",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The authors should explain why in Table 3, the 'Single Best' model on the MMLU dataset outperforms the proposed aggregation methods.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The proposed method optimizes the aggregator on several large datasets. But does it generalize effectively to other, unseen datasets?",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Regarding concerns about evaluation scope and generalization, the authors did not provide additional benchmarks or experimental results during the rebuttal.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The fundamental problem is that the research question itself is not important enough, and its practical value is limited. Specifically, the paper devotes a large portion to studying how to optimally aggregate votes from multiple LLMs, but this problem has very limited importance in the current LLM application ecosystem.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "First, the closed-set classification (K fixed options) that the paper focuses on is only a small part of LLM applications; the more mainstream applications are open-ended generation, multi-turn dialogue, and complex reasoning, and the paper's method cannot be extended to these scenarios.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Regarding concerns about evaluation scope and generalization, the authors did not provide additional benchmarks or experimental results during the rebuttal.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Second, the improvement shown in experiments is extremely small (0.5-2 percentage points), not worth increasing the system complexity.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Third, in practice, there are often simpler and more effective solutions like directly use the strongest single model (Table 3 shows that a single model is sometimes better than ensemble), or invest in training a better model, rather than ensemble multiple weak models.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Fourth, the core issue in multi-agent LLM reasoning is how to design an effective debate protocol and how to enable models to truly exchange and integrate information and the final voting is actually the most trivial part. The paper is essentially optimizing a marginal problem.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The OW algorithm is a beautiful theoretical contribution, proving its Bayesian optimality. However, this method relies on knowing the accuracy of each LLM, and in the unsupervised aggregation scenario considered in the paper, obtaining these accuracies requires a large amount of labeled data. Since it is unsupervised, how do we obtain this data?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Theorem 2 shows that the advantage of ISP decays at a rate of 1/K, meaning that for tasks with many options or open-ended functions, ISP offers virtually no advantage. The paper acknowledges this limitation in its conclusion but does not propose a solution. This may further restricts the applicability of the method.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Regarding concerns about evaluation scope and generalization, the authors did not provide additional benchmarks or experimental results during the rebuttal.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper does not adequately discuss the limitations and applicability of the method.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "One of the assumptions of this study relies on the idea that we can model the difficulty of a prompt question given to an LLM using **\u03b1** (question difficulty) and **\u03b2\u1d62** (model ability). However, these quantities are inherently **subjective** and cannot be reliably measured. This raises concerns about the realism and validity of the assumptions on which this work is based.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The study\u2019s **comparative evaluation** is also limited, as it primarily benchmarks the proposed algorithms against **MV**, a relatively simple baseline. More advanced multi-agent reasoning strategies such as the ones described in the related work section (see Appendix A.1) were not included in the comparison, constraining the empirical scope of the findings.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Additionally, the paper **does not discuss statistical significance** or provide detailed information about its experimental setup. Key aspects such as, variance, and number of seeds used are not reported, making it difficult to assess the robustness and reproducibility of the results. Including these details would strengthen the credibility of the findings and provide clearer insight into the reliability of the proposed methods.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 9597,
+  "prompt_tokens": 1993,
+  "total_tokens": 11590,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 7802,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00296618,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00296618,
+   "upstream_inference_prompt_cost": 0.00027902,
+   "upstream_inference_completions_cost": 0.00268716
+  }
+ }
+}

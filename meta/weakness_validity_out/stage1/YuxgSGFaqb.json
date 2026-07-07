@@ -1,0 +1,102 @@
+{
+ "paper_id": "YuxgSGFaqb",
+ "decision": "Accept (Oral)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "Limited novelty / \u201cintegration over invention.\u201d The work skillfully engineers an end-to-end pipeline for realistic SE evaluation, but core techniques (retrieval, ranking, CI emulation, multi-turn prompting) largely reuse known components.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Under-granular ablations for RACG. Current ablations are mostly on/off toggles or coarse retrieval settings, leaving it unclear which sub-module drives gains.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Remaining outstanding points are: (ii) hYHi\u2019s requests for finer-grained RACG ablations and stronger causal/controlled evidence about the role-switching protocol remain mostly out-of-scope rather than answered",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Language & ecosystem coverage is narrow. Results cover C++/Python/Rust/Go but omit Java/JS/TS and build systems (Maven/Gradle, pnpm/yarn/monorepo). This limits external validity for common enterprise stacks.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Remaining outstanding points are: (iii) broader ecosystem coverage (e.g., Java/JS/TS) is acknowledged but not delivered.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It's hard to interpret the primary \"Win Rate\" metric given its adversarial nature. A model's success depends on the relative weakness of its opponent (the reviewer model). This makes it difficult to assess the absolute quality and correctness of a solution based on this metric alone.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The paper's main \"battle\" metric, the Win Rate, is severely confounded. The \"Win Rate\" is defined as the submitter's patch passing all CI checks, including the reviewer's generated test. As the authors correctly note, \"higher values may also indicate weaker reviewer tests\". This confounding variable makes it impossible to draw clear conclusions about a submitter's absolute capabilities.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The paper introduces a complex, multi-stage RACG module but explicitly states it is a \"baseline rather than a standalone algorithmic contribution\". The ablation study in Table 3 fails to justify its necessity.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Remaining outstanding points are: (ii) hYHi\u2019s requests for finer-grained RACG ablations and stronger causal/controlled evidence about the role-switching protocol remain mostly out-of-scope rather than answered",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The win rates of all models are very close to each other (almost every model gets 0.9 or above), which makes me question the utility of this benchmark in terms of model selection.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Remaining outstanding points are: (i) cSPp\u2019s request for statistical treatment (CIs/significance/variance) is still not fully resolved in the paper as written",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Best@k values for all the models are also very close to each other, which makes it hard to judge which model is better.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Remaining outstanding points are: (i) cSPp\u2019s request for statistical treatment (CIs/significance/variance) is still not fully resolved in the paper as written",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Retriever doesn\u2019t seem to boost performance much in Table 3, especially for Best@3 for Python and C++. The authors also acknowledge a weakness in how many relevant files can be included (only 5 files) and that context retrieval leads to the most failures (26% according to Appendix C1). This makes the benchmark less reliable since the LLMs cannot perform optimally under these limitations.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "They also addressed concrete omissions and protocol details (e.g., missing citations raised by cSPp; reviewer-test quality gates and rejection breakdown raised by kJ84) and provided new retrieval evidence using a stronger reranker (SFR-Embedding-Code-400M), improving Top-10 hit rate materially relative to earlier numbers (addressing cSPp\u2019s \u201clow hit-rate\u201d objection).",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Missing citations for some relevant work, like CodeRAGBench [1], CrossCodeEval [2], and RepoCoder [3].\n[1] Wang, Zora Zhiruo, et al. \"Coderag-bench: Can retrieval augment code generation?.\" arXiv preprint arXiv:2406.14497 (2024).\n[2] Ding, Yangruibo, et al. \"Crosscodeeval: A diverse and multilingual benchmark for cross-file code completion.\" Advances in Neural Information Processing Systems 36 (2023): 46701-46723.\n[3] Zhang, Fengji, et al. \"Repocoder: Repository-level code completion through iterative retrieval and generation.\" arXiv preprint arXiv:2303.12570 (2023).",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "They also addressed concrete omissions and protocol details (e.g., missing citations raised by cSPp; reviewer-test quality gates and rejection breakdown raised by kJ84)",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 7683,
+  "prompt_tokens": 1736,
+  "total_tokens": 9419,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 6280,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 1408,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.002236584,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.002236584,
+   "upstream_inference_prompt_cost": 8.5344e-05,
+   "upstream_inference_completions_cost": 0.00215124
+  }
+ }
+}

@@ -1,0 +1,151 @@
+{
+ "paper_id": "BzqkbJTsbq",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "The motivation for unifying two inherently distinct tasks, style transfer and image restoration, is not sufficiently substantiated. The authors (L99-L111) suggest potential knowledge transfer between the two, but no empirical evidence or references are provided. In fact, these tasks possess fundamentally different supervision properties: style transfer relies on weak, abstract cues, whereas restoration requires high-fidelity alignment with the reference. This discrepancy raises concerns about negative transfer when attempting to integrate both under a single framework. Including empirical evidence or prior works demonstrating positive transfer between these tasks would strengthen the argument.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The inclusion of task-specific components, such as the label-processing function $M$ and hyperparameters like $\\eta_1$, appears to contradict the paper\u2019s claim of a unified framework. If these elements must be individually tuned per task, the true level of unification remains ambiguous.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In L263, the authors briefly compare their approach with SDEdit, but the described mechanism, mixing the noised conditioning image during the diffusion process, closely resembles the method proposed in ILVR [a]. A proper citation and discussion of ILVR should therefore be included for completeness.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The deblurring setup assumes a Gaussian blur kernel, which may be an overly restrictive assumption and limit general applicability.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper seems to inconsistently use \\citet and \\citep throughout; all citations should be revised for consistency according to the chosen bibliography style.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The authors redefine stylization as \u201cweak label guidance\u201d and classic inverse problems (e.g., super-resolution, denoising) as \u201cdegraded label guidance,\u201d which differs from established usage in the computer vision literature. Using the available measurement/observation $y$ as a guide during the reverse diffusion process is already common practice in existing algorithms for both stylization and inverse problems. Therefore, this work cannot be considered the first to \"unify\" these approaches; such a formulation risks confusing the readership rather than clarifying the contribution.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "To capture the measurement/observation inforamtion, $z_{0|t}$ is refined  using eq. (9). This objective function $\\ell_1 (z_{0|t},  y)$ is already frequently used to improve the performance of stylization and inverse problems. This cannot be considered a novelty of the proposed DPG.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "For process knowledge integration, $\\alpha_\\text{margin}$ would strongly influence the performance of tasks. Depending on other hyperparameters such as $T_1$, $\\eta$, and $\\gamma$, the quality of results may change. However, the authors do not provide any ablation studies. They just offer simple guidelines in the supplementary material. Based on the currently available information, the algorithm cannot be reproduced.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The qualitative comparisons presented in the paper cannot confirm that the proposed DPG clearly outperforms existing algorithms. Furthermore, the image quality is not sufficient to compare the algorithms.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Unfortunately, the paper format doesn't follow ICLR guidelines yet. The guidelines say as follows: ```Citations within the text should be based on the \\texttt{natbib} package and include the authors' last names and year (with the ``et~al.'' construct for more than two authors). When the authors or the publication are included in the sentence, the citation should not be in parenthesis using \\verb|\\citet{}| (as in ``See \\citet{Hinton06} for more information.''). Otherwise, the citation should be in parenthesis using \\verb|\\citep{}| (as in ``Deep learning shows promise to make progress towards AI~\\citep{Bengio+chapter2007}.'').``` To follow this guideline, the first sentence of the introduction section should start with \"In recent times, diffusion models (DMs) (Ho et......)\". Unfollowing this ICLR format guideline makes it hard to read the paper.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "DPG introduces many hyperparameters, because it should determine 1) mixing weights, 2) early-step window, 3) margin, and 4) inner step sizes. If this parameter should be changed according to tasks, the author's main claim that DPG is a generalizable framework for weak-label and degraded-label tasks should not hold, because this means not a generalizable framework but an adjustable framework according to tasks.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Justification depth: While intuitions are clear, the paper lacks a deeper analysis of line 250: \"By adding noise and applying guidance, we let the model select the most relevant information for the task.\" My question is whether just mixing the noisy label is enough to change the model's behavior to select the most relevant information. In the rebuttal and discussion phase, I would like to discuss this with the author and revise the paper to correctly understand the reader. In current form, I am more towards that just mixing is not enough to enforce the model to choose relevant information only.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Clarity and originality of the \u201cunified framework\u201d claim. While the paper frames DPG as a unified, training-free guidance framework, several prior works have already explored similar directions. For example, *Manifold Preserving Guided Diffusion* (ICLR 2024) formulated a single training-free framework that covers super-resolution, deblurring, face-ID, CLIP, and style guidance\u2014all without an explicit forward operator. Thus, the novelty of unification alone may be limited. The introduction dedicates considerable space to emphasizing potential advantages of such unification, but the paper would benefit from demonstrating concrete benefits (e.g., improved generalization across tasks or reduced hyperparameter tuning) rather than discussing them conceptually.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Task-specific dependency of the mapping function ( M ). Although the framework is described as general, it still requires defining a mapping function ( M ) to transform task-specific labels ( y ) into an image-like form. This step is not always straightforward and may vary considerably across tasks. In some inverse problems (e.g., phase retrieval or Fourier-domain tasks in *Diffusion Posterior Sampling*), such a mapping is not directly feasible, which somewhat limits the claimed generality of the approach.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Missing discussion and comparison with closely related work. The *Manifold Preserving Guided Diffusion* paper\u2014arguably the most methodologically similar prior work\u2014is not cited or discussed. That work also introduces an ( x_0 )-alignment loss with target information, conceptually close to Equation (9) here. Including a citation, a brief discussion, and possibly a quantitative comparison (e.g., in Fig. 4 or Table 1) would clarify the distinction between DPG and prior frameworks and make the contribution positioning clearer.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Need for deeper analysis of the core components. The main novelty appears to lie in the *Data Knowledge Integration (DKI)* and *Process Knowledge Integration (PKI)* modules, yet their effects are not analyzed in depth. \u2013 For **DKI**, injecting label information during early denoising is an intuitive and appealing idea, particularly since early predictions are often blurry and unstable. However, the ablation table (Table 2) seems inconsistent\u2014entries (b) and (c) report significantly lower PSNR than the \u201cw/o D\u201d or \u201cw/o P\u201d variants, which might be a reporting error.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "\u2013 To help readers better appreciate DKI\u2019s role, it would be valuable to visualize several denoising trajectories, comparing predicted ( x_0 ) with and without DKI. Such qualitative evidence would make the mechanism\u2019s effect clearer and strengthen the empirical analysis.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 7567,
+  "prompt_tokens": 2042,
+  "total_tokens": 9609,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 5209,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.002301584,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.002301584,
+   "upstream_inference_prompt_cost": 0.000273628,
+   "upstream_inference_completions_cost": 0.002027956
+  }
+ }
+}

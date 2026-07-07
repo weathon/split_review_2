@@ -1,0 +1,95 @@
+{
+ "paper_id": "JEYWpFGzvn",
+ "decision": "Accept (Oral)",
+ "n_reviewers": 3,
+ "items": [
+  {
+   "weakness_text": "Key definitions are not well highlighted in the text, and the mathematical sections are poorly written and hard to follow. Since definitions are missing from the theorems, the explanation is rather hard to follow. For example, the entropy H is not clearly defined, \\mathbb{D} not defined. Similarly r(N | x) not defined in Alg 1 input. While I may have missed these definitions, I would suggest not burying them in the text and making key components clear and easier for readers to refer to.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal addressed the substantive reviewer concerns, including questions about generality, clarity of the theoretical sections, and qualitative evaluation.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It would be helpful if there were some visual results demonstrating the differences in InfoTok's reconstruction at different token lengths for the same image, so we could see what inputs are determined to need lower ones and which are determined to need higher ones. The reconstructions shown in Figure 2 are not particularly compelling - the compression results are considerably worse than Cosmos-DV.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal addressed the substantive reviewer concerns, including questions about generality, clarity of the theoretical sections, and qualitative evaluation.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "There are no video samples provided in the supplementary material or project page which makes qualitative analysis of the results challenging.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal addressed the substantive reviewer concerns, including questions about generality, clarity of the theoretical sections, and qualitative evaluation.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Is the per-token ELBO computed purely based on the encoder-decoder\u2019s end-to-end reconstruction path? Must this be explicitly introduced during training, or can the method be plugged into any VAE-style model without changes? Specifically, can non-VAE tokenizers be adapted to this framework?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "If N_max is small or the compression ratio is extremely low (e.g., \u03b2< 0.1), what are the observed effects on stability and convergence? Would the KL term dominate or explode in such settings, and does it impact model converging or generalization?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The method is designed for videos. Would it generalize to other structured data types such as audio and 3D point clouds? Do different modalities affect the ELBO-based router's assumptions or effectiveness?",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal addressed the substantive reviewer concerns, including questions about generality, clarity of the theoretical sections, and qualitative evaluation.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "It would be helpful if the paper included a discussion of the limitations of the proposed approach.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Since the method seems general enough to be applied to images, it would be helpful to explain the rationale for limiting the experiments to videos.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal addressed the substantive reviewer concerns, including questions about generality, clarity of the theoretical sections, and qualitative evaluation.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "typo: L184: an more accurate -> a more accurate",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 6001,
+  "prompt_tokens": 1073,
+  "total_tokens": 7074,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 5039,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00168406,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00168406,
+   "upstream_inference_prompt_cost": 0.0001382024,
+   "upstream_inference_completions_cost": 0.0015458576
+  }
+ }
+}

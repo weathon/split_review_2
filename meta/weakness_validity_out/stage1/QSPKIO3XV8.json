@@ -1,0 +1,144 @@
+{
+ "paper_id": "QSPKIO3XV8",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "Limited novelty: The central idea\u2014decomposing and fusing dimensional and domain representations\u2014is not fundamentally new. Variants of similar factorization and conditional embedding approaches have already been explored in operator learning, meta-PDE frameworks, and equivariant neural operator designs. The paper lacks a crisp theoretical justification or truly novel algorithmic insight. It feels like another architectural tweak rather than a new paradigm.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "In particular, the method is considered a mere combination of existing techniques, such as dimension decomposition, parameter sharing, and MoE without clearly articulating a core technical insight or theoretical motivation for their integration.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Insufficient baseline coverage: The paper only compares against basic operator learning baselines (e.g., FNO, DeepONet, or UNet-like variants). To substantiate the claims of improved generalization, it is essential to compare against stronger and more recent models, including: (1) Koopman neural operator as a mesh-free solver of non-linear partial differential equations, (2) Solving High-Dimensional PDEs with Latent Spectral Models. These methods are explicitly designed for high-dimensional PDE problems and constitute state-of-the-art baselines.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Also, it was pointed out that the evaluation lacks comparisons with state-of-the-art PDE solvers.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Superficial ablation analysis: The ablations only show minor performance differences when components are removed. This raises concerns about whether the proposed \u201cco-decoder\u201d mechanism truly drives the reported improvements or if the gains are marginal/random noise.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lack of theoretical insight: The authors repeatedly claim that dimension/domain factorization improves generalization, but no formal analysis or empirical probing (e.g., transfer learning between dimensional settings, robustness to domain shifts) is provided to support these claims.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited scope of experiments: The experiments are narrowly focused, and it\u2019s unclear whether the method scales or generalizes to more challenging PDEs (e.g., higher-dimensional or irregular geometries). There is no comparison on computational overhead, parameter efficiency, or training stability.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Although a high-dimensional Poisson problem is tested, the benchmarks remain relatively simple",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Unconvincing performance gains: Even within the provided benchmarks, the improvements are often modest and lack statistical rigor (e.g., no error bars, limited repetitions, unclear significance testing). This weakens the claim of superiority over baselines.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "the reported accuracy and efficiency gains over standard PINNs are modest",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Overclaiming in narrative: The abstract and conclusion use strong language (e.g., \u201cuniversal\u201d, \u201crobust generalization\u201d, \u201csignificant improvement\u201d) that is not backed by the presented evidence. This is a recurring issue in weak submissions.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The proposed framework simply adds a Mixture-of-Experts (MoE) layer to a dimension-decomposition backbone. This combination seems arbitrary and lacks a clear reason or theoretical justification. The MoE layer makes the model more complex but does not show any real advantage over a well-tuned single network or simpler decomposition methods. The claimed \u201cautomatic\u201d domain decomposition is not properly compared with existing, simpler domain decomposition approaches used in PINNs, so its benefit remains unclear.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "In particular, the method is considered a mere combination of existing techniques, such as dimension decomposition, parameter sharing, and MoE without clearly articulating a core technical insight or theoretical motivation for their integration.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The reported improvements in accuracy and efficiency are small compared with standard PINNs or other PINN-based methods. The added model complexity and training cost are not justified by the limited gains shown on low-dimensional test problems.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "the reported accuracy and efficiency gains over standard PINNs are modest",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper presents a clean combination of dimension decomposition, MoE-based domain decomposition, and a variable interpretability metric. While the empirical results are solid, the theoretical innovation is limited\uff1aBoth parameter sharing and MoE are well-established techniques. The paper would benefit from a clearer articulation of the core technical challenge or insight specific to this setting, and from theoretical analysis connecting the VI metric to the proposed model\u2019s design to make the contribution more solid.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "In particular, the method is considered a mere combination of existing techniques, such as dimension decomposition, parameter sharing, and MoE without clearly articulating a core technical insight or theoretical motivation for their integration.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experiments do not include comparisons with state-of-the-art PDE solvers such as Fourier Neural Operator (FNO) [1], which are highly relevant baselines.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Also, it was pointed out that the evaluation lacks comparisons with state-of-the-art PDE solvers.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Ablations that remove the dimension factorization or the MoE router are necessary to substantiate the co-decomposition claim.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Although the paper tests a high-dimensional (10D) Poisson equation, the PDEs considered remain relatively simple. The robustness and generality of the proposed 3D framework would be more convincing if tested on more complex or non-analytically-solvable systems.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Although a high-dimensional Poisson problem is tested, the benchmarks remain relatively simple",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "**Lack of theoretical justification for the VI\u2013convergence relationship**. The paper implicitly proposes an important but unproven proposition: if for all dimensions $j$, $VI_j \\to 1$, then the model prediction $\\hat{u}$ converges to the true separable solution $u$. Currently, this claim is only supported empirically, where high VI values are observed to correlate with low prediction errors. However, no formal mathematical proof is provided to substantiate this relationship.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Regarding Variable Interpretability (VI), no theoretical justification is provided.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "**Fixed number of experts $K$ limits adaptivity and may cause compromise responses**. The number of experts $K$ is manually chosen rather than learned adaptively. When the PDE solution contains multiple fine-grained or highly localized structures (e.g., shocks, vortices, or high-frequency regions), a fixed small $K$ may fail to provide adequate domain resolution. Consequently, the router\u2019s softmax weighting may average across distinct subregions, diminishing the local specialization property of the Mixture-of-Experts and leading to compromise responses. This design constraint restricts flexibility for more complex or multi-scale problems.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "**Router\u2013expert coupling risks instability and expert starvation**. The strong interdependence between the router and experts introduces potential training instability. If an expert achieves slightly lower error early in training, the router may continuously reinforce its weight allocation, causing other experts to receive negligible gradients\u2014a phenomenon known as expert starvation. In problems with rapidly evolving or multi-shock dynamics, delayed router adaptation can further trigger oscillatory expert switching and degrade convergence stability.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 6426,
+  "prompt_tokens": 2264,
+  "total_tokens": 8690,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 4366,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0014859028,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0014859028,
+   "upstream_inference_prompt_cost": 0.0002225512,
+   "upstream_inference_completions_cost": 0.0012633516
+  }
+ }
+}

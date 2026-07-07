@@ -1,0 +1,172 @@
+{
+ "paper_id": "bxZUPQbvp0",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "The claimed challenge of \"unknown environments\" is not compelling. Having agents learn rules through exploration is already common in RL testing; this work merely places such setups in an economic context without deeper innovation on modeling real-world uncertainty (e.g., policy shifts, competition, market shocks).",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lacks substantive novelty. The work offers no new algorithmic, theoretical, or methodological contribution. It aggregates three synthetic optimization problems and frames them as economic benchmarks, without proposing new scientific questions or techniques. This in my opinion does not meet ICLR's bar for conceptual advancement.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The introduction presents the paper as advancing \"reasoning in economic environments,\" but the experiments feel more like testing in-context trial-and-error on small synthetic tasks. The framing somewhat overreaches what is actually achieved. Seems pretty similar to prior work on ICL and LLMs in economic environments (see https://arxiv.org/abs/2410.08345)",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Further along lines of the above, some claims in this paper feel somewhat poorly substantiated and not demonstrating a sound expertise in this field. Examples include:\n    - \"Organizations increasingly delegate parts of their economic decision-making to LLMs.\" - could do with more justification\n    - \"As the capacity for LLMs to use increasingly large sets of tools advances, one could imagine augmenting LLM agents with additional tools, e.g., a (secure) Python interpreter.\" - it is extremely common these days for LLMs to use code interpreter tools, and has been for a while (it's offered as a default over OpenAI API). This claim feels somewhat outdated.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Poor engagement with prior benchmarks. The paper neglects direct comparisons to major agent benchmarks such as vals.ai Finance Agent Bench, GAIA, etc. If not going to contribute novel methodology (e.g. post-training models to be better at economic policymaking, or producing some theory etc) that's fine, but places this paper in realm of pure benchmark papers where standards these days are high.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Questionable economic modeling. The pricing task uses an inconsistent profit formula dividing by the demand-sensitivity parameter, which breaks standard economic logic and may distort the difficulty and scoring of that environment.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The key weakness is the lack of a formal framing. While POMDPs are mentioned, all environments should be explicitly cast as a POMDP (or similar) to make it much clearer. The paper would significantly benefit from a consistent formal framing specifying states, actions, observations, transitions, and rewards. This would unify the three environments, clarify what information is hidden, and make uncertainty and exploration analysis more rigorous. Currently, it is quite informal, e.g. \"The agent sets prices and receives feedback\".",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "There are just two final results tables and no plots/breakdowns of temporal evolutions, despite all being run over 100 periods.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Figure 1 is the key description figure. This should be made more generic and clearer. If environments are formalised as POMDPs, this would be easier to see. Keep the figure generic, e.g. actions (tool usage), rewards/env scores, etc. Show periods and the repetition that occurs. Currently it is not very insightful.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The discussion/conclusion mentions \"rich measurability\". Currently this analysis in the paper is nascent (just table 3).",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The impact of the notes tools should be furthered studied. This changes the state/obs space by augmenting additional info, and this would be much clearer under the POMDP formalism. Reasoning under uncertainty is mentioned, but not explored explicitly.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "For each environment, a clear description of exactly how the environments prevent data contamination, e.g. the hidden and randomly initialised private info etc, should be added.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In the related work section, the proposed benchmark seem to fit within the tool calling and/or game categorisations, rather than needing a seperate definition.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The heavy use of footnote reference style is not particularly standard in ICLR, and should be inline where possible.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "For the procurement and scheduling tasks, the setup feels quite strange. In both cases, the uncertainty over effectiveness/preferences seems unrealistic given the presence of an oracle function that can evaluate proposed bundles/matching. \n\t- For procurement, could such an oracle function exists without actually testing out the purchased bundles? If testing is required, the problem should be modelled in an online manner and some measure akin to regret should be evaluated.\n\t- For matching, it's unrealistic to be able to know the number of blocking pairs in a matching without knowing the preferences.\n\t\t- Maybe it would make sense to see, given the preferences, how well an LLM can discover a stable matching?\n\t- The problems feel almost like the bandit setting with an underlying structure to rewards?",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The main benefit of using LLMs for economic decision-making over optimization algorithms seems to be in cases where there is a lot of unstructured text data. In such cases, it is unlikely that the LLM will have access to well-structured tools.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "For all tasks, it would be helpful to have better baselines to get an idea of how hard these problems are (something similar to the naive baseline mentioned in the appendix). Ideally, there would be both the performance of a simple heuristic algorithm and some notion of human performance.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The authors mention there is significant variation between runs but there are no error bars or indication of the variability of performance. I understand the runs are expensive (especially on frontier models) but it would be helpful to have some analysis of this effect.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper could do with a deeper comparison to existing work. While there may not be many economics-related benchmarks many of the tasks do seem more like mathematical optimization problems.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It feels like these tasks are evaluating more the ability of these models to infer key parameters of a model and then reason accordingly. However, in the prompts, it doesn't feel like the models are given enough information to be able to perform this inference.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 6340,
+  "prompt_tokens": 1646,
+  "total_tokens": 7986,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 5223,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00200564,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00200564,
+   "upstream_inference_prompt_cost": 0.00023044,
+   "upstream_inference_completions_cost": 0.0017752
+  }
+ }
+}

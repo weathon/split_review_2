@@ -1,0 +1,165 @@
+{
+ "paper_id": "5Y4wvlp923",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "The article is too short, with less than 7 pages of main text and 8 pages of references. The content is not comprehensive and is not conducive to understanding",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not provide a rebuttal. As a result, none of the reviewers\u2019 concerns were directly addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While SDE is conceptually intuitive, the paper lacks formal analysis on why asymmetric weighting ensures balanced gradients or avoids representation collapse. The directional term ($\\Delta = \\mathrm{SDE}_{B,A} - \\mathrm{SDE}_{A,B}$) is justified empirically, but no convergence or stability theorem is provided. A geometric or optimization-theoretic explanation of how SDE relates to disentanglement would strengthen the contribution.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not provide a rebuttal. As a result, none of the reviewers\u2019 concerns were directly addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "There are too few baseline models for comparison. Please add more baselines published in the past 2 years for comparison.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not provide a rebuttal. As a result, none of the reviewers\u2019 concerns were directly addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The ablations confirm SDE\u0007's contribution but do not visualize how semantic balance changes representation geometry. Embedding plots (e.g., t-SNE/UMAP) or reconstructed component visualization would better substantiate the \u0007\u0002semantic disentanglement\u0007\u0002 claim.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not provide a rebuttal. As a result, none of the reviewers\u2019 concerns were directly addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Table 1 format is not standardized.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not provide a rebuttal. As a result, none of the reviewers\u2019 concerns were directly addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Insufficient experiments and lack of experimental analysis.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not provide a rebuttal. As a result, none of the reviewers\u2019 concerns were directly addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The article still has a lot of page space, but the introduction, related work, The experimental analysis is described briefly, lacking in richness and content.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not provide a rebuttal. As a result, none of the reviewers\u2019 concerns were directly addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "This paper as a whole seems like a semi-finished product, with insufficient experimental analysis, too few baseline comparisons, and insufficient richness.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not provide a rebuttal. As a result, none of the reviewers\u2019 concerns were directly addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The content is insufficient, the main text is less than 7 pages, and there are no appendix.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not provide a rebuttal. As a result, none of the reviewers\u2019 concerns were directly addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The code is also not publicly available and cannot be obtained.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not provide a rebuttal. As a result, none of the reviewers\u2019 concerns were directly addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "No convergence or stability analysis for APW\u0007's $\\Delta$-driven weights.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not provide a rebuttal. As a result, none of the reviewers\u2019 concerns were directly addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The novelty is marginal",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not provide a rebuttal. As a result, none of the reviewers\u2019 concerns were directly addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Improvements over baselines are small and sometimes inconsistent.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not provide a rebuttal. As a result, none of the reviewers\u2019 concerns were directly addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The analysis lacks theoretical grounding; why SDE provides meaningful gradients is not convincingly explained.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not provide a rebuttal. As a result, none of the reviewers\u2019 concerns were directly addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Experiments focus on limited datasets and do not evaluate robustness or scalability.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not provide a rebuttal. As a result, none of the reviewers\u2019 concerns were directly addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The novelty of this work is modest. It introduces the SDE metric but fails to provide sufficient evidence to validate its correctness.Moreover, the integration of SDE into the loss function via a basic weighting mechanism is rather simple, and the paper lacks a thorough analysis of its working mechanism.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not provide a rebuttal. As a result, none of the reviewers\u2019 concerns were directly addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The scope of the related work and baselines is outdated. Is the field truly devoid of recent advances?",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not provide a rebuttal. As a result, none of the reviewers\u2019 concerns were directly addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper's structure could be improved. The methodological description is repeated between Section 3 and Section 4.4, creating redundancy and confusion for the reader.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not provide a rebuttal. As a result, none of the reviewers\u2019 concerns were directly addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The manuscript contains several basic errors that undermine its precision. For instance, key equations lack numbering, and undefined symbols (e.g., 'T' on line 103, 'A' on line 117) appear in the text without corresponding definitions in the formulas.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not provide a rebuttal. As a result, none of the reviewers\u2019 concerns were directly addressed.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 1726,
+  "prompt_tokens": 1109,
+  "total_tokens": 2835,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 0,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.000510832,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.000510832,
+   "upstream_inference_prompt_cost": 0.000124208,
+   "upstream_inference_completions_cost": 0.000386624
+  }
+ }
+}

@@ -1,0 +1,123 @@
+{
+ "paper_id": "GODFBZhFcX",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "Given that LLM scores are not very accurate, it may be challenging to accurately measure the system's stability.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "I think all reviewer concerns have been addressed.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "as in Tables 1 and 2, regarding the token usage metric, the result is not significant. This makes me think about whether the system is sending too many tokens at one time in the communication channel, or if the system has a higher latency in planning for the next step.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "I think all reviewer concerns have been addressed.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Typos: ... In the composer part of Fig 1., \"assumtion\" should be \"assumption\".",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "I think all reviewer concerns have been addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The distinction between the proposed methodology and existing multi-agent task planning techniques remains unclear. In particular, the paper needs to articulate clear differences from approaches like ProAgent, CoELA, REVECA, and CaPo, which also perform tasks through multi-agent communication.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "8. More discussions on the difference between the existing methods and PCE.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "while the main contributions are presented as the Planner-Composer-Evaluator structure and the decision tree-based techniques in the Composer and Evaluator, these appear to be applications of existing methods rather than novel contributions.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "9. PCE relies on many existing methods.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "if the Planner-Evaluator structure alone achieves higher performance than baselines that utilize collaborative agents, what accounts for this superiority? The analysis lacks clarity on why performance exceeds baselines even without the Composer, and where specifically the Composer contributes to performance improvements.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "10. The analysis lacks clarity on why performance exceeds baselines even without the Composer, and where specifically the Composer contributes to performance improvements.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experiments are exclusively conducted in two-agent settings. While technically \"multi-agent,\" this does not sufficiently support the paper's broader claims of solving uncertainty in \"multi-agent... environments\". The complexity of tracking collaborator intentions and partial observations scales combinatorially with the number of agents. It is unclear how the Composer's decision tree and the Evaluator's scoring would handle branching on assumptions about n\u22121 other agents without becoming intractable.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "5. It is unclear whether the method can scale to larger numbers of agents.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper offers no analysis of the Composer's reliability. If the Composer fails to extract the key assumption or hallucinates an irrelevant new one, the entire decision tree is built on a faulty foundation, and the Evaluator's \"principled\" scoring becomes meaningless.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "6. The paper offers no analysis of the Composer's reliability.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "the paper's claim that PCE \"amplifies the benefits of scaling\" seems slightly overstated; the data suggests the benefit of the PCE framework is largely additive\u2014PCE starts at a better baseline, and that baseline advantage is maintained or slightly widened as the model scales.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "7. The paper's claim that PCE \"amplifies the benefits of scaling\" seems slightly overstated; the data suggest the benefit of the PCE framework is largely additive\u2014PCE starts at a better baseline, and that baseline advantage is maintained or slightly widened as the model scales.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The related work section focuses primarily on communication-centric methods (like ProAgent, CoELA, etc.). However, it seems to overlook other recent lines of work on long-horizon LLM planning in partially observable environments that do not rely on heavy communication. For example, [1]. [1] Nayak, Siddharth, et al. \"LLaMAR: Long-Horizon Planning for Multi-Agent Robots in Partially Observable Environments.\" arXiv preprint arXiv:2407.10031 (2024).",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "3. Lack of discussion on prior work on long-horizon LLM planning",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It is unclear how the hyperparameters were chosen. The authors set D = 3, alpha = 1, beta = 1, lambda = 1, Kaction = 10, Kmessage= 3 empirically, but no according further explaination or ablation is provided.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "1. It is unclear how the hyperparameters were chosen.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The related work section should discuss tree-search-based methods (e.g., CoTS) more clearly. The authors need to clearly articulate how their method differs conceptually and why PCE is needed beyond existing tree reasoning or search frameworks.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "2. The related work section should discuss tree-search-based methods (e.g., CoTS) more clearly.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper would benefit from more case studies or qualitative analyses to illustrate how PCE behaves in different uncertainty scenarios and to provide deeper insight into its decision-making process.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "4. The paper would benefit from more case studies or qualitative analyses.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 5623,
+  "prompt_tokens": 1943,
+  "total_tokens": 7566,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 4082,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 1792,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.001645756,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.001645756,
+   "upstream_inference_prompt_cost": 7.1316e-05,
+   "upstream_inference_completions_cost": 0.00157444
+  }
+ }
+}

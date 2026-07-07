@@ -1,0 +1,74 @@
+{
+ "paper_id": "5H8kxW0Efk",
+ "decision": "Reject",
+ "n_reviewers": 3,
+ "items": [
+  {
+   "weakness_text": "**Lack of Clarity on Optimization:** The paper employs a zero-order optimizer from Reifenstein et al. (2024), but the algorithm itself is not explained. A brief introduction or intuition about the optimizer would significantly improve accessibility for readers unfamiliar with the reference.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "**Reward Function Assumptions:** The reward functions in Appendix F relies on knowledge of the optimal energy value. This assumption raises concerns about fairness in comparisons with methods that do not use such information.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "**Adaptability**: From my understanding, this approach is relatively limited in terms of the classes of optimization problems that it can be used on, e.g., those that can be formulated as Equation (1). Compared to other exact/heuristic/learning-based methods, this is a relatively strong limitation in terms of applicability.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "While the authors addressed several technical clarification requests in the rebuttal, including evaluation metrics, optimization details, and additional large-instance results, concerns about broader applicability beyond Ising/Max-Cut formulations and scalability to more diverse problem instances remain only partially resolved.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "**G-Set Results**: The authors compute time-to-solution (TTS) on the G-set benchmarks using reference cut values drawn from prior Ising-machine literature rather than from the globally best-known Max-Cut results reported in combinatorial-optimization studies. While this choice maintains consistency with neural Ising comparisons, it also means that the reported TTS values correspond to approximate rather than truly optimal targets. For this reason, it would be more informative to include information on the differences in solution quality and time compared to the best-known approaches.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "**Scalability**: The experiments are limited to G-set instances up to $N=1000$, with no results reported for the larger, more challenging graphs. The authors state that the scalability is with respect to model size, rather than CO problem size, so I am not sure why they would limit their evaluation to small instances. The absence of results on larger instances makes it difficult to assess how well the method scales relative to state-of-the-art Ising and Max-Cut solvers. This is a further concern given the limited applicability to other classes of problems. Additionally, there is no reporting of training time, which makes the scalability of training unclear.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "While the authors addressed several technical clarification requests in the rebuttal, including evaluation metrics, optimization details, and additional large-instance results, concerns about broader applicability beyond Ising/Max-Cut formulations and scalability to more diverse problem instances remain only partially resolved.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Evaluation metrics (TTS vs objective quality). The paper emphasizes \u0000e2\u0000b0\u00009ctime to solution\u0000e2\u0000b0\u0000a0 (TTS), defined as the time required to reach a solution with 99% success probability. While TTS is common in annealing/Ising communities, it is less standard in the combinatorial optimization literature, which typically leads with objective quality (cut value, clique size, independent set size), approximation ratios or normalized optimality gaps, and then reports wall-clock time. I encourage the authors to complement TTS with conventional CO metrics. This would make results easier to compare with non-Ising baselines.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "While the authors addressed several technical clarification requests in the rebuttal, including evaluation metrics, optimization details, and additional large-instance results",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 963,
+  "prompt_tokens": 1132,
+  "total_tokens": 2095,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 0,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.000342496,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.000342496,
+   "upstream_inference_prompt_cost": 0.000126784,
+   "upstream_inference_completions_cost": 0.000215712
+  }
+ }
+}

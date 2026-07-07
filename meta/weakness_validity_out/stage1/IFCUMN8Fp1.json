@@ -1,0 +1,242 @@
+{
+ "paper_id": "IFCUMN8Fp1",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "The method is constrained to very small-scale domains. The data and computation requirements are impractical for even modest state spaces and observation sequence lengths. The approach is only validated on tiny POMDPs with 3 or 4 states in the state space.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Outstanding: Scalability (Reviewers NVMq, iKCN, MsTT): \u2026 The method's complexity remains exponential in observability length. The approach is fundamentally limited to small, discrete state spaces compared to modern deep RL benchmarks.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While the paper motivates its approach through planning, as stated above, the experimental domains are so small that it is unclear whether the claimed potential planning benefits would generalize to more realistic problems.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Outstanding: Scalability (Reviewers NVMq, iKCN, MsTT): \u2026 The method's complexity remains exponential in observability length. The approach is fundamentally limited to small, discrete state spaces compared to modern deep RL benchmarks.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The broader motivation and real-world relevance of learning full POMDP models through this method are questionable.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Outstanding: Practical Applicability (Reviewer atUB, iKCN): The requirement for full-rank actions and ergodicity under uniform exploration is a hard constraint that likely precludes this method from being applied to many real-world partial observability problems.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Several assumptions look strong for realistic POMDPs and probably require more discussion",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Addressed by Rebuttal: Algorithm Clarity & Assumptions (Reviewers atUB, MsTT): The authors \u2026 added a dedicated section discussing the restrictiveness of assumptions.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Only tiny POMDPs (3\u20136 states) are considered.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Outstanding: Scalability (Reviewers NVMq, iKCN, MsTT): \u2026 The method's complexity remains exponential in observability length. The approach is fundamentally limited to small, discrete state spaces compared to modern deep RL benchmarks.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "A comparison to baselines sharing the same assumptions and goal (no access to the transition/observation dynamics+model learning) is missing",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Addressed by Rebuttal: Baselines (Reviewers NVMq, MsTT): The authors added an Expectation-Maximization (EM) baseline, addressing the lack of comparative evaluation.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Although the appendix derives an exploration count (Figure 5), the text never reports total time (wall clock); the Hankel grows exponentially in the observability length, and PO-UCT is time-demanding, so practical limits matter.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Outstanding: Scalability (Reviewers NVMq, iKCN, MsTT): \u2026 The method's complexity remains exponential in observability length. The approach is fundamentally limited to small, discrete state spaces compared to modern deep RL benchmarks.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Planning is done with a shallow PO-UCT at the partition level (depth 3/1000 sim). It is unclear whether differences in returns stem from model quality or planner mismatch.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Even if the actions are played uniformly at the model training time, there's no guarantee of _where_ the model is accurate after a finite number of steps; according to the underlying MDP dynamics, some parts of the MDP might be unexplored and so turn the model inaccurate in those regions, and there is no way to detect that phenomenon. As a result, the approach doesn't guarantee the usefulness of the learned model in a finite number of steps.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Outstanding: Practical Applicability (Reviewer atUB, iKCN): The requirement for full-rank actions and ergodicity under uniform exploration is a hard constraint that likely precludes this method from being applied to many real-world partial observability problems.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper has a number of weaknesses cutting across soundness, presentation, and contribution.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The authors' notion of an observability partition, and Theorem 1's limitation to only matching the POMDP in aggregate over the partition seems to be dodging the open question of identifying a POMDP representation.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "POMDPs whose states can identified from their next observation distribution is an extremely limiting class.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "T-Maze, for example, does not have this property as the long hallway would exactly be collapsed by the observability partition.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "If we're unconcerned with the recovered POMDP allowing negative probabilities for states within a partition, then why not be happy with linear PSRs?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Furthermore, the abstract claims it produces \"proper probabilistic models leveragable by downstream inference operations.\"  But they are not \"proper probabilistic models\".",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Addressed by Rebuttal: Utility of POMDPs vs. PSRs (Reviewer atUB): The authors added a reward-specification experiment to argue that recovering explicit POMDP parameters allows for re-planning with new rewards without re-learning dynamics, a capability lacking in pure PSRs or RNNs.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The abstract claims \"[PSRs] cannot, however, yield direct estimates of transition and observation likelihoods\", which seems wrong as PSRs have simple closed form transition updates, observation distributions.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The Singh et al. (2004) paper defines a \"system dynamics matrix\", but the SDM is not a Hankel matrix at all (which 3.1 seems to suggest it is).",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Similarly, Equation (6) doesn't come from Wolfe nor is it the ${\\hat P_{\\cal T, H}}$ matrix from Boots.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The paper makes an early remark that data is gathered with a uniform random exploration, but doesn't elaborate further or include it formally as an assumption.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Line 163: Doesn't this need proof or a citation?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "In 3.3, it sure seems like assumption 3 is redundant.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "There is no description of what the shading in Figure 3 means.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Limited experimental scale and analysis: Experiments only test 2-4 state problems with no evaluation of how performance scales with state space size.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Outstanding: Scalability (Reviewers NVMq, iKCN, MsTT): \u2026 The method's complexity remains exponential in observability length. The approach is fundamentally limited to small, discrete state spaces compared to modern deep RL benchmarks.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Missing comparisons with other POMDP learning methods (e.g., EM-based approaches, other spectral methods).",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Addressed by Rebuttal: Baselines (Reviewers NVMq, MsTT): The authors added an Expectation-Maximization (EM) baseline, addressing the lack of comparative evaluation.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The algorithm fundamentally requires at least one action with a full-rank transition matrix to recover observations\u2014many real-world POMDPs may lack this property (e.g., deterministic systems, heavy aliasing).",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Outstanding: Practical Applicability (Reviewer atUB, iKCN): The requirement for full-rank actions and ergodicity under uniform exploration is a hard constraint that likely precludes this method from being applied to many real-world partial observability problems.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The ergodicity assumption may not hold in systems with absorbing states or disconnected components.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Addressed by Rebuttal: Algorithm Clarity & Assumptions (Reviewers atUB, MsTT): The authors \u2026 added a dedicated section discussing the restrictiveness of assumptions.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Together, these limitations constrain practical impact",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Outstanding: Practical Applicability (Reviewer atUB, iKCN): The requirement for full-rank actions and ergodicity under uniform exploration is a hard constraint that likely precludes this method from being applied to many real-world partial observability problems.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Presentation could be clearer: Dense mathematical exposition without pseudocode makes the algorithm difficult to follow.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Addressed by Rebuttal: Algorithm Clarity & Assumptions (Reviewers atUB, MsTT): The authors simplified the algorithm (removing Assumption 4), added pseudocode, and included a dedicated section discussing the restrictiveness of assumptions.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Missing ablation studies: No experiments examining key design choices",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Limited engagement with recent work: Would benefit from discussion of or comparison with recent neural approaches to POMDP learning and connections to related system identification literature",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 3006,
+  "prompt_tokens": 2769,
+  "total_tokens": 5775,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 0,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.000983472,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.000983472,
+   "upstream_inference_prompt_cost": 0.000310128,
+   "upstream_inference_completions_cost": 0.000673344
+  }
+ }
+}

@@ -1,0 +1,130 @@
+{
+ "paper_id": "yBpzF8hp3J",
+ "decision": "Accept (Oral)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "The Zipfian assumption may restrict generality; robustness under other distributions is not fully discussed.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The remaining concerns not explicitly addressed are: (1) alternative mechanisms and (2) experiments on new datasets.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Section 6 outlines directions but lacks concrete proposals (e.g., how adaptive subsampling might integrate into WGM).",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Some key related works are missing and should be discussed.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors have successfully addressed most of these concerns during the rebuttal period. In particular, the authors have provided additional discussions and clarifications, new experimental results, and an updated manuscript, as detailed below. - R1. The authors provided further clarifications and the required discussion on the theoretical concerns, addressing W1.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It is unclear whether the datasets used in the experiments are justified to follow the Zipfian distribution assumed in the analysis\u2014particularly for parameters $s > 1$ (and not even $s = 1$).",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The remaining concerns not explicitly addressed are: (1) alternative mechanisms and (2) experiments on new datasets.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "It would be helpful to clarify whether the key theoretical results, such as **Theorem 3.3** and **Corollary 3.4**, are empirically validated in the experiments.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "An asymptotic bound on the missing mass of a mechanism in a specific setting would be more useful if it had implications in practice either by predicting practical performance in parameter settings or by allowing different algorithms to be compared theoretically.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "It would be instructive to compare the theoretical error bound against empirical performance on synthetic Zipfian data.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The remaining concerns not explicitly addressed are: (1) alternative mechanisms and (2) experiments on new datasets.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "It would be useful to plot the frequency distribution on the real datasets to see if they follow a power law.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors provided new experimental results, such as plotting the frequency distribution on real datasets, log-log plots of frequency versus rank, and histograms of user item set sizes for each dataset, addressing W3.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Reporting the size distribution of $|W_i|$ would be interesting to compare the setting of $\\Delta_0$ to those statistics. The theoretical result suggests that $\\Delta_0$ should be set to $\\max |W_i|$ though increasing $\\Delta_0$ worsens performance for the Amazon games dataset and the small datasets. Is this because $\\Delta_0$ has exceeded the size of any $W_i$ or for another reason?",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors provided new experimental results, such as plotting the frequency distribution on real datasets, log-log plots of frequency versus rank, and histograms of user item set sizes for each dataset, addressing W3.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The statement that the gap between WGM and the policy baselines is smaller in the missing mass case compared to the $\\ell_0$ cardinality case is misleading. While the gap is 5 percentage points (MM is measured as a percentage), WGM performs up to 50% worse than the baselines in some instances when measured as a ratio. This is the apples-to-apples comparison to make when commenting that \"for cardinality... sequential methods often output $\\approx 2X$ more items [than WGM].\"",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors provided the required discussions on the experimental concerns, addressing W2.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Comparison to more baseline algorithms would also be interesting. In the theoretical results, it is very reasonable to only analyze WGM as it is a well-studied algorithm and other candidate algorithms may be very difficult to analyze. On the other hand, if an important empirical takeaway is that \"WGM obtains MM within 5% of that of the policy mechanisms, in spite of their significantly more intensive computation,\" it would be useful to compare to other methods of Swanberg et al. and Chen et al. which offer better cardinality results while still using a similar amount of computation to WGM.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The remaining concerns not explicitly addressed are: (1) alternative mechanisms and (2) experiments on new datasets.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Missing mass analysis of any other algorithm, for example the weighted Laplace mechanism to start, would be interesting.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The remaining concerns not explicitly addressed are: (1) alternative mechanisms and (2) experiments on new datasets. For (1), the authors emphasize that WGM is already near-optimal and therefore opted not to analyze other algorithms.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "It seems that the performance of the algorithm depends on the choice of user contribution $\\Delta_0$, which ideally has to be close to $\\max_|W_i|$. This requires prior knowledge of the maximum elements, or at least some estimate of the parameter of the Zipf distribution of the underlying dataset.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "The remaining concerns not explicitly addressed are: (1) alternative mechanisms and (2) experiments on new datasets.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "There is a mismatch in the upper and lower bounds for top-k selection and k-hitting set.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors provided further clarifications and the required discussion on the theoretical concerns, addressing W1.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 8189,
+  "prompt_tokens": 1680,
+  "total_tokens": 9869,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 6540,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 1536,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.002356088,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.002356088,
+   "upstream_inference_prompt_cost": 6.3168e-05,
+   "upstream_inference_completions_cost": 0.00229292
+  }
+ }
+}

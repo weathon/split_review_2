@@ -1,0 +1,88 @@
+{
+ "paper_id": "Vsgq2ldr4K",
+ "decision": "Accept (Oral)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "need to pay cost for each sample, and if not paying for any inference scaling cost degenerates to sampling from p.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Inference cost: The additional decoding-time cost is inherent to the method and remains a trade-off rather than a resolved issue.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "the evaluated benchmarks are rather older. do we expect the method to be still tractable with harder datasets that require longer CoT lengths? at least evaluate AIME25 or better HMMT25/BRUMO25, which are common math reasoning benchmarks to be tested on",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experiments are only conducted on small models such as Qwen2.5-7B. Experiments on more advanced models and larger models can further solidify the empirical exploration. But it is understandable given the resources in academia.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Scalability to larger models: Experiments are limited to relatively small model sizes, which leaves open questions about behavior at larger scales.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The evaluation spans four benchmarks, which, while representative, do not fully capture the diversity of reasoning and generation tasks.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "As noted by the authors, the method can only exploit existing capabilities of the base model\u2014it cannot exceed its representational capacity. A deeper discussion or analysis of the top-k ceiling would help contextualize the results.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Top-k ceiling and diversity trade-offs: The added pass@k analysis helps contextualize how the method balances sharpening and diversity better than RL-based approaches.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "It depends on tuning the power factor, block size, and number of MCMC steps, which may limit plug-and-play usability.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Hyperparameter sensitivity and robustness: The authors clarified that the power parameter is robust across a reasonable range and requires minimal tuning in practice, supported by new empirical analysis.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The algorithm provides no theoretical guarantee of convergence to the true power distribution in large sequence spaces.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The paper evaluates only single-shot responses and does not test multi-turn reasoning or chain-of-thought extensions.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Effectiveness on longer reasoning chains: Evidence from GPQA (with longer average sequences) and blockwise MCMC sampling mitigates concerns about degradation on longer generations.",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 4010,
+  "prompt_tokens": 1113,
+  "total_tokens": 5123,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 3300,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.001178268,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.001178268,
+   "upstream_inference_prompt_cost": 5.5468e-05,
+   "upstream_inference_completions_cost": 0.0011228
+  }
+ }
+}

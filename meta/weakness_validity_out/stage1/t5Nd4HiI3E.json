@@ -1,0 +1,109 @@
+{
+ "paper_id": "t5Nd4HiI3E",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "The straightforward linear combination of L_t and L_e outperforms SimPO and DPO consistently on both alignment and reasoning tasks, which is impressive. Is the reason for the failure of baselines really due to the high variance caused by reasoning traces? Is it possible that the improvement of BVPO is mainly brought by extra prompts and additional training signals of g_e? Why does the effectiveness continue to improve in reasoning tasks?",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Additionally, there is a potential unfair comparison issue in implementation and data quantity.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The authors should provide the exact value of \\alpha in different settings. Moreover, the effectiveness of the MSE minimization should be verified (e.g., by providing experiments with different hyperparameter \\alpha on both tasks).",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The experiments and analysis are insufficient.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The authors conduct the experiments merely on Qwen series. The generalization ability of BVPO on other LLM structures should be evaluated.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The experiments and analysis are insufficient.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The BVPO method is more like a data augmentation method than a improvement in algorithm. The theoretical analysis induced optimal value of $\\alpha$, but it is never used in practical, and the authors simply chose 0.5",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "the reviewers pointed out that BVPO is more like a data augmentation method rather than an algorithm improvement.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Insufficient experiments. This work only compares with two baselines SimPO and DPO on ArenaHard and AlpacaEval 2.0. Some important baselines are missing, such as mixing thinking/non-thinking preference data",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The experiments and analysis are insufficient.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lack of analysis. There are limited analysis conducted, only evaluation on Math reasoning benchmarks. Some important ablation studies, such as the value of $\\alpha$, $\\beta$, were not included.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The experiments and analysis are insufficient.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Answers generated under the ` thinking response` condition come from a different prompt distribution than regular reasoning traces. The paper simply interpolates the two log-probabilities without measuring the bias induced by this shift, nor does it report accuracy or consistency of the empty-trace replies on a validation set.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "the reviewers pointed out that BVPO is more like a data augmentation method rather than an algorithm improvement.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The closed-form optimal weight $\\alpha^*$ needs $\\Sigma_{te}, b_t, b_e$, etc. In practice these expectations are replaced by mini-batch estimates whose error is not analyzed. If the estimator variance is large, the \u201coptimal\u201d weight can deviate far from the theoretical value and even inject extra noise; the manuscript provides no bound or ablation on this estimation error.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "the reviewers pointed out that BVPO is more like a data augmentation method rather than an algorithm improvement.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "All results are obtained from DeepSeek-R1-Distill models that only undergo supervised fine-tuning. Their traces are short and well-formatted, so gradient variance is relatively mild. After large-scale RL (especially RLVR), reasoning models produce much longer and more exploratory chains, amplifying noise. Whether BVPO still suppresses variance under this harder regime remains untested.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The experiments and analysis are insufficient.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Requires generating two separate preference datasets (D_t and D_e)\nNo analysis of whether the same improvement could be achieved with the same total data budget using only one approach\nNo discussion of computational overhead during training",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Additionally, there is a potential unfair comparison issue in implementation and data quantity.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Only tested on DeepSeek-R1 family models\nAll models share the same base architecture (Qwen)\nNo exploration of other LRM architectures or reasoning approaches",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "The experiments and analysis are insufficient.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 5525,
+  "prompt_tokens": 1162,
+  "total_tokens": 6687,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 4475,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 1024,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.001594992,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.001594992,
+   "upstream_inference_prompt_cost": 4.7992e-05,
+   "upstream_inference_completions_cost": 0.001547
+  }
+ }
+}

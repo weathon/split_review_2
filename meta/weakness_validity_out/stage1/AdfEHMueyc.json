@@ -1,0 +1,137 @@
+{
+ "paper_id": "AdfEHMueyc",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "No form of hypothesis testing was reported (only mean fitness + stdev curves), but as far as I can tell, in all but one experiment, there was no difference with and without weight inheritance. In the one case where weight inheritance might affect fitness, there was no difference with and without the proposed method.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "More importantly, there is no evidence that design optimization occurred. And there is no evidence that weights were inherited across different designs.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The reviewers have strong concerns about its contribution to the field. There is not much new materials in the method and the empirical results are limited.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Finally, the scholarship is poor. I expected to see (at the very least some subset of) the following literature referenced/discussed: [list of 10 papers]",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The reviewers have strong concerns about its contribution to the field. There is not much new materials in the method and the empirical results are limited.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "I have a relatively big concern about the contribution of this paper. GNN and Transformer are already heavily used in co-design, for example [1,2,3,4], what is the main difference between this work with them?",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The reviewers have strong concerns about its contribution to the field. There is not much new materials in the method and the empirical results are limited.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "But I find the authors do not compare this work with them even though the topic is closely related. If possible, could the author provide any comparison with this line of works?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Morphology generation relies on mutation and selection, lacking systematic integration of generative priors (VAE/diffusion/diffusion, microphysical guidance), and search efficiency may be limited in large morphological spaces. No control design with single-stage evolution has been achieved.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Comparison spectra are relatively concentrated: a systematic comparison between the main and other strong baselines of the graph structure (such as ModularEvoGym) and meta learning/fast adaptation methods.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The novelty of this paper is rather limited. The primary contribution seems to be adding a graph network on top of an MLP to address scalability.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "The reviewers have strong concerns about its contribution to the field. There is not much new materials in the method and the empirical results are limited.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The problem formulation for morphology\u2013control co-design is unclear. What exactly is the control space (e.g., motion or torque variables) that the method optimizes for control?",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "It is not clear why the proposed method uses a \u201cdecentralized structure\u201d (Line 190), nor why it is inherently scalable to adding or removing actuators. For instance, if actuators are added, the control policy still needs to change to control the added motors (and the added DoF). Thus, the claim that \u201cmorphological changes such as adding or removing actuators can be incorporated without redesigning the policy\u201d is not convincing.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "The reviewers have strong concerns about its contribution to the field. There is not much new materials in the method and the empirical results are limited.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "How are morphologies generated or sampled? The paper provides no detail on the process of morphology design.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It is questionable to present this method as a co-design approach. The pipeline appears sequential: first generating a morphology, then optimizing a controller for that morphology. Soft robot co-design should tightly integrate morphology design with motion control and physical constraints; the current framework does not clearly demonstrate such coupling.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "The reviewers have strong concerns about its contribution to the field. There is not much new materials in the method and the empirical results are limited.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The literature review is very limited. For example, key recent work in morphology-control co-design is largely omitted.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "The reviewers have strong concerns about its contribution to the field. There is not much new materials in the method and the empirical results are limited.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Experiments are limited to a simple 2-D discrete simulation. There is no evaluation on more realistic soft robot simulations or physical platforms, making generalizability to real soft robots questionable.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "The reviewers have strong concerns about its contribution to the field. There is not much new materials in the method and the empirical results are limited.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Experiments do not include comparisons with state-of-the-art methods, making it difficult to assess performance improvements or contributions relative to existing work.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "The reviewers have strong concerns about its contribution to the field. There is not much new materials in the method and the empirical results are limited.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 6164,
+  "prompt_tokens": 1411,
+  "total_tokens": 7575,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 4684,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00192346,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00192346,
+   "upstream_inference_prompt_cost": 0.00019754,
+   "upstream_inference_completions_cost": 0.00172592
+  }
+ }
+}

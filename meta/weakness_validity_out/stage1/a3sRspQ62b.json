@@ -1,0 +1,137 @@
+{
+ "paper_id": "a3sRspQ62b",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "The core contribution is about generative modeling for turbulence, but the paper only evaluates on 2D data where turbulence does not exist, see [1]. Furthermore, [1] is a closely related work that should be discussed.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The samples shown in the appendix all have an unphysical 8x8 block structure",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited Physical Grounding Beyond Frequency Domain",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Heavy Reliance on Learned Frequency Priors",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Computational and Memory Overhead",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Conceptual Ambiguity: Frequency is not from Physics, it is hidden",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "My main critique for the proposed method is the motivation and argumentation for the addition of three previously proposed components. Intuitively I understand the problem of high frequency features. However, the actual arguments and motivations for specific components of the proposed method remain a bit inprecise to me. They mix arguments against diffusion models with arguments for some general components: - Empirical spectral bias: It seems to me like your approach now fits lower frequency features worse. Not clear to me if we do not just trade-off low for high frequency components. - Theoretic standpoint on spectral bias: Even though diffusion and in my opinion also flow matching models favour low and high frequency features at different \"timepoints\", it does not necessarily imply a problem. In fact, this can actually help the modelling of the different features, arguably a reason why they perform very well on many tasks. Note for example that within the modelling of complex systems there exist a lot of models which also explicitly separate those levels in hierarchical models. - Further, the theoretic results are limited in generality. Theorem 4.1 is intuitive and essentially follows from assuming a power-law spectrum for x\u0302_0(\u03c9) and that diffusion noise variance is frequency-independent. The novelty of this theorem is limited: the argument is not surprising and relies on strong assumptions (power law PSD) that may not hold uniformly across datasets. The authors should (i) explicitly state assumptions and the practical implications/limits and (ii) discuss whether/why flow-matching (deterministic) avoids the same fate (they use flow matching in the method but Theorem is about diffusion). - Only arguing about energy preservation, but not showing or constraining it. Would be nice to actually constrain model to physical properties. - Missing statistical significance test for results. - The paper emphasizes that flow matching yields faster inference, but does not provide wall-clock comparisons (inference time), or ODE solver steps for flow matching vs iterative diffusion baselines. Overall, my main concern is the actual motivation and novelty of the proposed method, where the main contribution is to combine 3 pre-existing components to show some improvement.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "However, they highlight several weaknesses, including ... insufficient motivation and explanation for the choice and combination of the model components, and the fact that the theoretical analysis does not adequately support the paper\u2019s claims.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Figure 1 different y scales make the figure unintuitive. Fixed scale would actually let their method stand out more.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper is very crammed, even breaking the ICLR template (e.g. 5.3 section heading, a lot of negative v-space all over the paper).",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Space hacking let to figure 6 appearing after figure 8.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "My main criticism against the paper is the way it is prepared. It absolutely lacks precision and puts wordy descriptions in the place of clear scientific arguments supported by facts. To give some examples: There are words like \"external representation space\" in the section 3.3 where the meaning is never explained, in the context of physics the authors speak about \"semantically meaningful [...] features\" or the \"common mode signal\" which's Wikipaedia definition is clearly (completely) out of context, finally calling the rot operator spatial differential is unnecessarily complicated.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "However, they highlight several weaknesses, including a lack of precision in the technical description",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Not unrelated, Theorem 1 and the supporting lemmas does not really contribute to the understanding why the model proposed by the authors should be more effective that a diffusion based generative model. The authors argue that in the diffusion noising, high frequencies modes are noised faster (if one accepts the spectral power law for the initial conditions). But that of course does not imply that these modes will be badely reconstructed during generation, but just that the backward process generates them last, which is just as it supposed to be. To make a theoretical problem out of this in my eyes is unfounded. The mathematical argument itself (not the interpretation) is ok and is based on standard arguments of the It\u00f4 calculus. The mathematical originality of this part is low.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "However, they highlight several weaknesses, including ... the fact that the theoretical analysis does not adequately support the paper\u2019s claims.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The notation in the theoretical part and Appendix F is very hard to follow. The authors should concisely define the spatial Fourier transform with which they work at least in the appendix and explain their discretization to FFT. Lemmas 1-3 are standard and stuff from stochastic analysis and should rather be in the appendix.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "However, they highlight several weaknesses, including a lack of precision in the technical description",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In the evaluation, a residual based analysis in a chaotic setting over longer time spans makes little sense. It would be good if this evaluation could be complemented by comparing statistical flow features like power spectra of spatial and temporal correlations, which would be a good additional to the motivation of the paper.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The most general version of PDE in the preliminary part is unnecessary, the explanation of the flow matching approach is largely incomprehensible and in many details inaccurate.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "However, they highlight several weaknesses, including a lack of precision in the technical description",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 4577,
+  "prompt_tokens": 1678,
+  "total_tokens": 6255,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 2981,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00151648,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00151648,
+   "upstream_inference_prompt_cost": 0.00023492,
+   "upstream_inference_completions_cost": 0.00128156
+  }
+ }
+}

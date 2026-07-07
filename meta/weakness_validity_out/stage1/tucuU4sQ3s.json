@@ -1,0 +1,116 @@
+{
+ "paper_id": "tucuU4sQ3s",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "Limited performance.\nThe method performs worse than all storage-based models, showing limited competitiveness in practical CL scenarios.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Simplicity vs. effectiveness.\nThe proposed approach is simple, but its results do not convincingly show that such a minimal mechanism can achieve strong continual learning.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Scalability concern.\nAs also noted by the authors, under extreme lifelong settings the null-space directions may saturate. Without a clear advantage in scalability over storage-based methods, the claimed benefit of being memory-free remains modest.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The method assumes that tasks have sufficiently distinct distributions, enabling interference reduction via orthogonalization or projection. However, when tasks are highly correlated or share overlapping features, the model may struggle to separate old and new knowledge, leading to reduced stability and adaptability.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experimental evaluation is limited to standard vision benchmarks (e.g., CIFAR, ImageNet subsets) with relatively few tasks, focusing only on class-incremental learning. The absence of experiments on more complex multimodal settings such as VQA or image-text retrieval limits the demonstration of generalizability.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The method\u2019s performance is sensitive to key hyperparameters, including projection dimension, update ratio, and orthogonalization strength. The lack of an adaptive tuning mechanism may hinder robustness and scalability in real-world, dynamic scenarios.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In class-incremental tasks, the method has not been compared with other Parameter-Efficient Fine-Tuning (PEFT) approaches such as LPI, TAM, MoELora\uff0cor DIKI, limiting the completeness of its performance validation.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal largely addressed ... Reviewer SL2R\u2019s questions on missing PEFT coverage by clarifying baseline scope and robustness",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Theory is mostly motivational; tighter links between parameter-space bounds and function-level forgetting would help.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Long-horizon spectral drift and null-space quality: Although the method re-computes SVD per task, after many merges the spectrum will evolve. A more systematic study of whether low-energy subspaces gradually become \u201ccontaminated\u201d (especially for highly correlated task sequences) and how to monitor/remedy this (e.g., periodic re-orthogonalization, spectral gating) would be valuable.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal largely addressed Reviewer 4o99\u2019s concerns about long-horizon spectral drift and practicality",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Merged updates limit reversibility; lightweight selective rollback is not explored.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Scalability guidance for larger backbones (ViT-L/H) would aid practitioners.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal largely addressed Reviewer 4o99\u2019s concerns about long-horizon spectral drift and practicality",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Storage-free baseline models are not that strong. Then a question is: using null-space may constrain the model expressivity. Is it still able to trade off by increasing the memory cost to get a stronger performance? Or the null-space also constrain the performance upperbound?",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal largely addressed ... Reviewer TeKM\u2019s doubts about competitiveness under strict memory-free constraints.",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 7988,
+  "prompt_tokens": 1169,
+  "total_tokens": 9157,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 6809,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0024003,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0024003,
+   "upstream_inference_prompt_cost": 0.00016366,
+   "upstream_inference_completions_cost": 0.00223664
+  }
+ }
+}

@@ -1,0 +1,137 @@
+{
+ "paper_id": "doxBjZ88H3",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "the key text with the description of the information gap is difficult to parse and ambiguous. the logic of the construction is not clearly enough explained in that part of the text.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "the punchline is rather weak: the results do not seem to provide much insight into how one could design better experiments beyond giving ranges of possible d' parameters that look good c.f. the theory. It is not clear if the (not negligible) experimental data collected in this setup is outside that regime so that experimentalists would know to do something differently.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "the two theories outlined were the theory of representing likelihood v..s sampling-based code. However, here sampling seems to be an additional assumption. It would be cleaner if the comparison was simply a presentation of likelihood v.s. a representation the posterior. One can also consider a theory of sampling from the normalized likelihood (which would be equivalent to posterior assuming a uniform prior). It was unclear wether sampling is essential in the model comparison.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "the paper only consider prior imposed during the task. It seemed that the results were based on the assumption that the task prior can be learned perfectly. Yet, this assumption may be too strong.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "What about the long-term priors (or natural priors) the observers already learn? Can the theoretical framework also apply to these? Or would these complicate things?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "I am not sure if the approach would indeed be fruitful or whether there might be easier and more fruitful approach for adjudicating between the different theories. In particular, from Section 4, I am under the impression that practically it would still be difficult to distinguish these theories (Correct me if I have the wrong impression).  I wonder if there would be more fruitful path that would also be easier. For example, instead of using a static setting, how about considering a learning paradigm instead? Suppose we start with a baseline condition, and measure the neural responses. Then we teach the observers to learn a different prior. Under the likelihood theory,, the neural representation in V1 should not change. In contrast, based on the posterior theory, the neural representation in V1 should change according to the prior learned.  So the question is, what is the advantage of the approach proposed in the current paper compared to such an alternative approach?",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The most substantial concern, raised by Reviewer 1gnw, is that biological sensory adaptation (e.g., gain control for metabolic efficiency) may confound the \"steady-state\" encoding assumptions required by the framework.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper would be stronger if some empirical results from experiments can be shown. Even a re-analysis some previously reported experimental data to demonstrate the advantage of the current method would be useful.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "In the revision, the authors analyzed the Allen Brain Observatory dataset. They empirically demonstrated that the information gap is effectively zero in this dataset (validating their theoretical prediction for single-context designs). This powerfully illustrates why existing data is insufficient and why their proposed multi-context design is necessary.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Why is it not sufficient to seek two stimulus ensembles that produce the largest discrepancy in estimates produced by the two models?  And how do the results depend on the design and training of the deep neural network decoders that are used to obtain likeilihoods or posteriors from the neural population?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper is built on the direct comparison of two models (likelihood encoding vs. posterior encoding), but there are other proposals in the literature as to how prior probabilities might be embedded in neural systems.  In particular, Ganguli & Simoncelli (2010/2014) propose that inhomogeneous populations of tuning curves encodes the prior, the spiking responses form a likelihood, and a weighted nonlinear decoder can approximate Bayesian estimates.  There's reasonable experimental support for these components, but it's not clear how this formulation would be categorized in the context of the authors' proposed experimental test.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Reviewer 1gnw had concerns about mixed coding models (e.g., Ganguli & Simoncelli). The authors addressed these concerns by showing these yield a distinct $\\Delta_{info} \\approx 0$ signature, allowing them to be analytically distinguished from pure hypotheses.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The authors' formulation relies on a highly simplified description of how an organism (human or otherwise) adapts to a sensory environment. In particular, they assume the posterior observer is aware of the true prior, and is able to use it properly for inference, which seems inconsistent with the large literature on adaptation.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewer 1gnw raised a substantive concern that biological sensory adaptation (e.g., gain changes for efficiency) might be conflated with posterior modulation, potentially violating the \"steady-state\" assumptions. While the authors argue that well-trained steady states allow for separation, this remains a significant experimental challenge.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In describing prior literature, the paper should make mention of work on optimal stimulus design for estimating perceptual discrimination thresholds [eg: Quest (watson/pelli 1983), Pest (Medigan 1987), Information-theoretic stimulus optimization for neurophysiology (Lewi etal 2006/2009), Quest+ (Watson 2017)]. Perhaps more relevant, work by Machens et al 2005 adaptively sought a stimulus ensemble for which a neural population (grasshopper auditory receptors) provided an optimally efficient code.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Using KL-divergence and decoding performance is pretty common in modelling in neuroscience, so I don't think using it for a specific problem could be considered a huge contribution.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "the paper lacks empirical results. There are multiple public data sets that actually contain gratings with different orientation and contrasts, for example Allen Brain observatory visual coding Neuropixel data set( https://portal.brain-map.org/circuits-behavior/visual-coding-neuropixels). So I think testing the practicality of the approach is feasible for the authors.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "In the revision, the authors analyzed the Allen Brain Observatory dataset. They empirically demonstrated that the information gap is effectively zero in this dataset (validating their theoretical prediction for single-context designs). This powerfully illustrates why existing data is insufficient and why their proposed multi-context design is necessary.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "the method relies on a lot of assumptions, and most importantly optimality of the neual code. There are multiple studies showing that the code is not perfectly optimal, including those referenced in the paper, e.g Haefner, et al, Neuron 2016 in which they explained a Bayesian approach that models the bias toward early observations.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Reviewers UTZ6 and JDGu both talked about sub-optimal observers. The authors added a procedure (Appendix A.5) to incorporate subject-specific biased priors inferred from psychometrics, making the framework robust to non-ideal behaviour.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I can't see how this approach could give a practical solution to that.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 2056,
+  "prompt_tokens": 3161,
+  "total_tokens": 5217,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 0,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.001010947,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.001010947,
+   "upstream_inference_prompt_cost": 0.000439379,
+   "upstream_inference_completions_cost": 0.000571568
+  }
+ }
+}

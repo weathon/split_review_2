@@ -1,0 +1,102 @@
+{
+ "paper_id": "8J3GTeQmwl",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "It is confused whether $v_i$ in Line 97 is a typo, since it is unusual for a node label to be a random variable. In addition, if $v_i$ is intended to be $\\mu_i$, then $p_{ij}$ would be random, see my Questions 1 and 2.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It is unusual that the paper does not impose any assumptions on the graphon function. It is unclear what role the graphon function plays in their framework.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "(5) The role of the graphon function requires further clarification.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The proofs need to be written more rigorously. See my Question 2, 5.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "(2) There is a theoretical gap, and a more rigorous proof is needed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I could not follow the theoretical justification precisely, but I get the intuition behind it which is that the training and test data are independent of each other. Therefore, it doesn't change the distribution of the edge probabilities. It is worthwhile to note that this is valid only when the presence or absence of an edge is independent of that of other edges.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "After reviewing the discussion-phase comments, I find that most of the reviewers\u2019 concerns have been adequately addressed, and the overall evaluation of the submission is generally positive.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "While the paper tests networks up to approximately 2,600 nodes, many real-world networks contain tens or hundreds of thousands of nodes, yet no discussion addresses computational or memory requirements at such scales. I understand to some extent because the number of pairs for increases quadratically with respect to the number of nodes. But it is nicer to discuss a solution to scale up the method.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "(3) Scalability remains a concern.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Scope and generality. The method applies specifically to graphon models and depends on smoothness and exchangeability assumptions. It is unclear how the proposed theoretical framework or random-imputation idea would extend to broader classes of network models (e.g., latent-space, temporal, or sparsified networks). Thus the paper\u2019s claims of general applicability thus seem overstated.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "(1) The scope of the work requires further extension.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Empirical impact. The experimental gains over ECV are modest. In Table 1, SAS and ICE show no meaningful improvement, suggesting that differences arise mainly from estimator robustness rather than from the proposed validation method. In real-world datasets, results are essentially tied on three of four networks. Only the drug\u2013disease network shows a visible advantage, which is not analyzed in depth. Without more in-depth analysis demonstrating the impact of ECV bias, it is difficult to conclude that the differences are practically important.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "(4) The empirical results lack sufficient in-depth analysis.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Efficiency gains. Although Figure 3 shows a computational speed-up relative to ECV, the paper does not provide an asymptotic complexity comparison. Moreover, the statistical efficiency results in Figure 5 are averaged across all graphon models and may be dominated by the weaker performance of NS and USVT, making it hard to assess whether the gains are consistent or meaningful across settings.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "(3) Scalability remains a concern.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "This work assumes the data comes from a graphon and the goal is to assess graphon-based estimators. However, would such a method be extended beyond this assumption? Discussion about the limitations of applicability would be a nice addition to the paper.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "(1) The scope of the work requires further extension.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Additional discussion on the order complexity of the method vs the baselines would strengthen the paper.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "(3) Scalability remains a concern.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 1170,
+  "prompt_tokens": 1597,
+  "total_tokens": 2767,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 0,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.000547243,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.000547243,
+   "upstream_inference_prompt_cost": 0.000221983,
+   "upstream_inference_completions_cost": 0.00032526
+  }
+ }
+}

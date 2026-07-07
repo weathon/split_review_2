@@ -1,0 +1,109 @@
+{
+ "paper_id": "Yo7eG3lC3y",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "**Require dense scene annotations.** This is the major concern of the proposed evaluation metric which requires dense annotations of each assets (attributes, locations, etc). However, for some methods which generate entire scene in a single mesh (e.g., diffusion-based model), the proposed method cannot use tools to get those information. The results in Table 2 also validate this concern that, with textual reasoning on attributes and precise spatial information from rendering engine, the performance will drop significantly. Therefore, the usability of the proposed metric is quite limited.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The requirement for ground-truth scene graphs restricts utility to specific pipelines (like Holodeck), limiting broader application.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "- Simulator dependency: LEGO-EVAL assumes access to the scene graph and Unity backend. This may not be available in many real settings like photorealistic assets.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Simulator Dependency: The requirement for ground-truth scene graphs restricts utility to specific pipelines (like Holodeck), limiting broader application.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "- Scene limination: LEGO-BENCH is limited to indoor scenes. Broader or more varied data would strengthen claims.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "- Failure analysis: It's unclear which constraint types cause most errors for baselines.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Cost/Failure Analysis: Detailed cost tradeoffs and error breakdowns were provided.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The paper does not provide conclusive evidence (or even a brief discussion) to the claim that finer-grained text-scene alignment leads to real embodied gains. The paper does provide _preliminary_ evidence via the Holodeck refinement vignette (Fig. 7); however there\u2019s no \u201cdetect -> repair -> retrain\u201d loop or even a pointer to existing sim-to-real failures. A minimal downstream study (or stronger citations) would make the story much more convincing.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Downstream Evidence: Lack of empirical experiments demonstrating that this specific alignment improves downstream robot learning tasks.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "LEGO-Eval leans on several Unity-facing tools, so the comparison to image-only VLM judges risks being apples-to-oranges. Please add baselines that ingest similar structure (e.g., VLM + detector/scene-graph outputs, see weakness #2 and question #3 below) to show the lift truly comes from the proposed orchestration.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Unfair Baselines: The authors successfully added Grounding DINO, ConceptGraphs, and 3D-LLM baselines to prove LEGO-Eval's superiority.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The paper has a limited analysis of failure modes of VLM-as-judges. Figure\u20098 hints that VLM judges mostly hallucinate or misidentify objects, yet we never see how often that happens or how severe it is. Please tally the dominant error types (mis-identification, spatial mistakes, attribute mismatches) so we can tell whether cascading failures are the main culprit. If mis-identification dominates, test baselines that feed object detection outputs [1,2] or structured summaries from scene graph generators to see how much ground they recover. Likewise, benchmark 3D-language models (3D-LLM, Point-LLM) that already encode volumetric context. A quantitative breakdown plus these stronger baselines would clarify when LEGO-Eval is indispensable versus when richer perception priors nearly match it.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Cost/Failure Analysis: Detailed cost tradeoffs and error breakdowns were provided.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The paper introduces a new test set called LEGO-BENCH, but it only contains 130 instructions. This is a very small number, which might not be enough to prove the necessity of making such a benchmark. In fact, there are many indoor scene synthesis benchmarks and it is not even worthwhile to start a new language-instructure synthesis from scratch.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "the limited size of the benchmark.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In LEGO-BENCH, the scenes used to test the evaluator were created \"manually.\" This process is very slow, expensive, and hard to scale. Utilizing a sequence call of LLM APIs to generate, verify, and refine, seemed to be costly and super inefficient in generating a simple contraints scene from natural language.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The best results come from using \"GPT-4.1.\" The paper shows that performance drops significantly when using smaller or different models. This means the system's success isn't just its smart design but also its reliance on a very powerful (and expensive) \"brain\" that not everyone can access or afford. For example, does a 7B or 4B model good enough to generate good results based on the method proposed?",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Model Reliance: Authors rebutted that the framework works with open-weights models (Qwen), not just GPT-4.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Considering the downstream tasks, what can this method bring advantages to? e.g. robotic learning? navigation? gaming?  The dataset from \"manually collect instructions for 3D scene synthesis\" may not be super useful for other envs, tasks, game engines, simulations, e.t.c. In another language, the impact of this LEGO-BENCH is too small.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Downstream Evidence: Lack of empirical experiments demonstrating that this specific alignment improves downstream robot learning tasks.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 5748,
+  "prompt_tokens": 1637,
+  "total_tokens": 7385,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 4313,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 1536,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.001666588,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.001666588,
+   "upstream_inference_prompt_cost": 5.7148e-05,
+   "upstream_inference_completions_cost": 0.00160944
+  }
+ }
+}

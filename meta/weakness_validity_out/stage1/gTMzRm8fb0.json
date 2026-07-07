@@ -1,0 +1,130 @@
+{
+ "paper_id": "gTMzRm8fb0",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "The paper\u2019s academic context is weakened by placing related work in the appendix, and its scope is blurred between the ranking and re-ranking domains, leading to an incomplete set of comparative baselines. See details in Questions 2",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The theoretical proof is contingent on the optimal strategy $\\pi^{*}$, which is substituted by an approximate Reward Model $\\hat{r}$ in practice. While the paper claims robustness against bias in $\\hat{r}$, the inherent difficulty in training a truly optimal reward model means this approximation gap remains a potential bottleneck, limiting the performance ceiling achievable in the real world.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The overall reproducibility is a concern and the scalability experiments fails to demonstrate that other, more sophisticated single-stage solutions (beyond simple DNNs) cannot also achieve similar or superior scaling behavior.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The training process itself is complex and resource-heavy, The proposed method shifts complexity to the training stage, requiring a costly and intricate pipeline, especially for large-scale industry recommendation systems.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors provided hard production logs showing GoalRank is faster than the production multi-stage pipeline and has a significantly higher Model Flops Utilization, debunking the 'prohibitive cost' concern.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The architectural details and specific implementation of the generator model itself are not sufficiently elaborated, making it difficult to fully assess the proposed method's design choices and reproduce the results.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The monolithic generator is inherently less adaptable to new business objectives compared to the more modular M-G-E paradigm, which allows for quicker adjustments.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "While the authors proposed a 'fusion strategy' for online goal-switching, a major fundamental change in ranking philosophy might still require a more complex retraining than a modular evaluator swap.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Experimental Fairness: The experimental comparison between GoalRank and the G-E baselines raises fairness concerns. - The GoalRank framework relies heavily on a powerful, pre-trained Reward Model to provide its training signal. This reward model is functionally equivalent to an evaluator, albeit used offline. - For a fair comparison, the G-E and MG-E baselines should have been equipped with the exact same reward model to serve as their online evaluator. Without this, the observed performance lift of GoalRank may not stem from the superiority of its \"G-only\" architecture but rather from the fact that it was trained by a more powerful \"teacher\" (the reward model) than the evaluators used by the baselines.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors clarified that all baselines and GoalRank used the exact same frozen evaluator in both offline and online tests, ensuring the performance lift is architectural.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Positioning of the paper: The fundamental goal of both GoalRank and listwise learning to rank (LTR) is the same: to learn a function that can optimally order an entire list of items by considering the items collectively, rather than in isolation. What are the differences between them?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Practicality and Online Feasibility: While the paper demonstrates strong online performance, it omits a critical discussion of the training cost. The \"Group Construction\" step requires generating and evaluating multiple lists for every training sample, which implies a training cost that could be orders of magnitude higher than for the baseline models. This potentially prohibitive cost could severely limit the model's practical applicability in industrial settings that require frequent retraining.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors provided hard production logs showing GoalRank is faster than the production multi-stage pipeline and has a significantly higher Model Flops Utilization, debunking the 'prohibitive cost' concern.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited Adaptability: As a single generator model, it lacks the flexibility of an independent evaluator. When business objectives or optimization metrics change frequently, model adjustment costs are high, making it less adaptable than a two-stage architecture.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "While the authors proposed a 'fusion strategy' for online goal-switching, a major fundamental change in ranking philosophy might still require a more complex retraining than a modular evaluator swap.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Strong Dependence on Reward Model: The training process relies on a reward model trained based on user feedback. If the reward model is biased or noisy, it may lead to inaccurate reference strategies, affecting overall ranking quality.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "High Training and Resource Costs: GoalRank's core advantage comes from large-scale models and group optimization, but this also means higher computational resources and training costs, making it less friendly to small- to medium-scale application scenarios.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors provided hard production logs showing GoalRank is faster than the production multi-stage pipeline and has a significantly higher Model Flops Utilization, debunking the 'prohibitive cost' concern.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lack of Strong Baseline Comparisons: The lack of comparisons with baselines for solving large candidate ranking, such as Onerec and Tiger, makes the paper's experimental results less convincing.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "While RankMixer was added, some specific retrievers mentioned by Reviewer t9JT (Onerec/Tiger) were not compared directly, though the authors argued that list-wise re-ranking baselines were more task-compatible.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper's writing is confusing and difficult to understand.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 10686,
+  "prompt_tokens": 1572,
+  "total_tokens": 12258,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 9038,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00321216,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00321216,
+   "upstream_inference_prompt_cost": 0.00022008,
+   "upstream_inference_completions_cost": 0.00299208
+  }
+ }
+}

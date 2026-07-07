@@ -1,0 +1,88 @@
+{
+ "paper_id": "R0ZKcQlF2C",
+ "decision": "Reject",
+ "n_reviewers": 3,
+ "items": [
+  {
+   "weakness_text": "Major claims are not empirically justified. Many statements in Sections 1\u20133 are presented as facts without direct supporting evidence. For example, the claim that multi-model feedback \u201cmitigates bias\u201d is not demonstrated beyond intuition.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Reviewer Mg4w\u2019s concerns about unclear metric definitions, limited ablations, and insufficient evidence supporting claims about bias mitigation are addressed in part by formalizing fairness and clarifying single- vs. multi-model comparisons.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Experimental definitions are unclear or inconsistent. Key metrics such as fairness are vaguely defined in prose but not rigorously formalized in Section 4. In Table 2, fairness is said to represent \u201chow evenly the performance drop is distributed,\u201d but if so, the original dataset should always be 100% fair by definition, which contradicts reported values (e.g., 84.8 or 82.9). I could not understand what a fairness value of 85 actually means.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Reviewer Mg4w\u2019s concerns about unclear metric definitions, limited ablations, and insufficient evidence supporting claims about bias mitigation are addressed in part by formalizing fairness and clarifying single- vs. multi-model comparisons.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Evaluation is incomplete. There is no ablation for critical design choices (e.g., the number of sampled models, verifier quality, or extraction accuracy). Moreover, the paper lacks qualitative analysis of failure cases until very late (Figure 2), and even there the discussion remains superficial.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper's core motivation is to reduce data contamination's impact on benchmark validity, yet the evaluation metrics do not directly demonstrate reduced contamination or improved prediction of true model capabilities on unseen data by the four metrics (Difficulty, Separability, Fairness, Alignment). The paper needs real-world data validation such as temporal splits or naturally occurring unseen data. For example, GitHub PRs after model training cutoffs provide natural test cases for SWE-bench contamination evaluation (if there is any). The evaluation should test whether ArenaBencher augmentation on augmented SWE-bench better predicts performance on post-cutoff PRs compared to other baselines. Without this validation, it remains unclear whether ArenaBencher actually solves data contamination or merely creates harder variants.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewer 1g77\u2019s concerns about the lack of direct evidence that ArenaBencher mitigates contamination, and the absence of strong comparative baselines, remain largely unresolved. While the rebuttal provides conceptual clarification and internal comparisons, empirical validation on truly unseen or post-cutoff data is still missing.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper provides no comparative evaluation with baseline methods, making it impossible to assess how good the proposed method is. Two critical types of comparisons are missing. First, the paper does not compare multi-model feedback against single-model augmentation to establish cost-effectiveness, leaving unclear whether sampling multiple models provides proportional improvement over using just one model given the additional API costs. Second, there is no comparison with other multi-model collaboration approaches or simpler augmentation methods such as paraphrasing or rule-based perturbations.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewer 1g77\u2019s concerns about the lack of direct evidence that ArenaBencher mitigates contamination, and the absence of strong comparative baselines, remain largely unresolved.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I think the framework lacks a mechanism to balance the competing goals of difficulty and separability. The results in Table 2 also partly show this. The current selection mechanism, which selects candidates with the highest aggregated loss, may favor test cases that are simply too hard for all models, causing their scores to cluster near zero and reducing the benchmark's ability to distinguish between them. A truly discriminative benchmark should maximize the variance in performance across models.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewer gCrr\u2019s concerns regarding the difficulty\u2013separability trade-off, justification for subsampled multi-model feedback, dependence on a single proprietary model (GPT-4), and computational cost are partially addressed through theoretical explanations, ablations, and human validation. However, explicit mechanisms for balancing separability and difficulty and stronger robustness analysis of the judge remain open.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The design choice of sampling $m = \\lceil\\sqrt{K}\\rceil$ models for feedback should be better justified. Although the paper cites \"classical ensemble heuristics\" from Random Forests and XGBoost, ArenaBencher's objective is different. There is no guarantee that a heuristic designed for decorrelating learners by subsampling features would be optimal for estimating a population statistic by subsampling models.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewer gCrr\u2019s concerns regarding the difficulty\u2013separability trade-off, justification for subsampled multi-model feedback, dependence on a single proprietary model (GPT-4), and computational cost are partially addressed through theoretical explanations, ablations, and human validation. However, explicit mechanisms for balancing separability and difficulty and stronger robustness analysis of the judge remain open.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The entire framework is dependent on a single proprietary model (GPT-4). The authors commendably include a failure case analysis for the generator (Figure 2), but do not discuss or analyze the robustness of the verifier/judge. A systematic bias or blind spot in the judge model could silently poison the entire evolved benchmark.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewer gCrr\u2019s concerns regarding the difficulty\u2013separability trade-off, justification for subsampled multi-model feedback, dependence on a single proprietary model (GPT-4), and computational cost are partially addressed through theoretical explanations, ablations, and human validation. However, explicit mechanisms for balancing separability and difficulty and stronger robustness analysis of the judge remain open.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 9490,
+  "prompt_tokens": 1779,
+  "total_tokens": 11269,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 8065,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 1024,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.002742612,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.002742612,
+   "upstream_inference_prompt_cost": 0.000132862,
+   "upstream_inference_completions_cost": 0.00260975
+  }
+ }
+}

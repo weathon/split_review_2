@@ -1,0 +1,130 @@
+{
+ "paper_id": "IHyY6vdYZw",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "While the reported gains are consistent (e.g., +5.9 points for InternVL2.5-78B), the final performance often falls short of what has been achieved by other contemporary methods that focus on improving the policy model itself through advanced training techniques.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "the approach in this paper is purely an inference-time strategy. While it successfully lifts the performance of existing models, it does not fundamentally enhance the models' intrinsic reasoning capabilities. The resulting performance, while improved, does not appear to push the state-of-the-art boundary as significantly as these training-focused methods.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Best-of-N not as strong as training the underlying model (DRVz)",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The Best-of-N strategy is notoriously expensive. Using BoN with N=8, as is the default in this paper, multiplies the inference cost (both latency and compute) by at least a factor of 8, plus the overhead of running the VisualPRM critic. This makes the method impractical for many real-world applications. While the authors demonstrate performance scaling up to N=128, they do not provide a thorough discussion on the cost-performance trade-off. A more complete analysis would be necessary to assess the practical viability of this approach. The reported performance gains, while notable, may not be sufficient to justify such a substantial increase in inference cost for many use cases.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Best-of-N is expensive (Ppnx, DRVz)",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Potential generator-bias in labels: Process rewards are derived from continuations sampled with InternVL-2.5 models. This may bias the PRM toward InternVL-style reasoning and limit transfer to other families (e.g., GPT-5, Qwen-VL).",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Potential bias towards InternVL-style reasoning. (h3nV, edvQ)",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "MC estimation only: The paper uses MC to estimate expected accuracy per step but does not compare with alternative credit assignment/judging strategies (e.g., MCTS, LLM-as-a-Judge).",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "No comparison with alternative credit assignment strategies or other critic strategies (Ppnx, h3nV, edvQ)",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Model size choice and scaling law: VisualPRM is fixed at 8B; the paper lacks justification for this size and a scaling curve (e.g., 1B/3B/8B/14B) to reveal accuracy\u2013latency\u2013cost trade-offs.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Label quality & construction pipeline clarity. The Monte-Carlo step-correctness (`Eq. (2)`) relies on continuations sampled from an unspecified model $M$; this risks systematic bias/noise if $M$ shares failure modes with the policy models later evaluated. In addition, merging solutions to a maximum of 12 steps may distort error localization and the temporal dynamics of \u201cfirst error vs. downstream errors.\u201d Please quantify label noise (e.g., step-level inter-rater agreement on a subset), report sensitivity to the number of sampled continuations, and analyze the effect of step-merging on PRM accuracy.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Fairness of comparisons. Please clarify whether the reported gains in `Tab.2` are measured only against each policy model\u2019s base (\u201cPass@1\u201d) or also against strong critic baselines. To more comprehensively validate the effectiveness of the proposed approach, include outcome-based reward (ORM) and additional PRM baselines under identical Best-of-N settings (same candidate pool, N, decoding, and compute). Also expand `Tab.3` with more PRM variants and report matched-compute results.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Generalization beyond the current suite. Beyond the seven benchmarks used (six math, one multidisciplinary), consider evaluating on more general-purpose multimodal benchmarks and on broader text-only reasoning benchmarks to substantiate cross-domain robustness.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited technical novelty; strengthen the case for multimodality. The paper\u2019s primary contributions appear to be `VISUALPRM400K` and `VisualProcessBench`, while methodological novelty is modest. To demonstrate that the *multimodal* aspect is indispensable (rather than a text-dominant signal), please add modality ablations and analyses showing performance drops when visual evidence is removed or corrupted. Such results would clarify the unique value of multimodal supervision/assessment relative to single-modal PRMs.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "PRMs are well studied in the language modeling space. This work repurposes those studies and algorithms to the multimodal space with limited algorithmic novelty.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "An automated Monte Carlo sampling-based pipeline is used to generate the PRM400k dataset. There are no discussions on the quality of this dataset and alignment with human judgement. How the authors ensure incorrect demonstrations are filtered out and how this could affect the trained PRM\u2019s abilities as a critic are not discussed. 10% of the reasoning steps are negative demonstrations. Effect of PRM modeling with more balanced positive and negative demonstrations, using weaker models and models from other series to introduce diverse thinking styles is not explored.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The task categories in VisualProcessBench are mostly centered around math and logic. Extensibility of this methodology for other vision applications like chart, table, GUI reasoning among others will be helpful.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While PRM is shown to outperform other Best-of-N strategies, a discussion about latency and throughput tradeoffs compared to other light-weight strategies can strengthen the claim.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 6165,
+  "prompt_tokens": 1620,
+  "total_tokens": 7785,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 4458,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 1536,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00163849056,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00163849056,
+   "upstream_inference_prompt_cost": 5.038656e-05,
+   "upstream_inference_completions_cost": 0.001588104
+  }
+ }
+}

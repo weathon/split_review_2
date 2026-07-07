@@ -1,0 +1,130 @@
+{
+ "paper_id": "XHzrBDzKaX",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "While a parametric generator and \"controllable difficulty\" design are introduced, the work lacks explicit verification that these difficulty gradients align with human cognitive standards\u2014undermining the benchmark\u2019s validity for mapping model performance to human-like visual reasoning.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Though formats like \"decomposed multiple choice\" reduce random guessing, they raise demands on models\u2019 language logic. Subtle wording differences may cause errors from language misunderstanding (not poor visual reasoning), distorting assessments of true visual capabilities.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "it is unclear how much the observed failures reflect limitations of language-mediated testing rather than fundamental visual reasoning deficits.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The dataset  lacks detailed specs for each type\u2019s sample size and clear evaluation criteria\u2014this ambiguity hurts result reproducibility and makes assessing sample statistical sufficiency difficult.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The discussion of reasoning lacks connection to existing cognitive or formal reasoning theories. This reduces the conceptual depth of the argument.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Dataset statistics and evaluation setup could be more transparent\u2014particularly regarding sample sizes per task, statistical significance, and model parameterization.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Providing case studies that how state-of-the-art VLMs try to solve these tasks might bring more insight into the field.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Incremental over existing works. The main idea that MLLMs struggle with spatial and perceptual reasoning is consistent with plenty of prior studies [1\u20134]. Authors claimed it is the \"first benchmark that grounds MLLM assessment directly to human cognitive factors\". The paper does not provide deeper diagnostic insight or a new analytical perspective in my opinion.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The main concern is that the paper largely reinforces what is already well established... the work is seen as more of a reformatting and aggregation of existing ideas rather than a conceptual advance.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited psychometric validation. Since FRCT assumes factor independence, validating whether these factors transfer meaningfully to MLLMs (e.g., internal consistency or item-response correlation) is essential but missing.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "No human baseline under identical protocol. Without re-collected human scores on the digitized tests, the paper\u2019s claim of \u201chuman-level gap\u201d is qualitative.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Possible data contamination and licensing concerns. FRCT items are not guaranteed to be public domain. The paper should clarify licensing or use only synthetic items.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Overemphasis on reformatting. The benchmark is technically solid but largely an infrastructure contribution. The analysis section should provide more interpretation of why models fail: whether failures stem from vision backbone resolution limits or misalignment between textual and spatial representations.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper's framing of MLLM failure in \"human-like visual cognition\" is weakened by the lack of a contemporary human baseline. The authors compare MLLM performance on a new digital protocol to historical norms from a paper-and-pencil task, which is an invalid comparison due to protocol changes (e.g., digitization, no time pressure). While acknowledged in Appendix C, this is a significant limitation. To substantiate claims about a \"human-like\" gap, the authors must establish a human \"ceiling\" by collecting baseline data using the identical VISFACTOR protocol given to the models.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper fails to sufficiently differentiate VISFACTOR from the large body of existing work on abstract visual reasoning. The authors should provide a comprehensive comparison to benchmarks like ConceptARC, MaRs-VQA, and various Bongard Problem datasets. This comparison should articulate the unique cognitive abilities or reasoning types that VISFACTOR isolates which are not already covered by prior work, thus justifying its specific contribution.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "The main concern is that the paper largely reinforces what is already well established... the work is seen as more of a reformatting and aggregation of existing ideas rather than a conceptual advance.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "A concern is the benchmark's potential longevity. The authors do not include results from the most recent, publicly available SOTA models (e.g., GPT-5, Gemini 2.5 Pro). It is possible these models already perform at or near the human ceiling, which would render the benchmark \"solved\" and limit its utility for measuring future progress. The authors should test the strongest available models to demonstrate that VISFACTOR remains a challenging task and that its findings of MLLM \"failure\" are still relevant.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "AC and reviewers concern the practical impact and longevity of the benchmark... It is not clear how widely it will be adopted or how much it will influence model development beyond confirming known weaknesses.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 8501,
+  "prompt_tokens": 1691,
+  "total_tokens": 10192,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 6962,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00261702,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00261702,
+   "upstream_inference_prompt_cost": 0.00023674,
+   "upstream_inference_completions_cost": 0.00238028
+  }
+ }
+}

@@ -1,0 +1,200 @@
+{
+ "paper_id": "SkmkGKEZ1U",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "There are too many drawbacks in this paper. In general, this submission is more like a blog post instead of a rigorous paper as it lacks of enough and solid experiments and evaluations to demonstrate its claims.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Multiple reviewers remarked that the paper reads more like a \"blog post\" than a scientific study.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Lack of Novelty: LLM + CAS could be viewed as part of Tool-use LLM research. The proposed idea is not novel.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewers questioned the scientific novelty of the work.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Insufficient rigor and experimental substance: The \u201cevaluation\u201d consists of two main case studies plus ~\u201c40\u201350 easier problems,\u201d but there are no well-defined benchmarks, success metrics, or failure analyses (rates of correct/incorrect splits, wall-clock, query counts, sensitivity to prompts, comparisons to baselines like hand-crafted heuristics or SMT-based pipelines, etc.). As is, this reads more like a prototype report/blogpost than an ICLR-level empirical study.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The most critical deficiency identified by all reviewers is the absence of rigorous evaluation.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Underspecified method details: Key pieces are missing or skeletal. For example, the \u201cstructured prompt\u201d is left with placeholders (\u201cdescribe the structure of the prompt\u201d), and the code snippet for Resolve is fragmentary; the search over constants C is a coarse grid without justification or sensitivity analysis. This makes the approach hard to reproduce or evaluate scientifically.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Key implementation details, such as the specific prompting strategies and the \"elaborate Mathematica code\" central to the contribution, were underspecified.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Heavy reliance on closed-source Mathematica without proof objects: While Resolve is powerful, the paper acknowledges there is no proof term and asks the reader to trust a closed system; this undermines the claim of \u201crigorous verification,\u201d especially for research-level math. No attempt is made to cross-check with open tools (e.g. SageMath) on a subset, or to export certificates.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Reproducibility & accessibility concerns: Running the system requires Mathematica and a frontier LLM API, making reproduction costly; even the authors\u2019 ethics section notes access costs. There is a website, but that can\u2019t substitute for open artifacts or independent verification.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Scope creep vs. precise problem definition: The paper oscillates between \u201casymptotic inequalities\u201d and the specific case study. I could feel the motivation of this paper: making a true AI4Math tool or project to better help professional mathematicians instead of some fuzzy LLMs that could only do math questions. But there is no crisp task definition, no sanity check for the motivation, and no quantitative experiments to show the helpfulness and effectiveness. This vagueness makes it hard to judge whether this is something scientifically helpful or just some course project.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The most critical deficiency identified by all reviewers is the absence of rigorous evaluation.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Line 86: \u201c(** describe the structure of the prompt**)\u201d... This is unprofessional at best.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The text contains unprofessional placeholders such as \"(** describe the structure of the prompt**)\", indicating the paper was not finished prior to submission.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Line 91: All the mentioned solvers need citations, as well as the Mathematica Resolve function - due to its central role in your system.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Line 100: Fig.1 is mentioned initially on page 2 but appears on page 4. Why?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Line 101 (and multiple others): \u201co-forge.com\u201d. At the top right corner of the front page of this website it clearly states: Created by Vijay Ganesh Ayush Khaitan Violating the ICLR guidelines regarding anonymity.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The submission violated ICLR's double-blind reviewing policy. The paper repeatedly references a project website (\"o-forge.com\") which explicitly listed the authors' names and affiliations during the review period. The authors acknowledged this oversight in their response.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Regarding the website itself, while I liked the UI and readily available examples, it sometimes returns weird results. For example, Example Series 1 returns a summary that contains a single word: \u201cThe\u201d. I ran it a few times to make sure it\u2019s not some random LLM aberration. Other times the output shows a Python error stack trace (\u201cExecution Failed\u201d). Seems underbaked and the code is unstable.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Line 109,113,119 (and others): Citations. You\u2019re mentioning Prof. Tao many, many times - but he is a prolific mathematician. Point to the specific works you use.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Line 123: While I personally agree with this claim on (most) interesting series bounds, it needs to be quantified (benchmark vs. other methods), or at least supported by multiple examples from the literature.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The most critical deficiency identified by all reviewers is the absence of rigorous evaluation.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Line 127: The novelty claim is unclear to me. It seems like an engineering project - implementing a (good) idea by Prof. Tao. While I agree that such an online tool can be useful for mathematicians around the world - and would like to encourage you to improve it and fix the bugs - the system does not constitute *scientific* innovation done by you. The generate (via LLM) -> verify (via CAS) approach was done in multiple projects (though not specifically in your use case) - so the core approach is also not novel on its own.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewers questioned the scientific novelty of the work.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "If the strongest results are the proof of the specific use-case (which to my understanding is indeed novel, but I don\u2019t know enough to say how impactful this singular result is), then perhaps consider submitting to a mathematical / experimental math journal?",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewers questioned the scientific novelty of the work.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Line 295: I\u2019m a supporter of readable papers and not-too-formal language, but this is too much. The paper is not your blogpost.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Multiple reviewers remarked that the paper reads more like a \"blog post\" than a scientific study.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Line 348: What do you mean \u201caround 40-50\u201d??",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The paper mentions testing the tool on \"40-50 easier problems\" but fails to present any data, success rates, or analysis regarding these tests within the paper itself.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Section 5: You need concrete statistics for all the claims here. Currently it\u2019s anecdotal.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The most critical deficiency identified by all reviewers is the absence of rigorous evaluation.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Section 6: There are multiple other works in AI for Math that apply combinations of CAS/code generation + LLMs. The current overview is quite limited.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper reads more like a concept demo or blog post than a rigorous scientific study, lacking detailed quantitative and ablation studies with proper baselines. Testing on self-curated \"suite of around 40-50 easier problems\" and a few case studies falls far short of the evaluation expected of a research paper.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The most critical deficiency identified by all reviewers is the absence of rigorous evaluation.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Hybrid symbolic\u2013neural approaches (e.g., Lean+LLM, AlphaProof, Autoformalization pipelines; see https://arxiv.org/abs/2310.17807, https://ieeexplore.ieee.org/document/10356332) have already explored the same broader paradigm with planning, code generation, formal proof verification, not just heuristic checking. The authors present O-Forge as \u201crevolutionary,\u201d yet it is essentially prompting an LLM for suggestions and sending them to a formal tool - Mathematica.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewers questioned the scientific novelty of the work.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Crucial implementation details are omitted. How exactly is the LLM prompted? How is the \u201cin-context feedback\u201d loop structured? How is the decomposition quality evaluated or improved iteratively? Are there failure modes where the LLM produces incorrect decompositions, and how are these handled?",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Key implementation details, such as the specific prompting strategies and the \"elaborate Mathematica code\" central to the contribution, were underspecified.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "This paper does not appear to contrain any evidence as to its effectiveness. Section 5 begins \"In addition to the above-mentioned case study of hard problems, we tested our tools on an extensive suite of around 40-50 easier problems, in order to study how well it performs on a diverse set of inequalities,\" but there is no mention of these \"hard problems\" anywhere in the paper. Additionally, for these easy problems, the paper presents three high level takeaways but no actual evidence.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "The most critical deficiency identified by all reviewers is the absence of rigorous evaluation.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 2849,
+  "prompt_tokens": 2517,
+  "total_tokens": 5366,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 0,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.001141885,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.001141885,
+   "upstream_inference_prompt_cost": 0.000349863,
+   "upstream_inference_completions_cost": 0.000792022
+  }
+ }
+}

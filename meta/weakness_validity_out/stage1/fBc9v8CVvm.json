@@ -1,0 +1,130 @@
+{
+ "paper_id": "fBc9v8CVvm",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 3,
+ "items": [
+  {
+   "weakness_text": "This method is similar to existing distillation methods like SiD, DMD and VSD, for example, DMD requires a trained diffusion teacher and a online-training generator, corresponding to the $t\\in [0,1]$ part of TwinFlow; the auxiliary fake score network corresponds to the $t\\in[-1,0]$ part. The authors should provide a detailed comparison in their paper.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The **unfair and lack of comparison** and **LoRA training** are addressed. During rebuttal, the authors provide experiments on replace the BLIP3 dataset, full model training, training with different LoRA configuration, and loss ablation. Also, they provide additional comparison with previous method on efficiency, effectiveness and computational cost.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Since this approach integrate the function of the three models in DMD into one model, there is potential performance degration since the total model capacity is limited.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The **unfair and lack of comparison** and **LoRA training** are addressed. During rebuttal, the authors provide experiments on replace the BLIP3 dataset, full model training, training with different LoRA configuration, and loss ablation. Also, they provide additional comparison with previous method on efficiency, effectiveness and computational cost.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Though with better performance, the forward and backward pass of TwinFlow seems much more complicated than consistency training, the authors are expected to provide the theoretical and practical training cost comparison (also see questions).",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The **unfair and lack of comparison** and **LoRA training** are addressed. During rebuttal, the authors provide experiments on replace the BLIP3 dataset, full model training, training with different LoRA configuration, and loss ablation. Also, they provide additional comparison with previous method on efficiency, effectiveness and computational cost.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The paper does not fully explain why the negative time trajectory is required and why the rectification component ultimately converges to a single step solution. If this was not investigated but only empirically observed, this needs to be clearly pointed out",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The strength of the method could be better explained in more simple settings such as CIFAR10 or Image1K.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The **unfair and lack of comparison** and **LoRA training** are addressed. During rebuttal, the authors provide experiments on replace the BLIP3 dataset, full model training, training with different LoRA configuration, and loss ablation. Also, they provide additional comparison with previous method on efficiency, effectiveness and computational cost.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Almost all evaluations have been done on text-to-image benchmarks. This comes with additional complexity in the evaluation as e.g. diversity of images for the same text prompt multiple times (as pointed out by the authors in Table 2). While not explicitly mentioned in the main paper, the method seems to perform worse on other (simpler) benchmarks as e.g. Image-1K 256x256. In fact the 2 step FID of Twinflow trained for 801 epochs mentioned in the appendix (FID=2.05) is larger than the pure RCGM FID value after 424 epochs (FID=1.92, see https://github.com/LINs-lab/RCGM/blob/main/assets/paper.pdf).",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The **unfair and lack of comparison** and **LoRA training** are addressed. During rebuttal, the authors provide experiments on replace the BLIP3 dataset, full model training, training with different LoRA configuration, and loss ablation. Also, they provide additional comparison with previous method on efficiency, effectiveness and computational cost.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Qwen-Image-Lightning is 1 step leader on the DPG benchmark and should be marked like this in Table 2",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The **unfair and lack of comparison** and **LoRA training** are addressed. During rebuttal, the authors provide experiments on replace the BLIP3 dataset, full model training, training with different LoRA configuration, and loss ablation. Also, they provide additional comparison with previous method on efficiency, effectiveness and computational cost.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Qwen-Image-TwinFlow (and possibly also TwinFlow-0.6B and TwinFlow-1.6B, see question below) leverages a pretrained model that is fine-tuned. In this case the pretrained model somehow acts as a \"teacher\" adding stability to the fine-tuning i.e. as the fake data predictions. However, when training from scratch the optimization problem becomes significantly harder. Possible stability issues and their solutions are not discussed in the paper.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The **unfair and lack of comparison** and **LoRA training** are addressed. During rebuttal, the authors provide experiments on replace the BLIP3 dataset, full model training, training with different LoRA configuration, and loss ablation. Also, they provide additional comparison with previous method on efficiency, effectiveness and computational cost.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "In several parts of the paper, i.e. the methodology section, it is not always easy to follow the equations as variable names are not always defined or used in a consistent manner (see questions below)",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The **unclear writing** is addressed. The authors revise the paper and provide additional explanation during rebuttal.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Theoretical flaws. If I understand correctly, the paper trains a model with a single-timestep condition to handle generation at arbitrary steps. **However, such a model is no longer a score model, and using it in reverse KL to compute the gradient of logp is theoretically flawed**.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The **therotical flaws concern remains unsolved**. The definition of score models disagrees between Reviewer xzEE and the authors. AC confirms that the merits in this paper outweigh the theoritical defination disagreement.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "BLIP-3o-60K contains samples carefully generated using GenEval prompts, and training on BLIP-3o could yield very high GenEval scores. GenEval score is the primary metric used in this paper and highlighted in the abstract, which leads to an unfair comparison in this paper.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The **unfair and lack of comparison** and **LoRA training** are addressed. During rebuttal, the authors provide experiments on replace the BLIP3 dataset, full model training, training with different LoRA configuration, and loss ablation. Also, they provide additional comparison with previous method on efficiency, effectiveness and computational cost.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "I think the benefits of integrating the real score, fake score, and generator\u2014three models together\u2014have been overly claimed. Particularly in the Qwen 20B example cited by the authors, all models use LoRA. For the distillation by reverse KL method, integrating two LoRAs onto the same model backbone does not bring about notable memory costs. And the GAN loss is an additional benefit; we can directly remove it and still achieve high performance.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The **unfair and lack of comparison** and **LoRA training** are addressed. During rebuttal, the authors provide experiments on replace the BLIP3 dataset, full model training, training with different LoRA configuration, and loss ablation. Also, they provide additional comparison with previous method on efficiency, effectiveness and computational cost.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The combination of reverse KL and consistency-like RCGM is straightforward. Besides, similar combinations have been explored in sCM [a].",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The \"twin trajectory\" has been explored in FACM [b]. However, no discussion is found in the paper.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 6031,
+  "prompt_tokens": 1881,
+  "total_tokens": 7912,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 3893,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 1792,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.001751316,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.001751316,
+   "upstream_inference_prompt_cost": 6.2636e-05,
+   "upstream_inference_completions_cost": 0.00168868
+  }
+ }
+}

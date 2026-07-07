@@ -1,0 +1,158 @@
+{
+ "paper_id": "e26MPyczN9",
+ "decision": "Reject",
+ "n_reviewers": 5,
+ "items": [
+  {
+   "weakness_text": "I understand the ambition of this paper but the title seems too \"huge\". First of all, the claim of programmatic policies generalize better should be explained throughly and more work should be discussed and cited.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The primary concerns raised by multiple reviewers are, better OOD generalization of programmatic policies is not a claim but simply an experimental observation, what constitutes minor modifications to NNs, and the experimental evaluation is limited.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "the claim of programmatic policies generalize better should be explained throughly and more work should be discussed and cited.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The primary concerns raised by multiple reviewers are, better OOD generalization of programmatic policies is not a claim but simply an experimental observation, what constitutes minor modifications to NNs, and the experimental evaluation is limited.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "I am not fully convinced by the \"minor modifications\" as tweaking reward function or observation setting are injecting inductive bias, this is not a trivial change to learning of an neural network policy. Also, DSL is a perfect method to inject inductive bias, have you considered tweaking DSL and conduct some experiments?",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not sufficiently address the concern around what constitutes \u2018minor modification\u2019 to NN training, and some reviewers argue that changing the reward function provides another mechanism for injecting prior knowledge into training.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "From my understanding, programatic policies and neural policies are not contradict to each other and can be composed together, this is verified by previous works [1, 6]. Moreover, neural networks are specialized to have better perceptual generalization, yet programmatic policies are suitable for systematic generalization. I believe this aligns many of your research statement, it would be better to discuss this in your revised paper.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "While the paper's re-evaluation of prior work is valuable, its main positive claim feels limited. The paper argues that the _true_ advantage of programmatic policies lies in their _expressivity_ for tasks requiring complex algorithmic structures (like memory or data structures), which common neural network architectures lack . In my view, this is a well-understood distinction, and the \"SparseMaze\" proof-of-concept serves more to confirm this known limitation of standard recurrent networks than to provide a new, surprising insight. It would be similarly straightforward to design an environment where neural network policies generalize better (e.g., an environment based on classifying handwritten digits, where the task is perceptual and the underlying \"program\" is unknown). The paper wants to guide future evaluation of OOD generalization in RL. However, the main take-away message seems to be \"programmatic policies are better when the task requires an explicit algorithm,\" which is not a particularly novel conclusion. For this reason, the contribution feels limited, which is why I vote for a weak reject.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Considering NNs are universal function approximators, the fact that a NN can be found to perform as well as the programmatic policy on generalization (or any metric) is well-understood and the paper does not expand our understanding of this phenomenon.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "I am not sure I completely agree with the claim that previously reported advantages of programmatic policies are only due to experimental confounders. I am not sure any of the previous papers claimed that programmatic policies would always generalize better than neural one, only that they can provide a favorable inductive bias for certain tasks.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The reviewers concerns are two-fold, (i) existing work has not made this claim, only observed generalization in some experiments, and (ii) the fact that modifying the NN or its training is likely to provide better OOD generalization is know and not contested by existing work.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "I find the experiment in Sec. 5 to be too extreme the other way around: while PPO with a GRU seems to fail to learn a good policy for these Maze problems it does not constitute imo conclusive evidence that neural policies cannot generalize to these type of mazes as stated around line 463. It could very well that the neural architecture was ill-chose or the training procedure could be improved. Especially since the programmatic policies on the other side are trained with a completely different algorithm leveraging much large models.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The limited experimental evaluation is justified by the authors as necessary since these are the environments used in previous work. However, reviewers assert that additional environments would strengthen the paper\u2019s claims.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "some of the claim in this paper are perhaps a bit too strong (Sec. 4) are lack supporting evidence (Sec. 5). I would be willing to revise my score if the authors can modulate a bit these claims or provide for instance more evidence on why they believe that neural policies will never be able to generalize to problems in Sec. 5.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The limited experimental evaluation is justified by the authors as necessary since these are the environments used in previous work. However, reviewers assert that additional environments would strengthen the paper\u2019s claims.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In section 5, the author tries to use expressivity and discoverability to define the existence of a generalized solution and a well-developed algorithm for searching the generalized solution. A neural net is a universal function approximator. It is not trivial for a program to have a more generalized solution. Discoverability may be the key advantage for the programmatic policies.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Considering NNs are universal function approximators, the fact that a NN can be found to perform as well as the programmatic policy on generalization (or any metric) is well-understood and the paper does not expand our understanding of this phenomenon.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The advantage of using a data structure is limited to navigation problems like KAREL. For the control problems like TORCS and PARKING, which data structure is needed to solve these problems more generally?",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The paper discusses some aspects of the generalization. Clearly state each environment's focus on those kinds of generalization. For instance, the PARKING environment discussed the distribution shift generalization, and the KAREL environment discussed the input-scale generalization.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Liu et al. [1] compose programs in the KAREL environment to solve the tasks with h reward signal. The compositional generalization of policies is not discussed in the paper.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The claims are not defined and I believe they are tautology. From the abstract ' We argue that a representation enables OOD generalization if (i) the policy space it induces includes a generalizing policy ', I understand it as: our problem has a solution if there is a solution to our problem. Similarly, claim (ii) is trivial, 'if an algorithm can find a solution to our problem, our problem has a solution'. OOD generalization, which is the key metric of this paper is not defined.",
+   "reviewer_index": 4,
+   "ac_status": "unresolved",
+   "ac_evidence": "the absence of a definition of OOD generalization in the original version of this paper, and a disagreement about the appropriateness of the proposed definition.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Programmatic policies as presented in this paper are mostly non-Markovian, e.g. the programs for the TORCS can query past sensor states in e.g. peek(, -2). This could also be a confounding factor when comparing to Markovian DRL policies.",
+   "reviewer_index": 4,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Authors do not show any convergence curves which is problematic when claiming properties of trained policies.",
+   "reviewer_index": 4,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I don't understand why changing the reward function in the TORCS experiment can explain anything about generalization capabilities of DRL policies. By doing so, you simply changed the problem. In that case you could claim: there exist problems for which DRL policies can generalize as well as programmatic policies.",
+   "reviewer_index": 4,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not sufficiently address the concern around what constitutes \u2018minor modification\u2019 to NN training, and some reviewers argue that changing the reward function provides another mechanism for injecting prior knowledge into training.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I do not understand neither how the other experiments help support the claim that neural network generalize as well or better than programs! what if your training curves did not converge?",
+   "reviewer_index": 4,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Overall I am not convinced by the problem at hand, the claims, nor the experiments. Key confounding factors include: markovianity of policies (even though it is partially adressed in table 2), potential non-convergence of training, DDPG and PPO were never meant to train policies that generalize OOD so training algorithm choice is also a key confounding factor.",
+   "reviewer_index": 4,
+   "ac_status": "unresolved",
+   "ac_evidence": "The limited experimental evaluation is justified by the authors as necessary since these are the environments used in previous work. However, reviewers assert that additional environments would strengthen the paper\u2019s claims.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 16065,
+  "prompt_tokens": 2284,
+  "total_tokens": 18349,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 13855,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 2048,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.004588584,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.004588584,
+   "upstream_inference_prompt_cost": 9.0384e-05,
+   "upstream_inference_completions_cost": 0.0044982
+  }
+ }
+}

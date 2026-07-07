@@ -1,0 +1,137 @@
+{
+ "paper_id": "SpUXijnBEg",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "Inconsistency in Theorems and practical implementation: Proposition 1 establishes the gradient equivalence by defining $a^{\\text {target }}$ using the Q-gradient evaluated at the policy's output, $\\pi_\\theta(s)$. However, the paper then argues this is conceptually inconsistent and, in the final DOAL objective (Eq. 16), defines the target using the Q-gradient evaluated at the data action, $a$. While this change is key to decoupling, the original equivalence from Proposition 1 no longer strictly holds, leaving a gap in the theoretical justification for the final objective.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "While the authors added more experiments with more runs, which addressed the reviewers' concerns about the experiments (although partially), other concerns are not sufficiently addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper introduces the Batch-Normalizing Optimizer and the trust-region parameter $\\delta$ as a more stable replacement for the sensitive hyperparameter $\\alpha$ from the BRAC objective. Despite this, the final DOAL actor loss in Equation 15 still contains an $\\alpha$ parameter, which is described as a controller for the \"learning rate of actor\" and is copied from a prior work. This is confusing. It is unclear how this $\\alpha$ interacts with $\\delta$ and why it is still necessary if the optimization trade-off is now managed by the trust region. This ambiguity detracts from the otherwise clean narrative of simplifying hyperparameter tuning.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "While the authors added more experiments with more runs, which addressed the reviewers' concerns about the experiments (although partially), other concerns are not sufficiently addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In Table 1, some experimental results with D- still behind the vanilla algorithms.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "All reviewers pointed out that the experimental results are not satisfied, including the performance, number of runs, and scope.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Writing & clarity: The paper has noticeable grammatical issues, inconsistent notation, and several typos, which make the narrative harder to follow; The main results table is dense and difficult to scan, hindering quick cross-method comparisons across policy families and environments; consider adding per-method aggregates (e.g., mean/median across tasks) to improve readability.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "the manuscript still requires improvements in writing and clarity.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Shallow experimentation: The evaluation covers only 15 tasks total\u20146 from D4RL Adroit and 9 from OGBench. Moreover, results are averaged over just 4 seeds (D4RL) and 3 seeds (OGBench), which weakens statistical confidence and robustness of the findings.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "the conern of the shallow experimentation remains if I were the reviewer, especially w.r.t. the limited number of tasks.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "No compute analysis: A central claimed benefit is reduced computational cost by avoiding backpropagation through iterative diffusion/flow sampling chains, yet the paper provides no wall-clock or memory measurements to substantiate this. Even a simple per-epoch time or training-step latency comparison against BRAC-style training would clarify the practical value.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Missing ablations: There are no targeted ablations to disentangle contributions from (i) direct optimal-action targets, (ii) the Batch-Normalizing optimizer; the current analysis discusses hyperparameters but doesn't isolate causal impact on performance.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Novelty is mainly a reinterpretation plus a practical recipe. The equivalence that turns BRAC into target-matching is neat but technically light. Stronger differentiation from value-guided diffusion/flow, energy guidance, and behavior-regularized objectives would clarify what DOAL achieves beyond engineering convenience.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Value-quality dependence and limited uncertainty handling. DOAL targets rely on \u2207\ud835\udc4e\ud835\udc44 at data actions; there\u2019s no integrated uncertainty-aware step control (ensembles, variance-based scaling) for OOD safety, which matters in offline regimes.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "I think the discussion related to OOD is needed, as it matters in offline RL.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Benchmark scope and stability. While OGBench and Adroit are covered, Adroit volatility and late-training collapse are reported without a full diagnosis, weakening stability claims.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "To me, it's unprincipled to replace a\u2019 that which should be sampled from the policy with the dataset action a, the paper does not provide a solid justification for this change (cf. Prop. 1/Eq. 13). In addition, the derivation appears to hinge on an L2 BC loss\u2014how does the argument extend to other losses (e.g., log-likelihood, flow-matching, diffusion objectives)?",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "I have the same feeling with this reviewer on the point that replacing policy-sampled actions with dataset actions needs further discussion, while I do not find the authors' rebuttal sufficiently address this.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Results are not uniformly stronger. The claim that DOAL \u201cconsistently improves performance\u201d over strong baselines is only partially supported. For example, DTrigFlow is dramatically worse on cube\u2011single\u2011play, and DIQL is broadly weaker than IQL on many tasks.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "All reviewers pointed out that the experimental results are not satisfied, including the performance, number of runs, and scope.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Efficiency claims lack measurement. A central motivation is avoiding BPTT through iterative samplers, but there are no wall\u2011clock time, memory, or gradient\u2011call counts comparing DOAL to TrigFlowQL/FQL under matched hardware.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The observation of Max-Q sampling does not constitute a novel contribution. Prior work (e.g., Q-chunking) already formalizes that the candidate count N in Max-Q sampling implicitly sets the level of KL regularization between the induced policy and the proposal/sampling distribution. From this perspective, increasing N weakens the effective regularization and can degrade performance, so it is unsurprising that \u201cthe bigger N, the better\u201d does not hold. Please cite these results..",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Scope of value learners. Most experiments couple DOAL with IQL for a controlled study, but since BRAC\u2011style methods remain strong (e.g., ReBRAC in Table\u202f1). Is this policy extraction approach still improve on other value learners?",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 9655,
+  "prompt_tokens": 2073,
+  "total_tokens": 11728,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 9504,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00299362,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00299362,
+   "upstream_inference_prompt_cost": 0.00029022,
+   "upstream_inference_completions_cost": 0.0027034
+  }
+ }
+}

@@ -1,0 +1,193 @@
+{
+ "paper_id": "yBFXOZPESZ",
+ "decision": "Reject",
+ "n_reviewers": 5,
+ "items": [
+  {
+   "weakness_text": "The paper lacks thorough comparative analysis explaining why Ano outperforms Grams despite their symmetric designs. Since both methods decouple direction and magnitude but swap which component comes from momentum versus gradients, this core difference deserves deeper investigation. Section 5.2 on noise robustness would be the natural venue for this analysis.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "A notable concern was that the paper does not sufficiently explain why Ano outperforms Grams, despite their symmetric design choices. ... The authors provide a plausible mechanistic explanation (momentum-based magnitude causing overdamping under noise) and add additional synthetic experiments. This is one of the more successful rebuttals, as it directly engages with the algorithmic distinction and improves interpretability.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The anomalous behavior in Table 1\u2014where Grams improves from \u03c3=0 to \u03c3=0.01 before degrading at higher noise levels warrants explanation.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors provide a plausible mechanistic explanation (momentum-based magnitude causing overdamping under noise) and add additional synthetic experiments.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The noise robustness section itself feels underdeveloped; given that noisy gradient adaptation is central to Ano's motivation, additional experiments demonstrating robustness in synthetic noisy settings would substantially strengthen the claims.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors provide a plausible mechanistic explanation (momentum-based magnitude causing overdamping under noise) and add additional synthetic experiments.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "On the experimental side, Ano and Anolog often achieve leading performance but frequently exhibit higher variance than competitors across Tables 2, 3, 4, and 5. This higher variance partly offsets the improvements in point estimates, and confidence intervals often overlap with strong baselines.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Several reviewers noted that final performance often overlaps with baselines within confidence intervals, raising doubts about the significance of gains. Others pointed out higher variance in Ano's results and questioned whether improvements are systematic. ... While this response is reasonable, it is not entirely convincing.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "In the NLP task, Grams maintains competitive performance on GLUE despite its opposite design choice, which raises questions about whether the direction-magnitude assignment is truly the critical factor or whether other aspects of the algorithm matter more.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors provide a plausible mechanistic explanation (momentum-based magnitude causing overdamping under noise) and add additional synthetic experiments. This is one of the more successful rebuttals, as it directly engages with the algorithmic distinction and improves interpretability.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The RL experiments, while well motivated, suffer from a methodological limitation. Using only 100k-step HalfCheetah proxy runs for hyperparameter tuning biases the grid search toward larger learning rates, which may favor more aggressive optimizers like Ano while disadvantageing methods that stabilize with conservative settings. Since RL is where Ano's advantages are most compelling, extending these experiments to longer horizons with tuning conducted on representative scales would better justify the claimed benefits and limit concerns about unfair comparison.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Limited Experiment Scale: The experiments mainly focus on small-scale networks. The effectiveness of Ano on larger networks and more complex tasks is unknown. E.g., This paper should amplify the experiments on ImageNet for CV tasks, GPT-2 serious models on NLPs.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Multiple reviewers expressed concern that experiments are limited to relatively small-scale supervised tasks (CIFAR-100, GLUE) and that claims about robustness or long-horizon stability are not supported by large-scale CV/NLP or very long training runs. Some reviewers explicitly requested ImageNet, ViT, or LLM-scale experiments. ... This response may not fully satisfy reviewers who view robustness claims as implicitly broader.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Limited Practical Gains: In stable environments and with longer training times, Adam sometimes outperforms Ano. In more unstable RL settings, such as in the MuJoCo environment, the convergence curve of Ano is sometimes comparable to, or even worse than baseline.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The results were reported with final performance, such as test accuracy. It would be nice to quantify noise robustness analysis in Section 5.2 with proper indices. Also, I encourage the authors to add more qualitative results on noise robustness; the current analysis with final test accuracy looks not convincing.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Concerns included sensitivity to batch size and replay buffer size, interaction with normalization layers, artificiality of noise injection, and inconsistent bias correction in code. The authors respond thoroughly by adding hyperparameter sensitivity studies, clarifying compatibility with BN/LN, justifying noise injection via GNS, and correcting implementation inconsistencies with rerun experiments. These responses are concrete and credible, and they materially improve the paper\u2019s reliability.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "How can we expect or say that the loss landscape for the target task would be noisy and we should use a robust optimizer for the noisy landscape? Is it possible to quantify noisiness in a landscape, such as in a reinforcement learning setting? The authors inject noise into the gradient for training, but I think it is still an artificial setup and far from a practical scenario. Furthermore, the failure of existing methods such as Adam should be clearly demonstrated, not by final accuracy.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Concerns included sensitivity to batch size and replay buffer size, interaction with normalization layers, artificiality of noise injection, and inconsistent bias correction in code. The authors respond thoroughly by adding hyperparameter sensitivity studies, clarifying compatibility with BN/LN, justifying noise injection via GNS, and correcting implementation inconsistencies with rerun experiments. These responses are concrete and credible, and they materially improve the paper\u2019s reliability.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Experimental results are not solid enough. CIFAR-100 with ResNet-34, with 70% accuracy, is a weak baseline; I encourage performing ViT training with ImageNet. Similarly, GLUE with BERT is a standard but weak baseline for now.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Multiple reviewers expressed concern that experiments are limited to relatively small-scale supervised tasks (CIFAR-100, GLUE) and that claims about robustness or long-horizon stability are not supported by large-scale CV/NLP or very long training runs. ... This response may not fully satisfy reviewers who view robustness claims as implicitly broader.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Specifically, the convergence rate of O(k^{-1/4}) for the proposed method is slower than O(k^{-1/2}) of Adam, despite the gain in noise robustness. This limitation should be verified in large-scale experiments such as ImageNet or LLM, targeting long iterations for training.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "At Line 107, the authors use $v_k$ in the denominator, whereas Eq. 2 at Appendix C applies $v_{k-1}$ in the denominator, which is inconsistent.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors acknowledge that some assumptions are stronger than necessary and state that bounded gradients can be replaced by weaker moment conditions without changing results. They also correct mathematical inconsistencies, clarify algorithmic details, and rerun experiments affected by implementation errors. These issues are largely addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "lambda_k in Algorithm 1 should be explicitly specified.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors acknowledge that some assumptions are stronger than necessary and state that bounded gradients can be replaced by weaker moment conditions without changing results. They also correct mathematical inconsistencies, clarify algorithmic details, and rerun experiments affected by implementation errors. These issues are largely addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Writing should be improved. \u201cLanscapes\u201d \u2192 \u201cLandscapes\u201d in OpenReview title. \u201cG^2\u201d \u2192 \u201c\\tilde G^2\u201d at Line 775. \u201cEquation equation 5\u201d \u2192 \u201cEquation 5\u201d at Line 1060. Ensure consistency for the choice of \u201coptimiser\u201d or \u201coptimizer\u201d as well as \u201coptimisation\u201d or \u201coptimization\u201d \u201cnon-stationnary\u201d \u2192 \u201cnon-stationary\u201d \u201cenvironments. which\u201d \u2192 \u201cenvironments, which\u201d \u201clitterature\u201d \u2192 \u201cliterature\u201d Line 423-426: duplicate.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "For the source code, the authors apply v_hat correction for ano.py, whereas others such as anolog.py, anosqrt.py, and anoall.py do not apply v_hat correction. This practice requires explanation.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Concerns included sensitivity to batch size and replay buffer size, interaction with normalization layers, artificiality of noise injection, and inconsistent bias correction in code. The authors respond thoroughly by adding hyperparameter sensitivity studies, clarifying compatibility with BN/LN, justifying noise injection via GNS, and correcting implementation inconsistencies with rerun experiments. These responses are concrete and credible, and they materially improve the paper\u2019s reliability.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The theory is conducted in the standard smooth optimization analysis. This framework is known to very poorly describe practical neural network optimization - even convex theory has better agreement.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "My understanding is that the theory is now better-positioned and less overstated, but still remains largely disconnected from the main empirical motivation, leaving a lingering theory-practice gap.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Moreover, the theorem is actually much worse than would achieved by standard SGD. The statement that sign-based methods fundamentally cannot achieve this rate is highly suspicious. It is well-known that normalized gradient descent (even in many different norms) achieves the same convergence rate as SGD when combined with momentum (see e.g. https://arxiv.org/abs/2002.03305, https://arxiv.org/pdf/2502.02900). sign-sgd is simply normalized SGD in the Linf norm, it should converge as well.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors respond by reframing the role of theory, explicitly stating that it is not intended to motivate Ano nor to claim superiority over SGD, but rather to show that Ano is not worse than existing sign-based methods under standard assumptions. The particular response to bWeQ was excellent in my view, and it is a shame that they could not respond to it.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The authors claim many benefits of the algorithm in terms of difficult noise distributions in the gradients. It would be better if the theory actually illustrated these points.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The experiments look very detailed, but in almost all cases it seems like the final performance of Ano is within the error bars of the baseline.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Several reviewers noted that final performance often overlaps with baselines within confidence intervals, raising doubts about the significance of gains. ... While this response is reasonable, it is not entirely convincing.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "There is a noticeable theory-practice gap: the proof requires specific schedules (e.g., $\\eta_k\\propto k^{-3/4}$ and $\\beta_{1,k}=1-1/\\sqrt{k}$, whereas the practical defaults use a fixed $\\beta_1$ (Ano) or the logarithmic Anolog schedule, with limited analysis of how far these choices deviate from the theoretical ones.",
+   "reviewer_index": 4,
+   "ac_status": "unresolved",
+   "ac_evidence": "My understanding is that the theory is now better-positioned and less overstated, but still remains largely disconnected from the main empirical motivation, leaving a lingering theory-practice gap.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Furthermore, from a theoretical standpoint, Sec. C.2 imposes a lengthy list of assumptions: a lower-bounded objective, unbiased gradient estimators with bounded variance, and, on top of that, both smoothness and bounded gradients. This feels overly restrictive; once the first three conditions are in place, it is more typical to assume either smoothness or bounded gradients, not both.",
+   "reviewer_index": 4,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors acknowledge that some assumptions are stronger than necessary and state that bounded gradients can be replaced by weaker moment conditions without changing results. They also correct mathematical inconsistencies, clarify algorithmic details, and rerun experiments affected by implementation errors. These issues are largely addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In terms of experiments, while results span CV/NLP/RL, the largest experiments remain moderate scale (e.g., CIFAR-level vision, GLUE-level language), so claims about large-scale pretraining or very long-horizon stability are untested, acknowledged in the Limitations.",
+   "reviewer_index": 4,
+   "ac_status": "unresolved",
+   "ac_evidence": "Multiple reviewers expressed concern that experiments are limited to relatively small-scale supervised tasks (CIFAR-100, GLUE) and that claims about robustness or long-horizon stability are not supported by large-scale CV/NLP or very long training runs. ... This response may not fully satisfy reviewers who view robustness claims as implicitly broader.",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 11908,
+  "prompt_tokens": 2978,
+  "total_tokens": 14886,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 8602,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00375116,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00375116,
+   "upstream_inference_prompt_cost": 0.00041692,
+   "upstream_inference_completions_cost": 0.00333424
+  }
+ }
+}

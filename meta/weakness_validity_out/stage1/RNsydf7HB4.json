@@ -1,0 +1,123 @@
+{
+ "paper_id": "RNsydf7HB4",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "My main concern is the severe computational inefficiency of the proposed method. The major drawback of Lu et al. 2019 was its extremely poor computational efficiency, and unfortunately, this limitation is inherited by this work since the framework design closely follows Lu et al. 2019. Specifically, solving only 500 instances on the relatively small-scale CVRP100 benchmark requires 7 days of computation. This is largely infeasible for real-world applications and falls dramatically behind state-of-the-art neural constructive methods such as LEHD [1], SIL [2], as well as improvement-based baselines such as NeuOpt [3], NDS [4], and L2Seg [5]. Critically, the paper fails to compare against any of the above-mentioned solvers. Furthermore, training time is omitted for reporting. While the generalization results in Table 3 appear promising in terms of solution gap, the absence of time analysis prevents any reasonable conclusions from being drawn. It is fundamentally problematic to compare a method requiring days of computation against methods that run in seconds or minutes without acknowledging this massive disparity in computational resources.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal helped most on the runtime point by explaining that the 6.6 days reflected an aggregate sequential wall-clock over a dataset and by adding per-instance timing along with a breakdown showing most time is spent in local search rather than the network.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Secondly, the contribution of this paper seems incremental. The paper largely builds on and extends Lu et al. 2019 in terms of the backbone MDP design, the network decoder, and the training process. The only difference is a different dual GCN module for the encoder, but it remains conceptually similar to the design in DACT (Ma et al, 2021). The idea of cross attention and gated fusion is quite standard in modern Transformers, and thus, the technical novelty and contribution are unclear.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "About the contribution, the rebuttal improved the positioning and explained differences from DACT/N2S-type approaches, but for the more critical reviewers the contribution may still read as combining known components without enough new insight validated across settings.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Thirdly, the evaluation is limited to support the justification of the new dual GNN architecture for the following reasons: 1)  the paper did not compare with other ways of encoding both the instance information and the solution information, such as the Synth-Att proposed in Ma et al 2022 [6], or the attention-based method in NDS [4] and L2Seg [5]. Furthermore, the paper lacks in-depth analysis of critical design decisions, such as the selection of the gating parameter alpha, or how the proposed method produces superior learned representations compared to alternatives. As a result, the paper fails to provide compelling justification for why two separate modalities are necessary and why the proposed method should be fundamentally better than existing encoding options.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "For missing comparisons to several strong recent baselines/alternatives, the rebuttal provides reasons why some methods are not directly comparable, but it does not fully close the gap for reviewers who asked for broader head-to-head evidence.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lastly, the proposed method is evaluated on limited scales (only 100 nodes) and limited variants (only CVRP) which fails to showcase the broader applicability and robustness of the proposed method.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal also strengthened large-scale CVRP evidence by adding CVRP1000/2000 experiments.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "1. The practical value of the proposed method is questionable when analyzing the results in Table 1. (1) GAMA vs. Other L2I: On CVRP100 (T=20k), GAMA achieves an average cost of 15.6510 in 6.6 days. DACT (T=20k) achieves a very close 15.6925 in only 33 minutes. GAMA is approximately 288 times slower for a marginal 0.26% gap enhancement in solution quality. (2) vs. Classical Solvers: The classical solver HGS achieves an average cost of 15.6994 in 4.5 hours. GAMA not only fails to significantly beat this quality but also takes over 35 times longer to run.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal helped most on the runtime point by explaining that the 6.6 days reflected an aggregate sequential wall-clock over a dataset and by adding per-instance timing along with a breakdown showing most time is spent in local search rather than the network.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "2. The results suggest an extremely unfavorable trade-off, making the method impractical compared to both existing neural and classical baselines.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal helped most on the runtime point by explaining that the 6.6 days reflected an aggregate sequential wall-clock over a dataset and by adding per-instance timing along with a breakdown showing most time is spent in local search rather than the network.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "3. The empirical validation is somewhat thin. The method is only applied to CVRP , and the primary experiments focus on relatively small-scale problems (N=20, 50, 100). While the generalization study on CVRPLib instances is a good inclusion, it's a small sample and doesn't fully alleviate concerns about how the method's performance and significant runtime scale to more diverse and complex large-scale routing problems.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "In summary, reviewers explicitly asked for at least one additional VRP variant. The rebuttal states this cannot be done now, so this concern remains.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "1. This paper is some conceptual overlap with DACT[1] and N2S[2]. The ideas of separating instance and solution information, and learning them through both self-attention and cross-attention are very similar to DACT.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "About the contribution, the rebuttal improved the positioning and explained differences from DACT/N2S-type approaches, but for the more critical reviewers the contribution may still read as combining known components without enough new insight validated across settings.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "2. The experiments only focus on CVRP problem, where more results on other representative VRP variants are expected.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "In summary, reviewers explicitly asked for at least one additional VRP variant. The rebuttal states this cannot be done now, so this concern remains.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "3. In comparison to DACT, the superiority of the proposed GAMA is not obvious, especially considering both optimality gaps and computation efficiency. For example, with comparable average cost on CVRP100 in Table 1, DACT(T=20k) needs 33m, while GAMA (T=20k) needs 6.6d.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal helped most on the runtime point by explaining that the 6.6 days reflected an aggregate sequential wall-clock over a dataset and by adding per-instance timing along with a breakdown showing most time is spent in local search rather than the network.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "4. The experimental results lack the comparison with baselines on large-scale VRP instances.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal also strengthened large-scale CVRP evidence by adding CVRP1000/2000 experiments.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The method's primary contribution is fundamentally undermined by its prohibitive computational cost. The results in Table 1 show that GAMA requires 6.6 days of inference time to solve CVRP100 instances. This is juxtaposed against the 33 minutes required by the DACT baseline and 4.5 hours by the classical HGS solver. An approximate 288-fold increase in runtime compared to DACT for a marginal 0.26% improvement in solution quality represents an unjustifiable trade-off, rendering the method unusable for any practical application.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal helped most on the runtime point by explaining that the 6.6 days reflected an aggregate sequential wall-clock over a dataset and by adding per-instance timing along with a breakdown showing most time is spent in local search rather than the network.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Furthermore, the paper's claims of superior zero-shot generalization are based on a flawed baseline comparison. The generalization study in Table 3 reports an average gap of 25.3% for the DACT baseline. This result is a clear anomaly and is highly inconsistent with previously published results for this strong baseline. This flawed comparison invalidates the claim of state-of-the-art generalization and suggests a lack of experimental rigor in the evaluation.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 9590,
+  "prompt_tokens": 2174,
+  "total_tokens": 11764,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 7545,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.002937262,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.002937262,
+   "upstream_inference_prompt_cost": 0.000300012,
+   "upstream_inference_completions_cost": 0.00263725
+  }
+ }
+}

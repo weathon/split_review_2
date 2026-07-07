@@ -1,0 +1,95 @@
+{
+ "paper_id": "65Ai8mLfjI",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "Based on the observation presented in Table 1 that adding CLIP embeddings can increase the quality of images generated from short prompts, it would be beneficial if the authors would also separate their evaluation based on the criteria of prompt length, to demonstrate that modulation can increase generation quality even with long prompts. A more detailed analysis would strengthen the method's reliability.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors addressed most of the reviewers\u2019 concerns, including the differences from existing works (GAN-based and diffusion-based approaches), the hyperparameters chosen during inference, clarification of the novelty, justification of the introduced dynamic modulation strategies, additional experimental results on different prompt styles, and the trade-off between enforced modulation and prompt fidelity.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The evaluation lacks a comparison to common, practical methods for quality enhancement. For example, many users simply add phrases like \"good quality image\" or \"very detailed image\" to their prompts or use negative guidance, which is a standard feature in many diffusion model interfaces.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "A potential trade-off between the enforced modulation and prompt fidelity is not explored. If the aesthetic qualities introduced by the modulation contradict the user's explicit request in a prompt, it could negatively impact prompt-following. An exploration of this dynamic would strengthen the submission.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors addressed most of the reviewers\u2019 concerns, including the differences from existing works (GAN-based and diffusion-based approaches), the hyperparameters chosen during inference, clarification of the novelty, justification of the introduced dynamic modulation strategies, additional experimental results on different prompt styles, and the trade-off between enforced modulation and prompt fidelity.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The primary weakness is the limited novelty of the method. This method (with the exception of choosing the dynamic modulation strategies) was already presented in [1] as a naive approach (Equation 2).",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors addressed most of the reviewers\u2019 concerns, including the differences from existing works (GAN-based and diffusion-based approaches), the hyperparameters chosen during inference, clarification of the novelty, justification of the introduced dynamic modulation strategies, additional experimental results on different prompt styles, and the trade-off between enforced modulation and prompt fidelity.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "A second, smaller weakness, concerns the justification for the proposed dynamic modulation strategies. These strategies are heuristically derived from observed attention patterns within the model. This reliance is a potential weakness, as attention weights are not always a reliable or faithful indicator [2] of a model's internal semantic processing at different hierarchical levels. While the authors attempt to validate these attention-driven heuristics through an ablation study, the results appear inconclusive and fail to provide a definitive justification for the chosen strategies.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors addressed most of the reviewers\u2019 concerns, including the differences from existing works (GAN-based and diffusion-based approaches), the hyperparameters chosen during inference, clarification of the novelty, justification of the introduced dynamic modulation strategies, additional experimental results on different prompt styles, and the trade-off between enforced modulation and prompt fidelity.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I noticed that different hyperparameters are used for different tasks and generation types/styles In Tab.5. Could the authors provide more detailed guidance on the process of selecting the appropriate strategy and its associated hyperparameters for a **new, unseen task**? Is this process largely heuristic, requiring manual search for each new situation, or are there general principles or a methodology that can be derived from the observations in Figure 3 to make this selection more systematic?",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors addressed most of the reviewers\u2019 concerns, including the differences from existing works (GAN-based and diffusion-based approaches), the hyperparameters chosen during inference, clarification of the novelty, justification of the introduced dynamic modulation strategies, additional experimental results on different prompt styles, and the trade-off between enforced modulation and prompt fidelity.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "**Connection and Distinction to h-space Methods:** The work [1] demonstrates that diffusion models possess a semantic latent space (h-space) and that rescaling the difference in latent features ($\\Delta h$) can control attribute strength. Could the authors discuss the primary distinction between their method and this prior work? Specifically, is it possible to achieve a similar guidance effect by simply rescaling $\\Delta h$, analogous to Equation 3 in this paper, instead of explicitly using the CLIP embedding to compute $y(p^+, t) - y(p^-, t)$?",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors addressed most of the reviewers\u2019 concerns, including the differences from existing works (GAN-based and diffusion-based approaches), the hyperparameters chosen during inference, clarification of the novelty, justification of the introduced dynamic modulation strategies, additional experimental results on different prompt styles, and the trade-off between enforced modulation and prompt fidelity.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The core idea of using pooled embeddings for guidance resembles prior work on semantic directions in GANs (e.g., StyleGAN) and recent methods like TokenVerse or Concept Sliders, though the application to modulation space in diffusion transformers is new.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors addressed most of the reviewers\u2019 concerns, including the differences from existing works (GAN-based and diffusion-based approaches), the hyperparameters chosen during inference, clarification of the novelty, justification of the introduced dynamic modulation strategies, additional experimental results on different prompt styles, and the trade-off between enforced modulation and prompt fidelity.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The method introduces new hyperparameters (guidance scale w, layer indices), requiring tuning for different tasks\u2014though ablations help, this adds complexity compared to plug-and-play baselines.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors addressed most of the reviewers\u2019 concerns, including the differences from existing works (GAN-based and diffusion-based approaches), the hyperparameters chosen during inference, clarification of the novelty, justification of the introduced dynamic modulation strategies, additional experimental results on different prompt styles, and the trade-off between enforced modulation and prompt fidelity.",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 4668,
+  "prompt_tokens": 1372,
+  "total_tokens": 6040,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 3134,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00149912,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00149912,
+   "upstream_inference_prompt_cost": 0.00019208,
+   "upstream_inference_completions_cost": 0.00130704
+  }
+ }
+}

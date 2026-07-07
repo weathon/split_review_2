@@ -1,0 +1,109 @@
+{
+ "paper_id": "kpLRYtPGt3",
+ "decision": "Accept (Oral)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "The effectiveness of Neon hinges on the assumption that s < 0 (negative gradient alignment). However, this condition may not consistently hold in practice, raising concerns about the robustness of the approach.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The hyperparameter configuration\u2014particularly the training budget and negative extrapolation strength w \u2014could introduce additional tuning complexity. Ablation studies in Figures 3 and 4 suggest that Neon is sensitive to these hyperparameters, which may impact its ease of deployment.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Positioning vs. simple weight merges: needs stronger comparisons to generic weight interpolation/extrapolation baselines (e.g., linear checkpoint merges/SWA-style extrapolation) to isolate NEON\u2019s specific benefit beyond \u201cnegative LR step\u201d.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Benchmark scope: focuses on standard class-conditional/unconditional image generation; lacks large-scale text-to-image or broader modalities, and relies mainly on FID + P/R without human eval.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Hyperparameter sensitivity: performance depends on w (and \u03b3 for AR/CFG); while grids are shown, guidance on automatic selection or stability across training checkpoints could be expanded.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I do not understand the novelty with respect to previous works. Could authors explain what is the difference between their work and [1] and mostly [2]? Especially, I really would like to better understand better the difference with [2]: the idea of using negative guidance from synthetic data is already in [2], in particular, Equation (1) of the proposed manuscript resembles line 4 in algorithm 1 of [2]. Are you doing SIMS, but in the parameter space? Could authors comment on that?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "How significant do you consider the empirical results? Can you show the same plots on test set, with the Dinov2 embedding?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "in particular I would be interested to see if the minimum value on the training set correlates with the minimum value on the test set",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Non-scientific comment: I would remove the following quote, \"In the words of Martin Luther King, Jr., \u201cSometimes to move forward, we have to go backward.\u201d, used to motivate negative parameter guidance. It does not feel appropriate",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper does not include quantitative comparisons against other self-training baselinesin the precision/recall/FID analyses. Even showing results for the simplest baseline of direct self-finetuning would help clarify how much of Neon\u2019s gain comes from the negative extrapolation itself versus the self-training process. Moreover, comparisons in terms of data and compute efficiency would contextualize Neon\u2019s benefits relative to prior self-improvement algorithms.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While the quantitative results are compelling, the paper would benefit from a few qualitative visual examples to illustrate how Neon changes the generative behavior. It remains a bit unclear whether the performance gains are purely distributional (i.e., improved diversity and recall) or also reflect higher fidelity and perceptual realism compared to naive self-training.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 3853,
+  "prompt_tokens": 1244,
+  "total_tokens": 5097,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 2741,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.001253,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.001253,
+   "upstream_inference_prompt_cost": 0.00017416,
+   "upstream_inference_completions_cost": 0.00107884
+  }
+ }
+}

@@ -1,0 +1,95 @@
+{
+ "paper_id": "TBsTStMK41",
+ "decision": "Reject",
+ "n_reviewers": 5,
+ "items": [
+  {
+   "weakness_text": "The technical novelty of the proposed algorithm is limited. Without reading the actual method section, I can already tell from the introduction how the algorithm works. The use of linear programming relaxation and randomized rounding is a standard approach in combinatorial optimization, and the paper does not introduce any new techniques or insights in this regard.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "No rebuttal submitted. Most of the concerns are still valid.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "From a practical standpoint, optimizing the desk-rejection process may not be a priority for conference organizers. The submission limit policies are primarily designed to manage reviewer workload, and authors are expected to adhere to these limits at the time of submission. To a large extent, the responsibility lies with authors to manage their submissions. Therefore, while the proposed method can reduce unnecessary rejections, it may not significantly impact the overall conference review process or author experience.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "No rebuttal submitted. Most of the concerns are still valid.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Lack of baselines: \n\ta. There are other works ( cited in the paper ) that address the same issue, e.g. Cao et al (2025) also propose an objective function to address fairness in desk rejects due to max submission limits. However, it has not been used as a baseline. \n\tb. There exist many heuristics to solve ILPs, eg, Branch and Bound also involve solving the LP relaxation and then tackling the fractional assignments. Wouldn\u2019t the existing black-box ILP solvers be able to solve the proposed ILPs? There is no comparison to those. They may be costly, but this desk rejection ILP is not the bottleneck in the overall paper-reviewer assignment process.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "No rebuttal submitted. Most of the concerns are still valid.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Issues with the metric: if the baseline method desk-rejects 2 papers and your method rejects only 1, then according to the used metric, it would be 50% improvement! Please consider reporting the confidence intervals.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "No rebuttal submitted. Most of the concerns are still valid.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Subjective analysis of the additional papers that are not rejected by the proposed algorithm is missing -- some intuitive discussion on why and how the additional accepted papers promote author\u2019s welfare would be very useful.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "No rebuttal submitted. Most of the concerns are still valid.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Limited objective function: The paper's primary weakness, which undermines its entire contribution, is its choice of objective function. The authors equate \"improving author welfare\" with a simplistic, utilitarian goal: maximizing the raw number of desk-accepted papers. This premise is fundamentally flawed, as it ignores the more critical goals of a fair academic review process, such as promoting author diversity, protecting the work of early-career researchers, and ensuring a variety of institutions are represented. A policy optimized for paper throughput could easily and systematically disadvantage researchers from smaller labs in favor of large, prolific groups, thereby harming the very community it claims to help.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "No rebuttal submitted. Most of the concerns are still valid.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Questionable practical impact: The practical significance of the proposed solution is questionable due to the nature of existing submission policies. Many top-tier conferences that enforce limits set a high bar (e.g., 25 for CVPR 2025), and since these limits are well-publicized, authors are strongly incentivized to self-regulate and avoid violations. This suggests the algorithm may only apply to a small number of edge cases. The paper's own results support this concern: in the simulation for ICLR 2025 with a limit of b=25, the proposed method saves only 4 papers over the ForwardReject baseline. This marginal improvement for realistic, high-limit scenarios raises doubts about the algorithm's real-world impact.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "No rebuttal submitted. Most of the concerns are still valid.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "There is a potential technical issue with the MAXROUNDING algorithm. If my reading is correct: after rounding a paper l up to 1, the algorithm checks each co-author i and, if sum_{j in T_i} tilde{x}_j > b, it finds a set S_i subset (S intersect T_i) whose fractional mass totals at least (1-x_l) and zeros them out. This choice of required mass (1-x_l) is not minimal and be strictly larger than the actual overflow delta_i = max[0, sum_{j in T_i} tilde{x}_j - b]. There are feasible states where delta_i < (1-x_l) yet the residual fractional mass sum_{j in S intersect T_i} tilde{x}_j is less than (1-x_l) (e.g., when author i is already near b-1 with a small remaining fractional slack). In such a case Algorithm 3 (as written), may fail to find S_i despite the fact that only delta_i needs to be deleted to restore feasibility. The proof of Theorem 4.6 does not argue existence of S_i under the stronger (1-x_l) requirement; it simply asserts that \"a sufficient number of papers\" are rejected, which does not address the mismatch between the needed mass delta_i, and the requested mass (1-x_l). I believe this is an important gap, but probably fixable if one was to replace line 14 of the Algorithm with sum_{j in S_i} >= delta_i and add a short invariant-based argument in the proof in the appendix.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "No rebuttal submitted. Most of the concerns are still valid.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While the paper formalizes the problem, it arguably oversimplifies it. A more realistic model would allow for variable submission limits based on factors like an author's seniority or research area.",
+   "reviewer_index": 4,
+   "ac_status": "unresolved",
+   "ac_evidence": "No rebuttal submitted. Most of the concerns are still valid.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 3797,
+  "prompt_tokens": 1802,
+  "total_tokens": 5599,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 2371,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 1792,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.001095731,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.001095731,
+   "upstream_inference_prompt_cost": 5.1556e-05,
+   "upstream_inference_completions_cost": 0.001044175
+  }
+ }
+}

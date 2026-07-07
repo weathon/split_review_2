@@ -1,0 +1,151 @@
+{
+ "paper_id": "pbbRmnFkjG",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "l161: Because the stable SAE constrains dictionary atoms to the convex hull of activations, convexity is guaranteed for the learned concepts but not necessarily for the native representation. Maybe explicitly separate SAE-induced claims from \u201cmodel-native\u201d claims, and add ablations with unconstrained SAE, showing the same qualitative geometry without the convex prior.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Reviewer `vpmQ`\u2019s technical corrections regarding the charts and native representation constraints were accepted",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "l064: The importance definition is clear, but the figure mapping isn\u2019t. Maybe specify exactly what dot size and color encode in Figure 1. Adding a concise legend in the main text, a one-line formula linking $\\phi$ to the plotted quantity would make the visualization reproducible and easier to see.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Reviewer `vpmQ`\u2019s technical corrections regarding the charts and native representation constraints were accepted",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "l259: UMAP is fine for intuition, but it shouldn\u2019t be used to make claims. Maybe caution that UMAP as visualization only, add a brief hyper-parameter sensitivity (n_neighbors, min_dist, seed) in the appendix, and keep the main analysis on PCA/spectral metrics.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "l293: \"dense Sun et al. (2025) activations\" -> \"dense activations Sun et al. (2025)\"",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "**Limited scope of downstream task exploration**: Section 3 examines only three downstream tasks, while DINOv2 supports many more applications. For classification, only the \"elsewhere\" concept is explored in detail, limiting the generalizability of findings.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewer `PH2n` is leaning negative with a score of 4, mainly concerned that the empirical evidence is too limited to support the new hypothesis.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "**Insufficient empirical foundation for MRH**: The authors propose MRH based on intuitions from task-specific geometrical organization but acknowledge it still needs rigorous proof (line 445). Given the limited number of tasks and task-specific concepts explored (see point above), the theoretical proposition rests on unstable empirical grounds.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewer `PH2n` is leaning negative with a score of 4, mainly concerned that the empirical evidence is too limited to support the new hypothesis.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "**Underdeveloped discussion of implications**: The paper lacks sufficient explanation of what consequences adopting the MRH concept has for interpreting ViTs and what concrete benefits this perspective provides to the research community. The discussion section should match the verbosity and clarity of the introduction.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Misleading characterization of SAE contribution: The authors state they \"operationalize\" LRH using SAE, when they actually adopt an SAE previously introduced by Fel et al. (2025). This overstates their methodological contribution.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Excessive reliance on appendix: Figures in the appendix are cited frequently in the main text (e.g., \"Different tasks recruit different concepts\" in Sec. 3, \"Empirical evidences\" in Sec. 6), resulting in sections that are difficult to follow without constant back-and-forth navigation.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Citations should stay in brackets, use \\citet.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "TL;DR is broken.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The analysis in this paper is mostly descriptive as opposed to describing why different tasks within DINOv2 have different representational sparseness etc.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The paper attempts to do too much\u2014spanning SAE implementation, large-scale task analysis, and a new geometric theory (MRH)\u2014without a unifying throughline. The connection between these parts often feels narrative rather than logically necessary.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The evidence for the Minkowski Representation Hypothesis is largely qualitative and circumstantial (e.g., UMAPs, smooth PCA maps, block structures). Stronger quantitative tests or falsifiable predictions are needed to substantiate the claim.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "They satisfied Reviewer `nELv` by adding hard numbers, such as the geodesic analysis and archetypal analysis.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The observed deviations from LRH (anisotropy, coherence, low-dimensional task subspaces) could be explained by simpler mechanisms such as structured sparsity or normalization effects\u2014yet the paper moves quickly to a new geometric framework without ruling these out.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Key hyperparameters (e.g., SAE sparsity level, dataset etc.) and their sensitivity are not well explored; it is unclear how robust the reported concept structure for the 3 tasks is to these design choices.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While task specialization is interesting, it remains correlational; it\u2019s unclear whether manipulating the discovered concepts truly affects task behavior. I think some causal manipulation could be interesting too.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 8037,
+  "prompt_tokens": 1606,
+  "total_tokens": 9643,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 6612,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0024752,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0024752,
+   "upstream_inference_prompt_cost": 0.00022484,
+   "upstream_inference_completions_cost": 0.00225036
+  }
+ }
+}

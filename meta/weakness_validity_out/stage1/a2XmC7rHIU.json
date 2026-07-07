@@ -1,0 +1,151 @@
+{
+ "paper_id": "a2XmC7rHIU",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 5,
+ "items": [
+  {
+   "weakness_text": "Narrow Problem Scope: Most problems are high school-level (IMO/USAMO); few undergraduate/research-level tasks.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The corpus is primarily centered on high-school and competition problems, with limited coverage of more advanced or research-level mathematics.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Outdated Provers: GROK-4/GPT-5 are only used as judges, not prover, which misses latest LLM proof capabilities.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Lack of analysis of why formal theorem provers lag behind natural language counterparts. This is an interesting comparison, it would be great if there can be some deeper analysis.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "a more systematic diagnostic analysis (e.g., tighter controls, clearer attribution of bottlenecks, or deeper error breakdowns) remains limited, so the discussion is best viewed as explanatory rather than definitive.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The evaluation of proof judgement may be heavily dependent on the judger\u2019s prompt or criteria, so neither the judging accuracy nor the alignment with human graders are accurate enough.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "they clarified the comparability of human vs LLM judging protocols",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "This work did not cover problems from advanced math or research-level math, where proof problems weigh more importance than math competitions. This limits the contribution of OPC.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The corpus is primarily centered on high-school and competition problems, with limited coverage of more advanced or research-level mathematics.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The creation of this OPC heavily depends on manual annotation from experts, which limits the scalability of this work.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "the reliance on expert annotators remains an inherent bottleneck for scaling, refresh cycles, and long-term expansion.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It might be somewhat subjective, but the presentation quality is low, even considering the number of figures included in the manuscript. While it is understandable that the authors tend to include more content rather than placing all figures in the Appendix, the text in each section is highly granular. I think this weakness could be addressed by rethinking the overall structure. The main focus should be on the dataset itself, which is valuable, while the incremental contributions in the form of interesting observations should either be explored more deeply or moved to the Appendix.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "promise to revise claims/related-work wording accordingly",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Binary evaluation loses information: The \"5+/7 points counts as correct\" threshold is arbitrary and discards nuanced quality differences that partial credit scoring would capture.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "they clarified the comparability of human vs LLM judging protocols",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Unfair formal/informal comparison: Comparing specialized formal proof models against general-purpose LLMs isn't apples-to-apples. The brief mention of Seed-Prover's 50% formal accuracy suggests the gap may be overstated.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "a more systematic diagnostic analysis (e.g., tighter controls, clearer attribution of bottlenecks, or deeper error breakdowns) remains limited, so the discussion is best viewed as explanatory rather than definitive.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Missing statistical analysis: No confidence intervals, significance tests, or error bars despite sufficient sample sizes.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "strengthened reporting with confidence intervals/statistical analyses",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Insufficient contamination analysis: Section C.2's comparison of \"Standard\" vs \"Non-standard\" competitions is suggestive but not conclusive. The performance differences could be explained by difficulty alone.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "the authors addressed most of these points: they explained the trade-off between adding more advanced mathematics and maintaining dataset scale, and provided protential reasons behind formal provers lagging informal ones.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "misleading statement: my biggest issue is that apparently not the full dataset was shared, as only USAMO and BMOSL seem to appear in the zipped supplementary (and also for these, not the full dataset? seems quite small), contrary to the claim: \"We have included our dataset in the supplementary material, along with detailed descriptions of our methodology and experimental setup to ensure full reproducibility.\"",
+   "reviewer_index": 4,
+   "ac_status": "resolved",
+   "ac_evidence": "resolved by the rebuttal: clarified where the full dataset is located in the supplement",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "ambiguous claim: \"The OPC was specifically designed for broad applicability and downstream usage in proof generation research and is the first to include a substantial number of correct, LLM-generated solutions to problems from prestigious mathematics competitions such as the USAMO and IMO.\" As it reads, it is unclear if the authors claim to be the first ever to create such a dataset, or the first to create such a dataset in the more narrow domain of contest math problems (only the latter is correct). Since this is from the **appendix**, I would urge the authors to rewrite.",
+   "reviewer_index": 4,
+   "ac_status": "resolved",
+   "ac_evidence": "promise to revise claims/related-work wording accordingly",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "missed important prior literature: Probably the first paper on \"pure\" autograding was https://arxiv.org/abs/2406.10268, and there is (rather similar) follow-up work by these authors https://arxiv.org/html/2502.13337v1 (it would be good to include this in the related work section). But much earlier work exists implicitly in ML even if not marked as autograding, e.g. in 2024 https://arxiv.org/abs/2402.11111 a more detailed methodology for \"LMs as evaluators\" was derived (see also more papers on prior such literature), or **2021** in the well-known paper https://arxiv.org/abs/2110.14168, which used what they called \"verifiers\" All this points to an existing body of work on proof judging that is missing from this paper.",
+   "reviewer_index": 4,
+   "ac_status": "resolved",
+   "ac_evidence": "promise to revise claims/related-work wording accordingly",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Wrong claim: \"Data contamination poses only a minor risk for proof judging, since generated proofs cannot be present in the training data.\" I am unsure on what information this claim rests - who is to say that the main LLM companies don't exactly do this? They have their LLMs generate outputs on contest-level problems to ensure that their LLMs can potently act as judges, which can be of use for subsequent pipelines that the companies might use, or in case the public wants to use LLMs as judges, and companies are interested in having their LLMs perform well on publicly known problems. This seems entirely plausible to me, so I believe this statement should be retracted.",
+   "reviewer_index": 4,
+   "ac_status": "resolved",
+   "ac_evidence": "the rebuttal directly resolves this reviewer\u2019s main blockers around dataset availability, claim wording, related-work coverage, contamination framing, and missing details.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "in terms of the results, with some exceptions, the paper seems to reinforce known folklore beliefs about how models performance on mathematics.",
+   "reviewer_index": 4,
+   "ac_status": "unresolved",
+   "ac_evidence": "some concern remains that the paper\u2019s primary value is as high-value infrastructure (dataset + evaluation protocol + baselines), with relatively fewer novel empirical insights compared to the strength of the resource contribution.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Almost no details are given about fine-tuning on R1 Qwen3-8B. In particular, rivalling the performance on GPT-5 is a dubious claim (presumably a heldout subset of OPC was used for this on which R1 Qwen was not train? details are missing)",
+   "reviewer_index": 4,
+   "ac_status": "resolved",
+   "ac_evidence": "expanded experimental details",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 9617,
+  "prompt_tokens": 2176,
+  "total_tokens": 11793,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 7590,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 1920,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00278236,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00278236,
+   "upstream_inference_prompt_cost": 8.96e-05,
+   "upstream_inference_completions_cost": 0.00269276
+  }
+ }
+}

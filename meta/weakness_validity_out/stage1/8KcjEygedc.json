@@ -1,0 +1,123 @@
+{
+ "paper_id": "8KcjEygedc",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "While the paper links theory to LLM math reasoning (AIME benchmark in Table 1&2), it would be better to discuss other LLM-critical tasks (e.g., code generation, natural language understanding, or multi-step reasoning benchmarks) where curation is also widely used.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "I think the concerns about the linear models, pruning oracle, and discussion are addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Additionally, the authors do not investigate how the pruning ratio or oracle quality affects performance across different model sizes (e.g., 7B vs. 70B LLMs), leaving uncertainty about whether the LIMO principle holds consistently across LLM scales.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I think the main inconsistency between the main message and theory is that: both 'KE' and 'KH' strategies are effectively 'less is more'. It is just what data should be picked. I think it is a bit of stretch to say 'KE' is equivalent to 'more is more', while the neural scaling laws scenario should correspond to a very small $\\phi$ instead of the 'KE' strategy.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The theory relies on linear model with Gaussian covariates, and is limited to the binary classification setup with proportional asymptotics. This is, definitely limited, as is acknowledged also by the authors in the limitation discussions, a good starting point for study the pruning and data curation in large datasets. I think this is only a minor weakness.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "I think the concerns about the linear models, pruning oracle, and discussion are addressed.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "A general style suggestion: use \\eqref instead of \\ref for equations.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Page 19, 'Corollary xyz'. I think this is a placeholder or typo.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Arguably the most important feature of the paper is that their theory is predictive of empirical results in a very realistic dataset (ImageNet training of a ViT), but it is not clear from the writing how to use this in practice. In particular: how does someone measure the quality of the generator $\\rho$ for a dataset you are given? No commentary on this is given. A bonus would be if the authors gave a step-by-step appendix section for a practitioner on how to use their theory (willing to raise score for clarity on this)",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The concern about the application still holds.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "\"the base LLM is a strong generator\" based on what? how is this claim measured?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Why is $n=5000$ considered the 'large data' setting in Figure 1? How was this number chosen? That $n$ is smaller than the CIFAR-10 training set...",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "capitalize PDF and CDF on L184",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "**Linear Models:** The theoretical results are derived under the assumption of linear models and Gaussian covariates. This is a known standard simplification for RMT analysis but limits the direct quantitative applicability to deep neural networks on structured data. However, the empirical results do point towards potential qualitative transfer, but would warrant a more complete exploration.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "I think the concerns about the linear models, pruning oracle, and discussion are addressed.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "**Fixed Oracle:** The framework assumes a fixed pruning oracle ($w_o$). In practice, oracles (e.g., reward models) are often learned and may evolve adaptively during training (e.g., iterative RLHF), which is not captured in the current analysis. Extending the theory to adaptive oracles would be an important future direction.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "I think the concerns about the linear models, pruning oracle, and discussion are addressed.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "I am **highly skeptical** that this constitutes the explanation for 'Less is More' in modern deep learning. The assumptions are too strong, the dynamics of optimization (like SGD) and feature learning are ignored, and the empirical validation is not sufficiently robust to confirm that the mechanisms identified by the theory are the ones driving results in practice.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 5783,
+  "prompt_tokens": 1559,
+  "total_tokens": 7342,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 4411,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0012901875,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0012901875,
+   "upstream_inference_prompt_cost": 0.0001532497,
+   "upstream_inference_completions_cost": 0.0011369378
+  }
+ }
+}

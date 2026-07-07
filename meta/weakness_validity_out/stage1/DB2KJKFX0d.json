@@ -1,0 +1,151 @@
+{
+ "paper_id": "DB2KJKFX0d",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "The exact and detailed formula of the regularization terms (PatchNCE and BD-SSIM) is missing. Which distance metrics were used for the regularization losses? It would be helpful to add the formulations in the supplementary material.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It is mentioned that the NCE regularization loss is designed to maintain consistency with the LQ inputs in order to preserve structural details. However, how can you guarantee that this term actually preserves 'structural' information? Are there any ablation studies regarding this term with qualitative analyses and/or brain regional comparisons that support this claim? In addition, if my understanding is correct, this term reduces the discrepancy between the LQ and generated data. In that case, it seems to potentially conflict with the role of L_{Adv}, which enhances resolution (i.e., the main goal of this paper). How does the proposed method address this issue?",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper does not include qualitative comparisons and neuroscientific comparisons with baseline models.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "the evaluation still feels incomplete, with limited qualitative neuroscientific comparisons to baselines and lingering questions about whether the gains reflect true functional signal improvement rather than model induced artifacts.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Notations need a double check, e.g., in Fig 3 caption, shouldn't the approximating distribution \\hat x_{1|t_i} be derived from the neural generator q_\\phi instead of the joint distribution p? Please correct me since I'm not an expert on diffusion models, but I also think it should be the approximated \\hat x_{1|t_j} in p(x_{t_{j+1}}|x_{t_j},x_{1|t_j}) in Fig 3.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The first attempt of learning 3T-7T generation from unpaired data is desirable, but the real-world evaluation should be focused on paired data since the final purpose is generating ground truth 7T fMRI from 3T fMRI. In this regard, BDSB performs similarly to OTT-GAN for PSNR and even worse for SSIM.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "the evidence in the paired real setting remains weak and does not clearly support the broad performance claims.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The contribution of a better fMRI enhancement via learning across datasets has not been evaluated. As mentioned above, there are no experiments of training with unpaired data and testing on paired data. The ability of learning across datasets makes BDSB more fundamental than existing models, and it should lead to a model scaled from multiple datasets. However, the BDSB is trained separately for unpaired and paired experiments.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Technical innovation is limited. Why don't other optimal transport methods fit into the proposed framework?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "While the method is framed as unpaired learning, the implementation and experiments do not convincingly show that unpaired samples are leveraged for learning. A meaningful test would involve partial or full training on unpaired data and evaluation on paired data to quantify the benefit of the unpaired setup.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "the paper still does not convincingly establish the scientific validity of learning a 3T to 7T mapping across subjects and datasets without stronger controls for scanner and site confounds.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "On the TDM Real (paired) dataset, BDSB performs similarly to OTT-GAN, contradicting the claim of superior performance \"across all real and synthetic experiments.\" This discrepancy should be discussed explicitly.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "the evidence in the paired real setting remains weak and does not clearly support the broad performance claims.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Frechet Inception Distance (FID) typically relies on an ImageNet-trained network and is not meaningful for fMRI-like data, whose statistics differ drastically from natural images.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Related methods are only briefly mentioned in the appendix; a dedicated section would improve context and clarify how baselines are chosen.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "When the authors or the publication are not included in the sentence, the citation should be in parenthesis using \\citep{}, as outlined in the formatting instructions.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The primary issue with this submission lies in its scientific rigor and validation design. The authors claim that BOLD signals obtained from 7T MRI can be effectively mapped to or synchronized with evolving time series from 3T scanners. However, this assumption is not convincingly supported. It remains highly questionable whether (1) temporal synchronization between 3T and 7T acquisitions can be achieved with sufficient precision, and (2) whether the spatial correspondence of voxel- or surface-level activations can be meaningfully aligned across different field strengths. From a machine learning standpoint, however, the 3T and 7T datasets should ideally be paired or co-registered at the subject level to enable cross-modality learning. Without a clear justification or evidence supporting this assumption, the technical soundness of the proposed framework is undermined.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "the paper still does not convincingly establish the scientific validity of learning a 3T to 7T mapping across subjects and datasets without stronger controls for scanner and site confounds.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The use of 2D conformal mapping to reduce fMRI data complexity is conceptually interesting, yet it raises serious concerns about potential information loss during the projection from high-dimensional cortical surfaces to a 2D representation. This approach may oversimplify the spatial geometry of the brain and distort the topological structure of functional activations. The authors should consider or at least discuss alternative representations, such as spherical harmonics (see the well-established approach by Anderson et al., NeuroImage, 2010), which preserve surface geometry while enabling efficient spectral decomposition.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Given that this is a neuroimaging study, replicability testing is a crucial standard for evaluating robustness. The current manuscript lacks experiments on test\u2013retest datasets, which are commonly used to assess the reliability of functional signals and model generalization. The authors should include such analyses or provide clear justification for their omission.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Several reviewers also asked for neuroimaging standard reliability style validation, such as test retest analyses, and this remains largely missing.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Finally, the authors should acknowledge the inherent limitation that the proposed method primarily enhances spatial resolution and signal-to-noise ratio (SNR), but does not address the true temporal resolution gap in fMRI. The fundamental challenge remains the coarse temporal sampling (on the order of 1 s) compared to neuronal timescales (milliseconds). The paper would be stronger if it explicitly discussed this limitation and clarified whether the proposed method could, in principle, be extended to improve temporal fidelity.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited novelties. This work is a combination of existing components such as conformal mapping and Schrodinger bridge model.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 8860,
+  "prompt_tokens": 2361,
+  "total_tokens": 11221,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 6775,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0019739623,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0019739623,
+   "upstream_inference_prompt_cost": 0.0002320863,
+   "upstream_inference_completions_cost": 0.001741876
+  }
+ }
+}

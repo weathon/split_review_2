@@ -1,0 +1,158 @@
+{
+ "paper_id": "cVX3VqO8BO",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "The selected tasks are relatively simple. On one hand, many demonstrated actions (e.g., opening a drawer) can be performed by simpler, lower-cost two-fingered grippers, failing to highlight the advantage of dexterous hands. On the other hand, the tasks designed for dexterous hands (e.g., picking and placing objects) involve overly simplistic semantics, lacking part-level manipulation or interactions with clear subsequent intent (e.g., 'handing the scissor handles to the user' or 'grasping the teapot lid', which are feasible in OakInk). We expect to see complex manipulation sequences that are hard to do for non-dexterous hands and feature richer semantic hierarchies.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The evaluations in simulation are primarily analytical metrics. I believe success rates for the manipulations are essential.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors provide additional experiments, including expanded ablation studies, text\u2013motion alignment evaluations, success rate metrics, and comparisons with other language-guided HOI models.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Tokenizer evaluation limited to a single hand. Although a unified dexterous-hand tokenizer is proposed, both the HOI and real-world experiments appear to use only one hand type. A broader evaluation across multiple robot hands would more convincingly validate the tokenizer\u2019s generality and cross-hand transfer.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Underspecified sequence-generation metrics. The paper introduces a manipulation sequence generator, but the evaluation protocol for sequences is insufficiently detailed. Please clearly define the quantitative metrics and how they are computed.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Missing text\u2013motion alignment evaluation. Given the language-conditioned setup, include explicit Text\u2013Motion Alignment assessments is necessary. Please provide both quantitative measures and qualitative analyses (e.g., human judgments of instruction adherence).",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors provide additional experiments, including expanded ablation studies, text\u2013motion alignment evaluations, success rate metrics, and comparisons with other language-guided HOI models.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Line 075: 'Language -guided' \u2192 'Language-guided'.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Line 115: missing space before 'introduces'.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Line 377: only five metrics are listed",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The main weakness of the approach is the complexity of the method. Currently, the approach consists of multiple parts and many different pre-trained models that need to be finetuned.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The authors do not provide code. It is unclear which simulation environment they have used.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The authors mention some terms without providing sufficient explanation in their context or a reference to related work. Such terms are MANO poses (line 153), vector-quantization operator (line 187), knowledge distillation (line 203).",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In the introduction, the authors listed 4 core capabilities, and 4 contributions. However, they almost identically, and their repetition is not well motivated. Therefore, the authors should either differentiate them better, or combine them in order to improve legibility.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Line 045: No space before AffordDexGrasp",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Line 272: No space between sentences (generation.A practical)",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Table 1, 2, and 4: The arrow pointing to right next to Diversity is unintuitive, and its meaning might confuse readers, who did not read the evaluations section in detail.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Some sections are unclear and missing detail (see questions)",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The AC carefully checks the comments from the reviewer with the negative rating (ZSGv, rating 2) alongside the authors\u2019 responses and finds that the responses are sufficiently convincing, with the expectation that the reviewer\u2019s concerns can be addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper would benefit from further ablations. E.g. the different parts of the cost function. Or the benefits of using a unified latent space. Here, the (maybe naive) alternative would be to learn everything in a single space (e.g. MANO) and retarget the output of the VLM afterwards. Such a comparison would be insightful.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors provide additional experiments, including expanded ablation studies, text\u2013motion alignment evaluations, success rate metrics, and comparisons with other language-guided HOI models.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "There is no further information on the costs of the optimization of the grasp. How long does it take? Is it real-time capable?",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 5055,
+  "prompt_tokens": 1363,
+  "total_tokens": 6418,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 3273,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00160622,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00160622,
+   "upstream_inference_prompt_cost": 0.00019082,
+   "upstream_inference_completions_cost": 0.0014154
+  }
+ }
+}

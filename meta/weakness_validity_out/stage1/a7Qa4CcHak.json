@@ -1,0 +1,102 @@
+{
+ "paper_id": "a7Qa4CcHak",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 3,
+ "items": [
+  {
+   "weakness_text": "we had human baselines (i.e. an expert or junior engineer was asked to complete the task in the same conditions), instead of time estimates as these might over/under estimate the actual time required (famously this is quite hard to accurately do).",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The concerns, such as extending the benchmark to include security testing (Reviewer xXm9), human baselines instead of time estimates (Reviewer ptwJ), and the possibility of sampling bias (Reviewer 56KK), are still standing.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited diversity in certain categories: While covering multiple task types, some categories (network configuration, distributed system management) have sparse representation, potentially failing to capture the full spectrum of real-world usage",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewers\u2019 core concerns informing the decision included: * Sufficient environment diversity.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Narrow evaluation metrics: Predominantly relies on binary pass/fail assessment, lacking consideration of execution efficiency, code quality, and other important dimensions. The scoring mechanism for partial completion is insufficiently granular",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Static environment limitations: Testing environments are relatively static, not adequately simulating dynamic environmental changes, concurrent operations, and other complexities found in production settings",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Insufficient treatment of user interaction: Terminal operations frequently require user confirmation and interaction, but the benchmark's design doesn't adequately address this aspect",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Security considerations absent: The paper lacks substantive discussion of security risks associated with AI agents executing terminal commands, and doesn't propose corresponding safety mechanisms",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The concerns, such as extending the benchmark to include security testing (Reviewer xXm9), human baselines instead of time estimates (Reviewer ptwJ), and the possibility of sampling bias (Reviewer 56KK), are still standing.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It's possible that the comparisons would be more fair if the best/preferred scaffold for each agent were used rather than a shared scaffold (which might still favor one model over others).",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewers\u2019 core concerns informing the decision included: * The fairness of the setting of the evaluation.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "An LLM judge for error analysis was chosen based on agreement with a human annotator on 20 traces, but there are 74 tasks. I think this leaves open a large possibility of sampling bias.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The concerns, such as extending the benchmark to include security testing (Reviewer xXm9), human baselines instead of time estimates (Reviewer ptwJ), and the possibility of sampling bias (Reviewer 56KK), are still standing.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "\"Most agents attempt tasks for less than 20 minutes.\" This seems very limiting, when most of the tasks are estimated to take humans at least an hour. Models are known to suffer from early stopping in agent tasks, it seems this was not controlled for.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The tasks are all public, limiting the longevity of this benchmark",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 4430,
+  "prompt_tokens": 1069,
+  "total_tokens": 5499,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 3402,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.001289708,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.001289708,
+   "upstream_inference_prompt_cost": 4.9308e-05,
+   "upstream_inference_completions_cost": 0.0012404
+  }
+ }
+}

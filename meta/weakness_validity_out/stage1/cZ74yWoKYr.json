@@ -1,0 +1,137 @@
+{
+ "paper_id": "cZ74yWoKYr",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "The paper claims that recent efforts are empirical and lack formal grounding, and that this work presents a formal study from the perspective of output perturbation. However, reasoning from output error is the most straightforward approach; the reason the field often avoids it is the high computational cost of evaluating A*V. The proposed \u201cformal\u201d method in practice is a heuristic: keep half of the budget with an existing method and allocate the rest via a relaxed A*|V|_1 criterion. Moreover, prior methods such as Quest and MagicPig also consider output-level effects.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The claimed \u201cformal\u201d advance reduces to a theory-guided heuristic that aligns with a straightforward output-aware intuition; the novelty relative to prior output-sensitive or selection-based lines remains thin.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Quest also uses an approximate A*V to select important tokens, but it is more justified because it makes on-the-fly decisions during inference, step-by-step, conditioned on each incremental output (I'm not asking the authors to compare Quest since its a selection method). By contrast, this paper\u2019s formulation is built around the output of a single token at the end of prefilling. That is naturally aligned with single-turn QA settings like LongBench and ruler where most information resides in the prompt, but it is too narrow for real-world scenarios. In my view, such output-perturbation\u2013based scoring is better suited for cache selection rather than eviction. The paper should include results on datasets like PG-19 and SCBench that feature multi-turn dialogue or long-horizon modeling.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Evaluation emphasizes single-turn prompts and adds multi-turn SCBench only in rebuttal with limited scope.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Efficiency evaluation is unconvincing. The paper uses time-to-first-token (TTFT) in the prefill phase (including eviction) as the efficiency metric. Under the current evaluation setting, where full prefilling is followed by a one-shot eviction based on some metric, then decoding with the remaining KV, I think the TTFT does not make sense at all. With one-shot removal, the complexity of the scoring method hardly matters; one could even use a full A*V and see little difference in TTFT compared to what is reported. What would be meaningful is: (a) chunk-wise acceleration during prefilling, or (b) on-the-fly acceleration during long-context decoding. At minimum, please quantify the latency/memory overhead per decoding step for the proposed approximate selection, since Quest found such approximations to be costly and thus opted for block-wise computation.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Efficiency reporting is fragmented and omits a concise accounting of overheads per step and throughput across context lengths in the main body.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Clarity and presentation. The paper is not that easy to follow. The method is simple enough to be described clearly in a few paragraphs as the core idea is to introduce an approximate A*V to guide the first-step output perturbation for cache eviction. The mathematical proofs seem unnecessary.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Naming. The method needs a proper name. Referring to it as \u201cours\u201d throughout the paper is unhelpful for readers and subsequent citations.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal helps by clarifying scope (static eviction vs dynamic selection), adding recent baselines (PyramidKV, DuoAttention), reporting SCBench results, showing chunked-prefill latencies, and committing to clearer naming (CriticalKV) and streamlined exposition.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Although Appendix B claims robustness to \u03b1, the main paper only presents results for \u03b1 = 0.5. A sensitivity analysis in the main text would improve credibility.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "It also argues the infeasibility of exhaustive search and provides \u03b1-sensitivity, including at 10% cache.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The writing is mostly clear but sometimes verbose. Sections 3.4\u20133.6 mix implementation and theoretical statements, which could be reorganized for readability.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal helps by clarifying scope (static eviction vs dynamic selection), adding recent baselines (PyramidKV, DuoAttention), reporting SCBench results, showing chunked-prefill latencies, and committing to clearer naming (CriticalKV) and streamlined exposition.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Some kV entries may be important to maintain long-distance dependency or semantic coherence, even if they contribute little to the l_1 loss of the current output. Could you provide some discussion about this point?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The greedy strategy does not guarantee finding the global optimal solution. Could you provide some output L1 result comparisons between the greedy strategy and exhaustive search? Is it possible?",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "It also argues the infeasibility of exhaustive search and provides \u03b1-sensitivity, including at 10% cache.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The conclusion of the output difference relies on attention weight, V, and W^O is straightforward. However, this article has spent a lot of space proving this, which makes me puzzled.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Why must this paper use 50% of the budget to select the KV pair with maximum attention weights? Why not use the adjusted attention containing output differences directly (In Alg. 1)?",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The method\u2019s dependence on a two-stage design and a fixed split (\u03b1) would benefit from stronger justification and sensitivity in the main text.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Some recent baselines are not compared [1, 2].",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal helps by clarifying scope (static eviction vs dynamic selection), adding recent baselines (PyramidKV, DuoAttention), reporting SCBench results, showing chunked-prefill latencies, and committing to clearer naming (CriticalKV) and streamlined exposition.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "I believe the authors' definition of perturbation is too narrow\u2014it is defined only based on the output at the current step, and the proposed method is built on this foundation. However, cache eviction is static. Although the perturbation may be reduced at the current step, the KV cache pruned based on this step's perturbation might become important again in subsequent steps. Therefore, how should the perturbation in future steps be measured? Also, how does the proposed method perform in multi-turn dialogue or ultra-long sequence scenarios?",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Evaluation emphasizes single-turn prompts and adds multi-turn SCBench only in rebuttal with limited scope.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The proposed method shares strong relevance to Quest [3]. Quest approximates attention computation based on the maximum and minimum KV values, while the proposed method uses the L2 norm for approximation. However, the authors do not provide any discussion or comparison with Quest, even though Quest employs a dynamic selection approach.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "The positioning versus dynamic selection methods is only partially convincing; novelty beyond an intuitively output-aware view feels incremental.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The comparison of inference speed is not sufficient. There should be results on acceleration for both 128K pre-filling and inference, similar to the presentation in DuoAttention [1].",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Efficiency reporting is fragmented and omits a concise accounting of overheads per step and throughput across context lengths in the main body.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 11372,
+  "prompt_tokens": 1923,
+  "total_tokens": 13295,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 9303,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00345338,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00345338,
+   "upstream_inference_prompt_cost": 0.00026922,
+   "upstream_inference_completions_cost": 0.00318416
+  }
+ }
+}

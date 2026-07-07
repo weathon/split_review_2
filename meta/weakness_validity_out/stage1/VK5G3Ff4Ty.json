@@ -1,0 +1,137 @@
+{
+ "paper_id": "VK5G3Ff4Ty",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "The authors claimed that they selected small LMs and their larger counterparts but from Table 1, they seems to be from completely different models families (e.g. Gemma 3 paired with Med-Llama). Generally, I would consider 1B-8B to be in similar scale, as one would be able to run a 8B model on consumer GPU too. Also, why compare small general models with large medically-adapted models? Would a fairer comparison would be between both general or both medically-adapted?",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Concerns persist regarding comparisons across different model families, fine-tuned small models versus non-fine-tuned larger models, and the absence of strong control experiments.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In medical summarization, it has been shown that automated metrics do not correlate with human preference. The authors also discussed this in the related work, but the experiment setup does not involve any human evaluation. The paper contains only a single illustrative example and qualitative claim about hallucination in SmolLM2. No crowd/clinician study exists.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "core issues related to ... the absence of human evaluation ... remain largely unresolved.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Finetuning details: missing",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The finding that fine-tuned small models can perform on par with larger one (zero/few-shot) is not new and was shown in previous work (the authors also discussed this in their related work). The experiments also does not aim to further explain this phenomenon and does not provide any interesting insights.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The main finding (fine-tuned small models can match or exceed larger zero- or few-shot models) is already well established. The additional analyses do not rise to the level of a novel conceptual or methodological contribution.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Statistical rigor and human evaluation. Results hinge on point estimates over n=250 without confidence intervals or significance testing; no clinician blind review is reported.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "does not resolve concerns about statistical rigor or the lack of human evaluation.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "External validity. The study uses a single text dataset (MeQSum) and a single imaging domain (CXR). Would be better if there are different benchmarks involved.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The study covers a limited set of datasets and domains, constraining the strength of its broader conclusions.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Some narrative statements suggest SLMs outperform across all metrics after PEFT, yet detailed tables/figures and notes on instability. More granular win-loss accounting by metric/model would avoid over-generalization.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors moderated earlier broad statements implying that small models outperform larger ones across all metrics, and now acknowledge that larger models retain advantages in stability and hallucination resistance.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I think the biggest and most immediate thing the authors should do is ask themselves why. What is the research question you want to answer? You should start from there and derive what experiments should be conducted to answer the question and support your claims. If you don't know where to start, you can at least conduct some form of error analysis to help guide your research before jumping into wasting a bunch of computes.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Several reviewers noted that the paper benchmarks many models without a clearly articulated hypothesis or guiding research question. While the rebuttal adds analysis depth, this structural issue remains.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "You finetuned small LMs with LoRA and showed it performed better than not-finetuned large LMs (who are not even that large in today standards.) Are we supposed to be surprised by this result-- if we are supposed to be surprised, how do you justify? And for a fair comparison, at the very least you should compare with finetuning small LMs with full-finetuning, and LLMs with LoRA finetuning. Even then, why are you running this experiment in the first place? Small LMs are unsurprisingly not good at generalization compared to LLMs, so it is expected to not perform well zero-shot.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Concerns persist regarding comparisons across different model families, fine-tuned small models versus non-fine-tuned larger models, and the absence of strong control experiments.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Your evaluation only includes automatic metrics, most of which are known to not correlate very well with human judgement. Have you at least tried some sort of human evaluation?",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "core issues related to ... the absence of human evaluation ... remain largely unresolved.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Even then, the reported results on the automatic metrics for before and after finetuning are still very low -- have you looked at the generated output and analyze them?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Also, finetuning, at the very least you should report hyperparameters you used for the finetuning to support your claim",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The findings in this paper is very much expected and have been extensively explored in other papers, so my overall excitement is a bit low. This affects the overall originality and significance. For example, in [1], researchers have already found that models with much smaller sizes outperform LLMs. You may find much more relevant papers out there.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "The main finding (fine-tuned small models can match or exceed larger zero- or few-shot models) is already well established. The additional analyses do not rise to the level of a novel conceptual or methodological contribution.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I am not sure what \"common assumptions\" are in line 22. Are there any dimensions (e.g., hallucination) where large models still outperform smaller ones? Or you think that small models can outperform LLMs across all dimensions related to clinical summarization? I think it is important to study this issue comprehensively.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors moderated earlier broad statements implying that small models outperform larger ones across all metrics, and now acknowledge that larger models retain advantages in stability and hallucination resistance.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The first two paragraphs of the introduction appear to be verbose and can be significantly shortened to discuss the most important point.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 7919,
+  "prompt_tokens": 1823,
+  "total_tokens": 9742,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 6092,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00247254,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00247254,
+   "upstream_inference_prompt_cost": 0.00025522,
+   "upstream_inference_completions_cost": 0.00221732
+  }
+ }
+}

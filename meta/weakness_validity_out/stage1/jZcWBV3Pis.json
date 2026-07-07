@@ -1,0 +1,137 @@
+{
+ "paper_id": "jZcWBV3Pis",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "The main weakness of this work is the lack significance. In the abstract and the introduction, authors lay out the motivations behind this paper: can Chinchilla's prescribed token-to-parameter ratio be trusted? Unfortunately, the paper answers this question only partially: if we have a systematic error in counting model parameters, the compute optimal TTP will likely be constant. However, the paper doesn't give any insight whether Chinchilla's initial $L(N,D)$ functional form, from which the optimal TTP ratio is derived from, is reliable in the first place.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The most critical outstanding concern, shared by Reviewers RqTP, PX56, and LUM4, is the limited marginal contribution of the work.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I think the analysis is not deep enough and the paper's insights add to our understanding of compute optimal scaling of LLMs.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "I believe the paper would be greatly strengthened it is more based on real-world use cases of the Chinchilla scaling law, so that findings can guide practice.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I feel instead of best fit, the choice of model parameters could be based on how people actually count model parameters, for example according Kaplan et al, Hoffmann et al, whether embedding weights are included, whether efficient implementation of operators that reduces parameters are considered.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors effectively addressed Reviewer 7rMq's concern regarding the \"synthetic\" nature of the experiments by explicitly mapping the \"Additive Constant Perturbation\" to the real-world accounting issue of including/excluding embedding parameters.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I am curious and hope the authors could elaborate in revision, what previous works have also analysed the model parameters count aspect of the neural scaling law (Kaplan, Chinchilla, or others), what are their findings, and how this work compares to them and finds anything novel.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "I encourage the authors to describe more details how existing works count parameters, like in Kaplan et al, Hoffman et all, and other works.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I wonder how exactly Hoffman et al calculates mode counts? It would be very helpful if the authors understand how Hoffman calculates model parameters and also describe in main paper. And then, the best fit model count will not be necessary.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Main weakness in my opinion is the strong claim of Chinchilla conclusions eg with regard to TTP estimates being good guidance for practitioners following the conducted study.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "While the rebuttal clarified the intent (auditing inputs vs. fixing functional forms) , it did not solve the reviewer's core issue: that \"relying on const 20 TTP is confusing\" because the underlying Chinchilla fits themselves have high uncertainty and poor extrapolation.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I think the statement abour relying on const 20 TTP is confusing, as the study does not deal with repairing this particular deficit of original Chinchilla work.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "While the rebuttal clarified the intent (auditing inputs vs. fixing functional forms) , it did not solve the reviewer's core issue: that \"relying on const 20 TTP is confusing\" because the underlying Chinchilla fits themselves have high uncertainty and poor extrapolation.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I think as the study deals with effect of model param perturbations only, one has to be again cautious to make a general statement about Chinchilla hints to be reliable - as also further elements of the study, eg dataset composition nature etc, can be in same way source of changing the important trends as model param perturbation, which is though not checked by the study.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "There is no enough detail about the data used for the current study. It seems that authors rely on previous work done by Besiroglu et al to extract the data from original Chinchilla plots, but it is nowhere mentioned.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal successfully corrected Reviewer LUM4's oversight regarding data provenance and confidence intervals, pointing out that these were indeed present in the main figures (Fig 1 & 2) and Appendix.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "It is not clear why authors rely only on Chinchilla data to make a case for TTP recommendation testing. Eg, Llama 3 reports also offer numerous datapoints that were used to fit scaling laws and it would be good to understand whether TTP estimation there leads to same or different results as in Chinchilla, which would provide for practitioners more consistency if both were aligned in their recommendations derived from scaling law fits.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewer PX56's concern regarding the predictive validity of these \"robust\" laws remains unaddressed. The paper essentially shows that the input definitions don't change the old fits, but it fails to demonstrate that these fits are actually predictive for modern, massive-scale models (like Llama 3) where the functional form itself might break down.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It seems there is not a clear validation of scaling law fits, eg using held out points, to make sure that obtained fits actually retain the sufficient quality. This was also not performed in original Chinchilla study, validation there was arguably done by using three different approaches and observing similar trends. Here authors use only Approach 3, parametric loss fit, and there should be a way to show that obtained fits are actually to be trusted.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Objectively, the research findings of this paper offer a comparatively limited marginal contribution.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "The most critical outstanding concern, shared by Reviewers RqTP, PX56, and LUM4, is the limited marginal contribution of the work.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Furthermore, despite the highly insightful nature of the original Chinchilla work, its practical application value within the industry remains constrained.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 8663,
+  "prompt_tokens": 2746,
+  "total_tokens": 11409,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 7002,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 2560,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00252336,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00252336,
+   "upstream_inference_prompt_cost": 9.772e-05,
+   "upstream_inference_completions_cost": 0.00242564
+  }
+ }
+}

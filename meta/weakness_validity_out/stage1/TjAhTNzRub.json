@@ -1,0 +1,277 @@
+{
+ "paper_id": "TjAhTNzRub",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "This assumes black-box access to the model since, if the model is distributed, an attacker could easily recover the forgotten information by removing the added projections.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "clarified how the projection layer can be fused into model weights (mitigating bypass concerns)",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Furthermore, it is not yet clear whether unlearning only part of the model is sufficient to comply with current regulations.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It is unclear to me whether this can be applied to random unlearning.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Several reviewers raised concerns that the method does not reliably support instance-wise unlearning, especially when forget and retain samples come from the same class. The rebuttal largely acknowledges this limitation and reframes the method as class- or concept-level, but this effectively narrows the contribution rather than resolving the concern.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Furthermore, I fail to see how this method can be applied to, let's say, LLMs, where a class cannot be directly attributed to a logit in the output distribution.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lines 222-223 assume that given the prototypes matrix $P\\in\\mathbb{R}^{d\\times k}$ and its pseudoinverse $D =V\\Sigma^{-1}U^\\top$, $DP=I_k$. Although this is true only if $P$ is of full rank, which is likely since $d\\gg k$. Yet, I feel this should be properly discussed.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors provided reasonable explanations for notation inconsistencies",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Equation 4, uses $P^+$ instead of $D$ in one case. It is not wrong, but it seems like $D$ and $P^+$ are two different terms.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors provided reasonable explanations for notation inconsistencies",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Also in equation 4, if $DP=I$ (left inverse), shouldn't $I - PP^+=0$ (right inverse)? In that case, the complement-space projection term has no utility.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors provided reasonable explanations for notation inconsistencies",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Figure 2 is low resolution. I suggest exporting it to PDF.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Several reviewer concerns were partially or fully addressed by the rebuttal, particularly those related to clarity, positioning, and threat model assumptions.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Line 116-117, Thudi et al. is cited twice (use \\citet{})",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors provided reasonable explanations for notation inconsistencies",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lines 214-215, the paper should clearly mention that the expected behaviours are specifically intended for class-unlearning.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Several reviewer concerns were partially or fully addressed by the rebuttal, particularly those related to clarity, positioning, and threat model assumptions.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The part on multiple experts (Section 3.3) could be more formal, in my opinion. To fully understand what is happening, I had to scroll until the appendix and check the Pseudocode.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Several reviewer concerns were partially or fully addressed by the rebuttal, particularly those related to clarity, positioning, and threat model assumptions.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Related to W2, Line 320 mentions experiments on instance-wise unlearning. Yet, I was not able to find them.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal largely acknowledges this limitation and reframes the method as class- or concept-level",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I found the paper\u2019s framing of KD somewhat confusing. KD is described as an alternative designed to address the limitations of using retrain-from-scratch as the gold standard for unlearning. However, this seems more like a shift in objective than a solution to a known limitation. ... From that perspective, KD appears conceptually closer to model editing\u2014which modifies or removes specific knowledge\u2014than to classical privacy-oriented unlearning, which focuses on reproducing the retrained model\u2019s behavior under a privacy\u2013utility tradeoff.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Most of Reviewer FRtt's concerns were about positioning, threat model clarity, and whether the method is closer to unlearning or editing. The rebuttal handled these points fairly well and clarified several misunderstandings.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The claim that prior unlearning methods focus solely on privacy metrics while ignoring utility is not entirely accurate. Traditional unlearning methods already aim to balance privacy and utility by approximating the retrained model, so the key distinction from KD lies in their objectives rather than in any inherent limitations.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Most of Reviewer FRtt's concerns were about positioning, threat model clarity, and whether the method is closer to unlearning or editing. The rebuttal handled these points fairly well and clarified several misunderstandings.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I did not observe any new metrics being formally introduced. ... It would be helpful if the authors could further clarify what is meant by 'introducing utility metrics' and how this differs from existing evaluation practices in unlearning.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Most of Reviewer FRtt's concerns were about positioning, threat model clarity, and whether the method is closer to unlearning or editing. The rebuttal handled these points fairly well and clarified several misunderstandings.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "it seems to rely on the assumption that the model functions as a closed system. ... any access to internal representations or earlier layers could potentially expose the forgotten information. ... method would seem best suited for scenarios where third parties cannot directly access or fine-tune internal layers. It would be helpful if the authors could clarify whether this closed-box assumption is inherent...",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Questions about whether the method assumes a closed-box setting were also addressed convincingly by arguing that remapping can be absorbed into the model and applied at different layers.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "it is less clear whether this claim also extends to numerical stability and conceptual validity. As the number of classes or concepts grows, prototype orthogonalization and pseudo-inverse computations may become ill-conditioned, and the assumption that each class can be represented by a single prototype may no longer hold. It would be helpful if the authors could clarify whether the scalability claim covers these aspects or primarily refers to runtime efficiency.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The set of baselines compared in the paper seems somewhat limited given how active the unlearning area has become. ... It would be helpful to include comparisons against existing feature-based unlearning methods, as these share a closer methodological foundation with the proposed approach.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Although the Prototype-Orthogonal projection enforces orthogonality, it implicitly assumes that the forget and remain prototypes are not highly entangled. As illustrated in Figure 2, when the entanglement is strong, the PO subspace may fail to capture the principal features of the data. In such cases, as shown in Equation (4), the introduced complement-space projection retains components of the forget prototypes. This suggests that strongly entangled forget prototypes cannot be fully unlearned, thereby limiting the effectiveness of the proposed method.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Another unresolved issue is the robustness of prototype-based orthogonalization under strong representation entanglement. ... they do not provide the kind of quantitative entanglement or leakage analysis some reviewers explicitly requested.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Experiments focus on concept-wise unlearning. The paper does not evaluate instance-wise unlearning (random forgetting), subclass unlearning, or unlearning in VLMs and generative models. This narrows the claim and leaves open whether the method robustly handles entangled features.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "However, several core concerns remain outstanding, most notably those related to instance-wise unlearning.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The results in Table 6 indicate that the proposed method becomes less effective in higher feature entanglement. Specifically, the stronger entanglement is in mid-layer representations, compared to the final layer. The results weaken the generality and robustness of the approach.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Another unresolved issue is the robustness of prototype-based orthogonalization under strong representation entanglement. ... they do not provide the kind of quantitative entanglement or leakage analysis some reviewers explicitly requested.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Some related works are missing and lack discussion (e.g., [1]).",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "One of the core contributions as claimed by the authors is the effectiveness of using multiple experts to spread the forgotten concepts across the embedding space. Still the ablation study on the number of experts, do not support this contribution, as increasing the number of experts does not improve the results for CIFAR-100 and Tiny-Imagenet (Figure 6). Even for CIFAR-10 the results remain the same for the most part. This also can be seen from the results in Table 11.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "does not fully resolve the concern that conditional routing is over-emphasized relative to its demonstrated benefits",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "When applying your method to random data forgetting, if you compute the average embedding for the forget samples in a class, it almost overlaps the average embedding for the remaining samples in that class. How do you use your method to remember the forget samples by mapping the average embedding, while maintaining the accuracy of the model on the remaining samples with the same average embedding?!",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Several reviewers raised concerns that the method does not reliably support instance-wise unlearning, especially when forget and retain samples come from the same class. The rebuttal largely acknowledges this limitation and reframes the method as class- or concept-level, but this effectively narrows the contribution rather than resolving the concern.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "From the explanation it seems that each class has a single prototype vector. In that case how can the autocorrelation of a prototype vector be less than one in Figure 3? The cosine similarity of a vector with itself should be 1! This also raises questions about the discussion in section 3.1.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors provided reasonable explanations for notation inconsistencies",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper seems very confusing with the use of undefined notations throughout their method section. What is S_f in line 247? The paper would benefit a lot by adding a notation section.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors provided reasonable explanations for notation inconsistencies",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "This is also the case with many undefined abbreviations (D_r, D_rt, HM, HM_t) in section 4.1.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors provided reasonable explanations for notation inconsistencies",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The names and notations do not match across the main body, tables, and captions: $D_{rt}$ is used in the caption and D_rt in the table and text. The paper seems unpolished.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors provided reasonable explanations for notation inconsistencies",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "A clear definition of the problem that is being solved is missing. It seems that the paper focuses on only class unlearning, but they present some results on random data forgetting in the experiments; yet, the extension of the method to unlearning a subset of the class is not clear and justified!",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "However, several core concerns remain outstanding, most notably those related to instance-wise unlearning.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The setting of experiments for random data forgetting is not clear at all! What percentage of data are you forgetting in the results of table 3? Are they randomly chosen across different classes? This is also the same for the classes. What is the number of classes you try to unlearn? In most class unlearning works, the main initial focus is to show that one class can be unlearned effectively and then do experiments on multiple classes. In this work authors treat classes almost as individual samples by performing bulk forgetting on multiple classes simultaneously.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Several reviewers raised concerns that the method does not reliably support instance-wise unlearning, especially when forget and retain samples come from the same class.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The computation time for some of the methods seems a bit counterintuitive. For example the underlying approach for BS is similar to RL but instead of random labels it finds the labels from adversarial attacks. So the fact that the time reported for BS is much smaller than RL in figure 4 is a bit counter intuitive.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "better explained the runtime and memory comparisons",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The SVM-based MIA that is used for evaluations is very weak compared to the SOTA MIA methods in the literature. I encourage the authors to utilize SOTA MIA for their evaluations rather than relying on basic approaches.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "There are more recent works on machine unlearning for classification models that have not been used as base-lines in the experiments. Please see [4,5,6,7,8].",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In line 126 authors point out that KD is a necessary extension for MU evaluation, but they do not provide any definition or clarification for KD. At least refer to the appendix section containing the details.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Several reviewer concerns were partially or fully addressed by the rebuttal, particularly those related to clarity, positioning, and threat model assumptions.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Duplicate sentence in line 717/718.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Several reviewer concerns were partially or fully addressed by the rebuttal, particularly those related to clarity, positioning, and threat model assumptions.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 12921,
+  "prompt_tokens": 4296,
+  "total_tokens": 17217,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 10978,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00421932,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00421932,
+   "upstream_inference_prompt_cost": 0.00060144,
+   "upstream_inference_completions_cost": 0.00361788
+  }
+ }
+}

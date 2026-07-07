@@ -1,0 +1,95 @@
+{
+ "paper_id": "UJ2UUjT2ko",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 3,
+ "items": [
+  {
+   "weakness_text": "The three mechanisms are inferred largely through counterfactual patching, but the causal independence between them is assumed rather than rigorously established. For example, lexical and reflexive mechanisms often co-occur. It remains unclear if they are distinct causal variables or correlated manifestations of shared attention dynamics.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Concern about \u201ccausal independence\u201d: authors clarify they demonstrate causal controllability/independent effects at the mechanism level (via interventions where mechanisms are set to disagree and one is shifted while others are fixed).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Although filler text is introduced later, most analyses still rely on templated X likes Y style prompts. These may not capture linguistic variability or discourse-level entity binding.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Concern about templated prompts / linguistic variability: authors add a new evaluation (Appendix D.4) with phrasing variations and report consistency.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I'm looking for more details about how exactly the interchange interventions were performed and how the authors localized where to do interchange interventions. From the appendix, it seems like this is based on performing interchange interventions on the attention at specific layers on the last token position? And the authors use attention knockout to figure out which layers are passing entity information to the final token position? Can you clarify?",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Interchange intervention implementation/localization: authors clarified layer selection and that interventions patch the last-token residual stream; reviewer follow-up indicates this resolved their main confusion, and authors additionally made explicit that this is **full vector patching**.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The main body of the paper would benefit from a bit more explanation of what exactly is going on here (I'm aware of space constraints, but I think this is important). And the appendix would benefit from a clear, high-level description of what the experiments are actually doing.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Putting the counterfactual input on top in Figure 1 feels confusing, seems more natural to have the original on top and the counterfactual below?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I found the text description of the reflexive mechanism (line 231) to be fairly hard to parse. This seems like something that is much easier to show than to say, so a figure could be helpful.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Reflexive mechanism explanation: added a figure and a dedicated section; reviewer states the figure is helpful and Section 3.4 helps.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Line 159: use \\citet instead of \\citep",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Figures: Some key figures (e.g., Fig. 2) are difficult to interpret. The axes, metrics, and what constitutes \u201cmixed\u201d effects are not clearly explained in the captions or main text, making it hard for readers to connect the visualization to the described mechanisms.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Figure clarity (axes/definitions of \u201cmixed\u201d): authors report caption and text clarifications.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Presentation of reflexive mechanism: The explanation and evidence for the reflexive mechanism remain somewhat unclear. Because the patched context may already contain the predicted token, it is hard to disentangle whether the observed effect truly demonstrates a \u201cpointer\u201d or simply reflects ongoing retrieval from other mechanisms.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Reflexive mechanism ambiguity: authors moved additional validation into main text (new Section 3.4) and described controls intended to distinguish pointer patching vs answer-token carryover/suppression explanations.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 6254,
+  "prompt_tokens": 1912,
+  "total_tokens": 8166,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 6449,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0020188,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0020188,
+   "upstream_inference_prompt_cost": 0.00026768,
+   "upstream_inference_completions_cost": 0.00175112
+  }
+ }
+}

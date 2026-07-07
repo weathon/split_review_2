@@ -1,0 +1,81 @@
+{
+ "paper_id": "mkl9iIXIr2",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 3,
+ "items": [
+  {
+   "weakness_text": "The comparison in Table 1 does not appear to be quite a fair comparison. In particular, the warehouse constraint in prior work Hihat et al. (2023) is a general convex set, whereas the one in the paper restricts the sum of the items to be less than the capacity. This seems to be quite a restrictive assumption of the items take up different space in the warehouse.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewer xAJn pointed out the difference in the constraints considered in this paper and the prior work Hihat et al. 2023. The rebuttal acknowledged this limitation. This concern deserves more work in the future.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I found some of the presentation to be poor to the point that it was difficult to verify the theoretical results in the paper. I point these out and ask for clarification in the Questions section.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The clarifying questions on the technical details were addressed by the rebuttal.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The paper does not evaluate the computational overhead of its algorithm. For example, the SOGD base learner requires\u00a0$K=\\lfloor\\log_2 T/(32\\max(L,1)\\log T)\\rfloor+1$\u00a0experts and combiners, and the doubling trick involves restarting the base learner; the growth of computational cost with\u00a0T\u00a0or\u00a0$L_{max}$\u00a0is unreported, which is critical for real-time inventory applications.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The ideal comparator\u00a0$u_t=d_t$\u00a0assumes\u00a0$d_t\\leq D$\u00a0to satisfy\u00a0$u_t\\in C(0)$. However, the paper does not discuss how the algorithm performs when demand\u00a0$d_t>D$, which\u00a0is a common real-world scenario, nor does it clarify whether the regret bound remains valid when\u00a0$u_t$\u00a0must be capped at\u00a0D.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Reviewer KfMr asks about the assumption of $d_t\\leq D$. The rebuttal clarifies that the algorithm and the theoretical results both hold for the $d_t>D$ case.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The paper is purely theoretical and lack of experimental validation.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper simplifies the problem by assuming a linear warehouse capacity constraint.  The authors admit this is a limitation and that their proofs rely on it. This is a fair limitation, but it does reduce the generality of the result.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewer xAJn pointed out the difference in the constraints considered in this paper and the prior work Hihat et al. 2023. The rebuttal acknowledged this limitation. This concern deserves more work in the future.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The connection to adaptive regret or meta-OCO methods (e.g., MetaGrad, Ader) is acknowledged, but it\u2019s unclear if simpler baselines could reach similar dynamic regret under relaxed constraints.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 4165,
+  "prompt_tokens": 1045,
+  "total_tokens": 5210,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 3400,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0013125,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0013125,
+   "upstream_inference_prompt_cost": 0.0001463,
+   "upstream_inference_completions_cost": 0.0011662
+  }
+ }
+}

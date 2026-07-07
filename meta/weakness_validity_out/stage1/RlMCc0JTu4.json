@@ -1,0 +1,109 @@
+{
+ "paper_id": "RlMCc0JTu4",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "Please use the same format for citation. Eg. The citation in introduction and in related works using different format in the text",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "In addition, the paper exhibits severe problems in presentation and completeness, including missing figures, missing references, inconsistent formatting, and incomplete experimental results.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Figure 2 is missing",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "In addition, the paper exhibits severe problems in presentation and completeness, including missing figures, missing references, inconsistent formatting, and incomplete experimental results.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Citations mentioned in the main text is missing in the reference section.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "In addition, the paper exhibits severe problems in presentation and completeness, including missing figures, missing references, inconsistent formatting, and incomplete experimental results.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "\u201cOur proposed framework incorporates robotic arms, parallel grippers, cameras, and optical tactile sensors. This framework facilitates seamless transitions between different contact states, leveraging both visual and tactile information to enhance robot performance, representing a significant advancement over existing approaches\u201d Point cloud-based visual tactile fusion method is not novel. [1]\n[1]Yuan et.al Robot Synesthesia: In-Hand Manipulation with Visuotactile Sensing",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Concerns are also raised about the lack of novelty relative to existing visuotactile fusion and robot synesthesia work.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The \u201c3)\u201d in line 107 is confusing, I do not find \u201c1)\u201d and \u201c2)\u201d",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Without literature review for recent state-of-art papers.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "No figure.4 in the paper but mentioned in the text.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "In addition, the paper exhibits severe problems in presentation and completeness, including missing figures, missing references, inconsistent formatting, and incomplete experimental results.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Many Format Issues",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "In addition, the paper exhibits severe problems in presentation and completeness, including missing figures, missing references, inconsistent formatting, and incomplete experimental results.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Writing and presentation is confusion and put barrier to reader.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "In addition, the paper exhibits severe problems in presentation and completeness, including missing figures, missing references, inconsistent formatting, and incomplete experimental results.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The major contribution claimed in line 53- 61 about \u201cvisual tactile synesthesia\u201d and \u201cteacher students\u201d is not novel which has already been published in existing work [1], where they also use point cloud-based visual tactile fusion and teacher student reinforcement learning. The only difference might be the different sensor and the author using affordance in this paper.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Multiple reviewers point out that the submission substantially overlaps with an already published paper, raising concerns about duplicate submission and research integrity.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "No tables and experiments results.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "In addition, the paper exhibits severe problems in presentation and completeness, including missing figures, missing references, inconsistent formatting, and incomplete experimental results.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 4779,
+  "prompt_tokens": 1165,
+  "total_tokens": 5944,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 4791,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00150122,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00150122,
+   "upstream_inference_prompt_cost": 0.0001631,
+   "upstream_inference_completions_cost": 0.00133812
+  }
+ }
+}

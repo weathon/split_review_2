@@ -1,0 +1,193 @@
+{
+ "paper_id": "HA8vzzT6Ax",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 6,
+ "items": [
+  {
+   "weakness_text": "The experimental evaluation only considers two unbiased watermarking schemes (Gumbel-max and SynthID). The analysis would be more convincing if extended to other representative watermarking frameworks, such as KGW or reweight-based methods [1,2].",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Remaining concerns primarily relate to ... extensions to biased or non-degenerate watermarking schemes, which reviewers generally agreed are reasonable limitations and future directions rather than blockers.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The proposed method requires applying watermarking to both the draft and target models during speculative sampling. The paper does not analyze whether this dual watermarking might affect text quality or fluency.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Most reviewer concerns were adequately addressed in the rebuttal, including clarifications on ... text-quality evaluation.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The proof that watermark strength can reach the upper bound WS = H(P) (Theorem 3.2) assumes that each P_\u03b6 is a completely deterministic distribution, where every generated token is fixed once the pseudorandom seed is given. However, even SynthID\u2019s tournament sampling still has randomness after top-k and 2^m rounds, so P_\u03b6 isn\u2019t truly deterministic. This means the bound is more of a theoretical ideal than something achievable in real LLM decoding. The paper should make this distinction clearer and discuss how far practical schemes are from that ideal. For example, how much does it improve over different m (the number of layers used in SynthID)?",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Most reviewer concerns were adequately addressed in the rebuttal, including clarifications on ... assumptions behind theoretical optimality ...",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The claim of achieving both the best sampling efficiency (SSE = 1 - TV(Q, P)) and the highest watermark strength (WS = H(P)) relies on several strong assumptions, such as perfectly unbiased decoders, fully deterministic generation, and independent pseudorandom seeds. If any of these assumptions don\u2019t hold, the trade-off comes back. So should the result really be interpreted as showing what\u2019s possible under idealized conditions, not as a general solution that always works?",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Most reviewer concerns were adequately addressed in the rebuttal, including clarifications on ... assumptions behind theoretical optimality ...",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The paper itself clarifies that watermark strength \u2260 detection efficiency (Remark\u20093.1): two schemes with comparable watermark strength may still differ in detection efficiency.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Remaining concerns primarily relate to broader robustness, downstream behavioral impacts, and extensions to biased or non-degenerate watermarking schemes",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Regarding specific methods, mixture of multiple pseudorandom sources will hurt detection efficiency, as more pseudorandom sources means more ambiguity at detection time. ... This paper uses three seeds, further compounding interference among signals at detection time. Concretely, for any observed token the detector does not know whether it came from (i) an accepted draft token, (ii) a rejected token replaced from the residual, or (iii) the \u201cextra\u201d token when all draft tokens were accepted. This uncertainty necessarily makes practical detection weaker than the paper\u2019s \u201cWS\u201d metric.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Remaining concerns primarily relate to broader robustness, downstream behavioral impacts, and extensions to biased or non-degenerate watermarking schemes",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "In Experiment section of this paper, the claim is also \u201cimproved detectability,\u201d not matching with non-accelerated watermarking. Therefore, the \u201ctrade\u2010off\u201d still exists. The paper pushes the practical frontier but does not remove it, the headline \u201cBREAK THE TRADE-OFF\u201d is overstated. A more faithful summary is that the method steadily approaches a better trade-off.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Remaining concerns primarily relate to broader robustness, downstream behavioral impacts, and extensions to biased or non-degenerate watermarking schemes",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The paper, for simplicity, treats positions as independent. A stricter analysis should avoid this assumption, and some results can hold without independence.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Seed reuse is not discussed. Re-applying the same pseudorandom seed should be skipped (e.g., as in prior \u201ccontext code history\u201d) to maintain unbiasedness.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Oracle knowledge vs deployment reality: Many results assume access to the base distribution P_t (or accurate logits) and, for the strongest detectors, the accept coin. External forensics often lacks both; estimation error can materially affect strength and false positives.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Remaining concerns primarily relate to broader robustness, downstream behavioral impacts, and extensions to biased or non-degenerate watermarking schemes",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Model/scale realism: Simulated (Q,P) pairs and small-vocab settings may not capture calibration quirks, long-tail tokens, or beam-blocking in large models.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Remaining concerns primarily relate to broader robustness, downstream behavioral impacts, and extensions to biased or non-degenerate watermarking schemes",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Robustness / attack model: The paper doesn\u2019t stress-test adversaries who (i) alter spacing/punctuation, (ii) paraphrase with another model, or (iii) run ensemble-style removal \u2014 how quickly does the effective KL collapse?",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Remaining concerns primarily relate to broader robustness, downstream behavioral impacts, and extensions to biased or non-degenerate watermarking schemes",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Broader behavioral impacts not discussed: Recent studies suggest watermarking can alter model behavior beyond detectability or quality trade-offs. ... The paper would be stronger with a targeted discussion of how speculative sampling with watermarking affects alignment-relevant metrics (e.g., reward scores) and a short discussion citing these works to contextualize potential side effects.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Remaining concerns primarily relate to broader robustness, downstream behavioral impacts",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Downstream behavior: Stronger coupling can interact with alignment/quality. Recent work reports reward/quality/alignment degradations under watermarking; the paper doesn\u2019t quantify the proposed method\u2019s effect on reward score or human preference.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Remaining concerns primarily relate to broader robustness, downstream behavioral impacts",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Reporting details: Some derivations (e.g., Eq. 10) are explained tersely; detector training details and calibration of \u03c4 / p could be easier to reproduce.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Most reviewer concerns were adequately addressed in the rebuttal, including clarifications on ... additional related work, runtime reporting, and text-quality evaluation.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Adversarial/transform robustness: Evaluate detectability after common edits (paraphrase via another model, synonym swaps, punctuation/whitespace jitter, mild re-ordering). Report the induced drop in effective strength and how close it is to theoretical predictions.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Remaining concerns primarily relate to broader robustness, downstream behavioral impacts, and extensions to biased or non-degenerate watermarking schemes",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Latency & throughput accounting: Since the goal is \"fast and provable,\" include an end-to-end latency/throughput table under seeded acceptance (overhead of PRNG, acceptance calibration, detector extraction) to confirm the practical speedup survives.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Most reviewer concerns were adequately addressed in the rebuttal, including clarifications on ... runtime reporting",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Downstream effects audit: Report reward-model scores or human preference deltas for seeded-accept decoding vs baseline speculative and vs classic watermarks. Even a small ablation will reassure readers that \u201cmax strength\u201d doesn\u2019t quietly harm alignment/quality.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Remaining concerns primarily relate to broader robustness, downstream behavioral impacts",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Clarity & reproducibility: Expand the derivation around Eq. 10 in the main text (one boxed paragraph). Right now it jumps out of the blue without providing much background.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Most reviewer concerns were adequately addressed in the rebuttal, including clarifications on ... additional related work, runtime reporting, and text-quality evaluation.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Clarity on SynthID: The paper uses SynthId as a case-study in this work, as it is an 'unbiased watermark'. However, SynthID is a relatively large class of watermarks that follow the tournament sampling mechanism. The general SynthID watermark is not even unbiased (when N>2). Unfortunately, the authors do not provide sufficient information to understand which specific case of SynthID is proposed in this work. I also believe that such information should be added for the sake of clarity.",
+   "reviewer_index": 5,
+   "ac_status": "resolved",
+   "ac_evidence": "Most reviewer concerns were adequately addressed in the rebuttal, including clarifications on SynthID variants",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Missing related work: The content of this paper misses several related works on 'unbiased' watermarks for better context, which can also be considered for the analysis and experiments. ... [1], [2], [3] are highly relevant.",
+   "reviewer_index": 5,
+   "ac_status": "resolved",
+   "ac_evidence": "Most reviewer concerns were adequately addressed in the rebuttal, including clarifications on ... additional related work",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Experiments section should be extended. I would expect this section to consider more experiments, through more datasets (testing across specific tasks/domains) and testing more aspects of watermarking (robustness?). The current collection is quite narrow. Furthermore, I would expect a quantification of the watermark strength through p-values and quantification of the bias (through either textual quality or cross entropy/relative perplexity).",
+   "reviewer_index": 5,
+   "ac_status": "unresolved",
+   "ac_evidence": "Remaining concerns primarily relate to broader robustness, downstream behavioral impacts, and extensions to biased or non-degenerate watermarking schemes",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The title of section 3 \"COMPLETE THE TRADE-OFF DIAGRAM\" is not clear.",
+   "reviewer_index": 5,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 11805,
+  "prompt_tokens": 2970,
+  "total_tokens": 14775,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 9065,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0037212,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0037212,
+   "upstream_inference_prompt_cost": 0.0004158,
+   "upstream_inference_completions_cost": 0.0033054
+  }
+ }
+}

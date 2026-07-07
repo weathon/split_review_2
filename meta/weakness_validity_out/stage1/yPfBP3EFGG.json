@@ -1,0 +1,221 @@
+{
+ "paper_id": "yPfBP3EFGG",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "Due to the introduction of the two-track system, new weighting parameters have been incorporated into the algorithm. These weighting parameters are constrained by other parameters. Are all these parameters well-defined? Could there be instances where parameter values fall outside their intended domain or become meaningless?",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Although the article provides a theoretical analytical framework, its readability is relatively low and lacks some necessary explanatory notes. It could benefit from adding more intuitive explanations or reorganizing the writing in this section.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper demonstrates convergence under the KL property, but does not explain how the \"non-convex + weakly convex\" conditions of the objective function satisfy the KL property.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper proposes using different variance-reduction estimators to estimate stochastic gradients, but it does not provide corresponding results for different variance estimators. Does this imply that the convergence performance of different variance estimators is largely similar?",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "There are some typos in the article: for example, in line 375 $\\min_{i \\in [8]} \\{A_i\\} > 0$; in Theorem 2 (iii), $m$ doesn't seem to work, and so on. Please carefully check the formulas in the paper.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While the two-track formulation is conceptually interesting, the theoretical contribution is incremental: the convergence analysis largely follows standard K\u0141-based arguments used in many recent nonconvex adaptive/VR methods (e.g., Adan, NAdam, AdaBelief). No essential improvement in complexity or rate is shown compared to existing results. Extending from convex to weakly convex functions is straightforward under this framework and does not introduce new analytical challenges.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Experiments are conducted only on a small LIE dataset (LOL) with 500 image pairs. This cannot convincingly demonstrate effectiveness for large-scale deep learning training\u2014the primary target scenario for Adam-type methods.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Both Reviewers F9bp and CUKC point out to the inconsistency between the theory and the empirical results and Reviewer SUNG argued that key baselines are missing.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Missing key baselines such as AdamW, Adan, AdaBelief, Ranger, and SGD+Momentum.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Both Reviewers F9bp and CUKC point out to the inconsistency between the theory and the empirical results and Reviewer SUNG argued that key baselines are missing.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The reported runtime (\"Time = 10\u207b\u2075 s\") is suspiciously small.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The VR technique, while theoretically appealing, is rarely favored in deep learning practice due to high memory and computational costs and potential degradation of generalization. This limitation should be explicitly acknowledged and empirically examined.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The algorithm tracks only a scalar second moment instead of Adam\u2019s coordinate-wise second moment, performing global RMS scaling rather than true adaptive preconditioning. This sacrifices Adam\u2019s robustness under anisotropic or sparse gradients, making the \"Adam-style\" label misleading.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The extrapolation path never evaluates gradients at the extrapolated point $\\tilde{x}^k$, reusing $\\nabla f(x^k)$. Without look-ahead gradients, it loses the curvature-awareness that yields Nesterov acceleration, so the \"two-track\" design offers little real benefit.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Parameters $\\gamma, \\alpha, \\lambda$ are randomly drawn from complex, state-dependent intervals that can even become invalid. It\u2019s unclear how this randomness is handled in practice.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper treats $\\ell_{1/2}$-norm as weakly convex, but it is not: its curvature diverges to $-\\infty$ near zero, violating the assumption used in the proofs. Hence, the theoretical guarantees do not actually cover the experimental setup.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Both Reviewers F9bp and CUKC point out to the inconsistency between the theory and the empirical results",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lemma 5 asserts that $\\mathbb{E}[ \\Phi]$ preserves the K\u0141 property by averaging over all mini-batches, but this relies on a purely formal argument ignoring stochastic dependence and VR estimators. The assumption is unverified yet central to the convergence proof.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The abstract claims almost sure convergence to a stationary point, but Theorems 1 and 2 prove only expected convergence. The a.s. statement overstates what the analysis actually establishes.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewer CUKC points out that the main theoretical result is weaker than the statement (overselling), because almost sure convergence is claimed whereas only a convergence under expectation is proved.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The convergence proof requires $\\mu < 0.5$ for positivity in descent inequalities, conflicting with practical Adam settings where the first-moment coefficient is often chosen near 0.9. The theory thus does not apply to realistic training regimes.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Key baseline details (learning-rate schedules, warm-up, AdamW usage) are missing. Computational overhead of SAGA/SARAH is unreported, undermining fairness and reproducibility.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper reports STNAdam-SGD/SAGA/SARAH results but does not isolate which component (two-track, Nesterov, VR, or adaptivity) drives the gain. Without such comparisons, the source of improvement and true novelty remain unclear.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I find the theoretical convergence analysis section quite confusing, with information that looks unnecessarily complicated for an Adam-type method.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "One would expect a theorem that assumes the KL condition and smoothness to obtain the proposed result, as the abstract and intro prepare the reader for. Instead the paper introduces a bit out of the blue Assumption 1 without explanation of when this holds and why it is needed, then Lemmas 2 to 5 are presented in the main paper without explaining why this is needed for the flow of the narrative and why these are important. As far as I can see, the proofs of these lemmas (steps in the paper) use standard arguments, so i am not sure why they needed to be highlighted in the main paper and not simply the appendix.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Then Theorem 1 includes an assumption on the function $\\Phi$ that does not look natural. Why this is needed for the paper? How is the associate with the main assumptions mentioned in the introduction (important information is missing).",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In addition even if the paper focuses on the KL condition, this condition was never properly defined throughout the paper. The only mention of it is in Lemma 5, but without a proper definition and why one should care about this condition (problems for which this is useful to have an analysis for).",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In terms of presentation, I am also not sure how Table 1 is useful. How this serves the narrative?",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The numerical experiments are also far from what the rest of the paper's theory claims. How do these problems satisfy the theoretical assumptions? Is there a gap between theory and experiments there? This is fine, but it was never properly presented in the paper.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Both Reviewers F9bp and CUKC point out to the inconsistency between the theory and the empirical results",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "From the experiments, it is also not clear to me why the new approach is better than the previous ideas for solving the same problems. Is there any intuition of why this works, or should one simply run the methods and report the results?",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The authors claim that the new method adopts a novel two-track iteration framework and is essentially an enhanced version of stochastic Adam. But in the paper, this was never properly explained. The idea enhanced Adam in what sense (theory, experiments, something else)?",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 12321,
+  "prompt_tokens": 1964,
+  "total_tokens": 14285,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 9590,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00372484,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00372484,
+   "upstream_inference_prompt_cost": 0.00027496,
+   "upstream_inference_completions_cost": 0.00344988
+  }
+ }
+}

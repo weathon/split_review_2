@@ -1,0 +1,39 @@
+{
+ "paper_id": "rzGEfYr2ZC",
+ "decision": "Reject",
+ "n_reviewers": 3,
+ "items": [
+  {
+   "weakness_text": "The paper exceeds the 9-page length limit, as mentioned in the Author Guideline: https://iclr.cc/Conferences/2026/AuthorGuide.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "[summary] The paper exceeds the 9-page limit for ICLR 2026 and therefore should be desk rejected. [reviewer_concerns] The paper exceeds the 9-page limit for ICLR 2026; consequently, it was not reviewed by the reviewers.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 806,
+  "prompt_tokens": 475,
+  "total_tokens": 1281,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 658,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00029218,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00029218,
+   "upstream_inference_prompt_cost": 6.65e-05,
+   "upstream_inference_completions_cost": 0.00022568
+  }
+ }
+}

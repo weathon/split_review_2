@@ -1,0 +1,151 @@
+{
+ "paper_id": "t33kMzEAg8",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 5,
+ "items": [
+  {
+   "weakness_text": "Combines existing ideas (latent reasoning + token control) with minor algorithmic extensions.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors have provided the necessary revisions to evidence on latency and outlined substantial gains achieved in training-free, and elaborated rationales described in Sec. 3.3 and explained the strategy for analyzing interpretability.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The overall system involves multiple heuristic components (entropy tracking, switching windows, signal mixing), making the pipeline heavy and less theoretically elegant.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors have provided the necessary revisions to evidence on latency and outlined substantial gains achieved in training-free, and elaborated rationales described in Sec. 3.3 and explained the strategy for analyzing interpretability.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The contribution is more of a practical inference-time system design than a fundamentally new reasoning principle.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors have provided the necessary revisions to evidence on latency and outlined substantial gains achieved in training-free, and elaborated rationales described in Sec. 3.3 and explained the strategy for analyzing interpretability.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Accuracy gains are modest given the added complexity.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors have provided the necessary revisions to evidence on latency and outlined substantial gains achieved in training-free, and elaborated rationales described in Sec. 3.3 and explained the strategy for analyzing interpretability.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The overall performance gains are relatively small, and the efficiency story is not fully convincing \u2014 a clearer, more direct metric is needed, and Appendix Table 8 suggests that long generations are still required to reach good accuracy.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors have provided a detailed efficiency analysis in the rebuttal.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The paper should further explain why switching between latent and explicit modes improves performance, and clarify whether (and how) the latent trajectories can be decoded or inspected in text for interpretability.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors have provided in the rebuttal and verified that the proposed method enables dynamic adaptation to the difficulties of different problems.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The experimental scope is limited; results on larger models and on other task types (e.g., coding), where latent reasoning may be less naturally applicable, would make the empirical claims more convincing.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors have included Qwen3-32B, Deepseek-R1-Distill-Qwen-32B, and evaluated the generalization ability on 6 additional benchmarks.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While the convergence and termination triggers are intuitive, the specific thresholds (\u00bdCmax for convergence, Cmax for termination) appear arbitrary. Why these specific fractions? How sensitive is performance to these choices? The paper doesn't ablate these design decisions.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Limited failure case analysis and the modes of failure. It would be good to add the cases or categories of questions where the proposed approach fails.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The results reported for soft thinking approach appear to be lower than standard CoT, which is contrary to the claims in the original Soft-thinking paper. This raises concerns about implementation correctness and whether comparisons are on equal footing.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors presented the experiments with a >= 32B model and the baseline performance, and clarified that they have used the correct implementation to ensure a fair comparison.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The method introduces many heuristic design choices and hyperparameters (window sizes W_E\u2192L and W_L\u2192E, signal mixing coefficients \u03b1\u2080 and \u03b2\u2080, switch count limits C_max, convergence/termination triggers), and it appears from the ablations that these are tuned on the test sets, which raises concerns about generalization and fair comparison.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors have provided the necessary revisions to evidence on latency and outlined substantial gains achieved in training-free, and elaborated rationales described in Sec. 3.3 and explained the strategy for analyzing interpretability.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "It seems unclear whether the latent reasoning mode genuinely enables the claimed \"exploration\" of multiple reasoning paths, since Soft-Thinking simply weights tokens by probability, and the pretrained LLM likely still concentrates probability mass on similar natural language tokens. It would be beneficial to provide some analysis of the probability distributions within the latent tokens or other evidence that meaningful exploration is occurring beyond what explicit sampling would achieve.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "There are quite a few citations that are wrong and appear to be LLM-hallucinated, even including the most important \"Soft-Thinking\" paper that this work is primarily built on top of - the citation in the draft is ```Bowen Zhang, Yanzhuo Li, Shuohang Wang, Yu Tu, Jason Wei, Ashish Vaswani, Shikun Liu, Chenlu Yu, Deli Chen, Hongyi Li, Zhihua Zhang, and Chen Liang. Soft thinking: Training-free latent reasoning for large language models.``` while the actual one should be ```Zhen Zhang, Xuehai He, Weixiang Yan, Ao Shen, Chenyang Zhao, Shuohang Wang, Yelong Shen, Xin Eric Wang. Soft Thinking: Unlocking the Reasoning Potential of LLMs in Continuous Concept Space```.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "In short-budget settings, the method typically switches to explicit mode immediately and does not enter latent reasoning due to the dwell window. Yet it still outperforms CoT, suggesting the improvements largely come from early confidence-based stopping and < think >/< /think > embedding conditioning rather than latent reasoning itself. Ablation isolating these effects would clarify the true source of gains.",
+   "reviewer_index": 4,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors have provided the necessary revisions to evidence on latency and outlined substantial gains achieved in training-free, and elaborated rationales described in Sec. 3.3 and explained the strategy for analyzing interpretability.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Experiments are concentrated on math reasoning, and it remains unclear whether the method benefits broader domains (e.g., multi-hop QA, code, commonsense reasoning). Reasoning dynamics can differ significantly across tasks.",
+   "reviewer_index": 4,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors have included Qwen3-32B, Deepseek-R1-Distill-Qwen-32B, and evaluated the generalization ability on 6 additional benchmarks.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The original SoftThinking results indicate improvements over CoT primarily for \u226532B models. Here, the reproduced SoftThink baseline is weaker than CoT on \u22648B models. Given that SwiReasoning is training-free, extending evaluation to \u226532B models would help verify baseline fidelity and clarify whether the proposed method scales beyond the small-model setting.",
+   "reviewer_index": 4,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors presented the experiments with a >= 32B model and the baseline performance, and clarified that they have used the correct implementation to ensure a fair comparison.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The switching logic, dwell window, and mixing schedule are manually designed. While intuitive, their tuning behavior across models and tasks remains unclear, and no wall-clock or FLOP analysis is provided, making deployment efficiency uncertain.",
+   "reviewer_index": 4,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors have provided a detailed efficiency analysis in the rebuttal.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 8859,
+  "prompt_tokens": 1813,
+  "total_tokens": 10672,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 6774,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 1792,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.002533636,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.002533636,
+   "upstream_inference_prompt_cost": 5.3116e-05,
+   "upstream_inference_completions_cost": 0.00248052
+  }
+ }
+}

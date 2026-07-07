@@ -1,0 +1,123 @@
+{
+ "paper_id": "Gk7gLAtVDO",
+ "decision": "Accept (Oral)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "TRACE can be computationally expensive due to needing multiple generations to populate the CoT % vs Avg passing rate curve",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Addressed: ... compute overhead via vLLM optimizations and KV cache sharing",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The comparison to CoT monitors is not entire apples-to-apples as TRACE uses strictly more information; it allows querying the base model multiple times and it also has access to the output reward. The authors did not compare with more involved monitors, e.g., monitors that take as inputs CoT, actions and reward output.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Outstanding: ... apples-to-apples comparisons with advanced monitors",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Something which the authors also acknowledge is the relatively simple nature of the loopholes that they investigated.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Outstanding: Realism of synthetic loopholes",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The environments are very synthetic / contrived, and likely don't reflect real-world reward hacking scenarios.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Outstanding: Realism of synthetic loopholes",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Deployment framing & calibration guidance: TRACE is shown to work during training and at inference, but the paper doesn't offer a clear, setting\u2011specific recipe for threshold calibration, drift handling, and baseline selection. This is especially important when the initial\u2011policy baseline is unavailable (e.g., auditing a third\u2011party model) or when data distribution shifts over time.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Assumptions about CoT access & control: TRACE presumes you can see the CoT, truncate it, and force early answers. That\u2019s not always feasible (latent\u2011reasoning systems, models with hidden traces, or agents whose action plans break when truncated).",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Addressed: ... latent CoT via token injection adaptations",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Early solvability vs. hacking: High AUC can reflect genuinely easy\u2011early items rather than exploitation. A brief false\u2011positive analysis (e.g., counterfactuals that remove loopholes but preserve difficulty) would clarify this boundary.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Outstanding: potential false positives on easy tasks",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Cost/sensitivity profile: TRACE uses multiple truncation points and sampling. The paper lacks runtime and stability guidance (e.g., how many points/samples are enough, temperature sensitivity, and the cost\u2013accuracy Pareto).",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Addressed: ... compute overhead via vLLM optimizations and KV cache sharing",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Adversarial adaptation: A savvy model could pad early reasoning or delay the exploit to evade early passability checks. A short red\u2011teaming experiment (or mitigation ideas like randomized truncation schedules) would strengthen robustness.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Addressed: Overthinking via baseline calibration and prevention techniques",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Realism and coverage of loopholes: The synthetic IC/RM setups are clean and illustrative; real exploits can be subtler, multi\u2011step, or tool\u2011centric. Even a small \"wild\" case study (or a discussion of expected failure modes) would help scope external validity.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Outstanding: Realism of synthetic loopholes",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It is unclear whether the proposed TRACE method will be robust enough to handle LRMs with overthinking issues where the correct answer may occur in the middle of a CoT trajectory albeit the model itself is unhacked.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Addressed: Overthinking via baseline calibration and prevention techniques",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The authors mentioned several limitations with CoT monitor approach, which mainly include deceptive CoT content and latent CoT methods. While the proposed TRACE method may be used to tackle deceptive CoTs, it is unclear to me how TRACE can be used in the case of latent CoT.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Addressed: ... latent CoT via token injection adaptations",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The sampling process seems to introduce quite a lot of compute overhead as a given LRM needs to produce multiple responses for each chunk of the truncated CoT trajectory.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Addressed: ... compute overhead via vLLM optimizations and KV cache sharing",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 6862,
+  "prompt_tokens": 1211,
+  "total_tokens": 8073,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 5427,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0020909,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0020909,
+   "upstream_inference_prompt_cost": 0.00016954,
+   "upstream_inference_completions_cost": 0.00192136
+  }
+ }
+}

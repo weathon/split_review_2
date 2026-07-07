@@ -1,0 +1,81 @@
+{
+ "paper_id": "5T1vMQldr8",
+ "decision": "Reject",
+ "n_reviewers": 3,
+ "items": [
+  {
+   "weakness_text": "The algorithm essentially constrains the reward to focus more on the in-distribution data, which may limit the method's generalization capability to some extent.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Training the CVAE introduces additional computational cost. Using cosine similarity as part of the reward lacks theoretical motivation and analysis.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The author response (which is quite detailed) addressed some of concerns.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "SPOT heavily relies on attention weights. However, with limited feedback (especially noisy feedback), the learning process of this attention-based preference model can become very unstable, failing to provide fine-grained importance signals.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Some concerns are not fully addressed such as the robustness of the attention mechanism",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experimental setup primarily follows that of Preference Transformer, but two key points from the paper remain unverified. First, the importance of subgoals could be better validated in tasks with original sparse rewards (e.g., AntMaze or Adroit). Second, the paper mentions that reward extrapolation becomes more difficult with noisy preferences, yet no experiments were conducted in noisy environments. Instead, 100% accurate synthetic feedback was used. For example, real human feedback, such as in Uni-RLHF[1], contains noise.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The definition of subgoals depends on hyperparameters and heuristic rules. Despite supporting ablation studies, selecting appropriate hyperparameters for different environments is difficult. Additionally, how was the K=10% value chosen?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The visualizations show key subgoals for the Hopper task. However, goal-guidance may not provide significant gains in locomotion tasks. It would be beneficial to see visualizations of key states for manipulation and goal-oriented tasks.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "It also requires training a CVAE in addition to the preference model, which introduces extra computational cost.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The author response (which is quite detailed) addressed some of concerns.",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 688,
+  "prompt_tokens": 822,
+  "total_tokens": 1510,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 0,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.000246176,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.000246176,
+   "upstream_inference_prompt_cost": 9.2064e-05,
+   "upstream_inference_completions_cost": 0.000154112
+  }
+ }
+}

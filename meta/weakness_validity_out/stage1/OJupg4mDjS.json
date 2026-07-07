@@ -1,0 +1,172 @@
+{
+ "paper_id": "OJupg4mDjS",
+ "decision": "Accept (Oral)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "I think that the article does not provide a quite clear theoretical verification: despite of the fact that the authors provide a nice intuition from Otto-Wassernstein geometry, they do not provide the proof of convergence of these two algorithms. For example, in Lemma 1, they just point out that the loss function admit one global minimum and do not show that the algorithm converge to the, at least, stationary point.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Some limitations on the convergence guarantees, and challenging computation may still remain.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "for the case of centered Gaussian distributions, as the author admit, it is unknown that the optimal solution is still Gaussian distribution in general distribution space.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "I am not sure that how we use the proposition 6, 7, 8 in our algorithms.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewer Pw4V: convergence of the proposed algorithms; the role of Proposition 6, 7, 8 for the proposed algorithms?",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Line 32: accound \u2192 account",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Equation 26: inconsistent notation, the author use \"]\" to denote open bracket \"(\" and \"[\" to denote close bracket, while in other formula they use the \"(\" and \")\".",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "\"hessian\" should be \"Hessian\"",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Line 180: GL should be italic",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The proof for coercivity is not clear (among the notion of coercivity, which one that you use, and why the norm $\\|()\\|$ goes to infinity implies the coercivity).",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I am a bit worried about the scalability of the method. All examples are conducted on a small scale with at most two components. Thus, the paper leaves the gap what would happen for larger datasets and what kind of resources the method requires in such a scenario. It would be great if the authors could discuss this in the paper and also illuminate if it is, indeed, a problem.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewer F5cW: scalability; a lack of practical applicability",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "This ties into the second weakness I see with the paper: a lack of practical applicability. As mentioned above, the examples are small and restricted to synthetic examples. Thus, I do not see on which applications the paper could have an (immediate) impact. As I see this as a more of a theoretical/modelling work, I do not consider this as a major issue. However, it would be nice if the authors could include a discussion what kind of applications they envision their method could be useful for (down the line) and how they image their ideas could impact other machine learning work.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewer F5cW: scalability; a lack of practical applicability",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "I am worried about the following: * **Use of regularization in neural network objectives.** In particular, using regularization to enforce geometric constraints is much weaker than incorporating them as a hard constraint via a clever parametrization. In practice, I suspect the different directions do not end up orthogonal, and it would be helpful to quantify how much this is a problem in practice, and how sensitive it is to hyperparameter tuning. I did not see an experiment directly addressing this.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewer 2t9m: effects of orthogonal regularization in neural network objectives;",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "* **Experiments: Gaussian case should have at least *some* kind of non-synthetic evaluation.** Gaussian experiments are limited to toy datasets designed to highlight differences with ordinary PCA. While this is certainly necessary, it would have been better to also include some kind of non-synthetic datasets where the Gaussian mean and covariance is estimated empirically. For example, in continuous action imitation learning and RL, one often considers policies consisting of neural networks that learn a mean and covariance. In this domain, the authors' form of PCA could be used for things like outlier detection. I am not suggesting the authors necessarily need to add this specific example, more that it's important to have *something* non-synthetic for the Gaussian case since it's a central part of the paper.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "the authors provide additional empirical results, e.g., additional baselines, real-world dataset, additional task, which significantly alleviate raised concerns from the Reviewers.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "* **Experiments: why is there a theorem in the experiments section?** Theory should be presented separately from evaluation, this part should be moved to some part in main body.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "* **Experiments: Gaussian case is missing obvious baselines.** In 5.1, a natural baseline is to compare against is Euclidean PCA in the space of Cholesky coefficients of the covariance matrix. How would this produce different results compared to Euclidean PCA with respect to the SPD cone coordinates, or the proposed method?",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "the authors provide additional empirical results, e.g., additional baselines, real-world dataset, additional task, which significantly alleviate raised concerns from the Reviewers.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "* **Experiments: non-Gaussian case is missing obvious baselines.** For the point cloud data presented, the most obvious way I can think of to do PCA is take some kind of off-the-shelf model like PointNet, and perform PCA in its latent space, and present the results. While this is certainly a much heavier method, I think some kind of visual comparison needs to be included in the main body, as this is the single most obvious performance question that readers might have.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "the authors provide additional empirical results, e.g., additional baselines, real-world dataset, additional task, which significantly alleviate raised concerns from the Reviewers.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "* **Experiments: no evaluation of downstream applications of PCA like outlier detection.** The authors do not evaluate how good the principal components produced are for any downstream purpose, instead they are just plotted to show their properties. I would like to see at least some kind of quantitative evaluation. For instance, this could be considered for outlier detection, to compare how well linear vs. the proposed geodesic PCA performs. Non-linear PCA has been studied for this specific purpose before, see for instance \"Quadric Hypersurface Intersection for Manifold Learning in Feature Space\" by Pavutnitskiy et al. which includes full experiments on this. Note that I am not suggesting the authors implement this specific downstream application of PCA, instead I think it is important to have at least some kind of evaluation of this kind.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "the authors provide additional empirical results, e.g., additional baselines, real-world dataset, additional task, which significantly alleviate raised concerns from the Reviewers.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The block alternating algorithm for Gaussian GPCA is not guaranteed to always converge to a unique minimum due to non-uniqueness in the problem geometry (the authors acknowledge this).",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewer oUMT: non-uniqueness convergence of the block alternating algorithm for Gaussian GPCA; computationally expensive for the eigenvalues of the Hessian at each step during the Otto geodesic update; scalability challenge for neural network approach;",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "In the general case, one needs to verify the eigenvalues of the Hessian at each step during the Otto geodesic update. This may be computationally expensive.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewer oUMT: non-uniqueness convergence of the block alternating algorithm for Gaussian GPCA; computationally expensive for the eigenvalues of the Hessian at each step during the Otto geodesic update; scalability challenge for neural network approach;",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While the neural network implementation facilitates computational tractability, the construction of geodesics needs further tuning and learning from large examples and may have scalability issues.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewer oUMT: non-uniqueness convergence of the block alternating algorithm for Gaussian GPCA; computationally expensive for the eigenvalues of the Hessian at each step during the Otto geodesic update; scalability challenge for neural network approach;",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The comparisons and experimental results are all qualitative and thus the practical application of this method is in question. However, this is an extremely minor point, not important for the publication of the paper.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 9842,
+  "prompt_tokens": 2025,
+  "total_tokens": 11867,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 7348,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 1792,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.002838556,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.002838556,
+   "upstream_inference_prompt_cost": 8.2796e-05,
+   "upstream_inference_completions_cost": 0.00275576
+  }
+ }
+}

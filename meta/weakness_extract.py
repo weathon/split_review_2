@@ -27,6 +27,7 @@ from pathlib import Path
 import dotenv
 from openai import OpenAI
 from pydantic import BaseModel
+from typing import Literal
 
 ROOT = Path(__file__).resolve().parent.parent
 dotenv.load_dotenv(ROOT / ".env")
@@ -44,7 +45,7 @@ RETRY_DELAY = 5
 class Item(BaseModel):
     weakness_text: str
     reviewer_index: int
-    ac_status: str  # "resolved" | "unresolved" | "not_mentioned"
+    ac_status: Literal["resolved", "unresolved", "not_mentioned"]
     ac_evidence: str  # the exact AC sentence that establishes the status; "" only when not_mentioned
     needs_editing: bool
 

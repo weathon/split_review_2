@@ -1,0 +1,102 @@
+{
+ "paper_id": "jJedqisfOt",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "Limited theoretical depth for LRF-Dyn: While the paper presents a compelling neuro-dynamic approximation of self-attention, the theoretical treatment of LRF-Dyn remains less rigorous than that of LRF-SSA. Specifically, the membrane potential update formulation lacks an explicit connection to the global attention weighting mechanism it replaces.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Experiments limited to static vision benchmarks: Despite the motivation from real-time and neuromorphic computing, the evaluation is restricted to frame-based, static datasets (ImageNet-1k and ADE20K). These benchmarks do not fully capture the event-driven potential or energy-efficiency implications of spiking systems. The paper would benefit from experiments on neuromorphic datasets (e.g., N-Caltech101, DVS Gesture, or N-Cars) to substantiate claims of biological plausibility and resource efficiency.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Experimental performance improvement is limited.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Further experiments have also validated the effectiveness of the proposed method.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The motivation behind LRF-SSA requires further validation. The paper points out a mismatch in attention patterns between SSA and VSA: as shown in Fig. 1(a) and Fig. 2, VSA emphasizes local relations, while SSA exhibits unfocused global attention. However, this lack of local attention in SSA is a result of its inherent limitations rather than the root cause of its shortcomings. Therefore, enhancing local attention may not fundamentally resolve the issue. In fact, this issue stems from information loss due to the binary nature of spikes in SSA. Previous research [1] has identified this problem and proposed solutions that effectively focus on key features. As a result, the motivation for this paper needs reconsideration and further validation.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "the concerns were not of a major type and more questions, which then the authors did satisfactorily answered such as 'The motivation behind LRF-SSA requires further validation.'",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The proposed method achieves only marginal accuracy improvements on the ImageNet-1k classification task, particularly on the state-of-the-art architecture QKFormer, where the accuracy gain is less than 0.5%.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The adoption of multi-dendritic neurons increases training complexity, potentially leading to higher computational costs on large-scale datasets such as ImageNet.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The presentation of inference memory requirements could be improved. Providing a tabular summary for LRF-Attn and LRF-Dyn would make the comparison clearer and more intuitive.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "To substantiate the claimed benefits of the proposed method, such as the reduction in memory overhead, the authors should provide concrete quantitative data, for instance, measurements of energy consumption and inference latency.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "To further justify the necessity of multi-dendritic neurons, the authors are encouraged to include comparisons under identical conditions with other spiking neuron (e.g., LIF, ALIF or DH-LIF) that serve as the core neurons in LRF-Dyn.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Given that LRF-Dyn exhibits more complex dynamical behavior, the authors should consider providing an algorithmic description or pseudocode to facilitate a clearer understanding of the proposed method.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 5558,
+  "prompt_tokens": 1240,
+  "total_tokens": 6798,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 4483,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00172984,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00172984,
+   "upstream_inference_prompt_cost": 0.0001736,
+   "upstream_inference_completions_cost": 0.00155624
+  }
+ }
+}

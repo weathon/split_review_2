@@ -1,0 +1,130 @@
+{
+ "paper_id": "jLO4pSi5Pt",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "The failure modes (head-bias accumulation, tail erosion under EM) are not VLM-specific; they are general LT-TTA issues. While packaging under \u201cVLM LT-TTA\u201d is useful, the problem statement and the proposed mechanisms (prototypes, rebalancing, entropy shaping) appear modality-agnostic, not specific to VLM. The paper should (i) sharpen what is uniquely VLM (e.g., cross-modal drift, text prior effects) and show where L-TTA leverages that, or (ii) reframe as a general LT-TTA method and broaden evidence beyond VLMs.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Results rely on low-capacity VLMs; validating on more powerful, recent VLMs (both open- and closed-source) would better establish its contribution and clarify whether gains persist or diminish with stronger backbones.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited methodological novelty. While the paper defines a new and realistic long-tailed test-time adaptation setting, most of its core components --dual prototypes, rebalancing modules, and entropy regularization -- are adapted from existing long-tailed learning techniques. Therefore, the methodological contribution appears somewhat incremental, as it primarily repurposes well-known ideas rather than introducing fundamentally new mechanisms. Nevertheless, the adaptation of these ideas to a label-free, online TTA scenario is well-executed and empirically validated.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Limited methodological novelty: the proposed technique appears to be somewhat incremental, as it mainly reuses of well-known ideas rather than introducing fundamentally new mechanisms.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Computational overhead not fully analyzed. In a test-time adaptation (TTA) environment, it is crucial to evaluate computational overhead, as most prior works explicitly report their runtime and justify that their methods can operate under realistic TTA constraints. To the best of my knowledge, the proposed method introduces additional parameters compared to existing baselines due to the inclusion of the RS module and dual prototypes. Therefore, a detailed analysis of runtime and memory consumption is required.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Computational overhead not fully analyzed: some reviewers criticized the fact that all these additional costs were not properly investigated.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Hyperparameter sensitivity. The method relies on several new hyperparameters (i.e., $\\beta$ in BEM, $\\tau$ for temperature, $\\eta$ for CRA weighting). The paper gives fixed settings but limited analysis on sensitivity or tuning difficulty.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "I think the authors have addressed most of the points concerning baselines, sensitivity analysis, experiments, and clarifications on funding.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Intuition of synergy of SyPs and RS. The authors show the synergy of SyPs and RS with empirical results, but I cannot catch the intuition why those two modules can have positive synergy. Deeper explanation could make reviewers understand easily.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The method requires tuning several per-dataset hyperparameters, which contradicts with the core objective of test-time adaptation, where models are expected to generalize without dataset-specific tuning.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "I think the authors have addressed most of the points concerning baselines, sensitivity analysis, experiments, and clarifications on funding.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The Balanced Entropy Minimization (BEM) loss depends on access to class priors ($\\pi$), which are not typically available in reality, making this assumption impractical.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Too strong assumptions: the assumption that BEM loss depends on the access to class priors ( $\\pi$), which are generally not available in practice, seems a bit strange according to some reviewers.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "This paper primarily emphasizes entropy-minimization, prompt-tuning, and prototype-based approaches, but it omits discussion of important emerging TTA families, such as vision-encoder adaptation methods (e.g., CLIP-ArTT[1], WATT[2]), parameter-free approaches (e.g., ZERO[3]), and reinforcement-based TTA frameworks (e.g., RLCF[4]).",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "I think the authors have addressed most of the points concerning baselines, sensitivity analysis, experiments, and clarifications on funding.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The notation and exposition can be difficult to follow, and parts of the method are challenging to comprehend. Clarity and narrative coherence could be improved to enhance readability.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The article is difficult to read, the writing quality is poor, and Figure 3, intended to facilitate reader understanding, is so complex that it has the opposite effect. I emphasize that the authors need to improve the clarity of the method descriptions. The excessive number of parameters and notations makes the text extremely difficult to read. I also share the reviewers' criticism of this high number of parameters, which is contrary to the objective of a TTA. How can someone adapt L-TTA to a particular new dataset? This question is important! ",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The \u201clong-tailed TTA\u201d setting largely overlaps with non-i.i.d. TTA explored in prior works such as LAME [a], NOTE [b], SAR [c], DA-TTA[d], and DELTA [e]. The challenges analyzed (imbalance over time, EM bias, boundary collapse) are identical to those already studied in non-i.i.d. test-stream TTA. Therefore, I doubt the claim that this is the \u201cfirst study of TTA under long-tailed scenarios.\u201d The authors may need to demonstrate the conceptual or procedural difference more clearly.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "interest of Long tail TTA vs non IID TTA : some reviewers did not understand the interest of long-tail TTA, and the proposed BEM algorithm appears similar to EM.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Because of the overlap mentioned above, the proposed method also appears similar to existing ones. BEM modifies EM by adding a penalty that down-weights already-confident classes to reduce head-class over-optimization. This seems very close to class reweighting in non-i.i.d. TTA (e.g., DELTA), which injects class-wise weights to counter imbalance during EM. As written, Propositions 1\u20132 provide intuition but not a decisive distinction from prior class-aware EM approaches, which makes this component appear incremental rather than novel.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "interest of Long tail TTA vs non IID TTA : some reviewers did not understand the interest of long-tail TTA, and the proposed BEM algorithm appears similar to EM.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Section 2 lacks explicit discussion of non-i.i.d. TTA. Adding a subsection contrasting L-TTA with these prior studies is essential for proper positioning.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "interest of Long tail TTA vs non IID TTA : some reviewers did not understand the interest of long-tail TTA, and the proposed BEM algorithm appears similar to EM.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Table 4 omits training-free TTA methods for VLMs (e.g., TDA, ZERO [f]), which are critical for comparisons in speed/accuracy trade-offs.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Missing Baselines : some reviewers also criticized the absence of some baseline methods, particularly for non-IID TTA, as well as for certain general TTA techniques.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 9074,
+  "prompt_tokens": 2573,
+  "total_tokens": 11647,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 7293,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 2560,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00261422,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00261422,
+   "upstream_inference_prompt_cost": 7.35e-05,
+   "upstream_inference_completions_cost": 0.00254072
+  }
+ }
+}

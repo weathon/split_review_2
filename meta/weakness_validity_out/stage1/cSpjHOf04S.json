@@ -1,0 +1,109 @@
+{
+ "paper_id": "cSpjHOf04S",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "Actually, there exists an established experimental protocol for evaluating click-based segmentation methods... But here, the proposed method is not tested in the same setup, instead, an entirely different experimental protocol is used.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Using diffusion (and even SD!) for click-based segmentation is not novel. This idea was exploited in the early Conditional Diffusion Network (CDNet) [1] that dates back to 2021... The most recent M2N2 [2] utilizes self-attention maps produced by Stable Diffusion for unsupervised and training-free approach to instance segmentation. None of these works is cited or discussed.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors have made a good attempt at addressing this during the rebuttal and promised to update the paper with more extensive discussion and more precise claims around novelty.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The method was evaluated against trainable SimpleClick, custom pipeline based on DINO and off-the-shelf SAM. SimpleClick were trained according to custom training procedure, which naturally inhibits concerns about whether there were properly trained... Results achieved with SD, are significantly inferior to those of SAM on medium-sized and small-sized objects in COCO, DRAM, EgoHOS and PIDRay, in other words, in almost all scenarios, which makes me doubt the practical value of the proposed approach.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "the authors clarified that state-of-the-art instance segmentation performance is not a claim made in the paper and not the reason why their finding is of interest to the community. The model does show positive results on generalizing to broad unseen classes from just a few training classes (in some cases as few as 5), which is a valuable and interesting finding, even though results are far behind state of the art generalist instance classification models in most tested cases.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The novelty of this work is limited. Previous studies [1][2][3] have already shown that generative models can exhibit open-set segmentation capabilities without task-specific training. This paper mainly extends those ideas to category-agnostic instance segmentation.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "This is a significant concern that has only been partially addressed in the rebuttal: the authors clarify that existing works focus on other aspects of segmentation generalization, e.g. emergent segmentation via attention maps, but none cover the precise setting of this paper. While this isn\u2019t a strong argument for novelty, the paper does add value to the existing literature of evaluating generative models for their segmentation capabilities and has an interesting finding.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Methodologically, the paper lacks innovation. Finetuning generative models for segmentation is a well-established approach, and the proposed loss function is highly similar to existing techniques [4][5].",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited performance on small objects: As shown in Table 1, the proposed approach performs well on large objects but struggles significantly with small-object segmentation.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Imprecise instance coloring and unclear mask extraction details: The color-based instance representation occasionally produces noisy or dirty colors, which raises concerns about the consistency and robustness of the predicted masks. The paper would benefit from a clearer explanation of how these colored outputs are converted into binary or instance masks, with more explicit technical detail in the Methods section.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited extensibility to semantic or text-guided segmentation: Since the framework relies heavily on color-based encoding, its applicability to semantic or text-guided segmentation appears constrained.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "According to evaluation, the Stable Diffusion variant of their model is performing the best. However this a old model and it would be good to see how the performance scales when used with recent DiT based models such as SD3 and Flux.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The authors hint at part level understanding in Figure 3. It would good to perform evaluation on some part segmentation datasets [1,2] to check generalization of these models to finer granularity levels.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Training is conducted on a relatively small and limited diversity dataset. It would be good to explore the effect of expanding the dataset, eg. using SA-1B (or a subset).",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 5972,
+  "prompt_tokens": 2286,
+  "total_tokens": 8258,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 4687,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 256,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.001963528,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.001963528,
+   "upstream_inference_prompt_cost": 0.000291368,
+   "upstream_inference_completions_cost": 0.00167216
+  }
+ }
+}

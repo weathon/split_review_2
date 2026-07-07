@@ -1,0 +1,130 @@
+{
+ "paper_id": "lJqssVKeR7",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 5,
+ "items": [
+  {
+   "weakness_text": "The main weakness concerns the foundational assumptions underlying its theoretical advantages. The critical \"well-approximated Hessian\" condition is challenging to verify empirically, particularly during early training stages.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "While outperforming ZO baselines, the accuracy gap with first-order methods remains, highlighting inherent limitations of the ZO approach.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Limited Discussion on Computation Overhead: While communication is the primary bottleneck, the computational cost of ZO methods is inherently higher than first-order methods due to the need for multiple forward passes. The paper briefly mentions the preconditioning time is negligible but does not provide a full comparison of the total wall-clock time (computation + communication) against first-order methods. This is crucial for assessing real-world utility, as increased computation time might offset communication savings.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Validation of Theoretical Assumptions: The core theoretical improvement hinges on the \"well-approximated Hessian\" condition (Eq. 17) and the low-effective-rank property. While the empirical results are strong evidence, the paper does not directly validate that the learned diagonal matrix H actually satisfies this condition for the LLMs used in the experiments. A more rigorous analysis or measurement of the whitening rank during training would strengthen the theoretical claims.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Comparison with Parameter-Efficient Fine-Tuning (PEFT): The discussion of FL+PEFT baselines (like FedLoRA) is brief and relegated to the appendix. Given that PEFT is a dominant approach for efficient LLM fine-tuning, a more thorough comparison in the main text is warranted. HiSo's claim of \"full-parameter\" tuning is a different paradigm, but a direct comparison on metrics like final accuracy, communication cost, and memory usage would better situate HiSo within the existing landscape.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Hyperparameter Sensitivity: The ablation study on the Hessian smoothing parameter \u03bd shows robustness, but the performance of adaptive methods like HiSo can be sensitive to other hyperparameters like the learning rate and the exponential moving average decay factor. A more detailed sensitivity analysis would be helpful for practitioners.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Benchmark scale and diversity\uff1aThe main LLM experiments involve six clients with two sampled per round, and tasks are classification and extractive QA. Although these are standard NLP benchmarks and good stress tests for convergence and accuracy, they are still small compared to industrial federated networks across hospitals, phones, or enterprises. The paper would be stronger if it included either larger federations or at least a stress test with many more clients and skew patterns.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Backbone model: The authors only conduct experiments on OPT series models, how about the Qwen series models? I am curious about the performance of proposed method on those models.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Theory assumptions and coverage: The convergence guarantee depends on a low effective rank Hessian spectrum and on the quality of the diagonal Hessian approximation. While the paper provides evidence that the estimated diagonal Hessian has a long tail and argues that large language models empirically satisfy this, it does not show failure cases or quantify how often the whitening rank assumption holds in domains beyond language. This makes it harder to judge how robust the dimension independent claim really is.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Theoretical Practicality and Depth: The theoretical analysis relies on a good approximation of the Hessian, yet the method employed in practice is only a diagonal approximation. This gap makes it difficult to appreciate the practical relevance of Theorem 1. Furthermore, a simple non-convex analysis seems insufficient, as it fails to capture the specific landscape properties of neural network loss functions.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Experimental Comprehensiveness: The experimental validation appears somewhat limited. It would be strengthened by including plots of the training loss against both iterations and wall-clock time on more experiments. Additionally, experiments on more datasets and with larger models would better demonstrate the scalability and robustness of the proposed method.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Novelty of Insight: The core idea seems limited. Since zeroth-order optimization inherently accesses only scalar information at each step, the advantage of communicating solely scalars appears straightforward. I did not find significant novel algorithmic insights in the current work.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The experimental validation is limited to the OPT family of models (OPT-125M to OPT-2.7B). These models are somewhat dated and are known to be undertrained. The effectiveness of HiSo on newer, more capable models (e.g., smaller variants of LLaMA-3.2, Qwen-2.5, Gemma 3, or SmolLM) is not demonstrated. It is unclear if the same optimization behavior will hold on these new architectures.",
+   "reviewer_index": 4,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The claim that HiSo is a \"Hessian-informed\" or \"second-order\" method is potentially misleading. The proposed update for the diagonal Hessian approximation in Equation (12) is a recursive exponential moving average of the squared updates. This formulation is functionally identical to the variance/second-moment tracking in first-order adaptive optimizers like RMSProp or Adam. This makes the contribution appear more as an application of an adaptive preconditioner to the ZO setting, rather than a true second-order method.",
+   "reviewer_index": 4,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 5017,
+  "prompt_tokens": 1559,
+  "total_tokens": 6576,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 3362,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 1536,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.001450988,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.001450988,
+   "upstream_inference_prompt_cost": 4.6228e-05,
+   "upstream_inference_completions_cost": 0.00140476
+  }
+ }
+}

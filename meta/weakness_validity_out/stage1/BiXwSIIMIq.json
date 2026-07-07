@@ -1,0 +1,158 @@
+{
+ "paper_id": "BiXwSIIMIq",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "Some of the assumptions are strong. Theorem 2 requires stationarity of the inner Langevin DC step at each iteration and smoothness/coercivity of \u2013log p(x); these are hard to ensure in high-dimensional image spaces. Is there anyway authors could test this on the empirical images or a toy problem?",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The concerns of assumptions and computation cost from Reviewers JtYg, zbpZ, and srVv have been addressed and the corresponding scores were increased.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Algorithm 1 injects noise inside the AC-DC denoiser. As implemented, D\u03c3 is a stochastic operator: given the same input, it can return different outputs due to the injected noise (both in the AC step and in the DC sampling/evolution). However, the convergence analysis treats D\u03c3 as a deterministic mapping z \u2192 D\u03c3(z), i.e., a point-to-point operator. This is a mismatch. It seems that the current deterministic analysis does not rigorously cover the algorithm being evaluated experimentally.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The concerns of assumptions and computation cost from Reviewers JtYg, zbpZ, and srVv have been addressed and the corresponding scores were increased.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Theorem 1: The proof strategy follows the fixed-point iteration approach of Ryu et al. This requires the fidelity \u2113 to be \u00b5-strongly convex. This is violated in many applications highlighted by the paper itself: deblurring, super-resolution, compressed sensing, MRI, and inpainting (e.g., rank-deficient A or non-strongly-convex penalties).",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The concerns of assumptions and computation cost from Reviewers JtYg, zbpZ, and srVv have been addressed and the corresponding scores were increased.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Theorem 1: The parameter condition involving \u03b5 and \u00b5 may be restrictive. In particular, as \u03b5 \u2192 1, the factor (1 + \u03b5 \u2212 2\u03b5^2) \u2192 0, making the right-hand side \u03b5/(\u00b5(1 + \u03b5 \u2212 2\u03b5^2)) blow up. Then the condition 1/\u03c1 > \u03b5/(\u00b5(1 + \u03b5 \u2212 2\u03b5^2)) is practically impossible to satisfy. This contradicts with the experimental setup, where Table 3 indicates \u03c1 \u2265 100 in all cases, which violates the small-step requirement in the theorem.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The concerns of assumptions and computation cost from Reviewers JtYg, zbpZ, and srVv have been addressed and the corresponding scores were increased.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Theorem 2: The assumption \u201cthe DC step reaches the stationary distribution for each k\u201d is strong.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The concerns of assumptions and computation cost from Reviewers JtYg, zbpZ, and srVv have been addressed and the corresponding scores were increased.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Theorem 3: The analysis follows Chan et al. (2016): boundedness of the denoiser, vanishing noise schedules, and adaptive \u03c1 yield convergence to a fixed point. While this shows stability, it does not characterize the limit point as a solution to any explicit optimization problem. As a result, the algorithm\u2019s fixed point lacks interpretability: it is not known to minimize a well-defined objective nor to satisfy an equilibrium condition like a monotone inclusion. This is a conceptual limitation of the framework that should be acknowledged and discussed more candidly.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The concerns of assumptions and computation cost from Reviewers JtYg, zbpZ, and srVv have been addressed and the corresponding scores were increased.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Theorem 3: The assumption may be strong: The requirement that ||\u2207\u2113(x)||/\u221ad \u2264 R < \u221e for all x is generally false for common inverse problems (deblurring, super-resolution, compressed sensing, MRI, inpainting) unless x is constrained to a compact set. For instance, with \u2113(x) = (1/2\u03c32)||Ax \u2212 y||2, the gradient norm grows with ||x|| unless constrained.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The concerns of assumptions and computation cost from Reviewers JtYg, zbpZ, and srVv have been addressed and the corresponding scores were increased.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Questionable Core Assumption: A central weakness lies in the justification of the DC step. As outlined in the derivation leading to Eq. (10), the method assumes the residual s^(k) follows a Gaussian prior. This assumption appears to contradict the paper's primary motivation\u2014that the noise in the ADMM iterate is not Gaussian and is off-manifold. If s^(k) can be reasonably modeled as Gaussian, the necessity of the complex DC correction is significantly undermined, as a simpler Gaussian denoiser might suffice. The paper lacks a compelling empirical or theoretical justification for this critical assumption.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The concerns of assumptions and computation cost from Reviewers JtYg, zbpZ, and srVv have been addressed and the corresponding scores were increased.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Lack of Clarity on Method Variants: The distinction between the two presented variants, 'Ours-tweedie' and 'Ours-ode,' is not clearly explained in the main text. The reader is left to infer the difference from the appendix, which is unsatisfactory. The core methodological description should explicitly state what these variants are.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The concerns of assumptions and computation cost from Reviewers JtYg, zbpZ, and srVv have been addressed and the corresponding scores were increased.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Insufficient Discussion of Related Work: The proposed correction mechanism bears a conceptual resemblance to the Onsager correction in Denoising Approximate Message Passing (D-AMP) algorithms [1, 2], which also handles structured iteration noise. Furthermore, the nature of iteration noise in PnP algorithms has been explicitly studied in works like TFPnP [3] (Section 6.2 -- Iteration Noise of PnP Methods). The paper would be significantly strengthened by discussing these connections and clearly delineating how the proposed approach differs from or relates to these ideas.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The concerns of assumptions and computation cost from Reviewers JtYg, zbpZ, and srVv have been addressed and the corresponding scores were increased.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Inadequate Discussion of Computational Cost: The AC-DC denoiser, particularly the DC step which involves multiple (J=10) Langevin steps, drastically increases the number of score function evaluations (NFE) per ADMM iteration compared to a standard PnP step. While the appendix includes an NFE analysis, the main text should frankly acknowledge this as a significant limitation and discuss the trade-off between performance and computational efficiency.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The concerns of assumptions and computation cost from Reviewers JtYg, zbpZ, and srVv have been addressed and the corresponding scores were increased.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Noise addition before score application already appears in recent PnP diffusion works (which the paper also acknowledges). In this respect, the novelty seems incremental.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Reviewer uYpW with confidence=2 didn\u2019t respond to authors' responses to the comments on the novelty of this work, experimental setup, and assumptions with finite-step analysis, which were reasonably addressed by the authors.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The DC step, a short Langevin refinement combining the score and a quadratic potential, structurally resembles diffusion posterior correction schemes, where noise injection is followed by brief score-based Langevin updates to pull iterates back toward the learned distribution. The paper\u2019s approach integrates this idea into ADMM, but conceptually overlaps with prior noise-add-and-refine mechanisms.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Reviewer uYpW with confidence=2 didn\u2019t respond to authors' responses to the comments on the novelty of this work, experimental setup, and assumptions with finite-step analysis, which were reasonably addressed by the authors.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The AC and DC schedules appear heuristic. The issue of stability is unclear across tasks without tuning.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The concerns of assumptions and computation cost from Reviewers JtYg, zbpZ, and srVv have been addressed and the corresponding scores were increased.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Theorem 2 assumes that DC reaches the stationary distribution each iteration, which is unrealistic in practice with only a few Langevin steps.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The concerns of assumptions and computation cost from Reviewers JtYg, zbpZ, and srVv have been addressed and the corresponding scores were increased.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "With strong convexity of the fidelity term, only convergence to a ball is ensured, not a point. Without strong convexity, an adaptive ADMM penalty schedule is required.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The concerns of assumptions and computation cost from Reviewers JtYg, zbpZ, and srVv have been addressed and the corresponding scores were increased.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experiments use a pre-trained score model, so the advantages are partly dependent on that backbone.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Many baselines are not ADMM-PnP, so the comparison may be apples-to-oranges from an optimization perspective.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 2609,
+  "prompt_tokens": 2466,
+  "total_tokens": 5075,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 0,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.001068076,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.001068076,
+   "upstream_inference_prompt_cost": 0.000342774,
+   "upstream_inference_completions_cost": 0.000725302
+  }
+ }
+}

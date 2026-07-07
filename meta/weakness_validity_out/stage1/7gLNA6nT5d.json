@@ -1,0 +1,137 @@
+{
+ "paper_id": "7gLNA6nT5d",
+ "decision": "Reject",
+ "n_reviewers": 5,
+ "items": [
+  {
+   "weakness_text": "Section 2.2: the description of the whole model structure is unclear. The formula in line152 needs more detailed explanation, like how the attention score of n-gram head is normalized, what if there are no n-grams in the history, if there is only one head in each NG layer. The authors should better provide a pseudo-code or the architecture figure.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not give a rebuttal so none of their concerns were addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "What is the architecture of your base transformer model? What is the number of layers and the total size of the model? Do you try using a powerful pretrained model to see if the benefit of 2-gram information still helps? There should also be experiments on different model size to further validate the effectiveness of the n-gram head.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not give a rebuttal so none of their concerns were addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The limited generalizability. The motivation of the 2-gram induction head  is to mitigate the simplicity bias and accelerate the emergence of in-context learning. While effective at small scales and with limited data, this architectural improvement is fundamentally a hardcoded bias for simple, short-term pattern recognition (specifically, 2-gram statistics in the experiments, 3-gram will hurt the performance). In the era of increasingly large transformers and datasets, the attention itself can emerge the complex induction heads and even more sophisticated learning algorithms, which makes the 2-gram information redundant. Moreover, in real-world scenarios, the basic in-context learning capability is already strong, we do not need to train the transformer from scratch for the emergence of in-context RL, and the n-gram information is insufficient for distilling complex RL algorithms that require abstract reasoning instead of the local sequential patterns.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not give a rebuttal so none of their concerns were addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The work lacks formal analysis explaining why N-gram heads yield stability gains and reduced data requirement. Maybe the authors should provide some theoretical perspective to elaborate this.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not give a rebuttal so none of their concerns were addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Could the authors add more experiments on some diverse visual tasks to further showcase the superiority ?",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not give a rebuttal so none of their concerns were addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "This paper demonstrates the benifits of n-gram heads by expriments in two environments and their variants in Miniworld. However, these environments are relatively simple. I suggest the authors test n-gram heads in more complicated continuous control tasks (e.g., MuJoCo, Meta world) to show the generalization.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not give a rebuttal so none of their concerns were addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In addition to the experiments, I would expect theoretical analysis for why explicit n-gram heads can help improve data efficiency and traning stability in Algorithm Distillation, as n-gram has been studied for decades.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not give a rebuttal so none of their concerns were addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "As VQ and ResNet are used in image-based tasks, I suggest the authors also analyze the training cost sensitivity for these modules. They are important to prove the adaptation and efficiency in pixel-based environment.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not give a rebuttal so none of their concerns were addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The title is missing in the paper.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not give a rebuttal so none of their concerns were addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The figure positions mismatch the text. For example, I have to jump pages to find Fig. 2 and Fig. 4 when I read the paper. It would be nice to rearrange the paper so that the figures are right in the place where they are referred.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not give a rebuttal so none of their concerns were addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The scope of this work is narrow, as it focuses solely on improving Algorithm Distillation [17], and it is unclear whether the findings generalize beyond this specific approach. Given the limited experimental scale, its relevance to understanding in-context learning in large transformer models is also unclear.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not give a rebuttal so none of their concerns were addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "W1: This is my main concern. This work seems to not disentangle three questions: 1) how does n-gram heads general help the training of transformers 2) why this is espeically important (or not) in ICRL tasks 3) is the gain via n-gram heads really not achievable by other hyperparameter tuning or different architectural tricks.",
+   "reviewer_index": 4,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not give a rebuttal so none of their concerns were addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "W2: It is very hard to takeaway generalizable insights on why n-gram heads help and when we should be using these.",
+   "reviewer_index": 4,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not give a rebuttal so none of their concerns were addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "W3: Lack of serious comparison. The method is only compared against vanilla AD. There has been many variants on the algorithmic side, and at the same time many improvements on the transformer architecture and initialization.",
+   "reviewer_index": 4,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not give a rebuttal so none of their concerns were addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "W4: Overselling of generality. The title and abstract suggest n-grams solve ICRL's data problems broadly, but it is hard to understand whether these gains are precisely attributable to n-gram heads or will be simply addressed by data scale or better optimization.",
+   "reviewer_index": 4,
+   "ac_status": "unresolved",
+   "ac_evidence": "The authors did not give a rebuttal so none of their concerns were addressed.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 6699,
+  "prompt_tokens": 1437,
+  "total_tokens": 8136,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 5910,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0020769,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0020769,
+   "upstream_inference_prompt_cost": 0.00020118,
+   "upstream_inference_completions_cost": 0.00187572
+  }
+ }
+}

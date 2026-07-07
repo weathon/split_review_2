@@ -1,0 +1,214 @@
+{
+ "paper_id": "ZKkeA1G935",
+ "decision": "Reject",
+ "n_reviewers": 5,
+ "items": [
+  {
+   "weakness_text": "They assume graph structure can be effectively encoded as text prompts. While innovative, this verbalization step might oversimplify structural relationships, potentially losing fine-grained topology information.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Use of LoRA only in the first session assumes that continual adaptation can be achieved purely through frozen embeddings and prototype updates \u2014 a strong assumption that may not generalize across highly dynamic graph evolutions.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Missing formal theoretical analysis of why the prototype mechanism preserves generalization in LLM-embedded graph representations (e.g., no bounds on forgetting or feature drift).",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "the more fundamental conceptual and methodological issues\u2014particularly the alignment between the stated motivation and the proposed method, as well as the theoretical grounding of the approach\u2014remain largely unaddressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The authors do not deeply dissect which component of SimGCL contributes most (LoRA, prototype, or prompt design). Without that, causal claims (\u201cgraph prompts mitigate forgetting\u201d) remain partially speculative.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "ablation evidence on the roles of LoRA, prompts, and prototypes; [...] These clarifications resolve many presentation-level issues raised by reviewers.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "In small-scale datasets like Cora and Citeseer, very large LLMs might overfit to textual node attributes, inflating reported improvements.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The constraint of setting each task to have a unified sample size is unreasonable, and the label imbalance problem is the real challenge that should be addressed.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "dataset construction choices, sample-size filtering, and variance reporting (confirming five-seed averages). [...] These clarifications resolve many presentation-level issues raised by reviewers.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The introduction of global testing is not very clear. More clear figures or visualizations are needed.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "the global-testing setup and how inter-task edges and class sets are handled across sessions; [...] supplied pointers to additional visualizations (embedding clustering, forgetting curves) [...] These clarifications resolve many presentation-level issues raised by reviewers.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The used graphs are all text-attribute graphs (TAGs). Can the proposed method be extended to non-TAGs?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Experimental details should be included in the main paper to provide readers with a general picture of the experimental settings.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal provided clearer descriptions of: (i) the baseline implementations and training protocols; [...] (iv) dataset construction choices, sample-size filtering, and variance reporting (confirming five-seed averages).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "There are some typos, and the authors should carefully revise the paper.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "My biggest concern lies in the motivation. The primary goal of continual learning is to enable efficient adaptation under limited resources, whereas LLMs are inherently computationally expensive. It is unclear whether the significant computational cost introduced by LLMs can truly justify the efficiency-driven learning protocol that continual learning aims to achieve.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "several fundamental concerns remain. [...] Motivation\u2013method mismatch. [...] The rebuttal does not fully establish how the diagnosis of protocol flaws directly leads to the design of SimGCL.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Following this point, I believe the comparison should include GCL methods that allocate additional parameters (expansion-based) or memory (experience-replay-based) to narrow the substantial computational gap between LLMs and traditional GNNs. However, the authors compare their method only with regularization-based approaches, which are the most resource-limited class of GCL methods. Furthermore, the comparisons are arguably unfair since the methods rely on different backbone architectures for graph prediction.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "the more fundamental conceptual and methodological issues\u2014particularly the alignment between the stated motivation and the proposed method, as well as the theoretical grounding of the approach\u2014remain largely unaddressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The authors acknowledge task ID leakage and address it by introducing a global testing protocol, which is commendable. Nonetheless, all the datasets used (e.g., Cora, Citeseer, WikiCS) are widely used text-attributed benchmarks that may overlap with the pretraining corpora of LLMs. The paper does not verify whether such overlap exists, leaving potential knowledge leakage from pretraining unaddressed.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I also find the fairness of the LLM4GCL benchmark setup questionable. The LLM baselines are not fine-tuned on the same datasets and therefore lack domain knowledge of LLM4GCL, making the comparison asymmetric. The proposed method appears less focused on mitigating catastrophic forgetting and more on task-specific instruction tuning, which may even result in overfitting to the given dataset. This is evidenced by the large performance gap between the proposed method and other LLM-based baselines on LLM4GCL, in contrast to the much smaller gap observed on standard public datasets. Overall, the comparisons and evaluations in this paper feel ambiguous, making it difficult to discern the central message or takeaway the authors intend to convey.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Technical clarity and coherence of the method. [...] the paper still does not clearly motivate and justify its design choices. [...] The rebuttal does not fully establish how the diagnosis of protocol flaws directly leads to the design of SimGCL.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "the paper does not clearly explain the proposed model or the models used for comparison. As a result, many methodological choices are not properly justified.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal provided clearer descriptions of: (i) the baseline implementations and training protocols; [...] These clarifications resolve many presentation-level issues raised by reviewers.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "in the introduction, the authors claim that there is a lack of investigation into the rationality of the common experimental setup used for GCL. It is worth noting that a recent study has already explored this aspect [1]. Another meaningful reference that should be considered and discussed is [6].",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "In the background section, the authors correctly highlight one of the main limitations of the commonly adopted GCL setting, which I agree with, and propose the idea of global testing. However, it is not clear how this proposal relates to the subsequent discussion about inter-task edges, which the authors claim not to consider in their tasks. This choice isolates subgraphs, making the problem closer to the original formulation. This point should be discussed and clarified in greater depth. Furthermore, the removal of the limited-representation classes appears to be a strong design choice that requires a more thorough discussion, particularly regarding its advantages and potential drawbacks.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "the global-testing setup and how inter-task edges and class sets are handled across sessions; [...] These clarifications resolve many presentation-level issues raised by reviewers.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "In Section 3.2, the authors claim that the considered datasets cover a wide range of possible sizes. However, in practice, the investigation is limited to relatively small datasets. Large-dimensional datasets, such as OGN-Products and Reddit [2], are not considered. Moreover, most of the selected datasets are citation networks. Considering that the goal of the paper is to establish a benchmark for testing models in GCL, the dataset selection appears rather limited. Another important distinction that can significantly impact the GCL scenario is the difference between heterophilous and homophilous datasets, which is not addressed in this work.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "lack of ... scope and generality\u2014limited dataset diversity (heavily citation-network\u2013based), missing heterophily analysis, unclear extensibility beyond TAGs ... The rebuttal partially addresses these issues, but several core concerns remain.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In the paper, both the definitions of the literature methods and that of the proposed SimCML are not presented clearly, which makes it difficult to follow the flow of the discussion and to evaluate the novelty of the proposed approach.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal provided clearer descriptions of: (i) the baseline implementations and training protocols; (ii) the global-testing setup ... These clarifications resolve many presentation-level issues raised by reviewers.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "the discussion of the LLM baseline is very limited, the authors only state that it is nascent and that no methods have yet been specifically designed for CGL tasks. What remains unclear is how the LLM baselines are actually applied in the context of CGL, and consequently how the reported results are obtained.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal provided clearer descriptions of: (i) the baseline implementations and training protocols; ... These clarifications resolve many presentation-level issues raised by reviewers.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Regarding the models considered, it is surprising that the authors do not include several of the most promising replay-based approaches, such as CaT [3], PDGNN [4], SSM [5], among others.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "The rebuttal partially addresses these issues, but several core concerns remain.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Another major issue is the lack of explanation regarding the experimental setting and the validation policy. While the appendix lists the hyperparameters considered, many of them are fixed, and it is not clear how these values were selected. Considering the aim of the paper, this represents a significant limitation.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal provided clearer descriptions of: (i) the baseline implementations and training protocols; (ii) the global-testing setup ... (iv) dataset construction choices, sample-size filtering, and variance reporting (confirming five-seed averages) ... These clarifications resolve many presentation-level issues raised by reviewers.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Moreover, the results reported in the tables do not include any measures of variance or standard deviation, raising concerns about whether the experiments were run only once. If this is the case, it is unclear how the authors assess the stability of the results or the statistical significance of the differences between models. This is particularly important for the LLM application, where variance in results is typically more pronounced.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "variance reporting (confirming five-seed averages) ... These clarifications resolve many presentation-level issues raised by reviewers.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Limited Theoretical Justification for SimGCL: While SimGCL shows strong empirical results, the paper provides little theoretical or analytical grounding for why the combination of graph prompts, LoRA fine-tuning, and prototype-based classification alleviates forgetting. The approach appears largely empirical, and the mechanism behind its robustness (e.g., whether prototype stability or prompt alignment is the key factor) is not formally analyzed. Adding theoretical reasoning or ablation-based evidence would strengthen the scientific depth of the contribution.",
+   "reviewer_index": 4,
+   "ac_status": "unresolved",
+   "ac_evidence": "the more fundamental conceptual and methodological issues\u2014particularly the alignment between the stated motivation and the proposed method, as well as the theoretical grounding of the approach\u2014remain largely unaddressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Overstatement of SimGCL's generality and simplicity: The paper claims that SimGCL 'greatly alleviates catastrophic forgetting' and 'surpasses all existing baselines' under a rehearsal-free constraint. While the reported results do show strong gains (up to 20%), these improvements are dataset-dependent \u2014 performance drops significantly on sparse or long-session datasets (e.g., Arxiv-23, FSNCIL). Hence, calling it universally effective may be an overstatement; the method is empirically strong but not universally superior.",
+   "reviewer_index": 4,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Assertion of 'efficiency' and 'low cost': The authors emphasize SimGCL's efficiency due to LoRA-based tuning and prototype inference. However, they provide no runtime, memory, or scaling benchmarks to substantiate this claim. Given that LLM fine-tuning is resource-intensive, this efficiency claim seems qualitative and not empirically validated, representing a mild overstatement.",
+   "reviewer_index": 4,
+   "ac_status": "resolved",
+   "ac_evidence": "supplied pointers to additional visualizations (embedding clustering, forgetting curves) and time-efficiency analyses in the appendix. These clarifications resolve many presentation-level issues raised by reviewers.",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 17272,
+  "prompt_tokens": 3189,
+  "total_tokens": 20461,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 13827,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 2944,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.004952892,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.004952892,
+   "upstream_inference_prompt_cost": 0.000116732,
+   "upstream_inference_completions_cost": 0.00483616
+  }
+ }
+}

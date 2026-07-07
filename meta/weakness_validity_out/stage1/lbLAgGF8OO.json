@@ -1,0 +1,81 @@
+{
+ "paper_id": "lbLAgGF8OO",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "Restrictive linear reward with known feature assumption for an adversarial hybrid setting;",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The first major challenge lies in the computational feasibility of solving the core minimax optimization (point 2 in the algorithm) at each round. This problem seems exceptionally difficult: the learner must optimize over distributions of policies against an adversary optimizing over distributions of models, with an objective function that involves nested expectations and KL divergences over trajectories. For any non-trivial state space, the policy and model classes are likely to be enormous, making an exact solution intractable. The objective is also non-convex and non-concave in general (?). While the paper provides a theoretical blueprint, it offers no practical implementation or approximation scheme. Bridging this gap would require major algorithmic innovations,",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The major concern raised by the reviewer is about the practical implementation of the algorithm. First, the core minimax optimization required at each round is computationally intractable in practice; second, the theoretical assumptions are strong and potentially unrealistic.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The core assumptions of the paper present a significant gap between the theory and the reality of most RL problems. The most restrictive assumption is possibly the requirement for a pre-defined, finite partition of the model space into infosets where all models within an infoset share a unique optimal policy and value function (Assumptions 1 & 3). In practice, such a discrete and perfectly aligned partition seems unavailable; the \"optimal policy\" may not be uniquely defined or may change during learning. Furthermore, Assumption 4 (linear rewards with known features) for the hybrid setting is a strong structural limitation, as it assumes the learner has perfect knowledge of the reward representation, which is often the very thing that needs to be learned in adversarial settings.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The major concern raised by the reviewer is about the practical implementation of the algorithm. First, the core minimax optimization required at each round is computationally intractable in practice; second, the theoretical assumptions are strong and potentially unrealistic.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "A major weakness is the presentation. The paper is very difficult to read. Many notions are supposed known to the reader and there is no attempt to aim at a bit of self contained presentation. For instance, the assumptions 5,6 are difficult to grasp. This makes the contribution of the paper less valuable because more difficult to gauge. The presentation of the assumptions could be done differently by first describing informally the context and main restrictions and then making them mathematically precise.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "A minor concern is about the writings. The paper still requires effort to achieve a self-contained presentation.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Since this work has provided a series of new SOTA results, it would be very helpful to add some discussion and intution after each results or assumption (for example, Assumption 1).",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "From Table 1, I notice that the regret bound of off-policy exploration might be inferior to that of on-policy exploration. Could the authors explain why this happens?",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Also, most previous works for tabular and linear MDPs with adversarial loss functions use occupancy measure (OM)-based or policy optimization (PO)-based methods, both of which are model-based and require to learn the transitions explicitly to construct the loss estimator. Could the authors intuitively explain how to construct the \"loss estimator\" without explicit learning of transitions?",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 5275,
+  "prompt_tokens": 1134,
+  "total_tokens": 6409,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 4289,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00163576,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00163576,
+   "upstream_inference_prompt_cost": 0.00015876,
+   "upstream_inference_completions_cost": 0.001477
+  }
+ }
+}

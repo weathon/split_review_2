@@ -1,0 +1,95 @@
+{
+ "paper_id": "UESTP6dR1K",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "I am confused about the transferability results presented in Figure 5 (right). I can't understand this figure and there is no accompanying explanation or analysis. I would like to understand how well the proposed method transfers to different tasks, and a more detailed discussion would be helpful.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Concerns primarily focused on the complexity of the two-stage system, potential fragmentation of agent roles, sensitivity to hyperparameters, and the clarity of transferability results.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The meta-agent evaluation process introduces multiple sources of randomness (including LLM output variance, error propagation across chained agents, sampling variability within the meta-agent, and stochastic evaluation outcomes). This leads to higher variability than typical single-LLM evaluations. In addition to averaging results over three runs, reporting variances would help assess and demonstrate the stability of the system\u2019s performance.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The framework\u2019s separation into two discrete stages (specialist discovery and specialist cultivation) appears conceptually convenient but somewhat artificial.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Insufficient formal guarantees: Despite using formal methods, lacks theoretical guarantees for correctness and completeness of generated specifications. Critical states or constraints may be missed",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Questionable scalability: How does computational complexity scale with state space size? The paper lacks analysis of large-scale scenarios",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Data dependency: Requires sufficiently diverse execution traces to learn complete specifications. Cold start and rare state handling is inadequate",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Shallow comparisons: Limited comparison with pure learning-based or pure formal methods, making it hard to assess true advantages of the hybrid approach",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Practical deployment challenges: How are state specifications continuously updated in dynamic environments? Maintenance issues aren't discussed",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The system is inherently complex due to its hierarchical, two-tiered structure. It requires maintaining both a low-level Architect (a large generative LLM used for evolutionary search) and a high-level, trained Meta-Controller (a neural policy). The entire process involves managing an offline two-stage training loop (Discovery and Cultivation), which is more involved than implementing fixed-architecture or simple prompt-optimization methods.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "While the separation of Discovery and Cultivation is logically justified by the \"explore-then-exploit\" paradigm, the practical implementation remains heavy. The requirement to maintain a high-capability \"Architect\" LLM, a trained Meta-Controller, and a memory management system constitutes a significant engineering barrier compared to simpler prompting strategies.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 807,
+  "prompt_tokens": 1369,
+  "total_tokens": 2176,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 0,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.000414637,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.000414637,
+   "upstream_inference_prompt_cost": 0.000190291,
+   "upstream_inference_completions_cost": 0.000224346
+  }
+ }
+}

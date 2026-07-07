@@ -1,0 +1,88 @@
+{
+ "paper_id": "xDO0239YOm",
+ "decision": "Reject",
+ "n_reviewers": 3,
+ "items": [
+  {
+   "weakness_text": "The scientific problem is hypothetical. In real data analysis, manually tuning the clustering cutoff does not impose a huge overhead and it is the standard practice. The clustering is indeed a subjective work. I think any work that claims to provide an \"optimal\" clustering for diverse scRNA-seq datasets will fail in the end. Even with LLM, there will be still some steps that one have to make subjective choices.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "\u201cChoosing the right resolution is therefore critical, as it determines not only the granularity of biological discovery but also the downstream functional annotation of each cluster.\u201d This premise is faulty, as many resolutions are possibly good, and it is also possible that no clustering resolutions are good and instead manual grouping of cells is needed (often by starting with an over-clustered data set and then selecting clusters to group based on expressed cell markers).",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "the premise of the paper is about single cell transcription clusters, but the test data is perturb-seq, which is a different type of experiment that is analyzed first by mapping crispr perturbation effects, not by clustering. The paper should have selected multiple standard scRNA-seq experiments with clear ground truth clustering results.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "the core empirical validation concerns (evaluation largely confined to one Perturb-seq dataset, lack of tests on standard scRNA-seq datasets with accepted annotations, limited quantitative alignment with perturbation labels or ground truth clusterings, and limited/weak baselines)",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "the silhouette baseline is simple. How about using ground truth cluster annotations?",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "the core empirical validation concerns (evaluation largely confined to one Perturb-seq dataset, lack of tests on standard scRNA-seq datasets with accepted annotations, limited quantitative alignment with perturbation labels or ground truth clusterings, and limited/weak baselines)",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Evaluation is confined to one Perturb-seq dataset (K562 from Replogle et al., 2022).",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "the core empirical validation concerns (evaluation largely confined to one Perturb-seq dataset, lack of tests on standard scRNA-seq datasets with accepted annotations, limited quantitative alignment with perturbation labels or ground truth clusterings, and limited/weak baselines)",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Reliance on proprietary, closed-source LLMs is a cool idea, but more \u201canalysis/automation tooling for single-cell pipelines\u201d than a core ML advance.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "as well as whether the claimed methodological contribution is sufficiently substantiated as a general ML advance rather than an application-specific heuristic",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper does not address LLM hallucinations, for example through ensemble agents, nor does it address biases, for example the tendency to over-rely on popular GO terms.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The agent assumes gene signatures (top over-expressed by logFC) capture full biology, ignoring down-regulated genes or pathway interactions.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 6135,
+  "prompt_tokens": 1172,
+  "total_tokens": 7307,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 5353,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 1024,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.001767192,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.001767192,
+   "upstream_inference_prompt_cost": 4.9392e-05,
+   "upstream_inference_completions_cost": 0.0017178
+  }
+ }
+}

@@ -1,0 +1,130 @@
+{
+ "paper_id": "lZrZgZ9wIu",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "This work only shows the energy-saving ratio in Table 2, but does not simultaneously display the inference accuracy under the corresponding sparsity level. In addition, this work only presents two small-scale static datasets (CIFAR-10/100) and convolutional network structures.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Authors' Response: Directly addressed by adding two new comparative analyses in the appendix: ... Also added requested comparisons ... Restructuring tables (e.g., new Table 1) to jointly present accuracy and energy reduction. ... The authors added compelling ImageNet/ViT experiments.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The so-called energy saving in this work are compared to vanilla pretrained ANN models. This work did not compare the inference accuracy and energy consumption with a series of important works based on STBP sparse training.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Authors' Response: Directly addressed by adding two new comparative analyses in the appendix: CHT-based Conversion vs. STBP-based Sparse SNN Training (SD-SNN, DPAP): Showing competitive accuracy with higher sparsity and lower energy at comparable time steps.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The sparse SNN obtained based on ANN-SNN Conversion requires a significant amount of time-steps in the inference phase, as evidenced by the time-steps listed in Table 2. In comparison, the SNN obtained from STBP sparse training usually only requires no more than 8 time-steps, which is also a limitation of this work.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "In the description of this reviewer (3cJ8) under 'Estimated Score Change': 'high inference time steps' remains a listed concern, and the reviewer's score was unchanged (Reject). The AC does not state that this specific concern was resolved; rather, the reviewer maintained their position.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The sparse training in this work was conducted during the ANN stage and is not directly related to SNN, which raises concerns about the contribution of this work to the SNN community.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Under 'Reviewer 3cJ8' reaction: 'despite the strong technical response, this reviewer's most damning concern was the contribution to the SNN community (W4). The reviewer's perspective seems to be that significant SNN research should involve direct SNN training innovations. ... The reviewer's confidence was a 5 (\"absolutely certain\"), indicating a strong, fixed position. They are the least likely to have changed their score.'",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "It is obvious that the layout of the figures, tables and formulas in this work needs further optimization.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Improved Presentation and Clarity: Reviewers' Concerns (FQAr, 3cJ8): Cited issues with ... poor figure/table layout. Authors' Response: Effectively addressed by ... Reorganizing figures and supplementary materials for better readability.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Novelty appears incremental: The study combines two well-established components, namely dynamically sparse training (DST)-based sparsity and standard ANN-to-SNN conversion techniques, and focuses mainly on evaluating their combined effect rather than introducing a new methodological contribution.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Outstanding Concerns (Fundamental to Rejection): Lack of Compelling Novelty / Incremental Contribution: Reviewers' Stance (nyYp, 3cJ8): The core criticism that the work is a combination of established techniques rather than a novel methodological contribution was not overcome.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Energy claims are theoretical and hinge on strong assumptions; no hardware validation. The headline \"up to 99% energy reduction\" is derived from a spike-count/FLOP model plus constants (EMAC/EAC) and the assumption that sparse hardware gives linear speed/energy benefits w.r.t. link sparsity. There is no measurement on neuromorphic or sparse-compute hardware. Consequently, the core claim remains speculative without device-level latency/energy evidence or even cycle-accurate simulators.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Outstanding Concerns (Fundamental to Rejection): Theoretical vs. Practical Energy Claims: Reviewers' Stance (nyYp, FQAr): While the authors acknowledged the limitation, the lack of hardware validation remains a critical, unaddressed gap. The claim of \"up to 99% energy savings\" is fundamentally weakened by being purely theoretical and model-based.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The title, \"CONVERSION OF SPARSE ARTIFICIAL NEURAL NETWORK TO SPARSE SPIKING NEURAL NETWORK CAN SAVE UP TO 99% OF ENERGY,\" is potentially misleading. It suggests a 99% saving over a baseline that is not clearly specified, likely leading readers to assume it's compared to a sparse ANN. The abstract clarifies it's versus a dense SNN, but the title remains overly broad and risks overstating the finding.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Improved Presentation and Clarity: ... Authors' Response: Effectively addressed by: Changing the title to be more precise (\"Investigating the Trade-off Between Accuracy and Theoretical Energy...\").",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experiments are conducted on small datasets. The paper's impact would be significantly greater with validation on larger, more complex datasets (e.g., ImageNet or its subsets).",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Although the authors added experiments with Vision Transformers (ViT) on ImageNet in their revision... (AC meta-review summary). Also: 'The authors added compelling ImageNet/ViT experiments.'",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Table 2 reports sparsity and energy but crucially omits the accuracy/performance of the converted models. This makes it impossible to evaluate the true trade-off between efficiency and accuracy, which is the central claim of the work.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Improved Presentation and Clarity: ... Restructuring tables (e.g., new Table 1) to jointly present accuracy and energy reduction.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "A key component of the method, CHT, is based on a preprint that has not undergone peer review. This reliance weakens the methodological foundation of the paper, as the core algorithm's efficacy and claims are not yet independently verified.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Under Reviewer FQAr: 'they ... provided peer-review citations for CHT'.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The discussion and conclusion frame the work as a significant step towards brain-like architecture. However, simply converting a sparsely trained ANN to an SNN is a relatively indirect contribution to neuromorphic computing. The narrative should be tempered to more accurately reflect the specific contribution: an efficient conversion pipeline leveraging sparse training, rather than a fundamental advance in brain-like computing.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Under Reviewer FQAr: 'they ... tempered the narrative.'",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experiments are conducted solely on traditional CNNs like MLP and VGG-16. Currently, Transformer architectures have become mainstream in fields such as computer vision. To demonstrate the generalizability and state-of-the-art relevance of the proposed method, the authors should include experimental results on converting sparsely trained Transformer models from ANN to SNN.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Although the authors added experiments with Vision Transformers (ViT) on ImageNet in their revision... (AC meta-review summary). Also: 'The authors added compelling ImageNet/ViT experiments.'",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "All experiments are performed on the relatively small CIFAR-10 and CIFAR-100 datasets. The absence of validation on large-scale, more challenging real-world datasets like ImageNet raises concerns about the generalization capability of the conclusions in complex scenarios and diminishes the practical value of the method.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Although the authors added experiments with Vision Transformers (ViT) on ImageNet in their revision... (AC meta-review summary). Also: 'The authors added compelling ImageNet/ViT experiments.'",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 12687,
+  "prompt_tokens": 3046,
+  "total_tokens": 15733,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 10567,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0039788,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0039788,
+   "upstream_inference_prompt_cost": 0.00042644,
+   "upstream_inference_completions_cost": 0.00355236
+  }
+ }
+}

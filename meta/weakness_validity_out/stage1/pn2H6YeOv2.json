@@ -1,0 +1,130 @@
+{
+ "paper_id": "pn2H6YeOv2",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "The paper appears to violate the official format for submissions, which makes unclear whether the submitted content exceed the paper limit or not if the manuscript were appropriately reformatted.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The proposed method seems to introduce some computational/storage burden by SVD and the PI-CCA quantities, compared to previous continual learning methods. Also, since retaining of statistic information can also be seen as some kind of replay, it should be compared with replay-based continual learning for fair evaluation.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "they quantify modest overhead and very small certificate storage compared with replay buffers",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "One of the motivation of the replay-free method has been privacy protection as discussed in Introduction, but it is unclear whether the proposed method can provably prevent the privacy leakage from the correlation statistics.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Reviewer pV7E, at 4, might still view the conceptual novelty as moderate, but ... and privacy clarifications and per\u2011task results.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "In experiments, the superiority of the proposed method is only shown by averaged results, which may be dominated by a single task with high accuracy by luck.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "and provide per\u2011task results showing consistent gains.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The core components prompt perturbation averaging and subspace-angle preservation are not novel and have been extensively studied in prior work on representation similarity and prompt tuning. Their application to continual learning is incremental and lacks a strong theoretical or empirical justification for novelty. e.g., Orthogonal Over-Parameterized Training (CVPR20), Controlling text-to-image diffusion by orthogonal finetuning (NeurIPS23) DeLoRA: Decoupling Angles and Strength in Low-rank Adaptation (arxiv 24) PAID: Pairwise Angular-Invariant Decomposition for Continual Test-Time Adaptation",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The rebuttal addresses most technical and empirical concerns in a reasonable way, though some conceptual debates on novelty remain.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The paper does not convincingly demonstrate that preserving CCA geometry is fundamentally more effective than existing regularization or distillation-based methods. The observed gains could be attributed to careful tuning rather than a conceptual breakthrough.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "the added baselines, geometry\u2013performance correlation, and theoretical justification for the projector loss plausibly reduce the concern that gains are purely due to tuning",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The prompt invariance mechanism is relatively simplistic (averaging projectors) and does not explore more sophisticated or adaptive strategies.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "the simplicity of the prompt invariance and anchor construction is better motivated in the constrained replay\u2011free, constant\u2011memory setting",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The method assumes access to a diverse anchor prompt set for certificate construction, which may not be feasible in real-world streaming scenarios.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "give additional evidence that prompt invariance and small, label-derived anchor sets are effective and not overly sensitive",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "I think the explanation of the proposal method could be improved to be a bit easier to understand. The concept of a \u201ccertificate\u201d is used, but since I am not familiar with continual learning, I do not understand the definition. An explanation of the term is necessary.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "clearer explanations of the CCA certificate",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "There are no statistical tests for the main results. There is the following sentence: \"Each configuration is repeated with three different random seeds, and we report the mean and the standard deviation.\" However, I cannot find the standard deviation.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "standard deviations and paired t\u2011tests demonstrating statistical significance of gains",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The proposed method is a collection of multiple ideas, and it might remain a bit unclear whether the core idea possesses the generality or universality to influence future research in a broad research area.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Certificate dependence on sketching and hyperparameters is described but the randomness/variance from sketch seeds and sketch types needs deeper quantification: how often does a small sketch RNG seed change final retention?",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "the authors add robustness experiments showing low sensitivity to sketch randomness and sketch type",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Experiments focus on ViT-B/16 + LoRA; unclear how PI\u2013CCA scales to much larger backbones or different adapter types (other LoRA ranks, full-finetune, or other PETs).",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "scaling results to ViT\u2011L backbones and multiple PET configurations",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Reproducibility caveat: paper promises to release code only at camera-ready due to commercial constraints. for reproducibility during review, providing a compact reference script or a verified pseudocode runner (or smaller toy logs) would greatly help reviewers reproduce core claims.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 6121,
+  "prompt_tokens": 1670,
+  "total_tokens": 7791,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 4625,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 1536,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.001775648,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.001775648,
+   "upstream_inference_prompt_cost": 6.1768e-05,
+   "upstream_inference_completions_cost": 0.00171388
+  }
+ }
+}

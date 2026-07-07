@@ -1,0 +1,22 @@
+Anchor BUpdp5gETF.md — Avg Score: 2.50, 19 weighted items:
+[strength] weight=+1.36: Has a valid and strong motivation.
+[strength] weight=+3.70: The finding that the RLRS's of a smaller model can be transfered (with slight adjustment) to a larger model wi
+[strength] weight=+3.43: The experiments are comprehensive and do show the effectiveness and efficiency of the proposed RLRS.
+[strength] weight=+4.25: The proposed method has been applied to large model scales, which is practical if the implementation and resul
+[strength] weight=+2.00: Problem tackled is practical and of interest to the community.
+[strength] weight=+2.04: The core idea is interesting.
+[strength] weight=+1.81: The paper is clear and easy to follow.
+[strength] weight=+3.21: The authors tune their hyperparameters well.
+[strength] weight=+2.58: I think the topic the authors are aiming to address is interesting, and it makes sense that different learning
+[weakness] weight=-3.41: The validity of the claim that the hyperparameters of small model remains robust in large model is not convinc
+[weakness] weight=-6.54: The hyperparameter tuning process is based on plain searching, which make the algorithm lack of efficiency in 
+[weakness] weight=-8.82: (**Limited Novelty of proposed approach**) The authors assume that relative learning rates tuned on smaller mo
+[weakness] weight=-5.86: The rationale for introducing separate learning rate schedules for different components is not well-explained.
+[weakness] weight=-9.50: The paper does not sufficiently compare its approach with established methods for adaptive learning rates, suc
+[weakness] weight=-8.07: The overall novelty of the work might be limited given that tuning learning rates for each component of the ne
+[weakness] weight=-6.73: The paper doesn’t answer the question of whether the final lr values are truly needed. Figure 4 suggests that 
+[weakness] weight=-3.63: The experiments are relatively small in scale and could be better ablated.
+
+[1]: https://arxiv.org/abs/2407.05
+[weakness] weight=-6.70: This proposed method is not theoretically motivated and the proposed method appears to be a very crude heurist
+[weakness] weight=-7.90: There is very little background or discussion covering the central topics of this paper. For example, there is

@@ -1,0 +1,137 @@
+{
+ "paper_id": "Y6lVVJHiwN",
+ "decision": "Reject",
+ "n_reviewers": 5,
+ "items": [
+  {
+   "weakness_text": "The theoretical guarantees rely on the convexity of both the objective and constraint functions (Assumption 1), along with bounded Lipschitz constants and sub-Gaussian noise assumptions. This is a standard assumption for proving $O(1/\\sqrt{T})$ rates, but it limits the immediate applicability to realistic federated learning settings (most real federated tasks, such as deep neural network training, are nonconvex).",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "...the restrictive assumption of convexity have not been sufficiently addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Combining constraints, compression, local updates, and partial clients in a single framework is beneficial, but the technical novelty of each component may appear incremental compared to prior art. FedSGM essentially merges well-known techniques, such as switching gradient updates for constraints, error-feedback compression, and multi-step local SGDs (similar to FedAvg), and extends existing analyses to their combined application.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Limited novelty (combining several existing techniques) ... have not been sufficiently addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Although the two case studies are relevant, the experiments are somewhat limited in diversity and scale.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Some of the major concerns include 1. Limited experiments",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The theory assumes convex objectives and constraints, which restricts applicability to deep federated learning scenarios. The extension to nonconvex settings is not discussed.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "...the restrictive assumption of convexity have not been sufficiently addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Experiments are restricted to small datasets and tabular RL tasks. Results on large-scale or nonconvex benchmarks (e.g., image classification or language models) would greatly strengthen the empirical claims.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Some of the major concerns include 1. Limited experiments",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experimental section lacks strong comparisons with recent constrained FL baselines (e.g., primal-dual or penalty-based methods), making it difficult to evaluate relative performance.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Some of the major concerns include 1. Limited experiments",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "No experiments under heterogeneous data distributions.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Some of the major concerns include 1. Limited experiments",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The novelty and significance of the constraint formulation seem to be overstated. Assumption 3 restricts the generality of the framework, limiting the scope of the unification. Hard and soft switching closely resemble well-known approaches for minimizing an unconstrained regularized objective, with the regularizer R chosen as: R(w)=0 if G(w)<=\\eps and \\infty otherwise (see the formulation [1]). In this viewpoint, the literature review seems to be inadequate.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Limited novelty (combining several existing techniques) ... have not been sufficiently addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Practical relevance of the unified framework is unclear: FL is a diverse field, and it is not evident which real-world FL setups require all of the newly-enabled components simultaneously.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Some of the major concerns include ... 3. Limited practical relevance",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Experiments are limited and mostly illustrative. I think that there is a lot of missed potential. Having the unified framework, one can also compare the different aspects of the framework to answer fundamental questions of federated learning -- what is more important: to have more clients in partial participation, or to have more bits in the compresion schemes, or to do more local steps?",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Some of the major concerns include 1. Limited experiments",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper needs a major revision before considering publishing. There are missing definitions (convexity, Lipschitz continuity), a lack of formal rigor, and a disjointed and difficult-to-follow narrative.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The authors have not compared their proposed method with the state-of-the-art. The experiments (Section 4) only compare FEDSGM against a \"Centralized\" (i.e., non-federated) version of itself which is an ablation study.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Some of the major concerns include 1. Limited experiments",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It demonstrates that the federated setting introduces a performance cost (which is expected) but tells us nothing about whether FEDSGM is better than any other existing method.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Some of the major concerns include 1. Limited experiments",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In this paper, the authors does not propose a new communication-efficient technique. It merely \"incorporates\" standard methods like Top-K compression and Error Feedback. Moreover, their method added new communication overhead. Algorithm 1 explicitly requires a \"Constraint query\" (lines 3-4) where all clients send their constraint value $g_j(w_t)$ to the server, which then aggregates and broadcasts the switching decision. This is a full, separate communication round-trip that must happen before the main gradient/model update. This added synchronisation step directly contradicts the goal of reducing communication bottlenecks.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Some of the major concerns include 2. Techinques used for communication efficiency are not new",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experimental results in the main body of the paper are limited. The authors could move some of the results from the appendix for the final version of the draft.",
+   "reviewer_index": 4,
+   "ac_status": "unresolved",
+   "ac_evidence": "Some of the major concerns include 1. Limited experiments",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 4823,
+  "prompt_tokens": 1319,
+  "total_tokens": 6142,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 3162,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0015351,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0015351,
+   "upstream_inference_prompt_cost": 0.00018466,
+   "upstream_inference_completions_cost": 0.00135044
+  }
+ }
+}

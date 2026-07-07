@@ -1,0 +1,179 @@
+{
+ "paper_id": "zHdKaF3ZM7",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 5,
+ "items": [
+  {
+   "weakness_text": "The introduction does not (although the related work does) mention selective SSMs (e.g., Mamba), which have re-introduced nonlinearities into linear RNNs.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "CelebA reconstruction seems a bit contrived as a task: the annotated S4 article referenced does indeed reconstruct MNIST and similar image data, but then proceeds to spoken digit data, which the authors did not try reconstructing. Moreover, CelebA face reconstructions are substantially corrupted. While I do not deny WARP's improvement in image reconstruction over baseline, I am unsure about the salience of image reconstruction as a metric for evaluating RNNs. I think there are more relevant tasks to measure long-range dependencies, such as Long-Range Arena benchmarks.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "There are no experiments on text prediction or classification, which are some of the most relevant tasks for evaluating new RNN architectures - does WARP have limitations or inductive biases that prevent it from expressively processing text? If so, the authors should state it, as this is an important limitation, especially to claims of in-context learning. If not, then the authors should evaluate their model with text to support the expressivity of WARP.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "WARP's connections to biology are not sufficiently explained in the main text, although the authors do discuss it further in the appendix.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Scalability constraints: The main bottleneck is the large transition matrix which scales quadratically with the number of root-network parameters. Experiments are thus limited to moderate model sizes, raising questions about feasibility for large-scale models.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "In particular, scalability remains a concern due to the growth of the transition matrix with the dimensionality of the flattened auxiliary weights, and the paper still offers limited theoretical insight into why the method works as well as it does.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited theoretical grounding: While the empirical evidence is compelling, the theoretical analysis of representational capacity and stability (e.g., under linear recurrence updates) still remains to be established.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "In particular, scalability remains a concern due to the growth of the transition matrix with the dimensionality of the flattened auxiliary weights, and the paper still offers limited theoretical insight into why the method works as well as it does.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Computational cost reporting: Although the recurrence is linear, updating and decoding weight vectors remains costly. Memory and compute scaling with model size are not fully quantified and are only provided in the appendix, but entirely missing from the main body of the paper.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited setting for dynamical system reconstruction: While the possibility of making the network physics-informed is compelling, the shown examples illustrate this for relatively simple systems with a small number of parameters. While the proposed method clearly allows for in-context learning, and hence does not need to retrain a network for each new dynamical system (from the same category), the setups are done for what appears to be noiseless input-output data, and a low number of parameters. One could, instead of learning the entire mapping of the system, learn only its phase or exponential mapping for any other sequence model that allows for ICL, in the same way as demonstrated in this work. This alternative formulation would serve as a fairer baseline for comparison.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Novelty relative to prior work: There is conceptual overlap with other concepts briefly outlined in the related work (e.g., fast weight RNNs), though the authors' framing is distinctive. A more explicit comparison to those baselines would help to better position WARP's contribution.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Claims are sometimes overstated and/or imprecise. For example, phrases like \"transformative paradigm for adaptive machine intelligence\" (Abstract, Conclusion) and \"redefine sequence modeling\" (Abstract) are not well-supported. The empirical results show WARP is competitive but not uniformly superior.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "the paper occasionally overstates its results. In particular, claims such as \u201coffers unprecedented potential\u201d are not fully supported by the evidence, as the results in Table 4 are not consistently dominant.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "\"Brain-inspired formulation\" (Abstract, page 2) refers only to using input differences, with citation to synaptic plasticity [16], but the connection is somewhat superficial - there is a rich literature concerned with modelling realistic synaptic plasticity rules which this approach to weight-space trajectory modelling does not engage with.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "\"Infinite-dimensional RNN hidden states\" (page 9, footnote 6) is misleading\u2014the hidden state is finite-dimensional, though it parametrizes a function.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The analytic results rest on linear, Gaussian assumptions; nonlinear recurrence effects and gating dynamics are only discussed qualitatively. As such, predictive power for modern gated RNNs or structured SSMs is limited.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "In particular, scalability remains a concern due to the growth of the transition matrix with the dimensionality of the flattened auxiliary weights, and the paper still offers limited theoretical insight into why the method works as well as it does.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The analysis centers on the infinite-width, overparameterized limit; it does not quantify where the asymptotic predictions break down for finite models.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "In particular, scalability remains a concern due to the growth of the transition matrix with the dimensionality of the flattened auxiliary weights, and the paper still offers limited theoretical insight into why the method works as well as it does.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The authors reference Saxe et al. (2014) but omit more recent theoretical works on curriculum and transfer in RNNs (e.g., Rajan, Kepple & Engleken) and on gradient-flow analyses in recurrent kernels \u2014 literature directly related to their spectral-mode interpretation.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "In particular, scalability remains a concern due to the growth of the transition matrix with the dimensionality of the flattened auxiliary weights, and the paper still offers limited theoretical insight into why the method works as well as it does.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Although the experiments match qualitative trends, they serve mainly as demonstrations rather than quantitative tests (e.g., no variance or uncertainty estimates, small sample sizes).",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Generalization is assessed by mean-squared error only; tasks with stochastic noise or long-term dependency tests (copy, addition, character-level modeling) would strengthen claims about recurrence depth and spectral bias.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Benchmark depth. While broad, the benchmark is missing some of the newer SSMs that define the current frontier. In particular, LinOSS (Rusch & Rus, 2024)\u2014an oscillatory, long-sequence SSM\u2014is cited but not compared. Given that LinOSS, FACTS, and Griffin all outperform S4 and Mamba on long forecasting tasks, excluding them makes the SoTA claim weaker.",
+   "reviewer_index": 4,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Scalability. The transition matrix $A \\in \\mathbb{R}^{D_\\omega \\times D_\\omega}$ scales quadratically with the size of the decoder, which will quickly become impractical. No structured or low-rank variants are explored.",
+   "reviewer_index": 4,
+   "ac_status": "unresolved",
+   "ac_evidence": "In particular, scalability remains a concern due to the growth of the transition matrix with the dimensionality of the flattened auxiliary weights, and the paper still offers limited theoretical insight into why the method works as well as it does.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Theory gap. The paper is mostly empirical. There\u2019s no discussion of spectral properties, stability, or representational capacity of the linear map in weight space.",
+   "reviewer_index": 4,
+   "ac_status": "unresolved",
+   "ac_evidence": "In particular, scalability remains a concern due to the growth of the transition matrix with the dimensionality of the flattened auxiliary weights, and the paper still offers limited theoretical insight into why the method works as well as it does.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Domain imbalance. Some domains (especially physics and image experiments) use small or older baselines (ConvCNP, GRU, Transformer). More recent adaptive or physics-informed baselines like Neural Context Flows (ICLR 2025) or ZEBRA (2024) would strengthen those sections.",
+   "reviewer_index": 4,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 11752,
+  "prompt_tokens": 2062,
+  "total_tokens": 13814,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 9232,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00357924,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00357924,
+   "upstream_inference_prompt_cost": 0.00028868,
+   "upstream_inference_completions_cost": 0.00329056
+  }
+ }
+}

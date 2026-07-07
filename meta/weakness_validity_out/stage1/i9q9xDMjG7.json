@@ -1,0 +1,130 @@
+{
+ "paper_id": "i9q9xDMjG7",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "The implementation details of the evaluation metrics are not clearly specified. It seems that both *Faithfulness* and *Evidence Coverage* rely on external judgment models, such as *LLM-as-a-Judge*, but the paper does not disclose the exact implementation of this component.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Reviewers ebWh and bvTB flagged unclear definitions for metrics and dataset construction. The authors provided detailed pseudocode and prompts for these processes in the revised appendix.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The scale of retrieved content among methods appears inconsistent. According to Section H.2 *Configuration*, the retrieval strategies of RAG and different GraphRAG variants are not aligned\u2014for example, RAG restricts the Top-K to 5. This inconsistency may affect the fairness of performance comparisons.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The potential mechanisms through which *Graph Indexing content* influences various tasks deserve further study. Statistics in Table 15 show that different GraphRAG strategies employ distinct types of indexed content, such as text chunks, communities, entities, and relationships. For instance, could the inclusion of *community* information better support *contextual summarization* tasks?",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "How corpus characteristics affect the choice of GraphRAG remains an open question. Although the paper thoroughly investigates when to use GraphRAG from the perspective of task properties and performance, Sections C.1 and D further discuss the traits of the selected *Medical* and *Novel* corpora, as well as the yet-unexplored *Legal* and *Financial* domains. Extending the study of \"When to use GraphRAG\" to domain-specific corpora would significantly strengthen the work.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The calculation process for some evaluation metrics is simplistic and unclear. For example, the paper does not explain how it determines whether a claim c is supported by the context C when calculating EVIDENCE RECALL and FAITHFULNESS.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Reviewers ebWh and bvTB flagged unclear definitions for metrics and dataset construction. The authors provided detailed pseudocode and prompts for these processes in the revised appendix.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The process of Logic and Evidence Extraction is not clearly described either in the main text or the appendix. While the use of GPT-4.1 is mentioned, the specific extraction procedure and output format are not illustrated clearly.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Reviewers ebWh and bvTB flagged unclear definitions for metrics and dataset construction. The authors provided detailed pseudocode and prompts for these processes in the revised appendix.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The proposed four-level task hierarchy is claimed that task difficulty increases along the retrieval difficulty and reasoning complexity. However, this paper do not provide formal or operational definitions for these levels\u2014there are no explicit thresholds for evidence quantity, reasoning steps, or context length that determine the boundaries between levels.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Reviewer dvvB asked for operational definitions of task difficulty. The authors clarified this by quantifying \"Knowledge Breadth\" and \"Reasoning Depth\" for each level.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The benchmark does not disclose the absolute corpus size for the Novel and Medical datasets. Consequently, it remains unclear how GraphRAG\u2019s performance scales with corpus size. Without controlled experiments across small, medium, and large datasets, the current results cannot confirm whether the observed improvements stem from the graph structure itself or from differences in data volume and density.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Reviewer dvvB noted a lack of analysis regarding corpus size. The authors conducted controlled experiments across different scales, demonstrating that vanilla RAG performance degrades with scale while GraphRAG remains stable.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The paper does not empirically analyze how different indexing contents\u2014such as entities, relationships, phrases, or communities\u2014affect GraphRAG performance. Although Table 15 summarizes the indexing types used by various implementations, these differences are only descriptive and intertwined with other design factors like retrieval strategies and graph density.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The paper does not evaluate GraphRAG on time-sensitive or temporally evolving datasets. The current study\u2019s exclusive focus on static corpora (medical guidelines and classical novels) means it cannot assess how graph-based retrieval performs under temporal drift or continuous knowledge refresh.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The dependence of GraphRAG on LLM ability. The authors tested two models (GPT-4o-mini and Qwen2.5-14B) on the benchmark. However, the analysis of how GraphRAG depends on the ability (size) of LLMs is missing. It would be nice if the author could give some analysis on the minimum size for a successful GraphRAG.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Reviewer zK5v questioned the minimum model size required for effective GraphRAG. The authors addressed this by adding experiments with the Qwen2.5 series (3B, 7B, 14B), identifying 7B as a practical performance inflection point.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Some of the multi-hop QA datasets, which contains QA pairs with various question types and different difficulties, such as CWQ, MuSiQue, and 2WikiMultihopQA, are not discussed in this manuscript.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "This paper lacks a concrete explanation of how the raw text corpus is organized into an ontology by GPT-4.1. This task can be challenging, hence one may need to recognize entities and relations, and then perform necessary disambiguation procedures.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The proposed benchmark does not evaluate the efficiency of graph construction. Ignoring graph construction efficiency is justifiable only if the constructed graph can be reused across a wide range of scenarios.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Reviewer zK5v requested analysis on construction costs. The authors added a detailed breakdown of time and token usage for various methods, highlighting the trade-offs.",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 7854,
+  "prompt_tokens": 1626,
+  "total_tokens": 9480,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 6233,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00242676,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00242676,
+   "upstream_inference_prompt_cost": 0.00022764,
+   "upstream_inference_completions_cost": 0.00219912
+  }
+ }
+}

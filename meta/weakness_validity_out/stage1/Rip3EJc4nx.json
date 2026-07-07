@@ -1,0 +1,186 @@
+{
+ "paper_id": "Rip3EJc4nx",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "The dataset coverage is narrow and the evaluation tasks are of low difficulty, relying on a small set of relatively simple zero-shot benchmarks. This makes it difficult to assess robustness in areas such as instruction following, multi-step reasoning, long-context understanding, or multilingual and multi-domain settings.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The experimental evaluation is insufficient. (Reviewer cwzU, Emas, zpe3). The reviewers recommend that the authors conduct experiments on a broader range of datasets and with larger-scale models.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "There may be a mismatch between the benchmarks and the pruned model components: if the tasks do not sufficiently engage the pruned submodules, the reported \u201cdistribution fidelity\u201d may be overstated and external validity remains uncertain.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Baseline and tuning transparency is limited, with missing comparisons to stronger or more recent pruning baselines, as well as a lack of systematic hyperparameter exploration under fair alignment conditions (e.g., matched training steps and learning-rate sweeps).",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The experimental evaluation is insufficient. (Reviewer cwzU, Emas, zpe3). The reviewers recommend that the authors conduct experiments on a broader range of datasets and with larger-scale models.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The evaluation metrics are limited, focusing heavily on perplexity or simple zero-shot accuracy, without including direct generation results.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The pruning ratio \u03c1_{mlp} is fixed across all MLP layers, despite entropy potentially varying per layer, this could limit the functionality of HFPrune.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Limitations in algorithm design. (Reviewer Emas, oKVY) The proposed method applies a fixed, uniform pruning ratio across all layers, which may limit its effectiveness in more challenging pruning scenarios.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lack a comparative discussion or empirical correlation analysis between entropy-based and Fisher-based importance scores.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Theoretical Justification. (Reviewer Emas, oKVY) The authors are recommended to give some analysis their proposed methods and give a discussion with the methods like Fisher-based methods.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Training-time FLOPs for fine-tuning (post-pruning recovery) are omitted.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper fundamentally lacks theoretical justification for why entropy-based importance should preserve model performance. This is not a minor omission, in my view it's a central issue that undermines the contribution's scientific rigor.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Theoretical Justification. (Reviewer Emas, oKVY) The authors are recommended to give some analysis their proposed methods and give a discussion with the methods like Fisher-based methods.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Exclusively focuses on zero-shot QA/classification tasks",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The experimental evaluation is insufficient. (Reviewer cwzU, Emas, zpe3). The reviewers recommend that the authors conduct experiments on a broader range of datasets and with larger-scale models.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "No evaluation on reasoning, long-form generation, or conversational capabilities",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The experimental evaluation is insufficient. (Reviewer cwzU, Emas, zpe3). The reviewers recommend that the authors conduct experiments on a broader range of datasets and with larger-scale models.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Largest model tested is only 7B parameters",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The experimental evaluation is insufficient. (Reviewer cwzU, Emas, zpe3). The reviewers recommend that the authors conduct experiments on a broader range of datasets and with larger-scale models.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited architectural diversity beyond LLaMA/Qwen families",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The experimental evaluation is insufficient. (Reviewer cwzU, Emas, zpe3). The reviewers recommend that the authors conduct experiments on a broader range of datasets and with larger-scale models.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Uses uniform pruning ratios across layers, ignoring heterogeneous sensitivity",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Limitations in algorithm design. (Reviewer Emas, oKVY) The proposed method applies a fixed, uniform pruning ratio across all layers, which may limit its effectiveness in more challenging pruning scenarios.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited sparsity range testing (only 20-30%)",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The experimental evaluation is insufficient. (Reviewer cwzU, Emas, zpe3). The authors give the results under limited sparsity range (only 20-30%).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The performance gains over dense models likely result from fine-tuning rather than pruning itself",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "No explanation of which types of neurons are pruned and why (recent works have revealed super neurons, super weights, super experts etc.)",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "No investigation of the relationship between entropy reduction and specific capabilities",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Missing analysis of method sensitivity to calibration data selection",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The assertion that the method 'minimizes the change of global prediction distribution' is not rigorously nor theoretically established, and the connection between this and performance preservation remains speculative.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Theoretical Justification. (Reviewer Emas, oKVY) The authors are recommended to give some analysis their proposed methods and give a discussion with the methods like Fisher-based methods.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Explanation on the Choice of Baselines: As discussed in the Related Work section, LLM pruning is a highly focused research area with a large body of work, which can be categorized into different approaches. However, in the experimental section, only a few methods such as LLM-pruner, LoRAPrune, and LoRAP are compared, and the rationale behind choosing these baselines is not explained. It remains unclear whether the state-of-the-art methods from each category are all covered by the baselines used in this paper. If they are, an explanation should be provided; if not, more baselines should be included (or a justification should be given for why they cannot be included for a fair comparison).",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "The experimental evaluation is insufficient. (Reviewer cwzU, Emas, zpe3). The reviewers recommend that the authors conduct experiments on a broader range of datasets and with larger-scale models.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "More Comparison on Efficiency: For Efficiency, the paper only compares the proposed method with SDMPrune, demonstrating that the proposed approach is more efficient than methods like SDMPrune, which require a teacher model. The efficiency of other methods (LLM-pruner, LoRAPrune, LoRAP) should also be compared.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Writing Needs Improvement: - For example, in lines 013-014 of the Abstract: The statement 'A common approach uses Taylor Expansion' does not clearly explain the field of research. It should at least mention that 'it is a common approach for LLM pruning.' - In line 015 of the Abstract, the sentence 'However, its reliance on one-hot cross entropy loss, ...' contains a grammatical error. It should be 'it relies on' instead. - Many more problems on writing exists",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 7263,
+  "prompt_tokens": 1780,
+  "total_tokens": 9043,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 6088,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00228284,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00228284,
+   "upstream_inference_prompt_cost": 0.0002492,
+   "upstream_inference_completions_cost": 0.00203364
+  }
+ }
+}

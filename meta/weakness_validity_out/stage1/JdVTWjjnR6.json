@@ -1,0 +1,200 @@
+{
+ "paper_id": "JdVTWjjnR6",
+ "decision": "Reject",
+ "n_reviewers": 6,
+ "items": [
+  {
+   "weakness_text": "How the \"hippocampal\" and \"thalamic\" analogies are quantitatively realized. While the hippocampal\u2013thalamic analogy is conceptually interesting, the connection to actual neuroscientific mechanisms remains largely metaphorical.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "I find the biological connection to still be somewhat strained.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Computational overhead and scalability of the memory and activation modules. The memory retrieval and sparse activation modules may introduce additional computational overhead. The paper would benefit from a quantitative analysis of training/inference cost and scalability to larger datasets.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "the authors have provided good arguments and follow up experiments for the following aspects: ... computational efficiency",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Minor concerns - Refer to the questions",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Biased dataset performance discussion - While HiTNet performs strongly on MOSI/MOSEI, the performance margin on SIMS is relatively modest.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "How is the Top-K value in the Semantic Memory Module selected? Could the authors discuss the impact of different k values on performance?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The proposed method involves sparse activation across multiple modules. Could the authors analyze what would happen if full activation were used instead?",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "the authors have provided good arguments and follow up experiments for the following aspects: ... the merits of sparse activation",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Could you add explanations for G and g in the caption of Figure 2, or include a legend directly in the figure for clarity.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The paper claims that Hierarchical Fusion provides better performance. Could you compare it against simpler alternatives such as concatenation, summation, or attention-based fusion?",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "the authors have provided good arguments and follow up experiments for the following aspects: ... the fusion strategy",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Since the optimization objective includes many constraint terms, could this lead to unstable or slower training? Could you show training curves and discuss convergence behavior? In addition, how sensitive is the training process to random seed variations Does the loss fluctuate significantly?",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "the authors have provided good arguments and follow up experiments for the following aspects: ... convergence",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In section relevant work, could you introduce and discuss all the methods you compared?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "This paper does not compare its method with some powerful modern imputation methods such as masked-autoencoding and diffusion-based completion. Also missing are ablations against simpler reliability heuristics (e.g., SNR/entropy-based gates). These methods may seem more suitable for scenarios where frames are missing.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The input with missing frames does not simulate real-world scenarios, such as consecutive frame drops due to packet loss. Conducting experiments under such conditions would be more convincing.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "the authors have provided good arguments and follow up experiments for the following aspects: robustness to consecutive missingness",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "By coupling the intra- and inter-modal streams only via a late, single-point gate, the model limits cross-layer interactions and can miss fine-grained synergies that require earlier or multi-level fusion.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "the authors have provided good arguments and follow up experiments for the following aspects: ... the fusion strategy",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The convex mix $s\u22c5x+(1\u2212s)\u22c5h$ assumes additive compatibility between native and completed features, risking blurred signals and underfitting of nonlinear cross-modal interactions.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The biological inspiration, while interesting, remains mostly metaphorical; the paper could better justify how the hippocampal\u2013thalamic analogy concretely guides the architecture design and contributes beyond naming.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "I find the biological connection to still be somewhat strained.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experimental section, though broad, lacks sufficient comparison with very recent multimodal robustness approaches or large foundation models, which limits understanding of its relative performance in the current landscape.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "They have also added some baseline experiments at the request of the reviewers (who asked for the latest foundation models).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Some implementation details and hyperparameter settings are not clearly described, making it difficult to reproduce results or fully assess the method's computational efficiency and scalability.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "the new hyperparameter tuning method should be better described and the authors should consider confidence intervals",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper states that \"the missing information reconstruction module ERec, designed to reconstruct the missing features of each modality,\" but in Figure 2, the position of this module is ambiguous, making it difficult for readers to interpret and align it with the overall framework.",
+   "reviewer_index": 4,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper does not explore the model's performance under non-random missing scenarios.",
+   "reviewer_index": 4,
+   "ac_status": "resolved",
+   "ac_evidence": "the authors have provided good arguments and follow up experiments for the following aspects: robustness to consecutive missingness",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "There are some writing detail issues: the formulas lack proper punctuation \u2014 for example, a comma should follow Formula (2) and a period should follow Formula (3). Formula (7) should be followed by an explanatory sentence, and the use of uppercase and lowercase letters is inconsistent.",
+   "reviewer_index": 4,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Novelty gap with existing memory-based completion: Key-value memory banks have been used for missing-modality imputation and for speech emotion with artefacts. The authors should clarify how their SMM differs from these works beyond simply being applied to sentiment.",
+   "reviewer_index": 5,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Biological inspiration is loose: The hippocampus performs associative pattern completion across time, whereas the SMM retrieves a single best-matching vector with cosine similarity and updates by frequency, which is closer to a standard dictionary. A more rigorous mapping or citation to computational neuroscience models (e.g., Hopfield networks, Kanerva's sparse distributed memory) would strengthen the claim.",
+   "reviewer_index": 5,
+   "ac_status": "unresolved",
+   "ac_evidence": "I find the biological connection to still be somewhat strained.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Inference requires five sub-networks per modality, a memory bank of 64\u00d73 tensors, two Transformers for confidence & completion, and a 4-layer fusion transformer. The paper reports accuracy but not latency, FLOPs, or GPU memory; a table or plot (e.g., vs. LNLN) is needed for deployment claims.",
+   "reviewer_index": 5,
+   "ac_status": "resolved",
+   "ac_evidence": "the authors have provided good arguments and follow up experiments for the following aspects: computational efficiency",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Hyper-parameter sensitivity: Optimal loss weights differ by dataset (MOSI \u03b1=10, MOSEI \u03b1=1.5). No automatic tuning or principled weighting (e.g., uncertainty weighting, GradNorm) is explored, raising reproducibility concerns.",
+   "reviewer_index": 5,
+   "ac_status": "unresolved",
+   "ac_evidence": "the new hyperparameter tuning method should be better described and the authors should consider confidence intervals",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 8264,
+  "prompt_tokens": 1897,
+  "total_tokens": 10161,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 5956,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00237314,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00237314,
+   "upstream_inference_prompt_cost": 0.0002443336,
+   "upstream_inference_completions_cost": 0.0021288064
+  }
+ }
+}

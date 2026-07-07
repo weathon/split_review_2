@@ -1,0 +1,88 @@
+{
+ "paper_id": "GE0b5aQAvm",
+ "decision": "Reject",
+ "n_reviewers": 3,
+ "items": [
+  {
+   "weakness_text": "I found the paper extremely difficult to parse, both linguistically and conceptually. The writing is often ambiguous, and key terms are not defined well. For example, the opening statement of the abstract (\"neural policy ensembles are sub-optimal with respect to linear policy ensembles\") is already unclear and leaves the reader guessing what kind of optimality this is referring to.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The central theoretical claim almost seems self-referential given the assumptions. Since the problem setup is fully linear with quadratic costs, and the class of linear policies already contains the global optimum, it follows by construction that any non-linear function cannot be better. If I understood correctly, this result is highly unsurprising and, arguably, trivial within the stated framework of linear problems with quadratic costs.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The authors seem to assume that neural policies are nonlinear by construction and therefore suboptimal. However, this neglects the fact that, by the universal approximation theorem, a neural network with ReLU activations can represent a linear function exactly. In other words, a neural policy can approximate the optimal linear controller arbitrarily well. The suboptimality is in my view a statement about nonlinear functions in general, not necessarily about neural policies.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "In the treatment of ensembles, the authors reference, for example, Burke et al. for non-convex mixing with neural networks, but these works consider state-dependent mixtures. In the author's notation, the weights $w_i$ seem to be static rather than state-dependent. As before, the authors exclude the probability simples from the support of non-convex mixing by construction.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The paper overclaims its contributions. The abstract and introduction have no mention of the assumptions made in both the theoretical and empirical studies. For example, the abstract states: \"We develop a theoretical framework to formally prove that (non-linear) neural policy ensembles are sub-optimal with respect to linear policy ensembles.\" However, from different parts of the text I have pieced together that this results only holds for: a Lipschitz continuous transition function, deterministic polices, in a linear quadratic system, and doesn't hold for neural policies in general, but instead for policies with an additional assumption of a minimum level of non-stationarity of each individual ensemble member (neural networks are universal function approximators, so they can also learn linear policies). Furthermore, the result seems to only guarantee the existence of one state for which the non-linear neural ensemble is suboptimal, which might not be encountered by the controller from the given starting state, which would make it irrelevant for its performance.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The theoretical results are difficult to follow. The theorems are stated rather clinically, and are lacking in clear structure regarding assumptions, how they are proven, and what they imply.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "There is a clear mismatch between the claims and the theoretical results. The introduction and related work cite deep RL methods using ensembling of policies (notably the work of Yang et al. 2022) in a completely different way than what the theoretical results consider. Introduction mentions that their theory would explain why ensembling of neural policies is doomed to be sub-optimal because of temporal coupling and non i.i.d setting compared to standard classification but the theoretical results show none of that. Instead all the theory is built around ensembling non-linear policies that are solving distinct control problems and then averaging them with no further learning. However, taking a quick look at the paper of Yang et al. 2022, there are large difference in the setting, as in the latter work every sub-policy is solving the same task, and the ensemble policy is also optimized using what they call an ensemble aware loss. Can the author clarify the relation between their theoretical results and the setting of Yang et al. 2022, or any other deep RL setting using ensembles of neural policies?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Theorem statements, assumptions and proofs lack clarity. In the main theorem, it is not clear how the non-linear policies are obtained. The optimal policy is linear for each LQR sub-problem, but by the assumption in line 140, the neural policies are forced to be non-linear and thus these policies are sub-optimal by design. It is then not surprising then that the ensembling of these policies is also sub-optimal. Studying problems where linear policies are optimal and making the assumption that neural policies cannot be optimal is in my opinion not a setting reflective of practical applications that use neural policies. Moreover, the proof could also gain some clarity: where do equation 21 and 22 come from? What even is $R$ in these equations, do you perhaps mean $R_{\\text{ens}}$? Is $\\lambda_{\\min}$ the smallest eigenvalue? For the proof of Theorem 3, could you please provide a reference to the claim that $K_\\lambda$ is optimal? As it does not seem trivial to me from the equations since there doesn't seem to be a linear relation between gain matrices and cost matrices. Thank you.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 6799,
+  "prompt_tokens": 1428,
+  "total_tokens": 8227,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 5422,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 1152,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.001974616,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.001974616,
+   "upstream_inference_prompt_cost": 7.0896e-05,
+   "upstream_inference_completions_cost": 0.00190372
+  }
+ }
+}

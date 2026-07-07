@@ -1,0 +1,158 @@
+{
+ "paper_id": "YvMkU4BYOA",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "Unreliable benchmarking and unfair baselines.\nThe paper reports that GES \u201cdid not finish within seven days\u201d on networks of 56\u201376 variables, which is inconsistent with known implementations (e.g., Tetrad, bnlearn) that complete such tasks in seconds. This strongly suggests an inefficient or incorrect implementation. As a result, the comparative runtime and performance claims are not credible.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Common concerns include limited and inconsistent evaluation, clarity issues, lack of theory, feasibility, and overclaiming.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lack of methodological clarity.\nThe XBIC algorithm is never presented in a self-contained form. There is no pseudocode, clear procedural description, or specification of how the SHAP-weighted penalty integrates into the search process. This makes it impossible to reproduce or verify the reported results.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Common concerns include limited and inconsistent evaluation, clarity issues, lack of theory, feasibility, and overclaiming.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Weak theoretical grounding.\nThe proposed modification of BIC is heuristic. The claim that XBIC \u201cpreserves consistency\u201d is asserted without proof, and no argument is given that the SHAP-weighted penalty yields correct model selection under standard assumptions. The theoretical contribution is therefore minimal.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Common concerns include limited and inconsistent evaluation, clarity issues, lack of theory, feasibility, and overclaiming.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Excessive computational cost.\nEach node-level model requires an XGBoost and SHAP computation, resulting in orders-of-magnitude higher runtime than standard BIC or GES. The paper acknowledges this overhead but does not justify it in terms of improved accuracy or scalability.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Common concerns include limited and inconsistent evaluation, clarity issues, lack of theory, feasibility, and overclaiming.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited and potentially biased empirical evaluation.\nExperiments are confined to small and medium discrete networks and omit widely used baselines such as MMHC, FGES with standard caching, and more recent hybrid or score-based methods. The evaluation also uses incomplete DAGs (from PC and GES) without orientation repair, which biases the results in favor of XBIC.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Common concerns include limited and inconsistent evaluation, clarity issues, lack of theory, feasibility, and overclaiming.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Overstated claims.\nThe paper repeatedly asserts that XBIC \u201coutperforms GES and PC\u201d and that GES is impractical for moderately large networks. Given the evidence, these claims are not supported. The method is an exploratory heuristic, not a practical or theoretically justified replacement for established algorithms.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Common concerns include limited and inconsistent evaluation, clarity issues, lack of theory, feasibility, and overclaiming.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Presentation issues.\nThe exposition is uneven: the technical content is embedded in prose, with critical steps scattered across sections. Key ideas (e.g., why SHAP values should adjust BIC penalties) are described only qualitatively, and notation is inconsistently introduced.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Common concerns include limited and inconsistent evaluation, clarity issues, lack of theory, feasibility, and overclaiming.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Runtime overhead is severe. Runtimes are orders of magnitude larger than BIC/PC (e.g., Asia: 0.39s BIC vs. 74.78s XBIC; Win95pts: 75.33s vs. 2139.27s), which materially limits practical use.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Common concerns include limited and inconsistent evaluation, clarity issues, lack of theory, feasibility, and overclaiming.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "All data are generated from canonical bnlearn BNs; there are no real-world observational datasets with accepted ground-truth DAGs or interventional verification. Orientation is assessed mainly via directed-edge F1 after forcing DAGs, rather than CPDAG-aware metrics.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Common concerns include limited and inconsistent evaluation, clarity issues, lack of theory, feasibility, and overclaiming.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The headline improvements average absolute +0.04 F1 vs. BIC (w=2). Per-dataset tables show several regimes with negligible or negative deltas and sensitivity to w. The paper itself notes small-sample regimes where XBIC effectively reduces to BIC (few confident predictions).",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Common concerns include limited and inconsistent evaluation, clarity issues, lack of theory, feasibility, and overclaiming.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Evaluation design likely favors the proposed method. PDAG completion by random orientation: For baselines that output CPDAGs (e.g., PC), the paper randomly orients undirected edges to form a DAG before directed-edge scoring. This can artificially depress baseline precision/recall on directed edges. More appropriate is CPDAG-aware metrics or reporting \u201ccorrectly oriented compelled edges.\u201d XBIC enjoys heavy per-node tuning (Optuna over many XGBoost hyperparameters) while there is no evidence that comparable hyperparameter sweeps were performed for the baselines (e.g., PC test selection, GES score variants).",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Common concerns include limited and inconsistent evaluation, clarity issues, lack of theory, feasibility, and overclaiming.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The complexity term is multiplied by exp(w\u00b7SHAP(G)). Beyond a brief \u201cbounded SHAP\u201d remark, no conditions are proven under which SHAP(G) remains bounded or leads to asymptotically correct orientations; the consistency discussion is qualitative and hinges on assumptions not verified empirically.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Common concerns include limited and inconsistent evaluation, clarity issues, lack of theory, feasibility, and overclaiming.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Interestingly enough the provided link leads to an anonymous repo which is then empty. Not sure if that is on purpose.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In recent years amortized approaches similar to prior fitted networks have been very popular and are probably SOTA approaches for causal structure learning [1,2] or cause effect estimation [3] with many concurrent works at the same time (i just provide pointers from which it would be easy to get find the others). It is unclear to me why the amortized causal discovery methods should not be a valid baseline here and why they should not beat the proposed approach by a wide margin in the empirical studies.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Common concerns include limited and inconsistent evaluation, clarity issues, lack of theory, feasibility, and overclaiming.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Beyond that the comparisons with GES or PC are basically very old baselines and seem very selective.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Common concerns include limited and inconsistent evaluation, clarity issues, lack of theory, feasibility, and overclaiming.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The comparisons in Section 4.3 are all done with respect to PC and GES, which are relatively old algorithms in the field of causal discovery. I am not very familiar with this discrete setting, so I can't point to algorithms that should be compared to in 2025. However it seems there should be others that it could be compared to, such as an MCMC-based approach.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Common concerns include limited and inconsistent evaluation, clarity issues, lack of theory, feasibility, and overclaiming.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The presentation is not very polished. In particular, the graphs in Figure 2 have their label cut off in the first two columns. Much of the space is taken up by large graphs that could be made smaller.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It is not clear to me whether the significance of this work is sufficient and appropriate to be accepted at ICLR. In terms of the novelty, the application is relatively limited to discrete small graphs, the actual application utility of these graphs is relatively limited in practical terms. Secondly, the venue fit is very good. ICLR is specifically a venue about deep learning and representation learning, which this work does neither of. The work uses a more classical iterative method, which doesn't use any representation learning. I think a venue such as AISTATS or KDD might be more appropriate for this work.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 5267,
+  "prompt_tokens": 1778,
+  "total_tokens": 7045,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 3030,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 1536,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.001551648,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.001551648,
+   "upstream_inference_prompt_cost": 7.6888e-05,
+   "upstream_inference_completions_cost": 0.00147476
+  }
+ }
+}

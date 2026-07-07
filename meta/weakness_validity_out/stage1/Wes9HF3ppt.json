@@ -1,0 +1,137 @@
+{
+ "paper_id": "Wes9HF3ppt",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "For a more convincing narrative, I would therefore suggest incorporating such a baseline for at least the 5.2.2 Infilling task.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I suggest to therefore provide metrics for the computational cost for ILM, both in terms of training and inference. And preferably also how these metrics scale with model size, sequence length etc\u2026 Additionally, varying the model/dataset sizes for language modelling, would make for an interesting experiment.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Concerns insufficiently addressed: 2. Scaling: Multiple reviewers showed concerns about the scaling property of the proposed method, such as (1) it's hard to get any signal on this with sequence lengths and complexity as restricted as in e.g. LM1B, and (2) model size scaling.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Several paragraphs are quite long and dense. It might be more easily digestible for readers to split them up. Example paragraphs are: Line 33 - 53, Line 291 - 309, Line 334 - 352",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Line 17 + Line 54 VS Line 86: can come across as contradicting each other. First you claim to \u201crevisit\u201d insertion based sequence generation. Then Line 86 introduces \u201cInsertion Language Models\u201d. Perhaps make this distinction more clear.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Line: 127: Since the bold text \u201cLimitations of MDMs\u201d start the paragraph, I\u2019m left with the impression that you claim that step size \u201cs\u201d is a limitation of MDMS. But I would argue this is rather a limitation of how people potentially would train MDMs. Similarly, I would find it a bit weird to say that \u201ca high learning rate breaks training for Transformers\u201d and hence this is a limitation\u2026. I therefore suggest some rephrasing here.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Line 208: I have never come across the term \u201cUnembedding\u201d layer, to refer to the final linear layer to the vocab. Perhaps there\u2019s something more common you could pick?",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Line 335: Zebra Puzzles are now notated with bold, and reside inside the 5.1.1 Star Graphs sub chapter. Seems more appropriate and consistent to let Zebra Puzzles be its own subchapter.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Not allowing caching is a pretty big deal for incremental generative models. I understand that it is future work, but it could be nice to discuss a bit what the possible avenues are toward efficient ILM inference?",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Concerns insufficiently addressed: 1. Efficiency: Any ideas how to address caching/fast inference? The authors have tried to provide a solution with detailed answers, which showed the authors' careful thinking on this question; however, it may not be convincing enough due to a lot of work may be needed to get it work in practice.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "it would be nice to see some experiments/exposition put toward the question 'what parts of ILMs do we expect to become more robust/more brittle at scale'?",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Concerns insufficiently addressed: 2. Scaling: Multiple reviewers showed concerns about the scaling property of the proposed method, such as (1) it's hard to get any signal on this with sequence lengths and complexity as restricted as in e.g. LM1B, and (2) model size scaling.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Method: Fundamental Inefficiency - The primary limitation of ILMs is that they sacrifice parallelization benefits from both ARMs and MDMs. Unlike ARMs, ILMs cannot leverage efficient parallel training, and unlike MDMs, they do not support parallel inference. However, despite giving up these parallelization advantages, the improvement in generative perplexity is not substantial (Table 2, LM1B).",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Concerns adequately addressed: 1. The primary limitation of ILMs is that they sacrifice parallelization benefits from both ARMs and MDMs. Unlike ARMs, ILMs cannot leverage efficient parallel training, and unlike MDMs, they do not support parallel inference. However, despite giving up these parallelization advantages, the improvement in generative perplexity is not substantial (Table 2, LM1B).",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Experiment Setup: NLL Measurement - NLL measures how accurately a model captures the learned distribution. However, the comparison appears unfair: MDM uses naive tau-leaping sampling while ARM and ILM use nucleus sampling with p=0.9. For a fair comparison, I recommend re-evaluating with p=1.0 for all models.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Concerns adequately addressed: 2. MDM sampling parameters.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Experiment Setup: Infilling Task - Similar to the NLL experiments, either: (1) change p=0.9 to p=1.0 for fair comparison, or (2) employ advanced sampling strategies for MDM (e.g., confidence-based sampling methods [1]) to verify performance under more favorable conditions.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Concerns adequately addressed: 2. MDM sampling parameters.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Experiment Setup: Baselines - Recent discrete diffusion models such as Edit Flows [2] and FlexMDM support arbitrary-length generation. However, comparisons with Edit Flows are missing from the synthetic task experiments. I would like to see: (1) performance comparisons between ILMs and Edit Flows, and (2) clarification of what advantages insertion-based language models offer over editing-capable discrete diffusion/flow matching models.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Concerns adequately addressed: 3. Comparison with EditFlow and FlexMDM.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper\u2019s technical novelty is somewhat limited, as its main contribution lies in applying an existing insertion-based sequence generation technique to the problem of variable-length text generation. While this adaptation is practical, the paper does not sufficiently deepen the theoretical or conceptual understanding of insertion-based generation, nor does it clearly articulate the unique challenges encountered when extending this approach to general language modeling. A more thorough analysis of these challenges, such as handling coherence, positional dependencies, or long-range consistency, would strengthen the contribution.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Furthermore, several (not all) recent studies that have explored similar directions [1,2] appear to have been overlooked. Incorporating a discussion of these works and clarifying how the proposed model differs or improves upon them would better situate the paper within the existing literature and highlight its distinct value.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 10643,
+  "prompt_tokens": 2537,
+  "total_tokens": 13180,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 8712,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00333522,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00333522,
+   "upstream_inference_prompt_cost": 0.00035518,
+   "upstream_inference_completions_cost": 0.00298004
+  }
+ }
+}

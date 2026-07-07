@@ -1,0 +1,123 @@
+{
+ "paper_id": "9h2c2rMSY1",
+ "decision": "Reject",
+ "n_reviewers": 3,
+ "items": [
+  {
+   "weakness_text": "In the first part of the paper, the authors establish that the TV distance between consecutive steps is maximal in the functional space. I believe the implication of this statement is supposed to be that, therefore, we cannot consider the functional space coverage using ideas from covariate shift. However, the approach of Barbet et. al only establishes that $\\mathcal{P}(Y\\in\\mathcal{C}(X))\\ge 1-\\alpha-\\sum_i w_i d_{TV}(z, z^i)$, which is a lower bound. How can we say anything more strongly than just making claims of this lower bound here?",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Moreover, this then motivates studying this problem in a finite-dimensional discretized form. This, however, then just becomes a standard, finite-dimensional time series problem, so I do not see how this becomes any different from a typical finite-dimensional conformal time series problem. Also, Theorem 4.2 appears to be a standard proof from SDEs, so I do not see why it and its proof are provided in the main body of the paper.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Incremental Novelty: The algorithmic contribution is primarily an application of the existing Weighted CP framework (Barber et al., 2023) to a specific class of problems where the distribution shift is analytically known.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Finally, the experimental results appear to be not very compelling: many times, WCP appears to produce extremely conservative prediction regions, having a coverage of 1.0 or close to it at desired coverage levels well below this. The other methods, in contrast, appropriately hit 0.90 initially.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Practical Utility: In cases of significant drift, the method maintains coverage by producing infinite (vacuous) bands.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "No real algorithmic or theoretical contribution. Theorem 4.1 proves that for the heat equation with Gaussian initial conditions, the TV distance between solution distributions at any two distinct time points is maximal (equals 1). Theorem 4.2 shows that for discretized linear PDEs with Gaussian initial conditions, the solution distribution at any time t remains Gaussian, with explicitly computable mean and covariance. These two results are not particular novel for PDEs. The authors' method, then, directly applies Barber et al. 2023's weighted conformal prediction algorithm using the likelihoods. The coverage guarantees are from Barber 2023. I fail to see how this algorithm is a novel contribution.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Incremental Novelty: The algorithmic contribution is primarily an application of the existing Weighted CP framework (Barber et al., 2023) to a specific class of problems where the distribution shift is analytically known.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The scope is limited. The algorithm only applies to _linear_ PDEs with _Gaussian_ (and location-scale) initial conditions, but most physical systems of interest of UQ have nonlinear dynamics (Navier-Stokes, reaction-diffusion with nonlinear terms, etc.). The proposed algorithm require explicit probabilities which makes it not extendable to the more general case.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Limited Scope and Applicability: The proposed method strictly relies on the linearity of the PDE and Gaussian (or location-scale) initial conditions to compute closed-form density ratios.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "What is the target coverage? Why is the target in Fig 3 set at 90% but the target for WCP said to be 99%? Why does WCP's line disappear half way through the horizon? What is $n_\\infty$ in Table 1 and how should we interpret it?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Limited experiment setups: only linear, univariate, synthetic experiments. This is a result of the nature and assumption made by the method, but with this set of experiments it's not very convincing that this algorithm is useful in practice.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lack of comparison to baselines, and discussion of literature. From the PDE literature, there are works that provide probabilistic forecasts (for example [1,2], and the baselines in LSCI). From the CP literature, there are a swath of works that handles time series distribution shift that does not require explicit covariates or local exchangeability [3-6]. They should be compared to show what are the advantages of your algorithm, or at least discussed w.r.t. why they are not applicable to your setup.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Comparison to Baselines: Reviewer e72z noted a lack of comparison to standard time-series CP baselines. The authors argued these baselines only offer asymptotic guarantees, but the absence of empirical comparison makes it difficult to assess the trade-off between the proposed method's 'exact but potentially vacuous' guarantees and the 'approximate but informative' bands of existing methods.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It is also questionable that WCP over-covers by so much, often achieving 1.0 coverage with infinite bands. While I respect the authors' honest reporting, this is a significant limitation on the usability of the UQ bands. UQ's goal is calibration and the tendency to over-cover is not desirable. Can you show results of both 90% and 99% target coverage?",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Practical Utility: In cases of significant drift, the method maintains coverage by producing infinite (vacuous) bands.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Some qualitative plots of UQ bands (similar to figure 1) will also help the presentation of results.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited scope. Theoretical guarantees hold only for linear PDEs with Gaussian initial conditions, where analytic densities exist.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Limited Scope and Applicability: The proposed method strictly relies on the linearity of the PDE and Gaussian (or location-scale) initial conditions to compute closed-form density ratios.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Incremental novelty. Weighted CP under covariate shift is known (e.g., Barber et al., 2023); the contribution is mainly its application to PDE surrogates, not a new CP framework.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Incremental Novelty: The algorithmic contribution is primarily an application of the existing Weighted CP framework (Barber et al., 2023) to a specific class of problems where the distribution shift is analytically known.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Narrow experiments. Tests on 1-D synthetic PDEs demonstrate correctness but not scalability or real-world complexity.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 8486,
+  "prompt_tokens": 2617,
+  "total_tokens": 11103,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 6649,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0019255987,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0019255987,
+   "upstream_inference_prompt_cost": 0.0002572511,
+   "upstream_inference_completions_cost": 0.0016683476
+  }
+ }
+}

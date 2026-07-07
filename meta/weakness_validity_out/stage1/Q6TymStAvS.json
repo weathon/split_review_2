@@ -1,0 +1,123 @@
+{
+ "paper_id": "Q6TymStAvS",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "The major weakness is the paper's structure and writing. A significant portion of the early sections is dedicated to explaining well-established concepts, which may be inefficient for an expert audience at ICLR conference.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It would be better if the authors delineate their novel technical contributions from the baseline frameworks of RFM and DFM. As presented, it is difficult to isolate the exact innovations beyond the application of existing tools to a new domain.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "For the Anisotropic Dirichlet Flow, the increased methodological complexity does not consistently yield superior performance over the simpler Spherical Flow (e.g., in the Heisenberg model results of Table 3). What is the justification for this more complex model if its empirical advantage is not universally demonstrated across the tested problems?",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "A critical observation from Table 1 is that the learning-free Classical Shadow baseline consistently outperforms all trained generative models, especially on the correlation metric and in the high-sample regime. Could the authors explain this performance gap and justify the practical utility of the generative approach if it fails to surpass a direct, learning-free estimation method?",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The provided plot does not strongly support this claim. The performance gap between the two error types appears marginal across the tested error rates. The paper's assertion that spin errors are \"significantly higher\" seems overstated. This weakens the central premise that a geometry specifically designed to maximize the distance between spin-flipped states is necessary and justifies the added model complexity.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper's experiments compare the proposed methods primarily against other flow-matching variants. This comparison is too narrow and fails to benchmark against the true state-of-the-art in generative modeling for quantum states.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Baseline comparisons were added with diffusion-based methods, and classical machine learning modles based on kernel methods (RBFK, NTK).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Despite its novelty, the scope of practical applications appears somewhat narrow at this stage. The framework\u2019s advantages are demonstrated primarily on specific shadow-based tasks, and it remains uncertain how easily the approach can scale to broader or more complex domains of quantum learning.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The AC agrees with Reviewer Fo5i raised the point that \"The framework\u2019s advantages are demonstrated primarily on specific shadow-based tasks\", which the AC agrees. The authors explained why studying Pauli-6 POVMs, but in any case this is still a very physics setting, and it's not that clear how this can be extended to more scenarios of learning quantum problems or AI for physics as a whole.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "A current limitation is the method\u2019s dependence on the structure of Pauli shadows. Since the model architecture and training procedure hinge on these symmetries, adapting it to non-Pauli or arbitrary measurement settings could require substantial reworking of the geometric foundation.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The empirical evaluation is somewhat underdeveloped. Comparisons are made to only one baseline, and while qualitative results are encouraging, they leave open questions about quantitative robustness and competitiveness against state-of-the-art generative quantum models.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Baseline comparisons were added with diffusion-based methods, and classical machine learning modles based on kernel methods (RBFK, NTK).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "All the experiments presented are for 1D models. This is a concerning as the ground states of 1D models have efficient classical representation in terms of MPS representations. 2D experiments would have substantially improved the quality of the results",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "2D Heisenberg model (L=4\u00d74) (tab. 6).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Motivation of restricting to ground states of Hamiltonians is unclear to me? Why not thermal states or states produced by real time evolution? I don't see the learning task itself using any information about the fact this is a ground state of a Hamiltonian.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Experiments were added on 1D Heisenberg model with (L=30) (tab. 4), and real-time quantum dynamics under 1D TFIM (L=10) (tab. 5).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Computational overhead: The anisotropic Dirichlet flow requires precomputing and integrating Beta-function\u2013based terms, which could limit practicality; runtime and memory costs are not quantified in very detail.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "The AC agrees with Reviewer Mwxx's concern about computational overhead and scalability. In the reply the authors mentioned that for the studied cases it takes ~20 minutes on an A100 GPU, but it's not very clear if this is convincing enough for the efficiency - this is not a very small computational cost (around 10^3 seconds on a top-level GPU) while the problem scale is also not that large (especially under the shadow setting). It would be more convincing if the cost is comprehensively studied under different scales and systems, or would be perfect if an explicit complexity upper bound is proved.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Restricted empirical scope: Experiments are limited to 1D spin chains (TFIM and Heisenberg). The scalability and performance of ShadowFM on larger or higher-dimensional systems are not demonstrated.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Experiments were added on 1D Heisenberg model with (L=30) (tab. 4), and real-time quantum dynamics under 1D TFIM (L=10) (tab. 5), 2D Heisenberg model (L=4\u00d74) (tab. 6).",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 10502,
+  "prompt_tokens": 2191,
+  "total_tokens": 12693,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 9074,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0032473,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0032473,
+   "upstream_inference_prompt_cost": 0.00030674,
+   "upstream_inference_completions_cost": 0.00294056
+  }
+ }
+}

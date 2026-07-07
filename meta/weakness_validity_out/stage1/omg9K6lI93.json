@@ -1,0 +1,144 @@
+{
+ "paper_id": "omg9K6lI93",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "Limited quantitative rigor in the TACD proposal \u2013 The TACD framework is primarily conceptual. The paper does not empirically demonstrate its effectiveness across multiple languages or benchmark families. Including even a small-scale implementation (e.g., Arabic vs. French) would make the framework more convincing.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The paper further proposed a Translation-Aware Contamination Detection framework.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Insufficient experimental rigor \u2013 The main conclusion, that translation masks but does not eliminate contamination, is built on the assumption that TS-Guessing perfectly detects contamination. However, TS-Guessing is itself an imperfect and indirect measure. I suggest the authors evaluate multiple contamination detection methods (such as entropy, dynamic metric) [4,5,6,7] to validate whether the observed masking effect is consistent across different approaches.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Incomplete explanation of experimental anomalies \u2013 In Table 2, when the contamination percentage is 10%, Mistral-7B-Instruct-v0.2 achieves the best score on XQuAD, and Qwen3-1.7B achieves the best score on MLQA, significantly higher than other contamination levels. It is unclear whether these spikes are due to statistical noise, overfitting to partial contamination, or artifacts from translation alignment. The authors should further analyze or discuss these irregular trends.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited generalizability of conclusions \u2013 (1) The fine-tuning approach relies on LoRA and PEFT, which may behave differently from full-parameter fine-tuning. It remains unclear whether the same contamination masking effects hold under full fine-tuning. (2) The evaluation is conducted exclusively on Arabic, a morphologically rich and low-resource language. The findings may not generalize to typologically different languages (e.g., Chinese or Finnish). Expanding to additional languages would strengthen the paper\u2019s external validity.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Missing some related work. [1] Recent advances in large langauge model benchmarks against data contamination: From static to dynamic evaluation (EMNLP 2025) [2] Leak, Cheat, Repeat: Data Contamination and Evaluation Malpractices in Closed-Source LLMs (EACL 2024) [3] Data Contamination Calibration for Black-box LLMs (ACL 2024) [4] ConStat: Performance-Based Contamination Detection in Large Language Models. [5] DyCodeEval: Dynamic Benchmarking of Reasoning Capabilities in Code Large Language Models Under Data Contamination (ICML 2025) [6] Towards Data Contamination Detection for Modern Large Language Models: Limitations, Inconsistencies, and Oracle Challenges (ACL 2025) [7] Detecting Pretraining Data from Large Language Models. [8] Do Membership Inference Attacks Work on Large Language Models? (COLM 2024)",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "there are also many concerns, such as missing critical prior work",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Lack of Novelty. The same idea (translation can cause hard-to-find data contaminations) has been explored in existing research [1] [2]",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "missing critical prior work",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The method author proposed TACD wasn't even evaluated in their experiments (if I read the paper correctly, it's only a proposal)",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The paper further proposed a Translation-Aware Contamination Detection framework.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Writing and plotting can use some improvements. You can drop some of that item lists, and images are overly large.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Missing Critical Prior Work: The most significant weakness is the failure compare with existing work [1], which is not just \"related\"; it established the very phenomenon of cross-lingual contamination that this paper investigates. This omission makes the paper's framing as a novel investigation of a \"blind spot\" feel misleading.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "missing critical prior work",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Limited Scope: The study is confined to a single language (Arabic) and three benchmarks. The prior CrossLanguage work was far broader, testing seven languages and demonstrating how the effect varies between language families (e.g., European vs. Asian).",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lack of Comparison: The prior Cross Language work proposed a new probe called \"choice confusion\". This paper proposes using an extended \"TS-Guessing\" probe. A much stronger contribution would have been to compare these two different probes to see which is more effective at detecting this form of contamination.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Vague Framework: The proposed \"Translation-Aware Contamination Detection (TACD)\" is acknowledged by the authors to be a \"forward-looking blueprint\" and not a concrete, implemented solution. It's an obvious conclusion (\"we should check other languages\") rather than a technical contribution.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The paper further proposed a Translation-Aware Contamination Detection framework.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The experimental design is quite weak from all aspects. Is the objective measuring the presence of cross lingual contamination on top of english contamination, what is the reason behind adding english test example into the fine-tuning mixture? Why not just check the impact on arabic contamination? In the current setting even p=0 is fully contaminated with english test samples.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Why only use TS-Guessing, there are many methods that use model outputs to detect training data membership or contamination. The experimental claim that these models avoid detection seems unrealistic.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Claims around performance and model behaviour in section 4.2 are not backed. Table 2 shows significant changes in performance and while inconsistent it does not show near-flat trends.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The writing is poor, clearly AI generated, tables are not labelled and overall paper structure needs significant improvement.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 8069,
+  "prompt_tokens": 1674,
+  "total_tokens": 9743,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 6378,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 1408,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.002335984,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.002335984,
+   "upstream_inference_prompt_cost": 7.6664e-05,
+   "upstream_inference_completions_cost": 0.00225932
+  }
+ }
+}

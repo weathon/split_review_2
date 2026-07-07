@@ -1,0 +1,165 @@
+{
+ "paper_id": "RNe17WTR38",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "**Limited novelty.** The proposed framework of self-generation and self-verification is not new. Similar iterative preference learning or self-rewarding approaches have already been explored in prior works such as [1,2,3,4,5]. The paper differs only in minor details (e.g., thresholded verification, curriculum scheduling), which do not constitute meaningful methodological novelty. It also overlaps heavily with [6] in both structure and training procedure.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewers consistently viewed the core idea (single model as generator + verifier, thresholded majority voting to build preference pairs for DPO/iterative self-training) not sufficiently novel relative to prior LLM-as-judge, majority-voting/ensembling, and self-reward literature.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "**Lack of proper comparison and discussion.** The paper does not compare against the most relevant prior works on self-improvement or self-rewarding LMs. There is also little discussion on how the proposed method differs conceptually or empirically from existing iterative preference optimization frameworks.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Several reviewers additionally flagged missing key baselines.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "**Weak experimental validation.** The experiments are narrow in scope (e.g., training on a single dataset, using only two models, and evaluating mostly on math relaative easy reasoning tasks). There are no experiments on other domains (e.g., coding) or stronger reasoning benchmarks (e.g., AIME, AMC). As a result, the claims of general self-evolution remain unsubstantiated.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "They also questioned whether the empirical evidence supports the paper\u2019s broader claims: gains are strong on the synthetic Knights-and-Knaves setting but modest on real math benchmarks; evaluation scope is narrow, and cost/performance tradeoffs may be unfavorable due to multiple generations + verification passes.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "**Cost inefficiency.** The generator\u2013verifier framework requires multiple generations and verification passes, increasing computational cost significantly. However, the observed performance gains are modest, suggesting poor cost\u2013performance trade-off.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "cost/performance tradeoffs may be unfavorable due to multiple generations + verification passes.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Improvements on Real Datasets: The paper finds really small improvements on datasets like GSM-8K or MATH-500 in comparison to the synthetic task. I think this needs more analysis, see one concern below on this thread.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "They also questioned whether the empirical evidence supports the paper\u2019s broader claims: gains are strong on the synthetic Knights-and-Knaves setting but modest on real math benchmarks; evaluation scope is narrow, and cost/performance tradeoffs may be unfavorable due to multiple generations + verification passes.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Distribution Leakage: I was not familiar with OpenThoughts3, but I looked into it and found that it was really close in distribution to GSM-8K and MATH-500. It aggregated reasoning problems. I wonder if this leads to inflated gains and the modest gains seen are from using OpenThoughts3 rather than the set up seen here.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Hyperparameters: How are hyperparameters selected? My reading right now is that they are selected using the testing set...",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Verifier Signal: The core claim of the paper is that we can extract reliable signals from noisy self-verification via thresholded voting. But, when measured against a strong model with access to ground truth, the unsupervised verifier is only ~60% accurate on KK with Gemma\u20114B. At scale, this is far from real preference labels. Even when making the model larger, you're still topping out at around 91%.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewers consistently viewed the core idea (single model as generator + verifier, thresholded majority voting to build preference pairs for DPO/iterative self-training) not sufficiently novel relative to prior LLM-as-judge, majority-voting/ensembling, and self-reward literature.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Small Models: In the abstract, the authors claim that the approach \"enhances reasoning in small models\" yet Gemma\u20111B shows little to no benefit. In the limitations section, this is acknowledged as well. I would reduce claims on generality in the abstract implied upfront.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "They also questioned whether the empirical evidence supports the paper\u2019s broader claims: gains are strong on the synthetic Knights-and-Knaves setting but modest on real math benchmarks; evaluation scope is narrow, and cost/performance tradeoffs may be unfavorable due to multiple generations + verification passes.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Novelty: Conceptually, I am having trouble differentiating between this method and self-refinement. To me, the paper is in this way, purely empirical. The major problem with this is that the main improvement the paper demonstrates is with KK and very limited improvement on the math benchmarks. Without stronger gains or deeper analysis, the contribution doesn't feel very strong to me.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewers consistently viewed the core idea (single model as generator + verifier, thresholded majority voting to build preference pairs for DPO/iterative self-training) not sufficiently novel relative to prior LLM-as-judge, majority-voting/ensembling, and self-reward literature.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "1. The paper lacks sufficient explanation of baseline methods such as INTUITOR, Absolute Zero (AZR), and AZR-Coder\u2014it is unclear how these baselines are implemented or differ from the proposed approach.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "2. Although the related work section mentions Absolute Zero and R-Zero, there is no direct empirical or conceptual comparison, making it difficult to assess the advantage of the proposed method.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Several reviewers additionally flagged missing key baselines.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "3. Without a comparison to an external or supervised verifier, it is hard to evaluate how much of the improvement comes from self-verification itself versus incidental effects of DPO fine-tuning.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewers consistently viewed the core idea (single model as generator + verifier, thresholded majority voting to build preference pairs for DPO/iterative self-training) not sufficiently novel relative to prior LLM-as-judge, majority-voting/ensembling, and self-reward literature.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "4. Different tables use different model backbones (e.g., Table 1 uses Qwen2.5-7B-Instruct, while Table 4 uses Gemma-3-1B-it), raising concerns about consistency and fairness in comparison.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "5. Figure 2 shows that the SimpleGV verifier accuracy improves over the base model, but since the verifier is not explicitly trained, it is unclear why or how this improvement emerges.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "6. In Table 1, several baselines perform worse than their original reports (e.g., GRPO with Qwen2.5-7B drops from 90.2 \u2192 82.9), yet no interpretation or justification is provided.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Presentation. a. The gray-highlighted rows in the tables are difficult to interpret . b. The numbers in Figure 5 are too small and hard to distinguish. c. The texts in Table 3 are overly long, making it hard to understand each configuration clearly",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "- LLM as a judge and Majority Voting/Ensembling has been well studied in prior work (e.g [1]) thus is unclear the main contributions of this work with respect to these approaches",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewers consistently viewed the core idea (single model as generator + verifier, thresholded majority voting to build preference pairs for DPO/iterative self-training) not sufficiently novel relative to prior LLM-as-judge, majority-voting/ensembling, and self-reward literature.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "- Several baselines (e.g MCTS) from the test time inference literature hasn't been compared against in this work, making it hard to judge the contribution of the proposed method",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Several reviewers additionally flagged missing key baselines.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 9932,
+  "prompt_tokens": 1761,
+  "total_tokens": 11693,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 7816,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.002974318,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.002974318,
+   "upstream_inference_prompt_cost": 0.000243018,
+   "upstream_inference_completions_cost": 0.0027313
+  }
+ }
+}

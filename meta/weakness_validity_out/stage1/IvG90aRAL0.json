@@ -1,0 +1,116 @@
+{
+ "paper_id": "IvG90aRAL0",
+ "decision": "Reject",
+ "n_reviewers": 5,
+ "items": [
+  {
+   "weakness_text": "Cost of additional qubits and gates not provided for Theorem 6 in Table I.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Applications of this paper can be more clearly articulated, i.e. what's been listed in strengths 1.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "it does not have discussion about practical applications - not even complexity bounds for explicit sparse convex optimization problems such as the matrix completion problem mentioned in Eq. (2).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Assumption for gradient obtainment in the matrix case seems a bit strong, as the gradient has to be low rank _and_ accessible in a KP tree.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The lack of simulations and qubit estimates for the core matrix algorithms (QPM/QTSVE) makes it challenging to assess the practical feasibility and actual performance of the proposed quantum speedups.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The algorithm requires strong quantum oracle access (e.g., normalized row states and function value oracles), which are currently not feasible on NISQ devices.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The algorithmic components (quantum maximum finding, SVD estimation, gradient estimation) are not new.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "it applied mostly existing quantum subroutines (and hence the technical contribution might not reach the bar of ICLR)",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The use of $\\tilde{O}$  notation hides constants that could have a significant impact on the practical runtime and performance of the algorithm.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper\u2019s algorithmic advances rely heavily on existing quantum subroutines\u2014such as quantum maximum finding, gradient estimation, and singular value extraction\u2014raising questions about how much novelty lies beyond combining these tools within the Frank\u2013Wolfe framework. The authors could better articulate what new technical challenges are overcome or what insights are unique to the projection-free setting. For example, what is the novelty of this work on vector variable problems compared with Chen & de Wolf (2023)?",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "it applied mostly existing quantum subroutines (and hence the technical contribution might not reach the bar of ICLR)",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Moreover, the analysis would benefit from a clearer discussion of applicability and limitations. The claimed speedups depend on assumptions like low-rank gradients and favorable spectral gaps; in dense or ill-conditioned cases, the advantage may vanish. Explicitly characterizing these regimes and their practical implications would strengthen the paper\u2019s significance.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "it does not have discussion about practical applications - not even complexity bounds for explicit sparse convex optimization problems such as the matrix completion problem mentioned in Eq. (2).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "My primary concern pertains to the paper's motivation. I find the core motivation insufficiently justified. The manuscript does not adequately establish a compelling need for specialized quantum algorithms for this particular class of problems. From my perspective, the proposed method appears somewhat ad-hoc, lacking both a clear demonstration of practical application and the provision of new, general insights for the field of quantum algorithm design.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "it does not have discussion about practical applications - not even complexity bounds for explicit sparse convex optimization problems such as the matrix completion problem mentioned in Eq. (2).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The main weakness involves unrealistic assumptions that affect the complexity of the full algorithm. For example, step 7 in Alg. 2 involves preparing, in each Frank-Wolfe iteration, a state $\\sum_{i=0}^{d-1}|i>|x^{(t)}>|0>$, with $|x>$ defined in Assumption 3 to be $|x> = |x_1>|x_2>\u2026|x_d>$. The state is over $d+2$ qubits. Similar qubit $O(d)$ qubit requirement is present in the rest of scenarios considered in the paper. This linear qubit requirement severely limits the applicability of the method for the stated goal of addressing high dimensional (high $d$) optimization problems. Preparing a $d$-dimensional arbitrary qubit state is hard in general, yet the impact of this step on the complexity of the whole method is not discussed.",
+   "reviewer_index": 4,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Some terminology could be revised, e.g. authors mention \u201csparsity-constrained problems\u201d in the introduction, but actually address L1 norm and not L0 norm constraints.",
+   "reviewer_index": 4,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 4735,
+  "prompt_tokens": 1266,
+  "total_tokens": 6001,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 3350,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0013827968,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0013827968,
+   "upstream_inference_prompt_cost": 0.0001630608,
+   "upstream_inference_completions_cost": 0.001219736
+  }
+ }
+}

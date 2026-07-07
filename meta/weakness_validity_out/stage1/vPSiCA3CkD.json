@@ -1,0 +1,151 @@
+{
+ "paper_id": "vPSiCA3CkD",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "The method unfortunately requires the ability to compute functional values, unlike the prior work on GRAAL and AdGD.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "In terms of complexity, there is no realy improvement upon the work of Li & Lan (2025). As the authors mention, the approach of Li & Lan (2025) is to use a line-search at the first iteration, which introduces only an additive term in the complexity, while guaranteeing that $\\eta_0 L \\ge 1$, so it doesn't affect the complexity in a multiplicative way. I don't see any limitation of this approach since both works require the use of functional values anyway. That being said, the proposed new method still may benefit a lot from updating the stepsize more adaptively in practice.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "One reviewer suggested that the author include the discussion about Li & Lan (2025) to the paper.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It's a bit unfortunate there is no numerical insights in this paper.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Some reviewers suggested that small experiments would make the contributions more solid. The authors replied that they would include some preliminary experiments in the revision. Please add them for the publication.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I found the discussion in Section 4.1 to be extremely hard to follow, especially Lemma 7. The four sets of indices are introduced without being properly explained, not to mention the third and the fourth sets use $l(k)$, whose meaning is even less obvious. It's completely unclear why these sets are introduced and what we should expect them to be. Moreover, it would be useful to remind the reader of the definition of $m$ around Lemma 8 as it's not used anywhere prior to that except for Theorem 2. It's also very confusing that the authors redefine $m$ in Theorem 3. To summarize, this section is extremely technical and would benefit from a rewrite that makes it more intuitive.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "some reviewers asked about the proof's intuition, and the authors added a sketch of the proof to clarify. Please include the proof sketch in the revision for publication.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The way the proofs are structured in the appendix makes reading them a tedious and a strongly challenging endeavour. I wish the authors chopped it into pieces with intuitive steps, rather than just giving the bounds all as a single huge inequality. I just couldn't make myself go through all the steps to check them even though I wanted to understand the proof.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "some reviewers asked about the proof's intuition, and the authors added a sketch of the proof to clarify. Please include the proof sketch in the revision for publication.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "\"$f(x) \\colon \\mathbb{R}^d \\to \\mathbb{R}$\" should be \"$f \\colon \\mathbb{R}^d \\to \\mathbb{R}$\"",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "\"Hence, it is rarely used in practice.\" I don't think this statement is true, many convex problems are still solved with line-search based methods",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "\"It is well known that AdaGrad has the complexity of GD in eq. (3) for L-smooth functions (Levy et al., 2018)\". I think it needs a clarification here that the results of Levy are only for bounded domains. It is also worth mentioning that the update in (5) misses the $G^2$ constant inside the square root, which is important for non-smooth convergence results.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "I think when introducing (6) and (7) it would be educational for the reader if the authors provided values of $\\gamma$ and $\\nu$ that have theoretical guarantees.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "\"Suh & Ma (2025) uses a stepsize\" -> \"Suh & Ma (2025) use a stepsize\"",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Some small issues in the citations: \"Jonathan M Borwein\" -> \"Jonathan M. Borwein\", \"in banach spaces\" -> \"in Banach spaces\", \"barzilai and borwein gradient\" -> \"Barzilai and Borwein gradient\", etc.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Despite experiments would be quite predictable it would be interesting to see a comparison with adproxgd and optimizers with backtracking beyond the standard smoothness. Not a real weakness, for the sake of comprehensiveness, the theoretical contribution is solid enough.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Lack of empirical validation. The paper presents no experiments. Small-scale benchmarks (logistic regression, least-squares, GLMs, robust convex losses) would verify geometric step-size growth in practice, overhead of computing $\\Lambda$, and wall-clock speedups versus other algorithms.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Some reviewers suggested that small experiments would make the contributions more solid. The authors replied that they would include some preliminary experiments in the revision. Please add them for the publication.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The theory requires universal constants $(\\theta, \\gamma, \\nu)>0$ satisfying equation (19), but the paper does not provide guidance on how to choose these parameters in practice. This is a significant practical limitation. The paper should provide at least one explicit set of valid parameters and discuss how parameter choices affect the hidden constants in the O(\u00b7) notation.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Results cover smooth convex minimization only; there is no composite/prox extension, constraint handling, or analysis with stochastic/inexact oracles.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Although this is primarily a theoretical paper, including a simple toy experiment would make the contribution more informative. (This is not a requirement for acceptance, but a suggestion to strengthen the paper.)",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Some reviewers suggested that small experiments would make the contributions more solid. The authors replied that they would include some preliminary experiments in the revision. Please add them for the publication.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I would appreciate it if Section 4.1 provided a higher-level sketch of the main idea.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "some reviewers asked about the proof's intuition, and the authors added a sketch of the proof to clarify. Please include the proof sketch in the revision for publication.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 10390,
+  "prompt_tokens": 1494,
+  "total_tokens": 11884,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 8436,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 1152,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.002989336,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.002989336,
+   "upstream_inference_prompt_cost": 8.0136e-05,
+   "upstream_inference_completions_cost": 0.0029092
+  }
+ }
+}

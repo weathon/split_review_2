@@ -1,0 +1,81 @@
+{
+ "paper_id": "YS4N1YxXSM",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "The paper does not include a comparison to alternative query selection strategies, such as selecting representative queries via clustering (e.g., K-Means centroids). Without this comparison, it is difficult to fully assess the performance of the proposed \"outlier query\" heuristic relative to more established methods for summarization.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Partially unresolved: * Comparison to clustering-based selection remains.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The evaluation of the method's applicability to generation tasks appears less developed. Since the core query subselection component is bypassed in the single-query decoding scenario, a comparison against baselines specifically designed for decoding-phase KV management would be necessary to fully substantiate the method's competitiveness in this setting.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Addressed: * Generation-phase efficiency.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The potential impact of quantization on the method's performance is not discussed. The algorithm's reliance on precise geometric relationships (via cosine similarity) means its robustness in low-bit precision environments, which are common on its target hardware, remains an important but unevaluated factor.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Hardware efficiency may degrade due to the small chunk size and discontinuous KV selection.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Addressed: * Hardware considerations for small chunk sizes and discontinuous KV.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The approach is not very principled. While it is true that queries with high similarity with K will have low similarity with Mean(Q) due to OOD nature of query and key distributions (this is what theorem says), the converse is not true (this is what you want for efficiency) . It is especially not true in high dimensions -- where it is highly likely that queries with low similarity with Mean(Q) would also have low similarity with K. So this being a critical component of algorithm is unsettling. I would assume that most queriers chosen are actually even worse than Mean(Q) w.r.t similarity with K.  Can we have distribution plots of cosine similarities of chosen queries vs. all the queries.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Addressed: * Motivation for selecting outlier queries, with additional empirical evidence.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Some latest baselines are missing -- duoattention, xattention, spargeattention, might be good to add discussion / results for these.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Addressed: * Missing baselines.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Some explanations of the claims are confusing",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 4234,
+  "prompt_tokens": 1097,
+  "total_tokens": 5331,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 3479,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.001238748,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.001238748,
+   "upstream_inference_prompt_cost": 5.3228e-05,
+   "upstream_inference_completions_cost": 0.00118552
+  }
+ }
+}

@@ -1,0 +1,109 @@
+{
+ "paper_id": "SsUjdSVdUl",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "The paper claims to avoid \u201cstronger supervisors\u201d for critique data, yet relies heavily on ground-truth answers (i.e., golden labels) to construct both direct (Stage I) and indirect (Stage II) reward signals.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors provided new comparisons with relevant baselines (RCO, MultiCritique-RL), extended evaluations to more challenging reasoning tasks (creative writing, AIME, GPQA), clarified the intended distinction between \"stronger supervision\" and oracle-based reward signals, and reported robustness analyses under noisy feedback.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Lack of analysis of some highly related works in this paper [1], which also proposes to use the refinment as the additional feedback.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors provided new comparisons with relevant baselines (RCO, MultiCritique-RL)",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Since the authors explicitly state in the Abstract and Introduction that their method targets complex reasoning tasks, more challenging benchmarks such as AIME and GPQA should have been included in the evaluation.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "extended evaluations to more challenging reasoning tasks (creative writing, AIME, GPQA)",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Although the main text reports significant improvements on Qwen-3B and Qwen-7B, the appendix reveals that the performance gains on stronger models, such as DeepSeek-R1-Distill-Qwen-7B and Qwen2.5-72B-Instruct, are quite limited. These results should be reported and discussed in the main paper.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "the authors provided new comparisons with relevant baselines (RCO, MultiCritique-RL), extended evaluations to more challenging reasoning tasks (creative writing, AIME, GPQA), clarified the intended distinction between \"stronger supervision\" and oracle-based reward signals, and reported robustness analyses under noisy feedback.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The proposed method requires access to ground-truth answers to compute rewards. Under this setting, it remains unclear what advantages it offers over directly training the model's reasoning ability using RLVR methods (e.g., GRPO, DAPO). Additional experiments are needed to clarify this distinction.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "the authors provided new comparisons with relevant baselines (RCO, MultiCritique-RL), extended evaluations to more challenging reasoning tasks (creative writing, AIME, GPQA), clarified the intended distinction between \"stronger supervision\" and oracle-based reward signals, and reported robustness analyses under noisy feedback.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The paper's primary motivation is to train critics \"without stronger supervision\"1. However, the entire method, especially the critical Stage I, is heavily reliant on an \"oracle reward function\" r_oracle(x,y) to compute the direct discrimination reward r_dis. For the main experiments on math tasks, this oracle is a rule-based verifier that knows the correct answer. This oracle is a form of strong, external supervision.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "the authors ... clarified the intended distinction between \"stronger supervision\" and oracle-based reward signals",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The framework's success, particularly in Stage II, hinges on a critical assumption: the fixed actor model pi_theta is already a good \"refiner\". The authors state the actor is pre-trained to be \"capable of... faithfully refining them according to critiques\". This assumes away a large part of the problem. The helpfulness reward r_refine is a convolved signal of both the critique's quality and the actor's ability to understand it. If the actor is a poor refiner, r_refine becomes a noisy or meaningless signal, and Stage II would fail to optimize for helpfulness.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "some concerns are not fully resolved. In particular, the method\u2019s reliance on the actor\u2019s refinement capability may limit its effectiveness in settings with weaker or differently structured actors",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper correctly highlights its inference-time compute-efficiency benefits (e.g., in Figure 1 and Figure 6). However, it completely omits the training-time cost of this complex, two-stage RL pipeline.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper's core insight is that final-outcome rewards are insufficient, and a more direct signal is needed. The proposed solution, r_dis, is a direct reward for judging the outcome of the original response. This overlooks a more direct comparison to Process-based Reward Models (PRMs), which provide supervision at each step of the reasoning.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The design of indirect rewards based on actor refinement is similar to [1], which is not discussed in the current paper. The authors should further clarify the difference between this work and [1] to highlight their novelty.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors provided new comparisons with relevant baselines (RCO, MultiCritique-RL)",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The quality of generated critiques should be individually measured via automatic metrics or human evaluation.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 5897,
+  "prompt_tokens": 1709,
+  "total_tokens": 7606,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 4470,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0017391864,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0017391864,
+   "upstream_inference_prompt_cost": 0.0002201192,
+   "upstream_inference_completions_cost": 0.0015190672
+  }
+ }
+}

@@ -1,0 +1,186 @@
+{
+ "paper_id": "ikthqd3qF4",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "The evaluation is based solely on HMDA data, which may not represent broader linkage challenges across diverse domains (e.g., healthcare, e-commerce, or census data).",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The method relies on the assumption that each individual can have only a limited number of positive outcomes, which might not hold in certain contexts (e.g., multiple affiliations or family-linked entities).",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "No rebuttal submitted by the authors, and all concerns are still outstanding.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The paper does not explore how the model behaves under record duplication errors, partial overlaps, or noisy features, which are common in real-world datasets.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While \u201crelative recall\u201d is useful when ground truth is unavailable, its interpretability for practitioners is limited compared to traditional recall metrics.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "No rebuttal submitted by the authors, and all concerns are still outstanding.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Assumption 1 (independence of origination decisions across borrowers) ignores supply constraints, market-level shocks, and spatial correlation in mortgage markets. Assumption 2 (monotonically increasing origination probability) contradicts observed credit score degradation from multiple inquiries. Neither assumption receives empirical validation.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "No rebuttal submitted by the authors, and all concerns are still outstanding.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Theorem 1 provides Pr[False] \u2264 Pr[Mult]/p\u00b2, but the gap between the lower bound (92.3%) and true precision remains unquantified. Lemma 1 only shows Pr[Mult|False] \u2265 p\u00b2, not equality. the expectation is the simulation data with ground truth should quantify this gap.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "No rebuttal submitted by the authors, and all concerns are still outstanding.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "All clusters with >2 applications are dropped without justification. This limitation leaves critical questions unanswered: What fraction of true cross-applicants submit 3+ applications? How does this affect recall? The theory should extend to larger clusters or justify the restriction.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "No rebuttal submitted by the authors, and all concerns are still outstanding.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper lacks any comparison to established methods: Fellegi-Sunter probabilistic linkage, deep learning entity resolution, alternative clustering algorithms (DBSCAN, spectral clustering), or existing evaluation methods for record linkage without labels. Cannot assess whether the approach is actually useful.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "No rebuttal submitted by the authors, and all concerns are still outstanding.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Testing 96 combinations of distance functions and tolerance parameters with no principled selection criteria. Partition variables (census tract, property type, race, sex, age) lack sensitivity analysis for misreporting or changes. No guidance for practitioners on feature selection for new applications.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "No rebuttal submitted by the authors, and all concerns are still outstanding.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Selection Bias from Filtering False Positives: dropping clusters with multiple originations improves precision but creates selection bias\u2014the bound in Equation (1) applies only to the filtered sample, conflating \"identifying cross-applicants\" with \"removing obvious errors.\" This undermines the evaluation framework's integrity.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "No rebuttal submitted by the authors, and all concerns are still outstanding.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Validation Using Behavioral Patterns is Circular: Figure 7 \"validates\" the results by showing: applications in clusters are close in time (Figure 7a) and denied applicants improve their profiles (Figures 7b-d). But these patterns are exactly what the clustering algorithm was designed to find! This is not independent validation.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "No Ground Truth Validation Subsample: The paper has access to confidential HMDA data. Why not: Create a subsample with validated matches (manual review, SSN matching if available); Test the bounds against ground truth; Validate Assumptions 1-2 empirically",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "No rebuttal submitted by the authors, and all concerns are still outstanding.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The approach does not, I think, engage much with existing approaches seeking to do something similar (e.g., Enamorado et al. 2019 or the long-standing Bayesian record linkage literature). Some of the methods among those existing approaches could be important points of empirical comparison. It is not clearly how proposed method compares against existing baselines.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "No rebuttal submitted by the authors, and all concerns are still outstanding.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The approach relies on an accurate unconditional origination probability despite likely heterogeneity across observables and time. Because the bound uses a single p, subpopulations with lower approval rates will have fewer multiple-origination events even when merges are spurious, which could make the bound optimistic in those strata.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "No rebuttal submitted by the authors, and all concerns are still outstanding.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The assumptions of independence across borrowers and monotonicity in the number of applications are possibly strong in mortgage settings where tract-, lender-, and time-level shocks could induce correlation; the direction of bias will vary with the sign of these correlations, so sensitivity analyses would be helpful.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "No rebuttal submitted by the authors, and all concerns are still outstanding.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The empirical validation is confined to mortgages. The framing and notation are tailored to this case, which risks overstating generality; the paper would be stronger with a second, unrelated domain where an exclusivity rule holds.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "No rebuttal submitted by the authors, and all concerns are still outstanding.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "As noted earlier, the clustering component is narrow relative to the entity-resolution literature. Agglomerative complete-linkage with an L2-style distance is a reasonable baseline, but there is little comparison against alternative linkage strategies such as Bayesian or probabilistic record linkage, graph-based community discovery, or modern embedding-based similarity, which makes it hard to assess performance.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "No rebuttal submitted by the authors, and all concerns are still outstanding.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The practice of dropping clusters with multiple originations both changes downstream estimands and the lower bound on algorithm precision, while introducing researcher discretion; the paper derives an adjusted bound, but it would help to articulate ex-ante decision rules or heuristics.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "No rebuttal submitted by the authors, and all concerns are still outstanding.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The claim that the rate of clustering merges is itself informative about quality is asserted in prose but not fully substantiated empirically; more direct evidence or illustration would clarify how this guidance should be operationalized.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "No rebuttal submitted by the authors, and all concerns are still outstanding.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "the empirical section could be clearer about the nature of second applications\u2014whether they are rejected-then-resubmitted cases or different-lender near-duplicates\u2014since this affects the interpretation of some of the results.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The approach is evaluated on only a single dataset, which limits the strength and generalizability of the conclusions. There exists a rich body of literature on the record linkage problem, along with many publicly available benchmark datasets that could have been leveraged to provide a more comprehensive evaluation.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "No rebuttal submitted by the authors, and all concerns are still outstanding.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "there is no comparison with other established baselines. It would be useful to include comparisons with both simple heuristic methods and more advanced approaches, such as those incorporating embedding-based similarity measures, to better assess the effectiveness of the proposed method.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "No rebuttal submitted by the authors, and all concerns are still outstanding.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 9924,
+  "prompt_tokens": 1761,
+  "total_tokens": 11685,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 7495,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00302526,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00302526,
+   "upstream_inference_prompt_cost": 0.00024654,
+   "upstream_inference_completions_cost": 0.00277872
+  }
+ }
+}
