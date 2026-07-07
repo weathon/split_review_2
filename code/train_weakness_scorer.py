@@ -4,7 +4,8 @@ Each paper's strength/weakness items are embedded (last-token pooling),
 scored by a linear head (unbounded), and averaged into a paper score.
 Loss: weighted MAE, w = 1 + |gt - 5|.
 
-Resumable per epoch: checkpoints/weakness_scorer/epoch{N}/ with adapter + head.
+Resumable: checkpoints/weakness_scorer/latest/ (adapter + head + optimizer +
+step position) written every 200 steps; epoch{N}/ kept as end-of-epoch records.
 """
 
 import os
@@ -12,8 +13,8 @@ import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "2"
 
 import json
-import math
 import random
+import shutil
 
 import dotenv
 
@@ -40,6 +41,22 @@ LORA_ALPHA = 32
 GRAD_ACCUM = 8  # papers per optimizer step
 MAX_LEN = 2048  # truncation authorized by user; expected never triggered
 SEED = 0
+CKPT_EVERY = 200  # steps (papers) between latest-checkpoint saves
+
+
+def save_checkpoint(ckpt, model, head, optimizer, epoch, step):
+    # write to tmp then rename, so a crash mid-save never corrupts the resume point
+    tmp = ckpt.parent / (ckpt.name + ".tmp")
+    if tmp.exists():
+        shutil.rmtree(tmp)
+    tmp.mkdir(parents=True)
+    model.save_pretrained(str(tmp))
+    torch.save(head.state_dict(), tmp / "head.pt")
+    torch.save(optimizer.state_dict(), tmp / "optimizer.pt")
+    (tmp / "state.json").write_text(json.dumps({"epoch": epoch, "step": step}))
+    if ckpt.exists():
+        shutil.rmtree(ckpt)
+    tmp.rename(ckpt)
 
 
 def forward_paper(model, head, tokenizer, items, device):
@@ -65,22 +82,19 @@ def main():
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
     base = AutoModel.from_pretrained(MODEL_NAME, torch_dtype=torch.bfloat16)
 
-    start_epoch = 0
-    for e in range(EPOCHS, 0, -1):
-        if (CKPT_DIR / f"epoch{e}" / "done").exists():
-            start_epoch = e
-            break
-    if start_epoch == EPOCHS:
-        print(f"all {EPOCHS} epochs already done at {CKPT_DIR}")
-        return
-
+    latest = CKPT_DIR / "latest"
     head = nn.Linear(base.config.hidden_size, 1)
-    if start_epoch > 0:
-        resume_dir = CKPT_DIR / f"epoch{start_epoch}"
-        print(f"resuming from {resume_dir}")
-        model = PeftModel.from_pretrained(base, str(resume_dir), is_trainable=True)
-        head.load_state_dict(torch.load(resume_dir / "head.pt"))
+    if latest.exists():
+        state = json.loads((latest / "state.json").read_text())
+        start_epoch, start_step = state["epoch"], state["step"]
+        if start_epoch >= EPOCHS:
+            print(f"all {EPOCHS} epochs already done at {CKPT_DIR}")
+            return
+        print(f"resuming from {latest} (epoch {start_epoch}, step {start_step})")
+        model = PeftModel.from_pretrained(base, str(latest), is_trainable=True)
+        head.load_state_dict(torch.load(latest / "head.pt"))
     else:
+        start_epoch, start_step = 0, 0
         lora_cfg = LoraConfig(
             r=LORA_R, lora_alpha=LORA_ALPHA,
             target_modules=["q_proj", "k_proj", "v_proj", "o_proj",
@@ -97,21 +111,25 @@ def main():
         [p for p in model.parameters() if p.requires_grad] + list(head.parameters()),
         lr=LR,
     )
+    if latest.exists():
+        optimizer.load_state_dict(torch.load(latest / "optimizer.pt"))
 
     run = wandb.init(project="weakness-score", config={
         "model": MODEL_NAME, "epochs": EPOCHS, "lr": LR, "lora_r": LORA_R,
         "lora_alpha": LORA_ALPHA, "grad_accum": GRAD_ACCUM, "max_len": MAX_LEN,
-        "start_epoch": start_epoch,
+        "ckpt_every": CKPT_EVERY, "start_epoch": start_epoch, "start_step": start_step,
     })
     print(f"wandb run: {run.url}")
 
     for epoch in range(start_epoch, EPOCHS):
         model.train()
         order = list(range(len(train_data)))
-        random.Random(SEED + epoch).shuffle(order)
+        random.Random(SEED + epoch).shuffle(order)  # deterministic, so mid-epoch resume can skip forward
         optimizer.zero_grad()
-        for step, idx in enumerate(tqdm.tqdm(order, desc=f"epoch {epoch + 1}")):
-            sample = train_data[idx]
+        skip = start_step if epoch == start_epoch else 0
+        for step in tqdm.tqdm(range(skip, len(order)), desc=f"epoch {epoch + 1}",
+                              initial=skip, total=len(order)):
+            sample = train_data[order[step]]
             pred = forward_paper(model, head, tokenizer, sample["items"], device)
             gt = sample["gt"]
             loss = (1 + abs(gt - 5)) * (pred - gt).abs()
@@ -124,6 +142,8 @@ def main():
                 wandb.log({"train/loss": loss.item(),
                            "train/abs_err": abs(pred.item() - gt),
                            "epoch": epoch + step / len(order)})
+            if (step + 1) % CKPT_EVERY == 0:
+                save_checkpoint(latest, model, head, optimizer, epoch, step + 1)
         optimizer.step()
         optimizer.zero_grad()
 
@@ -137,6 +157,7 @@ def main():
         wandb.log({"val/mae": val_mae, "epoch": epoch + 1})
         print(f"epoch {epoch + 1}: val MAE = {val_mae:.4f}")
 
+        save_checkpoint(latest, model, head, optimizer, epoch + 1, 0)
         ckpt = CKPT_DIR / f"epoch{epoch + 1}"
         ckpt.mkdir(parents=True, exist_ok=True)
         model.save_pretrained(str(ckpt))

@@ -20,7 +20,6 @@ dotenv.load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
 from datasets import load_dataset
 
 from paths import DATASETS_DIR
-from build_deepreview import coerce_scores
 
 TRAIN_OUT = DATASETS_DIR / "weakness_score_train.jsonl"
 VAL_OUT = DATASETS_DIR / "weakness_score_val.jsonl"
@@ -54,7 +53,7 @@ def main():
 
     samples = []
     seen = set()
-    skipped_no_scores = 0
+    skipped_bad_scores = 0
     skipped_no_items = 0
     for ex in tqdm.tqdm(ds):
         pid = ex["id"]
@@ -62,9 +61,20 @@ def main():
             continue
         seen.add(pid)
 
-        scores = coerce_scores(ex["rating"])
+        # strict rating parse: any unparseable entry -> skip the whole paper
+        raw = ex["rating"]
+        if isinstance(raw, str):
+            raw = json.loads(raw)
+        try:
+            scores = [int(s.split(":", 1)[0].strip()) if isinstance(s, str) else int(s)
+                      for s in raw]
+        except (ValueError, TypeError):
+            print(f"skip {pid}: unparseable rating {ex['rating']!r}")
+            skipped_bad_scores += 1
+            continue
         if not scores:
-            skipped_no_scores += 1
+            print(f"skip {pid}: empty rating list")
+            skipped_bad_scores += 1
             continue
         gt = sum(scores) / len(scores)
 
@@ -99,7 +109,7 @@ def main():
     n_items = [len(s["items"]) for s in samples]
     gts = [s["gt"] for s in samples]
     print(f"papers: {len(samples)} (train {len(train)}, val {len(val)})")
-    print(f"skipped: no_scores={skipped_no_scores}, no_items={skipped_no_items}")
+    print(f"skipped: bad_scores={skipped_bad_scores}, no_items={skipped_no_items}")
     print(f"items/paper: min={min(n_items)} mean={sum(n_items)/len(n_items):.2f} max={max(n_items)}")
     print(f"gt: min={min(gts):.2f} mean={sum(gts)/len(gts):.2f} max={max(gts):.2f}")
     import collections
