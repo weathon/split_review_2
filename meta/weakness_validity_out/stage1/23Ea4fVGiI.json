@@ -1,0 +1,123 @@
+{
+ "paper_id": "23Ea4fVGiI",
+ "decision": "Reject",
+ "n_reviewers": 3,
+ "items": [
+  {
+   "weakness_text": "The experiments are narrow: only one domain and one benchmark family. Claims about general planning improvement are therefore not well supported.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Experimental scope stays narrow despite budget explanations.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "There are no comparisons with so many other structured prompting methods (eg CoS, ReAct, least-to-most, chain-of-thought scaffolding and so on). It is unclear whether TMK offers advantages beyond simply using more structured json templates.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Citing literature that CoT doesn't help planning doesn't substitute for direct comparisons with alternative prompting methods.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The explanation of why TMK helps remains speculative. No ablation isolates whether improvements come from the educational knowledge model framing or just from better formatting and key-word cues.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "No ablations isolate whether gains come from TMK's structure versus simply providing more organized JSON formatting.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The reviewer finds it difficult to understand what is the core idea/contribution of TMK prompting method proposed in the paper. The paper did poorly in explaining the proposed prompting method.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors addressed several issues: ... refined the hypothesis to frame TMK as a 'symbolic steering mechanism.'",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper proposes a prompting method, yet there are no examples of the prompt in the paper.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "included prompt examples in the Appendix.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "only OpenAI models",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Experimental scope stays narrow despite budget explanations.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "only one task (blocksworld)",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Experimental scope stays narrow despite budget explanations.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "many numbers are missing (Table 2)",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The one-shot TMK vs zero-shot baseline comparison remains potentially unfair.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Many fields are missing in Table 2, especially Plain Text + One Shot.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The one-shot TMK vs zero-shot baseline comparison remains potentially unfair.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Note that it's unfair to compare the other two columns (TMK + One Shot vs Plain Text + Zero Shot).",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The one-shot TMK vs zero-shot baseline comparison remains potentially unfair.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It does not make sense to replace standard description of blockworlds into irrelevant mystery or random words. No LLM learns it during pre-training, nor people will use those words to describe tasks, nor they will use LLMs like this.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "It's not easy to understand what TMK is doing (lacking a concrete example of the prompt/formatting).",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "included prompt examples in the Appendix.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The method is only experimented on blockworlds, which is a toy dataset easily solvable by non-machine learning algorithms like DFS. It's unknown whether the method can be generalized to other meaningful domains, such as mathematical, logical, legal, scientific reasonings.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Experimental scope stays narrow despite budget explanations.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 9175,
+  "prompt_tokens": 1073,
+  "total_tokens": 10248,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 8057,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.002602682,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.002602682,
+   "upstream_inference_prompt_cost": 0.000143782,
+   "upstream_inference_completions_cost": 0.0024589
+  }
+ }
+}

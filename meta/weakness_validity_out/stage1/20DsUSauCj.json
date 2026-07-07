@@ -1,0 +1,81 @@
+{
+ "paper_id": "20DsUSauCj",
+ "decision": "Reject",
+ "n_reviewers": 3,
+ "items": [
+  {
+   "weakness_text": "Limited Scientific Insight: The paper is presented more as an engineering achievement than a scientific one. It demonstrates that persona traits can be mapped to vectors but provides little insight into why this is the case and if other naive methods could do the same. The method feels like advanced prompt engineering applied to activations, rather than some general methodological approaches towards general understanding of related problems.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Questions about conceptual insight and the scope of contribution were only partially addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Insufficient Comparison to Naive Baselines: The paper fails to adequately compare its complex steering methods against simpler, \"naive\" baselines in the main text. A full evaluation against standard system prompting or language based methods (instead of using vectors) is critical. Lack of such experiments make it hard to judge if the vectors are truly necessary.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "key concerns remain: the lack of compelling naive-baseline comparisons.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Method Clarity: The core methodology is not fully detailed in the main text, making the workflow and its components difficult to understand. Key components, such as the exact prompts used for artifact generation, and workflow are best described in the paper with illustrative display items. This lack of details hinders reproducibility and a clear evaluation of the method's components.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal effectively clarified presentation issues",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While this work is very comprehensive, my biggest concern is the novelty of the approach. Previously, there have been numerous works that discuss model steering vectors, like RepE [1] or ITI [2]. Also, many works have provided ways to \"steer\" LLMs for personalized use [3], and even to change LLM personality traits in the latent embedding space [4,5]. Given these works that discuss similar approaches, I believe this deserves an in-depth discussion on what differences the Persona Vector has compared to previous literature.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "key concerns remain: the novelty gap relative to existing steering methods",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I am concerned about the authors' finding that \"persona shifts are rather correlated between seemingly different traits. In particular, we notice that negative traits tend to shift together\". This finding is concerning because this shows the weakness of the linear interventions in steering the model's persona. While it is understandable that certain persona sets may be correlated to each other to some extent, extremely high correlations (e.g., over 0.8) are not acceptable, because persona vectors should, by definition, be able to pinpoint vector directions that represent a \"specific persona\", and not be a measure to mitigate \"harmfulness\" as a whole. If we cannot extract a persona vector that steers the specific persona orthogonal to any other persona, I think the definition of \"persona vector\" is over-claiming its capabilities.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "key concerns remain: high correlations between traits undermining specificity",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The persona vectors are extracted by generating system prompts that would best elicit the target trait, and using the difference in mean activations between responses. This \"persona vector\" represents the direction that best explains the target persona, which is then applied to many use cases. However, I think this introduces a high risk of confirmation bias; i.e., the persona steering and detection approaches are only confirming the direction that has just been introduced systematically. To refute this point, I suggest you do an experiment that shows that the extracted persona vector is indeed a representation of the target persona, by testing on the inverted direction of the persona vector. For instance, if the \"evil\" vector _v_ indeed represents the direction of \"evil\", the negative vector _- v_ should represent \"benign\". Also, if the \"sycophancy\" vector is _v_, then _- v_ should represent a \"stubborn\" or \"self-biased\" personality trait. Using the persona vectors _v_ extracted for each persona, please provide a systematic evaluation of the effect of _- v_. If _- v_ can elicit the opposite persona, then the experiments provided are not just a confirmation of the direction, and we can say that the persona vector indeed captures the intended personality trait.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The presentation is flawed. The paper is very comprehensive and compares the steering approach against psychometric baselines, SAE, fine-tuning vs. few-shot prompting, etc. but this also works to their detriment as it obfuscates the main empirical findings. According to the authors, the main contribution appears to be an automated pipeline. In terms of empirical findings, the paper would seem to have less to offer. As the authors outline, the methods are otherwise well-established and extensively studied, i.e., linear probing. However, the paper includes a case study that shows that preventative steering during fine-tuning can reduce hallucinations without degrading accuracy. While the comprehensiveness of the report is laudable, it takes away from the overall argument. The paper would benefit from a more concise presentation focused on preventative steering, which is the novel empirical contribution, not the automated pipeline.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal effectively clarified presentation issues",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 6022,
+  "prompt_tokens": 1633,
+  "total_tokens": 7655,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 4700,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.001832718,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.001832718,
+   "upstream_inference_prompt_cost": 0.000218822,
+   "upstream_inference_completions_cost": 0.001613896
+  }
+ }
+}

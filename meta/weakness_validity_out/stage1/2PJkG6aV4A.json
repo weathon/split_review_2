@@ -1,0 +1,116 @@
+{
+ "paper_id": "2PJkG6aV4A",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "**1. Limited Methodological Novelty**\n\nThe paper's core methodological contribution is limited. The proposed framework is largely an adaptation of the established \"persona-based evaluation\" paradigm from the text-only LLM domain. The primary modification is substituting an explicit textual persona with an implicit visual one via a user's photo. This is a straightforward and incremental step, rather than a fundamental innovation in evaluation methodology.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "4. Reviewer oVen (1) Not addressed",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "**2. Potential for Confounding Variables in User Images**\n\nThe evaluation framework does not adequately account for confounding variables within the user images. While the paper assumes the model's biased outputs are a reaction to core demographic traits like gender and race, the images contain many other correlated cues. The paper does not present any analysis to disentangle these factors, making it unclear if the model is reacting to the intended demographic variable or to these other confounding visual features.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "4. Reviewer oVen (2) Not addressed",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "**3. Over-constrained \"Story Generation\" Task May Induce and Exaggerate Bias**\n\nOne of the paper's key findings relies on the \"story generation\" task, which is presented as the most open-ended evaluation. However, the prompt for this task is highly constrained, explicitly forcing the model to fill in seven sensitive attributes, including job, economic status, and education. This setup is less a measure of bias in creative, open-ended generation and more a \"stereotype fill-in-the-blanks\" exercise. This task design may itself induce bias and exaggerate the extent to which the model would apply stereotypes in more natural, unconstrained scenarios.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "1. The validation of the LLM-as-judge showed a 97% human agreement for the term explanation task. Was a similar human-agreement study performed for the story generation attribute extraction? This seems like a more complex and potentially ambiguous extraction task (e.g., parsing \"personality\" or \"economic situation\"), and it would be valuable to know the human-LLM alignment there as well.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "3. Reviewer Decc addressed",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "2. In the \"Term Explanation\" and \"Exam-Style QA\" tasks, did the models ever comment on the irrelevance of the attached photo? For example, a response like, \"I'm happy to explain linear algebra, but your photo is not relevant to the query.\" While not an explicit refusal, this would be an interesting behavior to note, as it sits between a full refusal and the (biased)-but-compliant behavior observed.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "3. Reviewer Decc addressed",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "1. The study only investigates race and gender bias, which seems limiting considering that image datasets exist with annotations for other types of social attributes.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "2. Reviewer RCGm (1) Not addressed",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "2. The proposed method itself is quite simple, which is not necessarily a weakness. However, the simplicity of the approach makes the first few pages of the manuscript feel repetitive as the same basic idea is described multiple times.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "3. The term explanation and exam-style QA tasks could be viewed as somewhat contrived in that they are not realistic prompting scenarios for LVLMs (i.e., it's unlikely for an image of a person to be provided as context along with a math of physics question). However, I understand the need to use creative prompting techniques to circumvent refusals.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "2. Reviewer RCGm (3) Not addressed",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "4. This work is limited only to bias evaluation and did not explore any strategies for mitigating bias.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "2. Reviewer RCGm (4) Not addressed",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "- Comparison to existing open-ended bias evaluations: I wonder if the proposed approach differs substantially from VisBias and other open-ended benchmarks, beyond using a different set of prompts. While the new tasks are irrelevant to the image by design, the prompts do refer to the user photo explicitly (\"I've attached my photo...\") and I wonder if the models may be misled to believe its response (e.g., generated story) should relate to the image, which leads to the same spurious correlations that direct bias probing suffers from. I would have liked to see some quantitative evaluations or comparisons between open-ended probing methods, similar to how the authors compared refusal rate to closed-form prompts in table 1.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "1. Reviewer EAsf (1) Not fully addressed",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "- It would be more convincing if the LLM judge used an ensemble of multiple models to reduce potential bias and variance from the Qwen3 32B model. While the model is shown to agree with human 97% of the time, it is unclear if this is high enough as the bias measurements for the task (term explanation) are mostly under 5%.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "- Most of the qualitative analysis was presented for story generation and term explanation and make intuitive sense. However, it remains unclear to me how the exam QA task could also be affected by demographics depicted in the image. The paper does not provide a detailed hypothesis or analysis on this task. Or could it be that the measured TVD of 1-2% is already within the margin of error that one cannot conclude the bias is present with certainty at all?",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 6147,
+  "prompt_tokens": 2232,
+  "total_tokens": 8379,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 4536,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0014279058,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0014279058,
+   "upstream_inference_prompt_cost": 0.0002194056,
+   "upstream_inference_completions_cost": 0.0012085002
+  }
+ }
+}

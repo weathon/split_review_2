@@ -1,0 +1,179 @@
+{
+ "paper_id": "2cq8FyBfDk",
+ "decision": "Reject",
+ "n_reviewers": 5,
+ "items": [
+  {
+   "weakness_text": "Lack of novelty. The core idea is about incorporating 3D geometric information in atom-level protein representaion, i.e., voxelizing 3D molecular structures and applying 3D CNN. It is not new. Similar strategies exist in prior works such as VoxMol[1], DeepSite[2], EnzyNet[3], etc. The paper mainly scales this direction with more data and modern augmentation, rather than introducing a fundamentally new modeling principle.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "As a result, the paper tends to overstate its novelty and does not clearly articulate what is fundamentally new beyond scaling a standard voxel 3D CNN to a larger dataset.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Inadequate related work coverage. The related work section omits many protein-level models that already use 3D geometric information in various ways. Representative examples include VoxMol[1], DeepSite[2], EnzyNet[3], etc.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The related-work discussion also omits several directly relevant voxel- or geometry-based methods, including recent models such as VoxMol",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experiments only compare against sequence-based models (ESM-2, MolFormer). No baselines employing 3D geometric information in protein-level tasks are included, even though these have been widely used in structure-aware prediction. For example, MaSIF[4] for binding-site and ligand interaction prediction. Umol[5] for structure prediction of protein-ligand complexes, etc.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "This issue is compounded by the lack of comparisons against modern equivariant baselines or point-cloud\u2013based geometric models",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "There is no technical novelty in the method",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "As a result, the paper tends to overstate its novelty and does not clearly articulate what is fundamentally new beyond scaling a standard voxel 3D CNN to a larger dataset.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The authors incorrectly state the problem and do not sufficiently review the state of the art (lack of recent references)",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The related-work discussion also omits several directly relevant voxel- or geometry-based methods, including recent models such as VoxMol",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Point-cloud networks, equivariant networks, convolutions beyond 3D, and pLMs with structural tokens are not discusses",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "the lack of comparisons against modern equivariant baselines or point-cloud\u2013based geometric models",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Mirror reflection does not make sense for protein structures. There are no mirror-reflecting proteins in nature.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "90deg random rotation augmentation is definitely too coarse. No evidence is provided how the computed embeddings differ if one rotates the input protein by an arbitrary amount, e.g. 45 deg",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The approach relies on voxelization and rotation/mirroring augmentations to handle geometric symmetry, but does not provide true SE(3) equivariance or invariance.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experiments present significant data leakage between test and training sets and must redo the experiments",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The authors must include more recent pLMs with structural tokens as a baseline + compare themselves with dedicated geometrical networks. Provided baselines are outdated and insufficient",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "the lack of comparisons against modern equivariant baselines or point-cloud\u2013based geometric models",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "No standard error is provided in the results. The difference in performance between different models may not be significant.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Data splits for pretraining, fine-tuning and test must be clearly explained with similarity scores provided.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It is not clear if the multi-task regression to in-silico scores is a good strategy for a foundation model. Additional experiments must be conducted, for example, fine-tuning baselines models with exact values of 23 Rosetta scores, etc. It may happen that Rosetta scores are just sufficient for the presented tasks.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited Benchmark Breadth. Evaluation focuses primarily on protein\u2013ligand binding; broader functional or structural biology tasks (e.g., mutation effects, protein\u2013protein interactions) remain unexplored.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Dependence on Predicted Structures. Relies entirely on AlphaFold-2 models, which can be inaccurate for flexible or disordered proteins which introduces systematic bias.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Restricted Rotation Invariance. Achieved only via data augmentation, not through inherently equivariant architectures (e.g., SE(3)-equivariant CNNs).",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The approach relies on voxelization and rotation/mirroring augmentations to handle geometric symmetry, but does not provide true SE(3) equivariance or invariance.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While efficient, the voxel-based approach may still scale poorly for very large complexes (cropping may omit structural context).",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The proposed model architecture and methodology are rather conventional, relying on standard 3D CNN blocks and voxelization. While efficient, the approach does not offer much conceptual novelty beyond scaling previously known techniques to AF structures.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "As a result, the paper tends to overstate its novelty and does not clearly articulate what is fundamentally new beyond scaling a standard voxel 3D CNN to a larger dataset.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The pre-training objectives and augmentations are straightforward, and the reported performance gains are modest or inconsistent across tasks.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The study also lacks comparison with baselines besides ESM-2 on certain tasks like IC50 prediction and GO annotation.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "the lack of comparisons against modern equivariant baselines or point-cloud\u2013based geometric models",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "A proper 3D equivariant model might do even better. (They are sometimes also referred to as E(3)-equivariant GNNs)",
+   "reviewer_index": 4,
+   "ac_status": "unresolved",
+   "ac_evidence": "the lack of comparisons against modern equivariant baselines or point-cloud\u2013based geometric models",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 7751,
+  "prompt_tokens": 2103,
+  "total_tokens": 9854,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 5689,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0017305715,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0017305715,
+   "upstream_inference_prompt_cost": 0.0002067249,
+   "upstream_inference_completions_cost": 0.0015238466
+  }
+ }
+}

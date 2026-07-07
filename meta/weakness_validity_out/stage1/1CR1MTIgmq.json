@@ -1,0 +1,95 @@
+{
+ "paper_id": "1CR1MTIgmq",
+ "decision": "Reject",
+ "n_reviewers": 3,
+ "items": [
+  {
+   "weakness_text": "A substantial portion of the text largely reiterates claims from the Palazzo et al. (2024) paper, as well as from the subsequent comment and rebuttal papers.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The arguments presented for each cited claim are very brief and lack sufficient detail and discussion.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In its current form, the paper is not self-contained, which makes it difficult to properly assess its content.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "it does not present any novel technical contributions",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It is highly questionable whether ICLR or similar conferences would be an appropriate venue for this submission. Considering the follow-up history of the original Palazzo et al. (2021) paper, TPAMI appears to be the more suitable venue for continuing this discussion.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "no research contribution is made",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "the paper is off topic for ICLR",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It is also over the page limit.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper should be sent to TPAMI.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 5222,
+  "prompt_tokens": 922,
+  "total_tokens": 6144,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 4621,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0011172778,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0011172778,
+   "upstream_inference_prompt_cost": 9.06326e-05,
+   "upstream_inference_completions_cost": 0.0010266452
+  }
+ }
+}

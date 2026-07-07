@@ -1,0 +1,5 @@
+currently, the calibration is done by using RAG to search whole database, this is noisy and hard to explain. Now let's do this. You can explore the repo first but the task below is not very dependeted on current code. 
+1. build a training set from the deepreview dataset
+2. Use a cheap determinstic function, to convert each review into a list of strength and weaknesses (get the weakness and strength field and then a simple list parsing)
+3. Fine tune a model (Qwen/Qwen3-Embedding-4B) with a linear layer at the end to predict a single score such that, it predicts a score for each item (either strength or weakness) and then average the the item scores to get the final score. Use MAE loss with weight function to optimize the model. The subscores are not bounded. The weight is larger for GT score far away from 5, to avoid mean collapse. Train on GPU2 and log to wandb. Finetune the whole model (not just the linear layer) but with LoRA. 
+Before running, use a subagent to review the code against REVIEW.md and then run it. 

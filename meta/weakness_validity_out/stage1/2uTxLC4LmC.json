@@ -1,0 +1,123 @@
+{
+ "paper_id": "2uTxLC4LmC",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "The biggest weakness of this paper is actually in the problem setting of attempting to make the chain-of-thoughts themselves safe, instead of just keeping the final response safe. I do not fully buy the authors\u2019 argument, presented in 2.2, for why we should train models to keep their chain-of-thoughts safe. Particularly, prior works [1, 2] have described how making chain-of-thoughts safer can harm monitorability of modern reasoning LLMs. [1] shows that for a strong reasoning model like o3-mini, prolonged training to apply optimization pressure on the COT directly can lead to obfuscation, where the model can take harmful/unsafe actions while obfuscating their thoughts in the COT, which may make it **much harder** to actually prevent unsafe behaviors. In other words, making COTs safe does not mean that very strong reasoning models like o3-mini will become safe \u2014 these models might just learn to obfuscate their chain-of-thoughts. **A very strong counter-argument will be needed to supporting why we need to make COTs safe instead of just the final answers, given the results from frontier reasoning models like o3-mini presented in [1], to justify why COTs should be safe as well, given the risk to monitorability that this process may produce.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The rebuttal has addressed most of the raised concerns, except for (1) formal theoretical guarantees and long-term behavior of offline preference optimization (Reviewer T2wZ) and (2) monitorability\u2013alignment trade-offs at frontier scale (Reviewer 1hr8).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lacking contextualization and novelty\n\nFirstly, just teaching the model to backtrack in its chain-of-thought to correct potential unsafe generations, such as Backtrack [4] might result in better performance. This paper does not cite [4] nor compare with it. Moreover, the idea of adding interventions to unsafe responses to potentially edit them to generate a preferred response, then creating a (preferred, dispreferred) pair for DPO-style training has already been explored in [4]. Without properly citing/contextualizing the current work with respect to [4] makes it significantly weaker.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Initial concerns were thoroughly addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Inheriting regular problems of DPO\n\nThe paper describes why regular RL/GRPO does not work (base model lacks diversity) and then proposes the alternative method of IPO. However, this seems to me to be a similar reasoning of why people were using DPO style learning for math/reasoning earlier. Specifically, if base models lack sufficient coverage and capacity, then online RL might not induce the correct learning behavior [7]. However, the proper solution of that is to train a better base model, as shown in [7], and then to use online RL on top of it, instead of using offline methods like DPO.\n\nMore specifically, an offline DPO loop will inherit all the problems of such an algorithm, like unintentional unalignment [8, 9] and problems of off-policy data [10, 11, 12]. These works and the concerns they raise about offline DPO-class of algorithms are not properly addressed in the paper. For example, what happens to the probability of positive sequences as IPO training goes on?",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The rebuttal has addressed most of the raised concerns, except for (1) formal theoretical guarantees and long-term behavior of offline preference optimization (Reviewer T2wZ) and (2) monitorability\u2013alignment trade-offs at frontier scale (Reviewer 1hr8).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lack of baselines\n\nThis is a very minor concern, but instead of running DPO, if one just runs SFT on the constructed preferred responses, how does that perform? How about SFT + DPO (i.e., RPO [9])?",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors added relevant baselines.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Although the paper includes sufficient baselines for SFT-based approaches, it does not include prior open-source work that uses RL-based approaches for safety training such as TARS [1]. Since part of the motivation is that RL training also does not provide sufficient signal, comparing against prior RL-based approaches for both reasoning trace analysis (Figure 2) and performance (Table 2) would help strengthen the paper.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors added relevant baselines.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In Table 2, is the Avg. safety score across both Rsng. and Resp. or just Resp.? It would be helpful if the table includes averages for them separately to see how the effect of IPO is different for the reasoning and answer.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Initial concerns were thoroughly addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I am not convinced about the claim in lines 189-191 \u201cHowever, the absolute safety scores remain limited on adversarial datasets, suggesting the challenge of imposing process supervision\u201d. How much effort was put into the training for tuning hyperparameters and exploring context guidelines in the reward model? The authors should explain what methods they tried to get the best performance out of GRPO with process rewards.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Initial concerns were thoroughly addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experiments on safety triggers and compliance cues were conducted on DS-8B. However, DS models are known to be relatively unsafe compared to other models [2,3], exhibiting different behavior. Does the trend also hold on other base reasoning models such as Qwen3-8B which are known to be safer?",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Initial concerns were thoroughly addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "- Limited model scale evaluation: Experiments are only conducted on mid-sized LRMs (DS-7B/8B and Qwen3-8B). Evaluating IPO on smaller (e.g., DS-1.5B) and larger models (e.g., DS-14B, DS-32B) would help assess scalability and generalizability.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Initial concerns were thoroughly addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "- Lack of adaptive robustness testing: It would be more convincing to include adaptive or adversarial tests such as obfuscation, paraphrased jailbreaks, or multi-turn exploit prompts, which better reflect real-world attack surfaces.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Initial concerns were thoroughly addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "- Limited capability assessment: Although math and coding benchmarks are included, there is no evaluation of general language capabilities after alignment \u2014 e.g., factual QA, instruction-following coverage, multilingual understanding, or knowledge recall. This raises questions about whether IPO maintains general utility beyond reasoning-heavy tasks.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors added relevant baselines, expanded evaluations, and demonstrated that IPO preserves general reasoning and language capabilities.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "1. The paper would benefit from a deeper theoretical discussion on why certain reasoning paths become unsafe, and why the IPO method work.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Initial concerns were thoroughly addressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "2. Empirical evaluation could be strengthened by including more open-ended reasoning scenarios to demonstrate generalization beyond factual or mathematical reasoning.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Initial concerns were thoroughly addressed.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 12224,
+  "prompt_tokens": 2487,
+  "total_tokens": 14711,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 10258,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0026477105,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0026477105,
+   "upstream_inference_prompt_cost": 0.0002444721,
+   "upstream_inference_completions_cost": 0.0024032384
+  }
+ }
+}

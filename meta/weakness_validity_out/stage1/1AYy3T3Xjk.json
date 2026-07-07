@@ -1,0 +1,193 @@
+{
+ "paper_id": "1AYy3T3Xjk",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "items": [
+  {
+   "weakness_text": "The proposed framework is heuristic. I do not see a clear correspondence between the classical four dimensions and the four CREDO dimensions in Table 1, and the authors do not provide strong theoretical foundations for constructing these new dimensions.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Similarly, the ITA deconstructs dialogues into origination nodes, development nodes, and scaffolding supports; however, the paper lacks detailed explanation of the logic and robustness behind this step-by-step construction. This process may heavily depend on the authors\u2019 subjective interpretation, which could introduce bias.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The work only compares its method against two baselines and does not report the performance of state-of-the-art models. Even considering cost constraints, GPT-4o would have been a cheaper and more capable alternative than the GPT-4 model used in this study.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper provides insufficient details about the prompts for evaluation models and expert annotation instructions, limiting reproducibility.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "There are other concerns raised by reviewers such as *lack of implementation details, logical contradiction, missing statistical experiments, and sensitivity analysis, and latency/compute and annotation cost*. While the authors have partially addressed these points in the rebuttal, I encourage them to incorporate these analyses into the paper in subsequent revisions.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "### 1. Ambiguous Causal Claims\nThe paper makes a strong and central claim that its framework \u201ctraces the cognitive trajectory of creative thinking.\u201d However, this assertion remains conceptually plausible but empirically unverified.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Another major issue raised by reviewers is the *causal contribution claims*. I agree with the reviewers that the paper only reveal the correlation rather than causal relationship.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "### 2. Statistical Reporting Limitations\nThe paper\u2019s statistical reporting lacks the depth necessary for confident interpretation of model performance.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "There are other concerns raised by reviewers such as *lack of implementation details, logical contradiction, missing statistical experiments, and sensitivity analysis, and latency/compute and annotation cost*. While the authors have partially addressed these points in the rebuttal, I encourage them to incorporate these analyses into the paper in subsequent revisions.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "### 3. Potential Data Leakage\nA major methodological concern lies in the model ecosystem overlap between data generation and evaluation. Students interacted with the DeepSeek LLM during data collection, and the same model family (DeepSeek-32B) was later fine-tuned as the evaluator.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "#### (1) Task framing\nThe data collection protocol emphasizes academic inquiry tasks in STEM fields (e.g., rock classification, carbon emission modeling). While suitable for studying analytical reasoning, this framing inherently biases the observed behavior toward convergent and knowledge-based reasoning rather than divergent or imaginative creation.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "#### (2) Absence of motivation manipulation\nParticipants were not explicitly instructed to \u201cgenerate original ideas,\u201d \u201ctake creative risks,\u201d or \u201cexplore unconventional solutions.\u201d In creativity research, such goal framing is critical: without motivational priming, individuals tend to default to task-completion strategies rather than expansive ideation.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "#### (3) Time constraint\nEach dialogue was capped at a maximum of 30 turns, with an average of fewer than 10. Creative cognition, however, often involves incubation and iterative recombination, requiring time for reflection and restructuring.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "### 5. Scope of creativity measured\nThe type of creativity captured by the study is best described as adaptive scientific or analytical creativity under LLM mediation, rather than open-ended or expressive creativity.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "1. The dataset (81 undergraduates; two universities; STEM-oriented tasks) constrains generalization to broader populations (K-12, humanities/arts, diverse cultures/languages). The paper acknowledges this but evaluation remains single-context. Actionable ask: run cross-institution and non-STEM validations (even small pilots) to probe transportability.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "One major concern echoed by the reviewers is the *Limited Dataset and Generalizability*. I agree with the reviewer that *the data used in this paper constrains generalization to broader disciplines and educational-level*. While the author tried to address this concern by explaining their data collection motivation and process in the rebuttal. But this doesn\u2019t address the reviewers concern(as of mine)",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "2. Comparing only to GPT-4 zero-shot and untuned DeepSeek-32B underestimates strong alternatives (e.g., prompt-programmed judges, few-shot rubric-prompting, instruction-tuned evaluators without LoRA, calibrated ordinal regressors over handcrafted features). Actionable ask: add tuned LLM-judge baselines (few-shot rubric, chain-of-thought with rubric anchors) and a non-LLM baseline (e.g., logistic/ordinal regression over process features).",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "3. The attribution experiment (macro-F1=0.84) relies on expert-labeled categories on the same type of data used to train the evaluator. This is valid for alignment to experts but leaves open whether attribution corresponds to causal contribution or downstream learning gains. Actionable ask: show that high attribution quality predicts independent outcomes (e.g., subsequent task performance, transfer, rubric-blind human judgments).",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Another major issue raised by reviewers is the *causal contribution claims*. I agree with the reviewers that the paper only reveal the correlation rather than causal relationship.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "4. Main metrics lack confidence intervals, per-dialogue variance, and significance tests between models. QWK and r are informative, but error analysis is thin (few failure cases, limited per-dimension uncertainty). Actionable ask: add bootstrap CIs, paired significance, and calibration metrics for ordinal predictions.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "There are other concerns raised by reviewers such as *lack of implementation details, logical contradiction, missing statistical experiments, and sensitivity analysis, and latency/compute and annotation cost*. While the authors have partially addressed these points in the rebuttal, I encourage them to incorporate these analyses into the paper in subsequent revisions.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "5. The semantic drift filter (cosine <0.15 for three consecutive pairs), cluster-then-stratify split (k=50), and ITA node definitions could influence results; there is no sensitivity analysis. Actionable ask: report robustness to cleaning thresholds, k, and ITA labeling variations; include prompt perturbation tests for the evaluator.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "There are other concerns raised by reviewers such as *lack of implementation details, logical contradiction, missing statistical experiments, and sensitivity analysis, and latency/compute and annotation cost*. While the authors have partially addressed these points in the rebuttal, I encourage them to incorporate these analyses into the paper in subsequent revisions.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "6. No breakdowns across demographics, domains, or dialogue lengths; potential bias if certain discourse styles are favored. Actionable ask: provide subgroup QWK/MAE and differential item functioning checks.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "7. The method presumes access to multi-turn logs and an evaluator pass; latency/compute and annotation cost (for gold standards) are not quantified. Actionable ask: report inference cost, throughput, and a human-in-the-loop review budget for classroom deployment.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "There are other concerns raised by reviewers such as *lack of implementation details, logical contradiction, missing statistical experiments, and sensitivity analysis, and latency/compute and annotation cost*. While the authors have partially addressed these points in the rebuttal, I encourage them to incorporate these analyses into the paper in subsequent revisions.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited Dataset and Generalizability \u2013 The dataset includes only 81 undergraduate students from STEM domains, restricting applicability to other disciplines or educational levels.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "One major concern echoed by the reviewers is the *Limited Dataset and Generalizability*. I agree with the reviewer that *the data used in this paper constrains generalization to broader disciplines and educational-level*. While the author tried to address this concern by explaining their data collection motivation and process in the rebuttal. But this doesn\u2019t address the reviewers concern(as of mine)",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Implementation Details Missing \u2013 The paper lacks practical training details such as hardware setup, fine-tuning time, and exact hyperparameter values needed for reproducibility.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "There are other concerns raised by reviewers such as *lack of implementation details, logical contradiction, missing statistical experiments, and sensitivity analysis, and latency/compute and annotation cost*. While the authors have partially addressed these points in the rebuttal, I encourage them to incorporate these analyses into the paper in subsequent revisions.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Inconsistency in Methodological Description \u2013 The paper claims to use a \u201cfully fine-tuned teacher model\u201d for knowledge distillation but also states that full fine-tuning is \u201ccomputationally prohibitive,\u201d creating a logical contradiction.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "There are other concerns raised by reviewers such as *lack of implementation details, logical contradiction, missing statistical experiments, and sensitivity analysis, and latency/compute and annotation cost*. While the authors have partially addressed these points in the rebuttal, I encourage them to incorporate these analyses into the paper in subsequent revisions.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lack of Transparency in Review References \u2013 Mentioning \u201cArea Chair comments\u201d during the review phase is inappropriate for a double-blind submission, suggesting possible misunderstanding or template-based phrasing.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Overly Polished and Synthetic Writing Style \u2013 The writing is highly formal, repetitive, and uniformly structured, which, combined with perfect consistency in technical phrasing and reference formatting, gives an impression of automated generation.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 11524,
+  "prompt_tokens": 3130,
+  "total_tokens": 14654,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 10706,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00366492,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00366492,
+   "upstream_inference_prompt_cost": 0.0004382,
+   "upstream_inference_completions_cost": 0.00322672
+  }
+ }
+}
