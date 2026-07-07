@@ -277,6 +277,10 @@ else:
 
 Do not skip items. Do not invent items that are not in the review.
 
+Respond with a single JSON object matching this schema exactly (no prose outside the JSON):
+
+{schema}
+
 Review record:
 
 {review_md}"""
@@ -299,17 +303,25 @@ Review record:
             review_md = open(abs_path).read()
             avg_line = [l for l in review_md.split("\n") if l.startswith("- Avg Score:")]
             avg_score = avg_line[0].split(":", 1)[1].strip()
+            # DeepSeek provider rejects response_format json_schema; use
+            # json_object with the schema in the prompt + manual validation
+            # (user-approved deviation from the parse() rule)
+            prompt = _ITEMIZE_PROMPT.format(
+                avg_score=avg_score,
+                schema=json.dumps(ItemizedReview.model_json_schema()),
+                review_md=review_md,
+            )
             try:
-                resp = await custom_client.chat.completions.parse(
+                resp = await custom_client.chat.completions.create(
                     model=SUBAGENT_MODEL,
-                    messages=[{"role": "user", "content": _ITEMIZE_PROMPT.format(avg_score=avg_score, review_md=review_md)}],
-                    response_format=ItemizedReview,
+                    messages=[{"role": "user", "content": prompt}],
+                    response_format={"type": "json_object"},
                     extra_body={"provider": {"only": [_OPENROUTER_PROVIDER]}},
                 )
+                items = ItemizedReview.model_validate_json(resp.choices[0].message.content).items
             except Exception as e:
                 print(f"  [itemized_calibration] FAILED file={os.path.basename(abs_path)} model={SUBAGENT_MODEL}: {e}")
                 raise
-            items = resp.choices[0].message.parsed.items
             lines = [f"Anchor {os.path.basename(abs_path)} — Avg Score: {avg_score}, {len(items)} items:"]
             for it in items:
                 lines.append(f"[{it.kind}] weight={it.weight:+.1f}: {it.item}")
