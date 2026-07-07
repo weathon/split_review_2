@@ -63,9 +63,9 @@ def main():
 
         # strict rating parse: any unparseable entry -> skip the whole paper
         raw = ex["rating"]
-        if isinstance(raw, str):
-            raw = json.loads(raw)
         try:
+            if isinstance(raw, str):
+                raw = json.loads(raw)
             scores = [int(s.split(":", 1)[0].strip()) if isinstance(s, str) else int(s)
                       for s in raw]
         except (ValueError, TypeError):

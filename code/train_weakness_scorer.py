@@ -83,6 +83,10 @@ def main():
     base = AutoModel.from_pretrained(MODEL_NAME, torch_dtype=torch.bfloat16)
 
     latest = CKPT_DIR / "latest"
+    # a crash between rmtree(latest) and rename in save_checkpoint leaves only
+    # latest.tmp; refuse to silently restart from scratch in that case
+    assert not (not latest.exists() and (CKPT_DIR / "latest.tmp").exists()), \
+        f"found orphaned {CKPT_DIR / 'latest.tmp'} without latest/; recover it manually"
     head = nn.Linear(base.config.hidden_size, 1)
     if latest.exists():
         state = json.loads((latest / "state.json").read_text())
