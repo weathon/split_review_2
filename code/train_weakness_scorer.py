@@ -15,7 +15,7 @@ import shutil
 
 import dotenv
 
-dotenv.load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
+dotenv.load_dotenv()  # no __file__: must also run inside a notebook
 
 import torch
 import torch.nn as nn
@@ -28,7 +28,7 @@ from pathlib import Path
 
 MODEL_NAME = "Qwen/Qwen3-Embedding-4B"
 DATASET_NAME = "weathon/weakness-score"
-CKPT_DIR = (Path(__file__).parent / ".." / "checkpoints" / "weakness_scorer").resolve()
+CKPT_DIR = (Path.cwd() / "checkpoints" / "weakness_scorer").resolve()
 
 EPOCHS = 2
 LR = 1e-4
@@ -38,6 +38,7 @@ GRAD_ACCUM = 8  # papers per optimizer step
 MAX_LEN = 2048  # truncation authorized by user; expected never triggered
 SEED = 0
 CKPT_EVERY = 200  # steps (papers) between latest-checkpoint saves
+ITEM_BATCH = 32  # max items per forward; a paper with more items runs in chunks
 
 
 def save_checkpoint(ckpt, model, head, optimizer, epoch, step):
@@ -56,14 +57,16 @@ def save_checkpoint(ckpt, model, head, optimizer, epoch, step):
 
 
 def forward_paper(model, head, tokenizer, items, device):
-    batch = tokenizer(
-        items, padding=True, truncation=True, max_length=MAX_LEN,
-        return_tensors="pt", padding_side="left",
-    ).to(device)
-    hidden = model(**batch).last_hidden_state  # [n_items, seq, h]
-    pooled = hidden[:, -1]  # left padding -> last token is EOS
-    item_scores = head(pooled.float()).squeeze(-1)  # [n_items]
-    return item_scores.mean()
+    chunk_scores = []
+    for i in range(0, len(items), ITEM_BATCH):
+        batch = tokenizer(
+            items[i:i + ITEM_BATCH], padding=True, truncation=True, max_length=MAX_LEN,
+            return_tensors="pt", padding_side="left",
+        ).to(device)
+        hidden = model(**batch).last_hidden_state  # [n_items, seq, h]
+        pooled = hidden[:, -1]  # left padding -> last token is EOS
+        chunk_scores.append(head(pooled.float()).squeeze(-1))  # [n_items]
+    return torch.cat(chunk_scores).mean()
 
 
 def main():

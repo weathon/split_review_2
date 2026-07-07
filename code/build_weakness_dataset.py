@@ -97,7 +97,18 @@ def main():
     rng = random.Random(0)
     rng.shuffle(samples)
     n_val = round(len(samples) * 0.05)
-    val, train = samples[:n_val], samples[n_val:]
+    val, train_pool = samples[:n_val], samples[n_val:]  # val keeps natural distribution
+
+    # uniform-ish train: bin by rounded gt, cap each bin at 400 (user decision)
+    bins = {}
+    for s in train_pool:
+        bins.setdefault(round(s["gt"]), []).append(s)
+    train = []
+    for b in sorted(bins):
+        train.extend(bins[b][:400])
+    rng.shuffle(train)
+    print("train bin counts after cap:",
+          {b: min(len(v), 400) for b, v in sorted(bins.items())})
 
     with open(TRAIN_OUT, "w") as f:
         for s in train:
