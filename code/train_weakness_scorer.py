@@ -9,9 +9,6 @@ step position) written every 200 steps; epoch{N}/ kept as end-of-epoch records.
 """
 
 import os
-
-os.environ["CUDA_VISIBLE_DEVICES"] = "2"
-
 import json
 import random
 import shutil
@@ -24,15 +21,14 @@ import torch
 import torch.nn as nn
 import tqdm
 import wandb
+from datasets import load_dataset
 from peft import LoraConfig, PeftModel, get_peft_model
 from transformers import AutoModel, AutoTokenizer
-
-from paths import DATASETS_DIR
+from pathlib import Path
 
 MODEL_NAME = "Qwen/Qwen3-Embedding-4B"
-TRAIN_PATH = DATASETS_DIR / "weakness_score_train.jsonl"
-VAL_PATH = DATASETS_DIR / "weakness_score_val.jsonl"
-CKPT_DIR = (DATASETS_DIR / ".." / "checkpoints" / "weakness_scorer").resolve()
+DATASET_NAME = "weathon/weakness-score"
+CKPT_DIR = (Path(__file__).parent / ".." / "checkpoints" / "weakness_scorer").resolve()
 
 EPOCHS = 2
 LR = 1e-4
@@ -75,8 +71,9 @@ def main():
     torch.manual_seed(SEED)
     device = "cuda"
 
-    train_data = [json.loads(l) for l in open(TRAIN_PATH)]
-    val_data = [json.loads(l) for l in open(VAL_PATH)]
+    ds = load_dataset(DATASET_NAME, token=os.environ["HF_TOKEN"])
+    train_data = list(ds["train"])
+    val_data = list(ds["validation"])
     print(f"train {len(train_data)} papers, val {len(val_data)} papers")
 
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
