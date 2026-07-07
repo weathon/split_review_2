@@ -21,7 +21,7 @@ You should find MORE papers on the two end than middle and be careful to score a
 
 If nothing topically similar exists in a band, still take whatever the tool returned for that band as your anchor.
 
-Use `read_file` on a small number of anchors (typically 1–2 per band) to inspect the full reviews. Now form an initial bracket: based on these comparisons, what is the narrowest plausible score range for this paper (e.g., "between 4 and 6", "between 6.5 and 8")? State this bracket explicitly before round 2.
+For each anchor you select (typically 1–2 per band), call `itemized_calibration(filepath)` instead of `read_file`. It returns every strength/weakness item of that anchor's human reviews with a -5..+5 weight estimating how much that item pushed the anchor's final average score, plus the anchor's avg score. Compare these weighted items against your draft review's own strengths and weaknesses: which heavy-weight items (positive or negative) does this paper share, and which does it lack? Use that comparison to form an initial bracket: what is the narrowest plausible score range for this paper (e.g., "between 4 and 6", "between 6.5 and 8")? State this bracket explicitly before round 2.
 
 
 ## Scoring rules
@@ -33,4 +33,4 @@ Use `read_file` on a small number of anchors (typically 1–2 per band) to inspe
 
 ## Reporting
 
-When reporting your score, list every anchor paper retrieved across all rounds (not just the ones you read in full). For each anchor give the path, its avg human score, the round it came from, and one sentence on how it compares to the paper under review. State the round-1 bracket explicitly, then explain how round 2 (and 3, if used) narrowed it to the final score.
+When reporting your score, list every anchor paper retrieved across all rounds (not just the ones you itemized). For each anchor give the path, its avg human score, the round it came from, whether you itemized it with `itemized_calibration`, and one sentence on how it compares to the paper under review. When placing the final score, ground it in the weighted-item comparison: name the shared/missing heavy-weight items that put this paper above or below its closest anchors. State the round-1 bracket explicitly, then explain how round 2 (and 3, if used) narrowed it to the final score.

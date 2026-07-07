@@ -262,7 +262,60 @@ else:
                 )
             return "\n\n".join(sections)
 
-        _merger_tools = [read_file, grep_file, draft_review, calibration_search]
+        class ItemWeight(BaseModel):
+            item: str
+            kind: str  # "strength" or "weakness"
+            weight: float  # -5..+5 impact on the anchor's final score
+
+        class ItemizedReview(BaseModel):
+            items: list[ItemWeight]
+
+        _ITEMIZE_PROMPT = """You are given the full human-review record of a paper, including its final average score. For EVERY strength and weakness item across ALL reviewers (their numbered/bulleted list entries), output:
+- item: a short quote or faithful paraphrase of the item
+- kind: "strength" or "weakness"
+- weight: a number from -5 to +5 estimating how much this item pushed the paper's final average score ({avg_score}) — strengths that clearly drove acceptance get large positive weights, fatal weaknesses get large negative weights, minor/ignored points get weights near 0.
+
+Do not skip items. Do not invent items that are not in the review.
+
+Review record:
+
+{review_md}"""
+
+        @function_tool
+        async def itemized_calibration(filepath: str) -> str:
+            """Itemize a selected calibration anchor's human review.
+
+            A subagent reads the anchor's full review record and assigns every
+            strength/weakness item a -5..+5 weight for how much it affected the
+            anchor's final average score. Call this for each anchor you select
+            (instead of read_file).
+
+            Args:
+                filepath: path to the anchor review .md returned by calibration_search.
+            """
+            abs_path = os.path.abspath(filepath)
+            if not abs_path.startswith(CALIBRATION_REVIEW_DIR + os.sep):
+                raise ValueError(f"itemized_calibration: {filepath!r} is not in the calibration review dir")
+            review_md = open(abs_path).read()
+            avg_line = [l for l in review_md.split("\n") if l.startswith("- Avg Score:")]
+            avg_score = avg_line[0].split(":", 1)[1].strip()
+            try:
+                resp = await custom_client.chat.completions.parse(
+                    model=SUBAGENT_MODEL,
+                    messages=[{"role": "user", "content": _ITEMIZE_PROMPT.format(avg_score=avg_score, review_md=review_md)}],
+                    response_format=ItemizedReview,
+                    extra_body={"provider": {"only": [_OPENROUTER_PROVIDER]}},
+                )
+            except Exception as e:
+                print(f"  [itemized_calibration] FAILED file={os.path.basename(abs_path)} model={SUBAGENT_MODEL}: {e}")
+                raise
+            items = resp.choices[0].message.parsed.items
+            lines = [f"Anchor {os.path.basename(abs_path)} — Avg Score: {avg_score}, {len(items)} items:"]
+            for it in items:
+                lines.append(f"[{it.kind}] weight={it.weight:+.1f}: {it.item}")
+            return "\n".join(lines)
+
+        _merger_tools = [read_file, grep_file, draft_review, calibration_search, itemized_calibration]
     merger = Agent(
         name="Merger",
         instructions=_merger_instructions,
