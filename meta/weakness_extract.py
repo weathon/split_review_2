@@ -103,7 +103,7 @@ for pid in ids:
     ac_parts = []
     for n in ac_notes:
         for k, v in n["content"].items():
-            ac_parts.append(f"[{k}] {v['value'] if isinstance(v, dict) else v}")
+            ac_parts.append(f"[{k}] {v['value']}")
     ac_text = "\n".join(ac_parts)
 
     prompt = PROMPT.format(weaknesses=weaknesses_text, ac=ac_text)
