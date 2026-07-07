@@ -363,6 +363,14 @@ else:
             review_md = open(abs_path).read()
             avg_line = [l for l in review_md.split("\n") if l.startswith("- Avg Score:")]
             avg_score = avg_line[0].split(":", 1)[1].strip()
+            # a section ends only at the next STANDARD field header (or reviewer
+            # separator) — reviewers' own ### subheaders inside the body (e.g.
+            # "### Related work:") are content, exactly as in the raw HF fields
+            # the scorer was trained on
+            _SECTION_END = re.compile(
+                r"\n(?:### (?:Rating|Rating Number|Confidence|Summary|Strengths|Weaknesses|"
+                r"Questions|Limitations|Soundness|Presentation|Contribution)\n|## |---)"
+            )
             pairs = []
             for header, kind in (("### Strengths", "strength"), ("### Weaknesses", "weakness")):
                 start = 0
@@ -371,10 +379,8 @@ else:
                     if idx == -1:
                         break
                     body_start = idx + len(header) + 1
-                    end_marks = [m for m in (review_md.find("\n###", body_start),
-                                             review_md.find("\n##", body_start),
-                                             review_md.find("\n---", body_start)) if m != -1]
-                    body_end = min(end_marks) if end_marks else len(review_md)
+                    m = _SECTION_END.search(review_md, body_start)
+                    body_end = m.start() if m else len(review_md)
                     for item in split_score_items(review_md[body_start:body_end]):
                         pairs.append((kind, item))
                     start = body_end
