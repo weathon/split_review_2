@@ -49,6 +49,31 @@ class Items(BaseModel):
     items: list[Item]
 
 
+# OpenRouter's .parse() helper returns malformed output for deepseek-v4-flash, so we send an
+# explicit strict json_schema via create() and validate the raw JSON with Items.
+SCHEMA = {
+    "type": "object",
+    "properties": {
+        "items": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "weakness": {"type": "string"},
+                    "label": {"type": "string", "enum": ["invalid", "valid", "exclude"]},
+                    "ac_evidence": {"type": "string"},
+                    "needs_edit": {"type": "boolean"},
+                },
+                "required": ["weakness", "label", "ac_evidence", "needs_edit"],
+                "additionalProperties": False,
+            },
+        }
+    },
+    "required": ["items"],
+    "additionalProperties": False,
+}
+
+
 PROMPT = """You are labeling the weaknesses raised in ONE human review of an ICLR paper, using ONLY what the Area Chair (AC) meta-review explicitly says about each concern.
 
 === REVIEWER'S REVIEW ===
@@ -90,14 +115,15 @@ def ac_text(node):
 
 async def label_review(sem, pid, ridx, hr, ac, rec):
     async with sem:
-        resp = await client.chat.completions.parse(
+        resp = await client.chat.completions.create(
             model=MODEL,
             messages=[{"role": "user", "content": PROMPT.format(review=review_text(hr), ac=ac)}],
-            response_format=Items,
+            response_format={"type": "json_schema", "json_schema": {"name": "Items", "strict": True, "schema": SCHEMA}},
         )
-    parsed = resp.choices[0].message.parsed
-    if parsed is None:
-        raise RuntimeError(f"deepseek returned no parsed output for {pid} review {ridx}: {resp.choices[0].message.content!r}")
+    content = resp.choices[0].message.content
+    if not content:
+        raise RuntimeError(f"deepseek returned empty content for {pid} review {ridx}")
+    parsed = Items.model_validate_json(content)
     rows = []
     for it in parsed.items:
         if it.label == "exclude":
