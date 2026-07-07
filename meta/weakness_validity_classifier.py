@@ -91,28 +91,36 @@ async def query_claude(prompt):
     return text
 
 
-async def classify_group(sem, key, group, hr):
+async def classify_group(sem, wlock, fout, key, group, hr):
     pid, ridx = key
     paper_path = group[0]["paper_path"]
     items_txt = "\n".join(f"{i}. {row['weakness']}" for i, row in enumerate(group))
     prompt = PROMPT.format(paper_path=paper_path, review=review_text(hr), items=items_txt)
-    async with sem:
-        out = await query_claude(prompt)
-    preds = extract_json(out)["predictions"]
-    by_idx = {p["item_index"]: p["prediction"] for p in preds}
-    if len(by_idx) != len(group) or set(by_idx) != set(range(len(group))):
-        raise RuntimeError(f"prediction misalignment for {pid} review {ridx}: got indices {sorted(by_idx)}, expected 0..{len(group)-1}")
-    rows = []
-    for i, row in enumerate(group):
-        rows.append({
-            "paper_id": pid,
-            "review_idx": ridx,
-            "item_index": i,
-            "weakness": row["weakness"],
-            "gold": row["label"],
-            "pred": by_idx[i],
-        })
-    return rows
+    for attempt in range(3):
+        try:
+            async with sem:
+                out = await query_claude(prompt)
+            preds = extract_json(out)["predictions"]
+            by_idx = {p["item_index"]: p["prediction"] for p in preds}
+            if len(by_idx) != len(group) or set(by_idx) != set(range(len(group))):
+                raise RuntimeError(f"misalignment: got {sorted(by_idx)}, expected 0..{len(group)-1}")
+            rows = [{
+                "paper_id": pid,
+                "review_idx": ridx,
+                "item_index": i,
+                "weakness": row["weakness"],
+                "gold": row["label"],
+                "pred": by_idx[i],
+            } for i, row in enumerate(group)]
+        except Exception as e:
+            print(f"  retry {pid} r{ridx} attempt {attempt+1}: {type(e).__name__}: {str(e)[:120]}")
+            continue
+        async with wlock:
+            fout.write("".join(json.dumps(r) + "\n" for r in rows))
+            fout.flush()
+        return len(rows)
+    print(f"  SKIP {pid} r{ridx} after 3 tries")
+    return None
 
 
 async def main():
@@ -121,20 +129,30 @@ async def main():
     groups = {}
     for row in data:
         groups.setdefault((row["paper_id"], row["review_idx"]), []).append(row)
-    print(f"dataset rows: {len(data)} | review groups: {len(groups)}")
+
+    pred_path = OUT_DIR / "predictions.jsonl"
+    done = set()
+    if pred_path.exists():
+        for l in open(pred_path):
+            r = json.loads(l)
+            done.add((r["paper_id"], r["review_idx"]))
+    todo = {k: g for k, g in groups.items() if k not in done}
+    print(f"dataset rows: {len(data)} | groups: {len(groups)} | already done: {len(done)} | todo: {len(todo)}")
 
     sem = asyncio.Semaphore(CONCURRENCY)
-    tasks = [
-        classify_group(sem, key, group, notes[key[0]]["human_reviews"][key[1]])
-        for key, group in groups.items()
-    ]
-    results = [r for sub in await asyncio.gather(*tasks) for r in sub]
-    assert len(results) == len(data), f"prediction count {len(results)} != dataset count {len(data)}"
-
-    with open(OUT_DIR / "predictions.jsonl", "w") as f:
-        for r in results:
-            f.write(json.dumps(r) + "\n")
-    print(f"wrote {OUT_DIR/'predictions.jsonl'} ({len(results)} predictions)")
+    wlock = asyncio.Lock()
+    with open(pred_path, "a") as fout:
+        tasks = [
+            classify_group(sem, wlock, fout, key, group, notes[key[0]]["human_reviews"][key[1]])
+            for key, group in todo.items()
+        ]
+        res = await asyncio.gather(*tasks)
+    ok = sum(1 for x in res if x is not None)
+    skipped = [k for k, x in zip(todo.keys(), res) if x is None]
+    print(f"classified groups this run: {ok} | skipped groups: {len(skipped)}")
+    if skipped:
+        print("skipped:", skipped)
+    print(f"wrote/appended {pred_path}")
 
 
 if __name__ == "__main__":
