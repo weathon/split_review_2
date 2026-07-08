@@ -23,7 +23,7 @@ import tqdm
 import wandb
 from datasets import load_dataset
 from peft import LoraConfig, PeftModel, get_peft_model
-from transformers import AutoModel, AutoTokenizer
+from transformers import AutoModel, AutoTokenizer, get_cosine_schedule_with_warmup
 from pathlib import Path
 
 MODEL_NAME = "Qwen/Qwen3-Embedding-4B"
@@ -39,9 +39,10 @@ MAX_LEN = 2048  # truncation authorized by user; expected never triggered
 SEED = 0
 CKPT_EVERY = 200  # steps (papers) between latest-checkpoint saves
 ITEM_BATCH = 32  # max items per forward; a paper with more items runs in chunks
+WARMUP_FRAC = 0.03  # linear warmup fraction, then cosine decay to 0
 
 
-def save_checkpoint(ckpt, model, head, optimizer, epoch, step):
+def save_checkpoint(ckpt, model, head, optimizer, scheduler, epoch, step):
     # write to tmp then rename, so a crash mid-save never corrupts the resume point
     tmp = ckpt.parent / (ckpt.name + ".tmp")
     if tmp.exists():
@@ -50,6 +51,7 @@ def save_checkpoint(ckpt, model, head, optimizer, epoch, step):
     model.save_pretrained(str(tmp))
     torch.save(head.state_dict(), tmp / "head.pt")
     torch.save(optimizer.state_dict(), tmp / "optimizer.pt")
+    torch.save(scheduler.state_dict(), tmp / "scheduler.pt")
     (tmp / "state.json").write_text(json.dumps({"epoch": epoch, "step": step}))
     if ckpt.exists():
         shutil.rmtree(ckpt)
@@ -115,13 +117,22 @@ def main():
         [p for p in model.parameters() if p.requires_grad] + list(head.parameters()),
         lr=LR,
     )
+    # one optimizer step per GRAD_ACCUM papers, plus one trailing flush per epoch
+    steps_per_epoch = len(train_data) // GRAD_ACCUM + 1
+    total_steps = EPOCHS * steps_per_epoch
+    scheduler = get_cosine_schedule_with_warmup(
+        optimizer, num_warmup_steps=round(WARMUP_FRAC * total_steps),
+        num_training_steps=total_steps,
+    )
     if latest.exists():
         optimizer.load_state_dict(torch.load(latest / "optimizer.pt"))
+        scheduler.load_state_dict(torch.load(latest / "scheduler.pt"))
 
     run = wandb.init(project="weakness-score", config={
         "model": MODEL_NAME, "epochs": EPOCHS, "lr": LR, "lora_r": LORA_R,
         "lora_alpha": LORA_ALPHA, "grad_accum": GRAD_ACCUM, "max_len": MAX_LEN,
-        "ckpt_every": CKPT_EVERY, "start_epoch": start_epoch, "start_step": start_step,
+        "ckpt_every": CKPT_EVERY, "warmup_frac": WARMUP_FRAC, "total_steps": total_steps,
+        "start_epoch": start_epoch, "start_step": start_step,
     })
     print(f"wandb run: {run.url}")
 
@@ -141,14 +152,17 @@ def main():
             (loss / GRAD_ACCUM).backward()
             if (step + 1) % GRAD_ACCUM == 0:
                 optimizer.step()
+                scheduler.step()
                 optimizer.zero_grad()
             if step % 20 == 0:
                 wandb.log({"train/loss": loss.item(),
                            "train/abs_err": abs(pred.item() - gt),
+                           "train/lr": scheduler.get_last_lr()[0],
                            "epoch": epoch + step / len(order)})
             if (step + 1) % CKPT_EVERY == 0:
-                save_checkpoint(latest, model, head, optimizer, epoch, step + 1)
+                save_checkpoint(latest, model, head, optimizer, scheduler, epoch, step + 1)
         optimizer.step()
+        scheduler.step()
         optimizer.zero_grad()
 
         model.eval()
@@ -161,7 +175,7 @@ def main():
         wandb.log({"val/mae": val_mae, "epoch": epoch + 1})
         print(f"epoch {epoch + 1}: val MAE = {val_mae:.4f}")
 
-        save_checkpoint(latest, model, head, optimizer, epoch + 1, 0)
+        save_checkpoint(latest, model, head, optimizer, scheduler, epoch + 1, 0)
         ckpt = CKPT_DIR / f"epoch{epoch + 1}"
         ckpt.mkdir(parents=True, exist_ok=True)
         model.save_pretrained(str(ckpt))
