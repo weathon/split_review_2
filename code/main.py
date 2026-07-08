@@ -321,19 +321,19 @@ else:
                 items.append("\n".join(current).strip())
             return items
 
-        def weight_lines(kinds_and_items: list[tuple[str, str]]) -> list[str]:
+        def favorability_lines(kinds_and_items: list[tuple[str, str]]) -> list[str]:
             scores = score_items_blocking([f"{k}: {t}" for k, t in kinds_and_items])
-            return [f"[{k}] weight={s:.2f}: {t}"
+            return [f"[{k}] favorability={s:.2f}: {t}"
                     for (k, t), s in zip(kinds_and_items, scores)]
 
         @function_tool
         async def draft_review(strengths: list[str], weaknesses: list[str], other: str) -> str:
-            """Record the merger's post-filtering draft and weight its items.
+            """Record the merger's post-filtering draft and rate its items.
 
             Pass each kept strength and each kept weakness as its own list entry
             (severity tier included in the entry text), plus everything else
             (removed points, novel insights, suggestions) as `other`. Returns
-            each of YOUR draft's items with a model-assigned weight (higher =
+            each of YOUR draft's items with a model-assigned favorability (higher =
             more positive contribution to the paper's score; no cutoff).
 
             Args:
@@ -342,8 +342,8 @@ else:
                 other: the rest of the draft (removed points, novel insights, suggestions).
             """
             pairs = [("strength", s) for s in strengths] + [("weakness", w) for w in weaknesses]
-            lines = await asyncio.to_thread(weight_lines, pairs)
-            return "Your draft's weighted items:\n" + "\n".join(lines)
+            lines = await asyncio.to_thread(favorability_lines, pairs)
+            return "Your draft's items with favorability ratings:\n" + "\n".join(lines)
 
         # a section ends only at the next STANDARD field header (or reviewer
         # separator) — reviewers' own ### subheaders inside the body (e.g.
@@ -356,7 +356,7 @@ else:
 
         def annotate_review_md(review_md: str) -> str:
             # locate every strength/weakness item, score it, and append
-            # **[weight=x.xx]** to the item's first (bullet) line, keeping the
+            # **[favorability=x.xx]** to the item's first (bullet) line, keeping the
             # document structure untouched
             lines = review_md.split("\n")
             line_starts, pos = [], 0
@@ -397,17 +397,17 @@ else:
                 raise ValueError("annotate_review_md: no strength/weakness items parsed")
             scores = score_items_blocking([f"{k}: {t}" for k, t in pairs])
             for li, s in zip(anchor_lines, scores):
-                lines[li] += f" **[weight={s:.2f}]**"
+                lines[li] += f" **[favorability={s:.2f}]**"
             return "\n".join(lines)
 
         @function_tool
         async def itemized_calibration(filepath: str) -> str:
-            """Read a selected calibration anchor's human review with item weights.
+            """Read a selected calibration anchor's human review with item favorability ratings.
 
             Returns the anchor's review document in its original format, with a
-            trained item scorer's weight (higher = more positive contribution to
+            trained item scorer's favorability rating (higher = more positive contribution to
             the paper's score; no cutoff) appended to every strength/weakness
-            item as **[weight=x.xx]**. Call this for each anchor you select (instead of
+            item as **[favorability=x.xx]**. Call this for each anchor you select (instead of
             read_file).
 
             Args:
