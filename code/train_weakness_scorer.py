@@ -102,8 +102,7 @@ def main():
         start_epoch, start_step = 0, 0
         lora_cfg = LoraConfig(
             r=LORA_R, lora_alpha=LORA_ALPHA,
-            target_modules=["q_proj", "k_proj", "v_proj", "o_proj",
-                            "gate_proj", "up_proj", "down_proj"],
+            target_modules="all-linear",
         )
         model = get_peft_model(base, lora_cfg)
     model.print_trainable_parameters()
