@@ -228,7 +228,8 @@ else:
         import threading
         _nc_lock = threading.Lock()
         _nc_scorer = {}
-        NC_SCORER_CKPT = "weathon/review_scoring"
+        NC_SCORER_CKPT = os.environ.get("NC_CKPT", "weathon/review_scoring")
+        NC_SIGNED = os.environ.get("NC_SIGNED") == "1"
 
         def nc_score_items(items: list[str]) -> list[float]:
             import torch
@@ -299,6 +300,8 @@ Return ONLY JSON: {{"items": ["...", ...]}}.
                 weaknesses: kept weaknesses, one item per entry.
                 other: the rest of the draft (removed points, novel insights, suggestions).
             """
+            import math
+
             def build():
                 out = []
                 for kind, src in (("strength", strengths), ("weakness", weaknesses)):
@@ -306,13 +309,24 @@ Return ONLY JSON: {{"items": ["...", ...]}}.
                         continue
                     items = nc_atomize("\n".join(f"- {s}" for s in src), kind)
                     scores = nc_score_items([f"{kind}: {t}" for t in items])
-                    out += [f"[{kind}] favorability={max(0.0, min(1.0, s / 10)):.2f}: {t}"
-                            for t, s in zip(items, scores)]
+                    for t, s in zip(items, scores):
+                        if NC_SIGNED:
+                            mag = 10 / (1 + math.exp(-s))  # 10*sigmoid(raw) -> (0,10)
+                            signed = mag if kind == "strength" else -mag
+                            out.append(f"[{kind}] impact={signed:+.1f}: {t}")
+                        else:
+                            out.append(f"[{kind}] favorability={max(0.0, min(1.0, s / 10)):.2f}: {t}")
                 return out
             lines = await asyncio.to_thread(build)
-            return ("Your draft's items with a trained-model favorability in [0,1] "
-                    "(0 = drags the score down, 1 = strongly positive, 0.5 = neutral):\n"
-                    + "\n".join(lines))
+            if NC_SIGNED:
+                header = ("Your draft's items with a trained-model impact score. Strengths score "
+                          "0 to +10 (how much this strength pushes the paper's score UP); weaknesses "
+                          "score 0 to -10 (how much this weakness pulls it DOWN); magnitude near 0 = "
+                          "minor, near 10 = decisive. Weigh the paper by the sum/balance of these:\n")
+            else:
+                header = ("Your draft's items with a trained-model favorability in [0,1] "
+                          "(0 = drags the score down, 1 = strongly positive, 0.5 = neutral):\n")
+            return header + "\n".join(lines)
 
         _merger_tools = [read_file, grep_file, draft_review]
     else:
