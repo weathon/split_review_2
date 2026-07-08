@@ -53,7 +53,7 @@ MARGIN_LAMBDA = 0.5
 RANKNET_LAMBDA = 0.5
 
 
-def save_checkpoint(ckpt, model, head, optimizer, scheduler, epoch, step):
+def save_checkpoint(ckpt, model, head, baseline, optimizer, scheduler, epoch, step):
     # write to tmp then rename, so a crash mid-save never corrupts the resume point
     tmp = ckpt.parent / (ckpt.name + ".tmp")
     if tmp.exists():
@@ -61,6 +61,7 @@ def save_checkpoint(ckpt, model, head, optimizer, scheduler, epoch, step):
     tmp.mkdir(parents=True)
     model.save_pretrained(str(tmp))
     torch.save(head.state_dict(), tmp / "head.pt")
+    torch.save(baseline.detach().cpu(), tmp / "baseline.pt")
     torch.save(optimizer.state_dict(), tmp / "optimizer.pt")
     torch.save(scheduler.state_dict(), tmp / "scheduler.pt")
     (tmp / "state.json").write_text(json.dumps({"epoch": epoch, "step": step}))
@@ -69,7 +70,7 @@ def save_checkpoint(ckpt, model, head, optimizer, scheduler, epoch, step):
     tmp.rename(ckpt)
 
 
-def forward_paper(model, head, tokenizer, items, device):
+def forward_paper(model, head, baseline, tokenizer, items, device):
     signs = torch.tensor([1.0 if it.startswith("strength") else -1.0 for it in items],
                          device=device)
     mags = []
@@ -82,7 +83,7 @@ def forward_paper(model, head, tokenizer, items, device):
         pooled = hidden[:, -1]  # left padding -> last token is EOS
         mags.append(10 * torch.sigmoid(head(pooled.float()).squeeze(-1)))  # (0,10)
     signed = signs * torch.cat(mags)  # strength (0,10), weakness (-10,0)
-    return 5 + signed.mean()
+    return baseline + signed.mean()  # baseline is a learnable scalar
 
 
 def main():
@@ -111,18 +112,21 @@ def main():
         print(f"resuming from {latest} (epoch {start_epoch}, step {start_step})")
         model = PeftModel.from_pretrained(base, str(latest), is_trainable=True)
         head.load_state_dict(torch.load(latest / "head.pt"))
+        baseline_init = torch.load(latest / "baseline.pt")
     else:
         start_epoch, start_step = 0, 0
         lora_cfg = LoraConfig(r=LORA_R, lora_alpha=LORA_ALPHA, target_modules="all-linear")
         model = get_peft_model(base, lora_cfg)
+        baseline_init = torch.tensor(5.0)
     model.print_trainable_parameters()
     model.to(device)
     head.to(device)
+    baseline = baseline_init.detach().to(device).requires_grad_(True)  # learnable baseline
     model.gradient_checkpointing_enable()
     model.enable_input_require_grads()
 
     optimizer = torch.optim.AdamW(
-        [p for p in model.parameters() if p.requires_grad] + list(head.parameters()),
+        [p for p in model.parameters() if p.requires_grad] + list(head.parameters()) + [baseline],
         lr=LR,
     )
     groups_per_epoch = (len(train_data) + PAIR_B - 1) // PAIR_B
@@ -153,7 +157,7 @@ def main():
         for g in tqdm.tqdm(range(skip, n_groups), desc=f"epoch {epoch + 1}",
                            initial=skip, total=n_groups):
             group = order[g * PAIR_B:(g + 1) * PAIR_B]
-            preds = torch.stack([forward_paper(model, head, tokenizer, train_data[j]["items"], device)
+            preds = torch.stack([forward_paper(model, head, baseline, tokenizer, train_data[j]["items"], device)
                                  for j in group])
             gts = torch.tensor([train_data[j]["gt"] for j in group], device=device, dtype=preds.dtype)
             mae = ((1 + (gts - 5).abs()) * (preds - gts).abs()).mean()
@@ -176,18 +180,18 @@ def main():
                 pair_acc = (dp[mask] > 0).float().mean().item() if mask.any() else float("nan")
                 metrics = {"train/loss": loss.item(), "train/mae": mae.item(),
                            "train/margin_rank": float(margin_rank), "train/ranknet": float(ranknet),
-                           "train/pair_acc": pair_acc,
+                           "train/pair_acc": pair_acc, "train/baseline": baseline.item(),
                            "train/lr": scheduler.get_last_lr()[0], "epoch": epoch + g / n_groups}
                 print(metrics)
                 wandb.log(metrics)
             if (g + 1) % CKPT_EVERY == 0:
-                save_checkpoint(latest, model, head, optimizer, scheduler, epoch, g + 1)
+                save_checkpoint(latest, model, head, baseline, optimizer, scheduler, epoch, g + 1)
 
         model.eval()
         val_preds, val_gts = [], []
         with torch.no_grad():
             for sample in tqdm.tqdm(val_data, desc=f"val epoch {epoch + 1}"):
-                pred = forward_paper(model, head, tokenizer, sample["items"], device)
+                pred = forward_paper(model, head, baseline, tokenizer, sample["items"], device)
                 val_preds.append(pred.item())
                 val_gts.append(sample["gt"])
         vp = torch.tensor(val_preds)
@@ -199,7 +203,7 @@ def main():
         wandb.log({"val/mae": val_mae, "val/pair_acc": val_pair_acc, "epoch": epoch + 1})
         print(f"epoch {epoch + 1}: val MAE = {val_mae:.4f}, val pair_acc = {val_pair_acc:.4f}")
 
-        save_checkpoint(latest, model, head, optimizer, scheduler, epoch + 1, 0)
+        save_checkpoint(latest, model, head, baseline, optimizer, scheduler, epoch + 1, 0)
         ckpt = CKPT_DIR / f"epoch{epoch + 1}"
         ckpt.mkdir(parents=True, exist_ok=True)
         model.save_pretrained(str(ckpt))
