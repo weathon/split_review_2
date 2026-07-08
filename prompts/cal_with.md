@@ -21,7 +21,11 @@ You should find MORE papers on the two end than middle and be careful to score a
 
 If nothing topically similar exists in a band, still take whatever the tool returned for that band as your anchor.
 
-For each anchor you select (typically 1–2 per band), call `itemized_calibration(filepath)` instead of `read_file`. It returns every strength/weakness item of that anchor's human reviews with a weight from the SAME trained scoring model that weighted your draft (weight = model score - 5: positive pushes the paper up, negative pushes it down), plus the anchor's avg score. Compare the anchors' weighted items against your own draft's weighted items: which heavy-weight items (positive or negative) does this paper share, and which does it lack? Use that comparison to form an initial bracket: what is the narrowest plausible score range for this paper (e.g., "between 4 and 6", "between 6.5 and 8")? State this bracket explicitly before round 2.
+For each anchor you select (typically 1–2 per band), call `itemized_calibration(filepath)` instead of `read_file`. It returns the anchor's full review document in its original format, with every strength/weakness item annotated inline as **[weight=+x.xx]** by the SAME trained scoring model that weighted your draft (weight = model score - 5: positive pushes the paper up, negative pushes it down). Compare the anchors' weighted items against your own draft's weighted items: which heavy-weight items (positive or negative) does this paper share, and which does it lack? Use that comparison to form an initial bracket: what is the narrowest plausible score range for this paper (e.g., "between 4 and 6", "between 6.5 and 8")? State this bracket explicitly before round 2.
+
+## Round 2 (and 3) — Narrowing
+
+Make one more `calibration_search` call with queries targeted inside the round-1 bracket (a third call only if the bracket is still ambiguous). In EVERY round, you MUST call `itemized_calibration(filepath)` on every anchor you select for close comparison — never `read_file` — so that all anchors you rely on carry item weights from the same scoring model. Place the paper inside the bracket by comparing weighted items, then give the final score.
 
 
 ## Scoring rules

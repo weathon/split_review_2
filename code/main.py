@@ -345,33 +345,26 @@ else:
             lines = await asyncio.to_thread(weight_lines, pairs)
             return "Your draft's weighted items:\n" + "\n".join(lines)
 
-        @function_tool
-        async def itemized_calibration(filepath: str) -> str:
-            """Itemize a selected calibration anchor's human review.
+        # a section ends only at the next STANDARD field header (or reviewer
+        # separator) — reviewers' own ### subheaders inside the body (e.g.
+        # "### Related work:") are content, exactly as in the raw HF fields
+        # the scorer was trained on
+        _SECTION_END = re.compile(
+            r"\n(?:### (?:Rating|Rating Number|Confidence|Summary|Strengths|Weaknesses|"
+            r"Questions|Limitations|Soundness|Presentation|Contribution)\n|## |---)"
+        )
 
-            The trained item scorer assigns every strength/weakness item of the
-            anchor's human reviews a weight (score-5: positive pushes the paper
-            up, negative pushes it down). Call this for each anchor you select
-            (instead of read_file).
-
-            Args:
-                filepath: path to the anchor review .md returned by calibration_search.
-            """
-            abs_path = os.path.abspath(filepath)
-            if not abs_path.startswith(CALIBRATION_REVIEW_DIR + os.sep):
-                raise ValueError(f"itemized_calibration: {filepath!r} is not in the calibration review dir")
-            review_md = open(abs_path).read()
-            avg_line = [l for l in review_md.split("\n") if l.startswith("- Avg Score:")]
-            avg_score = avg_line[0].split(":", 1)[1].strip()
-            # a section ends only at the next STANDARD field header (or reviewer
-            # separator) — reviewers' own ### subheaders inside the body (e.g.
-            # "### Related work:") are content, exactly as in the raw HF fields
-            # the scorer was trained on
-            _SECTION_END = re.compile(
-                r"\n(?:### (?:Rating|Rating Number|Confidence|Summary|Strengths|Weaknesses|"
-                r"Questions|Limitations|Soundness|Presentation|Contribution)\n|## |---)"
-            )
-            pairs = []
+        def annotate_review_md(review_md: str) -> str:
+            # locate every strength/weakness item, score it, and append
+            # **[weight=+x.xx]** to the item's last non-empty line, keeping the
+            # document structure untouched
+            lines = review_md.split("\n")
+            line_starts, pos = [], 0
+            for l in lines:
+                line_starts.append(pos)
+                pos += len(l) + 1
+            pairs = []       # (kind, item_text)
+            anchor_lines = []  # global index of each item's last non-empty line
             for header, kind in (("### Strengths", "strength"), ("### Weaknesses", "weakness")):
                 start = 0
                 while True:
@@ -381,13 +374,50 @@ else:
                     body_start = idx + len(header) + 1
                     m = _SECTION_END.search(review_md, body_start)
                     body_end = m.start() if m else len(review_md)
-                    for item in split_score_items(review_md[body_start:body_end]):
-                        pairs.append((kind, item))
+                    first_line = next(i for i, s in enumerate(line_starts) if s == body_start)
+                    last_line = next(i for i in range(len(lines) - 1, -1, -1)
+                                     if line_starts[i] < body_end)
+                    current, current_last = [], None
+                    for i in range(first_line, last_line + 1):
+                        if _SCORER_ITEM_MARKER.match(lines[i]):
+                            if current and "".join(current).strip():
+                                pairs.append((kind, "\n".join(current).strip()))
+                                anchor_lines.append(current_last)
+                            current = [_SCORER_ITEM_MARKER.sub("", lines[i], count=1)]
+                            current_last = i
+                        else:
+                            current.append(lines[i])
+                            if lines[i].strip():
+                                current_last = i
+                    if current and "".join(current).strip():
+                        pairs.append((kind, "\n".join(current).strip()))
+                        anchor_lines.append(current_last)
                     start = body_end
             if not pairs:
-                raise ValueError(f"itemized_calibration: no strength/weakness items parsed in {abs_path}")
-            lines = await asyncio.to_thread(weight_lines, pairs)
-            return f"Anchor {os.path.basename(abs_path)} — Avg Score: {avg_score}, {len(pairs)} weighted items:\n" + "\n".join(lines)
+                raise ValueError("annotate_review_md: no strength/weakness items parsed")
+            scores = score_items_blocking([f"{k}: {t}" for k, t in pairs])
+            for li, s in zip(anchor_lines, scores):
+                lines[li] += f" **[weight={s - 5:+.2f}]**"
+            return "\n".join(lines)
+
+        @function_tool
+        async def itemized_calibration(filepath: str) -> str:
+            """Read a selected calibration anchor's human review with item weights.
+
+            Returns the anchor's review document in its original format, with a
+            trained item scorer's weight (score-5: positive pushes the paper up,
+            negative pushes it down) appended to every strength/weakness item as
+            **[weight=+x.xx]**. Call this for each anchor you select (instead of
+            read_file).
+
+            Args:
+                filepath: path to the anchor review .md returned by calibration_search.
+            """
+            abs_path = os.path.abspath(filepath)
+            if not abs_path.startswith(CALIBRATION_REVIEW_DIR + os.sep):
+                raise ValueError(f"itemized_calibration: {filepath!r} is not in the calibration review dir")
+            review_md = open(abs_path).read()
+            return await asyncio.to_thread(annotate_review_md, review_md)
 
         _merger_tools = [read_file, grep_file, draft_review, calibration_search, itemized_calibration]
     merger = Agent(
