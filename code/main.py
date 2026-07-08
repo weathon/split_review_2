@@ -356,7 +356,7 @@ else:
 
         def annotate_review_md(review_md: str) -> str:
             # locate every strength/weakness item, score it, and append
-            # **[weight=+x.xx]** to the item's last non-empty line, keeping the
+            # **[weight=x.xx]** to the item's first (bullet) line, keeping the
             # document structure untouched
             lines = review_md.split("\n")
             line_starts, pos = [], 0
@@ -364,7 +364,7 @@ else:
                 line_starts.append(pos)
                 pos += len(l) + 1
             pairs = []       # (kind, item_text)
-            anchor_lines = []  # global index of each item's last non-empty line
+            anchor_lines = []  # global index of each item's first (bullet) line
             for header, kind in (("### Strengths", "strength"), ("### Weaknesses", "weakness")):
                 start = 0
                 while True:
@@ -377,21 +377,21 @@ else:
                     first_line = next(i for i, s in enumerate(line_starts) if s == body_start)
                     last_line = next(i for i in range(len(lines) - 1, -1, -1)
                                      if line_starts[i] < body_end)
-                    current, current_last = [], None
+                    current, current_first = [], None
                     for i in range(first_line, last_line + 1):
                         if _SCORER_ITEM_MARKER.match(lines[i]):
                             if current and "".join(current).strip():
                                 pairs.append((kind, "\n".join(current).strip()))
-                                anchor_lines.append(current_last)
+                                anchor_lines.append(current_first)
                             current = [_SCORER_ITEM_MARKER.sub("", lines[i], count=1)]
-                            current_last = i
+                            current_first = i
                         else:
                             current.append(lines[i])
-                            if lines[i].strip():
-                                current_last = i
+                            if current_first is None and lines[i].strip():
+                                current_first = i
                     if current and "".join(current).strip():
                         pairs.append((kind, "\n".join(current).strip()))
-                        anchor_lines.append(current_last)
+                        anchor_lines.append(current_first)
                     start = body_end
             if not pairs:
                 raise ValueError("annotate_review_md: no strength/weakness items parsed")
