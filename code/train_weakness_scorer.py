@@ -28,6 +28,7 @@ from pathlib import Path
 
 MODEL_NAME = "Qwen/Qwen3-Embedding-4B"
 DATASET_NAME = "weathon/weakness-score"
+HUB_REPO = "weathon/review_scoring"
 CKPT_DIR = (Path.cwd() / "checkpoints" / "weakness_scorer").resolve()
 
 EPOCHS = 2
@@ -184,6 +185,12 @@ def main():
         print(f"saved {ckpt}")
 
     run.finish()
+
+    from huggingface_hub import HfApi
+    api = HfApi(token=os.environ["HF_TOKEN"])
+    api.create_repo(HUB_REPO, repo_type="model", private=False, exist_ok=True)
+    api.upload_folder(repo_id=HUB_REPO, folder_path=str(latest), repo_type="model")
+    print(f"pushed {latest} -> https://huggingface.co/{HUB_REPO}")
 
 
 if __name__ == "__main__":
