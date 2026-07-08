@@ -222,10 +222,97 @@ else:
     _merger_instructions = load_prompts(_merger_prompt_file, paper_access=PAPER_ACCESS_FILE, no_cal=_NO_CAL)
 
     if _NO_CAL:
+        # no RAG calibration: gpt-oss atomizes the draft, the trained scorer rates
+        # each item, normalized to [0,1] (score/10 clipped) so the agent sees which
+        # strengths/weaknesses the model weighs most; the agent then scores directly.
+        import threading
+        _nc_lock = threading.Lock()
+        _nc_scorer = {}
+        NC_SCORER_CKPT = "weathon/review_scoring"
+
+        def nc_score_items(items: list[str]) -> list[float]:
+            import torch
+            with _nc_lock:
+                if not _nc_scorer:
+                    from huggingface_hub import snapshot_download
+                    from peft import PeftModel
+                    from transformers import AutoModel, AutoTokenizer
+                    print(f"  [nc_scorer] loading {NC_SCORER_CKPT} on cuda:0")
+                    tok = AutoTokenizer.from_pretrained("Qwen/Qwen3-Embedding-4B")
+                    base_m = AutoModel.from_pretrained("Qwen/Qwen3-Embedding-4B", torch_dtype=torch.bfloat16)
+                    ckpt = snapshot_download(NC_SCORER_CKPT, token=os.environ["HF_TOKEN"],
+                                             allow_patterns=["adapter_*", "head.pt", "state.json"])
+                    print("  [nc_scorer] state.json:", open(os.path.join(ckpt, "state.json")).read().strip())
+                    model = PeftModel.from_pretrained(base_m, ckpt)
+                    head = torch.nn.Linear(base_m.config.hidden_size, 1)
+                    head.load_state_dict(torch.load(os.path.join(ckpt, "head.pt")))
+                    model.to("cuda:0").eval()
+                    head.to("cuda:0").eval()
+                    _nc_scorer.update(tok=tok, model=model, head=head)
+                tok, model, head = _nc_scorer["tok"], _nc_scorer["model"], _nc_scorer["head"]
+                out = []
+                with torch.no_grad():
+                    for i in range(0, len(items), 32):
+                        batch = tok(items[i:i + 32], padding=True, truncation=True, max_length=2048,
+                                    return_tensors="pt", padding_side="left").to("cuda:0")
+                        out.extend(head(model(**batch).last_hidden_state[:, -1].float()).squeeze(-1).tolist())
+                return out
+
+        NC_OSS_PROMPT = """Split the following review {kind} into a flat list of atomic items. Each item is ONE distinct point; keep multi-sentence points together; split enumerated multi-point blocks. Discard lead-in sentences, pure reference/citation lines, duplicated sentences, standalone headers, typo-only lines. Preserve the original wording including inline citations like [1]. Do not invent content.
+
+Return ONLY JSON: {{"items": ["...", ...]}}.
+
+{kind}:
+"""
+
+        def nc_atomize(text: str, kind: str) -> list[str]:
+            label = "Strengths" if kind == "strength" else "Weaknesses"
+            last_err = None
+            for _ in range(4):
+                try:
+                    resp = custom_client_sync.chat.completions.create(
+                        model="openai/gpt-oss-120b",
+                        messages=[{"role": "user", "content": NC_OSS_PROMPT.format(kind=label) + text}],
+                        response_format={"type": "json_object"},
+                        extra_body={"provider": {"only": ["cerebras"], "quantizations": ["fp16"]}},
+                    )
+                    return list(json.loads(resp.choices[0].message.content)["items"])
+                except Exception as e:
+                    last_err = e
+                    print(f"  [nc_atomize] {kind} retry: {e}")
+            raise RuntimeError(f"nc_atomize failed for {kind}: {last_err}")
+
         @function_tool
-        def draft_review(draft: str) -> str:
-            """Record the merger's post-filtering draft before calibration or final writing."""
-            return "draft recorded"
+        async def draft_review(strengths: list[str], weaknesses: list[str], other: str) -> str:
+            """Record the merger's post-filtering draft and rate each item.
+
+            Pass each kept strength and each kept weakness as its own list entry,
+            plus the rest (removed points, novel insights, suggestions) as `other`.
+            Returns each of YOUR draft's items tagged with a favorability in [0,1]
+            from a trained scoring model: 0 = this item drags the paper's score down
+            (a serious weakness), 1 = this item strongly pushes the score up (a strong
+            strength), 0.5 = roughly neutral. Use these to judge which strengths and
+            weaknesses matter most when you decide the final score.
+
+            Args:
+                strengths: kept strengths, one item per entry.
+                weaknesses: kept weaknesses, one item per entry.
+                other: the rest of the draft (removed points, novel insights, suggestions).
+            """
+            def build():
+                out = []
+                for kind, src in (("strength", strengths), ("weakness", weaknesses)):
+                    if not src:
+                        continue
+                    items = nc_atomize("\n".join(f"- {s}" for s in src), kind)
+                    scores = nc_score_items([f"{kind}: {t}" for t in items])
+                    out += [f"[{kind}] favorability={max(0.0, min(1.0, s / 10)):.2f}: {t}"
+                            for t, s in zip(items, scores)]
+                return out
+            lines = await asyncio.to_thread(build)
+            return ("Your draft's items with a trained-model favorability in [0,1] "
+                    "(0 = drags the score down, 1 = strongly positive, 0.5 = neutral):\n"
+                    + "\n".join(lines))
 
         _merger_tools = [read_file, grep_file, draft_review]
     else:
