@@ -186,7 +186,13 @@ def main():
     api = HfApi(token=os.environ["HF_TOKEN"])
     api.create_repo(HUB_REPO, repo_type="model", private=False, exist_ok=True)
     api.upload_folder(repo_id=HUB_REPO, folder_path=str(latest), repo_type="model")
-    print(f"pushed {latest} -> https://huggingface.co/{HUB_REPO}")
+
+    base_dir = CKPT_DIR / "base"
+    base_dir.mkdir(parents=True, exist_ok=True)
+    AutoModel.from_pretrained(MODEL_NAME, torch_dtype=torch.bfloat16).save_pretrained(str(base_dir))
+    tokenizer.save_pretrained(str(base_dir))
+    api.upload_folder(repo_id=HUB_REPO, folder_path=str(base_dir), path_in_repo="base", repo_type="model")
+    print(f"pushed {latest} + base -> https://huggingface.co/{HUB_REPO}")
 
 
 if __name__ == "__main__":
