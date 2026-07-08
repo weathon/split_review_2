@@ -30,11 +30,20 @@ from claude_agent_sdk import (
 ROOT = Path(__file__).resolve().parent.parent
 DS_PATH = Path(__file__).parent / "weakness_validity_out" / "dataset"
 PAPERS = ROOT / "datasets" / "iclr2026_new" / "papers"
-OUT = Path(__file__).parent / "weakness_validity_out" / "stage3"
+OUT = Path(__file__).parent / "weakness_validity_out" / "stage3_readonly"
 OUT.mkdir(parents=True, exist_ok=True)
 
 MODEL = "claude-sonnet-5"
 CONCURRENCY = 2
+MAX_TURNS = 8
+# Read-only: the classifier may only read the paper file it is handed. Block every other general
+# tool so it cannot Grep/Bash/Web its way around instead of reading the paper.
+BLOCK = [
+    "Task", "AskUserQuestion", "Bash", "CronCreate", "CronDelete", "CronList", "Edit",
+    "EnterPlanMode", "EnterWorktree", "ExitPlanMode", "ExitWorktree", "Glob", "Grep", "Monitor",
+    "NotebookEdit", "PushNotification", "RemoteTrigger", "ScheduleWakeup", "Skill", "TaskOutput",
+    "TaskStop", "TodoWrite", "ToolSearch", "WebFetch", "WebSearch", "Write",
+]
 
 PROMPT = """You are judging whether a single reviewer weakness raised against a submitted paper is a VALID or INVALID concern.
 
@@ -64,8 +73,9 @@ async def classify(idx, row):
     opts = ClaudeAgentOptions(
         model=MODEL,
         allowed_tools=["Read"],
+        disallowed_tools=BLOCK,
         permission_mode="bypassPermissions",
-        max_turns=6,
+        max_turns=MAX_TURNS,
         cwd=str(ROOT),
     )
     text = ""
