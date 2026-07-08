@@ -15,7 +15,7 @@ import shutil
 
 import dotenv
 
-dotenv.load_dotenv()  # no __file__: must also run inside a notebook
+dotenv.load_dotenv()
 
 import torch
 import torch.nn as nn
@@ -35,12 +35,12 @@ EPOCHS = 2
 LR = 1e-4
 LORA_R = 16
 LORA_ALPHA = 32
-GRAD_ACCUM = 8  # papers per optimizer step
-MAX_LEN = 2048  # truncation authorized by user; expected never triggered
+GRAD_ACCUM = 8
+MAX_LEN = 2048
 SEED = 0
-CKPT_EVERY = 200  # steps (papers) between latest-checkpoint saves
-ITEM_BATCH = 32  # max items per forward; a paper with more items runs in chunks
-WARMUP_FRAC = 0.03  # linear warmup fraction, then cosine decay to 0
+CKPT_EVERY = 200
+ITEM_BATCH = 32
+WARMUP_FRAC = 0.03
 
 
 def save_checkpoint(ckpt, model, head, optimizer, scheduler, epoch, step):
@@ -66,9 +66,9 @@ def forward_paper(model, head, tokenizer, items, device):
             items[i:i + ITEM_BATCH], padding=True, truncation=True, max_length=MAX_LEN,
             return_tensors="pt", padding_side="left",
         ).to(device)
-        hidden = model(**batch).last_hidden_state  # [n_items, seq, h]
+        hidden = model(**batch).last_hidden_state
         pooled = hidden[:, -1]  # left padding -> last token is EOS
-        chunk_scores.append(head(pooled.float()).squeeze(-1))  # [n_items]
+        chunk_scores.append(head(pooled.float()).squeeze(-1))
     return torch.cat(chunk_scores).mean()
 
 
@@ -86,8 +86,6 @@ def main():
     base = AutoModel.from_pretrained(MODEL_NAME, torch_dtype=torch.bfloat16)
 
     latest = CKPT_DIR / "latest"
-    # a crash between rmtree(latest) and rename in save_checkpoint leaves only
-    # latest.tmp; refuse to silently restart from scratch in that case
     assert not (not latest.exists() and (CKPT_DIR / "latest.tmp").exists()), \
         f"found orphaned {CKPT_DIR / 'latest.tmp'} without latest/; recover it manually"
     head = nn.Linear(base.config.hidden_size, 1)
@@ -118,7 +116,6 @@ def main():
         [p for p in model.parameters() if p.requires_grad] + list(head.parameters()),
         lr=LR,
     )
-    # one optimizer step per GRAD_ACCUM papers, plus one trailing flush per epoch
     steps_per_epoch = len(train_data) // GRAD_ACCUM + 1
     total_steps = EPOCHS * steps_per_epoch
     scheduler = get_cosine_schedule_with_warmup(
