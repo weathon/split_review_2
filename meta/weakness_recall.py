@@ -44,8 +44,12 @@ METHODS = {
 }
 
 
-class Match(BaseModel):
-    raised_indices: list[int]
+MATCH_SCHEMA = {
+    "type": "object",
+    "properties": {"raised_indices": {"type": "array", "items": {"type": "integer"}}},
+    "required": ["raised_indices"],
+    "additionalProperties": False,
+}
 
 
 PROMPT = """Below is an automatically generated peer review of a paper, followed by a numbered list of specific weakness items that OTHER reviewers raised about the SAME paper.
@@ -86,13 +90,13 @@ def match(review_text, gold_items):
     prompt = PROMPT.format(review=review_text, items=numbered)
     for attempt in range(1, MAX_RETRIES + 1):
         try:
-            resp = client.chat.completions.parse(
+            resp = client.chat.completions.create(
                 model=MODEL,
                 messages=[{"role": "user", "content": prompt}],
-                response_format=Match,
+                response_format={"type": "json_schema", "json_schema": {"name": "match", "strict": True, "schema": MATCH_SCHEMA}},
                 extra_body={"reasoning": {"enabled": True}},
             )
-            return resp.choices[0].message.parsed.raised_indices
+            return json.loads(resp.choices[0].message.content)["raised_indices"]
         except Exception as e:
             if attempt == MAX_RETRIES:
                 raise
