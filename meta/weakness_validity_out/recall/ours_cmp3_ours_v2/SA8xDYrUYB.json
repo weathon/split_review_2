@@ -1,0 +1,12 @@
+{
+ "paper_id": "SA8xDYrUYB",
+ "method": "ours_cmp3_ours_v2",
+ "n_items": 1,
+ "matched": [
+  {
+   "index": 1,
+   "label": "valid",
+   "raised": false
+  }
+ ]
+}

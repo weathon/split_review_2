@@ -33,7 +33,7 @@ ROOT = Path(__file__).resolve().parent.parent
 dotenv.load_dotenv(ROOT / ".env")
 
 DATA = ROOT / "datasets" / "iclr2026_new"
-OUT = Path(__file__).parent / "weakness_validity_out" / "stage1"
+OUT = Path(__file__).parent / "weakness_validity_out" / "stage1_strict"
 OUT.mkdir(parents=True, exist_ok=True)
 
 client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=os.environ["OPENROUTER_API_KEY"])
@@ -51,22 +51,25 @@ class Item(BaseModel):
 
 
 class Extraction(BaseModel):
+    ac_lists_specific_concerns: bool
     items: list[Item]
 
 
 PROMPT = """You are given the official reviewer WEAKNESSES for one paper and the Area Chair (AC) meta-review of the same paper. The paper is post-rebuttal; the AC meta-review is the authoritative statement of which reviewer concerns were resolved during discussion and which remain.
 
-Do two things.
+Do three things.
 
-1. Split the reviewers' weaknesses into DISTINCT weakness items. Keep each item's wording verbatim from the review (you may trim to the single concern, but do not paraphrase). Record which reviewer (0-indexed, in the order given) it came from.
+1. GATE. Set ac_lists_specific_concerns = true ONLY if the AC meta-review explicitly LISTS specific, concrete concerns by name together with a resolution status (which concern was resolved, which remains). Set it false if the AC is entirely generic -- e.g. it only says things like "most concerns were addressed", "the paper clears the bar", or gestures at broad CATEGORIES ("remaining concerns relate to robustness / downstream impacts") without naming the specific concern. When false, the whole paper is dropped downstream, so do not try to salvage it.
 
-2. For each weakness item, decide, grounded ONLY in what the AC meta-review explicitly says (never your own reading of the rebuttal):
+2. Split the reviewers' weaknesses into DISTINCT weakness items. Keep each item's wording verbatim from the review (you may trim to the single concern, but do not paraphrase). Record which reviewer (0-indexed, in the order given) it came from.
+
+3. For each weakness item, decide, grounded ONLY in what the AC meta-review explicitly says (never your own reading of the rebuttal):
    - ac_status:
-       "resolved"      -> the AC explicitly states this specific concern was addressed / resolved / no longer a concern.
-       "unresolved"    -> the AC explicitly lists this specific concern as remaining / still a problem / a reason weighing against the paper.
-       "not_mentioned" -> the AC meta-review does not speak to this specific concern either way.
-     Do NOT infer resolution from the reviewers or from score changes; require an explicit AC statement.
-   - ac_evidence: the exact AC sentence that establishes the status (empty string only when not_mentioned).
+       "resolved"      -> the AC EXPLICITLY AND SPECIFICALLY names THIS concern as addressed / resolved / no longer a concern. A blanket sentence that does not name this specific concern ("most reviewer concerns were addressed") does NOT count.
+       "unresolved"    -> the AC EXPLICITLY AND SPECIFICALLY names THIS concern as a remaining problem that weighs AGAINST the paper (a blocker). A generic category sentence ("remaining concerns relate to robustness") does NOT count. Also, if the AC frames this remaining concern as a reasonable limitation / future direction / explicitly NOT a blocker, it is NOT unresolved.
+       "not_mentioned" -> anything else: the AC does not specifically name this concern, refers to it only generically / by broad category, or frames it as a non-blocking limitation or future direction.
+     Do NOT infer resolution from the reviewers or from score changes; require an explicit, specific AC statement that names this concern.
+   - ac_evidence: the exact AC sentence that specifically names this concern (empty string only when not_mentioned).
    - needs_editing: whether actually satisfying this concern requires CHANGING THE PAPER (running new experiments, adding results, restructuring, correcting content). Set false when the concern is a request for clarification, a misunderstanding, or an arguable point that can be settled by explanation without editing the paper.
 
 === REVIEWER WEAKNESSES ===
@@ -129,6 +132,7 @@ for pid in ids:
         "paper_id": pid,
         "decision": notes[pid]["decision"],
         "n_reviewers": len(reviews),
+        "ac_lists_specific_concerns": parsed.ac_lists_specific_concerns,
         "items": [it.model_dump() for it in parsed.items],
         "usage": resp.usage.model_dump() if resp.usage else None,
     }

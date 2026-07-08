@@ -16,12 +16,18 @@ from pathlib import Path
 
 from datasets import Dataset
 
-STAGE1 = Path(__file__).parent / "weakness_validity_out" / "stage1"
-OUT = Path(__file__).parent / "weakness_validity_out" / "dataset"
+STAGE1 = Path(__file__).parent / "weakness_validity_out" / "stage1_strict"
+OUT = Path(__file__).parent / "weakness_validity_out" / "dataset_strict"
 
 rows = []
+n_papers = 0
+n_gated = 0
 for f in sorted(STAGE1.glob("*.json")):
     d = json.load(open(f))
+    n_papers += 1
+    if not d["ac_lists_specific_concerns"]:
+        n_gated += 1
+        continue
     for it in d["items"]:
         status = it["ac_status"]
         if status == "not_mentioned":
@@ -48,6 +54,6 @@ for f in sorted(STAGE1.glob("*.json")):
 ds = Dataset.from_list(rows)
 ds.save_to_disk(str(OUT))
 
-print(f"papers: {len(list(STAGE1.glob('*.json')))}  rows: {len(rows)}")
+print(f"papers: {n_papers}  gated_out (generic AC): {n_gated}  kept: {n_papers - n_gated}  rows: {len(rows)}")
 print("label distribution:", Counter(r["label"] for r in rows))
 print(f"saved to {OUT}")
