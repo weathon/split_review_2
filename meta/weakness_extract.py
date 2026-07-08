@@ -122,6 +122,8 @@ for pid in ids:
                 extra_body={"reasoning": {"enabled": True}, "provider": PROVIDER},
             )
             parsed = resp.choices[0].message.parsed
+            if parsed is None:
+                raise RuntimeError(f"null structured output (finish={resp.choices[0].finish_reason})")
             break
         except Exception as e:
             if attempt == MAX_RETRIES:
