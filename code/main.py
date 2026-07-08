@@ -213,7 +213,7 @@ else:
     _harsh_sdk_system_prompt = None
 # neutral_reviewer = Agent(name="Strength Finder", instructions=load_prompts(_neutral_prompt, paper_access=PAPER_ACCESS_CHUNKED), model=resolve_model(NEUTRAL_MODEL), tools=[read_file, grep_file], model_settings=_MODEL_SETTINGS)
 
-_NO_CAL = "--no_cal" in sys.argv
+_NO_CAL = "--no_cal" in sys.argv or os.environ.get("NO_CAL") == "1"
 
 if MERGER_MODEL.startswith("claude_sdk:"):
     merger = None  # Claude SDK merger — created per-call in run_pipeline
