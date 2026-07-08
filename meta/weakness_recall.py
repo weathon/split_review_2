@@ -31,7 +31,7 @@ dotenv.load_dotenv(ROOT / ".env")
 
 FINAL = ROOT / "final_results"
 DS_PATH = Path(__file__).parent / "weakness_validity_out" / "dataset_gptoss"
-OUT = Path(__file__).parent / "weakness_validity_out" / "recall_gptoss"
+OUT = Path(__file__).parent / "weakness_validity_out" / "recall_gptoss_nth"
 
 client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=os.environ["OPENROUTER_API_KEY"])
 MODEL = "deepseek/deepseek-v4-flash"
@@ -39,12 +39,8 @@ MAX_RETRIES = 5
 RETRY_DELAY = 5
 
 METHODS = {
-    "ours_cmp3_ours_v2": {"dir": FINAL / "ours_cmp3_ours_v2" / "reviews", "kind": "single_md"},
-    "nocal_cmp3_nocal_v3": {"dir": FINAL / "nocal_cmp3_nocal_v3" / "reviews", "kind": "single_md"},
-    "baseline_cmp3_baseline_v2": {"dir": FINAL / "baseline_cmp3_baseline_v2" / "reviews", "kind": "single_md"},
     "cspaper": {"dir": FINAL / "cspaper", "kind": "cspaper_md"},
-    "DeepReviewer_14B": {"dir": FINAL / "DeepReviewer_14B", "kind": "deepreviewer_meta"},
-    "DeepReviewer-v2-openai": {"dir": FINAL / "DeepReviewer-v2-openai", "kind": "single_md"},
+    "ours_cmp3_ours_v2": {"dir": FINAL / "ours_cmp3_ours_v2" / "reviews", "kind": "single_md"},
 }
 
 
@@ -55,6 +51,8 @@ class Match(BaseModel):
 PROMPT = """Below is an automatically generated peer review of a paper, followed by a numbered list of specific weakness items that OTHER reviewers raised about the SAME paper.
 
 Decide, for each numbered weakness item, whether the generated review ALSO raises that SAME specific weakness. A match requires the same specific concern about the same aspect of the paper (e.g. both complain about a missing ablation on component X, or both question the same unsupported claim). Do NOT match merely because both mention the same general topic, and do NOT match generic overlap.
+
+You should include nice to have section in your judgement.
 
 Return the list of item numbers (integers) that the generated review raises. Return an empty list if none.
 
