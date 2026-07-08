@@ -323,7 +323,7 @@ else:
 
         def weight_lines(kinds_and_items: list[tuple[str, str]]) -> list[str]:
             scores = score_items_blocking([f"{k}: {t}" for k, t in kinds_and_items])
-            return [f"[{k}] weight={s - 5:+.2f}: {t}"
+            return [f"[{k}] weight={s:.2f}: {t}"
                     for (k, t), s in zip(kinds_and_items, scores)]
 
         @function_tool
@@ -333,8 +333,8 @@ else:
             Pass each kept strength and each kept weakness as its own list entry
             (severity tier included in the entry text), plus everything else
             (removed points, novel insights, suggestions) as `other`. Returns
-            each of YOUR draft's items with a model-assigned weight (score-5,
-            so positive pushes the paper up, negative pushes it down).
+            each of YOUR draft's items with a model-assigned weight (higher =
+            more positive contribution to the paper's score; no cutoff).
 
             Args:
                 strengths: kept strengths, one item per entry.
@@ -397,7 +397,7 @@ else:
                 raise ValueError("annotate_review_md: no strength/weakness items parsed")
             scores = score_items_blocking([f"{k}: {t}" for k, t in pairs])
             for li, s in zip(anchor_lines, scores):
-                lines[li] += f" **[weight={s - 5:+.2f}]**"
+                lines[li] += f" **[weight={s:.2f}]**"
             return "\n".join(lines)
 
         @function_tool
@@ -405,9 +405,9 @@ else:
             """Read a selected calibration anchor's human review with item weights.
 
             Returns the anchor's review document in its original format, with a
-            trained item scorer's weight (score-5: positive pushes the paper up,
-            negative pushes it down) appended to every strength/weakness item as
-            **[weight=+x.xx]**. Call this for each anchor you select (instead of
+            trained item scorer's weight (higher = more positive contribution to
+            the paper's score; no cutoff) appended to every strength/weakness
+            item as **[weight=x.xx]**. Call this for each anchor you select (instead of
             read_file).
 
             Args:
