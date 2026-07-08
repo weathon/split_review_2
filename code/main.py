@@ -52,10 +52,11 @@ OLLAMA_BASE_URL = os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434/v1/"
 FEATHERLESS_BASE_URL = os.environ.get("FEATHERLESS_BASE_URL", "https://api.featherless.ai/v1")
 # MERGER_MODEL = "claude_sdk:claude-sonnet-4-6" # use dash instead of dot in claude sdk
 # MERGER_MODEL = "claude-sonnet-4.6"
-from openai import AsyncOpenAI
+from openai import AsyncOpenAI, OpenAI
 from agents import set_default_openai_client, set_tracing_export_api_key
 
 custom_client = AsyncOpenAI(base_url="https://openrouter.ai/api/v1", api_key=os.getenv("OPENROUTER_API_KEY"))
+custom_client_sync = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=os.getenv("OPENROUTER_API_KEY"))
 
 # OpenRouter usage accounting — inject {"usage": {"include": true}} into every
 # chat completion and accumulate the per-response `cost` field returned by OR.
@@ -305,21 +306,29 @@ else:
                         scores.extend(head(pooled.float()).squeeze(-1).tolist())
                 return scores
 
-        _SCORER_ITEM_MARKER = re.compile(r"^\s*(?:\d+[.)]|[-*+•])\s+")
+        OSS_PROMPT = """Split the following review {kind} into a flat list of atomic items. Each item is ONE distinct point; keep multi-sentence points together; split enumerated multi-point blocks. Discard lead-in sentences, pure reference/citation lines, duplicated sentences, standalone headers, typo-only lines. Preserve the original wording including inline citations like [1]. Do not invent content.
 
-        def split_score_items(text: str) -> list[str]:
-            # same deterministic parser the scorer's training set was built with
-            items, current = [], []
-            for line in text.split("\n"):
-                if _SCORER_ITEM_MARKER.match(line):
-                    if current and "".join(current).strip():
-                        items.append("\n".join(current).strip())
-                    current = [_SCORER_ITEM_MARKER.sub("", line, count=1)]
-                else:
-                    current.append(line)
-            if current and "".join(current).strip():
-                items.append("\n".join(current).strip())
-            return items
+Return ONLY JSON: {{"items": ["...", ...]}}.
+
+{kind}:
+"""
+
+        def oss_atomize(text: str, kind: str) -> list[str]:
+            label = "Strengths" if kind == "strength" else "Weaknesses"
+            last_err = None
+            for _ in range(4):
+                try:
+                    resp = custom_client_sync.chat.completions.create(
+                        model="openai/gpt-oss-120b",
+                        messages=[{"role": "user", "content": OSS_PROMPT.format(kind=label) + text}],
+                        response_format={"type": "json_object"},
+                        extra_body={"provider": {"only": ["cerebras"], "quantizations": ["fp16"]}},
+                    )
+                    return list(json.loads(resp.choices[0].message.content)["items"])
+                except Exception as e:
+                    last_err = e
+                    print(f"  [oss_atomize] {kind} retry: {e}")
+            raise RuntimeError(f"oss_atomize failed for {kind}: {last_err}")
 
         def favorability_lines(kinds_and_items: list[tuple[str, str]]) -> list[str]:
             scores = score_items_blocking([f"{k}: {t}" for k, t in kinds_and_items])
@@ -341,8 +350,12 @@ else:
                 weaknesses: kept weaknesses, one item per entry.
                 other: the rest of the draft (removed points, novel insights, suggestions).
             """
-            pairs = [("strength", s) for s in strengths] + [("weakness", w) for w in weaknesses]
-            lines = await asyncio.to_thread(favorability_lines, pairs)
+            def build():
+                s_items = oss_atomize("\n".join(f"- {s}" for s in strengths), "strength") if strengths else []
+                w_items = oss_atomize("\n".join(f"- {w}" for w in weaknesses), "weakness") if weaknesses else []
+                pairs = [("strength", t) for t in s_items] + [("weakness", t) for t in w_items]
+                return favorability_lines(pairs)
+            lines = await asyncio.to_thread(build)
             return "Your draft's items with favorability ratings:\n" + "\n".join(lines)
 
         # a section ends only at the next STANDARD field header (or reviewer
@@ -355,16 +368,10 @@ else:
         )
 
         def annotate_review_md(review_md: str) -> str:
-            # locate every strength/weakness item, score it, and append
-            # **[favorability=x.xx]** to the item's first (bullet) line, keeping the
-            # document structure untouched
-            lines = review_md.split("\n")
-            line_starts, pos = [], 0
-            for l in lines:
-                line_starts.append(pos)
-                pos += len(l) + 1
-            pairs = []       # (kind, item_text)
-            anchor_lines = []  # global index of each item's first (bullet) line
+            # keep the document structure (summary, rating, ...) untouched; replace
+            # each Strengths/Weaknesses section body with gpt-oss atomic items, each
+            # scored with a favorability rating
+            spans = []  # (body_start, body_end, kind)
             for header, kind in (("### Strengths", "strength"), ("### Weaknesses", "weakness")):
                 start = 0
                 while True:
@@ -374,31 +381,22 @@ else:
                     body_start = idx + len(header) + 1
                     m = _SECTION_END.search(review_md, body_start)
                     body_end = m.start() if m else len(review_md)
-                    first_line = next(i for i, s in enumerate(line_starts) if s == body_start)
-                    last_line = next(i for i in range(len(lines) - 1, -1, -1)
-                                     if line_starts[i] < body_end)
-                    current, current_first = [], None
-                    for i in range(first_line, last_line + 1):
-                        if _SCORER_ITEM_MARKER.match(lines[i]):
-                            if current and "".join(current).strip():
-                                pairs.append((kind, "\n".join(current).strip()))
-                                anchor_lines.append(current_first)
-                            current = [_SCORER_ITEM_MARKER.sub("", lines[i], count=1)]
-                            current_first = i
-                        else:
-                            current.append(lines[i])
-                            if current_first is None and lines[i].strip():
-                                current_first = i
-                    if current and "".join(current).strip():
-                        pairs.append((kind, "\n".join(current).strip()))
-                        anchor_lines.append(current_first)
+                    spans.append((body_start, body_end, kind))
                     start = body_end
-            if not pairs:
-                raise ValueError("annotate_review_md: no strength/weakness items parsed")
-            scores = score_items_blocking([f"{k}: {t}" for k, t in pairs])
-            for li, s in zip(anchor_lines, scores):
-                lines[li] += f" **[favorability={s:.2f}]**"
-            return "\n".join(lines)
+            if not spans:
+                raise ValueError("annotate_review_md: no strength/weakness sections found")
+            spans.sort()
+            out, cur = [], 0
+            for body_start, body_end, kind in spans:
+                out.append(review_md[cur:body_start])
+                items = oss_atomize(review_md[body_start:body_end], kind)
+                if items:
+                    scores = score_items_blocking([f"{kind}: {t}" for t in items])
+                    out.append("\n".join(f"- {t} **[favorability={s:.2f}]**"
+                                         for t, s in zip(items, scores)) + "\n")
+                cur = body_end
+            out.append(review_md[cur:])
+            return "".join(out)
 
         @function_tool
         async def itemized_calibration(filepath: str) -> str:
