@@ -16,8 +16,8 @@ from pathlib import Path
 
 from datasets import Dataset
 
-STAGE1 = Path(__file__).parent / "weakness_validity_out" / "stage1_strict"
-OUT = Path(__file__).parent / "weakness_validity_out" / "dataset_strict"
+STAGE1 = Path(__file__).parent / "weakness_validity_out" / "stage1_gptoss"
+OUT = Path(__file__).parent / "weakness_validity_out" / "dataset_gptoss"
 
 rows = []
 n_papers = 0

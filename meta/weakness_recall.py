@@ -30,8 +30,8 @@ ROOT = Path(__file__).resolve().parent.parent
 dotenv.load_dotenv(ROOT / ".env")
 
 FINAL = ROOT / "final_results"
-DS_PATH = Path(__file__).parent / "weakness_validity_out" / "dataset_strict"
-OUT = Path(__file__).parent / "weakness_validity_out" / "recall_strict"
+DS_PATH = Path(__file__).parent / "weakness_validity_out" / "dataset_gptoss"
+OUT = Path(__file__).parent / "weakness_validity_out" / "recall_gptoss"
 
 client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=os.environ["OPENROUTER_API_KEY"])
 MODEL = "deepseek/deepseek-v4-flash"

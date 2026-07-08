@@ -33,11 +33,12 @@ ROOT = Path(__file__).resolve().parent.parent
 dotenv.load_dotenv(ROOT / ".env")
 
 DATA = ROOT / "datasets" / "iclr2026_new"
-OUT = Path(__file__).parent / "weakness_validity_out" / "stage1_strict"
+OUT = Path(__file__).parent / "weakness_validity_out" / "stage1_gptoss"
 OUT.mkdir(parents=True, exist_ok=True)
 
 client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=os.environ["OPENROUTER_API_KEY"])
-MODEL = "deepseek/deepseek-v4-flash"
+MODEL = "openai/gpt-oss-120b"
+PROVIDER = {"order": ["cerebras"], "allow_fallbacks": False, "quantizations": ["fp16"]}
 MAX_RETRIES = 5
 RETRY_DELAY = 5
 
@@ -118,7 +119,7 @@ for pid in ids:
                 model=MODEL,
                 messages=[{"role": "user", "content": prompt}],
                 response_format=Extraction,
-                extra_body={"reasoning": {"enabled": True}},
+                extra_body={"reasoning": {"enabled": True}, "provider": PROVIDER},
             )
             parsed = resp.choices[0].message.parsed
             break
