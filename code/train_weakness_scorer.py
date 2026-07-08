@@ -31,6 +31,9 @@ DATASET_NAME = "weathon/weakness-score"
 HUB_REPO = "weathon/review_scoring"
 CKPT_DIR = (Path.cwd() / "checkpoints" / "weakness_scorer").resolve()
 
+PAIR_B = 8          # papers per group: intra-group pairs + one optimizer step
+RANK_LAMBDA = 1.0   # total = weighted MAE + RANK_LAMBDA * margin ranking
+
 
 def save_checkpoint(ckpt, model, head, optimizer, scheduler, epoch, step):
     # write to tmp then rename, so a crash mid-save never corrupts the resume point
@@ -104,8 +107,8 @@ def main():
         [p for p in model.parameters() if p.requires_grad] + list(head.parameters()),
         lr=LR,
     )
-    steps_per_epoch = len(train_data) // GRAD_ACCUM + 1
-    total_steps = EPOCHS * steps_per_epoch
+    groups_per_epoch = (len(train_data) + PAIR_B - 1) // PAIR_B
+    total_steps = EPOCHS * groups_per_epoch
     scheduler = get_cosine_schedule_with_warmup(
         optimizer, num_warmup_steps=round(WARMUP_FRAC * total_steps),
         num_training_steps=total_steps,
@@ -116,8 +119,9 @@ def main():
 
     run = wandb.init(project="weakness-score", config={
         "model": MODEL_NAME, "epochs": EPOCHS, "lr": LR, "lora_r": LORA_R,
-        "lora_alpha": LORA_ALPHA, "grad_accum": GRAD_ACCUM, "max_len": MAX_LEN,
-        "ckpt_every": CKPT_EVERY, "warmup_frac": WARMUP_FRAC, "total_steps": total_steps,
+        "lora_alpha": LORA_ALPHA, "pair_b": PAIR_B, "rank_lambda": RANK_LAMBDA,
+        "max_len": MAX_LEN, "ckpt_every": CKPT_EVERY, "warmup_frac": WARMUP_FRAC,
+        "total_steps": total_steps,
         "start_epoch": start_epoch, "start_step": start_step,
     })
     print(f"wandb run: {run.url}")
@@ -126,32 +130,33 @@ def main():
         model.train()
         order = list(range(len(train_data)))
         random.Random(SEED + epoch).shuffle(order)  # deterministic, so mid-epoch resume can skip forward
-        optimizer.zero_grad()
+        n_groups = (len(order) + PAIR_B - 1) // PAIR_B
         skip = start_step if epoch == start_epoch else 0
-        for step in tqdm.tqdm(range(skip, len(order)), desc=f"epoch {epoch + 1}",
-                              initial=skip, total=len(order)):
-            sample = train_data[order[step]]
-            pred = forward_paper(model, head, tokenizer, sample["items"], device)
-            gt = sample["gt"]
-            loss = (1 + abs(gt - 5)) * (pred - gt).abs()
-            assert not torch.isnan(loss), f"NaN loss at paper {sample['paper_id']}"
-            (loss / GRAD_ACCUM).backward()
-            if (step + 1) % GRAD_ACCUM == 0:
-                optimizer.step()
-                scheduler.step()
-                optimizer.zero_grad()
-            if step % 20 == 0:
-                metrics = {"train/loss": loss.item(),
-                           "train/abs_err": abs(pred.item() - gt),
-                           "train/lr": scheduler.get_last_lr()[0],
-                           "epoch": epoch + step / len(order)}
+        for g in tqdm.tqdm(range(skip, n_groups), desc=f"epoch {epoch + 1}",
+                           initial=skip, total=n_groups):
+            group = order[g * PAIR_B:(g + 1) * PAIR_B]
+            preds = torch.stack([forward_paper(model, head, tokenizer, train_data[j]["items"], device)
+                                 for j in group])
+            gts = torch.tensor([train_data[j]["gt"] for j in group], device=device, dtype=preds.dtype)
+            mae = ((1 + (gts - 5).abs()) * (preds - gts).abs()).mean()
+            dp = preds[:, None] - preds[None, :]
+            dg = gts[:, None] - gts[None, :]
+            mask = dg > 0  # pairs where paper i should score above paper j
+            ranking = torch.relu(dg - dp)[mask].mean() if mask.any() else preds.new_zeros(())
+            loss = mae + RANK_LAMBDA * ranking
+            assert not torch.isnan(loss), f"NaN loss at epoch {epoch} group {g}"
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+            scheduler.step()
+            if g % 20 == 0:
+                metrics = {"train/loss": loss.item(), "train/mae": mae.item(),
+                           "train/ranking": float(ranking), "train/lr": scheduler.get_last_lr()[0],
+                           "epoch": epoch + g / n_groups}
                 print(metrics)
                 wandb.log(metrics)
-            if (step + 1) % CKPT_EVERY == 0:
-                save_checkpoint(latest, model, head, optimizer, scheduler, epoch, step + 1)
-        optimizer.step()
-        scheduler.step()
-        optimizer.zero_grad()
+            if (g + 1) % CKPT_EVERY == 0:
+                save_checkpoint(latest, model, head, optimizer, scheduler, epoch, g + 1)
 
         model.eval()
         abs_errs = []
