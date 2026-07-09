@@ -1,21 +1,13 @@
-"""LoRA-finetune Qwen/Qwen3.5-4B (causal LM) + linear head, SIGNED item scores.
-
-Each item is wrapped in a favorability-judging prompt; the head reads the last
-token's final hidden state.
+"""LoRA-finetune Qwen/Qwen3-Embedding-4B + linear head, SIGNED item scores.
 
 Each item is scored with a sign forced by its kind:
   magnitude = 10 * sigmoid(head)  -> smooth (0,10), gradient everywhere
-  signed    = +magnitude for a "strength:" item, -magnitude for a "weakness:" item
-             -> strength in (0,10), weakness in (-10,0), 0 is the good/bad boundary
-  paper score = 5 + mean(signed items)   (NOT clipped during training, so the
-             gradient is never killed; a paper with strong strengths / few
-             weaknesses lands high, the reverse lands low)
+  strengths and weaknesses are averaged within their own group first, then combined:
+  paper score = baseline + (mean(strength mags) - mean(weakness mags)) / 2
+Averaging within group first means the item COUNT is not a prior.
 Loss (on the paper score): weighted MAE (w=1+|gt-5|) + 0.5*margin_ranking + 0.5*ranknet.
 
-Interpretable: the agent can read each item's signed score directly (how much this
-strength adds / this weakness subtracts, 0-10 magnitude).
-
-Resumable: checkpoints/weakness_scorer_signed/latest/ every CKPT_EVERY groups.
+Resumable: checkpoints/weakness_scorer_signed_groupmean/latest/ every CKPT_EVERY groups.
 """
 
 import os
@@ -36,19 +28,10 @@ from peft import LoraConfig, PeftModel, get_peft_model
 from transformers import AutoModel, AutoTokenizer, get_cosine_schedule_with_warmup
 from pathlib import Path
 
-MODEL_NAME = "Qwen/Qwen3.5-4B"
+MODEL_NAME = "Qwen/Qwen3-Embedding-4B"
 DATASET_NAME = "weathon/weakness-score"
-HUB_REPO = "weathon/review_scoring_signed_qwen4b"
-CKPT_DIR = (Path.cwd() / "checkpoints" / "weakness_scorer_signed_qwen4b").resolve()
-
-# Qwen3.5-4B is an instruct model: the judging question goes in a user turn via
-# the chat template, add_generation_prompt=True appends the assistant header, and
-# the head reads that last token's final hidden state (where the model would
-# begin its favorability answer) rather than a bare embedding.
-PROMPT = """You are judging one point from a paper review.
-How favorable is this point toward the paper?
-
-Point: {item}"""
+HUB_REPO = "weathon/review_scoring_signed_groupmean"
+CKPT_DIR = (Path.cwd() / "checkpoints" / "weakness_scorer_signed_groupmean").resolve()
 
 EPOCHS = 3
 LR = 1e-4
@@ -84,18 +67,14 @@ def save_checkpoint(ckpt, model, head, baseline, optimizer, scheduler, epoch, st
 
 def forward_paper(model, head, baseline, tokenizer, items, device):
     is_strength = torch.tensor([it.startswith("strength") for it in items], device=device)
-    prompts = [tokenizer.apply_chat_template(  # kind from raw item, LLM sees the chat-templated prompt
-        [{"role": "user", "content": PROMPT.format(item=it)}],
-        tokenize=False, add_generation_prompt=True,
-    ) for it in items]
     mags = []
     for i in range(0, len(items), ITEM_BATCH):
         batch = tokenizer(
-            prompts[i:i + ITEM_BATCH], padding=True, truncation=True, max_length=MAX_LEN,
-            return_tensors="pt", padding_side="left", add_special_tokens=False,
-        ).to(device)  # chat template already injected special tokens
+            items[i:i + ITEM_BATCH], padding=True, truncation=True, max_length=MAX_LEN,
+            return_tensors="pt", padding_side="left",
+        ).to(device)
         hidden = model(**batch).last_hidden_state
-        pooled = hidden[:, -1]  # left padding -> last token is the prompt tail
+        pooled = hidden[:, -1]  # left padding -> last token is EOS
         mags.append(10 * torch.sigmoid(head(pooled.float()).squeeze(-1)))  # (0,10)
     mags = torch.cat(mags)
     # average within each group first, then combine, so the item COUNT is not a
@@ -120,12 +99,7 @@ def main():
           f"{len(ds['validation']) - len(val_data)} val missing a group)")
 
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
-    tokenizer.truncation_side = "left"  # keep the trailing prompt tail when a long item overflows
-    # Qwen3.5-4B is vision+text; this is a text-only item scorer, so drop the
-    # vision tower and keep the LM backbone (Qwen3_5TextModel, hidden_size 2560).
-    _full = AutoModel.from_pretrained(MODEL_NAME, torch_dtype=torch.bfloat16)
-    del _full.visual
-    base = _full.language_model
+    base = AutoModel.from_pretrained(MODEL_NAME, torch_dtype=torch.bfloat16)
 
     latest = CKPT_DIR / "latest"
     assert not (not latest.exists() and (CKPT_DIR / "latest.tmp").exists()), \
