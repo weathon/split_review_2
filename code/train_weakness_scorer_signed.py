@@ -1,4 +1,7 @@
-"""LoRA-finetune Qwen/Qwen3-Embedding-4B + linear head, SIGNED item scores.
+"""LoRA-finetune Qwen/Qwen3.5-4B (causal LM) + linear head, SIGNED item scores.
+
+Each item is wrapped in a favorability-judging prompt; the head reads the last
+token's final hidden state.
 
 Each item is scored with a sign forced by its kind:
   magnitude = 10 * sigmoid(head)  -> smooth (0,10), gradient everywhere
@@ -33,15 +36,24 @@ from peft import LoraConfig, PeftModel, get_peft_model
 from transformers import AutoModel, AutoTokenizer, get_cosine_schedule_with_warmup
 from pathlib import Path
 
-MODEL_NAME = "Qwen/Qwen3-Embedding-4B"
+MODEL_NAME = "Qwen/Qwen3.5-4B"
 DATASET_NAME = "weathon/weakness-score"
-HUB_REPO = "weathon/review_scoring_signed"
-CKPT_DIR = (Path.cwd() / "checkpoints" / "weakness_scorer_signed").resolve()
+HUB_REPO = "weathon/review_scoring_signed_qwen4b"
+CKPT_DIR = (Path.cwd() / "checkpoints" / "weakness_scorer_signed_qwen4b").resolve()
+
+# Qwen3.5-4B is an instruct model: the judging question goes in a user turn via
+# the chat template, add_generation_prompt=True appends the assistant header, and
+# the head reads that last token's final hidden state (where the model would
+# begin its favorability answer) rather than a bare embedding.
+PROMPT = """You are judging one point from a paper review.
+How favorable is this point toward the paper?
+
+Point: {item}"""
 
 EPOCHS = 3
 LR = 1e-4
-LORA_R = 32
-LORA_ALPHA = 32
+LORA_R = 64
+LORA_ALPHA = 64
 MAX_LEN = 2048
 SEED = 0
 CKPT_EVERY = 200
@@ -73,10 +85,14 @@ def save_checkpoint(ckpt, model, head, baseline, optimizer, scheduler, epoch, st
 def forward_paper(model, head, baseline, tokenizer, items, device):
     signs = torch.tensor([1.0 if it.startswith("strength") else -1.0 for it in items],
                          device=device)
+    prompts = [tokenizer.apply_chat_template(  # sign from raw item, LLM sees the chat-templated prompt
+        [{"role": "user", "content": PROMPT.format(item=it)}],
+        tokenize=False, add_generation_prompt=True,
+    ) for it in items]
     mags = []
     for i in range(0, len(items), ITEM_BATCH):
         batch = tokenizer(
-            items[i:i + ITEM_BATCH], padding=True, truncation=True, max_length=MAX_LEN,
+            prompts[i:i + ITEM_BATCH], padding=True, truncation=True, max_length=MAX_LEN,
             return_tensors="pt", padding_side="left",
         ).to(device)
         hidden = model(**batch).last_hidden_state
@@ -97,6 +113,7 @@ def main():
     print(f"train {len(train_data)} papers, val {len(val_data)} papers")
 
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+    tokenizer.truncation_side = "left"  # keep the trailing "Favorability:" when a long item overflows
     base = AutoModel.from_pretrained(MODEL_NAME, torch_dtype=torch.bfloat16)
 
     latest = CKPT_DIR / "latest"
