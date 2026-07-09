@@ -83,9 +83,8 @@ def save_checkpoint(ckpt, model, head, baseline, optimizer, scheduler, epoch, st
 
 
 def forward_paper(model, head, baseline, tokenizer, items, device):
-    signs = torch.tensor([1.0 if it.startswith("strength") else -1.0 for it in items],
-                         device=device)
-    prompts = [tokenizer.apply_chat_template(  # sign from raw item, LLM sees the chat-templated prompt
+    is_strength = torch.tensor([it.startswith("strength") for it in items], device=device)
+    prompts = [tokenizer.apply_chat_template(  # kind from raw item, LLM sees the chat-templated prompt
         [{"role": "user", "content": PROMPT.format(item=it)}],
         tokenize=False, add_generation_prompt=True,
     ) for it in items]
@@ -96,10 +95,13 @@ def forward_paper(model, head, baseline, tokenizer, items, device):
             return_tensors="pt", padding_side="left", add_special_tokens=False,
         ).to(device)  # chat template already injected special tokens
         hidden = model(**batch).last_hidden_state
-        pooled = hidden[:, -1]  # left padding -> last token is EOS
+        pooled = hidden[:, -1]  # left padding -> last token is the prompt tail
         mags.append(10 * torch.sigmoid(head(pooled.float()).squeeze(-1)))  # (0,10)
-    signed = signs * torch.cat(mags)  # strength (0,10), weakness (-10,0)
-    return baseline + signed.mean()  # baseline is a learnable scalar
+    mags = torch.cat(mags)
+    # average within each group first, then combine, so the item COUNT is not a
+    # prior (a paper with many strengths no longer scores high just from counts).
+    # Papers missing either group are filtered out in main(), so both are non-empty.
+    return baseline + (mags[is_strength].mean() - mags[~is_strength].mean()) / 2
 
 
 def main():
@@ -108,9 +110,14 @@ def main():
     device = "cuda"
 
     ds = load_dataset(DATASET_NAME, token=os.environ["HF_TOKEN"])
-    train_data = list(ds["train"])
-    val_data = list(ds["validation"])
-    print(f"train {len(train_data)} papers, val {len(val_data)} papers")
+    # within-group averaging needs both groups present; drop papers missing either kind
+    both = lambda p: any(it.startswith("strength") for it in p["items"]) and \
+        any(it.startswith("weakness") for it in p["items"])
+    train_data = [p for p in ds["train"] if both(p)]
+    val_data = [p for p in ds["validation"] if both(p)]
+    print(f"train {len(train_data)} papers, val {len(val_data)} papers "
+          f"(dropped {len(ds['train']) - len(train_data)} train / "
+          f"{len(ds['validation']) - len(val_data)} val missing a group)")
 
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
     tokenizer.truncation_side = "left"  # keep the trailing prompt tail when a long item overflows
