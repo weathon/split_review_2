@@ -113,8 +113,12 @@ def main():
     print(f"train {len(train_data)} papers, val {len(val_data)} papers")
 
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
-    tokenizer.truncation_side = "left"  # keep the trailing "Favorability:" when a long item overflows
-    base = AutoModel.from_pretrained(MODEL_NAME, torch_dtype=torch.bfloat16)
+    tokenizer.truncation_side = "left"  # keep the trailing prompt tail when a long item overflows
+    # Qwen3.5-4B is vision+text; this is a text-only item scorer, so drop the
+    # vision tower and keep the LM backbone (Qwen3_5TextModel, hidden_size 2560).
+    _full = AutoModel.from_pretrained(MODEL_NAME, torch_dtype=torch.bfloat16)
+    del _full.visual
+    base = _full.language_model
 
     latest = CKPT_DIR / "latest"
     assert not (not latest.exists() and (CKPT_DIR / "latest.tmp").exists()), \
