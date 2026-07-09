@@ -2,6 +2,7 @@ import argparse
 import asyncio
 import csv
 import json
+import math
 import random
 import re
 import logging
@@ -275,7 +276,7 @@ Return ONLY JSON: {{"items": ["...", ...]}}.
                         model="openai/gpt-oss-120b",
                         messages=[{"role": "user", "content": NC_OSS_PROMPT.format(kind=label) + text}],
                         response_format={"type": "json_object"},
-                        extra_body={"provider": {"only": ["cerebras"], "quantizations": ["fp16"]}},
+                        # extra_body={"provider": {"only": ["cerebras"], "quantizations": ["fp16"]}},
                     )
                     return list(json.loads(resp.choices[0].message.content)["items"])
                 except Exception as e:
@@ -372,7 +373,7 @@ Return ONLY JSON: {{"items": ["...", ...]}}.
         _scorer = {}
 
         SCORER_DEVICE = "cuda:0"
-        SCORER_CKPT = "weathon/review_scoring"
+        SCORER_CKPT = "weathon/review_scoring_signed_groupmean"
         SCORER_MAX_LEN = 2048
         SCORER_ITEM_BATCH = 32
 
@@ -423,7 +424,7 @@ Return ONLY JSON: {{"items": ["...", ...]}}.
                         model="openai/gpt-oss-120b",
                         messages=[{"role": "user", "content": OSS_PROMPT.format(kind=label) + text}],
                         response_format={"type": "json_object"},
-                        extra_body={"provider": {"only": ["cerebras"], "quantizations": ["fp16"]}},
+                        # extra_body={"provider": {"only": ["cerebras"], "quantizations": ["fp16"]}},
                     )
                     return list(json.loads(resp.choices[0].message.content)["items"])
                 except Exception as e:
@@ -431,10 +432,13 @@ Return ONLY JSON: {{"items": ["...", ...]}}.
                     print(f"  [oss_atomize] {kind} retry: {e}")
             raise RuntimeError(f"oss_atomize failed for {kind}: {last_err}")
 
-        def favorability_lines(kinds_and_items: list[tuple[str, str]]) -> list[str]:
+        def impact_lines(kinds_and_items: list[tuple[str, str]]) -> list[str]:
             scores = score_items_blocking([f"{k}: {t}" for k, t in kinds_and_items])
-            return [f"[{k}] favorability={s:.2f}: {t}"
-                    for (k, t), s in zip(kinds_and_items, scores)]
+            out = []
+            for (k, t), s in zip(kinds_and_items, scores):
+                mag = 10 / (1 + math.exp(-s))
+                out.append(f"[{k}] impact={mag if k == 'strength' else -mag:+.2f}: {t}")
+            return out
 
         @function_tool
         async def draft_review(strengths: list[str], weaknesses: list[str], other: str) -> str:
@@ -443,8 +447,10 @@ Return ONLY JSON: {{"items": ["...", ...]}}.
             Pass each kept strength and each kept weakness as its own list entry
             (severity tier included in the entry text), plus everything else
             (removed points, novel insights, suggestions) as `other`. Returns
-            each of YOUR draft's items with a model-assigned favorability (higher =
-            more positive contribution to the paper's score; no cutoff).
+            each of YOUR draft's items with a model-assigned impact score:
+            strengths score 0 to +10 (how much this strength pushes the paper's
+            score UP), weaknesses score 0 to -10 (how much this weakness pulls it
+            DOWN); magnitude near 0 = minor, near 10 = decisive.
 
             Args:
                 strengths: kept strengths, one item per entry.
@@ -455,9 +461,11 @@ Return ONLY JSON: {{"items": ["...", ...]}}.
                 s_items = oss_atomize("\n".join(f"- {s}" for s in strengths), "strength") if strengths else []
                 w_items = oss_atomize("\n".join(f"- {w}" for w in weaknesses), "weakness") if weaknesses else []
                 pairs = [("strength", t) for t in s_items] + [("weakness", t) for t in w_items]
-                return favorability_lines(pairs)
+                return impact_lines(pairs)
             lines = await asyncio.to_thread(build)
-            return "Your draft's items with favorability ratings:\n" + "\n".join(lines)
+            return ("Your draft's items with trained-model impact scores (strengths +0..+10 push the "
+                    "score up, weaknesses -10..0 pull it down; near 0 = minor, near 10 = decisive):\n"
+                    + "\n".join(lines))
 
         # a section ends only at the next STANDARD field header (or reviewer
         # separator) — reviewers' own ### subheaders inside the body (e.g.
@@ -471,7 +479,7 @@ Return ONLY JSON: {{"items": ["...", ...]}}.
         def annotate_review_md(review_md: str) -> str:
             # keep the document structure (summary, rating, ...) untouched; replace
             # each Strengths/Weaknesses section body with gpt-oss atomic items, each
-            # scored with a favorability rating
+            # scored with a signed impact score
             spans = []  # (body_start, body_end, kind)
             for header, kind in (("### Strengths", "strength"), ("### Weaknesses", "weakness")):
                 start = 0
@@ -493,21 +501,25 @@ Return ONLY JSON: {{"items": ["...", ...]}}.
                 items = oss_atomize(review_md[body_start:body_end], kind)
                 if items:
                     scores = score_items_blocking([f"{kind}: {t}" for t in items])
-                    out.append("\n".join(f"- {t} **[favorability={s:.2f}]**"
-                                         for t, s in zip(items, scores)) + "\n")
+                    mags = [10 / (1 + math.exp(-s)) for s in scores]
+                    out.append("\n".join(
+                        f"- {t} **[impact={m if kind == 'strength' else -m:+.2f}]**"
+                        for t, m in zip(items, mags)) + "\n")
                 cur = body_end
             out.append(review_md[cur:])
             return "".join(out)
 
         @function_tool
         async def itemized_calibration(filepath: str) -> str:
-            """Read a selected calibration anchor's human review with item favorability ratings.
+            """Read a selected calibration anchor's human review with item impact scores.
 
             Returns the anchor's review document in its original format, with a
-            trained item scorer's favorability rating (higher = more positive contribution to
-            the paper's score; no cutoff) appended to every strength/weakness
-            item as **[favorability=x.xx]**. Call this for each anchor you select (instead of
-            read_file).
+            trained item scorer's impact score appended to every strength/weakness
+            item as **[impact=+x.xx]** / **[impact=-x.xx]**: strengths score 0 to
+            +10 (how much this strength pushes the paper's score UP), weaknesses
+            score 0 to -10 (how much this weakness pulls it DOWN); magnitude near 0
+            = minor, near 10 = decisive. Call this for each anchor you select
+            (instead of read_file).
 
             Args:
                 filepath: path to the anchor review .md returned by calibration_search.
