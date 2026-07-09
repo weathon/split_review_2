@@ -93,8 +93,8 @@ def forward_paper(model, head, baseline, tokenizer, items, device):
     for i in range(0, len(items), ITEM_BATCH):
         batch = tokenizer(
             prompts[i:i + ITEM_BATCH], padding=True, truncation=True, max_length=MAX_LEN,
-            return_tensors="pt", padding_side="left",
-        ).to(device)
+            return_tensors="pt", padding_side="left", add_special_tokens=False,
+        ).to(device)  # chat template already injected special tokens
         hidden = model(**batch).last_hidden_state
         pooled = hidden[:, -1]  # left padding -> last token is EOS
         mags.append(10 * torch.sigmoid(head(pooled.float()).squeeze(-1)))  # (0,10)
