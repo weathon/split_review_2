@@ -1,0 +1,145 @@
+{
+ "paper_id": "zS1bPtMlt9",
+ "decision": "Reject",
+ "n_reviewers": 3,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "While the refinement-based perspective is novel, many components (teacher-student EMA, confidence thresholds, masked reconstruction) are individually adapted from prior works. The contribution lies more in integration than in fundamentally new architectures.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "reviewer 2qeu is still concerned about the technical novelty",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The reliability detection relies on simple agreement-based thresholds. Although results show effectiveness, this component may be brittle in challenging cases (e.g., rare classes, long-range sparse points). More adaptive or learned error-detection strategies could strengthen the approach.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Evaluation comprehensiveness: Please consider comparing FRNet [Xu, et al.], LarseMix++ [Kong, et al.], and Lim3D [Li, et al.] for a more comprehensive evaluation on the semi-supervised LiDAR segmentation benchmark. Additionally, there are several self-supervised LiDAR segmentation methods that are evaluated on the same benchmark; please consider including those as well, such as SLidR [Sautier, et al.], Seal [Liu, et al.], and SuperFlow [Xu, et al.].",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Clarify computational overhead: The refiner introduces an additional network and losses\u2014reporting training/inference cost overhead would be valuable for practitioners.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "analysis on ... computational efficiency",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Proposition 2 is well-explained, but its assumptions (e.g., independence of correction/error rates) could be elaborated for readers less familiar with information-theoretic analysis.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "While some qualitative comparisons are shown, additional side-by-side visualizations across challenging categories could better demonstrate where refinement helps most.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Some sections could be slightly condensed for readability, especially in the theoretical analysis.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Teacher\u2013student EMA, agreement-based confidence, and masked reconstruction are all known individually. The contribution is more in how they are combined and applied to LiDAR pseudo-label refinement.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "reviewer 2qeu is still concerned about the technical novelty",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The confidence percentile rule is simple but might not be optimal in cases of class imbalance or rare categories (e.g., pedestrians, bicycles). Results could be brittle under distribution shifts.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Evaluation is limited to nuScenes and SemanticKITTI. More diverse benchmarks (Waymo, SynLiDAR, Robo3D, or other datasets) would strengthen claims of generality.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While qualitative improvements are shown, the paper doesn\u2019t deeply discuss where REPL still fails\u2014e.g., does it help small-object categories or long-range sparse regions?",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "limited performance gains ... rare classes",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The paper claims that pseudo-label quality improves during training due to the refiner. However, in teacher\u2013student frameworks, the teacher naturally improves over time thanks to EMA updates. It is thus hard to isolate how much of the improvement is due to the refiner versus the inherent dynamics of self-training. A comparison between EMA-only and EMA+refiner over time would strengthen the claim.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The refiner is based on masked reconstruction, which is generative by nature. It is unclear whether the gains stem from genuine pseudo-label correction or simply from the introduction of stronger feature representations via MAE. Ablations that replace MAE with another feature extractor (e.g., contrastive learning backbone) or apply MAE without pseudo-label refinement would help clarify this distinction.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The 'unreliable voxel identification' heuristic relies on several parameters (e.g., confidence percentile \u03ba). This raises a question about potential hyperparameter sensitivity. The paper would be strengthened by an analysis of how performance varies with these parameters, as it is currently challenging to gauge the tuning effort that might be required for new datasets.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "analysis on parameter sensitivity",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The framework introduces a third network (the refiner), which presumably adds computational and memory overhead. The paper does not currently include an analysis of training time or memory usage relative to baseline methods. Including this would help readers better evaluate the practical performance-vs-efficiency trade-off.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "analysis on ... computational efficiency",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The evaluation could be further strengthened by including additional benchmarks. For instance, key prior work like LaserMix also reported results on the ScribbleKITTI dataset. An evaluation on this would provide a more comprehensive picture of the method's robustness.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "results on ScribbleKITTI",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 4738,
+  "prompt_tokens": 2336,
+  "total_tokens": 7074,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 3466,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0043711,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0043711,
+   "upstream_inference_prompt_cost": 0.0008176,
+   "upstream_inference_completions_cost": 0.0035535
+  }
+ }
+}

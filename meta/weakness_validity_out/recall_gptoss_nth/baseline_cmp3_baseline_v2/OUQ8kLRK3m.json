@@ -1,0 +1,17 @@
+{
+ "paper_id": "OUQ8kLRK3m",
+ "method": "baseline_cmp3_baseline_v2",
+ "n_items": 2,
+ "matched": [
+  {
+   "index": 1,
+   "label": "valid",
+   "raised": true
+  },
+  {
+   "index": 2,
+   "label": "valid",
+   "raised": true
+  }
+ ]
+}

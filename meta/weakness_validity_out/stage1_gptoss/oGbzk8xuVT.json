@@ -1,0 +1,117 @@
+{
+ "paper_id": "oGbzk8xuVT",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "The paper fails to accurately determine the limitations that exist in similar proposals in the literature, and which ones are satisfactorily resolved by BuildBench.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Continuing with the previous thread, one reference published in ICML 2025 was Craftium, which was also published in RLC 2025. This platform is highly developed and allows the creation of environments for open-ended learning, procedural benchmark generation, and, in addition to multi-tasking (for CRL), it also allows for multi-agent learning. As I see it, Craftium's scope goes beyond that of BuildBench. Not including the most recent work in the comparison undermines this study.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The construct validity of the benchmark could be clearer\u2014it is not fully demonstrated that success requires genuine physical reasoning rather than geometric features.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The analysis of failure modes is relatively shallow; it does not fully separate challenges of exploration, long-horizon credit assignment, and physical modeling.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Developing a simulator using MuJoCo does not appear to be a substantial contribution, as there already exist numerous GPU-accelerated simulators with similar capabilities.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The problem setup is overly simplified\u2014the flying gripper operates in 3D space but only rotates around the z-axis (i.e., performs strictly vertical). This simplification likely explains why the reinforcement learning (RL) agents achieve rapid learning.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Although the title claims that the benchmark targets generalist agents, the experiments primarily evaluate standard RL algorithms with different exploration strategies. In contrast, the large language model (LLM) evaluations do not involve actual interaction or feedback from the environment, thus failing to demonstrate open-ended exploration or learning through experience.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I would expect a benchmark paper to present more rigorous experimentation and conclusion - the current paper falls short of this expectation. From the perspective of science, implementing PPO & SAC, and stating that other algorithms are \u201cout of scope for the paper\u201d (Limitations & Conclusion, page 9) is simply not sufficient to conclude that existing research on generalization is weak (although I intuitively agree with the authors\u2019 conclusions). Without rigorous quantitative benchmarking and ablatory analysis on scaling behavior (sample efficiency/compute cost analysis), this research contribution is just a little better than an open-source software release.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I would like to see standard supervised RL benchmarks on other methods like TDMPC2 [1] (a model-based approach) and other approaches specifically developed for Compositional tasks and object centric behavior [2][3][4][5]. Several competent VLAs & LLM augmented models also have attempted to achieve grounded reasoning capabilities [10][11]. Unsupervised exploration is also covered by several notable prior works [6][7]. **Atleast one other algorithm that covers the breadth of research directions for each supervised and self-supervised protocol** would improve the contribution greatly.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Can the authors concretely specify what sets apart their benchmark? Several existing works attempt to capture compositional and logical reasoning abilities in RL and robotics with simple-to-hard curriculum. Examples: FurnitureBench [9], BabyAI [12]. If there are significant novel changes, please specify why these new changes are essential and what prompted the need for an entirely new benchmark? For example, Maniskill [8] is a well established benchmark which already contains tasks like PickYCB, YCB Clutter, Stack cube, etc. Maniskill also provides demonstrations, RGBD & segmentation mask observations. What is the utility of a new benchmark when one could add more cubes and create these tasks on the current benchmarks. Please mention clearly.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Are demonstrations available for the tasks in this benchmark? Prior benchmarks like Maniskill [8] and FurnitureBench [9] also provide demonstrations and evaluations on generalizable Imitation learning methods which are additionally considered important approaches in the RL and robotics community.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Similarly, can fast rendering of RGBD observations be made available? With the popularity of Vision Language Models and DINO style vision encoders, visual observations are an essential component for modern benchmarks.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 2854,
+  "prompt_tokens": 2741,
+  "total_tokens": 5595,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1606,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00309985,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00309985,
+   "upstream_inference_prompt_cost": 0.00095935,
+   "upstream_inference_completions_cost": 0.0021405
+  }
+ }
+}

@@ -1,0 +1,96 @@
+{
+ "paper_id": "4fm4Rc5fUK",
+ "decision": "Reject",
+ "n_reviewers": 3,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "I want to know what other tool calls, besides the **Syntax Check Tool**, can enhance autoformalization. I doubt that there are many tools capable of surpassing **Lean** in terms of checking ability, so the paper should explore **Lean\u2019s potential as a tool** more deeply.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lean is not good at performing numerical calculations, but I didn\u2019t see you invoke any **calculator-related tools** in your framework.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Not including calculator-related tools in the framework (Reviewer ZNEC) -> distinguishing autoformalization as a translation phase from the subsequent proof generation phase.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Please provide experiments on **benchmarks that require extensive numerical computation**.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Provide experiments on benchmarks that require extensive numerical computation (Reviewer ZNEC) -> more experiments on MiniF2F, ProofNet, MathOlympiadBench, and PutnamBench",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Concerns about the reliability of the multi-model consistency tool: The paper relies on multiple large language models as \"judges\" to determine whether the generated statements are semantically consistent with the problems. However, the judgments made by LLMs may be unstable or biased, especially when it comes to subtle logical errors. Although the authors conducted human evaluations, the error rate and potential blind spots of the consistency checking tool remain unclear. It is recommended to further quantify or add verification mechanisms to ensure the accuracy of consistency feedback.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited generalization ability and scope: The current tool feedback is based on the Lean 4 compiler. If mathematical problems need to be formalized in other languages (such as Isabelle or Coq) or in different versions of Lean, the current approach may not be directly applicable. The authors mention the differences between Lean versions, but there is insufficient study on the adaptability of the method. Future work could explore the method\u2019s transferability across different formal systems or introduce language-agnostic tool interfaces.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Training and inference overhead: The three-stage training and multi-round feedback mechanisms of ATF increase computational complexity. In particular, during inference, the repeated invocation of the compiler and multi-model judgments may lead to slower inference speed and higher resource consumption. The paper does not discuss efficiency in detail. In practical applications, fast response is also important, and it would be helpful for the authors to specify the model\u2019s inference cost and latency, as well as its performance under limited computational resources.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Interpretability and failure analysis: Although the paper provides overall performance improvement data, it lacks an in-depth analysis of failure cases. For example, it remains unclear what types of problems ATF still struggles to formalize, or when tool feedback fails to correct the output. A detailed analysis of failure cases would help reveal the limitations of the approach and potential directions for improvement.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Failure analysis (Reviewer 7cvV) -> by providing a case from CombiBench.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper introduces a meaningful but moderately novel approach by systematizing tool feedback specifically for autoformalization",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Training and evaluation datasets are all derived from the Numina ecosystem; although similarity-based decontamination (cosine < 0.8) is performed, stronger guarantees against overlap would make the results more convincing. Include one external dataset (e.g., MiniF2F or PutnamBench) or a stricter decontamination threshold.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 6985,
+  "prompt_tokens": 1519,
+  "total_tokens": 8504,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 5842,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00216846,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00216846,
+   "upstream_inference_prompt_cost": 0.00021266,
+   "upstream_inference_completions_cost": 0.0019558
+  }
+ }
+}

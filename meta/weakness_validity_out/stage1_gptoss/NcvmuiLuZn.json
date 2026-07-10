@@ -1,0 +1,208 @@
+{
+ "paper_id": "NcvmuiLuZn",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "The biggest concern is that the empirical performance seems weak. The proposed method shows superior results on MNIST/CIFAR at (32x32), but performs worse than WGP on the BIA and PDB benchmarks. The baselines and datasets are also kind of weak: the paper should at least test at (64x64), and more challenging datasets would be welcome. Most baselines are pre-2018, with only one (Bartosh et al., 2025) that is recent, including more recent baselines will strengthen the experiment part.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Line 96: the proof of Proposition 2 is referred to Proposition 10, but no proof is provided for Proposition 10.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The discussion of \u201cPrior-driven Approaches\u201d is not accurate. Line 222 states, \u201cDespite these advances, learning remains anchored to a predefined prior scaffold,\u201d This is a strong claim, and the prior over stochastic processes can be learned directly from data via flow/diffusion models (e.g., Shi et al., 2025), which enables exact (or principled) posterior sampling.  Reference: Shi et al., Stochastic Process Learning via Operator Flow Matching, 2025.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper introduces a theoretically index-agnostic paradigm but instantiates it with a specific, practical architecture (DBPT) that is, by its deconvolutional nature, tied to a discrete (regular) grid and its specific training resolution. The authors should explicitly acknowledge the gap between the theoretical advantages of the paradigm and the practical limitations of the implementation.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Super-resolution experiments are missing. While the DBPT design seems applicable for super-resolution, its convolutional constraints likely limit evaluation to the specific training resolution. In contrast, general NP or operator-learning\u2013based models often enable zero-shot evaluation at different resolutions (e.g., train on 64x64, evaluate on 128x128 or higher) without retraining.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The ablation study in Appendix J is confusing. The Transformer-based model seems to perform very poorly , while the deconvolution architecture is significantly better. This large performance gap raises suspicion that the Transformer model may not be correctly implemented or tuned. Given that numerous state-of-the-art models in computer vision and generative modeling use Transformers as backbones and consistently show advantages over convolution-based models, I strongly suggest the authors detail the settings for this part and consider trying either a standard ViT (Vision Transformer) or a (multi-layer) cross-attention architecture",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Typos : 1) Line 269. \u201cFigure 2 present\u201d should be \u201cpresents\u201d 2) Line 292,  \u201cGP demonstrate\u201d should be \u201cdemonstrates\u201d. 3) Line 302, \u201cThe synthetic experiment demonstrate\u201d should be \u201cexperiments\u201d 4) Line 1063, \u201crising from !1 min\u201d check the typo",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The proposed N2P framework largely restates existing ideas found in Variational Implicit Processes, Normalizing Flow GPs, or Neural SDEs. The notion of generating a stochastic process via a measurable transformation of a base noise process (e.g., a Gaussian or Wiener process) is well established in prior literature. The contribution here is mainly terminological (\u201cweak prior paradigm\u201d) rather than methodological.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Despite the stochastic notation, the training objective reduces to a deterministic regression with noise regularization: $$ L = E_Z[\\frac{1}{\\tau_o}|R_{\\tau_o}(G_\\theta(Z)) - O|_F^2]. $$ There is no explicit likelihood, no KL regularization, and no posterior inference\u2014thus no genuine process-level probabilistic learning. In effect, the method behaves like a conditional generator (akin to a GAN without a discriminator) trained purely with an MSE loss.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The comparison with Neural Processes (NP) is also misleading. The claim that NP \u201crequires multiple trajectories\u201d is not accurate; NP frameworks can, in principle, operate on single trajectories, though with limited generalization. More importantly, NP remains a proper probabilistic model with explicit latent variables and variational inference, whereas N2P collapses to deterministic regression. The distinction the paper emphasizes (task-level z vs noise process Z) is not substantial.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experimental evaluation is limited. Reported improvements over baselines are modest and could easily result from architectural capacity or convolutional inductive biases. There is no ablation study to isolate the effect of the proposed \u201cnoise process\u201d component, and the claims of \u201csingle-trajectory learning\u201d are not convincingly demonstrated\u2014the model still relies on dense sampling along one trajectory, which effectively provides many supervision points.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper does not compare against recent and strong baselines in process learning and uncertainty-aware meta-learning, such as Attentive Neural Processes (Kim et al., 2019), Convolutional Conditional Neural Processes (Gordon et al., 2019), Transformer Neural Processes (Nguyen & Grover, 2022), and Neural Diffusion Processes (Dutordoir et al., 2023).",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It also fails to cite or discuss several directly relevant works. Most notably, Variational Implicit Processes (Garnelo et al., ICML 2019) and \u201cFunctional Variational Inference based on Stochastic Process Generators\u201d (Chao Ma, NeurIPS 2021) already introduced the same \u201cnoise-to-function\u201d formulation with proper probabilistic objectives. Similarly, the idea of mapping base noise to structured samples has long existed in GANs and Normalizing Flow models. By omitting these foundational references and not clarifying its novelty relative to them, the submission overstates its originality and misrepresents its contribution.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experimental validation is limited in both scale and diversity. Most experiments are confined to small, overused datasets such as MNIST and CIFAR-10. These benchmarks are no longer considered sufficient for demonstrating generalization or scalability in the ICLR community, as their challenges have been largely saturated. The paper does not evaluate on larger, more complex datasets or real-world continuous process data, making it difficult to assess whether the proposed framework meaningfully improves process-level modeling beyond toy examples.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While the paper\u2019s narrative is appealing\u2014\u201clearning stochastic processes from a single trajectory under weak priors\u201d\u2014the technical substance does not support this claim. The approach amounts to deterministic regression with injected noise and lacks both probabilistic rigor and meaningful novelty. The comparison with Neural Processes is conceptually misleading, and the theoretical contributions are largely decorative.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Additionally, several presentation and technical issues reduce the clarity of the paper. Many equations appear without numbering, making it difficult to reference them in the text. In addition, some lemmas and corollaries are stated without proof or with only vague intuitive arguments. For a paper that emphasizes theoretical grounding, the absence of formal derivations undermines the claimed rigor and makes it hard to verify correctness.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Writting. The writting and organization of the paper can be improved. For example, the citation commands (e.g., \\citet vs. \\citep) appear to be used wrongly and inconsistently, which affects the flow of the narrative. Several acronyms are introduced without full definitions at first use.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experiment section can be better explained. For example, in terms of time-series MSE, what is the MSE here? Prediction or imputation?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limitation of Discrete Index Sets: The entire framework is built upon a discretized index set \\mathcal{T}. While Corollary 13 states that the model is *compatible* with Kolmogorov extension to a continuum, this is an existence result. In practice, the trained DBPT model is fixed to its training grid. Making predictions at arbitrary, new time points not in \\mathcal{T} would require re-discretization and potentially retraining, which is a significant limitation compared to native continuous-time models like GPs or Neural SDEs. The method lacks **native continuous-index inference**.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Dependence on Generator and Noise Specifications: The quality of the learned stochastic process is entirely dependent on the representational capacity of $G_{\\theta}$ and the characteristics of the base noise $Z $. While the deconvolution decoder is a good choice, the framework is susceptible to issues common in generative models, such as potential **mode collapse** or failure to capture the full complexity of the target process's randomness, especially if the architecture or noise dimension is poorly chosen.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Scalability and Computational Cost: The claim of ``lightweight computation'' (Appendix E) is supported for the presented tasks, but this may not scale well. Generating the *entire trajectory* in one forward pass means that for very high-resolution index sets (e.g., megapixel images or extremely long sequences), the memory and computation cost of the deconvolutional decoder could become prohibitory. A more nuanced discussion of the **computational complexity in  $|\\mathcal{T}|$** and its scaling limits would be helpful.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Depth of Comparison with State-of-the-Art: The baseline selection is relatively dated (except SDE matching); a comparison with more recent and powerful sequence models, such as single-sequence diffusion models (see question section) or Gaussian process state-space models, would strengthen the evaluation.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In Section 2.1, the work grounds the theoretical results on the basis of finite or countable time grid T. First, I can not see how a generator $G_\\theta$ take an infinite number of $Z_t$s as inputs. Considering the actual DBPT model operates on a predefined, finite, discrete grid, the actual instantiation of the N2P framework is underwhelming and makes the grandiose theoretical result of Section 2.2 which invokes the Kolmogorov Extension Theory unnecessary.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experiment results on finance related data is very weak.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The work compares against conditional neural processes and SDE matching as baselines from the SDE-based approaches and neural process families. More recent and stronger baselines like latent SDE [1, 2], attentive and transformer neural processes[3, 4], gaussian neural processes [5, 6] should be compared against.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 4549,
+  "prompt_tokens": 3508,
+  "total_tokens": 8057,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1576,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00463955,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00463955,
+   "upstream_inference_prompt_cost": 0.0012278,
+   "upstream_inference_completions_cost": 0.00341175
+  }
+ }
+}

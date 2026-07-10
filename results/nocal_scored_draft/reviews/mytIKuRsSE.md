@@ -1,0 +1,4 @@
+Based on the favorability signals — strengths all at 1.00 (maximally positive), the major weakness at 0.02 (strongly negative), and minor weaknesses ranging 0.39–0.57 (mildly negative to neutral) — the paper's core contribution is solid but has a significant evaluation presentation issue that needs addressing. The paper identifies a genuinely novel problem, proposes a principled solution, and the training-time method alone (w/o TTR, 56.5) still dominates all baselines (best 43.9). The main weakness is fixable in revision.
+
+MY FINAL SCORE: <score>6</score>
+MY FINAL DECISION: <decision>Borderline Accept</decision>

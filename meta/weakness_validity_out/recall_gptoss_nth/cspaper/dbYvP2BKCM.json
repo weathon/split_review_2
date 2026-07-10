@@ -1,0 +1,87 @@
+{
+ "paper_id": "dbYvP2BKCM",
+ "method": "cspaper",
+ "n_items": 16,
+ "matched": [
+  {
+   "index": 1,
+   "label": "valid",
+   "raised": true
+  },
+  {
+   "index": 2,
+   "label": "invalid",
+   "raised": true
+  },
+  {
+   "index": 3,
+   "label": "invalid",
+   "raised": true
+  },
+  {
+   "index": 4,
+   "label": "valid",
+   "raised": false
+  },
+  {
+   "index": 5,
+   "label": "valid",
+   "raised": true
+  },
+  {
+   "index": 6,
+   "label": "valid",
+   "raised": true
+  },
+  {
+   "index": 7,
+   "label": "valid",
+   "raised": true
+  },
+  {
+   "index": 8,
+   "label": "valid",
+   "raised": false
+  },
+  {
+   "index": 9,
+   "label": "valid",
+   "raised": false
+  },
+  {
+   "index": 10,
+   "label": "valid",
+   "raised": false
+  },
+  {
+   "index": 11,
+   "label": "invalid",
+   "raised": true
+  },
+  {
+   "index": 12,
+   "label": "valid",
+   "raised": true
+  },
+  {
+   "index": 13,
+   "label": "valid",
+   "raised": false
+  },
+  {
+   "index": 14,
+   "label": "valid",
+   "raised": false
+  },
+  {
+   "index": 15,
+   "label": "valid",
+   "raised": false
+  },
+  {
+   "index": 16,
+   "label": "valid",
+   "raised": false
+  }
+ ]
+}

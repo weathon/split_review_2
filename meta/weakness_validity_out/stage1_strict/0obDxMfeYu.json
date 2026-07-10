@@ -1,0 +1,138 @@
+{
+ "paper_id": "0obDxMfeYu",
+ "decision": "Reject",
+ "n_reviewers": 5,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "The most significant weakness is the insufficient discussion and comparison with the most relevant prior work. The core mechanism of using gradients from an InD model to identify OOD samples in unlabeled data is the central contribution of Du et al. (\"How Does Unlabeled Data Provably Help Out-of-Distribution Detection?\"). While Medix employs a median-based objective instead of a mean-based one, the paper fails to compellingly argue why this constitutes a fundamental advance rather than an incremental variation. The absence of a direct, quantitative comparison with this key work (and its subsequent developments) makes it impossible to assess the true marginal contribution of the median-centric approach.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The central novelty/positioning concern from the reject reviews (f6xn, oj34, m1ju): no direct, apples-to-apples empirical comparison with SAL (and closely related follow-ups like LoD) is actually shown in the current submission; the rebuttal promises to add it in camera-ready, but it is still not resolved, at least during rebuttal at decision time. Relatedly, the claim that the median-centric filter is a fundamental advance rather than an incremental variant remains only partially supported without that direct comparison and without clearer isolation studies.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The empirical comparisons, while broad, overlook several recent and highly relevant state-of-the-art methods (e.g., [a,b]). This omission weakens the claim of superior performance, as it remains unclear how Medix fares against its most direct competitors.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The central novelty/positioning concern from the reject reviews (f6xn, oj34, m1ju): no direct, apples-to-apples empirical comparison with SAL (and closely related follow-ups like LoD) is actually shown in the current submission; the rebuttal promises to add it in camera-ready, but it is still not resolved, at least during rebuttal at decision time.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The iterative, greedy filtering algorithm (Algorithm 1) is computationally intensive. Although profiling results are provided, the cost may be prohibitive for very large-scale datasets or applications requiring frequent model updates, which is a common scenario in real-world deployments.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Compute/overhead concerns (DAEv, f6xn, oj34): authors point to profiling in Appendix A.6 and give concrete wall-clock/memory numbers and asymptotic costs.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The theoretical guarantees rely on assumptions such as i.i.d. samples and sub-Gaussian gradient coordinates. The practical validity of these assumptions, especially for modern deep networks and complex data distributions, is not thoroughly justified and could limit the real-world applicability of the bounds.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "**This paper should provide a more detailed discussion on a very important related work, SAL [1], which has only been briefly mentioned in the Related Work Section.** Both SAL and Medix share the same overall \"Separate and Learn\" framework, which first identifies OOD data from unlabeled wild data and then regularizes the model with them, and also leverages a similar reference gradient technique. If the reviewer understands correctly, the difference between SAL and Medix only lies in the procedures to use gradient information to identify candidate OOD data from the wild data. SAL can also be applied in the setting of dataset-level mixing. Therefore, the authors should **provide an in-depth discussion on the advantages of Medix over SAL, reinforced with additional experiment results or theoretical analysis.**",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The central novelty/positioning concern from the reject reviews (f6xn, oj34, m1ju): no direct, apples-to-apples empirical comparison with SAL (and closely related follow-ups like LoD) is actually shown in the current submission; the rebuttal promises to add it in camera-ready, but it is still not resolved, at least during rebuttal at decision time.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "**This paper omits a direct experimental comparison between SAL and Medix.** In fact, the reported results in the SAL paper indicate that SAL achieves nearly zero FPR95 on both CIFAR-10 and CIFAR-100 OOD benchmarks. But this paper claims that there are substantial opportunities for further advancement on utilizing unlabeled wild data. Therefore, the reviewer suggests that the authors **include a direct comparison with SAL and extend experiments on more challenging OOD benchmarks**, such as ImageNet-1k OOD benchmarks.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The central novelty/positioning concern from the reject reviews (f6xn, oj34, m1ju): no direct, apples-to-apples empirical comparison with SAL (and closely related follow-ups like LoD) is actually shown in the current submission; the rebuttal promises to add it in camera-ready, but it is still not resolved, at least during rebuttal at decision time.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The reviewer suggests that the authors present a detailed mathematical formulation of the element-wise median (EWM) used in the proposed algorithm, which will make it easier for readers to understand the implementation details.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "clarity items (f6xn): EWM is already defined and they will add a boxed definition.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The process of filtering potential outliers from unlabeled wild data incurs non-negligible computational overhead, since it involves calculating the gradient of the loss function with respect to model parameters for every sample in the wild data. The reviewer suggests that the authors provide an experiment to quantitatively evaluate the actual time cost of filtering OOD data from unlabeled wild data with Medix and compare it with the time cost to train the OOD detector.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Compute/overhead concerns (DAEv, f6xn, oj34): authors point to profiling in Appendix A.6 and give concrete wall-clock/memory numbers and asymptotic costs.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "I have not too many issues. I just want to ask why your bound has the Contamination term. It is possible to withdraw this term? In Du's work, there is not such constant. So it seems your bound is loss. Please address this issue, I will raise my score.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "theory question about the contamination term (ZRFU): authors explain the \u03b5/\u03c0-dependence as intrinsic under a Huber contamination model and contrast it with SAL's stronger structural assumptions.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "There is no comparison on challenging near-OOD scenarios and large-scale datasets (e.g., ImageNet), raising the concerns of the scalability of the proposed method.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Broader external validity beyond CIFAR-style protocols (several reviewers request ImageNet-scale / harder near-OOD): rebuttal points to one larger setting but does not fully meet the request for stronger, widely-recognized challenging benchmarks.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "\u200b\u200bLimited novelty differentiation\u200b\u200b. Medix's core design choice, i.e., (median filtering for OOD detector training) is closely related to\u200b\u200bOpenMatch\u200b\u200b[1] and \u200b\u200bSAL\u200b\u200b[2], with insufficient distinction in motivation and mechanics. The reviewer generally feel the novelty of the proposed method does not meet the bar of NeurIPS. More comprehensive comparison may be necessary.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "The central novelty/positioning concern from the reject reviews (f6xn, oj34, m1ju): no direct, apples-to-apples empirical comparison with SAL (and closely related follow-ups like LoD) is actually shown in the current submission; the rebuttal promises to add it in camera-ready, but it is still not resolved, at least during rebuttal at decision time. Relatedly, the claim that the median-centric filter is a fundamental advance rather than an incremental variant remains only partially supported without that direct comparison and without clearer isolation studies.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "\u200b\u200bInadequate evaluation\u200b\u200b. Strong baselines\u200b\u200b are missing. Initial comparisons used outdated methods (e.g., KNN+ 2022). Some recent SOTA (e.g., CIDER[3], POEM[4]) are missing.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Computational concern. While the gradients can be efficient for extracting outliers, it may introduce unaffordable computational cost. Time and Space complexity analysis will further justify the effect of Medix. The gradient quality may also influence the extraction, which is closely related to the amount of ID data used.",
+   "reviewer_index": 4,
+   "ac_status": "resolved",
+   "ac_evidence": "Compute/overhead concerns (DAEv, f6xn, oj34): authors point to profiling in Appendix A.6 and give concrete wall-clock/memory numbers and asymptotic costs.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Modest improvement. The baselines can already achieve great performance (e.g., WOODS on CIFAR10 vs. SVHN and LSUN-C), indicating that the improvement of Medix may be dataset-based and may shrink in some other domains(harder cases).",
+   "reviewer_index": 4,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Concern of greedy selection algorithm: while the leave-one-out strategy is intuitive and straightforward and the theoretical bounds are provided, there still be failure modes where ID data is wrongly removed.",
+   "reviewer_index": 4,
+   "ac_status": "unresolved",
+   "ac_evidence": "For the greedy filtering algorithm (DAEv), the rebuttal discusses bounds/failure modes, but empirical characterization of when/why it fails (e.g., sensitivity to contamination, weak InD model, low separation) remains limited.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 9585,
+  "prompt_tokens": 2872,
+  "total_tokens": 12457,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 7093,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 2688,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.002784824,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.002784824,
+   "upstream_inference_prompt_cost": 0.000101024,
+   "upstream_inference_completions_cost": 0.0026838
+  }
+ }
+}

@@ -1,0 +1,166 @@
+{
+ "paper_id": "4iu9Lj0Ist",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "Experiments. Only MNIST with a linear softmax model and 30 tasks.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "1. The reliance on the convexity assumption is validated only on a simple linear model, which is limited in scope.\n2. The disconnect between unlearning's intended utility for large-scale deep learning and its limited testing on MNIST.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Missing baselines. No experimental comparison to recent certified unlearning baselines adapted to continual settings.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "4. Lack of comparisons with baseline methods.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Presentation issues: (1)Fig. 2 (a)(b)lack proper subfigure labels or axis annotations, making it difficult for readers to interpret what each curve represents. (2) Some notation (e.g., ( w^{-S_{1:t}}_t ), ( \\gamma_t(S_{1:t}) )) is introduced without clear intuitive explanation, reducing readability.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited practical insight: (1) The final conclusion is rather shallow; it restates the theoretical findings without extracting practical implications or design principles for real-world systems. (2)The theoretical results, while mathematically correct, have limited guidance for practical applications\u2014for example, there is little discussion on how the proposed methods would scale to deep models or non-convex objectives.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Clarity and exposition: Several sections (e.g., Algorithm 2 and its derivations) are dense and difficult to follow; figures or flow diagrams illustrating the unlearning process would improve clarity.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Experimental limitations:  The evaluation is limited to MNIST with linear models, which does not convincingly support claims about the framework\u2019s generality.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "1. The reliance on the convexity assumption is validated only on a simple linear model, which is limited in scope.\n2. The disconnect between unlearning's intended utility for large-scale deep learning and its limited testing on MNIST.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Writing and structure:  The presentation could be reorganized to emphasize intuition before formal proofs. Some paragraphs in Section 3\u20135 are long and formula-heavy, which may discourage broader readership.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "On Theoretical Assumptions and Methodology:\n\u2022\tThe Strong Convexity Assumption is a Major Flaw: (Assumption 2.1) The entire theoretical framework relies on the assumption of \u00b5-strong convexity. This is fundamentally misaligned with the non-convex reality of deep neural networks, making all derived bounds and guarantees largely inapplicable to the models of interest at ICLR.\n\u2022\tHessian-Based Method is expensive: Algorithm 2 requires storing a Hessian matrix (O(d^2)) for every task. This is computationally and memory-wise prohibitive for any non-trivial deep network, rendering the algorithm a theoretical exercise rather than a practical solution.\n\u2022\t\"Natural Forgetting\" Method is Unreliable: Algorithm 1's performance may be problematic for recently learned tasks where natural forgetting is minimal. The resulting large approximation error would require injecting catastrophic levels of noise to ensure (\u03b5, \u03b4)-certification, likely destroying the model's utility.\n\u2022\tOverly Simplified CL Model: The theory is based on a simple l2-regularization CL method, which is not representative of more effective, state-of-the-art CL approaches (e.g., replay-based methods). Conclusions drawn from this model may not generalize.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "1. The reliance on the convexity assumption is validated only on a simple linear model, which is limited in scope.\n3. The computation of the full Hessian is impractical, especially for large-scale models.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "On Experimental Validation:\n\u2022\tExperiments are Severely Limited: Validation was conducted only on MNIST using a linear model. This \"toy\" experiment is inadequate for a top-tier deep learning conference. It fails to demonstrate that the theoretical insights hold under the non-convex, high-dimensional dynamics of deep networks.\n\u2022\tLack of Meaningful Baselines: The paper only compares its two proposed methods. It lacks crucial comparisons to practical baselines, such as simple fine-tuning on the retained data or adapting existing static unlearning methods, which would be necessary to properly contextualize the methods' performance.\n\u2022\tSuperficial Analysis of Unlearning Sequence: The paper notes that the order of unlearning requests affects performance\u2014an interesting finding\u2014but provides no deeper analysis, theoretical explanation, or resulting guidance for algorithm design.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "1. The reliance on the convexity assumption is validated only on a simple linear model, which is limited in scope.\n2. The disconnect between unlearning's intended utility for large-scale deep learning and its limited testing on MNIST.\n4. Lack of comparisons with baseline methods.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The theorems are presented under convexity assumptions. This need not hold true in practice, especially with deep learning models. The utility of unlearning lies primarily in large scale deep learning models where it is impractical to retrain without the forget-set.  It is also not clear if the proposed approach can scale to even moderately sized deep learning models.  The experiments are conducted with a linear model. The exact specifications of the model are not presented clearly.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "1. The reliance on the convexity assumption is validated only on a simple linear model, which is limited in scope.\n2. The disconnect between unlearning's intended utility for large-scale deep learning and its limited testing on MNIST.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Further concerning is the lack of comprehensive experiments to justify the claims presented empirically.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "1. The reliance on the convexity assumption is validated only on a simple linear model, which is limited in scope.\n2. The disconnect between unlearning's intended utility for large-scale deep learning and its limited testing on MNIST.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper presents a singular Split MNIST 3-way classification setup. This is a relatively simple problem. Stronger benchmarks are needed to properly demonstrate the effectiveness of continual learning and unlearning, particularly with regard to how well retained tasks are safeguarded from both catastrophic forgetting and unlearning.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "1. The reliance on the convexity assumption is validated only on a simple linear model, which is limited in scope.\n2. The disconnect between unlearning's intended utility for large-scale deep learning and its limited testing on MNIST.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper does not present accuracy numbers comparing task performance (both the target tasks being unlearnt and the others) before and after unlearning. This makes it hard to assess the effectiveness of the proposed method.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "1. The reliance on the convexity assumption is validated only on a simple linear model, which is limited in scope.\n2. The disconnect between unlearning's intended utility for large-scale deep learning and its limited testing on MNIST.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In Algorithm 1, the fact that noising is determined by a scalar bound that is not parameter-specific raises questions about the effectiveness of the proposed methods in terms of forgetting-spillover to the tasks that are to be retained.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Coming to Algorithm 2, the use of full Hessians is problematic in practice. Hessians are both expensive to compute and store, making the method impractical for anything beyond linear models. This could partly explain why the authors couldn\u2019t present experiments in benchmarks more challenging than MNIST. One recommendation would be to study the use of approximations to the full Hessian, such as Kronecker-Factorized (K-FAC) Hessians and diagonal Hessians.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "3. The computation of the full Hessian is impractical, especially for large-scale models.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Further, caching model parameter differences adds to the storage cost. One could argue for a far simpler solution of having one model per task and simply discarding the model corresponding to the task to be unlearned. A similar approach is followed by Continual Learning and Private Unlearning by Bo Liu, Qiang Liu, and Peter Stone (https://arxiv.org/abs/2203.12817).",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The lack of any baseline comparisons makes it hard to assess the proposed methods. Although Continual Learning and Unlearning is a relatively new topic, there exist works such as Continual Learning and Private Unlearning by Bo Liu, Qiang Liu, and Peter Stone (https://arxiv.org/abs/2203.12817), A Unified Framework for Continual Learning and Unlearning by Romit Chatterjee, Vikram Chundawat, Ayush Tarun, Ankur Mali and Murari Mandal (https://arxiv.org/abs/2408.11374) and An Unlearning Framework for Continual Learning Sayanta Adhikari, Vishnuprasadh Kumaravelu and P. K. Srijith (https://arxiv.org/abs/2509.17530).",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "4. Lack of comparisons with baseline methods.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Under algorithm 1, unlearning new tasks could prove more problematic than unlearning older ones due to the decaying nature of influence. Newer tasks could be as likely, if not more,  to be unlearned as older tasks in many applications.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Under algorithm 1, storing a private model with data that is supposed to be unlearned could still be problematic under right-to-erasure compliance laws.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 2582,
+  "prompt_tokens": 2475,
+  "total_tokens": 5057,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 0,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.001061821,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.001061821,
+   "upstream_inference_prompt_cost": 0.000344025,
+   "upstream_inference_completions_cost": 0.000717796
+  }
+ }
+}

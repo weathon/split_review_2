@@ -1,0 +1,145 @@
+{
+ "paper_id": "RtS4UqSmNt",
+ "decision": "Accept (Oral)",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "The paper considers and names several restrictions in particular on the information structure and short-livedness of agents, but does not say something on how these affect outcomes. While I understand that for the tractability of the theoretical model all of them are essential, the fact that the authors run experiments would allow for an investigation of what other dynamics are possible with variations on, e.g., the stringent public information assumptions.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Insufficient literature review makes the position and contribution problematic.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Contribution 1 claim is incorrect because prior work on the combination of Bayesian persuasion (information design) and RL exists and is not discussed.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Citations on LLM on information design / Bayesian persuasion are not comprehensive enough (only focusing on the work of two or three labs), and the discussion is too limited.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The manuscript appears to lack sufficient discussion of the many assumptions of the stylized dynamic programming problem; the related part should be in the evaluation section.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The gap regarding non\u2011Bayesian players vs. humans and LLM vs. human is not addressed; the experiments may only illustrate robustness, not realism, and the paper does not justify the relevance to human behavior.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The main text does not provide the LLM's role\u2011play settings, and the experiments do not involve human participation or human data, causing a mismatch between experiments and claims.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The abstract must be changed to a single paragraph.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Include more of the experimental setup in the main body to clarify how exactly the setup with prompting etc. is performed.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The theorems may benefit from diagrams to show what the policies are in the different regimes.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Add an extra line about the computation of \\tilde{b}_i in the main body as it is a crucial point that is currently mysterious to the reader.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The model is a little too restrictive; it is not clear if the result can go beyond the symmetric binary signal setting.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The LLM experiment requires more care; Figure 1 is misleading because the value of prior and posterior are self\u2011reported by LLMs, and the strength of the signal from the oracle agent should be validated by another LLM.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The theorem statement can be clearer; for instance, though Theorem 1 only works for \\delta = 1, Theorem 2 should hold for all discount factors \\delta<1.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Equation (28) should depend on the prefix of the trajectory, but P^*_{\\lambda} seems to be the probability of the whole trajectory.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "You may try to simplify the proof by using dynamic programming (Bellman operator) or coupling.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 1962,
+  "prompt_tokens": 2042,
+  "total_tokens": 4004,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1002,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0021862,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0021862,
+   "upstream_inference_prompt_cost": 0.0007147,
+   "upstream_inference_completions_cost": 0.0014715
+  }
+ }
+}

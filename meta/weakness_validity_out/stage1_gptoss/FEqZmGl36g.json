@@ -1,0 +1,159 @@
+{
+ "paper_id": "FEqZmGl36g",
+ "decision": "Reject",
+ "n_reviewers": 5,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "Does guidance for certain properties improve the estimation of other properties/observables not used in guidance?",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Given that one of the benefits of the proposed method is not relying on gradients, it would strengthen the paper to show guidance for discrete target properties.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The discrete property guidance experiment directly answered their main request.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The discussion of challenges about challenges with gradient-based guidance (Fig. 2) is interesting, and I think further discussion / experiments along these lines would further strengthen the paper. I wonder if there is a way to show something similar with more realistic data by artificially creating 2 disconnected modes (i.e. removing data in a transition region or something like that).",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "\"Limits ESS-Flow\u2019s effectiveness when the prior does not well inform the target distribution\": while I understand that things like image inpainting might be challenging for the method, have the authors evaluated ESS-Flow on other image guidance tasks?",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "There are newer and more accurate models compared to something like CHGNet that might give more accurate metrics (MACE, eSEN, UMA, etc.)",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The authors provided limited background information about the ESS algorithm, which I believe most of the readers in the ML community should not be familiar with. We know that there are lots of zeroth-order sampling methods for sampling from \\$\\pi(z)\\propto p(z) g(T _ \\theta(z))\\$, such as rejection sampling, the MH algorithm, and proximal sampler (https://proceedings.mlr.press/v134/lee21a.html). What's the insight behind ESS, and why is the Gaussian prior important for it to work? (Also I'm not quite in favor of the use of the abbreviation ESS in this paper, since it is also used to refer to \"effective sample size\" in the literature of Monte Carlo methods, which may cause some misunderstanding. But it's fine if you keep it.)",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "For the experiments, I think it would be more convincing if the authors can also consider some image generation tasks, which are more familiar to most ML researchers, and can better demonstrate the effectiveness of the proposed method.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Also, as the authors have introduced the multi-fidelity version of the proposed method through a coarse discretization of the flow ODE, it would be interesting to see some ablation studies on the choice of the discretization step size and its impact on the generation quality and computational cost.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper lacks experiments on standard image-domain tasks (e.g. inpainting, deblurring), which are commonly used in related work such as D-Flow and PnP-Flow.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While the empirical contribution is solid, the theoretical contribution is relatively modest.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "One of the main points of the contribution is having this apply to non-differentiable rewards/potentials yet there are no experiments demonstrating this capability.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Proof of Concept for Non-Differentiable Potentials (DpS7, iqsg, C4du): The reviewers rightly pointed out that without a non-differentiable experiment, the method had no demonstrated advantage over gradient-based baselines. The authors added a material generation task where the reward (space-group symmetry) is computed by an external black-box simulator (spglib). The method achieved a 92% success rate versus 2.5% for unconditional sampling. This provides the factual evidence that the method works where gradient methods fail.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The authors demonstratet that they can avoid the Jacobian computation, but ESS-Flow still requires many evals (>1000 MCMC steps) of the transport map, hurting the efficiency of the approach",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The authors openly describe the limitation of ESS-Flow in cases where the target is constrained on a lower-dim manifold, but claim that in scientific domains the target distribution is not overly collapsed. However, in many applications like in protein design the target distribution lies exactly on such a lower dim manifold with most of the target space being invalid sampels; some more explanation why the authors think that this is not the case in many scientific applciations would help here.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In many scientific applications, people have circumvented the non-differentiability of categorical sequences via soft relaxations similar to the atom relaxation the authors use for their comparisons. In approaches like BindCraft (Pacesa et al, 2025 Nature), this works remarkably well, so the authors should potentially try to tune that baseline to see if it as strong as it can be.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While some of the baselines in the protein structure prediction case of Figure 4 look unrealistic, ESS-Flow also seems to have biophysical implausibilities, and the ELBO of the model only partially captures these things. A more fundamental evaluation like counts of clashes would demonstrate how good the structures actually are; the RMSD values above 10 suggest that all baselines seem pretty far off.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While 0th-order methods can benefit greatly in settings with unreliable gradients, they can also face severe scaling issues in high-dimensional spaces. Having an experiment showing performance as problem dimension scales would help further inform future readers when they should use ESS-flow vs. a gradient-based method.",
+   "reviewer_index": 4,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While results on the provided experiments show that the 0th order methods are outperforming the gradient-based methods, none of the experimental settings to my understanding actually fall under the non-differentiable setting that the paper proposes to address. It would help to either (a) include a relevant experiment setting where gradient information is truly intractable to retrieve, or (b) demonstrate that in the reported settings, the gradient structure is highly unideal for gradient-based methods, e.g. high Lipschitz constant (also, for line 290, maybe better to call them gradient-based rather than optimization-based, since there are many 0th order optimization algorithms). More statistical details on the experimental setup are needed, e.g. some std\u2019s in table 2 are higher in magnitude than the mean.",
+   "reviewer_index": 4,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "There are some missing baselines/ablations (e.g. adjoint matching [Domingo-Enrich et al.], non-ESS-based source space MCMC) that would help clarify whether the main benefit comes from being gradient-free or from the specific ESS mechanism.",
+   "reviewer_index": 4,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 5412,
+  "prompt_tokens": 2879,
+  "total_tokens": 8291,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 3675,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00506665,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00506665,
+   "upstream_inference_prompt_cost": 0.00100765,
+   "upstream_inference_completions_cost": 0.004059
+  }
+ }
+}

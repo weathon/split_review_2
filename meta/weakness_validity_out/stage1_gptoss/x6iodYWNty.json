@@ -1,0 +1,110 @@
+{
+ "paper_id": "x6iodYWNty",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 3,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "My main concern is that it seems the experiments were only conducted over one trial, as I could not find any mention of repetitions, and no error bars are reported in the tables. It is advisable to conduct multiple trials of each algorithm and use statistical testing to check that differences between algorithms are significant.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I have also listed several questions in the section below; these are minor points that I think would be useful to address in the updated paper.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "I think its totally fair that you use RL, but if you had data for supervised training, I think you could actually train in supervised fashion as your NN will be differentiable, no?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "I am not sure if you can call the predictor and corrector schedules in Song et al. (2020) \"handcrafted heuristics\" as you state in your text, but their design choices are theoretically well motivated.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The global optimzation problems are only in 2d, which seems pretty low to me, given that other communities like the derivative-free optimization community optimize on those functions in >10d. I would be interested in seeing the results on higher dimensions.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I think the results are not the strongest on every task, for instance on the sampling problems, PGS seems to be on par at least.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Why do you predict the corrector actions in line 3 of the algorithm? Is it always that single action you apply in line 7? If you predict both steps at once why have them separate at all?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "You should mention in the main paper that the functions you test on are 2d in Section 5.3.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Limited Novelty in RL for Optimization/Sampling: The core premise of applying RL to improve optimization or sampling workflows is not new. As noted in the paper\u2019s related work, prior studies (e.g., Li, 2019; Belder et al., 2023; Ye et al., 2025) have already explored RL for adaptive parameter tuning, optimizer design, and schedule prediction in similar problem spaces. The paper does not sufficiently distinguish NPC from these existing RL-driven optimization/sampling frameworks beyond its focus on homotopy-specific PC structures.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Incremental Improvement Over Traditional Methods: NPC largely builds on the well-established PC algorithm for homotopy problems and only replaces heuristic step-size/termination rules with RL policies\u2014this constitutes a relatively minor modification rather than a paradigm shift. The framework does not introduce new theoretical insights into homotopy methods or RL for sequential decision-making; instead, it refines existing components with incremental adjustments, limiting its contribution to methodological advancement.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "There are still some concerns that were not fully addressed, such as incremental performance improvement.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Dependence on Manual Reward Scaling: A critical practical limitation is the need for manual tuning of reward scales for each problem instance (detailed in Appendix A), which undermines the framework\u2019s claim of being a \"general solver.\" This manual step not only increases the barrier to deployment but also contrasts with the goal of automating heuristic-driven decisions\u2014an issue that the paper acknowledges but does not meaningfully address beyond proposing future work.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "In the rebuttal, authors clarified the novelty of the proposed approach, multiple trials, and reward scales.",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 3135,
+  "prompt_tokens": 2385,
+  "total_tokens": 5520,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 2180,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.003186,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.003186,
+   "upstream_inference_prompt_cost": 0.00083475,
+   "upstream_inference_completions_cost": 0.00235125
+  }
+ }
+}

@@ -1,0 +1,187 @@
+{
+ "paper_id": "CFuNu8dK4s",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "Comparing the proposed mask-based approach with other embodiment-agnostic action representation such as flow-based ones [1] would further strengthen the paper's argument.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Several works have already explored filtering out action-irrelevant information from visual inputs. For instance, [2] proposed more general information-theoretic approach that is not limited to pixel-aligned masking.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The abstracts opens with this statement: \u201cpixel-to-action VLA pipelines typically degenerate under background and view-point shifts\u201d, which is simply incorrect for the latest pixel-to-action pipelines (as demonstrated later in the paper where the proposed approach performs worse than pixel-to-action Pi0 out of domain on the RoboTwin benchmark).",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While the authors do discuss existing works on video generation + robot control in related work, the introduction is written in such a way as if they are the first to propose this idea.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In the related work section the authors mischaracterize the multi-view, 2-stage Dreamitate model as being end2end.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "the mischaracterization of prior works including Dreamitate as poitned out by pjgR",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Introduction claims that \u201cEmpirically, Vidar achieves state-of-the-art performance on the RoboTwin\u201d, which is not true, it underperforms compared to Pi0 in an out-of-distribution evaluation.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Overall, both the novelty and the contributions are over-claimed. The only (minimal) novelty I can see is in the design of the masked inverse dynamics model and the benefits of the proposed approach are not convincingly demonstrated. Real world evaluation is not reproducible and on RoboTwin the proposed approach performs on par with prior work (slightly better in-domain, slightly worse out-of-domain, which is supposed to be the key strength of the proposed approach).",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "overall novelty of the paper is not very significant. The reviewers' concern regarding overclaimed contribution still remained.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "For some reason the authors only use 40% of the demonstrations in RoboTwin. Results with 100% of the demonstrations need to be reported for reference.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It would be even better to report results on the more widely used RoboCasa or LIBERO benchmarks instead, using the standard protocol for these benchmarks. RoboCasa specifically targets out-of-domain generalization in a low data regime (50 demonstrations per task).",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "the missing RoboCasa and more extensive experiments requestted by pjgR",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It's unclear why different video generation models are used for real and sim experiments. Results should be reported under a uniform model (or with both models in both setting for completeness).",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The proposed approach is primarily tested on short-horizon pick-and-place and simple bimanual grasping tasks, while baselines such as VPP or UniPi were originally demonstrated on more complex or diverse scenarios.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The text has several mentions about pretraining/learning priors from internet videos (L017-018, L060-061, L062-063, L140-141). However, Fig.1 and the training details in Sec.3.1.2 do not mention any details about pretraining on internet videos. L062-063 explicitly states: \"we propose a three-stage training pipeline, where Internet-scale videos are used for general pretraining\". However, pretraining details on internet videos are clear from the paper.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "the tuning-down of \"internet-scale\" claim pointed out by Pr6T",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "How does the unified observation space (L172) mitigate morphology gaps? The text describes aggregation of multi-view images and instructions related to robotic platforms, camera & task. However, this is done via concatenation and resizing/reshaping operations. It is not clear how this mitigates the morphology gaps and preserves the kinematic context.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The text mentions about generalization to unseen robotic platform/embodiments (L080-081, L155). However, this argument is not validated in the experiments (details are not provided about this result).",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In experiments (Sec.3.2), there is mention about surpassing strong baselines like Pi0 (L293-294) with only 40% data usage relative to the leaderboard. However, I did not find any details about this result in Appendix C or the main paper.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "L278-280 states that UniPi is not pretrained on the large robotics dataset used for the proposed approach. This makes a direct comparison difficult. Is this also the case for VPP? It is important to train all the baselines in the same setting so that the benefits are clear.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "As noted in the related work section (L432-435), several VLA models train on millions of demonstrations across diverse embodiments. How is the pretrained strategy proposed in this work different from the pretraining for these VLA models?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "At test-time, multiple video trajectories are generated from the diffusion model and ranked using GPT-4o to select the highest scoring trajectory. How does this help with physically plausible trajectories? Also, what does the \"scaling\" in test-time scaling refer to? The text simply describes generating multiple candidates and selecting the best one using a scoring function.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "the clarification of terms such as \"test-time scaling\". Though the point raised by Pr6T regarding the clarification of the term is totally valid. Though test-time scaling is a well-known term, what it refers to specifically can varried a lot across different contexts.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The open-loop video generation process is currently computationally expensive and slow, requiring approximately 25 seconds on high-end GPUs, which is a significant barrier for real-time deployment.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "real-time latency issue (25-seconds) raised by fXnT",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The crucial performance improvement from Test-Time Scaling (TTS) relies on an external, large Vision-Language Model like GPT-4o for \"physics-aware reranking.\" This dependency introduces an opaque, expensive, and potentially brittle component into the core control system.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "reliance on external models that are black-box and has no guaranteed and uninterpretable.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Confusion in Presentation/Conciseness: The presentation of this work can be more concise in certain sections, which would help improve the flow and focus for the reader.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited Target Embodiment Validation: While the pre-training dataset is vast, the critical low-shot adaptation is demonstrated only on a single target platform (the Aloha robot), which limits the verification of true \"generalist\" cross-embodiment transfer.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 7134,
+  "prompt_tokens": 2553,
+  "total_tokens": 9687,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 5256,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00624405,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00624405,
+   "upstream_inference_prompt_cost": 0.00089355,
+   "upstream_inference_completions_cost": 0.0053505
+  }
+ }
+}

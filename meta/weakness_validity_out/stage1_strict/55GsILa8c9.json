@@ -1,0 +1,117 @@
+{
+ "paper_id": "55GsILa8c9",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "The framework exhibits notable sensitivity to several key hyperparameters, suggesting that its distinction between \u201ccausal\u201d and \u201cnon-causal\u201d peaks may depend heavily on parameter choices. This dependence raises concerns about the robustness of the approach and its generalizability to datasets or instruments beyond those tested.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While the authors acknowledge that CausalNovo entails additional computational cost due to multiple forward passes per batch, this overhead is not quantitatively characterized. A clear assessment of the increase in training time or computational resource usage would be essential for evaluating the method\u2019s practicality in real-world scenarios.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "technical limitations were raised concerning the computational overhead (approximately 2.3x training time)",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The framework\u2019s operational definition of causal ions\u2014limited to theoretical b, y, and a ions\u2014represents a simplified view of fragmentation behavior. In practice, mass spectrometric fragmentation is inherently stochastic, and signals from other ion types or unexpected neutral losses can also carry meaningful information. Although Table 6 addresses this to some extent, the analysis may not fully capture the spectrum of ionization behaviors across different instruments or fragmentation techniques.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The article is hard to follow; the background knowledge introduction about denovo and causal inference is not clear and detailed enough. CasualML is a relatively niche field, and AI for denovo is an even more niche area; readers of this article who are not very familiar with this field will have to spend a lot of time; many details, including \"do operation\" and \"b/y ions\", are not explained clearly;",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "There is no significant improvement in performance compared to SOTA models; although the article proves through experiments that applying casualNovo to casanovo and other models can bring improvements, there is no significant difference between the best result (casanovo + casualNovo) and the best baseline (searchNovo), and the performance is worse than the latest SOTA on novobench (ReNovo, LipNovo); it is worth noting that the article omits the latest baseline Lipnovo [1], and mentions ReNovo but does not compare it experimentally. It is unclear why?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Theoretical spectrum definition is oversimplified and not scientifically sufficient. The method assumes theoretical peaks are only b/y/a ions, but a minimum correct definition in proteomics is six ion types (a/b/c/x/y/z) \u2014 and modern SOTA like GraphNovo[1] uses 18+ ion variants. This directly challenges the causal sufficiency assumption claimed in the paper, because relevant causal signal peaks are explicitly omitted.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Missing key related works and citations. GraphNovo[1], ContraNovo[2], RankNovo[3] \u2014 all highly relevant and recent \u2014 are not cited or discussed.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Missing strongest baseline \u2014 especially ContraNovo \u2014 despite using Nine-species. If the authors use this benchmark, ContraNovo is a canonical comparison point and must be included. Otherwise, robustness and generality claims remain incomplete.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Benchmark choice is unconvincing. The paper relies mainly on NovoBench, specifically the Nine-species, Seven-species, and HC-PT settings. Taking Nine-species as an example \u2014 NovoBench adopts a cross-validation\u2013style train/test split within the same dataset, which is essentially a toy scenario that does not reflect real-world generalization requirements. In contrast, modern and more realistic evaluation protocols \u2014 as adopted by PrimeNovo, ContraNovo, and RankNovo \u2014 require training on a large-scale external corpus such as MassiveKB, and evaluating on Nine-species / Seven-species / HC-PT as out-of-distribution test sets. Under this view, the current evaluation setup does not convincingly demonstrate robustness or generalization. This limitation should be explicitly acknowledged and/or addressed in the discussion section of the paper.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Significant concerns remain outstanding regarding the evaluation realism and the magnitude of improvement; specifically, the authors acknowledged but did not rectify the reliance on the smaller NovoBench dataset rather than the industry-standard MassiveKB, leaving the method's utility in large-scale real-world scenarios unproven.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Although the framework is claimed to yield causal representations, the authors never visualize or interpret what these causal embeddings represent. It would be helpful to include some qualitative examples in addition to the quantitative results in Table 14 to improve interpretability.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The authors mention that the method \u201cincreases training cost,\u201d but it would be valuable to quantify this overhead and compare it directly with the base models.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "technical limitations were raised concerning the computational overhead (approximately 2.3x training time)",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Does the proposed method effectively work only for Transformer-based variants such as CasaNovo, but not for other architectures like DeepNovo?",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 7800,
+  "prompt_tokens": 1994,
+  "total_tokens": 9794,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 6280,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00246316,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00246316,
+   "upstream_inference_prompt_cost": 0.00027916,
+   "upstream_inference_completions_cost": 0.002184
+  }
+ }
+}

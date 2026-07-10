@@ -1,0 +1,131 @@
+{
+ "paper_id": "jLO4pSi5Pt",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "Problem novelty/positioning: the failure modes (head-bias accumulation, tail erosion under EM) are not VLM-specific; they are general LT-TTA issues. The paper should sharpen what is uniquely VLM or reframe as a general LT-TTA method.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Model capacity: Results rely on low-capacity VLMs; validating on more powerful, recent VLMs would better establish its contribution and clarify whether gains persist or diminish with stronger backbones.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited methodological novelty: most core components (dual prototypes, rebalancing modules, entropy regularization) are adapted from existing long-tailed learning techniques, making the contribution incremental.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Computational overhead not fully analyzed: the proposed method introduces additional parameters; a detailed analysis of runtime and memory consumption is required.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Hyperparameter sensitivity: the method relies on several new hyperparameters (\u03b2 in BEM, \u03c4 for temperature, \u03b7 for CRA weighting) with limited analysis of sensitivity or tuning difficulty.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Intuition of synergy of SyPs and RS: the paper shows empirical synergy but lacks deeper explanation of why the two modules positively interact.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The method requires tuning several per-dataset hyperparameters, which contradicts the core objective of test-time adaptation, where models are expected to generalize without dataset-specific tuning.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Balanced Entropy Minimization (BEM) loss depends on access to class priors (\u03c0), which are not typically available in reality, making this assumption impractical.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Omission of discussion of important emerging TTA families (e.g., vision-encoder adaptation methods, parameter\u2011free approaches, reinforcement\u2011based TTA frameworks).",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Notation and exposition can be difficult to follow; parts of the method are challenging to comprehend, affecting readability.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Long\u2011tailed TTA setting largely overlaps with non\u2011i.i.d. TTA studied in prior works; claim of being the first study is doubtful.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Proposed method appears similar to existing ones; BEM modification is close to class reweighting in non\u2011i.i.d. TTA, making the contribution incremental.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Section 2 lacks explicit discussion of non\u2011i.i.d. TTA; a subsection contrasting L\u2011TTA with prior studies is essential.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Table 4 omits training\u2011free TTA methods for VLMs (e.g., TDA, ZERO), which are critical for comparisons in speed/accuracy trade\u2011offs.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 2079,
+  "prompt_tokens": 3200,
+  "total_tokens": 5279,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1081,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00267925,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00267925,
+   "upstream_inference_prompt_cost": 0.00112,
+   "upstream_inference_completions_cost": 0.00155925
+  }
+ }
+}

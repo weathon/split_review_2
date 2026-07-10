@@ -1,0 +1,173 @@
+{
+ "paper_id": "GFWfR4G5fm",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "**The work lacks any kind of formal theoretical analysis:** - While it is understandable that their identifiability results are rooted back to the additive noise models setting, the key arguments in this paper itself still need more justification. - For instance, at line 281, \".. if.. closely aligned.. (Dk\u2248Dtest), then .. is likely a close approximation.. (Gk\u2248Gtest).\"  The authors need to discuss the scale of \"\u2248\":  Do same levels graph differences (e.g., measured by structural hamming distance) always lead to the same levels of differences in the sampled data?  Should this \"alignment of distribution\" score, as well as the sparsity constraint, be normalized by the sample size of data or graph size?  These problems need to be addressed to ensure the supervised method is grounded. - Moreover, within the scope of this work the unique identification of the DAG is guaranteed by ANM.  Then what about other cases where only an equivalence class is identifiable?  How to characterize the \"Gk\u2248Gtest\" in that case?  These should be discussed.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "**Search space for training instances can be improved to prevent from overfitting:**  Currently only the new graphs are generated for test-time training, together with the data forward sampled from them using the parameters regressed on data. However, these regressed parameters can be arbitrarily complex, leading to overfitting issues.  Could the authors please explain why new data generating functions are not generated together with graphs, and in a way similar to regularize the sparsity for graphs, regularize the complexity of these functions?",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal did a decent job addressing the search-related comments. In particular, they clarified the search space question and gave more concrete discussion around the search strategy and efficiency, and they also responded on the reproducibility.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "**Search strategy for training instances can also be improved for efficiency:**  Currently the \"optimal new training graphs\" are searched through stochastic graph refinement.  It seems that many existing optimization based causal discovery methods can be incorporated as a component to directly optimize the AD score.  Existing unsupervised causal discovery methods may also be used to get some \"base graphs\" to modify from.  Following this, some existing supervised causal discovery methods may also be viewed as \"test-time training\".",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The rebuttal did a decent job addressing the search-related comments. In particular, they clarified the search space question and gave more concrete discussion around the search strategy and efficiency, and they also responded on the reproducibility.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "**The overall presentation and writing is poor:**  For instance, - The authors introduce unnecessary technical notations even in the start of the first introductory paragraph. - The whole section 3.1 is hard to read, where more natural language are expected to explain the experimental setup. - The term \"low sparsity\" in Figure 2 can be ambiguous. - Too much abbreviation abuse throughout the paper.  What is the authors' proposed method, TTT-SCL or TACTIC?  The abbreviation for AD seems unnecessary, and subscripts with (\"G\", \"U\") noise notations only make section 3.1 hard to parse.  At the same time, many abbreviations are used before explaining them, e.g., the \"DAG\" is used at line 37 but only declared at line 104.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Code has not been publicly released, which is a major drawback for reproducibility  - especially given the empirical nature of the work. Will the authors release the code?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "As I understand, the generated graph-data pairs are either used for training a SCL from scratch or fine-tuning an existing SCL, although I am not sure which approach is undertaken. Could the authors clarify this? I believe this is a major component for the work that lacks a clear description.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "If it is only training from scratch, the optimization problem could be formulated as\n\n$$\n\t\\min\\_{G} \\mathbb{E}\\_{G \\sim P\\_{test}} [ L(G, D\\_{test}) | D\\_{test}], % . % .\n$$\n\nfor whichever (empirical) distribution $P\\_{test}$ is induced by the score function in Equation (5) and a loss function $L$ that defines the training of the underlying SCL model (AVICI). Is this correct (Otherwise, how can we compare fine-tuning vs. training the SCL model from scratch?) In this case, TACTIC is equivalent to score-based Causal Discovery algorithms - with a specific, stochastic score - and I believe that the distinction in Figure 1 is inaccurate.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Out of the three presented issues (lack of robustness to distribution shift, failure to perform compositional generalization, and mismatch between real and synthetic tasks), only two of them have been assessed on the experiments, as far as I understand. Could the authors elaborate on how TACTIC addresses compositional generalization (perhaps through experiments)?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "**Novelty.** The first two issues identified in the paper about SCL are known e.g. from Montagna et al., 2024, which the authors fail to mention and discuss in relation to their work. The third issue is nice to be observed, but it is a corollary of the other two: if we show that SCL fails OOD  in synthetic settings, the same should happen in real settings (but it is nice to see! Not sure somebody showed it before)",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "**Novelty.** In relation to Issue 2: the same problem is observed in Montagna et al., 2024 (figure 4 in their paper). However, they show that the performance gap is closed as you increase the number of training datasets (see figure 12 in Montagna et al., 2024). In your setting, it is unclear how many datasets from each SCM type (eg RFF_G_ER is one SCM type) are used in the mixed setting, so it\u2019s also unclear whether the conclusions in Montagna et al., 2024 would apply here. This requires discussion.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "**Statistical significance of experiments**. Conclusions of improved performance of TACTIC on (pseudo) real data can not be drawn only from two datasets (Sachs and Syntren)",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "On top of that, there is limited evidence on scalability and compute cost, sensitivity to initialization seems nontrivial, and the real world evaluation is still narrow.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "**Methodological/conceptual.** TTT-SCL/TACTIC, in order to work, requires training/fine-tuning on the test data **assuming they were generated according to an identifiable SCM;** in the paper, an additive noise model. Then (as already discussed in Montagna et al., 2024), this is equivalent to restricting the space of solutions under the assumptions of an additive noise model: if we are willing to make this assumption, why use SCL in the first place? I can use any of the known methods for causal discovery on additive noise models (SCORE, RESIT, NOGAM, GranDAG, \u2026). The clear advantage of these methods is that they do not require a training procedure, so there is not even the problem of distribution shifts: e.g., there is no issue of noise distribution shift, as most of these methods simply don\u2019t need assumptions on the noise distribution. In this light, I don\u2019t see the improvement that TTT-SCL/TACTIC brings to the table of algorithmic causal discovery.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The assumption of generating data with an ANM is still outstanding.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "**Reproducibility.** The authors fail to provide sufficient specifications on the training\n    1. In the TACTIC procedure, how do you choose the noise distribution of the SCM\n    2. In TACTIC, how do you choose the algorithm to sample the graph?\n    3. In section 3.2, how many datasets do you use for training, each one with how many samples?\n    4. In section 3.2, what are the specifics for AVICI training",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I am not sure NOTEARS, GES, and PC are the most probing methods to compare to. Since this is mostly an algorithmic paper, many more comparisons are needed (SCORE, CAM, NoGAM, RESIT provide good baselines for ANM causal discovery \u2014 these are just some of my picks, feel free to change/expand)",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "**Clarity**. \n    1. In section 3.2, the choice of presenting the results with a table, no highlights, doesn\u2019t really help to deliver the message. Please consider using figures?\n    2. L212: \u201cEach specific training data setting is indicated above the result\u201d. I assume this refers to tables? Please clarify this, and also consider making this explicit in the tables\u2019 captions.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "L222: \u201cAVICI can be considered the strongest model of open source under the SCL paradigm\u201d: any evidence for this?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Scalability: results \u2264 20 vars; K = 200 graphs + SIM fitting may be heavy; no runtime or complexity analysis.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "On top of that, there is limited evidence on scalability and compute cost, sensitivity to initialization seems nontrivial, and the real world evaluation is still narrow.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Initializer dependence: performance drops sharply without NOTEARS seed; robustness unclear.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "On top of that, there is limited evidence on scalability and compute cost, sensitivity to initialization seems nontrivial, and the real world evaluation is still narrow.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Theory: no guarantees that AD optimization recovers true graph or stable minima.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Evaluation breadth: only Sachs as real dataset; no interventional or large benchmarks.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "On top of that, there is limited evidence on scalability and compute cost, sensitivity to initialization seems nontrivial, and the real world evaluation is still narrow.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 14431,
+  "prompt_tokens": 2944,
+  "total_tokens": 17375,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 11488,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.004262004,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.004262004,
+   "upstream_inference_prompt_cost": 0.000394496,
+   "upstream_inference_completions_cost": 0.003867508
+  }
+ }
+}

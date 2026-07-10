@@ -1,0 +1,152 @@
+{
+ "paper_id": "nxmBUymHIQ",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "The main motivation is to improve LoRA-FA by locally updating the frozen A matrix, but the improvement appears incremental and not conceptually substantial. The paper may be seen as a minor extension of LoRA-FA with limited novelty.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The background explanation of why freezing A reduces GPU memory is brief and could be clarified with a more detailed analysis or quantitative breakdown of memory components saved (activations vs. optimizer states).",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Experimental results, especially in Table 3, show negligible GPU memory savings (24.6 GB \u2192 24.1 GB). It is unclear whether the trade-off justifies the added algorithmic complexity.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The models and training scale are relatively small. For the multimodal experiment, only one epoch is trained on 10% of LLaVA 150K. This leaves uncertainty about convergence and whether LoLoRA would maintain its advantage under full-scale training or with more epochs.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The empirical results are not good enough. The claimed performance-efficiency tradeoff is not convincing, as LoLoRA's memory savings are minor (on the order of a few hundred MB) and do not justify the added algorithmic complexity; also, it underperforms.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experiments are limited to very low ranks ($r={2,4,8}$).",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The theory gives intuition but lacks empirical validation under realistic conditions.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper requires major writing improvements; phrasing needs to be improved, and organization is uneven.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Comparison to more baselines is needed; e.g., to other memory-efficient PEFT methods (e.g., orthonormal LoRA, rank selection, and so on). The current baseline selection is limited.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "No runtime or compute cost analysis is given.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Parts of the writing are quite hard to follow. The abstract mentions the \"adapter\" A which wasn't clear in its meaning as one of the two LoRA matrices. There are also references to \"local updates\", which seem to mean updates that do not involve a gradient; this understanding only came after reading much of the paper in depth",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The method is named LoLoRA, yet this name is unused in the tables, making it difficult to parse what are the results to be compared against. Using the name LoLoRA-HPCA would be much clearer",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The results aren't very strong, with Table 1 and 2 both showing that these method is typically of worse performance than simply freezing A",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Only after a number of reads was it noticed that there are no figures. While not necessary, a figure depicting how LoLoRA works and its back-and-forth between optimizing B with gradients and optimizing A with this local update would be invaluable",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The isotropic assumption on $\\Delta W$ is a bit of a stretch. That said, the resulting update still seems reasonable and it unclear if there are more meaningful and tractable assumptions.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In a small setting, there could be a sanity check that the top-r eigenspace is being learned accurately by the online algorithm and there can be a comparison when the true exact eigenspace is used.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Some of the theoretical arguments could be less dense and written more clearly.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 2743,
+  "prompt_tokens": 1802,
+  "total_tokens": 4545,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1640,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00268795,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00268795,
+   "upstream_inference_prompt_cost": 0.0006307,
+   "upstream_inference_completions_cost": 0.00205725
+  }
+ }
+}

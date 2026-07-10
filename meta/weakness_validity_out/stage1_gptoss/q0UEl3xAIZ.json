@@ -1,0 +1,96 @@
+{
+ "paper_id": "q0UEl3xAIZ",
+ "decision": "Reject",
+ "n_reviewers": 3,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "Work uses only single environment to conduct its experiments, which do not provide any evidence on how GOEI will perform on other environments of the same type or other types of environments.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Conducted experiments compare GOEI only with DQN out of all RL algorithms. While GOEI is model-based RL algorithm and especially focused on state representation learning, it's crucial to compare it with other MBRL algorithms (i.e. [Dreamer v3](https://arxiv.org/abs/2301.04104), [DreamerPRO](https://proceedings.mlr.press/v162/deng22a.html) and others)",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Work do not propose either novel algorithms nor experimental benchmarks. The algorithm (GOEI) were already [published](https://doi.org/10.1016/j.neunet.2024.106246) and used as-is with citation.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The evperiment is confined to a simplified (five-card) version of Hol\u2019s der Geier, which restricts claims about scalability and general applicability to larger, more complex environments.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While GOEI achieves state compression, the interpretability of the resulting \u201ccore states\u201d remains opaque. The paper acknowledges this but does not propose methods to make reduced representations human-comprehensible.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While the experimental validation is thorough and provides useful empirical insights, this work is primarily an application and validation of the existing GOEI method in a new, more realistic environment (the competitive card game Hol\u2019s der Geier). So it is lack of methodological novelty.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The writing is overall not sufficient to convey the technical ideas. While a lot of real estate is spent on introductoy material, the core of the evaluated methodology is introduced hastily and with excessive amounts of vague language (\"this approach is ensurred by Bayes theory in which Bayesian inference is independent of the true causal direction.\" or \"where P (\u00b7) represents true probability distribution, while the agent model is differently denoted by p(\u00b7) in the following.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The evaluation is limited, partly by being restricted to just a single game and partly by claiming success by virtue of achieving nominal performance only when playing against the Nash Equilibrium",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Even if it were executed perfectly, the contribution of investigating the performance of a known method on a single new game seems insufficient for an ICLR paper.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 1891,
+  "prompt_tokens": 1559,
+  "total_tokens": 3450,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1084,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0019639,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0019639,
+   "upstream_inference_prompt_cost": 0.00054565,
+   "upstream_inference_completions_cost": 0.00141825
+  }
+ }
+}

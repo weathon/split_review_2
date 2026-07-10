@@ -1,0 +1,117 @@
+{
+ "paper_id": "b6miYNcjag",
+ "decision": "Reject",
+ "n_reviewers": 3,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "The results hold under restrictive assumptions.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "the mild assumption remains poorly explained and difficult to test on real data.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Estimation of Gram matrices can be expensive for large $d$ or $N$.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The theoretical strengths of GDS might not easily turn into practical guidance.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Comparaison with other metrics is not provided.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "comparison with other metrics is not provided.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The strongest results need linearly independent observation processes and some structure on the reporting noise. In real data those conditions may not hold exactly.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "the mild assumption remains poorly explained and difficult to test on real data.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The score is defined to preserve certain orderings, but in practice you never see those orderings because you never see the true labels. So it can be hard to know if it is right for your case.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Determinants of Gram matrices can be numerically small and unstable, especially in higher dimensions.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experiments are convincing but still mid scale. We do not see behavior for very large label spaces or very heavy class imbalance.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "There is not a wide empirical comparison with other label quality or data pruning methods, so it is hard to tell how big the gain is.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "comparison with other metrics is not provided.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The mathematical framing may be too abstract for practical deployment; real-world users might find the link between Q,P, and reliability difficult to interpret or estimate.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "the mild assumption remains poorly explained and difficult to test on real data.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The theoretical results rely on independence and linearity assumptions in the observation model P; it is unclear how robust the score remains when these are violated.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "the mild assumption remains poorly explained and difficult to test on real data.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While the three experiments are convincing, all datasets are relatively small-scale or well-structured; results on larger, noisier real-world datasets (e.g., survey or crowd-sourced data) would strengthen claims of generality.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 2945,
+  "prompt_tokens": 1553,
+  "total_tokens": 4498,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 2238,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0027523,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0027523,
+   "upstream_inference_prompt_cost": 0.00054355,
+   "upstream_inference_completions_cost": 0.00220875
+  }
+ }
+}

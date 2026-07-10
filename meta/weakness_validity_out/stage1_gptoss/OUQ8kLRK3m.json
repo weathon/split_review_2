@@ -1,0 +1,103 @@
+{
+ "paper_id": "OUQ8kLRK3m",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "This paper only uses the all-right/all-wrong grid matching criterion, ignoring cases where some reasoning is correct or intermediate steps are reasonable, limiting the fine-grained analysis of model capabilities.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Inadequate Human Experiment Design: Alignment with human cognition is the core advantage of this Benchmark. However, the handling of this critical aspect is very weak in this paper. Although a human comparison experiment is provided, there is a lack of detailed age distribution and significance testing. Additionally, there is no explanation of how participants were motivated to complete the questionnaire seriously or how invalid responses were excluded. For the complex task of designing cognitive test questionnaires, the paper seems to lack rigor; neither the main text nor the supplementary materials provide detailed explanations of how the questionnaire design excludes potential influencing factors. This leads to the conclusion \"validates the justification of our 4-level framework\" appearing unreliable. This point is particularly important because if the foundation of the human experiment is unreliable, the entire Benchmark's cognitive alignment will be questioned, thereby affecting its validity as a Benchmark.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "1. Experiment design with human evaluation",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lack of Detailed Analysis of Model Failure Modes: Specifically, error types in high-level cognitive tasks are not thoroughly explored, failing to reveal the specific reasons for model failures in complex tasks.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Key Findings Lack Depth: The paper emphasizes five key findings, but these findings do not demonstrate particularly outstanding innovation or in-depth analysis, appearing rather superficial.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Insufficient Analysis of Visual Information Impact: This is one of the key challenges in human and LLM testing. However, the analysis of how visual information affects model performance is overly simplistic, providing results for only two visualization formats and lacking deeper exploration.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Several aspects of the experimental design and presentation require clarification and stronger consistency. the selection of models across figures lacks transparency and methodological coherence. For example, Figure 5 does not specify why those particular four models were chosen, Figure 6 focuses solely on DeepSeek-R1 without justification, and Figure 7 switches to yet another subset of models while testing only two tasks. Such inconsistent model selection makes it difficult to assess whether observed relationships are generalizable. A more systematic comparison across models, task types, and difficulty levels would provide stronger evidence for the claimed trends. Table 2 also introduces new models without explanation",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "question design and ground-truth validity raise concerns. In Figure 8, certain problems might have multiple correct solutions (e.g., the Level-3 task where the path could start from one red square to the upper blue square not only the bottom one), yet only one is labeled as correct. Additionally, the prompt mislabels the target as a \u201cred dot\u201d instead of a \u201cred square.\u201d In the Level-4 example, two obstacle types exist, but the prompt fails to specify that only the blue obstacle is reflective, potentially confusing both human and model respondents. These ambiguities undermine the reliability of the evaluation.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "discrepancies between text and data should be addressed.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Line 340 claims that human accuracy decreases with task level, but Table 1 shows relatively stable human performance across Levels 1\u20133, except for a few specific tasks (e.g., sorting). Interestingly, these same tasks are also where models perform poorly. This suggests that further validation is needed to ensure the generated items reflect increasing cognitive difficulty rather than artifacts of task design.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "2. Further validation is needed to ensure the generated items reflect increasing cognitive difficulty rather than artifacts of task design.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While the paper proposes a cognitively inspired hierarchy of reasoning tasks, it does not measure the time humans take to solve them. Given the small-scale human evaluation and potential variance, reporting the average solving time per task would better substantiate the claimed cognitive alignment and reveal the true difficulty gradient.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 3572,
+  "prompt_tokens": 1863,
+  "total_tokens": 5435,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 2539,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00333105,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00333105,
+   "upstream_inference_prompt_cost": 0.00065205,
+   "upstream_inference_completions_cost": 0.002679
+  }
+ }
+}

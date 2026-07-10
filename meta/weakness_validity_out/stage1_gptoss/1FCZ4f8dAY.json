@@ -1,0 +1,131 @@
+{
+ "paper_id": "1FCZ4f8dAY",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "The claim that the authors make in lines 49-50 is too strong; \"General\" sounds like it could be used for any group, which I don't think is what the authors are claiming.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The theory looks at the generic O(d) group action ... practical experiments only consider the O(d) case for the +1 case, raising the question of practical uses of the theory in the -1 case.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Missing reference to related work [1] (Pearce\u2011Crump, Brauer's Group Equivariant Neural Networks) and request to comment on differences between the two papers.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Notation clarity: need to explicitly distinguish permutation indices (e.g., i,j,k,l) from rotational or group indices (e.g., a,b,c,d); Figure\u202f1 blurs this distinction, making it hard to track which quantities are equivariant to which symmetries.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Parameterization of q_{t,\u03c3,J}: need clearer explanation of how the MLPs are used in practice on the collection of inner products of input vectors, and how the MLP handles the permutation indices on the inner\u2011product tensor.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Permutation handling: clarify that q_{t,\u03c3,J} are not permutation\u2011equivariant functions but are invariant w.r.t. the rotational/Lorentz/symplectic group and labeled by specific index tuples; also explain the collapse of equivalent \u03c3 into isotropy classes in implementation versus the theoretical sum over all permutations.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Isotropic tensors: clarify whether isotropy is defined only with respect to the group action or also includes permutation symmetries (e.g., a_{ij}=a_{ji}), and provide an explicit enumeration of independent isotropic components for rank\u20114 tensors relevant to the neo\u2011Hookean example.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Related work: discuss Cartesian\u2011tensor\u2011based equivariant methods that similarly use inner/outer product constructions (provide references).",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Comparison to irrep\u2011based models: add a short discussion on expressivity, i.e., whether the span of inner/outer\u2011product constructions matches the space of irreducible\u2011tensor interactions for O(3).",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Minor: Corollary\u202f1 refers to Figure\u202f3, but this appears to correspond to Figure\u202f1.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The empirical comparisons could be strengthened.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "All data are synthetic or toy; no large\u2011scale, real\u2011world or high\u2011dimensional experiments.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "No complexity or scalability discussion, crucial for practical adoption.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Comparative evaluation is narrow, lacking comparison to modern equivariant neural architectures (E3NN, LieConv, TFN).",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 2796,
+  "prompt_tokens": 2278,
+  "total_tokens": 5074,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1761,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0028943,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0028943,
+   "upstream_inference_prompt_cost": 0.0007973,
+   "upstream_inference_completions_cost": 0.002097
+  }
+ }
+}

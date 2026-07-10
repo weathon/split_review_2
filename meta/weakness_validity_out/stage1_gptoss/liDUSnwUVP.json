@@ -1,0 +1,159 @@
+{
+ "paper_id": "liDUSnwUVP",
+ "decision": "Reject",
+ "n_reviewers": 3,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "The literature review section of the paper is very limited. The scale and impact of the COVID pandemic was so large that many thousands of papers were published, effectively trying every single technology available. Resnet being a very popular model, it was used in many papers. The combination of deep learning with compartmental models was also one of the most popular (and natural) techniques for prediction.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "As a result of the previous weakness, the paper does not clarify what is the novel contribution in this extensively explored subject.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "* Fundamental Lack of Technical Novelty: This remains the primary reason for rejection.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper does not explain the choice of the residual CNNs, versus other CNN techniques, or newer techniques such as attention models, diffusion models, LLMs etc.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The central idea of using neural networks to predict the parameters of a compartmental model is promising, but it is not novel. The authors appear to be unaware of a substantial body of prior work in this area, as the main methodological contribution of the paper has already been proposed in earlier studies, particularly in [1] and [2], and in a slightly different form in [3].",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "* Fundamental Lack of Technical Novelty: This remains the primary reason for rejection.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Related extensions have even been explored in the context of agent-based modeling (e.g., [4]).",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "* Fundamental Lack of Technical Novelty: This remains the primary reason for rejection.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper\u2019s contribution largely centers on this existing technical idea, with the additional element that the neural network learns from data across multiple diseases. While this cross-disease transfer concept is interesting, it does not constitute a technical innovation.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "* Epidemiological Validity of Cross-Disease Transfer: The concern that biologically distinct diseases (vector-borne vs. respiratory) cannot serve as effective priors for one another remains unaddressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I would recommend that the authors consider submitting this work to an epidemiological or applied modeling venue, where the empirical findings and early-pandemic insights would be more appreciated.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "To strengthen the experimental analysis, the paper should also compare its approach with alternative methods for calibrating compartmental models, such as approximate Bayesian calibration.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "* Inadequate Benchmarking: Despite adding two methods (EiNN and GradABM), the authors did not compare against the primary SOTA models suggested by the reviewers.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Additionally, I suggest exploring other compartmental models to showcase the generalizability of the approach.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Overall, I do not find the current level of technical contribution sufficient for publication at a leading AI/ML venue such as ICLR.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "* Fundamental Lack of Technical Novelty: This remains the primary reason for rejection.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "This work lacks any rigorous theory or mathematical notations for the explanation of the overall model and simply seems to be an incremental work that simply fuses a CNN with DELPHI. The authors need to distinguish between the contributions they make here. Table 1 seems to just be an ablation study.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The authors claim that the COVID-19 Forecasting hub models \u201clack publicly available, reproducible codebase, and the shared forecasting outputs do not include early-stage results\u201d. This is false as all the forecasting has been made publicly available since the early stage of the pandemic. Please see https://github.com/epiforecasts/covid-us-forecasts . Unfortunately the authors use none of these models as baselines. Talking about early stage forecasting, there are also works[1,2,3] that are deep-learning based and also incorporate physics.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The motivation that prior pandemics are equally important to make predictions in a new pandemic is a bizarre assumption by any means. I am not sure why the Dengue Fever outbreak dynamics will be useful for predicting the COVID pandemic.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "* Epidemiological Validity of Cross-Disease Transfer: The concern that biologically distinct diseases (vector-borne vs. respiratory) cannot serve as effective priors for one another remains unaddressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "You define \"Last Day of Augmentation (LDoA)\" using the peak of the first wave \u2192 future knowledge, which seems to be data leakage.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "ResNet-50 on 1D time series ignores temporal dynamics and risks over-fitting.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "There are no SOTA comparisons like EpiFNP [4], DeepGLEAM [5], or NeuralODE [6].",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "* Inadequate Benchmarking: Despite adding two methods (EiNN and GradABM), the authors did not compare against the primary SOTA models suggested by the reviewers.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Predictions do not have uncertainty estimates. Are multiple runs not done for Table 1?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "No code provided, so I have reproducibility concerns.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 5162,
+  "prompt_tokens": 2576,
+  "total_tokens": 7738,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 3738,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0047731,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0047731,
+   "upstream_inference_prompt_cost": 0.0009016,
+   "upstream_inference_completions_cost": 0.0038715
+  }
+ }
+}

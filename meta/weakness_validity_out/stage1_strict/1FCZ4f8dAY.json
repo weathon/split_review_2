@@ -1,0 +1,131 @@
+{
+ "paper_id": "1FCZ4f8dAY",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "I think the claim that the authors make in lines 49-50 is too strong (this is repeated in lines 475-476). \"General\" sounds like it could be used for any group, which I don't think is what the authors are claiming.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The theory looks at the generic O(d) group action, allowing p to be +1 or -1, which is extended to other classical Lie groups. However the practical experiments only consider the O(d) case for the +1 case, which (to the uninitiated) might make the theory somewhat \"overkill\". Are there any practical uses of their theory in the -1 case?",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Whilst the related work is pretty comprehensive, I think they are missing a reference to the potential related work [1] which looks at characterising O(d) and Sp(d) equivariant functions between tensors, exactly of the form they have considered when the input tuple is of length 1. Could the authors perhaps comment on the differences between the two papers beyond this?",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "**Notation clarity:** The paper should explicitly distinguish permutation indices (e.g., $i,j,k,l$) from \"rotational\" or group indices (e.g., $a,b,c,d$). Figure 1 blurs this distinction, making it hard to track which quantities are equivariant to which symmetries.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "**Parameterization of $q_{t,\\sigma,J}$:** It would be helpful to more clearly explain how the MLPs are used in practice on the collection of inner product of input vectors. I understand that each $q_{t,\\sigma,J}$ outputs a scalar coefficient that modulates a tensor built from outer products and isotropic components, but I'm not sure how the MLP handles the permutation indices on the inner product \"tensor\".",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "**Permutation handling:** Related to above, my understanding is that the $q_{t,\\sigma,J}$ are not permutation-equivariant functions; they are invariant with respect to the rotational/Lorentz/symplectic group but labeled by specific index tuples $(t,\\sigma,J)$. In theory, Corollary 1 sums over all permutations $\\sigma \\in S_{k'}$, but in practice the implementation collapses equivalent $\\sigma$ into isotropy classes (Appendix D), so only a small subset of unique tensor structures is instantiated. It would be good to clarify what is a helpful an analytical indexing device vs. how things are practically implemented.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "**Isotropic tensors:** Clarify whether isotropy is defined only with respect to the group action or also includes permutation symmetries (e.g., $a_{ij}=a_{ji}$). For rank-4 tensors relevant to the neo-Hookean example, an explicit enumeration of independent isotropic components under partial or full permutation symmetry would help readers connect this to classical elasticity theory.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "**Related work:** It would be good to discuss Cartesian-tensor\u2013based equivariant methods that similarly use inner/outer product constructions to add to the context of your methods:",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "**Comparison to irrep-based models:** A short discussion on expressivity, i.e., whether the span of inner/outer-product constructions matches the space of irreducible-tensor interactions for O(3), would contextualize how complete the representation is relative to Clebsch\u2013Gordan\u2013based methods.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "**Minor:** Corollary 1 refers to Figure 3, but this appears to correspond to Figure 1.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The empirical comparisons could be strengthened (see comments below).",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "All data are synthetic or toy (the stress\u2013strain task uses the Garanger et al. (2024) dataset, which if I understood correctly is still a simulated material data), no large-scale, real-world or high-dimensional experiments.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "No complexity or scalability discussion, crucial for practical adoption.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Comparative evaluation is narrow. Competes mostly with MLPs and one prior symmetry-enforcing method, no comparison to modern equivariant neural architectures (E3NN, LieConv, TFN). Without these, it\u2019s hard to judge whether improvements are due to the new theory or simply to enforcing symmetry at all.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 1922,
+  "prompt_tokens": 1887,
+  "total_tokens": 3809,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 324,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00080234,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00080234,
+   "upstream_inference_prompt_cost": 0.00026418,
+   "upstream_inference_completions_cost": 0.00053816
+  }
+ }
+}

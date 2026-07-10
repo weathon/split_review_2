@@ -1,0 +1,131 @@
+{
+ "paper_id": "OAXECnLxuk",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "The comparison between DaVinci and DeTikZify is not entirely fair, as DaVinci is based on a stronger base model. This means that conclusions about the effectiveness of the data curation strategy (l.375f) could also be due to this difference.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Even though the dataset is a central contribution, its creation is not entirely clear. For example, in l.154, the authors mention that they originally collect 360k TikZ snippets. It is not clear at which step these examples are filtered down to only 30k examples.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While the findings are interesting, there are few technical novelties presented.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The main concern lies in the data construction process, which contains only 30k samples, whereas previous work (DATIkZ v1: 117k, v2: 360k, v3: 456k) used much larger datasets. Though the authors provide more details in Appendix C, key information is still missing. In line 795, they refer to 225k samples, but after stratified sampling by token length, only 58k remain (line 978), and it is unclear how the final 30k samples (line 149) were selected. Moreover, stratified sampling by token length may introduce bias, making the proposed dataset focus more on the long-tail data of the original dataset.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "We encourage the authors to provide a concise and clear description of the data construction process in the main content, showing how 366,075 (line 764) valid pairs were reduced to the final TikZ-30k dataset. It is also necessary to provide comprehensive statistical analyses of the dataset at each step to ensure that no bias is introduced.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Bias in the evaluation method is another critical weakness. In line 338, the authors mention sampling 542 instances from 456,000 instances in DATIkZ v3. This small-scale test set cannot provide statistically convincing results, and the unclear sampling method raises concerns about potential distortion. Moreover, the authors should include evaluation metrics consistent with previous studies for better performance comparison.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The reviewer is curious about the \u201cerror-free precise feedback\u201d (line 076); however, the authors only introduce it as \u201ca method\u201d (line 263) without experimental support or technical details.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In Figure 1, the Tikz code is changing from \u201cyellow\u201d to \u201cred\u201d while the text is describing \u201cfrom green to light red\u201d in the top right part.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In Table 1, did not bold the best score for SigLIP",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It would be helpful to include a code efficiency metric, such as average token or character length, to better understand the complexity and verbosity of the generated TikZ code.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "There is no information about the data timeframe or sourcing, which raises potential concerns about data contamination or leakage.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The lack of human evaluation is a major limitation. Relying solely on automatic metrics makes it difficult to assess the real\u2011world quality and fidelity of generated figures. Even a small\u2011scale human evaluation would substantially increase the credibility of the results and help correlate human judgments with automatic metrics.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Although a new dataset has been constructed, there is no description of its license information, making the details of the dataset\u2019s licensing unclear.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The evaluation relies solely on automatic metrics, and no human evaluation is conducted. Since the proposed automatic metrics partially overlap with the reward function used in RL, verifying through human evaluation whether the improvement is genuinely meaningful\u2014or merely a result of metric hacking\u2014would greatly enhance the credibility and reliability of the results.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 2450,
+  "prompt_tokens": 1843,
+  "total_tokens": 4293,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1341,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00248255,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00248255,
+   "upstream_inference_prompt_cost": 0.00064505,
+   "upstream_inference_completions_cost": 0.0018375
+  }
+ }
+}

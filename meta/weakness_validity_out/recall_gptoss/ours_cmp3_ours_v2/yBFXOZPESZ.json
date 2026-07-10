@@ -1,0 +1,82 @@
+{
+ "paper_id": "yBFXOZPESZ",
+ "method": "ours_cmp3_ours_v2",
+ "n_items": 15,
+ "matched": [
+  {
+   "index": 1,
+   "label": "invalid",
+   "raised": true
+  },
+  {
+   "index": 2,
+   "label": "invalid",
+   "raised": false
+  },
+  {
+   "index": 3,
+   "label": "valid",
+   "raised": false
+  },
+  {
+   "index": 4,
+   "label": "invalid",
+   "raised": true
+  },
+  {
+   "index": 5,
+   "label": "valid",
+   "raised": false
+  },
+  {
+   "index": 6,
+   "label": "valid",
+   "raised": true
+  },
+  {
+   "index": 7,
+   "label": "valid",
+   "raised": true
+  },
+  {
+   "index": 8,
+   "label": "valid",
+   "raised": true
+  },
+  {
+   "index": 9,
+   "label": "valid",
+   "raised": false
+  },
+  {
+   "index": 10,
+   "label": "invalid",
+   "raised": true
+  },
+  {
+   "index": 11,
+   "label": "invalid",
+   "raised": false
+  },
+  {
+   "index": 12,
+   "label": "invalid",
+   "raised": false
+  },
+  {
+   "index": 13,
+   "label": "valid",
+   "raised": true
+  },
+  {
+   "index": 14,
+   "label": "invalid",
+   "raised": false
+  },
+  {
+   "index": 15,
+   "label": "valid",
+   "raised": true
+  }
+ ]
+}

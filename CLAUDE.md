@@ -10,7 +10,6 @@ HARD RULE 9: NEVER RUN THE METHOD IN A LOWER SETTING (THINKING OFF, LOWER THINKI
 HARD RULE 10: NO EMOJIES IN ANY FORM IS ALLOWED.
 HARD RULE 11: NEVER BE PROACTIVE, NEVER DO THINGS USER DID NOT ASKED, YOU ARE A TYPER, NOT AN ENGINEER
 HARD RULE 12: DO NOT TRY TO CONTINUE CONVERSATION, EVERY MESSAGE SHOULD BE TREATED AS LAST MESSAGE
-HARD RULE 13: NO SYNTAX CHECK ALLOWED
 
 Use conda env called neg
 
@@ -81,6 +80,7 @@ If you're orchestrating a multi-stage pipeline:
 - Every external call (API, subprocess, file I/O at boundaries) should log enough that a failure is debuggable after the fact. Not structured logging, just a `print` with the input summary and the error.
 - Don't catch broad `Exception` to keep the loop going. If you don't know what failure you're handling, you're hiding it.
 - When calling OpenAI (or other models) API, if JSON is needed, use client.chat.completions.parse(model=..., messages=..., response_format=PydanticModel) instead of forcing the model to output JSON by prompt. 
+- Some models (e.g. deepseek) may not support the pydantic parse path and return a bare JSON array/value instead of the wrapped object. In that case use client.chat.completions.create with response_format={"type": "json_schema", "json_schema": {"name": ..., "strict": True, "schema": <json schema dict>}} and json.loads the content yourself. 
 
 
 ## Cost

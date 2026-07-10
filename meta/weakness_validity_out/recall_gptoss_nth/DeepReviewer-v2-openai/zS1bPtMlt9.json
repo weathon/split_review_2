@@ -1,0 +1,22 @@
+{
+ "paper_id": "zS1bPtMlt9",
+ "method": "DeepReviewer-v2-openai",
+ "n_items": 3,
+ "matched": [
+  {
+   "index": 1,
+   "label": "valid",
+   "raised": false
+  },
+  {
+   "index": 2,
+   "label": "valid",
+   "raised": false
+  },
+  {
+   "index": 3,
+   "label": "valid",
+   "raised": false
+  }
+ ]
+}

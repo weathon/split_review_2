@@ -1,0 +1,110 @@
+{
+ "paper_id": "ZZFNyU3ZSo",
+ "decision": "Reject",
+ "n_reviewers": 3,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "Only 2 main models (Show-o and Emu3) are thoroughly evaluated: 1) Show-o: 1.4B params, diffusion + autoregressive, 2) Emu3: 8.5B params, fully autoregressive. Related work mentions MoMa (Lin et al., 2024b) which also integrates MoE/MoD into Chameleon (a unified model). A more direct comparison or clearer differentiation would be beneficial, although the paper notes MoMa lacked results on generation/most understanding tasks.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "One notable limitation is the limited diversity of the tested models (Show-o and Emu3).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The method relies on calculating ARank values beforehand to select layers and estimate pruning ratios. This requires running inference on a base model with sample data, adding a preprocessing step and computational overhead before the efficient training can begin.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The pruning ratios appear to be determined statically based on the initial ARank analysis, rather than being learned dynamically during training (though this is acknowledged as a limitation). Performance might be sensitive to the accuracy of this initial estimation.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Although the paper shows a reduction in FLOPs due to the introduction of the proposed UniMoD, it does not provide an analysis of the exact increase in the number of parameters or the computational overhead caused by introducing the method.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "the authors provided... analyzing the additional FLOPs and parameters (answering ruma\u2019s request) showing it is minimal.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited Task Diversity: Only two unified models (Show-o, Emu3) are tested; results on larger or more diverse multimodal architectures would strengthen claims.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "One notable limitation is the limited diversity of the tested models (Show-o and Emu3).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Ablation Details: Although some ablation studies are provided, the analysis of router behavior (e.g., routing distributions, token importance dynamics) could be more in-depth.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Both the issues of limited diversity and the high level need for a deeper analysis remain.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited Discussion on Trade-offs: The paper could elaborate more on how pruning ratios affect different modalities\u2019 representations and downstream tasks.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Both the issues of limited diversity and the high level need for a deeper analysis remain.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Theoretical Insight: The method is largely empirical; theoretical guarantees or formal efficiency bounds would further solidify its contribution.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While the detailed analysis is provided, some findings, such as the observation that attention weight patterns differ between tasks (Observation 1) or that token redundancy differs based on modeling methods (Observation 3), might be viewed as expected or previously implied in related transformer studies.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Similarly, the finding that early layers are more critical for the final outcome (Observation 2) is a phenomenon often observed in general deep neural networks.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Although the application of these analyses specifically to token pruning is novel, the paper's reliance on specific results from the Show-o model (e.g., Observation 5) suggests the specific pattern findings might be somewhat specialized to certain model architectures.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 3520,
+  "prompt_tokens": 2044,
+  "total_tokens": 5564,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 2521,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0033554,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0033554,
+   "upstream_inference_prompt_cost": 0.0007154,
+   "upstream_inference_completions_cost": 0.00264
+  }
+ }
+}

@@ -1,0 +1,131 @@
+{
+ "paper_id": "zt7IPzsXrT",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "Construction of \"target/neutral\" inputs, threshold choice, and variance of MI estimates need clarification.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Heavy use of classifier\u2011based \"unlearn accuracy\" and CLIP; limited human/adversarial prompt evaluation.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Results limited to SD\u202fv1.4/1.5; unclear portability to SDXL/DiT architectures.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "In the rebuttal, authors also provided results (multi-concept unlearning and artistic-style unlearning) with SDXL and Flux1.0, dataset construction details, and an analysis on scaling trends and computational effiency.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Deeper, main\u2011text ablations of S vs. R vs. Informax vs. geometry step and sensitivity of UQ's normalization would strengthen claims.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "In the rebuttal, authors also provided results (multi-concept unlearning and artistic-style unlearning) with SDXL and Flux1.0, dataset construction details, and an analysis on scaling trends and computational effiency.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Some notation is ambiguous. For example, The symbol W is used for both the updated matrix and intermediate solution W\u22c6 without distinction in Sec. 4.3 (see Eq. (8)\u2013(10)). In Appendix B.1, Eq. (11) redefines the objective with A = \u03bbI + S+R and B = diag(\u03b1), but these symbols are not introduced in the main text, breaking continuity.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Random seeds, data splits for ImageNet-Diversi50/ImageNet-Confuse5, and prompt selection criteria are omitted (see Sec. 5.1), hindering replication.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Fig. 3 reports GPU-hours and memory but omits per-concept scaling trends (e.g., time vs. number of concepts), critical for \u201cscalable\u201d claims (see Sec. 5.5).",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "In the rebuttal, authors also provided results (multi-concept unlearning and artistic-style unlearning) with SDXL and Flux1.0, dataset construction details, and an analysis on scaling trends and computational effiency.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Experimental benchmarks are mostly ImageNet-derived datasets (e.g., Imagenette, ImageNet-Diversi50), lacking evaluations on more complex and diverse real-world scenarios (e.g., dynamic concepts, cross-modal associated concepts), making it hard to verify the method\u2019s practical generalization.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It is suggested to explore ScaPre\u2019s adaptability and performance changes on larger diffusion models (e.g., Stable Diffusion XL).",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "In the rebuttal, authors also provided results (multi-concept unlearning and artistic-style unlearning) with SDXL and Flux1.0, dataset construction details, and an analysis on scaling trends and computational effiency.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It is suggested that the authors enhance and enrich the elaboration of the overview figure in this paper, as the current description of this figure is too simplistic, omits many details, and makes it difficult for readers to understand.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In the proposed Imagenette benchmark, it is not explicitly specified what prompts are used for evaluation and whether these prompts are merely category names; thus, it is suggested that the authors use more complex prompts to evaluate the impact of prompts on the experimental results.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "No comparison with parameter efficient Unlearning methods (e.g., SEMU https://arxiv.org/abs/2502.07587)",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "For instance, the authors provided a comparison with  parameter efficient unlearning methods (including the recent SEMU).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It would be beneficial to have the data from figure 3 in a from of a table in the appendix",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Based on the theoretical foundation the method should also work on other SOTA models (e.g., SDXL, Stable Diffusion 3.5, FLUX.1-dev, Qwen-Image); however, no experimental confirmation is presented in the paper",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "In the rebuttal, authors also provided results (multi-concept unlearning and artistic-style unlearning) with SDXL and Flux1.0, dataset construction details, and an analysis on scaling trends and computational effiency.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 4156,
+  "prompt_tokens": 1852,
+  "total_tokens": 6008,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 2966,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0037652,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0037652,
+   "upstream_inference_prompt_cost": 0.0006482,
+   "upstream_inference_completions_cost": 0.003117
+  }
+ }
+}

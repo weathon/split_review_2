@@ -1,0 +1,32 @@
+{
+ "paper_id": "HA8vzzT6Ax",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 6,
+ "ac_lists_specific_concerns": false,
+ "items": [],
+ "usage": {
+  "completion_tokens": 732,
+  "prompt_tokens": 3189,
+  "total_tokens": 3921,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 871,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00065142,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00065142,
+   "upstream_inference_prompt_cost": 0.00044646,
+   "upstream_inference_completions_cost": 0.00020496
+  }
+ }
+}

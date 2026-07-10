@@ -1,0 +1,145 @@
+{
+ "paper_id": "pI9n8wAR80",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "The computation of effective rank and the meta\u2011learning procedure may introduce substantial computational overhead. It would be beneficial to include an analysis of the time complexity and computational complexity, particularly with respect to runtime performance on large\u2011scale datasets.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "reviewers' concerns about the novelty, method description and computational overhead are well addressed in the rebuttal.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In the downstream experimental evaluation, I notice that the SIN\u2011127 dataset is a down\u2011sampled version of ImageNet\u2011127. Why not perform testing directly on ImageNet\u2011127? I am curious about the potential results on the full ImageNet\u2011127 dataset.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper lacks a primary diagram illustrating the proposed method. Introducing a main figure would make the methodology clearer and facilitate reader understanding.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The first of my concern is novelty. The core idea of this paper is little more than a combination of existing techniques, such as effective number, dual-branch, and meta-learning for hyperparams.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "novelty issue raised by reviewer peuh: While the rebuttal argues that each component has theoretical motivation, the overall method still appears to be a combination of known ideas.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The description of the DDDE module is overly simplistic. The authors propose computing the effective rank for the representation matrix\u00a0Zy\u00a0of each class y. They fail to discuss the computational cost of this procedure.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "reviewers' concerns about the novelty, method description and computational overhead are well addressed in the rebuttal.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In Figure2 (b,d,e), after applying LMC, the slope of the pseudo-label accuracy improvement barely changes. So I think its contribution is questionable.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Effect of LMC on pseudo label accuracy raised by reviewer peuh: The rebuttal argues that pseudo-label accuracy slopes may not reflect generalization and points to ablations where LMC improves final accuracy. Still, the evidence that LMC is a decisive contributor remains somewhat indirect.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The proxy validation set\u00a0Dv\u00a0is resampled from the small and imbalanced labeled set Dl. For tail classes,\u00a0Dl\u00a0may contain only a few samples. How do you justify that such a severely constrained proxy set can effectively guide the learning of $\\tau$ for a massive and differently distributed unlabeled set\u00a0Du?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The related work is covering a subset of the field, important references (such as [1]) are only used in the appendix, other are completely missing e.g. [2-5].",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The premise for the main hypothesis, i.e., the negative effect of overlooking the interplay between the two types of adjustment, has not been clearly supported by experimental results. If the premise is not properly established, all subsequent claims are affected. Figure 1b) only shows that monotonicity is not fulfilled.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Some statements lack evidence or reference, e.g. line 085. \"current work\" embraces all works, see also 1. (this is not saying that any of [2-5] does).",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The protocol (for CIFAR) chosen according to Du et al. ICML 2024 (Simpro) deviates from other, previously published protocols, e.g. from the cited paper [6], and makes comparisons difficult, in particular to state-of-the-art methods that remained un-cited and that use those previous protocols.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "For experiments that use compatible protocols, e.g. STL-10-LT, the proposed method is inferior to e.g. [4} and rather en par with [3].",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The description of erank is not sufficiently self-contained. In particular, it is not clear why the EN is estimated by erank. Line 197 just says \"we quantify EN ... using ... erank\" and references point to EN and erank, but not why the quantification is possible.  Also, it is not obvious why line 205 $p(i)$ is a probability and not just a point in the $m_y$-simplex.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "4.2 is partly written in a procedural way and the overall approach that leads to the algorithm needs to be stated more clearly.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The generalization analysis in Section 5 does not significantly enhance the overall contributions of the paper. Does the theory inspire/motivate the method proposed in the paper? If not, does the theory provide useful guarantees towards the final performance of the proposed solution?",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The presentation of the theoretical part of the paper can be greatly improved. Could the authors expand on the Line 298 (``If our estimation is accurate,...justifying our methodology``) and make it mathematically precise. If the reviewer understand it correctly, the only optimizing parameter in Section 5 is $\\tau$ and the function class $h_{\\tau}$ is linear with respect to $\\tau$ (since $\\tau$ is the overall logit-adjustment factor). Could the author attempt to provide a more explicit characterization of the Rademarcher complexity in this case?",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 4730,
+  "prompt_tokens": 2542,
+  "total_tokens": 7272,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 3303,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0044372,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0044372,
+   "upstream_inference_prompt_cost": 0.0008897,
+   "upstream_inference_completions_cost": 0.0035475
+  }
+ }
+}

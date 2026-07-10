@@ -1,0 +1,40 @@
+{
+  "citation": "",
+  "description": "",
+  "features": {
+    "paper_id": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "decision": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "reviewer_index": {
+      "dtype": "int64",
+      "_type": "Value"
+    },
+    "review_item": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "ac_status": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "needs_editing": {
+      "dtype": "bool",
+      "_type": "Value"
+    },
+    "ac_evidence": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "label": {
+      "dtype": "string",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": ""
+}

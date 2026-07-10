@@ -33,6 +33,7 @@ For the changed code only, answer each item. Allowed answers: no / doesn't apply
 8. Did the code optimized for time/cost/memory that COULD (no need to be must) lead to lower quality/wrong results?
 9. Does the code have comments for code that is easy to understand?
 10. Does the code keep results in memory and not disk?
+11. Did the agent write any arguments or hyper parameters without asking the user?
 
 ## Principles the review enforces
 This is research code: offensive programming, crash on the unexpected, no token/output caps, no speed-for-quality or speed-for-correctness downgrades. Correctness above "it runs".

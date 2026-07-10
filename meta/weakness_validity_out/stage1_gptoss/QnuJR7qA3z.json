@@ -1,0 +1,145 @@
+{
+ "paper_id": "QnuJR7qA3z",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "One of the main limitations (also mentioned by the Authors) is that all the benefits are based on the hardware synthesis and the impact of these changes on RAM and latency can be significantly higher (or lower).",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Authors are also encouraged to see the impact of these changes on other domains such as computer vision using ViTs.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Minor : Citation for RMSNorm and LayerNorm for the first time is missing L037",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Results rely on synthesis-based estimations only, with no end-to-end performance, latency, or energy measurements on real hardware (FPGA, or ASIC prototype) (noted as limitation) or simulation. Ideally, the results for area and power reported should be post place-and-route.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Evaluations cover only standard precision settings and moderate workloads; there is no stress testing under long-sequence LLMs, mixed precision, or extreme numerical conditions.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper does not compare against reconfigurable functional units (RFUs) or FPGA based designs that already provide similar arithmetic flexibility.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Models and datasets are reasonable but small. Ideally, to convincingly portray the benefits of the method a large range of model sizes must be employed with reports of accuracy and inference performance metrics.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Evaluation omits key runtime baselines such as GPU fused kernels or optimized accelerator designs.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The size of the ReLU network (e.g., hidden dimension) is not provided, making it difficult to estimate the processing cost of HARA.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "\"Missing key details\" (R74ZU): Authors claim hidden dimensions, conversion steps, local storage (CLUT), and tuning costs are already in the paper/appendix and further clarified in rebuttal. If accurate, this substantially mitigates the \"insufficient description\" critique.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The conversion mechanism from GeLU to HARA is not described.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "\"Missing key details\" (R74ZU): Authors claim hidden dimensions, conversion steps, local storage (CLUT), and tuning costs are already in the paper/appendix and further clarified in rebuttal. If accurate, this substantially mitigates the \"insufficient description\" critique.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The storage and memory-access overhead for the ReLU network weights is not adequately discussed. Conventional nonlinear operator implementations (including LUT-based approximation methods) do not require external memory access, so the latency and energy implications of fetching ReLU network weights should be analyzed for a fair comparison.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "\"Missing key details\" (R74ZU): Authors claim hidden dimensions, conversion steps, local storage (CLUT), and tuning costs are already in the paper/appendix and further clarified in rebuttal. If accurate, this substantially mitigates the \"insufficient description\" critique.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The parameter tuning cost for HARA (via dynamic programming and fine-tuning) is not fully discussed.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "\"Missing key details\" (R74ZU): Authors claim hidden dimensions, conversion steps, local storage (CLUT), and tuning costs are already in the paper/appendix and further clarified in rebuttal. If accurate, this substantially mitigates the \"insufficient description\" critique.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "This paper does not clearly describe the hardware resource requirements of conventional LUT-based approximation methods or their impact on inference accuracy. For example, NN-LUT [1] employs a simple LUT with only 16 entries to approximate nonlinear functions, achieving low hardware cost while maintaining accuracy. Although increasing the number of LUT entries could further reduce the mean squared error (MSE), such improvement may not necessarily lead to meaningful gains in inference accuracy. Hence, improving MSE at the expense of hardware efficiency may not be justified. Consequently, directly comparing MSE values between HARA and conventional LUT-based approximation methods may not represent a fair evaluation. A more comprehensive assessment, including hardware area, power overhead, processing latency, and inference accuracy, would be necessary to establish the practical advantages of HARA.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "\"Baselines and \u201cwhat is the right comparison\u201d (R8w3U, R74ZU): Comparisons to NN-LUT / RI-LUT are relevant, but reviewers asked for comparisons to other flexible/reconfigurable units and more recent or alternative baselines. The rebuttal promises more literature coverage but does not fully close this.\"",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Methodological contribution seems incremental: While the paper frames its contribution as a unified framework with an optimized DP-based initialization pipeline, the core technical novelty beyond prior work such as NN-LUT or RI-LUT appears limited. The main differentiator seems to be the use of dynamic programming for systematic breakpoint selection and analytical ReLU parameter conversion, which is a well-motivated but relatively moderate algorithmic improvement. If I have misunderstood the extent of this difference, clarification on how HARA\u2019s optimization pipeline fundamentally departs from previous LUT-based or neural approximation methods would be helpful.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "\"the incremental vs prior LUT/approximation engines question remains standing: is the key novelty truly methodological (global DP + analytic mapping + unified parameterization), or mainly an engineering improvement.\"",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lack of strong empirical motivation: The paper does not convincingly establish that non-linear operators are the primary computational bottleneck in modern Transformer inference, especially compared to attention or matrix-multiplication components. While the proposed framework demonstrates excellent numerical approximation accuracy, it remains unclear how much practical speedup or memory benefit these approximations bring at the end-to-end system level. In addition, the experimental scope is somewhat narrow\u2014evaluations focus on a small set of tasks and omit runtime or latency measurements that could justify the broader motivation.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The work\u2019s focus and contributions are primarily hardware- and implementation-oriented, with less emphasis on learning dynamics or algorithmic understanding. Therefore, the paper may align more naturally with a hardware or systems venue (e.g., DAC, MLSys) rather than ICLR, which typically emphasizes conceptual or methodological advances in machine learning.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 4363,
+  "prompt_tokens": 2995,
+  "total_tokens": 7358,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 2774,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0043205,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0043205,
+   "upstream_inference_prompt_cost": 0.00104825,
+   "upstream_inference_completions_cost": 0.00327225
+  }
+ }
+}

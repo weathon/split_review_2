@@ -1,0 +1,117 @@
+{
+ "paper_id": "5DpzzTPnJZ",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "Theory scope. Main results are derived for FQI-style/population losses; transfer to fully practical bootstrapped targets with representation drift is not fully established.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Breadth. Evaluation is confined to continuous control; adding a pixel-based or sparse-reward task (e.g., DMControl pixels, AntMaze) would test generality.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors added experiments on pixel-based tasks (Atari) and long-horizon settings (10M steps), showing the method's generality.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Over-edited text (LLM side-effects). While LLM assistance can improve flow/grammar, several sentences become awkward or semantically off and harm readability\u2014for example, the abstract\u2019s \u201cHow plasticity loss arises, dissipates and can be dissolved.\u201d A careful human pass is needed to fix misuses and improve readability.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Related work is too narrowly framed (over-emphasis on resets). The section concentrates on reset-style approaches while under-representing other relevant families\u2014particularly churn-reduction methods and auxiliary-loss\u2013based representation stabilisation. Please discuss these lines of work and clarify how SWD differs or complements them (see, e.g., churn-reduction: https://arxiv.org/abs/2506.00592; auxiliary losses: https://arxiv.org/abs/2405.00662).",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Missing related work / plasticity literature coverage. The related work should more deeply connect to recent plasticity and replay-weighting literature. Please discuss and contrast with, e.g.: - Overestimation, Overfitting, and Plasticity in Actor-Critic: the Bitter Lesson of Reinforcement Learning (ICML\u201924). - Disentangling the causes of plasticity loss in neural networks (CoLLA\u201924). - Hyperspherical Normalization for Scalable Deep RL (ICML\u201925). - Mitigating Plasticity Loss in Continual RL by Reducing Churn (ICML\u201925). - A Forget-and-Grow Strategy for Deep RL Scaling in Continuous Control (ICML\u201925).",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Novelty and Relation to 'Forget and Grow': While the authors provided a theoretical distinction in the rebuttal, the practical mechanism of SWD strongly aligns with the 'Forget and Grow' strategy and other age-based heuristics. To avoid overclaiming novelty, the authors must strictly acknowledge this work and explicitly delineate their theoretical contribution against it in the introduction of the camera-ready version.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Overlapping idea; contribution clarity vs ER-decay. Conceptually, SWD (linear, age-based down-weighting) looks very close to prior ER-decay heuristics, with differences seemingly in coefficients/schedules. The paper does offer more formalism, but the delta in contribution should be crystal clear: which parts are novel theory, which are new algorithmic prescriptions beyond a tuned decay, and what guarantees (if any) distinguish SWD from ER-decay? I'm open to a high score even if the mechanism is similar\u2014provided the theoretical backup and empirical analysis are meticulous and make the case for why this instantiation is principled/non-equivalent.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Implementation and efficiency details are thin. A per-sample weight update naively done every step can be costly. Please: - Describe the efficient implementation (lazy updates? piecewise-linear buckets? periodic renormalization?). - Report end-to-end wall-clock and GPU-hour costs on standard hardware for SimBa vs SimBa+SWD;",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Computational Efficiency (Reviewer 8vUF, HaDB): The authors successfully addressed the concerns regarding the $O(N)$ weight update cost by implementing an approximate bucket-based sampling scheme. This reduced the runtime overhead from ~20% to a negligible 0.6% while maintaining performance, thereby resolving the speed issue effectively.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The linear decay design of SWD (w_i = max(w_min, 1 - age_i/T)) appears somewhat arbitrary without clear theoretical justification for why this particular weighting scheme optimally compensates for the 1/k gradient attenuation. Sensitivity analysis on decay schedules and hyperparameters is insufficient.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Recency-based sampling is not novel conceptually, and the paper lacks direct comparisons with recent plasticity-preserving methods (ReDo, ReGraMa, Plasticity Injection). The claimed 'SOTA performance' is primarily against uniform sampling and PER, making it difficult to assess the true contribution relative to the current state of the art.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Baseline Comparison and Orthogonality (Reviewer mmd4, HaDB): The authors provided convincing empirical evidence that SWD is orthogonal to NTK-based methods (e.g., S&P). They demonstrated that SWD provides additive gains when combined with these methods, clarifying its distinct role in handling distribution shift rather than just network capacity.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Unprobed NTK mechanism: The paper posits NTK rank collapse but provides no spectrum or conditioning measurements; half of the causal story remains speculative.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Missing SOTA positioning: No head-to-head (or composition) with recent plasticity remedies such as ReGraMa, Plasticity Injection, or ReDo, leaving SWD's incremental or additive value unclear.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Baseline Comparison and Orthogonality (Reviewer mmd4, HaDB): The authors provided convincing empirical evidence that SWD is orthogonal to NTK-based methods (e.g., S&P). They demonstrated that SWD provides additive gains when combined with these methods, clarifying its distinct role in handling distribution shift rather than just network capacity.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Practical knobs under-explored: No sensitivity for $T$ (linear decay steps) and $w_{\\min}$; interactions with PER are not clarified (do they stack or conflict?); runtime or throughput impact is unreported.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 8137,
+  "prompt_tokens": 2000,
+  "total_tokens": 10137,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 6350,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.002513675,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.002513675,
+   "upstream_inference_prompt_cost": 0.000276,
+   "upstream_inference_completions_cost": 0.002237675
+  }
+ }
+}

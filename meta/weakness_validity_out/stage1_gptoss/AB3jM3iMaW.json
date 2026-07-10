@@ -1,0 +1,166 @@
+{
+ "paper_id": "AB3jM3iMaW",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "The motivation for using an LLM remains unclear (apart from some success in preliminary work)",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The main weakness is a lack of innovation and further insights.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The outstanding concerns include technical novelty and the distinction in technical challenges between the temporal and static graph settings (for details see Summary).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The idea that the graph reasoning ability of LLMs can be incentivized through reinforcement learning has been illustrated in previous work.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The outstanding concerns include technical novelty and the distinction in technical challenges between the temporal and static graph settings (for details see Summary).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Although the authors claim that previous works focus on static graphs while they target temporal graphs, they don't show what difference it will bring to the reasoning or further insights (e.g., what is special for temporal graphs but not static graphs).",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The outstanding concerns include technical novelty and the distinction in technical challenges between the temporal and static graph settings (for details see Summary).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In the whole pipeline, the innovation is quite limited.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The outstanding concerns include technical novelty and the distinction in technical challenges between the temporal and static graph settings (for details see Summary).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "For example, the algorithm is the well-established GRPO, and the LLM-as-Judge evaluation is also commonly used.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The outstanding concerns include technical novelty and the distinction in technical challenges between the temporal and static graph settings (for details see Summary).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The novelty of the proposed Real-TG is limited and lacks technical innovation. In Real-TG, the QA formulation [1], the GRPO pipeline [2], the $\u0003-alpha-temporal random walk [3], and the LLM-as-a-Judge evaluation [4] are introduced from existing works. All these mechanisms resemble existing works and do not introduce principled advances in LLM-based temporal graph learning or RLVR.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The outstanding concerns include technical novelty and the distinction in technical challenges between the temporal and static graph settings (for details see Summary).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The motivation of the model component design is unclear.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Why is RL chosen instead of SFT? In the literature on large reasoning models, RL is typically used to optimize preferences or human-aligned objectives; however, for tasks with a single correct answer, SFT may be more appropriate. The authors should clarify why RL is necessary and what concrete benefits it confers in this setting.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Why adopt $\u0003-alpha-temporal random walks rather than simpler k-hop neighborhoods?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Why use F1 as the reward metric rather than other ranking/IR metrics (e.g., MRR)? In equation 1, do the authors compute this F1 over a single pair of samples, since F1 fundamentally requires aggregation over multiple samples? An illustrative example may help with a better understanding of the paper.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The major concerns that were addressed during the rebuttal include Reward hacking quantification (Reviewer N4Ej), Training stability and hyperparameter sensitivity (Reviewer W9DC), Clarification of F1 reward design (Reviewers N4Ej, W9DC), and dataset diversity (Reviewer N4Ej).",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The GRPO procedure is known to be sensitive to hyperparameters. Does Real-TG also suffer from such instability?",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The major concerns that were addressed during the rebuttal include Reward hacking quantification (Reviewer N4Ej), Training stability and hyperparameter sensitivity (Reviewer W9DC), Clarification of F1 reward design (Reviewers N4Ej, W9DC), and dataset diversity (Reviewer N4Ej).",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Plots showing reward vs. training step would greatly strengthen confidence in the RL training procedure.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Why not conduct experiments in the recently proposed benchmark [5] and compare the models that also utilize LLMs for temporal graph learning [6]?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper provides an insightful observation of \"reward hacking\" in the smaller ReaL-TG-0.6B model, which \"justifies its predictions by claiming '(uq, vq, tq) has already been seen'\". This is a critical finding for outcome-based RL methods. Despite its importance, this phenomenon is not systematically measured. The paper provides no evidence or quantification to demonstrate it.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The major concerns that were addressed during the rebuttal include Reward hacking quantification (Reviewer N4Ej), Training stability and hyperparameter sensitivity (Reviewer W9DC), Clarification of F1 reward design (Reviewers N4Ej, W9DC), and dataset diversity (Reviewer N4Ej).",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The approach injects graph context purely as text; while explainable, it may drop important structural cues vs. learned embeddings.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Relies solely on six TGB datasets, which may share similar characteristics like social or transaction networks, limiting generalization claims.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The major concerns that were addressed during the rebuttal include Reward hacking quantification (Reviewer N4Ej), Training stability and hyperparameter sensitivity (Reviewer W9DC), Clarification of F1 reward design (Reviewers N4Ej, W9DC), and dataset diversity (Reviewer N4Ej).",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Training data sampled from only four datasets with 1,000 queries, potentially insufficient for diverse temporal patterns.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The major concerns that were addressed during the rebuttal include Reward hacking quantification (Reviewer N4Ej), Training stability and hyperparameter sensitivity (Reviewer W9DC), Clarification of F1 reward design (Reviewers N4Ej, W9DC), and dataset diversity (Reviewer N4Ej).",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Unseen datasets (uci, enron) are smaller, with fewer involved nodes, possibly underrepresenting complex scenarios.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The major concerns that were addressed during the rebuttal include Reward hacking quantification (Reviewer N4Ej), Training stability and hyperparameter sensitivity (Reviewer W9DC), Clarification of F1 reward design (Reviewers N4Ej, W9DC), and dataset diversity (Reviewer N4Ej).",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 6086,
+  "prompt_tokens": 2125,
+  "total_tokens": 8211,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 4410,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00530825,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00530825,
+   "upstream_inference_prompt_cost": 0.00074375,
+   "upstream_inference_completions_cost": 0.0045645
+  }
+ }
+}

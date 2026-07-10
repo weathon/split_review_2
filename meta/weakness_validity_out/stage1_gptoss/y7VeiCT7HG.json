@@ -1,0 +1,187 @@
+{
+ "paper_id": "y7VeiCT7HG",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "The theoretical formulation defines the coverage probability $P({X}^\\star \\subseteq X | X \\subseteq {X}^\\star)$, yet the practical implementation replaces this with an approximation $P({X}^\\star \\subseteq A^r_X | X \\subseteq {X}^\\star)$, where $A^r_X$ is a union of balls. The final acquisition (Eq. 8) relies on a minimum-distance heuristic $\\min(\\Delta(X, {X}), \\Delta(X, X_n))$, but the paper does not provide a rigorous justification linking this heuristic to maximizing the coverage probability. Could the authors provide a more formal bridge between the theoretical coverage formulation and the adopted minimum-distance heuristic?",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The coverage probability is approximated using minimax distance, which may not adequately capture complex or multimodal Pareto structures. Could alternatives like kernel-based diversity be explored?",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "This paper focuses on the MOBO problems that have many optimal solution regions, aiming to demonstrate the effectiveness of the proposed coverage term. However, the results do not significantly outperform the baselines; results on ZDT/DTLZ (Appendix) show smaller gains. The author should provide more diverse problems to strengthen claims.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The authors mentioned that a larger batch size leads to higher $P(X^\\star \\subseteq X)$ while it may reduce $P(X \\subseteq X^\\star)$. However, the result indicates that each batch size setting illustrates similar performance. There's no clear guidance on how to choose a batch size in practice for new problems. Could you conduct more experiments for this phenomenon?",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Some figures could better label axes or explain color scales for clarity.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The paper should be presented in the template of ICLR 2026, not ICLR 2025.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "I think the main issue is the heuristic foundation of this paper, there is no theoretical justifying thet $p(X \\subseteq X^*)$ can be approximate by qEHVI and in fact, I don't think this ever hold and one can justify by using exhaustive MC sampling as approximation.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Similar concerns apply to the coverage term: the connection between space-filling (minimum distance) and coverage probability is purely heuristic",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "(Minor) Tables would benefit from bold text to highlight best performance for easier comparison.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Maximizing HV is actually also diversifying solutions as the true Pareto front always has the maximum HV value. It seems to me that this plays a similar role with maximising the coverage of solutions.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "During HV-related search, the reference point may not be a big issue as it can be set adaptively based on the nondominated solutions found.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The metric used for maximizing coverage is like the well-known uniformity metric in multi-objective evolutionary optimization, Spacing (SP), which measures the maximim distance between two nearest solutions.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "IGD is not first proposed in Ishibuchi et al 2025. Please cite the orignal paper.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Not quite understand why you consider the \"IGD\" in the decision space. You didn't consider the diversity of solutions in the decision space since your method cares about the diversity in the objective space. There could be a situation that there is perfectly distributed solution set in the decision space, but poorly distributed mappings in the objective space - I think such a case can't verify your algorithm?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Not quite understand why your algorithm obtains a better HV compared to qEHVI since the latter directly optimize HV, but you try to strike a balance between HV and SP. Did you use the same reference setting strategy? If yes, what is it?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The proposed method is based on qEHVI and jointly estimates a batch of solutions, which may scale up poorly with the batch size [1] and perform worse than a sequential strategy [2,3]. When using a sequential acquisition strategy, qEHVI [2,3] can naturally produce a batch of solutions with good diversity and convergence through its iterative uncertainty updates. It would be useful to include a theoretical and empirical comparison between the proposed method and the sequential qEHVI.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The related work section is not very comprehensive with respect to MOBO methods. The experimental evaluation lacks comparisons with several well-established MOBO baselines, such as Sobol sampling, ParEGO, and Joint Entropy Search (JES) [4].",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "some key ideas and theoretical comparisons to concepts from the MOBO and MOEA literature are absent in the related work section",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The probabilistic factorization (Eq. 7\u20138) is intuitive but lacks formal theoretical proof.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Ablation study for the space-filling component is missing, making it unclear how much it contributes individually.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "some key ablations are missing",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Some figures and equations are overly dense, affecting clarity.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "No discussion on extending the framework to constrained or preference-based MOBO.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Theoretical limitations section (Section 5) could be expanded to strengthen formal grounding.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 4205,
+  "prompt_tokens": 2357,
+  "total_tokens": 6562,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 2598,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0039787,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0039787,
+   "upstream_inference_prompt_cost": 0.00082495,
+   "upstream_inference_completions_cost": 0.00315375
+  }
+ }
+}

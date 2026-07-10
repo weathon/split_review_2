@@ -1,0 +1,110 @@
+{
+ "paper_id": "Pxd5mjwznl",
+ "decision": "Reject",
+ "n_reviewers": 3,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "The described inconsistency in the paper does not exist. Gradient descent adjusts parameters, and activations a or pre-activations z are functions of parameters, so there is no inconsistency between updated z' and a'. Therefore, the paper is trying to solve a non-existent problem by replacing true gradient of activations by its finite difference approximation in backpropagation.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Also, ignoring decades of prior work on training neural networks, makes the contribution appear uninformed.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The authors seem to be unaware of all the literature about alternatives to backpropagation. More generally, no related work is discussed, there are only 10 references and the most recent one is from 2021.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The maths are wrong. The authors assume that after a step the activation $a$ will move exactly in the direction of its gradient (Eq. 3), which is wrong.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I do not understand why the authors use the inverse sigmoid function to recompute $z$ from $a$ when it has already been computed during the forward pass.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experimental section is extremely lacking. A 3-neurons network on a synthetic task is not a good benchmark, we would expect at the very least larger networks (e.g. 2 hidden layers, dimension 128) on CIFAR10 for instance.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The motivation for the proposed modification of the backpropagation (BP) is confusing. The exact gradient is essential for optimizers that update the model's parameters. If one approximates the gradient with a finite difference, then optimizers may converge to the wrong quasi-optimal parameters that do not correspond to the original problem. Moreover, typically only the stochastic gradient estimate is available in BP, and it remains unclear how this factor can be combined with the proposed approach.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "No theoretical analysis or even intuition on how the proposed approach resolves the stated problem of \"Although the models have shown great performance, it seems we are facing a bottleneck because nowadays we need to enlarge the models to billions of parameters to improve the accuracy by only a few percentages.\"",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The proposed approach is empirically tested only for the toy models and toy datasets, which is insufficient to make any well-supported conclusion about its effectiveness.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Although generalization ability is crucial for deep learning models, I see that such analysis is explicitly excluded from the consideration.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The observed gain in cost (btw what is cost in the y-axis in Figures 2 and 4?) looks not so large and can be explained with some random initialization. No proper statistical analysis of the significance of the presented gain is provided.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 2460,
+  "prompt_tokens": 1743,
+  "total_tokens": 4203,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1633,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00245505,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00245505,
+   "upstream_inference_prompt_cost": 0.00061005,
+   "upstream_inference_completions_cost": 0.001845
+  }
+ }
+}

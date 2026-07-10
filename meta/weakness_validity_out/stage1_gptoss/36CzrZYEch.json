@@ -1,0 +1,152 @@
+{
+ "paper_id": "36CzrZYEch",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "This approach seems limited to optimizing for human preferences as measured by these specific benchmarks. If for example, I wanted to fit to the preference of some specific group, then this method would not work.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Generalization: Reviewer kaX6 maintained that the contribution is limited by its restriction to autoregressive models (Janus-Pro), limiting its impact...",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The motivation for choosing this method over alternatives isn't entirely clear to me. For instance, would the approach remain effective with a different base model than Janus Pro? Would this generalize better to other human preference benchmarks?",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Generalization: Reviewer kaX6 maintained that the contribution is limited by its restriction to autoregressive models (Janus-Pro), limiting its impact...",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I'd appreciate more understanding into the underlying mechanisms of this behavior. Is this an emergent property of the pretraining phase, or something else?",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Mechanism Attribution: There is there... skepticism (Reviewer TNZX) about whether the gains are truly due to the NSC reward or the \"Semantic CoT\" reasoning step used in the pipeline.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I am surprised that figure 2 allows one to draw this conclusion. For example, [0] and other papers indeed observe an increase in entropy in addition to an increase in reward. I notice that the GRPO for the LLM is on a MATH task, which entropy does usually decrease.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Conflicting Literature: Reviewer kaX6 pointed out conflicts with recent literature (e.g., Tongyi DeepResearch) suggesting entropy increases with reward in text tasks as well, complicating the paper's narrative...",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Unimportant but appendix b.1 refers to GRPO as Generative Reward Process Optimization, instead of Group Relative Policy Optimization.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "This paper\u2019s statements about self-confidence are mistaken. As written, IRIS is actually maximizing self-confidence, not minimizing it. The paper\u2019s prose repeatedly says the opposite, but the mathematics and the reward used in training point the other way. Eq. (2) defines Self-Certainty (SC) at a token as $SC = -{KL}(U\\ \\Vert\\ \\pi_\\theta)$, contradicting the typical definition [r1].",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Clarification of Definitions: The authors corrected a typo in Equation 2 regarding the definition of Self-Certainty (SC) and Negative Self-Certainty (NSC) to address Reviewer TNZX\u2019s confusion regarding the sign of the KL divergence.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "There is a severe mischaracterization of the proposed method IRIS. The papers asserts that forward KL to uniform is \u201cmode-covering,\u201d contrasting it with entropy; but with the paper\u2019s own definition (forward KL: ${KL}(U\\Vert \\pi)$), increasing NSC pushes peaky (confidence-seeking) distributions, not mode-covering.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Theoretical Validity and Optimization: Reviewer TNZX raised a critical point that the authors' ablation study\u2014where directly optimizing NSC using gradient descent caused model collapse\u2014undermines the central claim.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Metric terminology drifts mid-paper. Fig. 2\u2019s paragraph says they \u201ccompute the self-confidence measured by ${KL}(U\\Vert \\pi)$,\u201d which is NSC by their Eq. (2), while elsewhere \u201cself-certainty\u201d is plotted and discussed, resulting in inconsistent naming (SC vs. NSC vs. \u201cconfidence\u201d).",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Clarification of Definitions: The authors corrected a typo in Equation 2 regarding the definition of Self-Certainty (SC) and Negative Self-Certainty (NSC) to address Reviewer TNZX\u2019s confusion regarding the sign of the KL divergence.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Novelty relative to prior work (INTUITOR [r1]) is thin at the algorithmic core. IRIS\u2019s intrinsic reward is exactly the token-level forward KL to uniform, used inside GRPO\u2014the same scalar that INTUITOR optimizes (called \u201cself-certainty\u201d there) using the same GRPO algorithm. The contribution is primarily domain/application (T2I) and pipeline choices (semantic CoT), not a novel objective. This should be explicitly acknowledged and compared.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Gains in the experimental results may stem from the semantic CoT stage rather than the intrinsic reward per se. While the appendix shows with/without CoT comparisons, the main results and claims still bundle CoT with IRIS; stronger controls are needed (e.g., CoT-matched baselines and cross-combinations with external-reward pipelines).",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Mechanism Attribution: There is there... skepticism (Reviewer TNZX) about whether the gains are truly due to the NSC reward or the \"Semantic CoT\" reasoning step used in the pipeline.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Although IRIS trains without external verifiers, most metrics are pretrained reward/evaluator models (HPSv2, etc). Improvements against these may reflect alignment with those evaluators rather than human preference; explicit human-preference studies can only be implied with blinded A/B tests.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Human Evaluation: The authors responded to requests for human preference studies (Reviewers ZMs2, kaX6) by providing a small-scale study (N=100, 9 evaluators) suggesting IRIS is competitive.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The performance using intrinsic reward is slightly lower than using external reward. It is sometimes acceptable to achieve slightly lower performance without the need of external reward, but in some cases people may prefer a higher overall performance.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Marginal Utility: Reviewers ggZ2 and kaX6 noted that IRIS generally performs comparably to or slightly worse than methods using external rewards.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Captions of figure 5 and 6 need to switch. The captions of some other figures also seem unclear. It would be better to summarize the key observations of each figure in the caption.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In the experiment, the authors compare the best checkpoints of T2I-R1 and IRIS, which may lead to unfair comparison. It would be better to compare them at the same training steps. Since RL training are often unstable and costly, sometimes the training step is also an important factor that we want to compare. Besides, in figure 3, it seems T2I-R1 consistently outperform IRIS by a large margin. This does not well align with the claimed results in Table1.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Reward aggregation details (text/image scaling, normalization) are unclear.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Not includes the comparison with preference- or diffusion-based RL.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Additional Benchmarking: The authors added the TIIF-Bench results to demonstrate performance on instruction following, addressing concerns about limited evaluation scope.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "There are no human studies to demonstrate that visual preference.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Human Evaluation: The authors responded to requests for human preference studies (Reviewers ZMs2, kaX6) by providing a small-scale study (N=100, 9 evaluators) suggesting IRIS is competitive.",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 6624,
+  "prompt_tokens": 2817,
+  "total_tokens": 9441,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 4813,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00595395,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00595395,
+   "upstream_inference_prompt_cost": 0.00098595,
+   "upstream_inference_completions_cost": 0.004968
+  }
+ }
+}

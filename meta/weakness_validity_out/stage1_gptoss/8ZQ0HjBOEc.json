@@ -1,0 +1,124 @@
+{
+ "paper_id": "8ZQ0HjBOEc",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "Lack of novelty: The presented results have appeared in various forms in prior work. For instance, Xiao et al. (2020) [1] show the existence of a well-defined limit for the mean predictor in Eq. (16). Related results and discussions of the limitations of the \"$n \\to \\infty$ then $L \\to \\infty$\" limit also appear e.g. in Seleznova & Kutyniok (2022) [2] and Hayou et al. (2022) [3]. This regime has long been considered trivial, as the covariance between distinct inputs converges to one, leading to effectivelly constant predictions for any input. Moreover, it seems like the paper uses unnecessarily complex machinery of rough differential equations to prove convergence of the mean predictor, which is a result that can be obtained directly through standard linear-algebraic arguments.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Restricted initialization setting: The analysis considers only the initialization $W_{ij} \\sim \\mathcal{N}(0, 1/n)$, corresponding to the *ordered phase*, in which gradients vanish with depth. Prior works cited above studied a broader class of initializations and show that the behavior of the \"$n \\to \\infty$ then $L \\to \\infty$\" regime depends critically on this choice. The present paper does not acknowledge this and, in fact, never explicitly defines the initialization variance.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lack of relevant literature discussion: Existing work on the regime $n \\to \\infty$, $L \\to \\infty$, $L/n \\to 0$ is not discussed. The paper does not reference or contrast its results with any prior analyses of this limit.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Misrepresentation of prior results: The paper incorrectly summarizes the results of Hanin & Nica (2019) [4], which concern the *double-scaling* regime where $L, n \\to \\infty$ with $L/n \\to \\lambda > 0$. The text repeatedly claims that Hanin & Nica study the case where \"the ratio of depth to width is unbounded\" or where $L \\gg n$, which is incorrect.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lack of clarity and technical precision: There are multiple problems with clarity and technical precision in the text. A few examples are:\n- The initialization distribution is never specified, so the source of randomness in the concentration results is unclear.\n- \"Case a\" (lines 221\u2013222) states that \"if data points lie on a unit sphere, the NTK is invertible.\" This is trivially false, with a counterexample of taking the same point on a sphere multiple times. Moreover, the text references \"Proposition 2 of Jacot et al (2018)\" here. However, Jacot et al (2018) [5] does not contain Preposition 2.\n- \"Case c\" (lines 227\u2013228) refers to \"stereographic projection from $\\mathbb{R}^{n_0}$ to $\\mathbb{S}^{n_0-1}$.\" Such a projection does not exist.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The empirical validation is minimal, using only synthetic, uniformly distributed data on a sphere for very shallow depths ($L=1$ to $10$). This is insufficient to support the theoretical claim of \"extremely slow\" convergence, as the chosen depth range is too small to visually demonstrate the asymptotic behavior. To be more compelling, experiments should include benchmarks on real-world datasets and probe much larger depths to empirically quantify the convergence rate and its impact on test performance.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While the paper successfully characterizes the existence of a limiting solution, it provides little discussion on what this limit implies for generalization. Does convergence to a fixed limit imply a loss of representation power or a tendency towards simpler functions? A deeper analysis connecting the specific form of the limiting kernel solution to known generalization behaviors would significantly strengthen the significance of the theoretical results.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Although the paper considers a different width and depth scaling than Hanin & Nica (2020), I do not think novelty of this result meets the bar for acceptance at this venue. The scope is limited to CNNs, omitting Transformers, now widely used in practice.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experiments explore depths up to only 10 layers, which is not particularly deep by modern standards.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "-- Experimental section is minimal; only small-scale synthetic tests are shown. A broader empirical sweep would strengthen conclusions.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "-- Intuition behind the RDE-based boundedness could be expanded\u2014currently highly technical and somewhat opaque to non-specialists.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "-- The convergence rate discussion could quantify how \u201cextremely slow\u201d approach to 1 is (as noted in L446--L454) using asymptotic bounds.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "-- The experimental section and conclusions feel somewhat underdeveloped, leaving the reader wishing for more explicit explanations or additional insights into the implications and experimental findings as per ICLR standards.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 3397,
+  "prompt_tokens": 2352,
+  "total_tokens": 5749,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 2030,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00337095,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00337095,
+   "upstream_inference_prompt_cost": 0.0008232,
+   "upstream_inference_completions_cost": 0.00254775
+  }
+ }
+}

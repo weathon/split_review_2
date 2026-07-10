@@ -1,0 +1,131 @@
+{
+ "paper_id": "doxBjZ88H3",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "the key text with the description of the information gap is difficult to parse and ambiguous. the logic of the construction is not clearly enough explained in that part of the text.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The appendix explains it better that the goal is to link crossentropy of different decoders to ideal observer posteriors arguing that a mismatched decoder will achieve overall less crossentropy performance but the main text cannot really be understood on its own",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "the punchline is rather weak: the results do not seem to provide much insight into how one could design better experiments beyond giving ranges of possible d' parameters that look good c.f. the theory. It is not clear if the (not negligible) experimental data collected in this setup is outside that regime so that experimentalists would know to do something differently.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Ambiguity about the two theories; sampling seems an additional assumption; unclear whether sampling is essential in the model comparison.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper only consider prior imposed during the task; assumes task prior can be learned perfectly, which may be too strong.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Question about long-term priors (natural priors) that observers already learn; applicability of framework to these.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The authors only considered a specific path for a relatively narrow setting; difficulty distinguishing theories; suggestion of alternative learning paradigm; unclear advantage of current approach.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper would be stronger if some empirical results from experiments can be shown; re-analysis of previously reported experimental data would be useful.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The development is over-formalized; why not simply seek two stimulus ensembles that produce the largest discrepancy; dependence on design/training of deep neural network decoders.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper is built on direct comparison of two models but other proposals (Ganguli & Simoncelli) exist; unclear how this formulation would be categorized.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The authors' formulation relies on a highly simplified description ... assumes posterior observer knows true prior ... inconsistent with adaptation literature; experimental design may lead to inconclusive results because adaptive changes are substantial and not aligned with the models.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewer 1gnw raised a substantive concern that biological sensory adaptation (e.g., gain changes for efficiency) might be conflated with posterior modulation, potentially violating the \"steady-state\" assumptions.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In describing prior literature, the paper should mention work on optimal stimulus design ... etc.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Using KL-divergence and decoding performance is common; lack of huge contribution.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lack empirical results; method relies on many assumptions, especially optimality of neural code; many studies show code not perfectly optimal; unclear practical solution.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 3180,
+  "prompt_tokens": 3514,
+  "total_tokens": 6694,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 2166,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0036149,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0036149,
+   "upstream_inference_prompt_cost": 0.0012299,
+   "upstream_inference_completions_cost": 0.002385
+  }
+ }
+}

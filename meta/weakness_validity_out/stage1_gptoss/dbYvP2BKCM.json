@@ -1,0 +1,159 @@
+{
+ "paper_id": "dbYvP2BKCM",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "While the paper positions ZNet as a novel paradigm for IV construction, the core idea of learning instrumental variable representations from data is an established research direction.  Several prior works have the explicit goal of generating valid IVs from observed covariates without pre-specified candidates, using variational and mutual information-based approaches. The architectural difference of ZNet\u2014learning a decomposition based on an SCM\u2014is a technical contribution but does not constitute a paradigm shift.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "4. (81B1, 3W6s) Lack of novelty",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "A more critical weakness is the exclusive reliance on semi-synthetic datasets for experimental validation.   While useful for controlled testing with known ground truth, this setup fails to demonstrate the method's applicability to real-world problems.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Concern 3. The authors explained that the use of semi-synthetic datasets is a standard practice in evaluating causal inference methods.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Furthermore, the absence of an evaluation on a real-world dataset with no ground-truth effect (e.g., a standard observational causal inference benchmark) leaves the practical utility in doubt.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Concern 3. The authors explained that the use of semi-synthetic datasets is a standard practice in evaluating causal inference methods.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "\"Moreover, all code to generate models, synthetic data, and experiments will be made public upon publication.\" I suggest publish in the review period.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Lack of clear novelty. Recovering instrumental variables from observational data is a well-known open problem, and several prior works (e.g., DIV.VAE, GDIV, AutoIV) have explored similar directions. The authors should clarify the key distinctions between ZNet and these existing approaches in terms of motivation, design, or theoretical guarantees.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "4. (81B1, 3W6s) Lack of novelty",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Equations 5 and 6 fail to demonstrate the lack of confounding in instrumental variables. In Equation 5, the outcome variable Y is directly predicted using the covariate X and the treatment variable T, which inherently incorporates confounding factors. Furthermore, in Equation 6, the meaning of Y - \\hat_{Y} is unclear. Why does its uncorrelated nature with Z guarantee that the instrumental variable Z is free from confounding?",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "1. (Y1uN, 81B1) Lack of theoretical guarantee, mathematical soundness.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Similarly, exclusivity and relevance cannot be satisfied. Crucially, how does the author ensure that f(X) and g(X) capture the confounding factor C and the instrumental variable Z, respectively? Without clarifying this key point, the validity of Equations 7\u20139 cannot be guaranteed.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "1. (Y1uN, 81B1) Lack of theoretical guarantee, mathematical soundness.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The superiority of ZNet cannot be assured. Based on the experimental data in Table 1, ZNet does not demonstrate outstanding performance.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "2. (Y1uN, D82i, 81B1) Mixed empirical performance.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The definition of an IV (\"An IV is a variable that influences the treatment but has no direct effect on the out come or influence from unobserved confounders.\") in abstact is wrong.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "1. (Y1uN, 81B1) Lack of theoretical guarantee, mathematical soundness.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The second condition, i.e., \"Exclusion restriction\" (page 2) is wrong. It should be Z\\perp Y|(T,C, e_Y).",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "1. (Y1uN, 81B1) Lack of theoretical guarantee, mathematical soundness.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "CATE(C)=E[Y|do(T)=1,C]\u2212E[Y|do(T)=0,C], and  ATE=E_C[CATE] seems to be wrong. Based on the standard definition of ATE, ATE should be E[Y|do(T)=1]\u2212E[Y|do(T)=0], rather than CATE(C).",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "1. (Y1uN, 81B1) Lack of theoretical guarantee, mathematical soundness.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Results are synthetic; real-world case studies are absent.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Concern 3. The authors explained that the use of semi-synthetic datasets is a standard practice in evaluating causal inference methods.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "In some regimes/methods ZNet is not best. A deeper error analysis would help users decide when ZNet is reliable",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "2. (Y1uN, D82i, 81B1) Mixed empirical performance.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper does not include any mathematical guarantees for the validity of the method. Therefore, it cannot be guaranteed that the learned IVs are actually valid IVs, potentially rendering the causal effect unidentifiable. I consider this the main and very severe weakness of the work.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "1. (Y1uN, 81B1) Lack of theoretical guarantee, mathematical soundness.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper assumes that there exists a subset of the confounders that can serve as instruments. However, this is not necessarily the case in practice.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "1. (Y1uN, 81B1) Lack of theoretical guarantee, mathematical soundness.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper makes the strong assumption that the instrument is sampled from a normal distribution. The reasoning behind this assumption is neither explained nor is the validity discussed.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "1. (Y1uN, 81B1) Lack of theoretical guarantee, mathematical soundness.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The provided loss is only suitable for valid IVs if the final loss terms related to independence requirements are truly 0. However, this is neither shown nor discussed (neither theoretically nor empirically).",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "1. (Y1uN, 81B1) Lack of theoretical guarantee, mathematical soundness.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Evaluation: The method is only evaluated for ATE estimation based on the mean error. For better (and fairer) comparison, the method should also be evaluated for CATE estimation based on the PEHE.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 4950,
+  "prompt_tokens": 2147,
+  "total_tokens": 7097,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 3119,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00446395,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00446395,
+   "upstream_inference_prompt_cost": 0.00075145,
+   "upstream_inference_completions_cost": 0.0037125
+  }
+ }
+}

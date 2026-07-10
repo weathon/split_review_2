@@ -1,0 +1,22 @@
+{
+ "paper_id": "ngfIm9aPsH",
+ "method": "DeepReviewer_14B",
+ "n_items": 3,
+ "matched": [
+  {
+   "index": 1,
+   "label": "valid",
+   "raised": false
+  },
+  {
+   "index": 2,
+   "label": "valid",
+   "raised": false
+  },
+  {
+   "index": 3,
+   "label": "valid",
+   "raised": true
+  }
+ ]
+}

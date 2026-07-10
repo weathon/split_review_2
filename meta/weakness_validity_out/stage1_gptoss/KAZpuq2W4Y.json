@@ -1,0 +1,138 @@
+{
+ "paper_id": "KAZpuq2W4Y",
+ "decision": "Reject",
+ "n_reviewers": 3,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "The definition of the attention-weighted covariance in Section 4.3.3 does not appear to include the attention scores $a_k$. The formula \\mathbf{C} = \\sum_{k=1}^K \\hat{\\mathbf{g}}_k \\hat{\\mathbf{g}}_k^\\top does not account for attention. Consistency with the first-order representation (which is attention-weighted) would suggest the covariance should be \\mathbf{C} \\;=\\; \\sum_{k=1}^K a_k \\, (\\mathbf{g}_k - \\mathbf{v}^{(1)}) (\\mathbf{g}_k - \\mathbf{v}^{(1)})^\\top. Without attention weights, the method loses its theoretical symmetry. This can result in large clusters being over-weighted, thereby potentially biasing the global aggregation. This should be rectified or explicitly justified.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "There is no attention heatmap, feature embedding visualization, or per-cluster qualitative case study to help understand how the proposed model attends key WSI regions. Such visualizations are standard in recent MIL literature.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "DBSCAN may generate many singleton or tiny clusters, especially for rare pathological regions, yet the impact of such clusters on downstream aggregation or classification is not fully analyzed. Are outliers weighted equally? Are their representations robust to class imbalance? No quantitative exploration is provided.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Both evaluation datasets are binary WSI tasks. The model\u2019s scalability to multi-class or regression-based WSI settings is not explored.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Tables 1 and 2 report HOMIL\u2019s performance and efficiency, but the baselines does not fully cover recent cluster-based and multi-granularity approaches. Still, the gaps over closest competitors are often small, so these tables cannot fully support claims of clear superiority.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Table 3 in the ablation study shows component-wise contributions and quantifies reductions in performance when clustering or second-order moments are removed, yet the total performance gains over ABMIL (the main first-order approach) is limited.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The authors provides a graphical  (Figure1) to illustrate the overall framework of the method. However, the current figure does not seem to fully align with the described approach. Specifically, what is the meaning of the \u201cGuide\u201d in the diagram within the method? Moreover, The details of splitting into two branches after copying should also be highlighted within the method.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The comparison experiments are not sufficient. Although the paper demonstrates good performance on two public datasets, this is not enough to fully illustrate the advantages of their method. More experimental comparisons are needed, such as with additional methods and datasets.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The current experimental analysis is insufficient and requires more visual comparative analysis to better demonstrate the advantages of their method.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper does not contain a bibliography section.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The authors should be specific about what type or kind of information is missed in first-order moments but captured in higher-order moments. In addition, why not third-order moments?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The statement around line 054 to line 058 is confusing. According to line 056, both moments are calculated with cluster representations, and the following sentence says this framework is an extension to ABMIL. ABMIL calculates the first-order moments using the original patch representations, which makes these consecutive two sentences contradictory to each other.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The utilization of DBSCAN requires further clarification. DBSCAN does not require an input of the number of cluster k, instead, it learns k through itself. Empirically, I have done such experiments on clustering the patch representations using DBSCAN, and the resulting ks are ranging from 5 to 30. Choosing only this number of representative tokens would cause severe information loss, unless proven otherwise. In addition, this method is not very stable, and the cluster might vary across different runs. It would be very useful if the authors could provide the clustering results and provide a more comprehensive analysis of this as well as its impact on the later stages.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The method section is lengthy. The authors are advised to provide some of the essentials for the readers to understand first-order and second-order moments, not repeating ABMIL for multiple times and not using bullet points to define concepts.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experiments need improvements. There are several SOTA methods missing from comparison, such as 2DMamba, RRTMIL, CATE, DGRMIL, etc. Also, for the ablation study, at least different clustering methods with different configurations, and third-order moments should be tested.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 2920,
+  "prompt_tokens": 2254,
+  "total_tokens": 5174,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1599,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0029789,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0029789,
+   "upstream_inference_prompt_cost": 0.0007889,
+   "upstream_inference_completions_cost": 0.00219
+  }
+ }
+}

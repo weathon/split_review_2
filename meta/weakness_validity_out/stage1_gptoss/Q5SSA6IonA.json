@@ -1,0 +1,145 @@
+{
+ "paper_id": "Q5SSA6IonA",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "The ablation study is relatively limited, providing insufficient analysis of the independent contributions of the two key FNF submodules. A more detailed exploration of how each component individually influences performance would strengthen the empirical validation.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper lacks interpretability analysis. Although the authors claim that adaptive modulation adaptively scales different frequency components in the spectral domain, the explanation remains purely mathematical without concrete visualization or empirical evidence. It is unclear how the modulation behaves across different images or tasks and whether any consistent adaptation patterns exist.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The comparison with recent state-of-the-art methods are missing, such as MLLA and OverLoCK.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In Table 3, the performance improvement under the Mask R-CNN 3\u00d7 MS schedule is marginal. The paper does not discuss possible reasons for this weak gain.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Although FNF solves some of the shortcomings of FNO, its core idea is still based on the traditional framework of \"frequency domain processing + time domain supplementation\". It does not propose a new visual representation learning paradigm, which weakens the innovation of this article.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Although ViF performs well on ImageNet-1K, its improvement on COCO and ADE20K compared to models such as ViM is relatively small (e.g., mAP increases by 0.2-0.4), failing to significantly widen the gap.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "ViF only tested three small and medium-sized variants, ViF-T/S/B, and did not evaluate the performance of larger models, such as those of ViT-L/16, on larger datasets.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Definition 7 mentions that adaptive modulation is achieved through the amplitude-sensitive weighting function \\|z\\| and learnable parameters \\alpha\\ and \\beta\\, but does not give the range of \\alpha\\ and \\beta\\ and whether they are adjusted with training iterations.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The paper does not evaluate ViF on larger datasets (e.g., ImageNet-22K, LAION) or with pretraining strategies such as self-supervised learning (MAE, BEiT). As such, the scalability and transferability of ViF remain uncertain compared to modern foundation models.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The ablation study (Table 5) confirms that each module contributes to performance, but lacks deeper interpretability or visualization (e.g., frequency response maps, energy spectrum analysis). More qualitative analysis could help clarify how ViF balances local and global representations in practice.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Although the authors cite GFNet and AFNO, the distinction between ViF\u2019s adaptive gating mechanism and prior dynamic spectral filters could be elaborated further.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The paper lacks experiments exploring the scalability of ViF on larger datasets such as ImageNet-22K or LAION.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The authors do not evaluate ViF under self-supervised or foundation model pre-training settings, which limits its generalization claims. I believe this is crucial for vision backbone models.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper lacks detailed frequency-domain visualizations (e.g., spectral activation maps) to empirically support its frequency modeling claims.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The improvements over strong Mamba variants on dense prediction tasks are relatively marginal compared to the architectural complexity.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The authors have not released any implementation code at submission time, reducing reproducibility.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 2721,
+  "prompt_tokens": 1846,
+  "total_tokens": 4567,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1643,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00268685,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00268685,
+   "upstream_inference_prompt_cost": 0.0006461,
+   "upstream_inference_completions_cost": 0.00204075
+  }
+ }
+}

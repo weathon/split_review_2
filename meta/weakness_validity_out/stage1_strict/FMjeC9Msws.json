@@ -1,0 +1,110 @@
+{
+ "paper_id": "FMjeC9Msws",
+ "decision": "Accept (Oral)",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "Lack of generalization research. The authors also mention it in paper. It hard to predict the generalization performance. Also the experiments focus mainly on math, it is hard to predict whether the findings can be generalized on more difficult, long horizon task, with different training data mixtures, under different architectures.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It doesn\u2019t proposed the new RL algorithm, but a comprehensive large scale experiments on current existing  most effective algorithms.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "I think the following comments have been addresed - Additional experiments regarding downstream evaluations, FP32, throughput, sample efficiency, and etc. - Novelty of the work",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Limited task breadth and generalization evidence: Most scaling fits are on verifiable math prompts drawn from Polaris\u201153K; downstream evaluation focuses largely on AIME\u201125. with some math+code multi\u2011tasking in the appendix. This leaves open how well the sigmoid fits and the ScaleRL recipe transfer to diverse RL setups (e.g., tool\u2011use, planning, safety\u2011constrained tasks, preference\u2011model rewards). A broader suite (beyond math/code) would strengthen the generality claim.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Compute as \"GPU\u2011hours\" conflates sample efficiency and throughput differences: The x\u2011axis is GPU\u2011hours rather than effective tokens / updates / actor\u2011generated tokens. Because PipelineRL increases hardware utilization, improvements in \"compute efficiency\" may partially reflect systems throughput rather than intrinsic sample efficiency. Reporting both (hardware time and tokenized data processed) would make cross\u2011recipe comparisons more interpretable.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Misc. Notes: I think that the Sigmoid choice is empirically motivated but not stress\u2011tested against alternatives. I see this as a necessary experiment.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The text sometimes describes \u201cpass rate vs. log(compute)\u201d but plots label compute in GPU\u2011hours on a log scale.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Some scope of the comparisons is missing. For example, value\u2011augmented baselines (e.g., VAPO/VC\u2011PPO\u2011style methods cited in App. A.1) are not included in the main scaling comparisons",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "- Because the focus of the paper revolves around the comprehensive study of the different training parameters to consider for RL training it does not propose any novel methods, other than the sigmoidal model produced as a result of the collected data.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "I think the following comments have been addresed - Additional experiments regarding downstream evaluations, FP32, throughput, sample efficiency, and etc. - Novelty of the work",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "- The RL experiments are mainly conducted on a single model with 8B parameters and the model may not fit as closely as the structure and number of parameters are changed. However, this is offset somewhat by the experiments conducted on the larger 17B Llama-4 model and illustrated in Figure 5(b).",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Some of the concerns still persists - Comparisons across model sizes.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "- It is still quite difficult to accurately interpret the leave-one-out experiments because of the complex interplay that may exist between several design decisions acting jointly.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "1. In Sec 4, the large scale experiment on model scale makes a comparison between an 8B dense model and a large 17Bx16 MoE model. It would be better to include model scale experiment on comparing model sizes among dense models,",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Some of the concerns still persists - Comparisons across model sizes.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 4697,
+  "prompt_tokens": 1347,
+  "total_tokens": 6044,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 4131,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00150374,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00150374,
+   "upstream_inference_prompt_cost": 0.00018858,
+   "upstream_inference_completions_cost": 0.00131516
+  }
+ }
+}

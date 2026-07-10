@@ -1,0 +1,103 @@
+{
+ "paper_id": "zNH3Sf404X",
+ "decision": "Reject",
+ "n_reviewers": 3,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "The contributions of this paper are rather limited, and somehow I feel that this paper is a bit out of the scope of ICLR focusing on learning representation.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper uses feature engineering to improve the performance of a few ML models (CatBoost, XGBoots, and RF). However, even those two effective features are not newly proposed in this paper.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper does not present the details of these two features, and the analysis in the end of Section 6 is rather simple and does not lead to any deep insights.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Section 3 can be better structured. After reading the related work, I cannot see how this paper will differ from them and what will be its new contributions.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper makes three claims: the classification of 163 millions of Bitcoin transactions, the features-keyLinker address clustering and the experimental results showing quality focused features can enhance semi-supervised learning performance on unlabeled Bitcoin flows. However, neither of the three claims are new in both concepts and technical development. The authors seem unaware of large literature and open source efforts in the detection of Illicit Bitcoin transactions.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper lacks technical novelty in either data collection stage or machine learning for detection of illicit Bitcoin flows.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experimental evaluation is poor and lacks the comparison to the state of the art methods for detection of illicit Bitcoin transactions/addresses.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The technical contribution is limited. No new methodology, algorithms, systems are proposed. The novelty of the features is unclear, since they are derived from related work - KeyLinker Smolenkova & Yanovich (2025), an address clustering technique and enhanced Shared Send untangling metrics Larionov & Yanovich (2023).",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Beyond effectiveness, no other performance metrics are considered such as efficiency and scalability, interpretability, etc.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experiment is conducted on one dataset. How well the results generalize across multiple datasets is unclear. No specific case studies are demonstrated.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 1651,
+  "prompt_tokens": 1629,
+  "total_tokens": 3280,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 888,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0018084,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0018084,
+   "upstream_inference_prompt_cost": 0.00057015,
+   "upstream_inference_completions_cost": 0.00123825
+  }
+ }
+}

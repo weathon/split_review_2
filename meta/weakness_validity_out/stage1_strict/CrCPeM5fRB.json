@@ -1,0 +1,145 @@
+{
+ "paper_id": "CrCPeM5fRB",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "SDSC captures only pointwise magnitude overlap under sign gating, overlooking broader structural properties such as local waveform shape and phase alignment. Consequently, it lacks time-shift/warping tolerance\u2014small temporal lags can significantly reduce the score, contradicting the intended \u201cstructure-aware\u201d characterization.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "When both signals share the same polarity or a strong DC offset, $H(E\\cdot R)\\approx1$ holds broadly, leading to inflated similarity even when shapes differ.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Around near-zero amplitudes, the Heaviside gating becomes highly noise-sensitive, causing unstable or vanishing gradients. Although the authors acknowledge gradient vanishing and describe it as robustness, this more likely indicates blindness to misalignment rather than genuine robustness.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "If MSE is said to fail at capturing structure, the evaluation should include structure-aware metrics such as Pearson correlation, spectral coherence, or STFT/Mel-cosine similarity. Relying solely on MSE/MAE weakens the empirical claim of structural fidelity.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The work omits direct comparisons with established structure-aware objectives. Simply stating these are \"computationally heavy\" is insufficient. An explicit time-vs-accuracy trade-off or short-sequence comparison would strengthen the argument.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Reporting only gradient norms does not characterize optimization behavior. The analysis should also consider gradient direction alignment, variance, or loss-landscape smoothness to assess stability.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper uses only SimMTM as the backbone \"for architectural simplicity,\" which severely limits generalizability claims. Without validation on diverse architectures (Transformers, CNNs, RNNs, recent foundation models), it's unclear if SDSC benefits are architecture-specific or truly general.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper only compares against MSE, PCC, and SI-SNR. Recent structure-aware losses for time series (e.g., shape-based losses, spectral losses, contrastive losses) are not included, making it difficult to assess whether SDSC represents state-of-the-art for structure-aware objectives.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Despite strong motivation, the actual improvements are modest: hybrid loss achieves 0.4783 vs. 0.4852 MSE in forecasting (1.4% improvement), and Table 6 shows MSE sometimes outperforms SDSC in fine-tuning scenarios. The gains don't match the strength of the conceptual contribution.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Computing SDSC requires element-wise min operations, Heaviside evaluations, and additional summations compared to MSE. No analysis of training time overhead or memory consumption is provided, which is critical for practical adoption.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "No clear definition of \"structure\", still related to alignment or warping.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The backbone model is not widely tested. With more powerful models, we don't know if the advantage of SDSC still exists.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The improvement on various tasks, are very marginal. For example, in the fine-tuned classification task, the SDSC approach is not showing better results in either in-domain or out-domain experiments.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "A motivation for the paper is that SDSC serves as a lightweight alternative to O(T^2) metrics (e.g., SoftDTW, DILATE). However, a direct comparison against them is missing. Currently, we only know that SDSC is faster, but we do not know how much performance is lost (or gained) compared to SoftDTW.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The \u03b1 parameter in the Sigmoid function significantly influences the gradient shape. The paper lacks a sensitivity analysis on how \u03b1 affects the performance of downstream tasks.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The \"alignment-free\" description may be somewhat misleading. While SDSC does not perform explicit temporal warping like DTW, it does enforce strict temporal and polarity alignment through its point-wise comparison.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 1598,
+  "prompt_tokens": 1571,
+  "total_tokens": 3169,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 0,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.000533904,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.000533904,
+   "upstream_inference_prompt_cost": 0.000175952,
+   "upstream_inference_completions_cost": 0.000357952
+  }
+ }
+}

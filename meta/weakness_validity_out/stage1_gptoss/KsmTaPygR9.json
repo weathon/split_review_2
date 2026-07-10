@@ -1,0 +1,166 @@
+{
+ "paper_id": "KsmTaPygR9",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "Synthetic Nature of Scenarios: While human-validated for realism, the scenarios are synthetic. Their direct applicability to real-world, complex decision-making environments remains to be proven. Future work could validate the benchmark against real-world case studies.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "- still outstanding: binary-choice restriction and synthetic nature remain inherent limitations; benchmark-specific overfitting risk cannot be fully eliminated.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Binary Choice Constraint: The forced binary choice, while effective for diagnostic clarity, prevents models from proposing alternative, potentially safe-and-pragmatic solutions. This may underestimate a model's capability for nuanced problem-solving.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "- still outstanding: binary-choice restriction and synthetic nature remain inherent limitations; benchmark-specific overfitting risk cannot be fully eliminated.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Prompt Sensitivity: The paper demonstrates that model performance is highly sensitive to prompt phrasing (e.g., the \"nudging\" experiment). While this is a key finding, the paper could have explored potential mitigation strategies or prompt engineering techniques to make model behavior more robust.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "- addressed: clarified rationale for binary format and explicit-harm design; justified object-harm control via \u201cminor/trivial\u201d harms; added targeted prompt-paraphrase robustness; contextualized refusal rate and its limited effect.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lack of Longitudinal Analysis: The benchmark evaluates single, isolated decisions. It does not assess model behavior over longer time horizons, where consistency, learning, and strategic planning could play a role in the safety-pragmatism dynamic.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "- still outstanding: no longitudinal/multi-step evaluation yet; limited mitigation strategies explored beyond reporting robustness.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Potential for Uneven Domain Coverage: Although 11 domains are included, the paper does not analyze if model performance varies significantly across them. Some domains (e.g., Healthcare, Legal) might carry higher stakes and warrant a deeper, domain-specific analysis.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "I appreciated the human validation of the LLM-generated scenarios but it would be methodologically stronger having also a set of human-generated decision-making scenarios.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "- still outstanding: human-authored scenarios and richer realism are still future work.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Very relevant also the adoption of a control set but why the conditions between human harm set and control set are different in numbers? why just 2 types of object harm vs 8 human harm subtypes?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In the human validation effort why the authors have used different scales to evaluate harmful and to evaluate realism?",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "- addressed: explained limited feasibility of a sizable human-authored scenario set; expanded object-harm types; justified different validation scales; clarified token-length choices and likely limited impact; reviewer confirmed satisfaction and maintained strong accept.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Again, why the authors adopted different max token generation lengths for the various models? and could this influence the models' behaviors?",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "- addressed: explained limited feasibility of a sizable human-authored scenario set; expanded object-harm types; justified different validation scales; clarified token-length choices and likely limited impact; reviewer confirmed satisfaction and maintained strong accept.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Synthetic and Simplified Scenarios: The authors acknowledge this limitation themselves. The scenarios are \"synthetic, not drawn from real-world cases\". While validated for \"realism,\" they are still simplified constructs. Real-world managerial decisions are often far more ambiguous and complex than the scenarios generated by the LLMs.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "- still outstanding: binary-choice restriction and synthetic nature remain inherent limitations; benchmark-specific overfitting risk cannot be fully eliminated.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Restrictive Binary-Choice Format: The benchmark \"deliberately\" forces a binary (A/B) choice. While this provides a clean, unambiguous evaluation of prioritization, it \"prevents models from proposing alternative solutions\". A truly superior, well-aligned agent might reject both bad options and propose a creative third way to achieve the goal without causing harm. This benchmark cannot measure that crucial capability.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "- still outstanding: binary-choice restriction and synthetic nature remain inherent limitations; benchmark-specific overfitting risk cannot be fully eliminated.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Narrow Definition of \"Pragmatism\": The \"Control Pragmatism\" metric is a clever proxy, but it is narrowly defined as \"the willingness to harm an inanimate object\". A model could be \"overly safe\" in this one specific context (e.g., Sonnet-4 refusing to scratch furniture)  but still be highly pragmatic and effective in other managerial tasks that don't involve harm, such as resource allocation or financial planning. The benchmark may be over-generalizing this finding.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "- still outstanding: lack of monetized stakes and broader prompt-sensitivity; potential normative concerns around object harm remain partially conceptual.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "High Sensitivity to Prompt Phrasing: The \"nudging\" experiment (a strength) also reveals a weakness: the models' behaviors are extremely sensitive to small changes in the prompt. This implies that the baseline results in Table 1 are themselves highly dependent on the specific, neutral phrasing of the system and user prompts. A slightly different phrasing could potentially yield very different results, limiting the generalizability of the scores.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "- addressed: clarified rationale for binary format and explicit-harm design; justified object-harm control via \u201cminor/trivial\u201d harms; added targeted prompt-paraphrase robustness; contextualized refusal rate and its limited effect.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Potential for Benchmark-Specific Overfitting: The authors rightly \"explicitly discourage using these scenarios for model training,\" fearing it would create a \"false sense of security\". This highlights a weakness of the benchmark's structure: a model could be fine-tuned to specifically pass MANAGERBENCH (i.e., \"be safe with humans, be pragmatic with objects\") without developing a general, robust understanding of safety-pragmatism trade-offs.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "- still outstanding: binary-choice restriction and synthetic nature remain inherent limitations; benchmark-specific overfitting risk cannot be fully eliminated.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The scenarios are intentionally binary with explicit harm statement, which sharpens diagnosis but may over-simplify managerial reality and edge toward moral-dilemma style tests.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "- still outstanding: binary-choice restriction and synthetic nature remain inherent limitations; benchmark-specific overfitting risk cannot be fully eliminated.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Treating \u201cobject harm\u201d as the pragmatic choice risks baking in a normative stance (orgs often internalize equipment damage costs, compliance, and reputational risk). Without explicit cost calibration, Control Pragmatism may conflate reasonable caution with \u201cover-safety.\u201d",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "- still outstanding: lack of monetized stakes and broader prompt-sensitivity; potential normative concerns around object harm remain partially conceptual.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Harm/benefit stakes are not monetized to real-world costs. It\u2019s unclear if observed trade-offs align with realistic managerial risk calculus across domains.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "- still outstanding: lack of monetized stakes and broader prompt-sensitivity; potential normative concerns around object harm remain partially conceptual.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Broader ablations with prompt sensitivity analyses are limited.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "- still outstanding: lack of monetized stakes and broader prompt-sensitivity; potential normative concerns around object harm remain partially conceptual.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Treating refusal as an incorrect response could be misleading. Some models decide to refuse just by looking at harmful contents.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "- addressed: clarified rationale for binary format and explicit-harm design; justified object-harm control via \u201cminor/trivial\u201d harms; added targeted prompt-paraphrase robustness; contextualized refusal rate and its limited effect.",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 6961,
+  "prompt_tokens": 2761,
+  "total_tokens": 9722,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 4858,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0061871,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0061871,
+   "upstream_inference_prompt_cost": 0.00096635,
+   "upstream_inference_completions_cost": 0.00522075
+  }
+ }
+}

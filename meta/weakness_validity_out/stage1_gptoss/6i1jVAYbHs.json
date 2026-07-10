@@ -1,0 +1,131 @@
+{
+ "paper_id": "6i1jVAYbHs",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "Major Flaw in Experimental Validation: The paper's core premise is that scaling up KGs to 1B triples is valuable. However, the experiments fail to demonstrate this value. Table 3, the primary knowledge grounding experiment, only shows that as the number of \"candidate triples\" (i.e., noise) increases, performance decreases. This experiment proves \"robustness to noise\" but critically fails to prove the benefit of \"knowledge coverage\". The paper is missing the most crucial experiment: a comparison between a small KG and the large KG on a set of questions where the answers only exist in the large KG. Without this, the motivation for the entire paper\u2014scaling up\u2014is left as an unsubstantiated assumption. As it stands, the experiments show that scaling up (the candidate pool) only hurts performance.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Unaccounted LLM Cost & Unfair Comparison: The KG2KV method (Section 4.1, Appendix H) relies on external, powerful LLMs (GPT-4o-mini, and the authors state in Appendix I that Claude-4-sonnet was used for development) to transform KG relations into natural noun phrases. This introduces a significant, one-off (but potentially massive) computational and/or API cost for preprocessing the 1B+ triples. This cost is completely ignored in the paper's efficiency analysis. This makes the comparison to methods like KBLaM, which uses simple synthetic templates, an unfair, apples-to-oranges comparison. The scalability of AtlasKV is thus partially achieved by offloading significant complexity to an external, unmeasured LLM.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Loss of Graph Structure: The KG2KV method inherently \"flattens\" the knowledge graph, treating each triple as an independent fact. This sacrifices all topological/structural information of the KG, limiting the method to one-hop retrieval and precluding multi-hop reasoning. This is a significant trade-off that should be more explicitly acknowledged and discussed as a limitation.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The methodology section is difficult to follow. The main issue is that many symbols are not clearly defined. For example, the meaning of $S$ on Line 253 and the correspondence of variables in Eq. (3) and Eq. (13). In addition, the paper does not state the model\u2019s optimization objective, which further increases the burden on readers trying to understand the work.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The paper\u2019s primary contribution appears to be complexity optimization for KG-augmented LLMs. However, relying solely on time/space complexity analyses and VRAM accounting is not sufficient to fully assess this advantage. For instance, when performing top-k pruning over a hierarchical KB, switching among three levels of keys can induce frequent CPU\u2013GPU I/O, which is a non-negligible hardware latency during real-world training/inference. I recommend discussing this overhead explicitly.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Missing parameter sensitivity analysis. To my knowledge, Rectangular Attention in KBLaM is not invoked at every LLM layer; it is typically applied every few layers. I could not find this setting in the main text (it might be in the appendix, which I may have overlooked). Moreover, the paper does not provide any rationale or analysis for such a setting.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Why three hierarchy levels? The choice of a 3-level hierarchical key-value cache is insufficiently justified. Please add more detailed theoretical or empirical support for this design choice.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Inter-level correlation in top-k selection is not clear. Are the top-k selections across different hierarchy levels correlated? Figure 6 only shows the variation of a single variable. Given that top-k pruning at an upper level can influence the quality of pruning at the next level, an experimental analysis of this inter-level dependency seems necessary.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I am curious about the appendix proof of equivalence for Rectangular Attention. It appears to be largely a distributive rearrangement of matrix operators that, in practice, does not change the computed result. Please provide a deeper explanation of its effectiveness. Alternatively, clarify whether this operator manipulation merely serves as an algebraic device to facilitate subsequent complexity analysis for hierarchical key-value computation.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "HiKVP's pruning is efficient, but lacks formal guarantees or error analysis.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Lack comparison with GraphRAG algorithms, such as HippoRAG and Raptor. I understand the focus of this work is on large KGs, where existing graphRAG algorithms can struggle to handle especially for indexing latency and token consumption. But comparing with them on small datasets can benefit the understanding the pros and cons of these methods.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "KG2KV requires relation rewriting (e.g., \"because\" -> \"cause\"), which relies on external LLMs. This introduces dependency on external models and may limit reproducibility.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The main concerns raised by the reviewers focus on design details, such as relation rewriting and hyperparameter choices (K64s, bR9N, yJsc) and aspects of the experimental setup (yVFP, yJsc). These concerns are sufficiently  addressed through additional experiments, ablation studies, and clarifications provided by the authors during the rebuttal.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The baselines are strong (KBLaM, RAG), but newer lightweight RAG variants (e.g., caching-based or hybrid symbolic-neural methods) are not included.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The claim that only 20K KG2KV samples suffice for generalization is intriguing, but more discussion is needed on why such small-scale training suffices for billion-scale integration.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 4301,
+  "prompt_tokens": 2338,
+  "total_tokens": 6639,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 2820,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00404405,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00404405,
+   "upstream_inference_prompt_cost": 0.0008183,
+   "upstream_inference_completions_cost": 0.00322575
+  }
+ }
+}

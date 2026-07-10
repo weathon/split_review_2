@@ -1,0 +1,89 @@
+{
+ "paper_id": "3YKeB9R1g9",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 3,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "The paper's main ideas are based mostly on experiments, and the theoretical explanations are limited.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "the concerns related to the limitations of the theoretical explanations and the question about other architectures listed under Weaknesses remain outstanding.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It is not clear whether the same collapse behavior holds for other architectures.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "the concerns related to the limitations of the theoretical explanations and the question about other architectures listed under Weaknesses remain outstanding.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It is not clear whether the same collapse behavior holds for other optimizers.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The questions regarding other optimizers and validation loss were addressed in the rebuttal.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "One thing that is not immediately clear to me is the utility of the model presented in section 5. It seems like the best procedure would be:\n\n* Search over hyperparameters at small scale (e.g. 100M).\n* Match parameters at larger scale.\n* Carry out partial training runs at large scale.\n* Use the partial training runs to select the best run and finish it.\n\nIt seems to me that even with the model, one may have to run many training runs at the largest scale in order to obtain the normalization factor, aka the finalized loss.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The authors are already well aware of the main limitations: the results are done with a fixed (but certainly standard) way of pretraining, i.e., single epoch, AdamW, moderate dataset sizes (\"TPP\"). The conclusions might not hold or look different for setups with much longer training, data curriculums or optimizers and schedules. Especially longer training (higher \"TPP\") would be relevant (is there a point where i breaks down?) and extrapolations beyond just training loss.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Minor: Celerity uses a much more refined datamix than just Slimpajama, which makes some comparison (e.g. to BTLM) somewhat hard. But that is discussed (and represents a general improvement of pretraining strategies including data+optimization).",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "First, as mentioned above, the paper is the newest in a serious of publications around LLM training predictability and scaling, which all build upon each other. I understand the authors have an in-depth understanding of this area, but the paper is extremely dense, with lots of notation and terms that make it daunting and complex to grasp for new readers. I think this presentation can be improved.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The concerns regarding readability were addressed by the authors through proposed substantial presentation improvements, including the addition of an intuitive overview in Section 2, a table of symbols, expanded \u201cKey Takeaways\u201d, and a rewritten bias\u2013variance tradeoff explanation.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Second, and very related, the authors have not published the code or any of the models as far as I can tell. Since the exact setup is quite unique (e.g., CompleteP), releasing those artifacts would be crucial in enabling better study of the entirety of methods that are included in this line of work.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Regarding the availability of resources, the authors committed to releasing the code (CompleteP) and to seeking approval to release models trained with the Celerity recipe, as well as other artifacts such as loss curve data from the ablation studies.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 6492,
+  "prompt_tokens": 1557,
+  "total_tokens": 8049,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 5461,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.001948494,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.001948494,
+   "upstream_inference_prompt_cost": 0.000208638,
+   "upstream_inference_completions_cost": 0.001739856
+  }
+ }
+}

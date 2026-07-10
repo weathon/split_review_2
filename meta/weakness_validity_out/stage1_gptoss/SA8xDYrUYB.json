@@ -1,0 +1,173 @@
+{
+ "paper_id": "SA8xDYrUYB",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "The middle side of Equation (13) seems to be incorrect.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Section 4.1: Missing information on the averge NFE and the used temperature (I guess it is 0.9 based on Table 1).",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Section 4.2: From my understanding, this experiment only varies the temperature at inference while keeping the training temperature (possibly 0.9) unchanged.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "questions about softmax temperature were clarified by showing that inference-time temperature scaling improves quality without retraining.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "As expected, using the inference temperature similar to the training one (the straight-forward configuration) provides the best performance. Deviating the inference temperature from the training one causes performance degradation, particularly in color saturation. Hence, the experiment cannot prove the benefits of the temperature-scaling control",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "questions about softmax temperature were clarified by showing that inference-time temperature scaling improves quality without retraining.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "A more reasonable experiment is to use the same temperature for training & inference, and compare models trained w/ different temperatures",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "questions about softmax temperature were clarified by showing that inference-time temperature scaling improves quality without retraining.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "There is no evidence showing that the temperature affects image diversity",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "questions about softmax temperature were clarified by showing that inference-time temperature scaling improves quality without retraining.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The results reported in Table 1 are far from state-of-the-art for Class-conditional generation on ImageNet-1k 256 x 256. The state-of-the-art ones, e.g., REPA, have FID less than 2. The reported result is only strong for vector-quantized image generation using standard DiT backbones. The authors should correct their claim.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Equation 12: \u03c0 was used before being defined",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "L265: The text should be in the same paragraph with the previous one",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Figure 5: Should add the temperature lable for each column",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The motivation is not well-convincing to me. It is not clear why receiving categorical signal is better for continuous flow matching. What is the geometry structure in continuous here ?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The theory about VFM seems to be out of place for me. To my understanding, this method is based on VFM framework but instead of inputing the codebook index and let the flow matching learn internal codebook embedding, they utilize the codebook embedding from vq-vae to create soft embedding $z_1$ and input continuous signal. This leads to limited novelty.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The model underperforms with DiT using continuous VAE. Furthermore, this technique heavily depends on a good VQ-VAE which is limited the model performance. It would be better to choose other discrete VQ-VAE, which has better rFID and some generative model training on that achieves very good FID like [1,2] to see how good the proposed technique can reached given different VQ-VAE.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Tokenizer dependence, raised by multiple reviewers, was directly studied by evaluating a stronger tokenizer, leading to improved FID and supporting the authors\u2019 claim that performance is dependent on the VQ autoencoder.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Purrception failed to beat LlamaGen-XL, which has similar number of parameters, with respect to FID (Purrception 4.72 vs LlamaGen-XL 3.39), as well as other baselines.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Purrception's encoder, decoder, and codebook are kept frozen during training, thus the entire method is fundamentally capped by the quality of the frozen vq-f8 tokenizer.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Tokenizer dependence, raised by multiple reviewers, was directly studied by evaluating a stronger tokenizer, leading to improved FID and supporting the authors\u2019 claim that performance is dependent on the VQ autoencoder.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Missing comparision with CDCD mentioned in related work, which also \"preserves the continuous-time formulation by operating on noisy embeddings while training with cross-entropy\".",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Table 1 does not include a CFM baseline. The paper only argues the converge curve \"strongly suggests\" Purrception would surpass CFM, but this is not convicing enough.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Missing visual comparison with baselines.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Important baseline missing - The main improvement compared to baselines is shown in the training efficiency. However, a comparison to the key baseline latent generative model SiT (Ma et al. 2024) is missing. I would request the authors to add this to their training efficiency analysis to improve thoroughness.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The missing SiT baseline highlighted by i3Vq was acknowledged as a valid weakness; the authors clarified the two key design changes (endpoint prediction vs. velocity prediction and cross-entropy vs. MSE) and added SiT-related comparisons and discussion.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The model doesn't reach competitive FID vs continuous models. This is not a major weakness, as it is known (empirically) that continuous latent models tend to perform better than the discrete ones in image generation. However, I would request the authors to add a discussion of why a 750M Purrception (discrete) will be more useful than a 675M DiT (continuous) model.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 6798,
+  "prompt_tokens": 2313,
+  "total_tokens": 9111,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 5059,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00590805,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00590805,
+   "upstream_inference_prompt_cost": 0.00080955,
+   "upstream_inference_completions_cost": 0.0050985
+  }
+ }
+}

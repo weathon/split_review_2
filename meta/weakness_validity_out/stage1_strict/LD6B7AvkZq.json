@@ -1,0 +1,194 @@
+{
+ "paper_id": "LD6B7AvkZq",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "The key \"understands composition\" assumption, which forms the basis for Corollary 4.5 and Theorem 4.6, is very strong. The paper does not provide sufficient empirical validation to determine to what extent this assumption holds for practical, trained models, which limits the applicability of these specific theorems.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "2. Clarification for the assumption about 'understands composition'",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experiments on Large Language Models (LLMs) are limited to anecdotal tests on \"ChatGPT-5-Instant\". This experiment may conflates two different tasks: calculating the result of an arithmetic expression and modeling the grammar of that expression. The task of calculating a result is not equivalent to the task of generating an expression from a grammar, especially from a model training perspective. Therefore, the difficulty an already-trained model shows in calculating a deeply recursive arithmetic expression is not direct evidence that a Transformer-based model would struggle to be trained on a deeply recursive PCFG (the paper's primary claim).",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "3. More experimental details will be provided by the authors, but the results are still restricted to small-scale scenarios.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The comparison in Section 5 between pretrained models and those trained from scratch seems unfair. Pretraining on a subgrammar essentially gives the model a strong hint, or an \"inductive bias,\" about the PCFG's correct structure. The baseline model, however, gets no such hints and must discover this hidden structure all on its own. Therefore, the finding that pretraining improves the final loss for smaller models might primarily demonstrate the benefit of curriculum learning and injecting this strong structural prior.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The work overstates the novelty of using CFGs to probe language models' learnability, e.g. in the introduction \u201cthis work initiates the theoretical and empirical study of training dynamics over CFGs\u201d but this is repeated in many places. See for instance Sennhauser and Berwick 2018 (Evaluating the Ability of LSTMs to Learn Context-Free Grammars), or Allen-Zhu et al 2023 (How Language Models Learn Context-Free Grammars).",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "1. Clarification for contributions and relationship to prior works",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Another drawback is that the grammars are tiny, and the model sizes not ablated with grooving grammars. I understand a framework is being suggested, but to justify the framework it would be good to do some kind of scaling. It doesn't have to be for very large models, or CFGs with thousands of rules. But sampling grammars (and averaging over them) and doing so for grammar sizes of e.g. 10,100,200,400,800 rules would indicate whether the findings are due to the simplicity of the languages or not. Especially in a section titled \u201cHow Language Models Learn\u201d",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "3. More experimental details will be provided by the authors, but the results are still restricted to small-scale scenarios.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In line 301 you say you train on several synthetic CFGs on transformers, but the settings are missing or not referenced. I.e. architecture and training parameters, grammars sizes.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "3. More experimental details will be provided by the authors, but the results are still restricted to small-scale scenarios.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In line 379 you make a claim about an effect that diminishes as models size and complexity increase but it seems to be backed by a single example.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "3. More experimental details will be provided by the authors, but the results are still restricted to small-scale scenarios.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The ChatGPT-5-Instant experiment is unclear, what is the setup? It is also missing a citation or description.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "3. More experimental details will be provided by the authors, but the results are still restricted to small-scale scenarios.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I recommend the authors fix the overly bold claims and smoothen the writing a bit, consider the related literature a bit better and strengthening the empirical study when revising their work. Ensuring full reproducibility is also important, make sure hyperparameters and configurations are reported and referenced.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "3. More experimental details will be provided by the authors, but the results are still restricted to small-scale scenarios.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In the introduction you state that training an LLM for studying its training dynamics is unfeasible. Even so, there is plenty of room to study their learnability without reaching SOTA and no reason to believe the findings don't apply to the top models.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "You could condense the standard definitions (kl, entropy, mle etc) a bit as prose, but im ok with the definition environment.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Please use numbers by equations (the equation or align environments), it\u2019s hard to refer to them otherwise.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "First, the claim that the authors' work \"initiates the study of the learning dynamics of transformers trained on PCFGs\" is wrong. There are at least two groups contributing in this direction: https://arxiv.org/abs/2406.00048 (see also https://journals.aps.org/prx/abstract/10.1103/PhysRevX.14.031001?__cf_chl_rt_tk=UOc8KN3VOXQLYip1DgN1hgH_sgm85mQO4KFwHUmz38A-1761924271-1.0.1.1-05csO._aVplfQKTVpNHOiSYCZ.oTz8qXQePSbQqMnLE, https://arxiv.org/abs/2505.07070, ) and https://arxiv.org/abs/2305.13673v4 (one iteration https://openreview.net/forum?id=qnbLGV9oFL also shares a portion of the title with the present submission). These contributions should be acknowledged and their relation to the present paper discussed.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "1. Clarification for contributions and relationship to prior works",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "If I understand correctly, the main technical contribution is the proposed loss decomposition. What is the intended consequence of this result? For instance, the authors claim that the decomposition implies that the model learns all subgrammars in parallel. However, a decomposition of the population loss can only constrain the location of the final optimum, not the dynamics of optimisation. In particular, it has no direct implications for convergence rates, sample complexities, or learning order. What additional assumptions would be required to justify the claim of \u201cparallel learning\u201d?",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "2. Related to the above point and regarding parallel learning, the new result mentioned by the authors relies on an independence-of-update-directions assumption, which is arguably strong and simplifies the problem a lot.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Inconsistent notation (pp. 4\u20135). Symbols change mid-derivation (e.g., (P(\\alpha\\dots)) vs (P(\\alpha\\mid\\varepsilon))), and in *Definition 4.2* the dependence of the summand on (a) is unclear. Please fix the notation globally and clarify how (a) enters the RHS of Def. 4.2/",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Application of Definition 4.2. When (A) is a fixed string (as in (D_{\\mathrm{KL}}(P\\Vert Q)_{\\alpha})), I cannot reproduce the final equation on p. 4. An explicit worked example would help verify the derivation.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "KL decomposition  of Theorem 4.3. from Definition 4.2. Please show the full derivation of the KL decomposition.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "\u201cUnderstanding compositionality.\u201d This assumption is too vague. Does it hold before, during, or after training, and what measurable property defines it?",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "2. Clarification for the assumption about 'understands composition'",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Implications of Theorem 4.6.  Specify whether the result concerns the population optimum or predicts learning dynamics (rates, ordering, or sample complexity). If the latter, state the additional assumptions required for \u201cparallel learning.\u201d",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "2. Related to the above point and regarding parallel learning, the new result mentioned by the authors relies on an independence-of-update-directions assumption, which is arguably strong and simplifies the problem a lot.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The empirical section does not clearly test the theoretical claims. If the main statement is that the overall loss equals the sum of the losses over subgrammars, this should be explicitly validated in a figure, rather than requiring the reader to infer it by visually summing multiple curves. Moreover, the role of Figure 2 is unclear relative to Figure 1---what new information does it convey? Finally, the dependence on the recursion number (R, or rather its expected value), is never systematically explored or quantified.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "3. How empirical validation supports the theory",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Although the topic is important, the results feel incomplete and lack depth. 1. The theoretical part at the beginning is quite trivial and unnecessary for understanding the dynamics. The first main result only appears at the end of page 6, making the presentation hard to follow.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "1. The theoretical results are a bit shallow, although they are interesting. More work needs to be done about the concrete implications of the developed theory.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "2. Regarding how transformers implement CFGs, Allen-Zhu et al. (2023) have already provided detailed and insightful analysis that largely covers the results here. The paper does not clearly explain its own contribution beyond that work.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "1. Clarification for contributions and relationship to prior works",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "3. The only genuinely new finding seems to be that transformers learn all subgrammars simultaneously, but the analysis is shallow. I would like to see more detailed investigations and ablations to uncover the mechanisms behind this behavior.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "1. The theoretical results are a bit shallow, although they are interesting. More work needs to be done about the concrete implications of the developed theory.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 13344,
+  "prompt_tokens": 2799,
+  "total_tokens": 16143,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 10275,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.003951258,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.003951258,
+   "upstream_inference_prompt_cost": 0.000375066,
+   "upstream_inference_completions_cost": 0.003576192
+  }
+ }
+}

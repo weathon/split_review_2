@@ -1,0 +1,166 @@
+{
+ "paper_id": "0kHbD6ad07",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "The paper seems poorly organized",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I felt lot of important results were pushed into appendix",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "main paper felt very repetitive at times",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Terms like measure-zero and injective need to be defined.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "clarification of the terms in the paper.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "A collision must be defined. It's not sufficient to say that a collision didn't occur because a value differed in any way. Some bound must be placed on the distance between the output representations that constitutes a collision.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Many activation functions are not real analytic functions.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "showing that the zero set is measure-zero is not sufficient to make the strong claim that there are no collisions.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "A collision should reasonably be considered anything within some small distance of zero rather than those items which have identical values given the reality of executing floating point operations a real machine.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The SipIT method is trivial - given one knows the latent representation of every substring (which is less probable than simply knowing the input text to begin with), the algorithm can produce the substring by evaluating every possible token in this location.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Further, the analysis of the algorithm seems to be either obscured or incorrect. For a prompt of length N and vocabulary of k, the algorithm will in the worst case require k^N time. This is exponential where the paper claims a linear time guarantee. Perhaps the paper meant linear with respect to vocabulary? But this is meaningless since the vocabulary is stationary and the input length is the changing factor.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Large vocabulary scaling. How does SipIt handle very large vocabularies (e.g., 100k+ tokens)? Does runtime grow linearly in practice, or do the gradient-based heuristics keep it manageable?",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "results for large vocabulary and models.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Uncertain theoretical result of non-analytic estimation. Most modern models use SwiGLU or SiLU activations. Since your proofs assume analytic activations, can you confirm that these fit the theory?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It is not clear, what happens with the quantized models. It seems that it can be the main source of the collision.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "quantization.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The experiments are provided for models of relatively small size, thus, we cannot asses what empirically happens with the larger number of parameters.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "results for large vocabulary and models.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The scope is limited to decoder-only Transformers with analytic components, excluding architectures with non-analytic activations (e.g., ReLU) or encoder-decoder models.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The practical utility of SipIt, while theoretically appealing, is primarily evaluated in a noiseless setting; its robustness to quantization or approximate hidden states is less explored.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "noise in the activations.",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The discussion of related work, while adequate, could better contextualize how these results complement or challenge prior beliefs about Transformer expressivity.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Some proofs in the appendix are highly technical and may be inaccessible to readers without deep mathematical backgrounds.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It will be very interesting to analyze injectivity correlation with other internal transformer characteristics like anisotropy and intrinsic feature dimension using such frameworks as LLM-Microscope (https://arxiv.org/abs/2502.15007, https://github.com/AIRI-Institute/LLM-Microscope).",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 5177,
+  "prompt_tokens": 1939,
+  "total_tokens": 7116,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 4037,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0045614,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0045614,
+   "upstream_inference_prompt_cost": 0.00067865,
+   "upstream_inference_completions_cost": 0.00388275
+  }
+ }
+}

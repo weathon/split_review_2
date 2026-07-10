@@ -1,0 +1,152 @@
+{
+ "paper_id": "KDIgNmK8YT",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "Regarding coverage, you mention that existing benchmarks primarily assess general instructions, which leads to the introduction of Instruction Following, Math, and Code in your work. However, Livebench also includes code and math subsets\u2014how does your work innovate beyond that? Furthermore, why does the inclusion of code and math tasks justify calling your benchmark WorldAlignment? WildBench, which is constructed from real-world dialogues, also provides nuanced evaluation; however, you do not offer a Spearman correlation with ChatBot Arena for comparison.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Regarding difficulty, you claim to introduce more challenging tasks, but from the prompt templates in Appendix C, it\u000e2\u0000a6\u0000a2s unclear why these prompts lead to more difficult questions. Your evaluation of \"difficulty\" using GPT-4o as a Judge is also somewhat limited\u000e2\u0000a6\u0000a2aren\u000e2\u0000a6\u0000a2t benchmarks like AIME, which are constructed manually, already difficult enough?",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Regarding response length, the analysis in Figure 2 suggests that longer instructions and responses correlate with higher diversity, yet it doesn\u000e2\u0000a6\u0000a2t clearly explain why longer prompts necessarily indicate greater difficulty. Do difficult tasks require long instructions? This reasoning is not entirely convincing.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Furthermore, in terms of bias control, Section 3.1 and [2] show significant overlap\u000e2\u0000a6\u0000a2mainly just the addition of \"d.\" Equations (2) and (3) also appear largely unchanged from [2], with no clear explanation of how \"d\" is reflected on the right-hand side, raising concerns about the novelty.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Benchmark Construction Details: There is a lack of detailed information regarding the construction of your benchmark. For example, how were the multiple domains under Instruction Following structured? What does \"persona\" refer to, and how is it defined? How do you ensure diversity and difficulty in the tasks? It seems that a single prompt is insufficient to achieve this. Appendix C doesn\u000e2\u0000a6\u0000a2t clarify these aspects, and the main text doesn\u000e2\u0000a6\u0000a2t provide further insight into how these benchmarks were constructed or how they ensure the claimed diversity and difficulty.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Model Evaluation Bias: The use of GPT-4o both as a reference model and as a judge introduces potential self-judging bias, as noted in [1]. To improve the robustness of the evaluation, it would be valuable to address this bias through alternative models or by incorporating more explicit control measures.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "(5) using GPT4o both to generate prompts and also as a judge may be problematic",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Mathematical and Code Tasks: The paper claims that post-trained models perform poorly on mathematical reasoning and code generation tasks. However, the open source models tested in Table 1 might not represent the state-of-the-art in these domains. Models like Qwen3 or DeepSeek-R1, which may have been specifically trained on mathematical and coding tasks, would provide a more appropriate baseline. Moreover, instead of relying on LLMs as judges, it would be useful to construct objective, standard answers for these tasks to ensure more consistent and accurate evaluation.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "(1) code and math don\u0000e2\u0000a6\u0000a2t require an LLM judge",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Overclaim in Figure 1: The paper suggests that traditional benchmarks primarily focus on Instruction Following. However, both Livebench and WildBench also include code and math tasks, which are not adequately acknowledged in your claims. Additionally, WildBench is constructed from real-world dialogues, not just Instruction Following. Therefore, the argument that the conventional scope is limited to Instruction Following is not entirely accurate.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Different from the authors' main claim that WorldAlignment is \"an expert-level, multi-domain human preference benchmark\" contradicts with its reliance on GPT-4o-generated pairs. It risks contamination and may not capture authentic human preferences, as real-world interactions (e.g., from Chatbot Arena or human annotators) could introduce.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "(2) GPT4o prompts may be poorly reflective of human prompts",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The domains in WorldAlignment, instruction following has been extensively studied in AlpacaEval and ArenaHard. Coding and math have their corresponding objective benchmark like LiveCodeBench and AIME, MATH. As there are ground truths in code generation and math reasoning, it is not necessary to propose a synthetic benchmark for coding and math reasoning.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "(1) code and math don\u0000e2\u0000a6\u0000a2t require an LLM judge",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Using GPT-4o and GPT-4.1-Mini as judges introduces potential self-bias, with inconsistent ratings across domains, lacking human validation for gold-standard reliability.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "(5) using GPT4o both to generate prompts and also as a judge may be problematic",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The data cleaning methodology is unspecified. It is unclear whether samples from various vertical domains were manually inspected by dedicated domain experts.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "(4) unclear data cleaning",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Employing GPT-4o to simultaneously generate baseline responses and act as the judge model may introduce unfairness or bias into the evaluation, as models tend to favor their own outputs.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "(5) using GPT4o both to generate prompts and also as a judge may be problematic",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The analysis of post-training effects is overly limited in its scope, encompassing a narrow range of model sizes and preference alignment methods. Consequently, the study fails to yield systematic or insightful conclusions. Further exploration is required across a wider variety of models (such as the Qwen series), a more diverse set of model sizes, and a broader spectrum of preference alignment or RL-based approaches. Additionally, the choice of training data itself may have a non-negligible influence on the results, a factor that warrants careful consideration.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The issue (which is also an issue in Alpaca Eval and Arena Hard) is that they mixed Math and Coding prompts with general instruction following tasks, and adopts a fixed way (LM-judge) for evaluation. Math and Coding questions are tasks that the model either is or is not correct. For example, if you are asking a model to solve a math problem, then the evaluation should be whether the answer matches the groundtruth. If the question is about coding, then you need to pass unit tests. Adopting an LM-judge for all of such question doesn't seem correct to me. It would be much much better if the authors can focus on chatbot general instruction following tasks instead of trying to make it \"multi-domain\".",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "(1) code and math don\u0000e2\u0000a6\u0000a2t require an LLM judge",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The prompts that the author used was sampled from GPT-4o. While it enhances the difficulty of the prompts, it results in a mismatch between how people generally use such models. There are natural prompts datasets (e.g. WildChat) out there and you can filter from it to control for quality. Manually conditioning on personas and sampling prompts from GPT-4o raises the question on how practical / how aligned this eval procedure is to human judgement.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "(2) GPT4o prompts may be poorly reflective of human prompts",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The author mentions that past works \"are often susceptible to spurious correlations, including response length bias, formatting preferences, and positional effects\" in the introduction. But I don't really see how the authors modify their benchmark design choices in resolving these problems. I think such problems are systematic and no matter how you control for the data quality, you will still have positional biases, and stylistic biases in LM-judges. For example, GPT-4o might favor a certain style of response that humans dislike.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "(3) not clear how benchmark adjusted to account for problems they list from previous benchmarks",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 11804,
+  "prompt_tokens": 2118,
+  "total_tokens": 13922,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 11082,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00360164,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00360164,
+   "upstream_inference_prompt_cost": 0.00029652,
+   "upstream_inference_completions_cost": 0.00330512
+  }
+ }
+}

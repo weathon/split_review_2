@@ -1,0 +1,124 @@
+{
+ "paper_id": "R8y089OGoo",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "Questionable Necessity (Unsound Premise): The paper's motivation is that the standard KL-regularized objective (Eq. 2) is unusable because its solution (Eq. 3) implies an unstable weighted regression (Eq. 4). This implicitly assumes that weighted regression is the only way to optimize this objective. This premise is challenged by recent work like BDPO (Gao et al., 2025, ICML), which tackles the exact same standard objective. BDPO shows that by decomposing the $D_{KL}$ term along the diffusion path ($D_{KL}[p_{0:N}^\\pi || p_{0:N}^\\nu]$), the objective becomes a sum of per-step, analytic KL divergences $\\sum_n D_{KL}[p_{n-1|n}^\\pi || p_{n-1|n}^\\nu]$. Since these per-step transitions are Gaussian, this penalty becomes a simple, stable, analytic MSE between the predicted noise vectors (Eq. 17 in BDPO). This suggests that DIPOLE's \"greedified\" objective (Eq. 5) is an overly complex solution to a problem that has a simpler, more direct solution within the original, standard RL framework.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Unsound premise / unnecessary objective",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Flawed Training Mechanism (Sigmoid Saturation): The core of DIPOLE's solution is the replacement of $\\exp(\\beta G)$ with the bounded $\\sigma(\\beta G)$ (Eq. 9). This introduces a new, critical problem: signal saturation. The sigmoid function saturates, meaning its output approaches 1 for all values above a certain threshold (e.g., $\\sigma(10) \\approx \\sigma(20) \\approx 1.0). This means the training loss for the positive policy $\\epsilon^+$ loses all gradient information that distinguishes \"good\" actions from \"excellent\" actions. The network is not learning a fine-grained reward landscape, but rather a near-binary classification of \"good\" (weight $\\approx 1$) vs. \"bad\" (weight $\\approx 0$). This saturation flaw directly contradicts the goal of the inference step (Eq. 10). The inference mechanism $\\tilde{\\epsilon} = (1+\\omega)\\epsilon^+ - \\omega\\epsilon^-$ relies on the \"greediness factor\" $\\omega$ to amplify the difference between the two policies. However, if $\\epsilon^+$ has already lost the high-reward gradient information due to saturation, $\\omega$ is merely amplifying a \"blurry\" or \"clipped\" signal. It's unclear how this can steer the policy towards truly optimal actions if the network was never trained to distinguish them in the first place.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Sigmoid saturation critique",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Gap Between Theory and Practice (The $k$ parameter): This saturation flaw is strongly corroborated by the implementation details. The paper's theoretical derivation (Eq. 9) relies purely on $\\sigma(\\beta G)$. However, Appendix D.2 reveals the practical use of a modified weight, $\\sigma(\\beta G + k)$. This 'shift factor' $k$, which is absent from the main theory, serves as strong evidence that the sigmoid-based weighting is not robust. It implicitly confirms the saturation problem, as the model's performance is highly sensitive to the distribution of $G(s,a)$. The mechanism is therefore not as 'principled' as claimed, requiring an ad-hoc hyperparameter to manually shift the sigmoid's non-saturating region to align with the data.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In DIPOLE, the weight term $\\sigma(\\beta G(s,a))$ (or $1 - \\sigma(\\beta G(s,a))$) is treated as constant with respect to the diffusion model parameters. This means that the diffusion model learns to denoise under static weighting but does not explicitly learn how to adjust the action distribution to improve $G(s,a)$ directly. Consequently, there is no gradient signal guiding the modification of intermediate noisy actions to increase the expected reward, which may lead to slower convergence or plateaued performance when the current policy\u2019s support does not already include near-optimal actions. As a result, the performance of DIPOLE heavily depends on the value estimator. If $G(s,a)$ overestimates certain actions, the weighting will amplify these errors, making policy improvement rely entirely on value accuracy rather than direct reward gradients. This issue is particularly pronounced in offline RL, where value estimates can be severely biased in out-of-distribution (OOD) regions. Thus, the diffusion process learns primarily through denoising consistency instead of reward shaping across time. Furthermore, since updates are based on weighted regression rather than policy gradient optimization, there is no stochastic gradient noise or entropy regularization to encourage exploration. In online fine-tuning scenarios (e.g., DIPOLE\u2019s autonomous driving setup), this lack of exploratory signal could slow adaptation to unseen environments.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Core methodological concern: \"weights treated as constant \u21d2 no direct reward gradient; heavy reliance on critic accuracy.\"",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper derives the optimal policy formulation but does not provide rigorous convergence guarantees or theoretical error bounds for the dichotomous approximation.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Lack of convergence/error bounds",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Although the parameter $\\omega$ controls the degree of greediness, the paper lacks quantitative analysis on how $\\omega$ and $\\beta$ jointly influence training stability and performance.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "\u03b1/\u03b2 interaction",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Training two separate diffusion models likely doubles computational and memory costs, yet the paper does not report comparisons on training time or efficiency.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Compute/storage overhead and LoRA details",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The method assumes a reliable reward function or Q-estimator $G(s,a)$, but it remains unclear how performance degrades when the value estimates are noisy or biased.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Core methodological concern: \"weights treated as constant \u21d2 no direct reward gradient; heavy reliance on critic accuracy.\"",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The method is only evaluated in offline or offline-to-online settings. I am not sure why the same idea cannot be applied to online RL?",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Online RL applicability",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The baselines for comparison seem random to me. Not sure what are the reasons to choose those baselines as opposed to some other diffusion-based / non-diffusion-based offline RL baselines. For example, there are plenty of model-based offline RL baselines and I think the authors primarily only choose model-free baselines. Is this intentional? What are the rationals behind choosing these baselines? I have read Sec 4.1 but I am not fully convinced by the explanation.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Baseline selection skepticism",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The reviewer is a little bit confused about why we need to train a policy that minimizes the rewards. In my opinion, to avoid the large difference between the optimized policy and the behavior policy of offline data, we can directly perform imitation learning on the second diffusion policy rather than minimizing the reward.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "How can we get $G(s, a)$ in the proposed method? Should we apply some special technique to learn it, such as CQL [R2]?",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The method can be classified as a weighted-based diffusion RL method and lacks the citation of the recent weighted-based diffusion RL method [R1].",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 6747,
+  "prompt_tokens": 3713,
+  "total_tokens": 10460,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 4911,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0063598,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0063598,
+   "upstream_inference_prompt_cost": 0.00129955,
+   "upstream_inference_completions_cost": 0.00506025
+  }
+ }
+}

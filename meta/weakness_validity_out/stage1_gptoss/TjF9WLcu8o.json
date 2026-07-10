@@ -1,0 +1,110 @@
+{
+ "paper_id": "TjF9WLcu8o",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "This paper lacks experimental validation. It proposes a framework but provides no empirical results, ablation experiments, or comparisons to demonstrate its effectiveness. In the absence of experiments, claims about the efficiency or robustness of adaptation remain speculative.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Its innovation is limited. The combination of contrastive learning and meta-learning has been previously studied. Beyond its application to CodeLLM, this paper does not clearly articulate its fundamental innovation.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The technical approach appears incomplete, key details such as update frequency, computational cost, and data requirements are unclear, making reproducibility difficult.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Absence of Experimental Results: The most critical issue is the lack of empirical results within the main text. Without this evidence, it is impossible for readers to verify the effectiveness of the proposed idea and validate the claims made by the authors.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Insufficient In-depth Analysis: The paper would be substantially strengthened by including further analysis like ablation study and case study.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited Discussion of Impact: The paper's contribution is currently undersold due to an overemphasis on engineering details. The discussion lacks a thorough analysis of the idea's broader significance and potential long-term impact.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "This is an unfinished submission. It reports no quantitative results\u2014no tables, no plots\u2014only a high-level system diagram. The \u201cevaluation\u201d section merely lists datasets, baselines, metrics, and implementation settings but provides zero numbers. Yet the manuscript still asserts gains (e.g., \u201c3\u20135\u00d7 fewer updates,\u201d \u201c12\u201318% on unseen languages\u201d) without evidence. In its current form, it is not ready for peer review and should not have been submitted.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The narrative is unclear and hard to follow.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Descriptions of methods are confusing and lack clarity.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Missing experimental results and lack of enough experimental details.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Many claims in the paper such as good performance of the proposed method lack support.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 2056,
+  "prompt_tokens": 1492,
+  "total_tokens": 3548,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1374,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0020642,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0020642,
+   "upstream_inference_prompt_cost": 0.0005222,
+   "upstream_inference_completions_cost": 0.001542
+  }
+ }
+}

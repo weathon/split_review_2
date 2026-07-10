@@ -1,0 +1,124 @@
+{
+ "paper_id": "RNsydf7HB4",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "Severe computational inefficiency of the proposed method... solving only 500 instances on CVRP100 requires 7 days... training time omitted...",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The contribution of this paper seems incremental... only difference is a different dual GCN module... idea of cross attention and gated fusion is standard... technical novelty unclear.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "About the contribution, the rebuttal improved the positioning and explained differences from DACT/N2S-type approaches, but for the more critical reviewers the contribution may still read as combining known components.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Evaluation is limited: no comparison with other encoding methods such as Synth-Att, NDS, L2Seg; lacks analysis of gating parameter alpha; fails to justify why two separate modalities are necessary.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "For missing comparisons to several strong recent baselines/encoders, the rebuttal provides reasons why some methods are not directly comparable, but it does not fully close the gap for reviewers who asked for broader head-to-head evidence.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Proposed method evaluated on limited scales (only 100 nodes) and only CVRP, failing to showcase broader applicability and robustness.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "reviewers explicitly asked for at least one additional VRP variant. The rebuttal states this cannot be done now, so this concern remains.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Practical value of the proposed method is questionable: GAMA 6.6 days vs DACT 33 minutes, 288x slower for marginal 0.26% improvement.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The results suggest an extremely unfavorable trade\u2011off, making the method impractical compared to both existing neural and classical baselines.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The empirical validation is somewhat thin. The method is only applied to CVRP, and the primary experiments focus on relatively small\u2011scale problems (N=20, 50, 100).",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "reviewers explicitly asked for at least one additional VRP variant. The rebuttal states this cannot be done now, so this concern remains.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "This paper is some conceptual overlap with DACT and N2S. The ideas of separating instance and solution information, and learning them through both self\u2011attention and cross\u2011attention are very similar to DACT.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "About the contribution, the rebuttal improved the positioning and explained differences from DACT/N2S-type approaches, but for the more critical reviewers the contribution may still read as combining known components.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experiments only focus on CVRP problem, where more results on other representative VRP variants are expected.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "reviewers explicitly asked for at least one additional VRP variant. The rebuttal states this cannot be done now, so this concern remains.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In comparison to DACT, the superiority of the proposed GAMA is not obvious, especially considering both optimality gaps and computation efficiency.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "For missing comparisons to several strong recent baselines/encoders, the rebuttal provides reasons why some methods are not directly comparable, but it does not fully close the gap for reviewers who asked for broader head-to\u2011head evidence.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experimental results lack the comparison with baselines on large\u2011scale VRP instances.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "For missing comparisons to several strong recent baselines/encoders, the rebuttal provides reasons why some methods are not directly comparable, but it does not fully close the gap for reviewers who asked for broader head-to\u2011head evidence.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The method's primary contribution is fundamentally undermined by its prohibitive computational cost: GAMA requires 6.6 days of inference time to solve CVRP100 instances, 288\u2011fold increase compared to DACT, rendering the method unusable for any practical application.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper's claims of superior zero\u2011shot generalization are based on a flawed baseline comparison; the DACT baseline gap of 25.3% is inconsistent with previously published results, invalidating the claim of state\u2011of\u2011the\u2011art generalization.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 4162,
+  "prompt_tokens": 2756,
+  "total_tokens": 6918,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 3057,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0040861,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0040861,
+   "upstream_inference_prompt_cost": 0.0009646,
+   "upstream_inference_completions_cost": 0.0031215
+  }
+ }
+}

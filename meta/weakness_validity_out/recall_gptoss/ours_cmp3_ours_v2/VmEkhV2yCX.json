@@ -1,0 +1,52 @@
+{
+ "paper_id": "VmEkhV2yCX",
+ "method": "ours_cmp3_ours_v2",
+ "n_items": 9,
+ "matched": [
+  {
+   "index": 1,
+   "label": "invalid",
+   "raised": false
+  },
+  {
+   "index": 2,
+   "label": "invalid",
+   "raised": false
+  },
+  {
+   "index": 3,
+   "label": "invalid",
+   "raised": false
+  },
+  {
+   "index": 4,
+   "label": "invalid",
+   "raised": true
+  },
+  {
+   "index": 5,
+   "label": "valid",
+   "raised": false
+  },
+  {
+   "index": 6,
+   "label": "invalid",
+   "raised": false
+  },
+  {
+   "index": 7,
+   "label": "invalid",
+   "raised": false
+  },
+  {
+   "index": 8,
+   "label": "valid",
+   "raised": false
+  },
+  {
+   "index": 9,
+   "label": "invalid",
+   "raised": false
+  }
+ ]
+}

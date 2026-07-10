@@ -1,0 +1,124 @@
+{
+ "paper_id": "2uTxLC4LmC",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "Potential Flaw in the Problem Setting: The biggest weakness of this paper is actually in the problem setting of attempting to make the chain-of-thoughts themselves safe, instead of just keeping the final response safe.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "monitorability\u2013alignment trade-offs at frontier scale (Reviewer 1hr8)",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lacking contextualization and novelty: The paper does not cite [4] nor compare with it, and the idea of adding interventions to unsafe responses ... has already been explored in [4].",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Inheriting regular problems of DPO: The offline DPO loop will inherit all the problems of such an algorithm, like unintentional unalignment [8, 9] and problems of off\u2011policy data [10, 11, 12], which are not properly addressed in the paper.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lack of baselines: Instead of running DPO, if one just runs SFT on the constructed preferred responses, how does that perform? How about SFT + DPO (i.e., RPO [9])?",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Missing prior open\u2011source RL\u2011based safety work such as TARS [1]; the paper does not include comparisons against prior RL\u2011based approaches for safety training.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Table 2 clarity: In Table 2, is the Avg. safety score across both Rsng. and Resp. or just Resp.? It would be helpful if the table includes averages for them separately.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Unclear claim about limited safety scores: The claim in lines 189\u2011191 about limited safety scores on adversarial datasets is not convincing; the authors should explain what methods they tried to get the best performance out of GRPO with process rewards.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Generalizability to other models: The experiments on safety triggers were conducted on DS\u20118B, but does the trend also hold on other base reasoning models such as Qwen3\u20118B which are known to be safer?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited model scale evaluation: Experiments are only conducted on mid\u2011sized LRMs (DS\u20117B/8B and Qwen3\u20118B); evaluating IPO on smaller and larger models would help assess scalability.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lack of adaptive robustness testing: The paper does not include adaptive or adversarial tests such as obfuscation, paraphrased jailbreaks, or multi\u2011turn exploit prompts.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited capability assessment: No evaluation of general language capabilities after alignment, such as factual QA, instruction\u2011following, multilingual understanding, or knowledge recall.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Need deeper theoretical discussion: The paper would benefit from a deeper theoretical discussion on why certain reasoning paths become unsafe, and why the IPO method works.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "formal theoretical guarantees and long\u2011term behavior of offline preference optimization (Reviewer T2wZ)",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Need more open\u2011ended reasoning scenarios: Empirical evaluation could be strengthened by including more open\u2011ended reasoning scenarios to demonstrate generalization beyond factual or mathematical reasoning.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 3466,
+  "prompt_tokens": 2792,
+  "total_tokens": 6258,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 2526,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0035767,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0035767,
+   "upstream_inference_prompt_cost": 0.0009772,
+   "upstream_inference_completions_cost": 0.0025995
+  }
+ }
+}

@@ -1,0 +1,152 @@
+{
+ "paper_id": "2za3iNkwXn",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 5,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "The chosen reasoning models are all based on DeepSeek-R1 or its distilled variants, which may constrain the generality of the claims. It is unclear whether the findings would also hold for other reasoning models such as GPT-OSS-20B or GPT-OSS-120B.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The proposed layer-importance locating method is not entirely convincing. For example, Figure 2 suggests that the first-layer weights are relatively unimportant, yet Table 3 shows that quantizing the 1_up component causes the largest performance drop on AIME 2024. This apparent contradiction raises concerns about the reliability of the identified importance scores.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Minor concerns: the tick labels in Figure 2 are not clearly visible, and there is a typo in line 483 (\u201cimrpving\u201d \u2192 \u201cimproving\u201d).",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited model coverage. The analysis centers almost exclusively on DeepSeek-R1 and its distilled variants, which makes several findings read as DeepSeek-specific behaviors rather than properties of compression that generalize across LRMs. Validating the conclusions on additional open-sourced LRM families (e.g., QwQ variants) would strengthen the generalizability claims and help disentangle model-specific effects from compression-induced phenomena.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Imbalanced treatment across compression methods. The paper allocates uneven coverage across the three compression families. Distillation is represented by off-the-shelf distilled checkpoints for black-box open-source models, quantization is explored with four distinct methods, while pruning is evaluated only with SparseGPT. This asymmetry makes the comparisons look method-specific rather than family-level and may hurt perceived fairness.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Coarse knowledge vs. reasoning disentanglement. The paper infers that parameter count chiefly affects knowledge based largely on lower MuSiQue EM/F1 compared to other tasks. However, this single contrast is not sufficient to attribute effects to knowledge retention versus reasoning capability. MuSiQue itself blends multi-hop reasoning with retrieval-like knowledge and is sensitive to prompt/context choices. As a result, the \u201cparameter count affects knowledge\u201d conclusion feels somewhat overstated. More fine-grained experiments would strengthen the claim, e.g., RAG vs. closed-book ablations across model sizes or other synthetic tasks that decouple reasoning from memorized facts.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Minor presentation issues. There\u2019s a typo (\u201cimrpving\u201d) in Section 6.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper makes, in my opinion, a quite strong claim on localizing the reasoning ability to certain model layers. The claim that later layer is more critical to reasoning/performances is intuitive, as they have greater impact on the final output, and could be sensitive to perturbations/compressions. However the authors do not go deeper into why certain deep layers are important to reasoning.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "For a systematic study, the authors should consider using a more diverse set of diagnosing tools, rather than only using one framework, as it would put the general applicability of the main claim under question.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In the paper, the locating of tokens related to certain reasoning behaviors seems not rigorous enough, as the authors only use GPT-4o to identify related tokens, which itself may have certain biases.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Some missing discussions on the layer/module-wise compression methods [1, 2], and identifying weights important to reasoning [3]",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Generalizability: The analysis is heavily centered on DeepSeek-R1 and its specific distilled variants (R1-Distill-Llama, R1-Distill-Qwen). It is unclear if the central findings (e.g., the high importance of the final-layer mlp.up_proj) are a general feature of all LRMs or an artifact of the specific distillation-with-SFT process used to create the R1 models.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Subjectivity in Methodology: The interpretability analysis (Section 2.2) relies on prompting GPT-4o to locate token sequences corresponding to four specific reasoning behaviors. This labeling process seems subjective and could introduce noise or bias. The robustness of the resulting steering vectors is highly dependent on the quality of this heuristic.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Underdeveloped Pruning Analysis: While pruning is introduced as one of the three main compression methods, it is quickly dismissed after benchmarking shows it performs poorly (e.t., at 50% sparsity). The subsequent mechanistic analysis focuses almost exclusively on distillation and quantization, making the pruning aspect of the paper feel incomplete.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Robustness & Statistics. Behavior labeling robustness is under-specified (prompt/threshold/seed); key results lack rank-stability and uncertainty (variance, 95% CIs, significance).",
+   "reviewer_index": 4,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Metric & Visualization Choice. RI plots zero out increases, risking masked compensations; provide justified alternatives (report both \u2191/\u2193 and net change).",
+   "reviewer_index": 4,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Coverage & Generalization. Pruning analysis is shallow (no mechanistic view beyond collapse); external validity is limited (mainly R1-distilled 8B/7B, few non-R1 families).",
+   "reviewer_index": 4,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 3437,
+  "prompt_tokens": 2501,
+  "total_tokens": 5938,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1984,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0034531,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0034531,
+   "upstream_inference_prompt_cost": 0.00087535,
+   "upstream_inference_completions_cost": 0.00257775
+  }
+ }
+}

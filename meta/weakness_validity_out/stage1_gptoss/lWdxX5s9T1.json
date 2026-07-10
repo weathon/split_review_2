@@ -1,0 +1,145 @@
+{
+ "paper_id": "lWdxX5s9T1",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "The ACVRP problem has been proposed for a long time, and there have been some dedicated efforts to solve this problem, including heuristic algorithms (e.g. Vigo D. A heuristic algorithm for the asymmetric capacitated vehicle routing problem[J]. European Journal of Operational Research, 1996, 89(1): 108-126.) and meta-heuristic algorithms (e.g. Leggieri V, Haouari M. A matheuristic for the asymmetric capacitated vehicle routing problem[J]. Discrete Applied Mathematics, 2018, 234: 139-150.). This paper does not discuss these previous works.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The selected baseline algorithms are not specifically tailored for asymmetric vehicle routing problems, limiting the validity of comparative analyses.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experimental evaluations only cover out-of-distribution scenarios\u2014where models are trained on instances of size 100 and tested on instances of other sizes\u2014while failing to include in-distribution scenarios, i.e., training on instances across all sizes and subsequent testing on instances of all sizes, weakening result comparability.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It lacks an online update mechanism to adapt to real-time dynamic changes (e.g., sudden traffic jams).",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The results of the ACVRPTW problem in Table 3. The method presented in this paper is not the optimal one, but it is highlighted in bold.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While leveraging SVD to encode matrix asymmetry is a valuable idea, the current contribution is confined to routing problems. Asymmetric (Directed) edge structures widely exist in other graph-based combinatorial optimization tasks. This scope limitation reduces the broader impact and significance of the work. If the authors could extend the idea from routing distance asymmetry to general graph asymmetry and validate it on a more diverse set of problems, the contribution would be substantially strengthened.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "ablation study and thus the attribution of improvement to the two ideas is not fully clear.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "performance of OR heuristics is not fully clear.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "why the performance improvements are so much larger for larger problems or out of distribution problems is not investigated.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "small methodological contribution: adding the eigenvectors is basically feature engineering the asymmetric distance matrix characteristics of the problem.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It would be helpful to show in tab. 1 which of the baselines have access to which problem information such as the asymmetric distance matrix, the demands etc.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper's contribution lies in the clever application of existing techniques rather than the development of fundamentally new methods. Both SVD and Sinkhorn normalization are standard, well-established algorithms. While the engineering is solid, the work feels more incremental than transformative from a methodological standpoint.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In Table 1, the authors state that all retrained baselines were evaluated using z-score normalization. However, the authors do not justify why this specific normalization was uniformly applied. Applying a non-native normalization may unfairly penalize baseline performance, making it unclear if the comparison was conducted under optimal conditions for all methods.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper uses different normalizations for different datasets. However, the paper provides no ablation study to compare the effect of z-score versus min-max (or no normalization) on the same dataset. It remains unclear whether the impressive performance gains are fully attributable to the proposed SVD and Sinkhorn modules or are partially an artifact of a specific, un-analyzed normalization choice.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The ablation study in Table 6 severely weakens the case for the SVD-based initialization as a standalone contribution. The RADAR-SVD performs very poorly on larger-scale problems, achieving a gap of over 20% on ATSP1000. This poor generalization suggests that the strong performance is critically dependent on the Sinkhorn operation.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Some critical hyperparameters' details are missing. For example, the number of iterations T for Sinkhorn normalization is not specified. It is unclear whether the increasing number of iterations significantly increases the computational load and performance of the model.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 2960,
+  "prompt_tokens": 2385,
+  "total_tokens": 5345,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1743,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00305475,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00305475,
+   "upstream_inference_prompt_cost": 0.00083475,
+   "upstream_inference_completions_cost": 0.00222
+  }
+ }
+}

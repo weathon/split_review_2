@@ -1,0 +1,103 @@
+{
+ "paper_id": "ei1bRG971A",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 3,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "Small performance improvements, both in an absolute sense and relative to known model variants. Even fine tuning or just random variation might yield performance improvements similar to those shown in the paper.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "they had issues with (a) small improvements",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Weak experimental support: only within-model deltas, no compute-matched baselines, and no wall-clock profiling.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "they had issues with (d) a missing computation-matched comparison",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Incremental and heuristic: conceptually similar to existing adaptive-depth ideas (MoD, MoR, ITT, early-exit) and lacks deeper theoretical insight.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "they had issues with (b) similarity to existing ideas",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The reported accuracy improvement over regular SFT is only 0.87 on average in table 1, which appears minimal. This makes the experimental results incomplete.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "they had issues with (a) small improvements",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Experiments are conducted on only a single LLM (Qwen), raising concerns about the generalizability of the method to other architectures.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "they had issues with (c) limited architectures",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Based on the method description and experiments, it is unclear whether DND fine-tunes all components of the transformer blocks in the selected layers (L_s to L_e) or if it fine-tunes all model parameters like standard SFT.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "they had issues with (e) missing details on SFT",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The router-level losses and their underlying motivation are not clearly explained. Moreover, their overall contribution appears minimal, as reflected by the similar values in Table\u202f2 (60.54, 60.58, 60.64) where these losses are not included.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Overall, the approach seems largely heuristic and does not demonstrate a substantial improvement in accuracy.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While this paper presents a promising direction, the paper does not quantitatively demonstrate why the selected tokens are \"critical.\" The visualizations could be the result of cherry-picking or confirmation bias. It is unclear if the router has learned a meaningful selection strategy or is simply responding to surface-level statistical patterns.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper claims a \"minimal parameter and computing increase,\" basing its efficiency analysis on a theoretical calculation of FLOPs. FLOPs are a poor proxy for actual inference speed (latency and throughput) on GPUs. The DND architecture, with its Pack and Unpack operations, breaks the massive parallelism that GPUs are optimized for, potentially leading significant latency increases that are not captured by FLOP counts. They should report: Wall-clock latency (ms per generated token) and throughput (tokens per second) on a standard benchmark GPU (e.g., A100 or H100).",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 3862,
+  "prompt_tokens": 1689,
+  "total_tokens": 5551,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 3065,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00348765,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00348765,
+   "upstream_inference_prompt_cost": 0.00059115,
+   "upstream_inference_completions_cost": 0.0028965
+  }
+ }
+}

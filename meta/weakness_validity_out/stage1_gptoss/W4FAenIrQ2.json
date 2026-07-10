@@ -1,0 +1,103 @@
+{
+ "paper_id": "W4FAenIrQ2",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 3,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "May need computational cost analysis: While \"compute constraints\" are briefly mentioned in page 4 (CyberFineWeb section), there's no breakdown of training time, GPU-hours, or carbon footprint across stages. Adding some analysis on computational cost would help readers to form a general impression on the scale of RedSage training process.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The lack of computational cost analysis is addressed (Reviewers f3PV, QvXR).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited human validation: One of my concern on this work is the data part is heavily reliance on LLM-based verification, which could introduce subtle self-reinforcing biases.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The concern about errors or bias introduced during LLM-generated augmentation remains (Reviewer QvXR).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Teacher model (verifier) analysis: Augmentation uses only Llama-3.3-70B and Qwen2.5-72B. Analysis on teacher model can make this paper more solid, such as examining sensitivity to teacher model choice, temperature settings, or comparison with smaller/different teacher models.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Minor issue: Font size on Fig. 3 and Fig. 5 can be larger which I felt difficulty to read",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The method for open-ended Q&A evaluation is not adequately described. Line 317 mentions \"prefix exact match or regex matching\" and points to Appendix C.1 however neither the text nor the appendix provide sufficient details or references to clearly understand this evaluation.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Requests for clarification and additional methodological details are addressed (Reviewer f3PV).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The method for generating the instruction-tuned variant is not explained or referenced. A diagramatic view of how each of the variants was derived would be helpful.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Requests for clarification and additional methodological details are addressed (Reviewer f3PV).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "There is not really any methodological novelty, given this is similar to other methods like FineWeb-Edu.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The concern about limited methodological novelty remains (Reviewer mCDa).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I would have liked to see evaluation of larger models (at least 32B) to see how well the methodology transfers to stronger models (one might worry that the gap will shrink).",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "The concern about evaluation on larger models is partially addressed by fine-tuning Qwen3-32B using the proposed pipeline (Reviewer mCDa).",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "It would also be good to get a closed model (e.g., GPT-5 or Claude) to get a ceiling for the new benchmark.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Evaluation against larger/closed-source models is addressed (Reviewers mCDa, f3PV).",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The abstract claims that the fine-tuned model improves on OpenLLM leaderboard tasks, but looking at Table 6, it seems like except on GSM8K, the RedSage is worse as would be expected.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 3133,
+  "prompt_tokens": 1665,
+  "total_tokens": 4798,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 2314,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0029325,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0029325,
+   "upstream_inference_prompt_cost": 0.00058275,
+   "upstream_inference_completions_cost": 0.00234975
+  }
+ }
+}

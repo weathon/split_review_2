@@ -1,0 +1,110 @@
+{
+ "paper_id": "k6nTUFoqeT",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "It is known that diffusion/flow based are slower to train compared to autoregressive models, the paper should report compute comparison between baselines to accurately place the gains in context.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "AR action heads trained with cross-entropy are brittle for real world control, exhibiting unpredictable bin prediction switches with little observation noise.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "CE loss is non-metric, it only cares about the probability on the ground-truth bin, no matter how the remaining probability mass is distributed among nearby vs far bins.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "How much does the FASTerVQ tokenization mitigate this?",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The texts in many figures are quite small and not easy to read especially when printed, particularly in Fig. 2 and Fig. 3.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Page 4 details the action tokenization process and components. I believe it would be easier for readers if there is an algorithm block that outlines this procedure, like FAST does.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "[1] is a recent work that incorporates autoregressive action chunk generation without an explicit action tokenizer, and its proposed technique is very relevant to the block-wise autoregression. The authors are recommended to include this in the related work.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The reusability in some figures is low due to the choice of colors, lack in contrast, and lack of clear captions. Page 7 is a good example for this issue. Red-green contrasts should be avoided in general.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "There are a few types in the manuscript, repeated words, and wrong references (e.g. to Fig. 5 on page 7).",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Aside from the LIBERO experiments in Table 1, most results seem to combine FASTer VLAs blockwise autoregressive decoding (BAR) with the FASTer tokenizer, making it difficult to judge the impact of the tokenizer itself on success rates.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The encoding times of the FASTer tokenizer seem high (150ms on LIBERO) compared to the runtime of the base pi0 model. To the best of my understanding, the paper does not isolate the tokenizer runtime as a standalone metric in the inference speed results.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 2515,
+  "prompt_tokens": 1713,
+  "total_tokens": 4228,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1797,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0024858,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0024858,
+   "upstream_inference_prompt_cost": 0.00059955,
+   "upstream_inference_completions_cost": 0.00188625
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "paper_id": "20DsUSauCj",
+ "method": "ours_cmp3_ours_v2",
+ "n_items": 4,
+ "matched": [
+  {
+   "index": 1,
+   "label": "valid",
+   "raised": false
+  },
+  {
+   "index": 2,
+   "label": "valid",
+   "raised": true
+  },
+  {
+   "index": 3,
+   "label": "valid",
+   "raised": true
+  },
+  {
+   "index": 4,
+   "label": "invalid",
+   "raised": false
+  }
+ ]
+}

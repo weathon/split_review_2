@@ -1,0 +1,152 @@
+{
+ "paper_id": "6vX0LH9Yt7",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "My main concern lies on the novelty of the proposed methodology with respect to PAC-Nerf [1]: although used for different objectives, both this work and Pac-NERF combine a learned neural surrogate with a physics-based simulator to get both efficiency and physical plausibility. This work should be mentioned and thoroughly discussed.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While visually compelling, the sketch interface seems more an application layer than a core technical contribution. It\u2019s unclear to me if the diffusion-based control module is novel or simply applied to this domain.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The presentation needs some minor adjustment and refinement, with e.g. table 2 floating over section titles.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While I am not up to date with all the applicable methods, the set of considered baselines seems somewhat limited. This makes it hard to assess the actual benefits with respect to the state of the art.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In Figure 7, why does the grid MSE finally decrease when transitioning from the neural physics phase to the MPM phase? Intuitively, one might expect it to increase monotonically. Could the authors provide insight into this phenomenon?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Sensitivity of the Fluid Complexity Threshold (`r_c`): How sensitive is the hyperparameter `r_c`, used to trigger the MPM solver? If the simulation scenario changes, would the value of `r_c`require adjustment? This dependency may limit the practical utility and generalizability of the simulator.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Integration of Controller and Neural Solver: The force field learned by the Diffusion-based Fluid ControlNet must be used in conjunction with MPM. Why wasn't the interaction between the controller and the neural physics solver explored? How could such an integration be implemented?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Efficiency of the Diffusion Model: Sampling from diffusion models is often computationally intensive. What sampling strategy was employed, and what is the associated latency? Are there potential avenues for optimization?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Limited Performance: While the overall system idea is intriguing, the visual results presented in Figure 11 suggest that the network may not have effectively learned meaningful physical dynamics. Although the latency might be low, the current level of accuracy appears insufficient for practical application. How does the authors plan to bridge this significant gap between performance and usability?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The presentation in its current format is sub-par. Several plots rely on scattered points that difficult clear understanding, while Figure 7 is particularly confusing. Why does the red rollout abruptly stop? It's also suspicious that the hybrid error high before the cutoff, so it seems like the approximation has a high baseline error. Moreover the abrupt truncation of the red plot could be an attempt of potentially masking issues of the method on further roll-outs.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The related-work discussion is brief relative to the breadth of prior neural simulators, hybrid solvers, and control methods; important positioning (what\u2019s new vs. NeuralMPM/MPMNet/Neural SPH) could be sharper.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "No supplemental video is provided, which is crucial for judging visual fidelity, stability, and interactive behavior of fluids (especially the control sequences).",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Results are limited and could be better presented. Is hard to understand what Figure 11 is demonstrating beyond qualitative snapshots,",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper motivates diffusion models by claiming \u201cstrong conditional generation with temporal coherence and spatial flexibility,\u201d but the architecture description does not employ explicit temporal attention or other mechanisms typically used to enforce coherence over long horizons in diffusion video models; this mismatch deserves either justification or an ablation.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The scope feels split across its two contributions: real-time acceleration via a neural\u2013MPM hybrid with fallback and sketch-driven \u201cartistic\u201d control via a diffusion controller. However it feels like both contributions are under-explored, seems like each direction could merit a focused paper with deeper ablations.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While the hybrid direction is practical, I find the core mechanism of monitoring the error then hard-switching to a classical solver is a generic wrapper with limited novelty. As presented, it could be applied to most neural simulators; the paper should demonstrate if any part of their design makes fallback uniquely efficient, and compare against to other neural simulation baselines by applying the same fallback onto other neural simulators.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The generative controller is also weakly motivated: classic optimization-based methods for interactive fluid control (e.g., \u201cFluid Control Using the Adjoint Method\u201d ; McNamara et al., 2004) tackle the same task without needing diffusion models for control. Table 3 also showed little improvement by using the generative model.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 3931,
+  "prompt_tokens": 2447,
+  "total_tokens": 6378,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 2572,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0038047,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0038047,
+   "upstream_inference_prompt_cost": 0.00085645,
+   "upstream_inference_completions_cost": 0.00294825
+  }
+ }
+}

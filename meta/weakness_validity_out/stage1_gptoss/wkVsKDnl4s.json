@@ -1,0 +1,124 @@
+{
+ "paper_id": "wkVsKDnl4s",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "The presentation and organization of the paper are not good. Especially for readers unfamiliar with the metagenomics classification problem,  it is difficult to follow the paper.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper provides a limited novelty. The proposed approach mainly relies on MetaTrinity, with some modifications (e.g., hash-based mapping).",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Although the authors emphasize that the theoretical analysis is a major contribution of the work, it is discussed in the appendix and presented incompletely.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experiments are limited to the CAMI II dataset. The baseline method performs better in accuracy than the proposed one (though slower).",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper omits and insufficiently discusses key related methods.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The appendix is incomplete.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper mentioned that they enabled the applications of HighClass in edge deployment. However, the 6.8GB memory requirement for deployment mentioned in the paper is not ideal for edge devices.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper has more than 9 pages for the main text, which is against the policy.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Section 5.4.1 is completely missing.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper cited the paper: From noise to signal: Enabling foundation-model pretraining on noisy, real-world corpora via quality-aware tokenization with full author list and the source as ArXiv. However, I cannot find it on ArXiv but also an anonymous submission to ICLR 2026, which is very concerning.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The \u201ctheory\u201d mostly restates standard learning theory with ad hoc constants. The claimed \u201cfirst comprehensive theory\u201d is not substantiated.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Made-up references: arXiv:2406.08251 actually corresponds to a completely different paper (Light-induced fictitious magnetic fields for quantum storage in cold atomic ensembles at https://arxiv.org/pdf/2406.08251), different from the cited one.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Some sections are even empty (5.4.1, F1, F2, F3, M7).",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 1902,
+  "prompt_tokens": 1468,
+  "total_tokens": 3370,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1152,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0019403,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0019403,
+   "upstream_inference_prompt_cost": 0.0005138,
+   "upstream_inference_completions_cost": 0.0014265
+  }
+ }
+}

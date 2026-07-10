@@ -1,0 +1,152 @@
+{
+ "paper_id": "YETCQLcKtn",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "The baselines are limited, comparing only against PPO and FPO. Methods like GenPO and DPPO are missing. Furthermore, the method does not show an advantage in half of the tasks in the IsaacLab benchmarks.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "There are too many hyperparameters, making reproduction difficult. Beyond standard PPO hyperparameters, it also involves the sampling strategy for $t$, noise variance learning, time or observation embedding dimensions, integration steps, and $w_b$, $w_g$, among others. The paper provides limited discussion on the sensitivity to these hyperparameters and the default strategies used.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "No code available.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The proposed interpolation-based estimation of importance ratios is only heuristic; the paper does not quantify the bias introduced or establish convergence guarantees. Providing analytical error bounds or controlled experiments comparing with exact estimators would strengthen credibility.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "They provided an analysis of the error introduced by the importance sampling correction",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The Brownian regularizer, while novel, lacks clear motivation and comparison with existing entropy regularizers (e.g., Haarnoja et al., 2018; Chao et al., 2024). Its empirical benefit is only qualitatively shown; a quantitative ablation isolating its contribution is necessary.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "They illustrate the performance of the Brownian noise, although I see some conflation between its effect on generalisation (i.e. as a regulariser) and its effect on exploration",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experimental evaluation is also fragmented\u2014PolicyFlow is compared with FPO on MuJoCo and PPO on IsaacLab, preventing a unified cross-method assessment.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors provided additional experiments",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Including all three under identical settings would clarify relative efficiency and expressivity. Furthermore, results are averaged over five seeds without significance testing",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The MuJoCo Playground evaluation covers only a moderate subset of tasks (e.g., BallInCup, CheetahRun, FingerTurnHard, ReacherHard) but omits the most challenging or high-dimensional environments such as Humanoid or Walker. This limits claims of scalability to complex continuous-control domains.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "some notations is not well defined: Sec. 3. $s,a$ is not defined before using. $p_{\\pi}(s)$ is never defined. $\\pi^*$ is mentioned but not clearly defined.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The reported empirical results are very close to PPO, providing limited evidence of improvement.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The additional model complexity and slower runtime are not justified by corresponding performance gains.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The theoretical connection between the flow-based representation and policy gradient optimization is underdeveloped.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The motivation for emphasizing FPO comparisons is not well justified relative to the paper\u2019s main objective.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Benchmark evaluations and variance reporting are incomplete, limiting the strength of the experimental conclusions.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "How is the initial flow matching model for the method in this paper obtained? What is the impact of the initial model's performance on the overall method?",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The target distribution of the flow-based policy changes dynamically during training, yet the objective function samples only a single t from the path at each step. Could this, due to the varying sample weights (different values of A) for each t along the path, prevent the model from learning an effective distribution?",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "They provided an analysis of the error introduced by the importance sampling correction",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "A sensitivity analysis experiment should be conducted on the parameters used in the algorithm, e.g, Brownian regularizer weight wb.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors provided additional experiments",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 3454,
+  "prompt_tokens": 1855,
+  "total_tokens": 5309,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 2317,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00323975,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00323975,
+   "upstream_inference_prompt_cost": 0.00064925,
+   "upstream_inference_completions_cost": 0.0025905
+  }
+ }
+}

@@ -1,0 +1,159 @@
+{
+ "paper_id": "wA6dvVnKe8",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "The novelty of the proposed method is limited. Learning adversarial examples by maximizing the distance from the original data is a common approach in adversarial attack literature [1-3].",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Although the work targets VLA systems, it does not analyze how visual perturbations affect the action generation process. As a result, the proposed attack closely resembles conventional vision-language model attacks.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While the authors claim that their method does not require access to target models, it still relies on the use of encoders.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Experiments are conducted on a single benchmark with only a few baseline comparisons.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While this attack claims to require less information than prior attacks to succeed, namely access to the encoders only, this remains a white-box attack.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "They do not sufficiently motivate a threat model where an adversary might have access to the encoder parameters and not the LVLM parameters, or knowledge of the other two requirements for UADA and UPA.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "UPA, the previous SOTA from Wang et al., already achieved near-perfect ASR on the \"task failure\" objective, making the small percentage increase not a sufficiently interesting result.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Given the fact that none of the evaluated models can reliably complete every task in the LIBERO dataset, \"task failure\" is not a meaningful metric for evaluation.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Unlike Wang et al., the authors do not present real-world results, which significantly weakens their claims.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Their demonstration of adversarial fine-tuning is a technique that is already well represented in adversarial machine learning literature.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Limited Scope of Defense Evaluation: The proposed adversarial fine-tuning defense is only evaluated on the single-camera OpenVLA model. While the paper attacks multi-camera models (OpenVLA-OFT and \u03c00), it does not demonstrate whether the defense is effective for them. These models are more complex and, as the paper notes, already exhibit higher baseline robustness. It is unclear how the defense would be applied or how effective it would be.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lack of Defense Baselines: The paper proposes an adversarial fine-tuning scheme but does not compare it against other defense methods.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Patch Occlusion Problem: The authors identify in their limitations that the patch \"may occasionally occlude important objects\". For example, this could cause the adversarial fine-tuning to train the model to ignore an object that the patch is covering. This is a non-trivial problem for the defense.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The related work on adversarial attacks on VLAs seems a bit sparse. There have been several works beyond (Wang et al., 2024) that tackle this problem; see, e.g., https://arxiv.org/pdf/2505.16640? and https://arxiv.org/abs/2506.03350. Additionally, while the authors cite related work from the adversarial examples community, there is work much closer to the robotics community on attacking LLM-based planners, see, e.g., https://arxiv.org/abs/2407.20242 and https://arxiv.org/abs/2410.13691. I think adding a discussion of these works, particularly those on VLA attacks, would give a better view of the literature, particularly because as written, one could reasonably infer that the only work on VLA attacks is Wang et al., 2024.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "I don't understand why the baselines differ between Table 2 and Table 3. The paper feels incomplete by selectively including these baselines. Furthermore, why did the authors not consider fine-tuning OpenVLA-OFT and pi0 to improve robustness?",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "For a purely empirical paper, this paper is *very* light on results, so much so that I'm going to advocate for rejection. It is reasonable to expect that an accepted paper should offer more creative/fine-grained analysis. The paper, as written, doesn't make a compelling/strong case that this method is significantly stronger than the baselines due to a lack of evidence.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The results also don't seem particularly compelling. It's somewhat hard to interpret the results in Table 3, because the authors use weak baselines (clean performance and random patches). And it looks like the baselines in Table 2 from Wang et al., 2024 do essentially the same. Perhaps there's an argument to be made that the patch attack uses a slightly more realistic threat model, but I think even this is arguable, given that it seems unlikely that a real adversary will apply patches in practice.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Since we're talking about robotics, why not try this on real hardware? That would certainly result in further impact than showing that this works in simulation. If I remember correctly, the motivation behind patch attacks back in the 2010s was that someone could insert/place patches onto stop signs or t-shirts, causing AVs to perform unsafe actions (happy to provide references if helpful).",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 4620,
+  "prompt_tokens": 2465,
+  "total_tokens": 7085,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 2988,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00432775,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00432775,
+   "upstream_inference_prompt_cost": 0.00086275,
+   "upstream_inference_completions_cost": 0.003465
+  }
+ }
+}

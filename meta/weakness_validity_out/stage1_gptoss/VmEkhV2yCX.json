@@ -1,0 +1,110 @@
+{
+ "paper_id": "VmEkhV2yCX",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "The description of data volume is highly unclear. In Section 2.2, $D_{LDQ}$ is described as containing 336B tokens, while $D_{SHQ}$ is described as containing 1.2M samples. It is also unclear exactly how much base data and reasoning data each model used during the pretraining phase, especially for the $M_{SHQ}$ model.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Clarity of training/data setup",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The results in Tables 2, 3, and 5 only report the average scores of the three models pretrained with reasoning data. However, Table 1 has already demonstrated significant performance differences between the base models of LDQ and SHQ. The authors should provide the complete results for each individual model group across all tables.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experimental results in this work lack validation across different model scales and on the more widely adopted Transformer architecture.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Architectural / scale generalization of results",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "All the performances are evaluated in reasoning tasks, the performance on the memry task are not evaluated.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Evaluation on non-reasoning (memory) tasks",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The paper does not clearly specify how the $\\mathcal{M_{LDQ}}$ and $\\mathcal{M_{SHQ}}$ datasets were mixed to create $\\mathcal{M_{LMQ}}$ (especially ratio). It would be important to investigate whether different mixing ratios significantly impact the model's performance, and specifically, whether an optimal ratio exists that would allow $\\mathcal{M_{LMQ}}$ to outperform $\\mathcal{M_{LDQ}}$.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Clarity of training/data setup",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Major: 'Scale and diversity of the reasoning data are important in pretraining' is not well supported. D_{LDQ} and D_{SHQ} are from different datasets, and scale and diversity is not the only difference. The content of the dataset, as well as the quality of the dataset, are likely to be confounders. I think a more controllable comparison is to reduce the size and diversity of D_{LDQ} (-->D'_{LDQ}) and compare M_{LDQ} and M'_{LDQ}.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Diversity vs quality in pretraining confounding",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Minor: Some observations remain to be better understood, for example why exactly pretraining benefits more from diversity and SFT betnefits more from quality.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Mechanistic explanation is partial",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "External validity & dataset specificity. The pretraining relies on NVIDIA-curated corpora (~6.2T tokens) and SFT sets such as OpenThoughts and Nemotron-Pretraining-SFT-v1. It\u2019s unclear how well the conclusions transfer to other pretraining bases or fully open corpora.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Architectural / scale generalization of results",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Clarity on PT/SFT data mixing and table notation. For Tables 2\u20133, please spell out the exact SFT composition used during post-training for each pretraining variant and standardize the notation. In Table 4, the meaning of SFT\u00d72 is ambiguous: is the dataset literally duplicated (two passes over identical examples) or expanded with additional unique samples? If duplicated, did the model simply see the same data twice (risking overfitting), and was the token budget controlled elsewhere?",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Clarity of training/data setup",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Breadth vs. alignment trade-off. Length-filtered long-CoT SFT (DALF) appears to improve reasoning while weakening instruction-following. Any concrete hypothesis (e.g., length effects, stylistic drift, or distribution shift) plus diagnostics on this?",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "Trade-offs with instruction following/alignment",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Pretraining mixture definition (80% D_base / 20% D_res). The paper states: \u201cwe pretrain from scratch for 1T tokens using 80% D_base and 20% D_res.\u201d  how is that 20% constructed on different reasoning dataset settings?  if any sampling strategy is used? Please clarify this.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "Clarity of training/data setup",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 4651,
+  "prompt_tokens": 2061,
+  "total_tokens": 6712,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 3543,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0042096,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0042096,
+   "upstream_inference_prompt_cost": 0.00072135,
+   "upstream_inference_completions_cost": 0.00348825
+  }
+ }
+}

@@ -1,0 +1,215 @@
+{
+ "paper_id": "4hkMvkzai5",
+ "decision": "Reject",
+ "n_reviewers": 5,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "The claim of being an \"audio codec\" is overstated as the experiments only focus on noisy speech data. Typical audio codecs should cover broader audio content, such as pure sounds or music.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The study lacks experimental comparisons with relevant works, such as UniCodec and FACodec, which share similar decoupling-based approaches mentioned in the introduction and related work.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experiments are limited to 700 hours of speech data. It is unclear if the method can scale effectively to larger datasets.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "One-shot voice conversion results are poor (e.g., WER exceeding 50). The qualitative audio demos also exhibit low sound quality. The paper should include comparisons with stronger voice conversion models like CosyVoice2 (e.g., its S3+flow matching method).",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Line 266: Correct \"S andnN\" to \"S and N.\"",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Define terms like SRVQ and NRVQ upon first mention.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The authors are largely overstating the results, and in particular regarding the universality of the disentangled representation obtained or in the semantic representation control.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper is not well positioned with regards to the appropriate State of the art. Some very related works in building disentangled representations using neural audio codecs are not mentioned nor discussed (for example [1] and [2] below). Similarly, the current work is weakly positioned with the SoA in Speech enhancement.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "No indication is given to assess if the differences between approaches are statistically relevant.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The justification of the interest of \u201cspeech / background sound separation\u201d from the neuroscience results (audio perception exploiting two different auditory cortex regions) is not convincing and appears to be quite disconnected.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The clarity and writing of the paper could be largely improved (e.g. figure 1 with almost unreadable texts, many typos or inconsistencies)",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The assumption that orthogonality between subspaces guarantees semantic disentanglement is not theoretically grounded. Orthogonality only enforces statistical decorrelation, not physical or perceptual independence. The learned projections may encode arbitrary frequency or energy partitions rather than truly separating speech and background sound. The analogy with the auditory cortex (A2) is purely metaphorical. Biological \u201corthogonality\u201d arises from nonlinear, attention-driven and feedback-modulated mechanisms, whereas the proposed SOP relies solely on linear projections and an L2 orthogonality loss.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Representation Swap Training (RST) lacks theoretical justification. The swap reconstruction objective can be satisfied without genuine factor separation, as the decoder may simply compensate through overparameterization. The observed \u201cdisentanglement\u201d might thus emerge from data correlation or reconstruction bias rather than causal structure. The Semantic Guidance (SG) module only supervises the speech branch using HuBERT features but is not jointly optimized with the SOP/RST mechanisms. Therefore, the claimed \u201chierarchical disentanglement\u201d (semantic vs. paralinguistic) is loosely coupled and not formally guaranteed.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Experiments are largely performed on synthetic mixtures (LibriTTS + DNS-Noise), without tests on real-world recordings, unseen noise conditions, or cross-domain generalization. Baseline selection is incomplete \u2014 comparisons omit recent disentangling codecs such as RepCodec, FunCodec, or SemanticCodec, which pursue similar objectives. The ablation analysis only reports SDR and WER metrics; no interpretability or information-theoretic metrics (e.g., mutual information, alignment scores) are provided to confirm actual semantic separation. Several claims (e.g., controllable feature recombination, semantic robustness) are demonstrated qualitatively through spectrograms, without perceptual or statistical validation. Subjective listening tests (MOS/CMOS/SMOS) are missing; evaluation relies solely on objective or proxy metrics such as DNSMOS and WER, which may not reflect perceptual quality.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The \u201cuniversal front-end\u201d claim is overstated. The multi-task functionality is achieved through post-hoc recombination of representations rather than a truly unified optimization framework. The connection between DeCodec\u2019s representation learning and human auditory cognition is speculative, offering conceptual inspiration but lacking neuroscientific rigor or measurable alignment.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper aims towards having audio codec as \"universal dis-entagled representation learner\", though both the theoretical discussion and experimental results point towards the case in which background noise is added to speech. The results on other audio types like singing/music/sound with more language coverage on evaluation other than English speech should be included to call it universal. Singing and background instruments are co-related and this can break the assumption of orthogonal spaces and representation swapping.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The authors used a well-established way of semantic vs acoustic information separation in neural codecs, which is having Hubert loss on semantic tokens, which limits the novelty to only speech vs background sound separation.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "For Table 1, DeCodec bitrate is 8kbps, which is higher than all the baselines. For the experimental results, Table 1 and Table 2, the baseline checkpoints are not re-trained with the new training dataset, which makes a comparison a little unfair.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "WER is quite high for Table 3 for Voice Conversion at 50+%, for all baselines, the authors provide an explanation that it's due to different speech segment voicing times, which is not convincing.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Fundamental flaw in premise: The core assumption that speech and background must be orthogonal is ill-posed for a reconstruction task. It does not convince me that there is no overlapping in the acoustic phonomenons of speech and background sound. Enforcing the codec to encode them into orthogonal representations could incur significant distortion in the decoupled outputs, as the decoder is deprived of shared acoustic information.",
+   "reviewer_index": 4,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Poor reconstruction quality on individual representation: The audio samples on the demo page substantiate the theoretical concern. Both the extracted speech and background sound in speech enhancement scenario are noticeably distorted, indicating that the decoder still relies on the combination of the separate representations to generate high-fidelity audio.",
+   "reviewer_index": 4,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Inefficient representation compression: The decouple of the audio signal in the proposed neural audio codec does not help the compression of encoded representation, but doubles the bitrate to 8kbps instead! Considering the separate representation is not properly decoupled, the added overhead is not dispensable when applied to various downstream tasks, especially for generation.",
+   "reviewer_index": 4,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The semantic guidance mechanism for the speech encoder has been established in prior work and does not constitute a novel contribution.",
+   "reviewer_index": 4,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In all figures and tables, the VQ module of DeCodec contains a SRVQ and a BRVQ. While in the main text, the BRVQ is never mentioned, but replaced with a NRVQ without any explanation.",
+   "reviewer_index": 4,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The font size of Figure 1 is too tiny to read easily.",
+   "reviewer_index": 4,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The Figure 2 is missing a lot of captions and legends to enable a basic understanding of the proposed workflow.",
+   "reviewer_index": 4,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 4182,
+  "prompt_tokens": 2896,
+  "total_tokens": 7078,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 2104,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0041501,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0041501,
+   "upstream_inference_prompt_cost": 0.0010136,
+   "upstream_inference_completions_cost": 0.0031365
+  }
+ }
+}

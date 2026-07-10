@@ -1,0 +1,103 @@
+{
+ "paper_id": "f4B4ohWO53",
+ "decision": "Reject",
+ "n_reviewers": 3,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "NVIB sampling and RD computation over all input pairs are expensive (O(n\u00b2) pairs). No runtime, memory, or scalability analysis is provided.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While the paper repeatedly claims local DP, its formulation (sampling embeddings within the model) seems effectively performs mechanism-level DP, not user-level DP.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Lack of practical validation: The experiments do not convincingly demonstrate real-world usefulness. It remains unclear for which downstream applications (e.g., classification, retrieval, or fine-tuning) the learned embeddings preserve performance while providing privacy.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While $\\epsilon$ is computed through RDP/BDP metrics, it is not specified or controlled in the same way as standard DP. The reader cannot interpret what an obtained $\\epsilon$ actually means in practical or regulatory terms.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Since the model operates under a local DP assumption, each client may achieve a different effective privacy strength. The implications for consistency, fairness, and aggregation are not discussed.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Approximate, not formal DP guarantees: The framework measures privacy using divergence bounds but does not prove formal composition or post-processing guarantees. As a result, it is more accurately described as ``DP-inspired\u201d rather than strictly DP-compliant.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Despite the emphasis on ``Transformer embeddings,\u201d the proposed method does not exploit any specific properties of Transformer architectures. The model merely applies the NVDP layer on top of general embeddings, meaning that the approach could equally apply to CNNs or MLP-based encoders.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The experiment lacks comparison with existing DP baselines [1][2].",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The discussion on neighboring dataset is vague. It is unclear how the neighbors map to the token/sentence scenario.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The experiment lacks attack analysis on the privatized embeddings, such as ",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 1835,
+  "prompt_tokens": 1612,
+  "total_tokens": 3447,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1114,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00194045,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00194045,
+   "upstream_inference_prompt_cost": 0.0005642,
+   "upstream_inference_completions_cost": 0.00137625
+  }
+ }
+}

@@ -1,0 +1,75 @@
+{
+ "paper_id": "HwyYpLxY0G",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "No Conclusion / Missing Discussion. The manuscript lacks a conclusion (and broader limitations/future-work discussion). For a mechanism-design paper making alignment claims, this omission is severe\u2014readers are left without synthesized takeaways or scope boundaries.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Over-general claim vs. narrow evaluation. The paper positions ASR as a general textual scoring alignment method, yet experiments are confined to peer grading in two undergraduate algorithm classes (22 assignments, 6\u20138 submissions each). For such a broad claim, 1 domain / 1 application family is insufficient (no summarization, coding, reasoning competitions, multi-hop QA, etc.).",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Mechanism rationale under-explained. While ASR enforces properness and minimizes MSE to a reference, there is no theoretical argument (or stress test) explaining why MSE alignment to potentially noisy or biased references (instructor / LLM-judge) yields better truthful textual elicitation in the wild. E.g., no analysis of error propagation from oracles, sample complexity, or generalization beyond the studied setting.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Baselines and diagnostics are thin for the claim. Comparisons cover best-constant and non-aligned ElicitationGPT (AV/MV), plus correlations against instructor/LLM-judge. Missing are: (a) stronger parametric aligners (e.g., small finetuned judger trained on the same reference), (b) adversarial/strategic probes that the paper\u2019s properness motivation emphasizes, and (c) deeper ablations on oracle quality and cluster granularity.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I have not checked the paper, as the paper has formatting errors and violates the ICLR guidelines.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "There is agreement that the paper should be rejected because it doesn't use the right template and violates the submission guidelines.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I was told to write a placeholder review here, since this paper is getting desk rejected due to not following the template.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "There is agreement that the paper should be rejected because it doesn't use the right template and violates the submission guidelines.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 1347,
+  "prompt_tokens": 1005,
+  "total_tokens": 2352,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 648,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.000509115,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.000509115,
+   "upstream_inference_prompt_cost": 0.00013869,
+   "upstream_inference_completions_cost": 0.000370425
+  }
+ }
+}

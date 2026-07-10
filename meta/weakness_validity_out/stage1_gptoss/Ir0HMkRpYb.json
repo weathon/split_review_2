@@ -1,0 +1,124 @@
+{
+ "paper_id": "Ir0HMkRpYb",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "3D style loss justification is empirical. The 3D voxel-statistics loss gives better LPIPS/RMSE consistency, but the paper does not analyze potential side effects such as global color bleeding or loss of local style detail in poorly observed regions. Some intuition or failure-case visualization would strengthen the argument that voxel-statistics matching is fundamentally better than 2D scene-level matching.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Scalability limits. Although Stylos is advertised as handling up to \u201chundreds of views,\u201d the scaling experiment shows visible degradation beyond ~32 views per batch (edge artifacts, instability in the Gaussian representation). The method may still be quite useful, but this practical constraint, probably brought by VGGT, should be communicated more prominently.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited Technical Novelty in Overall Framework: The overall conceptual framework of achieving fast, optimization-free 3D stylization by integrating a feed-forward 3D reconstruction model (VGGT/AnySplat) with cross-attention for style injection is highly similar to previous works like Styl3R (NeurIPS 2025, published on arXiv in May 2025), which uses Dust3R. While StylOS's integration of VGGT allows it to process a wider and more flexible range of input views, the core technical contribution of the idea of a single-forward 3D stylization framework is substantially weakened by this conceptual overlap. The authors should better address this overlap and clearly articulate how their specific implementation of the style injection and 3DGS prediction provides unique advantages over Styl3R's architecture.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Style Fidelity vs. Optimization: Although the speed advantage is clear, a deeper discussion or visual comparison is needed to evaluate the potential trade-off in style fidelity against state-of-the-art optimization-based 3D style transfer methods like \ud835\udca2\u2010Style: Stylized Gaussian Splatting or ARF. Are there certain styles (e.g., fine-grained texture styles) where the feed-forward approach visibly struggles compared to optimization?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Minor Formatting Concern (Font): It appears the authors may have modified the default font used in the ICLR style configuration.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The most significant contribution of this work is the introduction of a feedforward 3D stylization model, whose core advantages lie in faster inference and reduced memory usage. However, these critical metrics are not evaluated in the experiments. The paper should include a comparison of stylization time across prior works, from the earliest StylizedNeRF, ARF, and StyleRF to the more recent StyleGaussian and StylizedGaussian. For methods requiring per-scene fitting, the stylization time should account for both training and rendering times. Such comparisons would provide readers with a clearer perspective on how this work advances the field in terms of efficiency and practicality.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The comparison between NeRF-based and Gaussian-based stylization approaches is not adequately addressed. While StyleRF focuses on zero-shot stylization, its stylization quality is not the strongest. A detailed comparison with stylization examples from StylizedNeRF and similar NeRF-based methods is essential to highlight the advantages of the proposed approach. Moreover, StylizedGS, which outperforms StyleGS, should be included as the representative Gaussian-based stylization method in the comparisons. Incorporating these comparisons would strengthen the paper by demonstrating the superiority of the proposed method over both NeRF-based and Gaussian-based approaches.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lacks fair comparison with per-scene optimization methods under the same computational budget.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Critical implementation details are missing regarding the voxelization operation: What is the voxel resolution? How are occlusions handled? What is the specific implementation of confidence weighting? Do these factors have significant impact on the results?",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The weight parameters for each loss term are not provided.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The specific architecture of the Gaussian Adapter is not described in detail.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "There is insufficient discussion on which scene types or style categories the method performs poorly on.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Why does global cross-attention not only improve style consistency but also enhance geometric fidelity? This seems counterintuitive and requires deeper analysis.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 2708,
+  "prompt_tokens": 2058,
+  "total_tokens": 4766,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1426,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0027513,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0027513,
+   "upstream_inference_prompt_cost": 0.0007203,
+   "upstream_inference_completions_cost": 0.002031
+  }
+ }
+}

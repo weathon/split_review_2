@@ -1,0 +1,180 @@
+{
+ "paper_id": "VFaYukYt6K",
+ "decision": "Reject",
+ "n_reviewers": 3,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "It is challenging to follow the submitted paper draft. Many sections require rewriting for clarity, where even small details are not serving to communicate the author's point.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The title suggests a generalist representation approach to robotics, but the authors only apply their autoencoder approach to a self-driving data set. Much of the paper discusses robotics in a general sense, but since the experiments focus only on autonomous driving, I consider this misleading to readers.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Sections 2 & 3 in particular would benefit from extensive rewriting. It could be helpful to clarify how the latent codes are combined with classical motion planning in Section 2. Section 3 should be clearer that these are the experiments.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The writing makes it difficult to determine the paper's significant contributions or its advantages. For example, Table 2 shows several models surpass the author's model performance (e.g., DriveGPT has 0.5240 minADE_6 vs the author's 0.6415). It is mentioned that the author's latent space is notably smaller; what about the decoder model's capacity in comparison? Likewise, quantization is emphasized as necessary, but the reported metrics in Tables 1 & 5 suggest that excluding quantization leads to better performance.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It is not clear from the discussion in Table 4 why matching Motion-LLaVA is essential, and should be clearly stated in the writing.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Section 2.1 (Line 14): the quantization scheme described should cite prior research that reports a closely related (near-identical) approach [1]. This work was not mentioned in the related work.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Figure 2: This idea of nosing latent embeddings has been considered in other research. VAEs do this with the reparameterization trick, yet this feature is prominently established throughout the author's work (e.g. Figure 1 shows how vital this regularization trick is). If this adaptive noising approach is beneficial, it would be better justified if alternative noising schemes (i.e. a stochastic latent variable such as from a VAE) were compared against.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The introduction as a whole could be improved for clarity. We suggest restructuring the focus to the limitations of motion planning and the benefits of autoencoders to address these problems, rather than discussing autoencoders and treating motion planning as secondary.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Line 036: \"autoregressive\" is ambiguous in this sentence; make it more specific.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Line 038: \"autoencoder\" is not set up well in this paragraph and is confusing to read about as written.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Line 488 - 492: Combine content into a single paragraph",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "One of the main weaknesses of the paper is the reliance of the empirical study on a single dataset, the Waymo Open Motion dataset. This makes it difficult to assess the generalisation of this approach to other robotics domains.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewer UqUz expressed concern about generalization, noting that all experiments are conducted on a single dataset (WOMD).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "A key advantage of this approach described in the paper is the ability to use these compact latent tokens in conjunction with search algorithms. However, the only search studied in this paper is greedy search. Again, the issue of generalisation comes up in how this method would work with other search strategies like beam search or Monte-Carlo Tree Search.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "the only search studied in this paper is greedy search\u2026 how this method would work with other search strategies like beam search or Monte-Carlo Tree Search",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "When talking about real-world domains, a critical aspect is that of reliability and safety, which is not adequately addressed in this paper. Given that the paper attempts to provide a cheap way to achieve different user-guided behaviours, guarantees of reliability and safety, or the lack thereof, should be addressed.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Planning evidence is under-baselined. Section 3.4 reports maneuver \u201csuccess rate\u201d and edge-contact against the unmodified scenario, but no planning baselines (trajectory optimization, sampling-based planners, MPPI/IT-MPC, or diffusion planners) are included.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "For Reviewer 2tWV, the concern \u201cPlanning evidence is under-baselined\u2026 no planning baselines (trajectory optimization, sampling-based planners, MPPI/IT-MPC, or diffusion planners) are included\u201d was not fully resolved.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Scalability beyond toy latent sizes is unclear. All strong results use very small spaces (e.g., N=3 tokens, D=3 dims, Nlevels=2), where greedy cost is merely N\u00b7Nlevels^D = 3\u00b72^3 = 24 decoder calls. The paper acknowledges this efficiency (\u2248115 traj/s on RTX 6000 Ada), but does not test larger N/D/Nlevels where branching explodes and greedy likely degrades. A scaling study is essential.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewer 2tWV raised concerns about scalability since all strong results rely on extremely small latent spaces",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Objective realism and multi-objective tradeoffs. The showcased costs (cumulative left heading; target final speed) are simple and largely single-objective. Real planners optimize safety/comfort/progress and constraints (jerk, acceleration, distance to agents). The method\u2019s greedy, token-by-token decisions might be myopic under competing objectives; no experiments probe this.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewer 2tWV asked whether greedy token-wise optimization remains effective under multi-objective or competing costs",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Reliance on decoder variance as a guard-rail is risky. Prediction and planning searches penalize decoder-predicted variance, but heteroscedastic NNs can be miscalibrated (the paper cites this literature). There are no calibration diagnostics (PIT, ECE, risk-coverage), so search could be steered by poorly calibrated uncertainty.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited safety metrics for interactions. Planning reports edge-contact with static map; dynamic-agent collisions, min-distance, TTC are not measured. Multi-agent results are mainly qualitative (Fig. 6) and a language metric table (Table 4) that doesn\u2019t evaluate physical safety of generated interactions.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Causal ordering assumption not validated against optimization. The paper assumes nested-dropout + causal masking yields a coarse-to-fine order that aligns with greedy objective optimization. Evidence is indirect (reconstruction improves with more tokens; Fig. 3). There\u2019s no analysis showing early tokens control \u201ccoarse\u201d semantics relevant to downstream costs.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Open-loop feasibility and dynamics. The decoder produces kinematically smooth trajectories, but there\u2019s no explicit vehicle dynamics or closed-loop execution. It\u2019s unclear if generated plans remain feasible/stable under tracking noise or model errors.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 5736,
+  "prompt_tokens": 2721,
+  "total_tokens": 8457,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 3856,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00525435,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00525435,
+   "upstream_inference_prompt_cost": 0.00095235,
+   "upstream_inference_completions_cost": 0.004302
+  }
+ }
+}

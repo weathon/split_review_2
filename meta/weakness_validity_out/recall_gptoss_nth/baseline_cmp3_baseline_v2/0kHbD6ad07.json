@@ -1,0 +1,32 @@
+{
+ "paper_id": "0kHbD6ad07",
+ "method": "baseline_cmp3_baseline_v2",
+ "n_items": 5,
+ "matched": [
+  {
+   "index": 1,
+   "label": "invalid",
+   "raised": false
+  },
+  {
+   "index": 2,
+   "label": "invalid",
+   "raised": false
+  },
+  {
+   "index": 3,
+   "label": "invalid",
+   "raised": false
+  },
+  {
+   "index": 4,
+   "label": "invalid",
+   "raised": false
+  },
+  {
+   "index": 5,
+   "label": "invalid",
+   "raised": false
+  }
+ ]
+}

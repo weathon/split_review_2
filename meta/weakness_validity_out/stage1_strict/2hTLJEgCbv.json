@@ -1,0 +1,187 @@
+{
+ "paper_id": "2hTLJEgCbv",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "Motivation. I believe the motivation for this study is not clearly articulated. After reading the introduction, it remains unclear why the authors chose to focus on this particular family of generative models (for instance, they acknowledge that models such as GANs outperform VAEs in terms of generative quality, yet they do not explain why VAEs are still worth investigating).",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Connection to the current state of the art. I think the paper does not adequately position itself within the current state of the art. In the introduction, the authors overlook significant developments in generative modeling since the introduction of VAEs and GANs over a decade ago. This includes advances within these model families as well as alternative approaches such as DDPMs and flow-based models. The paper does not discuss why investigating vanilla VAEs remains relevant in light of these developments. Furthermore, the discussion of VAE limitations is superficial, and the authors overlook existing work that comprehensively analyzes and addresses these issues, some of them proposing changes in the neural networks (see [1-6] for some examples), that could enrich the analysis of this paper. As a result, the paper fails to properly assess the state of the art, identify a clear research gap, or connect to prior analyses of how design choices influence model performance. The related work discussion is limited to only three articles, which is insufficient to capture the broader literature.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lack of technical depth. The analysis of the state of the art, the related work, the motivation to study the effect of the architecture and the discussion of the experimental results remains at a very high level, and does not discuss the internal model dynamics that may explain the behavior observed in the experiments. Consequently, the discussion offers limited insight into how architectural choices influence model performance, leading to a rather weak overall contribution.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Experimental design. I think that the experimental setup is overly simplistic considering the significant advancements in VAE architectures (e.g., flow-based encoders, autoregressive decoders, hierarchical models). Moreover, since the experiments are conducted solely on the MNIST dataset (one of the simplest benchmarks) the findings provide limited insight into real-world or more complex scenarios. Additionally, the authors do not specify the assumed variational family or likelihood used in their experiments, which further weakens the reproducibility and interpretability of the results. The evaluation could be strengthened by including qualitative results for both generation and reconstruction, as well as standard quantitative metrics commonly used to assess VAE performance, such as PSNR for reconstruction quality and FID for generative quality.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lack of Scientific Contribution: The paper does not provide any novel or meaningful insight to the community. - To begin with, the experiment is conducted solely on the MNIST dataset, which makes the results insufficient to draw any definitive conclusions, particularly for an empirical study that lacks theoretical justification.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lack of Scientific Contribution: - Such empirical studies also require experimenting with modern VAE architectures such as NVAEs to be able to draw a meaningful conclusion.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Poor Presentation: - I couldn't find a clear agenda or the core questions the experimental section aims to answer; neither any structured organization of the experiments.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Poor Presentation: - The paper's experimental presentation is difficult to understand. First of all, the figure labels are tiny and difficult to read. There are way too many network structures presented in a single figure; the results could be split up into multiple figures based on the size or the type of the network architecture, and the analysis could be done based on how different network types (MLP/CNN) affect performance and how the size of these networks affects them.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Even though the weaknesses are acknowledged, I find this work to be more of an empirical benchmarking effort rather than genuine scientific research. For instance, the phenomenon of latent space collapse is already well known and does not constitute a new scientific discovery. To make a meaningful scientific contribution, I recommend that the authors investigate the issue more deeply, providing convincing evidence of which structural factors specifically cause the collapse and offering insights that could motivate the design of novel architectures to address it.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "1) Single dataset (MNIST). The findings may not generalize to natural images or other modalities.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "2) Limited metrics. No FID/KID for sample quality, no bits-per-dim (NLL) estimates. Reliance on reconstruction + KL and PCA seems too thin.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "3) Ambiguity in terminology. \u201cGenerative inference loss\u201d appears to denote the KL term; that phrasing is confusing and should be standardized (ELBO, KL, reconstruction).",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "4) Under-specified training protocol. Crucial choices (optimizer, LR, batch size, number of epochs, weight decay, KL annealing, early stopping, seed control) aren\u2019t reported here; the results could be highly sensitive to these choices.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "5) No parameter/FLOP matching. Architecture depth/width comparisons are not normalized for parameter count or compute. Gains could reflect capacity rather than inductive bias.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "6) Statistical reporting. No error bars/repeats across seeds, no significance tests. Illustratively, in line 206, the authors mention a weak correlation that is not quantified statistically. Or in line 256, the authors mention a separable representation, but this term is not properly defined and statistically quantified.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "7) Unclear figures. Some figures (e.g. 3) are not clear to me, e.g. what do the different colour represent.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "8) No contextualisation of previous results. It is unclear how the empirical results relate to previous theoretical work (e.g. [1-4]) and well-known practical tricks (e.g. [5-6])",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited empirical scope: The paper\u2019s experiments are restricted to the MNIST dataset and rely primarily on qualitative visualizations, such as PCA projections and reconstruction plots. This narrow evaluation limits the strength and generalizability of the findings. To better align with its stated goals, the study should include multiple datasets (e.g., Fashion-MNIST, CIFAR-10) and report quantitative metrics to demonstrate whether architectural effects persist across data domains.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lack of novelty and theoretical grounding: The core claims, that smaller dense encoders and multi-block CNN decoders perform better, are intuitive and have been observed in prior works such as NVAE and \u03b2-VAE. The paper does not provide a theoretical or mechanistic explanation for these effects. To strengthen its contribution, the authors could analyze how encoder complexity influences mutual information or the balance between reconstruction and regularization terms in the ELBO.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Capacity mismatch and insufficient experimental detail: The architectures compared differ in depth and parameter count, confounding performance differences. Without normalizing for model capacity or reporting parameter counts, conclusions about architecture are unreliable. Requesting the author(s) to add key training details: optimizer, learning rate, batch size, number of epochs, and random seeds.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Weak and undefined evaluation metrics: The term \u201cgenerative inference loss\u201d is not defined, and the study omits standard evaluation measures such as FID. These metrics are crucial for assessing reconstruction quality, sample fidelity, and latent structure. Including them would make the analysis more rigorous and comparable to existing literature.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Outdated literature context: The discussion omits recent developments in hierarchical VAEs [a] (Duan et al., 2023) and latent diffusion models [b] (Rombach et al., 2022). Situating the work within this broader context could clarify its role as a baseline diagnostic study rather than a novel modeling approach, and would prevent it from appearing disconnected from modern generative modeling trends.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 4099,
+  "prompt_tokens": 2986,
+  "total_tokens": 7085,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1533,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.001498656,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.001498656,
+   "upstream_inference_prompt_cost": 0.000400124,
+   "upstream_inference_completions_cost": 0.001098532
+  }
+ }
+}

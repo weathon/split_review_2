@@ -1,0 +1,124 @@
+{
+ "paper_id": "a4S1nQay3b",
+ "decision": "Accept (Oral)",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "The related work section does not adequately cover more recent progress, especially in areas concerning missing modalities and partially view-aligned representation learning.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Although warm-start and momentum updates are mentioned as strategies to stabilize training, the paper does not provide convergence curve analyses.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper does not include comparisons with recent methods that also employ optimal transport for multi-view clustering. Incorporating an experimental comparison with approaches such as \u201cPROTOCOL: Partial Optimal Transport-enhanced Contrastive Learning for Imbalanced Multi-view Clustering\u201d would strengthen the work.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While the EM-based optimal transport is elegant, they may introduce computational overhead when applied to very large-scale or high-dimensional datasets. The paper would benefit from a more detailed runtime analysis.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper should clarify why the posterior weight $Q_{ij}$ is defined as $\\frac{\\boldsymbol{P}_{ij}^*}{\\boldsymbol{p}_i^{(v_1)}}$ in Equation (17).",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "In Equation (17), the matrix ${Q}$ appears to serve as a re-alignment signal that guides the model's learning. It would be informative to analyze what happens if ${Q}$ is replaced with an identity matrix, and how would performance change if ${Q}$ were substituted with the ground-truth correspondence matrix?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "A minor presentation issue: on page 2, the text refers to Figure 2, but it seems this should be Figure 1.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "This method may incur higher computational cost due to EM iterations, GMM fitting, and optimal transport computations, potentially limiting scalability to very large datasets.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "This method relies on GMM assumptions, which may fail to model non-Gaussian embedding distributions, leading to suboptimal marginal estimates in complex data.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experiments focus on two-view settings, limiting generalization to multi-view scenarios where correspondence inference becomes more complex.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The proposed method depends on several manually tuned hyperparameters, such as the virtual mass $\\rho$ and the number of Sinkhorn iterations. The paper lacks a sensitivity analysis showing how performance varies with these values.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While the paper qualitatively visualizes the estimated correspondences in Figure 3, it does not provide any statistics about the intrinsic mismatch level of the datasets used. Without knowing the original category- or sample-level mismatch rate, it is difficult to judge how challenging the benchmark setting is.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The introduced EM-style framework, particularly the Sinkhorn-based E-step with virtual-node augmentation, likely incurs non-trivial computational overhead. The paper does not report training time or GPU memory consumption.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 1696,
+  "prompt_tokens": 1626,
+  "total_tokens": 3322,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 706,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0018411,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0018411,
+   "upstream_inference_prompt_cost": 0.0005691,
+   "upstream_inference_completions_cost": 0.001272
+  }
+ }
+}

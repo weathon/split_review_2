@@ -1,0 +1,124 @@
+{
+ "paper_id": "heVn5cNfje",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "Figure 1 demonstrates that HES distinguishes between correct and incorrect samples, but this is not equivalent to identifying high- and low-quality samples. High entropy from a language modeling perspective indicates uncertainty, while from an RL perspective it suggests exploration potential, both are model-centric properties. Sample quality, however, should be evaluated based on intrinsic properties like conceptual coverage and reasoning complexity, not just model confidence.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experiments focus exclusively on mathematical reasoning tasks. The generalizability to other domains requiring complex reasoning (e.g., medical reasoning benchmarks like HealthBench, legal reasoning, or scientific domains) remains unexplored.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Different models are used across experiments (Qwen3-8B/4B for SFT, DeepSeek-R1-Distilled-Qwen7B for RFT, DeepSeek-R1-Distilled-Qwen-1.5B for RL) without clear justification. This inconsistency makes it difficult to isolate the effects of HES from model-specific behaviors and complicates fair comparison across paradigms.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The proposed HES metric is computed by directly summing token entropies. For reasoning tasks, high-entropy tokens often represent divergence points or \"reasoning branches\" [1]. This suggests that HES is likely positively correlated with the response length. Therefore, an analysis of the correlation between HES and response length is essential. In Table 1, after accounting for potential evaluation noise, the performance of the top 20% of data selected using **length** (30.67 average) is very close to that selected using **HES** (31.14 average). Given the significant computational overhead required to calculate entropy over large datasets, it is necessary for the authors to provide a comparison against length as a baseline with a detailed correlation analysis.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Following the previous point, the authors must quantify the computational overhead required to calculate HES. This information is necessary to assess the method's practical utility. Generally, computing entropy for a single sample requires a full forward pass, making the overhead comparable to that of a single inference step. If this significant overhead fails to deliver substantial improvements over a simple heuristic-like length, the practical value of HES must be reassessed.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The HES metric is inherently model-dependent, as it requires model-specific entropy calculations for each sample. This computational requirement could be expensive for very large-scale models. This raises a question: Can HES derived from a smaller (and computationally cheaper) model be effectively used to select data that yields consistent performance gains for larger models?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While the paper addresses a core problem in LLM reasoning, the title \"Unified Data Selection for LLM Reasoning\" appears overly broad and ambitious for the proposed HES method. HES is a model-dependent strategy that incurs non-trivial computational overhead and, as noted above, faces methodological questions regarding its clear advantage over simpler heuristics. Describing HES as a \"Unified Data Selection method\" seems to be an overstatement. The authors should reconsider the framing and scope of their contribution.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Experiments are not comprehensive. Based on my experience, data selection for \"Difficulty\" should not use most difficult questions, but instead should choose \"medium\", not too hard but not too easy. Most difficult QA is not good for training, especially for RL.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Eval is only in-domain. The paper\u2019s main weakness is that, although it claims to offer a \u201cunified data selection for LLM reasoning,\u201d it only validates HES on math reasoning datasets. No code or other logical reasoning datasets.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Incomplete Competitive Analysis in RFT and RL and even SFT. The paper's experimental design is inconsistent. While the SFT experiments (Table 1) provide an excellent, comprehensive comparison against baselines, the RFT and RL experiments do not. Also, Table 2 and Table 3 for SFT have no other strong baselines.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "All datasets and most benchmarks are math; models are Qwen3 variants and DeepSeek-R1 distilled families. It is unclear whether HES transfers to non-math reasoning (code, science QA, multi-modal) or to very different model families.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While there is a small sensitivity plot, the theoretical or data-driven rationale for the default percentile and its stability across lengths/models/tasks is limited; AvgHE vs HES comparisons help, but a more systematic hyperparameter study across domains is missing.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The pipeline often first filters to correct rollouts, which blurs whether HES measures quality or just difficulty/length. Tighter decontamination and simple causal checks (e.g., control for length/difficulty; test on non-math tasks) are needed to show HES truly beat global metrics.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 3013,
+  "prompt_tokens": 2143,
+  "total_tokens": 5156,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1709,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0030098,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0030098,
+   "upstream_inference_prompt_cost": 0.00075005,
+   "upstream_inference_completions_cost": 0.00225975
+  }
+ }
+}

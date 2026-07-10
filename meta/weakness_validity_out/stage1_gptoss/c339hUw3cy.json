@@ -1,0 +1,208 @@
+{
+ "paper_id": "c339hUw3cy",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "DeepSeek-R1 appears to be a very strong general-purpose reasoning model. When compared with KernelCoder, which is specifically trained for kernel generation, the performance gap does not seem particularly large.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper should provide more information about the *Correctness Analysis* setup \u2014 including how many random inputs were used for validation, and what tolerance thresholds were applied when judging correctness.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "It is unclear why KernelBench Level 3 experiments were not included. A justification for this maybe helpful.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "In Section 3.4, for the second part of the dataset, the authors select samples achieving 5\u00d7 speedup. The rationale for this specific threshold is not explained. It would be interesting to know how results might change with alternative thresholds (e.g., 3\u00d7 speedup).",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "It would be valuable to include the performance of DeepSeek-R1-0528 in Table 5 for a more complete comparison.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Why choose Kevin to create dataset. possible to use DeepSeek-R1-0528? Or rounded to use kernelCoder to create dataset for next round training.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The dataset was created using Kevin, but the motivation for choosing this model over others (e.g., DeepSeek-R1-0528) is not fully explained. And is it possible to use KernelCoder itself to create dataset for next round training.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Illustration in Figure 1 is not completely clear. I would encourage authors to refer other published papers for improving this.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In section 3.3, it is not clear which model was used (under what conditions) to generate the data.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "In section 3.3, out of 90K total collected kernels, did authors find only 24K kernels to be correct?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "In section 3.5, only 4,892 samples are reported to be used for finetuning. It is not clear what happened to those 90K or 24K data points.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "In section 4.2 the definition of pass@k evaluation (lines 318, 319). Authors should refer to Chen et. la., 2021 human eval (https://arxiv.org/abs/2107.03374) paper for more clarity.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The data curation pipeline does not inspire scientific innovation.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Moreover, authors have not shown any way to determine the correctness of CoT steps. The bare assumption that generated CoTs are correct (even though the corresponding kernel maybe correct) isn't the right approach.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Performance improvement of generated kernels is of vital importance to justify the cost spent in training/inference/generations. Lacking the details on hardware feedback processing does not inspire confidence in obtaining performant kernels.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Case study shows naive details and does not show novel generated kernels that truly reflect thinking/reasoning from LLMs.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Authors' approach achieves very low speedups in general. Other methods/approaches have demonstrated far more speedups in comparison.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "If authors' approach does not produce correct AND performant kernels more often then this approach does not contribute any innovation to the field.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Some sections of the manuscript, particularly those describing the data synthesis and curation pipeline, would benefit from language refinement and stylistic polishing to improve clarity and readability.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The evaluation setup is somewhat limited, relying on a single fine-tuned model and one benchmark (KernelBench). Expanding the evaluation to include additional benchmarks, such as TritonBench, and more diverse fine-tuned models would strengthen the empirical validation and demonstrate broader applicability.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While the related work section covers key benchmarks and datasets relevant to kernel generation, it lacks a comparative table or structured analysis that clearly contrasts the proposed benchmark with existing ones. Including such a comparison, highlighting differences in dataset size, performance, cost, and methodology, would make the contribution\u2019s advantages more explicit and easier to assess.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "KernelBench is _not_ a reliable benchmark. Many of its shapes are too small, and the choice of pytorch eager as a baseline means you're mostly profiling against overhead.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "To get a meaningful interpretation of the speed of the generated kernels, it would be important to calculate their speed-of-light, i.e., how long they would take to execute based on the GPUs flops and memory bandwidth, and then show what percentage of this speed is achieved.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Furthermore, I'm worried about about dataset contamination. The kernels in KernelBench were chosen because they are common operations, and I'd be surprised if among the 9,789 tasks you selected from kernel book, there was not a significant overlap.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I would also say that the central observation about conciseness should be stated a bit more carefully. When generated by current-generation LLMs, short traces work better than long traces. That might not be the case for better future LLMs that don't \"wait\" so often, or for human-generated traces.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 4316,
+  "prompt_tokens": 2563,
+  "total_tokens": 6879,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 2667,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00413405,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00413405,
+   "upstream_inference_prompt_cost": 0.00089705,
+   "upstream_inference_completions_cost": 0.003237
+  }
+ }
+}

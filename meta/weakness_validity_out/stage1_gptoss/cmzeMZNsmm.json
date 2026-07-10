@@ -1,0 +1,103 @@
+{
+ "paper_id": "cmzeMZNsmm",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "Although the authors have conducted meaningful empirical research, this paper does not make any original theoretical or experimental contributions.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The overall experimental focus of this paper remains primarily on event extraction. Evaluation on a wider range of NLP tasks would enhance the significance of the paper's conclusions.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Task Generalization and Model Currency: Addressed by introducing a new Open-ended Planning experiment (PNNL) and evaluating on state-of-the-art models (OpenAI o3/o4) during the rebuttal. These additions effectively mitigated Reviewer y32Z\u2019s initial concerns about the findings being limited to the ACE05 dataset or outdated models .",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The conclusions of this paper are highly dependent on the test model and test task. LLMs are highly dependent on training data, and LRMs are primarily optimized for complex reasoning tasks. Do similar conclusions hold for the recent SOTA models o3 and o4? For datasets that are already saturated, optimizing prompt words will obviously not bring any improvement. For extremely difficult problems, such FrontierMath or ARC-AGI, can optimizing prompt also bring improvement?",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "Task Generalization and Model Currency: Addressed by introducing a new Open-ended Planning experiment (PNNL) and evaluating on state-of-the-art models (OpenAI o3/o4) during the rebuttal. These additions effectively mitigated Reviewer y32Z\u2019s initial concerns about the findings being limited to the ACE05 dataset or outdated models .",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited Methodological Novelty: The core optimization algorithm (MCTS) is adopted from prior work (e.g., PromptAgent). The primary novelty lies in its application to LRMs rather than in a fundamental advancement of the optimization technique itself. The paper is more of a thorough empirical benchmark than a methodological contribution.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Limited Methodological Novelty: This remains the primary ground for rejection.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Task selection bias: Event extraction is a highly structured, schema-constrained task. While the authors test generalization on two other tasks, the main conclusions are anchored in a setting where explicit guidelines and code-based prompting play an outsized role. It remains unclear whether the observed LRM advantages would hold in more open-ended reasoning tasks (e.g., mathematical proof, planning).",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Task Selection Bias: Although new tasks were added, the paper's core analysis is heavily anchored on Event Extraction with a specific \"downsampled\" setup (10 out of 33 event types). Reviewers maintained that the additional planning task does not fully remove the limitation of applying these insights to truly open-ended, creative reasoning domains.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Incremental Nature of Key Finding: The central finding that more capable models benefit from optimized prompts is intuitively plausible and, to some extent, expected. While the quantitative demonstration is valuable, it may not be sufficiently surprising or groundbreaking for a top-tier venue.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "Incremental Nature of Findings: Reviewer cQqu noted that the central finding\u2014that stronger reasoning models act as better optimizers and benefit from clearer instructions\u2014is intuitively plausible. While quantifying this behavior is useful, it lacks the ... factor ...",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Metric mismatch in optimization v reporting -- The reward aggregates averaged F1 across TI/TC/AI/AC (s. 3.2), yet the analysis \"primarily reports AC\" (I understand the authors provide a citation for this choice but I find it unsatisfactory), creating a potential objective-reporting mismatch. Clarify why not optimize AC directly.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Metric Mismatch and Robustness: Resolved by providing an ablation study (Appendix in Rebuttal) justifying the optimization of average F1 scores over AC-only scores to prevent pipeline error propagation. The authors also added Bootstrap 95% confidence intervals to demonstrate statistical significance, fully addressing Reviewer AcPa's technical concerns .",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Downsampling schema may bias conclusions -- To avoid (presumably) long prompts, the paper downsamples ACE05 to 10 event types and leaves long-contextg processing to future work (L236-245). This choice may favor models preferring concise prompts and limits external validity to full-schema EE.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Task Selection Bias: Although new tasks were added, the paper's core analysis is heavily anchored on Event Extraction with a specific \"downsampled\" setup (10 out of 33 event types). Reviewers maintained that the additional planning task does not fully remove the limitation of applying these insights to truly open-ended, creative reasoning domains.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Depth-5 gains are modest, at best. Paper does note \"non-dramatic\" improvements from full-depth over d-1 (RQ2) and tab 1 shows small deltas. This sort of raises questions about the practical valeur of deeper search.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "No statistical uncertainty reported. Main tables/figures lack confidence intervals or sig tests, making it hard to judge robustness of improvements.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Metric Mismatch and Robustness: Resolved by providing an ablation study (Appendix in Rebuttal) justifying the optimization of average F1 scores over AC-only scores to prevent pipeline error propagation. The authors also added Bootstrap 95% confidence intervals to demonstrate statistical significance, fully addressing Reviewer AcPa's technical concerns .",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 4294,
+  "prompt_tokens": 2336,
+  "total_tokens": 6630,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 3002,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0040381,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0040381,
+   "upstream_inference_prompt_cost": 0.0008176,
+   "upstream_inference_completions_cost": 0.0032205
+  }
+ }
+}

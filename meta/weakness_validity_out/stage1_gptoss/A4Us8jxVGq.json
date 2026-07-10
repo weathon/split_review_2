@@ -1,0 +1,152 @@
+{
+ "paper_id": "A4Us8jxVGq",
+ "decision": "Accept (Oral)",
+ "n_reviewers": 5,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "The theory applies to attention-only transformers, but validation on Pythia requires indirect analysis through covariance matrices of activations rather than direct weight comparison. This introduces an additional layer of approximation and makes it unclear how MLPs and multi-head attention affect the theoretical predictions.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The theoretical guarantees only hold for \\mathcal{O}(1/\\eta) steps in early training. While empirical results show features persist longer, the paper lacks analysis of how and why these features evolve during later training, limiting practical applicability for understanding fully trained models.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "To achieve theoretical tractability, the analysis relies on certain assumptions, such as \"sufficiently small\" initialization and bounds on the learning rate and number of steps (as seen in Theorem 4.1). The error bounds for the approximation, while derived, grow over time. This means the exact closed-form expressions are an idealization, and their accuracy naturally decreases as training progresses and the model's state becomes more complex.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Experiments use truncated vocabularies (3K for TinyStories, 20K for Pythia) which may not capture the full complexity of semantic associations in real LLMs with vocabularies of 50K+ tokens. The computational tractability argument doesn't fully justify this limitation.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper is validated only on the TinyStories dataset, which I consider insufficient for comprehensive verification.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The training loss on TinyStories remains very high (greater than 5), indicating that the model's learning on this dataset is inadequate and arguably unsuccessful. The value of discussing parameter characteristics under such inadequate fitting conditions is highly questionable.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The description of how theoretical and experimental results are compared in Section 5.2 is difficult to understand. The authors should revise this section and provide more detailed methodological descriptions in the appendix, preferably in an algorithmic format.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper uses one-hot encoding instead of the more commonly used embedding encoding. The authors should discuss how this distinction affects their theoretical results, particularly whether the presence of an embedding layer under zero initialization would invalidate their theoretical findings.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Paper [1] also discusses from a gradient flow perspective how the embedding layer is influenced by semantic distributions under small initialization, and its findings share some similarities with certain results in this paper. I believe the authors should discuss the distinctions between their work and [1].",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Quantitative validation centers on cosine similarity and selected qualitative token lists. Some broader behavioral evaluations or ablations (e.g., other corpora, tokenizations, or stronger baselines) would further strengthen the claims",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Unless I'm missing something, this doesn't hold well for later stages of training because of drift. That's fine, but I figured I'd raise it. I am not entirely sure how much this is a problem for the scope of the paper. Are there analyses on later stages of training that would be interesting but are blocked by this constraint?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I would like to see some interventional results showing some practicality: E.g., show that the leading term predictors enable training diagnostics or interventions (e.g., early phase monitoring that forecasts later perplexity or feature formation).",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The theoretical result is clean and realistic for early training, and the empirical results are suggestive. I think the thing holding this paper back right now are scope",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The primary weakness is that the theory still relies on strong architectural assumptions. It is derived only for self-attention-only transformers. This analysis does not account for the impact of MLP layers, which are important components of present models. While this is a limitation, it is an understandable simplification necessary to make the analysis tractable, and future work might build upon this to relax these assumptions.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited analysis of later training stages: While the paper notes that theoretical features persist beyond early training (e.g., cosine similarity \\u22650.7 after 100 epochs in TinyStories), it does not explore why or how weights drift from the leading terms. Understanding this drift (e.g., whether it corresponds to higher-level semantic learning) would strengthen the theory\u2019s completeness.",
+   "reviewer_index": 4,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Multi-head attention and MLP layers are understudied: The Pythia experiment adapts the analysis to multi-head attention by averaging attention heads, but it does not explore how individual heads or MLP layers interact with the proposed basis functions. For example, do some heads specialize in bigram mappings while others focus on context?",
+   "reviewer_index": 4,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lack of causal interventions: The empirical validation relies on correlational measures (cosine similarity, covariance), not causal tests (e.g., ablating the bigram mapping component of weights to see if next-token prediction degrades). Causal interventions would more strongly confirm that the basis functions are necessary for semantic associations.",
+   "reviewer_index": 4,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 3016,
+  "prompt_tokens": 2230,
+  "total_tokens": 5246,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1608,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0030425,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0030425,
+   "upstream_inference_prompt_cost": 0.0007805,
+   "upstream_inference_completions_cost": 0.002262
+  }
+ }
+}

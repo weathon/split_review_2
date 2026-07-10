@@ -1,0 +1,32 @@
+{
+ "paper_id": "b8TlYh6PN6",
+ "decision": "Accept (Oral)",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [],
+ "usage": {
+  "completion_tokens": 330,
+  "prompt_tokens": 1517,
+  "total_tokens": 1847,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 307,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00077845,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00077845,
+   "upstream_inference_prompt_cost": 0.00053095,
+   "upstream_inference_completions_cost": 0.0002475
+  }
+ }
+}

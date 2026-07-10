@@ -1,0 +1,145 @@
+{
+ "paper_id": "WxTlAbRUE6",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "The benchmark evaluation relies almost entirely on models from 2018\u20132022 (SchNet, PaiNN, DimeNet++, GemNet). These models are now well-known baselines but no longer representative of the current frontier in MLIPs.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The inclusion of EquiFormer-V2 is appreciated, but as a relatively unstable and non-conservative Transformer variant, it cannot represent the practical performance envelope of modern MLIPs.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Recent architectures such as MACE (Batatia et al., NeurIPS 2022), NequIP (Batzner et al., Nature Comm 2022), eSCN (2024), and ViSNet (2023) have become de facto standards for equivariant force fields and would provide a much stronger reference point.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While the four tasks are conceptually appealing, they remain relatively simple from the perspective of modern models, such as MACE and eSCN. For example, the Length Extrapolation and Functional Group Duplication tasks involve only small organic chains with linear motifs; these are unlikely to challenge advanced equivariant models that already generalise well across chain lengths and simple functional groups.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The manuscript lacks a clear justification of whether all models were tuned to their best configuration, and whether they were trained with equal computational budgets.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "MAE for forces is not a great measure of force discrepancy as it is not rotationally invariant.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The authors could use slightly more introduction to the idea of functional groups and chemical diversity to the ICLR readers who are not experts in chemistry.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I feel like the technical results introduced to the machine learning community represented by the ICLR readership is perhaps limited. This paper might be more suitable for publication in a field-specific journal.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The benchmark uses GFN2-xTB to label energies and forces. GFN2-xTB is a semi-empirical tight-binding method (not a high-level ab initio method). While the authors describe it as \u201cmore accurate\u201d and \u201crobust\u201d, it is well known that GFN2 is significantly less accurate than DFT or higher-level quantum calculations.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Although a few classical MLFF architectures is included, the model selection omits several important recent advances. In particular, foundation or large pre-trained models, e.g. UMA, JMP, MACE, are explicitly excluded. The authors argue this is to avoid \u201cmemorisation\u201d effects, but excluding such models greatly limits the relevance of the results to the current state of the field.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper is essentially a dataset and benchmark rather than a new modeling method. The idea of splitting training/test molecules to test extrapolation is natural and has been explored. While GMD-25 is carefully constructed, it mostly evaluates known phenomena (models overfit to training molecules) and does not introduce fundamentally new theory or techniques. In its current form, the benchmark may be more appropriate for a dataset/benchmark track. Furthermore, the tasks focus on fairly simple organic molecules (linear alkanes and functionalized variants). It is not clear how well the conclusions would extend to more complex chemistries (e.g. heteroatom-rich systems, inorganic materials, 3D conformers, etc.).",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Scope of generalization: While compositional generalization is addressed, extending the benchmark to temperature variations, allotropic forms, and non-polymeric systems would improve its coverage. Limiting the dataset to small organic molecules is restrictive.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Missing state-of-the-art (SOTA) models: The benchmark omits newer high-performing models listed on resources such as the MatBench Discovery Leaderboard. Including a few top-performing models would make the comparison more comprehensive.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Architectural bias analysis: Although the conclusion claims that the benchmark can reveal architectural biases, the paper lacks clear analysis or discussion explaining why certain architectures perform differently.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In Figure 4g, GemNet\u2019s energy error appears similar for ID and OOD? I would expect considerably better performance on ID as for other models.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "In Figure 2, SchNet performs poorly on force MAE but achieves the lowest energy MAE. Please explain this divergence.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 4514,
+  "prompt_tokens": 2885,
+  "total_tokens": 7399,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 3107,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00439525,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00439525,
+   "upstream_inference_prompt_cost": 0.00100975,
+   "upstream_inference_completions_cost": 0.0033855
+  }
+ }
+}

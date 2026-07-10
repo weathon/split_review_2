@@ -1,0 +1,67 @@
+{
+ "paper_id": "36CzrZYEch",
+ "method": "nocal_cmp3_nocal_v3",
+ "n_items": 12,
+ "matched": [
+  {
+   "index": 1,
+   "label": "valid",
+   "raised": false
+  },
+  {
+   "index": 2,
+   "label": "valid",
+   "raised": false
+  },
+  {
+   "index": 3,
+   "label": "valid",
+   "raised": true
+  },
+  {
+   "index": 4,
+   "label": "valid",
+   "raised": false
+  },
+  {
+   "index": 5,
+   "label": "invalid",
+   "raised": false
+  },
+  {
+   "index": 6,
+   "label": "valid",
+   "raised": false
+  },
+  {
+   "index": 7,
+   "label": "invalid",
+   "raised": false
+  },
+  {
+   "index": 8,
+   "label": "valid",
+   "raised": false
+  },
+  {
+   "index": 9,
+   "label": "invalid",
+   "raised": false
+  },
+  {
+   "index": 10,
+   "label": "valid",
+   "raised": true
+  },
+  {
+   "index": 11,
+   "label": "invalid",
+   "raised": false
+  },
+  {
+   "index": 12,
+   "label": "invalid",
+   "raised": true
+  }
+ ]
+}

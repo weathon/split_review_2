@@ -1,0 +1,257 @@
+{
+ "paper_id": "NIvqiJ8R4J",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "Unclear model design rationale. It is unclear what the unique strength of this proposed model is and why it should be, compared with prior models. The introduction and related work sections briefly stated that prior work can not do something, but the detailed research gap and how this work addressed such gap are unclear.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The current framework is meaningful, but there is no fundamental breakthrough or unique insights in algorithms or model side. It is more like a manually crafted application system in education with prompt-engineering.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Dataset Scale. There is only one dataset with only 184 questions.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The main experiment used simulated students for evaluation, which does not seem to be convincing. It is also unclear how many simulated students were generated, the differences among the simulated students, and rationales for such design. Without such details about student settings in the experiment, it is hard to evaluate the rigor and effectiveness of this work.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lack of statistical tests (such as t tests) for most tables to show the significance.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Main Experiment: The experimental measurements may not really support the claimed contribution in line 107: \"stimulating critical thinking\". Which metrics measure how the tutoring system improves the critical thinking of students in either simulation or real student study?",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Real Student Experiment: The real student experiment is unclear and does not look like a formal study. Is it a between-subject design or within-subject design or a mixed study design?\n\nFor this statement: \"one of six tutoring methods is randomly selected (with equal probability) to tutor the student\", does it mean that each student only receives one tutoring method (between-subject design) or each student receives different tutoring method for different questions? If so, how do you control so many human factors like different students in different questions with different tutoring methods? If one question is delivered to different students in different tutoring methods, how do you know the result difference is due to student subject difference or due to the tutoring method difference?\n\nParticipant scale and limited samples: So many human factors usually need larger-scale user study rather than N = 67. The authors can report the power via power analysis to show the statistical significance with the current participant number. Moreover, for this statement \"The student who selected the most questions chose 12, while the student who selected the fewest chose 2\", does it mean that each student only tested 12 questions at most? This limited sample size is probably not convincing to show its effectiveness.\n\nStudy design and metrics: Another concern is that the current study design and metrics may not really support the claim of enhancing tutoring performance. Most metrics are subjective (e.g., Appropriateness, Sentiment, Inspiration) and do not provide a very objective measurement. The success rate may be better quantified and more convincing, but Pelican's success rate (87%) is lower than simple step-wise methods (87.3%).",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "There are some typos.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "In my understanding, the construction of knowledge tree may heavily relies on manual work, which may hurts the scalability of the proposed framework. For example, scaling to full K12 education or vocational education would lead to a sharp increase in manual costs.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The evaluation limits to only 1 benchmark (GAOKAO Bench), it will be more convincing if authors validate PELICAN framework on more benchmarks.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "* Have LLMs really generated attention in education because of their extensive knowledge base and reasoning capabilities?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "* Extra space between \"at\" and \"here\" for code reference.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "* Change \"I Don't understand\" to \"I don't understand\" in Figure 1",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "* Add spacing: \"OK,I get it!\" between \"OK,\" and \"I\" in Figure 1",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "* First two paragraphs need citations to support their various claims",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "* Parentheses around citations are needed. In-text citation references are likely not the style for ICLR.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "* Line 80: random word \"Planning.\" appears",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "* Figure 3: Why does \"Explanation\" lead to \"Explanation\" in the slow-thinking? Why does \"Decomposition\" have a crown?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "* Line 148: random word \"Planning.\" appears",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "* \"introduce a successor-first strategy, in which the teacher prioritizes assessing leaf nodes or nodes whose successors have already been evaluated,\" I thought line 175 said \"a student can only master a child node after mastering its parent\"?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "* \"dual system theory\" citation? lines 215, 246",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "* Is this what you are proposing? Simulated teaching tree? Or is that something that already exists in the literature?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "* Does m = |S| (i.e., the length of the strategy pool)? If not, why?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "* The formulas seem overly high-level to the point of being complete black boxes with no reproducibility",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "* Reporting overhead in cost of dollars? Maybe should use something more concrete, like token usage.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "* Why not cite baseline methods?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "* How are suitability, logicality, informativeness, reliability, and overall quality calculated in the results?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "* The real-world experiment sounds limited. What is the average and standard deviation for the problems that the students voluntarily selected to be tutored? And what was the distribution like amongst the 6 conditions? Why no ANOVA test results?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "* Line 1314 in Appendix L.4.: \"FIANL\" should be \"FINAL\"",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "a) How fine-grained are the knowledge concepts in the hierarchy? Furthermore, does the system allow more granularity in the concepts, depending on the student?",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "b) The expert-assistant-verifier pipeline depends on the accuracy of the two LLMs involved. Do the authors conduct ablations on what fraction of the diagnostic questions are noisy? And how much is the performance of PELICAN affected by the noise?",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Furthermore, the authors should discuss on the diversity of the students involved in the human study. More than just performing well, did the students also report favorable experiences when interacting with LLMs? For example, a hyperparameter that can be controlled is M, which controls the number of times the LLM switches from fast to slow thinking. Is M decided based on whether the student progresses in the problem?",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 4991,
+  "prompt_tokens": 2925,
+  "total_tokens": 7916,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 2600,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.004767,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.004767,
+   "upstream_inference_prompt_cost": 0.00102375,
+   "upstream_inference_completions_cost": 0.00374325
+  }
+ }
+}

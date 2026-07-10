@@ -1,0 +1,159 @@
+{
+ "paper_id": "FF9QVQduAu",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "Lack of proper acknowledgement of closely related work. The most significant issue with this paper is its failure to properly acknowledge and position itself with respect to existing work that is nearly identical in methodology and motivation. In particular, the ICLR 2023 paper[1] that proposes a hyper label model for programmatic weak supervision that is, in essence, the same as the approach in this paper: [...] The lack of discussion, comparison, or even citation of this highly relevant prior work is a serious omission. This gives the misleading impression that the proposed approach is novel, when in fact it is a straightforward adaptation of an existing method to a closely related domain.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors also corrected the major omission around HyperLM by adding explicit positioning and head-to-head comparisons, which reviewer QfN2 indicated was the key condition for recommending acceptance.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper repeatedly claims to be the \"first\" to propose a foundation model for label aggregation, and to introduce a new paradigm. Given the existence of[1], these claims are overstated.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "The authors also corrected the major omission around HyperLM by adding explicit positioning and head-to-head comparisons, which reviewer QfN2 indicated was the key condition for recommending acceptance.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Given the existence of the hyper label model approach[1], the main contribution of the paper seems to be modifications to the synthetic data generator and GNN architecture.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "My remaining hesitation is primarily about the magnitude and clarity of the contribution: the discussion repeatedly notes that the overall paradigm and framework are closely related to prior amortized aggregation work (especially HyperLM), so the novelty appears more like a crowdsourcing-specific refinement than a new conceptual shift.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper lacks a systematic quantitative analysis of synthetic and real-world crowdsourced data. Although the authors validate generalization on real datasets, they do not analyze the distributional differences of key parameters (e.g., worker ability \u03b8, task difficulty \u03b2, task guessing rate c) between synthetic and real data, making it difficult to assess how well the learned patterns reflect real human annotation behaviors. Besides, how to obtain these sampling ranges?",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Concerns addressed in the discussion include the need for stronger evidence that the synthetic generator matches real crowdsourcing behavior (the authors added sim-to-real quantification)",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Although the parameters in the synthetic data generator are randomly sampled, the paper lacks a sensitivity analysis of key parameters. Random sampling alone cannot fully verify the model's robustness across different crowdsourcing conditions. It is recommended to include such an analysis to strengthen the credibility of CrowdFM's generalization claims.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Concerns addressed in the discussion include the need for stronger evidence that the synthetic generator matches real crowdsourcing behavior (the authors added sim-to-real quantification), missing ablations and hyperparameter/sensitivity analysis (the authors added both)",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "With regard to the comparison results, statistical tests are needed in the comparison results. The detailed description about statistical tests for comparisons of multiple algorithms on multiple datasets can be found from the papers such as Statistical comparisons of classifiers over multiple data sets.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Concerns addressed in the discussion include [...] lack of statistical rigor in the multi-dataset comparisons (the authors added significance tests).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper lacks ablation studies to verify the individual contributions of key components (e.g., attention-based aggregation, size-invariant initialization, and synthetic data diversity). Without such analysis, it is difficult to determine which design choices are most critical to the model's performance gains.",
+   "reviewer_index": 1,
+   "ac_status": "resolved",
+   "ac_evidence": "Concerns addressed in the discussion include [...] missing ablations and hyperparameter/sensitivity analysis (the authors added both)",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "How can we ensure that the distribution of synthetic data is sufficient to cover the feature space of real crowdsourcing tasks? Is there any performance degradation under certain types of tasks (such as extremely unbalanced ones)?",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "there remains some uncertainty about how broadly the synthetic generator's coverage supports real-world generalization and about metric choices in imbalanced settings.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Can CrowdFM be regarded as the specialization of GraphFM in the field of crowdsourcing? Has the pre-training objective of the existing GFM been borrowed?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The performance for extremely large-scale data (such as Senti and Fact) slightly decreases, but the reasons are not discussed.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "limited \"when/why it fails\" analysis for atypical or very large datasets",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The absence of ablation experiments makes the contributions of each module unclear",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Concerns addressed in the discussion include [...] missing ablations and hyperparameter/sensitivity analysis (the authors added both)",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Although it includes recent works such as EBCC, GOVERN, TiReMGE, etc., some new methods for 2024-2025 are missing (such as Zhang et al., KFNN and IWBVT of NeurIPS 2024 are cited but not used as baselines);",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Baseline coverage remains debatable because some suggested recent methods were excluded as \"not comparable,\"",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The superparameters such as the number of layers L and dimension d of GNN were not discussed in detail.",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Concerns addressed in the discussion include [...] missing ablations and hyperparameter/sensitivity analysis (the authors added both)",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The \"Sim-to-Real Gap\" between synthetic data and real data has not been fully quantified",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "Concerns addressed in the discussion include the need for stronger evidence that the synthetic generator matches real crowdsourcing behavior (the authors added sim-to-real quantification)",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Has the model truly learned the \"principle of collective intelligence\", or has it merely fitted the statistical patterns of synthetic data? How to prove.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Concerns still outstanding or only partially resolved are that [...] real-world applicability remains uncertain in settings where domain/task features or worker/task attributes matter (not directly evaluated).",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The backbone model is relatively simple and not new, but the design is a good fit for crowdsourcing, e.g. the size-invariant initialization for worker/task emebddings. I do not see it as a weakness, but just not a novel contribution. I still like the whole framework of building synthetic data and train a simple domain-indepedent model as foundation models.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The possible limitation of the model is it may lack the flexibility to adapt to the case when workers/tasks have their attributes, since these nodes are initialized with fixed pretrained embeddings.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "real-world applicability remains uncertain in settings where domain/task features or worker/task attributes matter (not directly evaluated)",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Another possible weakness is the limitation of the data generator. Although it is a quite general scheme, there might be other graphical models that it cannot cover; and also the prior distribution of the parameters might cause some bias for the pretrained foundation model.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 8601,
+  "prompt_tokens": 2365,
+  "total_tokens": 10966,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 6334,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00273938,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00273938,
+   "upstream_inference_prompt_cost": 0.0003311,
+   "upstream_inference_completions_cost": 0.00240828
+  }
+ }
+}

@@ -1,0 +1,47 @@
+{
+ "paper_id": "RNsydf7HB4",
+ "method": "nocal_cmp3_nocal_v3",
+ "n_items": 8,
+ "matched": [
+  {
+   "index": 1,
+   "label": "valid",
+   "raised": false
+  },
+  {
+   "index": 2,
+   "label": "valid",
+   "raised": true
+  },
+  {
+   "index": 3,
+   "label": "valid",
+   "raised": false
+  },
+  {
+   "index": 4,
+   "label": "valid",
+   "raised": false
+  },
+  {
+   "index": 5,
+   "label": "valid",
+   "raised": false
+  },
+  {
+   "index": 6,
+   "label": "valid",
+   "raised": false
+  },
+  {
+   "index": 7,
+   "label": "valid",
+   "raised": true
+  },
+  {
+   "index": 8,
+   "label": "valid",
+   "raised": false
+  }
+ ]
+}

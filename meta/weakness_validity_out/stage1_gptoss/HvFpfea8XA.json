@@ -1,0 +1,180 @@
+{
+ "paper_id": "HvFpfea8XA",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "Problem Framing \u2013 RAG for Personality? The core task is framed around personality extraction and preservation, which is arguably not well-justified as a role for RAG. Personality is a stable trait, and might be better handled by LLM summarization over full context rather than partial retrieval.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Evaluation Scope Too Narrow The evaluation overly focuses on MBTI/BFI-style tests. This does not show if the system performs well in downstream tasks (e.g., in-character QA, stylistic imitation). Also, no evidence is given that this personality focus doesn't degrade performance on other tasks.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "MBTI as Ground Truth? The paper does not clarify how ground-truth MBTI labels are obtained or validated. Are these canonical? Are there characters with ambiguous or contradictory traits across works?",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Overloaded Character Set Including 15 characters is impressive but risks overwhelming the reader. It would help to narrow the benchmark or focus deeply on 1\u20132 characters (e.g., Hirasawa Yui) with full backstory and qualitative insights.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Lack of Ablation Analysis No ablations are shown to measure the contributions of ACTS, GS, or AE. In particular, the GS module performs LLM-based reranking\u2014this is a strong boost and may unfairly outperform pure retrieval baselines, confounding the comparisons.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper is poorly written, and many essential details are missing, which makes it difficult to fully understand and reproduce the proposed approach.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The description of the CharacterRAG dataset construction process lacks sufficient detail. It is unclear how the persona documents were collected and processed, how the 450 QA pairs were generated, and what standards were used to filter unqualified documents. Furthermore, the authors do not discuss any measures taken to ensure the fidelity and correctness of the dataset. Since all experiments rely entirely on this dataset, these details are critical to ensure the fairness and reliability of the results.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The method descriptions are confusing and incomplete. The paper claims that the Adaptive Context-aware Text Splitter (ACTS) divides text into optimally sized and overlapping chunks; however, Section 4.1 provides no information on how the optimal chunk length is determined or how the overlap is implemented. Similarly, in Section 4.2 (Guided Selection), the details of the LLM prompting process are missing \u2014 including how the prompt templates are constructed and how the model\u2019s responses are evaluated or extracted. In Section 4.3 (Attribute Extractor), the authors only explain why and what attributes are extracted, but fail to specify how the extraction is actually performed.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "According to Section 5.2, Table 4 appears to present the main experimental results. However, both the table and its corresponding analysis are placed later in Section 5.3, which disrupts the logical flow of the paper and makes the structure somewhat confusing.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "In Figure 1, the authors do not explain how the chunk duplication frequencies and chunk usage rates are computed, which makes the figure difficult to interpret. In addition, the text in Figures 1 and 2 is too small to read clearly.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Figure 5 is mislabeled and should actually be Table 5.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The proposed method appears to be highly tailored to the CharacterRAG dataset. The ACTS component relies on the dataset\u2019s hierarchical structure, while the Attribute Extractor is built upon its predefined attribute taxonomy. As a result, the method may lack scalability and generalizability to other datasets or real-world scenarios. Moreover, comparing this approach with other methods on CharacterRAG may not provide a fair evaluation of its effectiveness.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Guided Selection (GS) relies on LLM to filter chunks, computationally expensive and impractical for large-scale persona documents.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "In the main experiments presented in Table 4, despite the dataset-specific design efforts, the improvement over the baseline naive RAG model is marginal, which makes the overall contribution appear limited. Although the proposed method performs relatively well on tasks related to MBTI and BFI, the Guided Selection (GS) component explicitly extracts MBTI- and BFI-related attributes (with the implementation details remaining unclear). Therefore, it is unsurprising that the method outperforms the naive RAG under these conditions.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The CharacterRAG dataset includes 15 fictional characters, but the paper does not specify their genre (e.g., anime, novel, film) or personality span (e.g., introverted vs. extroverted, heroic vs. villainous). If characters are concentrated in a single genre or share similar traits, the framework\u2019s generalization to diverse role-playing scenarios (e.g., classical novel characters) remains unvalidated.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The Attribute Extractor (AE) only extracts \"Belief and Value\" and \"Psychological Traits,\" claiming they \"directly influence behavior\". But it does not explain why other attributes (e.g., \"Social Relationships\" or \"Skill and Expertise,\" which also shape role responses) are excluded, nor provide comparative experiments to prove these two attributes are more critical for persona consistency. Is it specific to tasks like MBTI and BFI?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The evaluation dataset is incomplete. The paper only evaluates tasks like MBTI and BFI, but role-playing involves many other dimensions. Is the method applicable to other role-playing tasks? For example, imitating a character's linguistic style or simulating a character's behavior.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "CharacterRAG contains only 15 fictional characters, and much of the persona content is mined from Namuwiki; it remains unclear how well findings transfer to real people, evolving personas. Adding non-fictional or time-varying personas would strengthen claims.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While ACTS\u2019s hierarchical extraction cost is noted (O(N)), the end-to-end latency and token/dollar costs (especially for GS/AE with large models) are not reported in detail across LLMs/datasets, limiting deployment guidance.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The related work should cover several fast-moving threads which is missing: (i) LongRAG\u2019s long-unit/long-reader paradigm that challenges short-chunk assumptions; also add RankRAG, which unifies reranking with generation and is conceptually close to your Guided Selection. (ii) Role-playing/persona literature: evaluation benchmarks (CharacterEval; RoleLLM; InCharacter and a non-RAG), Non-RAG persona models (Persona-Adaptive Attention).",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The w/o-RAG baseline shows non-trivial background knowledge, but the paper does not deeply analyze how much persona knowledge the base LLMs already encode or how AE/GS ablations isolate gains beyond retrieval.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 4217,
+  "prompt_tokens": 2776,
+  "total_tokens": 6993,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 2137,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00413435,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00413435,
+   "upstream_inference_prompt_cost": 0.0009716,
+   "upstream_inference_completions_cost": 0.00316275
+  }
+ }
+}

@@ -1,0 +1,152 @@
+{
+ "paper_id": "IeNXtofK6T",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "In the abstract and introduction, the paper emphasizes that the reasoning ability of the guardrail LLM is essential for defense performance (e.g., Line 74: \u201cprompting an off-the-shelf LLM with strong reasoning capabilities should be reconsidered as an important and strong baseline for evaluating future defenses against prompt injection attacks\u201d). However, Figure 3 shows that enabling reasoning does not consistently improve detection or task utility, and in many cases even worsens performance. The support for this claim needs further clarification.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "questions regarding increased ASR results under reasoning model (7JYu, WLcy)",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Line 189 claims \u201cstrong generalization capabilities,\u201d but no experimental evidence is provided.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Line 198 highlights computational efficiency as a design advantage, yet no experiments compare computational cost with baselines.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Table 2 contains many N/A entries for baseline methods regarding FPR and FNR; the reason for this omission should be elaborated.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Line 362 states that GPT-3.5\u2019s performance improves when adding a definition, but the reported FPR and UA are actually worse. Please clarify what conclusion this experiment is intended to support.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "In Table 4 (adaptive attack setting), including the same baselines as in Table 2 would strengthen the comparison.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It is unclear how PromptArmor impacts performance on benign inputs.",
+   "reviewer_index": 0,
+   "ac_status": "resolved",
+   "ac_evidence": "if the defense would affect benign content that looks like an injection (reviewer LFHT, WLcy)",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "No statistical uncertainty is reported across results.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Minor: The specific version of the GPT models used (API version) is missing.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Adaptive attacks are now the most important way to test defenses against adversarial attacks (like prompt injection attacks). For example [1] states that \"adaptive attacks cannot be automated and always require careful and appropriate tuning to a given defense.\" Now for prompt injection attacks, I actually expect attackers to often not have the ability to adapt their attack (instead leaving prompt injections static on websites or untrusted data sources). With that being said, there is still value in testing PromptArmor against thorough adaptive attacks to better understand the failure modes of the defense. Section 4.6 contains some adaptive attack experiments, but it seems they are automated in nature. I expect there to be examples of fairly simple attacks that defeat PromptArmor. It would be beneficial to the paper to in fact find such attacks.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper could be improved by some cost analysis. Using any defense like PromptArmor is predicated on the fact that the defense is cheap enough to run for every input. Now I expect the defense to be fairly cheap (although using reasoning models for the defense can increase costs significantly due to larger token counts). A more in depth analysis of the cost tradeoff would be desirable. As I said, I expect PromptArmor to actually fair quite well under such analysis.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The biggest issue with this work is novelty. Prior works have experimented with having LLMs examine their inputs to determine when they might be malicious. For instance, [1] has LLMs examine inputs in a pipeline (see Figure 1 of this paper) that is very similar to the proposed pipeline (see Figure 1 of the submission). The only difference seems to be the use of the model to actually remove the prompt injection, which allows the user's intent to be carried out. However, this does not seem to be a major difference. The authors also do not cite [1] nor discuss differences.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "Reviewers 7JYu and LFHT raised concerns regarding novelty as prior work has explored similar ideas.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Table 2 does not seem to be a fair comparison since two variables are being experimented: (1) the base model used and (2) the method used. For a fair comparison, the openai models should be fine-tuned / used as initializations to each of the methods e.g., fine-tuning on the protectai prompt injection dataset.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I am confused by Figure 3. This figure seems to be showing that ASR goes up when reasoning is used. This result seems counterintuitive, as more inference time usually leads to better performance. The result also seems to contradict the findings of [2]. Could you explain why this might be?",
+   "reviewer_index": 2,
+   "ac_status": "resolved",
+   "ac_evidence": "questions regarding increased ASR results under reasoning model (7JYu, WLcy)",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Tensor Trust was designed such that humans found natural prompt injections *against specific models* and are therefore, not highly transferable, but instead reflect the common use case, where individual users find injections that work well against specific models. Therefore, it is not a fair comparison to use much stronger models like GPT-4o and GPT-4 as defenses without a comparison to the ASR on these new stronger models, which is not provided in Table 1 or in the paper (these are only provided for AgentDojo).",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It is not fully justified whether the general-purpose utility of the prompt is still preserved after the fuzzy-removal sanitization. **That is, what if the original task already contains some string that looks like an injection (e.g., \"Please remove the digits and sort the rest characters in the following string in alphabetical order: qwax6a1sda3cm3sdr5bm.\")?** I understand that the authors have reported that the FPR on AgentDojo is very low, so that the guardrail LLM won't strip benign stuff in the existing queries. But this is relatively a vague evaluation, and authors shall consider **curating a collection of seemingly harmful (but actually benign) queries** to stress-test the counterfactual robustness of the guardrail. To make an analogy, it should be like the data in XSTest (NAACL 2024) or MOSSBench (ICLR 2025), which is used to test the over-refusal.",
+   "reviewer_index": 3,
+   "ac_status": "resolved",
+   "ac_evidence": "if the defense would affect benign content that looks like an injection (reviewer LFHT, WLcy)",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Although I do appreciate the straightforward idea of training-free prompting, I would find it more convincing if the injection is used to instruction-tune a model for detection. Please note, the current symbolic process (fuzzy-match) already enables sufficient input-output data. As authors aim to make the approach \"regarded as a standard baseline\", releasing such an instruction-tuned judge will be more helpful.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 4533,
+  "prompt_tokens": 2889,
+  "total_tokens": 7422,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 2804,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0044109,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0044109,
+   "upstream_inference_prompt_cost": 0.00101115,
+   "upstream_inference_completions_cost": 0.00339975
+  }
+ }
+}

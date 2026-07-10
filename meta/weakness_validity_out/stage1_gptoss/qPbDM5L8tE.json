@@ -1,0 +1,131 @@
+{
+ "paper_id": "qPbDM5L8tE",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "The paper acknowledges computational latency as a limitation. While a common issue, more discussion on specific strategies to mitigate this for real-time robotic applications, beyond general statements, would be beneficial.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The reliance on LLMs for strategy formulation, while enabling zero-shot capabilities, raises questions about the consistency, optimality, and safety guarantees of these generated strategies across a truly diverse and potentially adversarial set of contact scenarios.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The effectiveness of the reactive control and adaptation hinges on an accurate internal world model and physical parameter estimation. More details on how these are learned, maintained, and their potential failure modes would strengthen the paper.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper exceeds the 9-page limit and, in accordance with the ICLR submission guidelines, should therefore be desk rejected. It also contains several formatting issues, most notably in Figure 3.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Furthermore, the plan component in *Equation (1)* is not clearly defined.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The method has not been evaluated on a real-world robotic platform, which undermines the claims regarding contact-rich manipulation, as simulators often struggle to accurately model physical contact dynamics.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Beyond the separation of the VLA into distinct vision and language modules and the introduction of a Memory Unit, the novelty of the contribution appears limited.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The tasks considered are very simple, only covering short-horizon basic manipulation (pushing / grasping / pivoting) of simple shapes, and it seems the method assumes access to a list of motion primitives, instead of directly doing joint position / torque control. This further simplifies the problem.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The authors assume that all the objects considered have known geometry. This is a strong assumption and greatly limits the generalizability of the method. How can the method generalize to unknown objects or non-rigid objects?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The applicability of the physical parameter estimation part is questionable. The authors assume that only 2 values \u2014 mass and friction \u2014 of a single object need to be estimated. This is another strong assumption: the difficulty of physical parameter estimation grows combinatorially with number of objects or degrees of freedom. Even for the simple case discussed in the paper, there seem be no physical parameter variations for each task. This does not systematically show the effectiveness of the module. On the other hand, in the real world, online adaptation might be infeasible for hard-to-reset or safety-critical scenarios.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The term \u201creal world\u201d or \u201cphysical world\u201d are mentioned several places in the paper. However, this is an incorrect claim as experiments are only done in simulation. This is particularly relevant in the context of this work, where high fidelity model is often required for such contact-rich reasoning, which often induces a notable gap between simulation and the real world (for both real2sim reconstruction and sim2real transfer). While it is fine to only demonstrate simulation results and state its limitations, leaving the incorrect impression that the proposed method works in the real world is certainly a over claim.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Additionally, the method is named as \u201cContact-VLA\u201d, which is inaccurate. VLAs typically refer to end-to-end models finetuned from VLMs to directly produce actions. However, in this work, it is a modular approach that leverages a combination of VLMs and LLMs. As a result, it would also easily lead to incorrect expectation of the work.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Since the approach involves using MPPI for planning and is demonstrated only in simulation, it is unclear whether MPPI uses the same simulation environment as that being used for evaluation. If so, it would not establish a fair comparisons to OpenVLA or pi-0.5 since they do not assume access to the environment models.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The approach also appears to rely on a text-only LLM for specifying contact strategies and cost functions. This appears to be very challenging since it\u2019s unclear how LLMs can specify these given no visual input (or even coordinate frame). The provided appendix also does not seem to provide sufficient details. For example, does it rely on task-specific prompt that is manually refined by the developer?",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 2788,
+  "prompt_tokens": 2523,
+  "total_tokens": 5311,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1592,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00297405,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00297405,
+   "upstream_inference_prompt_cost": 0.00088305,
+   "upstream_inference_completions_cost": 0.002091
+  }
+ }
+}

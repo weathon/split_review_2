@@ -1,0 +1,124 @@
+{
+ "paper_id": "Hf7jMztvve",
+ "decision": "Reject",
+ "n_reviewers": 3,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "the paper is poorly situated in related work. It makes strong claims about deception and interpretability without referencing key prior studies in truthfulness, mechanistic interpretability, or SAE analysis, leaving its novelty unclear.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "the organization and clarity are weak. The introduction is too short, figures are oversized, and many technical details\u2014such as how features are selected or how \u201cfeature fine-tuning\u201d is done\u2014are missing or unclear (e.g., \u201cwhen tuned to -1 nor when tuned to +1\u201d is never properly explained).",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "authors misinterpret and underestimate current interpretability methods. Claiming that SAE \u201cdeception features\u201d failed to activate does not justify dismissing the SAE framework; this reasoning overlooks the distributed and compositional nature of such representations.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "the paper criticizes existing evaluation methods without evidence. In line 100, the authors state that current evaluations are \u201cunreliable, hard to replicate, and unrealistic,\u201d yet they never specify which methods these are or provide comparisons to support the claim.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "the format and presentation are below standard. The text is brief relative to the figures, captions are vague, and the layout feels unbalanced and unfinished.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Secret Agenda game aims to generate \"high stakes deception\", however given that the problem is framed as a game does not feel high stakes as in Agentic Misalignment (arXiv:2510.05179) where the agent reported that it was fully aware that its actions will cause harm to a human being.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "the game framing may limit generalizability in two ways: (1) models may be following game rules rather than exhibiting deception that would occur in deployment, and (2) the artificial stakes may not activate the same neural mechanisms as real-world deception.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "it would drive the point home if the Secret Agenda test bed could elicit deception in case deception is clearly harmful, though I admit that deception of any kind is evidence enough - it would be trivial for a third party to cause the model to deceive.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "performing section 7 scatter plot for Secret Agent SAE latents seems like a natural step that could shed light on the proposed feature search methodology.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "along the same lines I would be very curious to see how raising or lowering the states changes models behavior and the SAE activations. Will SAE features become more sensitive in a \"real\" scenario? Will the model avoid deception knowing that it will cause harm?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "writing of the paper leaves a lot to be desired. It is overfull with jargon and, missing references and explanations; this necessitates that the reader either be very familiar with this area or read multiple references so that he/she may understand the paper and the results contained therein.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "repeated references to SAEs and features labeled by SAE but its full form (Sparse Autoencoder) is only stated on Page 5. Moreover, there is no explicit discussion of SAE-based labelling of features and its uses for interpretability.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "lack of details are the various game contexts in Section 5.3, with little explanation for the game contexts and explanations for the authors\u2019 selection of these contexts in their tests.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 2742,
+  "prompt_tokens": 2141,
+  "total_tokens": 4883,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1752,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00280585,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00280585,
+   "upstream_inference_prompt_cost": 0.00074935,
+   "upstream_inference_completions_cost": 0.0020565
+  }
+ }
+}

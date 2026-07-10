@@ -1,0 +1,117 @@
+{
+ "paper_id": "nzkObUsajY",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": true,
+ "items": [
+  {
+   "weakness_text": "The contributions of this paper are incremental. First, previous work [1] has already proposed layer-wise calibration methods. This paper hides this technical background and avoids citing the prior research. Furthermore, the multi-bit spike neuron (i.e., M-HT neuron [2], Burst spikes [3], etc.) has also been proposed. Additionally, there is also research [4] that converts QANNs to SNNs. I believe the contributions of this paper are limited to using multi-bit spike neurons to convert QANNs to SNNs.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "The contributions are deemed incremental, with prior work already addressing similar methods.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Critical technical details are missing. This paper does not describe how key components of the Transformer, including Layer Norm, Softmax, and matrix multiplication, are converted to a form suitable for SNNs.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Missing technical details, such as the conversion of key Transformer components (Layer Norm, Softmax), and the lack of an energy efficiency analysis or comparison with state-of-the-art methods (like SpikeZIP-TF) are significant drawbacks.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Lack of energy efficiency analysis. This paper does not analyze the energy efficiency advantages of the converted SNN over the original QANN. Furthermore, the proposed method employs multi-bit spikes. While this facilitates the conversion of QANN to SNN, it also introduces additional computational overhead in the linear layer. This paper does not analyze this impact either.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Missing technical details, such as the conversion of key Transformer components (Layer Norm, Softmax), and the lack of an energy efficiency analysis or comparison with state-of-the-art methods (like SpikeZIP-TF) are significant drawbacks.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "This paper lacks comparisons with state-of-the-art conversion methods, such as SpikeZIP-TF [5], in terms of performance and energy efficiency.",
+   "reviewer_index": 0,
+   "ac_status": "unresolved",
+   "ac_evidence": "Missing technical details, such as the conversion of key Transformer components (Layer Norm, Softmax), and the lack of an energy efficiency analysis or comparison with state-of-the-art methods (like SpikeZIP-TF) are significant drawbacks.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper claims to be \u201ctraining-free,\u201d but the calibration step still appears to involve optimization via BPTT or similar gradient-based tuning of neuronal thresholds. This step could reintroduce significant computational costs, especially for LLM-scale models.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The calibration step may still involve optimization, potentially reintroducing computational costs.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "There is a mismatch between the stated motivation and the evaluation metrics. The central motivation of ANN-to-SNN conversion is energy efficiency and neuromorphic deployability, yet the experiments focus solely on accuracy and perplexity benchmarks. The paper would benefit from including energy, latency, or hardware feasibility analyses.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "The lack of energy efficiency analysis and the mismatch between the motivation (neuromorphic deployability) and the evaluation metrics (accuracy/perplexity) are significant concerns.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The proposed models (tested on LLaMA-2 and LLaMA-3) are far beyond the capacity of existing neuromorphic chips (e.g., Loihi 2, TrueNorth). The authors should clarify which hardware platforms are envisioned for deployment, and whether the approach offers any practical energy advantage over quantized or sparsified ANN-based LLMs.",
+   "reviewer_index": 1,
+   "ac_status": "unresolved",
+   "ac_evidence": "There is no clarification on the hardware platforms for deployment.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper employs graded spikes. This design choice should be explicitly stated early in the paper and discussed in terms of hardware constraints, as graded spikes may complicate neuromorphic implementation.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The method heavily relies on the discrete integer outputs of the QANN. For modern LLMs using non-uniform quantization or containing complex activation functions (e.g., SwiGLU), their discretized values may be difficult to precisely reconstruct with a finite number of spike timesteps, potentially limiting the method's generalizability.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The reliance on QANN outputs, which may not accurately reconstruct activation values for modern LLMs using complex activation functions, limits the generalizability of the method.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Although the equivalence between IS and IF neurons is proven, this implementation requires a large number of IF neurons and timesteps to simulate a single IS neuron. The paper completely ignores the area overhead (requiring more neurons) and time overhead (requiring more timesteps) introduced by this mapping, which is crucial for evaluating the actual energy efficiency of the SNN.",
+   "reviewer_index": 2,
+   "ac_status": "unresolved",
+   "ac_evidence": "The question about the area and time overheads due to simulating IS neurons with IF neurons remains unaddressed.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Despite claims about low-power deployment, all experiments are simulation-based. No energy, latency, or throughput measurements are reported on neuromorphic hardware such as Loihi, making it impossible to validate the practical feasibility of edge deployment.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "The lack of energy, latency, or throughput measurements on neuromorphic hardware like Loihi makes it impossible to evaluate the practical feasibility of edge deployment.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The evaluation is only on LLaMA-2 and LLaMA-3, with no testing on other mainstream LLM architectures.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "There is no testing on other mainstream LLM architectures beyond LLaMA models.",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 5501,
+  "prompt_tokens": 2291,
+  "total_tokens": 7792,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 4175,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0049276,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0049276,
+   "upstream_inference_prompt_cost": 0.00080185,
+   "upstream_inference_completions_cost": 0.00412575
+  }
+ }
+}

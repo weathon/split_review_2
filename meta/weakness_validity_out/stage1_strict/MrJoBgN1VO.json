@@ -1,0 +1,131 @@
+{
+ "paper_id": "MrJoBgN1VO",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "While the empirical work is wide-ranging, I think the paper could be improved in clarity and rigour of the empirical analyses. For instance, the authors sample with a moderately high temp (0.6), to my understanding. However, no error bars are reported? How variable are the results? It would be good for the authors to present some sense of performance variation across tasks (e.g., 95% CIs around the mean; stdev, etc).",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "I also found the phrasing of Program-to-Geometry in Section 3.1 somewhat confusing. It seems like there are two capabilities the authors are interested in (as they lay out in that 3.1). But is Program-to-Geometry as a task both? Just one? It's worth clarifying (and I found that confusing...)",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "It also would be good for the authors to clarify how their work relates to https://arxiv.org/pdf/2408.08313, which seems quite similar, especially related to RQ1 (which was at ICLR last year and is not cited).",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "- It would be valuable to incorporate evaluations using vision models that directly interpret the rendered images, alongside results from multimodal models, to serve as a reference baseline. This would help disentangle whether the observed performance gaps arise from deficiencies in reasoning capabilities or challenges in parsing Asymptote code.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "- There is a discrepancy between Table 1 and the corresponding text on page 8: \"For example, GPT-o1 drops from 76.02% to 43.35%, and DeepSeek-R1 drops from 75.27% to 40.38%.\" Please verify and ensure alignment between the visual and textual elements.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "- The paper would benefit from a standardized definition of the dataset's input-output format, including an accessible, introductory explanation of Asymptote code to enhance clarity for readers unfamiliar with procedural drawing languages.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "- a more detailed analysis for the main results table in Section 5.3 is required, it is interesting that they struggle with angle and volumne, but lacks a bit of insights (for example why is this not the most challenging questions for abstract?)",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "- I am not entirely sure when the experiments have been drafted, but maybe add one most recent model for evaluation?",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "- The tasks seems undoubtly interesting, and one could see the implication, but testing the model to make geometric reasoning based on procedural code (albeit might have different syntax, but the geometric properties of these DSL are similar, information about the 2D/3D properties are stored somewhere in the code) has been studied for example in SGPBench (similar to the tested ability b in section 3.1 to make spatial and geometric reasoing) and SGP-GenBench (similar to ability a in section 3.1 generate geometric diagrams) and other similar works, in fact a lot of works has been dedicated for that, I would want to have some discussions with benchmarks from that area in the discussion / related work sections",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "- in general I am open for discussion and modification of my ratings",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "1. Positioning vs. prior art (major). The paper does not cite SGP-Bench (ICLR 2025), which evaluates LLMs\u2019 understanding of symbolic graphics programs without rendering as well, at broader scope (SVG for 2D; CAD for 2D/3D) and with systematic invariance tests under program transformations. While GeoGram focuses more on the 2D geometry math aspect, I think SGP-Bench is closely related and predates this submission, it should be discussed and contrasted.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "2. GeoGramBench stays within Asymptote/Matplotlib-style code and contest-style numeric targets. That makes results crisp, but limits to the mathematical geometry domain which is a fraction within the broad discussion of geometric spatial capability.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "3. While the paper's goal is to evaluate the program-to-geometry / geo-spatial capability of the LLMs, the questions also involve mathematic reasoning capability to solve the planar geometry tasks. Therefore, the final accuracy is kind of inconclusive for the geo-spatial one itself.",
+   "reviewer_index": 3,
+   "ac_status": "unresolved",
+   "ac_evidence": "The concern related to measuring the geo-spatial capabilities alone seems to be outstanding.",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "4. I think the DSL choice (Asymptote/Matplotlib\u2011style) can significant affect the evaluation results since various LLMs could be exposed to different amount of DSL code training. few-shot CoT experiments are important to justify the evaluation.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 1445,
+  "prompt_tokens": 2009,
+  "total_tokens": 3454,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 0,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.000680961,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.000680961,
+   "upstream_inference_prompt_cost": 0.000279251,
+   "upstream_inference_completions_cost": 0.00040171
+  }
+ }
+}

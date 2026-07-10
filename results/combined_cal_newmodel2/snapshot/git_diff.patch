@@ -1,0 +1,92 @@
+diff --git a/code/train_weakness_scorer.py b/code/train_weakness_scorer.py
+index 771645f89..6a1ce216b 100644
+--- a/code/train_weakness_scorer.py
++++ b/code/train_weakness_scorer.py
+@@ -31,8 +31,19 @@ DATASET_NAME = "weathon/weakness-score"
+ HUB_REPO = "weathon/review_scoring"
+ CKPT_DIR = (Path.cwd() / "checkpoints" / "weakness_scorer").resolve()
+ 
++EPOCHS = 3
++LR = 1e-4
++LORA_R = 32
++LORA_ALPHA = 32
++MAX_LEN = 2048
++SEED = 0
++CKPT_EVERY = 200
++ITEM_BATCH = 32
++WARMUP_FRAC = 0.03
++
+ PAIR_B = 8          # papers per group: intra-group pairs + one optimizer step
+-RANK_LAMBDA = 1.0   # total = weighted MAE + RANK_LAMBDA * margin ranking
++MARGIN_LAMBDA = 0.5   # total = MAE + MARGIN_LAMBDA*margin_ranking + RANKNET_LAMBDA*ranknet
++RANKNET_LAMBDA = 0.5
+ 
+ 
+ def save_checkpoint(ckpt, model, head, optimizer, scheduler, epoch, step):
+@@ -119,9 +130,9 @@ def main():
+ 
+     run = wandb.init(project="weakness-score", config={
+         "model": MODEL_NAME, "epochs": EPOCHS, "lr": LR, "lora_r": LORA_R,
+-        "lora_alpha": LORA_ALPHA, "pair_b": PAIR_B, "rank_lambda": RANK_LAMBDA,
+-        "max_len": MAX_LEN, "ckpt_every": CKPT_EVERY, "warmup_frac": WARMUP_FRAC,
+-        "total_steps": total_steps,
++        "lora_alpha": LORA_ALPHA, "pair_b": PAIR_B, "margin_lambda": MARGIN_LAMBDA,
++        "ranknet_lambda": RANKNET_LAMBDA, "max_len": MAX_LEN, "ckpt_every": CKPT_EVERY,
++        "warmup_frac": WARMUP_FRAC, "total_steps": total_steps,
+         "start_epoch": start_epoch, "start_step": start_step,
+     })
+     print(f"wandb run: {run.url}")
+@@ -142,31 +153,44 @@ def main():
+             dp = preds[:, None] - preds[None, :]
+             dg = gts[:, None] - gts[None, :]
+             mask = dg > 0  # pairs where paper i should score above paper j
+-            ranking = torch.relu(dg - dp)[mask].mean() if mask.any() else preds.new_zeros(())
+-            loss = mae + RANK_LAMBDA * ranking
++            if mask.any():
++                margin_rank = torch.relu(dg - dp)[mask].mean()
++                ranknet = -nn.functional.logsigmoid(dp[mask]).mean()
++            else:
++                margin_rank = preds.new_zeros(())
++                ranknet = preds.new_zeros(())
++            loss = mae + MARGIN_LAMBDA * margin_rank + RANKNET_LAMBDA * ranknet
+             assert not torch.isnan(loss), f"NaN loss at epoch {epoch} group {g}"
+             optimizer.zero_grad()
+             loss.backward()
+             optimizer.step()
+             scheduler.step()
+             if g % 20 == 0:
++                pair_acc = (dp[mask] > 0).float().mean().item() if mask.any() else float("nan")
+                 metrics = {"train/loss": loss.item(), "train/mae": mae.item(),
+-                           "train/ranking": float(ranking), "train/lr": scheduler.get_last_lr()[0],
+-                           "epoch": epoch + g / n_groups}
++                           "train/margin_rank": float(margin_rank), "train/ranknet": float(ranknet),
++                           "train/pair_acc": pair_acc,
++                           "train/lr": scheduler.get_last_lr()[0], "epoch": epoch + g / n_groups}
+                 print(metrics)
+                 wandb.log(metrics)
+             if (g + 1) % CKPT_EVERY == 0:
+                 save_checkpoint(latest, model, head, optimizer, scheduler, epoch, g + 1)
+ 
+         model.eval()
+-        abs_errs = []
++        val_preds, val_gts = [], []
+         with torch.no_grad():
+             for sample in tqdm.tqdm(val_data, desc=f"val epoch {epoch + 1}"):
+                 pred = forward_paper(model, head, tokenizer, sample["items"], device)
+-                abs_errs.append(abs(pred.item() - sample["gt"]))
+-        val_mae = sum(abs_errs) / len(abs_errs)
+-        wandb.log({"val/mae": val_mae, "epoch": epoch + 1})
+-        print(f"epoch {epoch + 1}: val MAE = {val_mae:.4f}")
++                val_preds.append(pred.item())
++                val_gts.append(sample["gt"])
++        vp = torch.tensor(val_preds)
++        vg = torch.tensor(val_gts)
++        val_mae = (vp - vg).abs().mean().item()
++        vmask = (vg[:, None] - vg[None, :]) > 0  # all pairs where gt_i > gt_j
++        vdp = vp[:, None] - vp[None, :]
++        val_pair_acc = (vdp[vmask] > 0).float().mean().item()
++        wandb.log({"val/mae": val_mae, "val/pair_acc": val_pair_acc, "epoch": epoch + 1})
++        print(f"epoch {epoch + 1}: val MAE = {val_mae:.4f}, val pair_acc = {val_pair_acc:.4f}")
+ 
+         save_checkpoint(latest, model, head, optimizer, scheduler, epoch + 1, 0)
+         ckpt = CKPT_DIR / f"epoch{epoch + 1}"

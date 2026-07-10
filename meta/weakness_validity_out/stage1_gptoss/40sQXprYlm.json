@@ -1,0 +1,117 @@
+{
+ "paper_id": "40sQXprYlm",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "There is high computational overhead of the proposed architecture. The authors admit that the current DNA implementation \"runs slower and consumes more memory\" than its dense baseline counterparts. This is attributed to the \"unoptimized handling of dynamically changing sequence lengths\" and the inability to precompute and cache attention masks. I think this makes it difficult to appreciate the practical benefit of \"compute efficiency.\" The savings from skipping modules are currently outweighed by the overhead of dynamic routing.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The performance is not a clear win; the paper aims for competitiveness, but the top-1 DNA language model achieves a worse validation loss (2.754) than the standard GPT-2 baseline (2.720).",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Finally, the \"fully distributed\" concept is slightly compromised by empirical design choices required for stable training, such as hard-coding the first few layers as a non-routed \"backbone\".",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Can you provide flops taken by the proposed method? It is hard to make comparison with baseline without flop comparison as their performances are similar. Include it in the table which presents the results for each domain.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Learning routing is a hard problem faced in MoEs, MoDs. The proposed method doesn\u2019t address it all, which makes the framework not useful at the current stage.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "What\u2019s the motivation to include skip identity modules?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Why does Top-2 DNA models always have skip modules in them and have different hidden size compared to others. It makes comparison harder.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Can you provide details about related works as to why this approach hasn't been successful in the past?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Can you provide specific choices made to ensure the comparison of proposed method to baseline is fair?",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It is unclear if there is evidence to believe that approaches like DNA can achieve a much sparser structure than these known methods.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Weak results: Evaluation results in vision tasks underperform the dense models. While the language task also show mixed results against the dense counterpart.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Doubts on interpretability: As the authors also discovered, randomly initialized model also show some degree of \"clustering\". This cases doubt on the reliability of inspection the patches and read meaning from it. It may simply because the patches starts to be close to each other, and their representation remain close through out the layers, when those representation pass through the linear router, they naturally feel like having some \"theme\". Maybe rigorously determine whether a path have specialized on anything requires new analysis method, for example, mixing up paths from the proposed model and randomly initialized model, and then letting the researcher determine if there is any pattern without knowing the source.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 2203,
+  "prompt_tokens": 2072,
+  "total_tokens": 4275,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1240,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00237745,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00237745,
+   "upstream_inference_prompt_cost": 0.0007252,
+   "upstream_inference_completions_cost": 0.00165225
+  }
+ }
+}

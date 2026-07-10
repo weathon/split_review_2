@@ -1,0 +1,75 @@
+{
+ "paper_id": "ZF0xRAdsuY",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "The core tradeoff is derived assuming specific forms of similarity decay and decision rules. Would the authors elaborate how universal or sensitive their conclusion is to the choice of decay function? In Discussion, the authors refer to \u201cfinite\u2011resolution similarity\u201d as a universal constraint, suggesting that the existence of the tradeoff is robust, even if the exact shape of the curve depends on the similarity decay. It is unclear whether in those larger models, the similarity function follows the linear decay or takes a different shape.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "As mentioned by the authors in Limitations subsection, compositional representations and hierarchy were outside the scope of the study. Adding a small pilot on a compositional task to show if/why the current theory breaks would strengthen the paper.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The concept of \u201csemantic resolution\u201d feels somewhat over\u2011introduced. Mathematically, it appears equivalent to a kernel scale or bandwidth that simply controls how similarity decays with distance. While the term is evocative and may carry intuitive meaning across domains, its use risks adding unnecessary jargon. I suggest that the authors clarify whether \u201csemantic resolution\u201d represents a genuinely new construct (i.e., beyond a kernel bandwidth) or simply reinterprets that familiar notion in \"semantic\" terms. A short comparison or restatement using standard terminology would make the paper easier to follow for readers from machine learning backgrounds.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Although there is nothing technically wrong with the abstract, it is very dense and hard to unpack on a first read. The authors could make it a bit lighter in order to appeal to a broader, non\u2011expert audience. For example, by simplifying a few long sentences and highlighting the main contribution more explicitly rather than embedding it deep within the paragraph.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Typos: Please fix the m\u2011dashes in line 84; and [an] additional one (line 97); maximal unncertain[ty] (line 158); m\u2011dash in line 189; m\u2011dash in line 457; m\u2011dashes in lines 464\u2011465; please fix hyphen in line 481.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "My primary concern is that the experiments in section 5 provide rather limited evidence of this tradeoff. Your suggestion (and the suggestion of the prior literature) that this is a universal tradeoff would suggest that it should be apparent even in models that weren't trained explicitly on the identification and similarity task you're measuring. The fact that models become better at identification/similarity as you're varying the parameter prioritizing one or the other loss function is maybe not particularly surprising (though I agree that it demonstrates that there is a tradeoff between those two functions). Moreover, the LLM and VLM experiments don't demonstrate a tradeoff but rather just show that resolution is limited overall. I thought the ReLU experiment was more compelling in this direction, as it trained the ReLU networks only on the similarity task and still demonstrated this emergent tradeoff over different epochs. Unless I'm missing something, I think acknowledging this limitation would be important.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 2407,
+  "prompt_tokens": 1763,
+  "total_tokens": 4170,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1631,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0024223,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0024223,
+   "upstream_inference_prompt_cost": 0.00061705,
+   "upstream_inference_completions_cost": 0.00180525
+  }
+ }
+}

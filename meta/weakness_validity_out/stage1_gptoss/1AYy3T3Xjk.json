@@ -1,0 +1,194 @@
+{
+ "paper_id": "1AYy3T3Xjk",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "The proposed framework is heuristic. I do not see a clear correspondence between the classical four dimensions and the four CREDO dimensions in Table 1, and the authors do not provide strong theoretical foundations for constructing these new dimensions.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Similarly, the ITA deconstructs dialogues into origination nodes, development nodes, and scaffolding supports; however, the paper lacks detailed explanation of the logic and robustness behind this step-by-step construction. This process may heavily depend on the authors\u2019 subjective interpretation, which could introduce bias.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The work only compares its method against two baselines and does not report the performance of state-of-the-art models. Even considering cost constraints, GPT-4o would have been a cheaper and more capable alternative than the GPT-4 model used in this study.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper provides insufficient details about the prompts for evaluation models and expert annotation instructions, limiting reproducibility.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper makes a strong and central claim that its framework \u201ctraces the cognitive trajectory of creative thinking.\u201d However, this assertion remains conceptually plausible but empirically unverified.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper\u2019s statistical reporting lacks the depth necessary for confident interpretation of model performance. No confidence intervals, variance across folds, or per-dimension error distributions are reported.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "A major methodological concern lies in the model ecosystem overlap between data generation and evaluation, risking self\u2011evaluation bias or data leakage.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The data collection protocol emphasizes academic inquiry tasks in STEM fields, biasing behavior toward convergent reasoning and limiting the ecological range of creativity being captured.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Participants were not explicitly instructed to \u201cgenerate original ideas,\u201d \u201ctake creative risks,\u201d or \u201cexplore unconventional solutions,\u201d limiting genuine creative exploration.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Each dialogue was capped at a maximum of 30 turns, with an average of fewer than 10, potentially truncating incubation and iterative recombination needed for authentic creative leaps.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The type of creativity captured is best described as adaptive scientific or analytical creativity, rather than open\u2011ended or expressive creativity, limiting the claim of measuring broader creativity.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "The dataset (81 undergraduates; two universities; STEM\u2011oriented tasks) constrains generalization to broader populations (K\u201112, humanities/arts, diverse cultures/languages).",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Comparing only to GPT\u20114 zero\u2011shot and untuned DeepSeek\u201132B underestimates strong alternatives; the paper should add tuned LLM\u2011judge baselines and a non\u2011LLM baseline.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The attribution experiment (macro\u2011F1=0.84) relies on expert\u2011labeled categories on the same type of data used to train the evaluator, leaving open whether attribution corresponds to causal contribution or downstream learning gains.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Main metrics lack confidence intervals, per\u2011dialogue variance, and significance tests between models.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The semantic drift filter, cluster\u2011then\u2011stratify split, and ITA node definitions could influence results; there is no sensitivity analysis.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "No breakdowns across demographics, domains, or dialogue lengths; potential bias if certain discourse styles are favored.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The method presumes access to multi\u2011turn logs and an evaluator pass; latency/compute and annotation cost are not quantified.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Limited Dataset and Generalizability \u2013 The dataset includes only 81 undergraduate students from STEM domains, restricting applicability to other disciplines or educational levels.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Implementation Details Missing \u2013 The paper lacks practical training details such as hardware setup, fine\u2011tuning time, and exact hyperparameter values needed for reproducibility.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Inconsistency in Methodological Description \u2013 The paper claims to use a \u201cfully fine\u2011tuned teacher model\u201d for knowledge distillation but also states that full fine\u2011tuning is \u201ccomputationally prohibitive,\u201d creating a logical contradiction.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Lack of Transparency in Review References \u2013 Mentioning \u201cArea Chair comments\u201d during the review phase is inappropriate for a double\u2011blind submission.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  },
+  {
+   "weakness_text": "Overly Polished and Synthetic Writing Style \u2013 The writing is highly formal, repetitive, and uniformly structured, giving an impression of automated generation.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": false
+  }
+ ],
+ "usage": {
+  "completion_tokens": 3280,
+  "prompt_tokens": 3743,
+  "total_tokens": 7023,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1653,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.00377005,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.00377005,
+   "upstream_inference_prompt_cost": 0.00131005,
+   "upstream_inference_completions_cost": 0.00246
+  }
+ }
+}

@@ -1,0 +1,194 @@
+{
+ "paper_id": "EbSkBZQF9g",
+ "decision": "Reject",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "The paper arrives at the broad conclusion that transformer-based models struggle to generalize on NP-complete problems, yet supports this claim using only a single case study (the 0\u20131 knapsack problem) and only with a single-layer transformer. This limits the strength of the conclusion.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The analysis is restricted to a synthetic dataset and a shallow model. To convincingly argue general limitations of Transformers on NP-complete tasks, the study should include additional NP-complete problems and architectural variants (e.g., deeper or pre-trained models).",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "While the paper includes many figures, the accompanying explanations are insufficient, making it difficult to interpret the key findings from the visualizations.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The work would benefit from a more formal theoretical examination of Transformer generalization in NP-complete settings, similar in spirit to prior analytical studies of model expressivity and computational limits [1, 2].",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The authors state that state-of-the-art models were excluded due to computational constraints. However, validating a claim with such broad implications requires experimentation on more capable models; otherwise, the conclusions may not generalize beyond the minimal architecture tested.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper may need to improve its presentation. For example, (1) explain the figures, (2) visualize the method and data, (3) make subsections, (4) split methodology and experiment.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Besides, to improve the flow, a general idea is not to use \"we use xxxxx and we find xxxx\", or \"xxx is xxx, we use it and find xxx\". A more easy-to-follow flow is first introducing the motivation, or the overview sentence of the paragraph or the subsection.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The author may need to add the discussion of related works and the discussion of the comparison with existing works. This paper is very relevant to LLM reasoning, LLM search/exploration.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The author may want to reconsider the scope of this work. I acknowledge that computation is a common issue, but considering more diverse tasks of NPC problems, or considering small-scale LLMs (e.g., 300M, 2B), is reasonable. The claim in the paper is strong, but the evidence is weak.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Fixed 4-item knapsack; no scaling across #items, model width/depth, or data size.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "No MLP/RNN/DeepSets or symbolic/DP baseline; no depth>1 ablations.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Unclear train/test split; no out-of-distribution tests (e.g., new capacities, price/weight ranges).",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Predicting only the optimal value sidesteps combinatorial structure (subset selection); may bias learning signals.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "NP-complete generalization and O(n^k) depth hypothesis are unsupported by the presented evidence.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "SVD/PCA on embeddings is suggestive but not decisive; no quantitative eval of probe accuracy vs layer/position.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The claims about broad transformer limitations may be somewhat overstated given the constrained single-layer setup and small scale; exploring multi-layer models or larger instances could strengthen them.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The methodology would benefit from additional baselines, clearer grokking criteria, and more ablation experiments.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Presentation could be improved by addressing typos, providing more details, and better integrating figures.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The mechanistic interpretability techniques are from previous literature, and don't offer any compelling evidence for the claims in the paper.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It isn't strictly necessary to introduce new mechanistic interpretability techniques, but I'd recommend looking at [2] for an example of a stronger algorithm-oriented approach to interpretability.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "It may be helpful for the authors to review work on tool-use. For instance, an argument can be made that even if LLMs cannot learn algorithms robustly, they can call tools to solve sub-problems, e.g. a knapsack solver.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper ignores work on transformer expressivity and algorithm learning, e.g. [1], which would make it clear that NP-complete algorithms shouldn't be able to be represented in a tiny transformer.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Claims that transformers can learn simpler algorithms (abstract sentence 1, line 11), aren't really true [3], so it isn't necessary to jump to NP-complete problems.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 3655,
+  "prompt_tokens": 2559,
+  "total_tokens": 6214,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1988,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0036369,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0036369,
+   "upstream_inference_prompt_cost": 0.00089565,
+   "upstream_inference_completions_cost": 0.00274125
+  }
+ }
+}

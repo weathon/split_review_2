@@ -1,0 +1,117 @@
+{
+ "paper_id": "0zKfU1rsXd",
+ "decision": "Accept (Poster)",
+ "n_reviewers": 4,
+ "ac_lists_specific_concerns": false,
+ "items": [
+  {
+   "weakness_text": "Theorem 3.1 is general, but the evaluated states appear to be low- or modestly entangled; tougher, higher\u2011entanglement regimes are not covered.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "No scaling analysis of gradient variance with qubit number; trainability claim remains heuristic.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper claims code availability but does not provide the anonymous GitHub link in the main text, which could hinder reproducibility efforts.",
+   "reviewer_index": 0,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "My main concern is the computational cost required to reach low infidelity in the general case. The theoretical bound in the paper is meaningful only in the limit S goes to 0. For target states with moderate or high entanglement, achieving a small S requires deeper circuits U, and it is unclear whether this can still be done with circuits of polynomial size.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Also, the upper bound is stated in terms of the existence of a product state with certain properties. This does not guarantee that a generic product\u2011state ansatz will satisfy the same bound in practice.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Another concern I have is that computing the entanglement measure requires access to the target state. For quantum data, this may be possible if multiple copies of the state are available, though the number of required copies is not made explicit. For classical data, however, one must first classically construct the full target state, which is not tractable at large numbers of qubits. In fact, the classical\u2011data experiments in the paper are limited to around 10 qubits.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Even for quantum states, as far as I understand, the simulations proposed in the paper rely on tensor\u2011network methods, which inherently assume limited entanglement. This suggests that highly entangled quantum data are effectively out of scope for the demonstrated results.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Finally, it is not clear that the optimization described in Eq. (2) can be solved in polynomial time.",
+   "reviewer_index": 1,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The paper compellingly argues that AQER mitigates barren plateaus in the final optimization. However, a critical discussion or numerical experiment is missing on the optimization landscape. The algorithm's success hinges on this greedy step being efficient. The paper would be significantly strengthened by a discussion of why the local structure of this cost function makes the optimization in Step I tractable.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The experimental comparison relies heavily on the two\u2011qubit gate count, which is a good but incomplete metric. To make a fairer and more robust assessment of AQER's scalability, I suggest the authors consider the gate depth, the number of trainable parameters, measurement overhead, and training cost.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "The study is performed under ideal, noise\u2011free conditions. Given that the practical utility of any near\u2011term algorithm depends on its noise resilience, the paper would be substantially more impactful with a discussion on this aspect. For instance, how might hardware noise affect the measurement of entanglement and the subsequent greedy circuit construction? Even a qualitative discussion or a small\u2011scale simulation under a simple noise model would add significant value.",
+   "reviewer_index": 2,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  },
+  {
+   "weakness_text": "Since the target hardware setting is the NISQ regime, the lack of experiments on real quantum devices, or even simulations under realistic noise models (e.g., depolarizing noise), makes it difficult to assess how the proposed method would perform in practice. This limitation is particularly relevant given that several prior works in this area include evaluations on real hardware.",
+   "reviewer_index": 3,
+   "ac_status": "not_mentioned",
+   "ac_evidence": "",
+   "needs_editing": true
+  }
+ ],
+ "usage": {
+  "completion_tokens": 2616,
+  "prompt_tokens": 2026,
+  "total_tokens": 4642,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1622,
+   "rejected_prediction_tokens": null,
+   "image_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 896,
+   "cache_write_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost": 0.0026711,
+  "is_byok": false,
+  "cost_details": {
+   "upstream_inference_cost": 0.0026711,
+   "upstream_inference_prompt_cost": 0.0007091,
+   "upstream_inference_completions_cost": 0.001962
+  }
+ }
+}
